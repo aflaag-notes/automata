@@ -1,0 +1,199 @@
+\documentclass[a4paper, 12pt]{report}
+
+%%%%%%%%%%%%
+% Packages %
+%%%%%%%%%%%%
+
+\usepackage{./Nyx/nyx-packages}
+\usepackage{./Nyx/nyx-styles}
+\usepackage{./Nyx/nyx-frames}
+\usepackage{./Nyx/nyx-title}
+\usepackage{./Nyx/nyx-macros}
+
+%%%%%%%%%%%%%%
+% Title-page %
+%%%%%%%%%%%%%%
+
+\logo{./Nyx/logo.png}
+
+\institute{\curlyquotes{\hspace{0.25mm}Sapienza} Università di Roma}
+\faculty{Ingegneria dell'Informazione,\\Informatica e Statistica}
+\department{Dipartimento di Informatica}
+
+\title{Automi: Calcolabilità e Complessità}
+\subtitle{Appunti integrati con il libro "Introduzione alla teoria della computazione", Michael Sipser}
+
+% \author{\textit{Author}\\TODO: DECOMMENTARE QUESTA SEZIONE}
+% \author{\textit{Author}\\Simone Bianco}
+\author{\textit{Author}\\Alessio Bandiera}
+% \supervisor{Linus \textsc{Torvalds}}
+% \context{Well, I was bored\ldots}
+
+\date{\today}
+
+%%%%%%%%%%%%
+% Document %
+%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+
+    % The following style changes are valid only inside this scope 
+    {
+        \hypersetup{allcolors=black}
+        \fancypagestyle{plain}{%
+        \fancyhead{}        % clear all header fields
+        \fancyfoot{}        % clear all header fields
+        \fancyfoot[C]{\thepage}
+        \renewcommand{\headrulewidth}{0pt}
+        \renewcommand{\footrulewidth}{0pt}}
+
+        \romantableofcontents
+    }
+
+    \chapter*{Informazioni e Contatti}      % \chapter* makes this a "fake" chapter
+    \markboth{Informazioni e Contatti}{}    % Manually sets \leftmark (current chapter name)
+    \addcontentsline{toc}{chapter}{Informazioni e Contatti}     % Manually adds chapter to ToC
+    
+    \subsubsection{Prerequisiti consigliati:}
+    \begin{itemize}
+        \item TODO: DA DECIDERE
+    \end{itemize}
+
+    \quad
+
+    \subsubsection{Segnalazione errori ed eventuali migliorie:}
+    
+    Per segnalare eventuali errori e/o migliorie possibili, si prega di utilizzare il \textbf{sistema di Issues fornito da GitHub} all'interno della pagina della repository stessa contenente questi ed altri appunti (link fornito al di sotto), utilizzando uno dei template già forniti compilando direttamente i campi richiesti.
+
+    Gli appunti sono in continuo aggiornamento, pertanto, previa segnalazione, si prega di controllare se l'errore sia ancora presente nella versione più recente.
+
+    \quad
+
+    \subsubsection{Licenza di distribuzione:}
+    
+    These documents are distributed under the \textbf{\href{https://www.gnu.org/licenses/fdl-1.3.txt}{GNU Free Documentation License}}, a form of copyleft intended to be used on manuals, textbooks or other types of document in order to assure everyone the effective freedom to copy and redistribute it, with or without modifications, either commercially or non-commercially.
+    
+    \quad
+
+    \subsubsection{Contatti dell'autore e ulteriori link:}
+    \begin{itemize}
+        % \item TODO: DECOMMENTARE QUESTA SEZIONE
+
+        % Simone
+        % 
+        % \item Altri appunti: \textbf{\href{https://github.com/Exyss/university-notes}{https://github.com/Exyss/university-notes}}
+        % \item Github: \textbf{\href{https://github.com/Exyss}{https://github.com/Exyss}}
+        % \item Email: \textbf{\href{mailto:bianco.simone@outlook.it}{bianco.simone@outlook.it}}
+        % \item LinkedIn: \textbf{\href{https://www.linkedin.com/in/simone-bianco}{Simone Bianco}}
+
+        % Alessio
+        % 
+        \item Github: \textbf{\href{https://github.com/ph04}{https://github.com/ph04}}
+        \item Email: \textbf{\href{mailto:alessio.bandiera02@gmail.com}{alessio.bandiera02@gmail.com}}
+        \item LinkedIn: \textbf{\href{https://www.linkedin.com/in/alessio-bandiera-a53767223/}{Alessio Bandiera}}
+    \end{itemize}
+
+    %%%%%%%%%%%%%%%%%%%%%
+
+    \chapter{New Chapter}
+
+    \section{New Section}
+
+    \subsection{New subsection}
+
+    \begin{frameddefn}[Alfabeto]
+        Si definisce \textbf{alfabeto} un qualsiasi insieme finito, non vuoto; i suoi elementi sono detti \textbf{simboli}.
+    \end{frameddefn}
+
+    \begin{example}[Alfabeto]
+        $\Sigma = \{0, 1, x, y, z\}$ è un alfabeto, composto da 5 simboli.
+    \end{example}
+
+    \begin{frameddefn}[Stringa]
+        Sia $\Sigma$ un alfabeto; una \textbf{stringa su $\Sigma$} è una sequenza finita di simboli di $\Sigma$; la \textbf{stringa vuota} appartiene ad ogni alfabeto, ed è denotata con $\varepsilon$.
+
+
+        \begin{itemize}
+            \item Data una stringa $w$ di $\Sigma$, allora $|w|$ è la lunghezza di $w$.
+            \item Se $w$ ha lunghezza $n$, allora è possibile scrivere che $w = w_1 w_2 \cdots w_n$ con $w_i \in \Sigma$ e $i \in [1, n]$.
+        \end{itemize}
+    \end{frameddefn}
+
+    \begin{example}[Stringa]
+        Sia $\Sigma = \{0, 1, x, y, z\}$ un alfabeto; allora una sua possibile stringa è $w = x1y0z$.
+    \end{example}
+
+    \begin{frameddefn}[Stringa inversa]
+        Sia $\Sigma$ un alfabeto, e $w = w_1 w_2\cdots w_n$ una sua stringa; allora si definisce l'\textbf{inversa} di $w$ come segue: $w^\mathcal{R}= w_n w_{n - 1}\cdots w_1$
+    \end{frameddefn}
+
+    \begin{frameddefn}[Concatenazione]
+        Sia $\Sigma$ un alfabeto, e $x = x_1 x_2 \cdots x_n, y = y_1 y_2 \cdots y_n$ due sue stringhe; allora $xy$ è la stringa ottenuta attraverso la \textbf{concatenazione} di $x$ ed $y$.
+
+        Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $x^k = \underbrace{xx \cdot x}_k$.
+    \end{frameddefn}
+
+    \begin{frameddefn}[Prefisso]
+        Sia $\Sigma$ un alfabeto, ed $x, y$ due sue stringhe; allora $x$ è detto essere un \textbf{prefisso} di $y$, se $\exists z \mid xz = y$, con $z$ stringa in $\Sigma$.
+    \end{frameddefn}
+
+    \begin{example}[Prefisso]
+        Sia $\Sigma = \{a, b, c\}$ un alfabeto; allora la stringa $x = ab$ è prefisso della stringa $y = abc$, poiché esiste una stringa $z = c$ tale per cui $xz = y$.
+    \end{example}
+    
+    \begin{frameddefn}[Linguaggio]
+        Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro.
+    \end{frameddefn}
+
+    \begin{frameddefn}[Automa finito]
+        Un \textbf{automa finito} è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
+
+        \begin{itemize}
+            \item $Q$ è l'\textbf{insieme degli stati}
+            \item $\Sigma$ è l'\textbf{alfabeto}
+            \item $\func{\delta}{Q \times \Sigma}{Q}$ è la \textbf{funzione di transizione}
+            \item $q_0 \in Q$ è lo \textbf{stato iniziale}
+            \item $F \subseteq Q$ è l'\textbf{insieme degli stati accettanti}
+        \end{itemize}
+
+    \end{frameddefn}
+
+    \begin{example}[Automa finito]
+        Un esempio di automa finito è il seguente:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state] (1) {$q_1$};
+                \node[state,accepting] (2) [right of=1] {$q_2$};
+                \node[state] (3) [right of=2] {$q_3$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge [bend left] node {1} (2)
+                    (2) edge [bend left] node {0} (3)
+                    (3) edge [bend left] node {0,1} (2)
+                    (1) edge [loop above] node {0} (1)
+                    (2) edge [loop above] node {1} (2)
+                 ;
+             \end{tikzpicture}
+             \caption{Un grafo indiretto pesato.}
+         \end{figure}
+
+        esso può essere descritto secondo la quintupla $(Q, \Sigma, \delta, q_0, F)$ come segue:
+
+        \begin{itemize}
+            \item $Q = \{q_1, q_2, q_3\}$
+            \item $\Sigma = {0, 1}$
+            \item $\delta$ è la seguente: \begin{center} \begin{tabular}{c|cc} & 0 & 1 \\ \hline $q_1$ & $q_1$ & $q_2$ \\$q_2$ & $q_3$ & $q_2$ \\ $q_3$ & $q_2$ & $q_2$ \end{tabular} \end{center}
+            \item $q_1$ è lo stato iniziale
+            \item $F = \{q_2\} \subseteq Q$
+        \end{itemize}
+
+    \end{example}
+
+    \proof{
+        questo è una prova di dim env
+    }
+    
+\end{document}
