@@ -107,7 +107,7 @@
     \end{frameddefn}
 
     \begin{example}[Alfabeto]
-        $\Sigma = \{0, 1, x, y, z\}$ è un alfabeto, composto da 5 simboli.
+        $\Sigma = \{\ttt 0,\ttt 1,\ttt x,\ttt y,\ttt z\}$ è un alfabeto, composto da 5 simboli.
     \end{example}
 
     \begin{frameddefn}[Stringa]
@@ -116,12 +116,12 @@
 
         \begin{itemize}
             \item Data una stringa $w$ di $\Sigma$, allora $|w|$ è la lunghezza di $w$.
-            \item Se $w$ ha lunghezza $n$, allora è possibile scrivere che $w = w_1 w_2 \cdots w_n$ con $w_i \in \Sigma$ e $i \in [1, n]$.
+            \item Se $w$ ha lunghezza $n \in \mathbb{N}$, allora è possibile scrivere che $w = w_1 w_2 \cdots w_n$ con $w_i \in \Sigma$ e $i \in [1, n]$.
         \end{itemize}
     \end{frameddefn}
 
     \begin{example}[Stringa]
-        Sia $\Sigma = \{0, 1, x, y, z\}$ un alfabeto; allora una sua possibile stringa è $w = x1y0z$.
+        Sia $\Sigma = \{\ttt 0,\ttt 1,\ttt x,\ttt y,\ttt z\}$ un alfabeto; allora una sua possibile stringa è $w = x\ttt{1}y\ttt{0}z$.
     \end{example}
 
     \begin{frameddefn}[Stringa inversa]
@@ -139,7 +139,7 @@
     \end{frameddefn}
 
     \begin{example}[Prefisso]
-        Sia $\Sigma = \{a, b, c\}$ un alfabeto; allora la stringa $x = ab$ è prefisso della stringa $y = abc$, poiché esiste una stringa $z = c$ tale per cui $xz = y$.
+        Sia $\Sigma = \{\ttt a,\ttt  b,\ttt  c\}$ un alfabeto; allora la stringa $x = \ttt{ab}$ è prefisso della stringa $y = \ttt{abc}$, poiché esiste una stringa $z = \ttt c$ tale per cui $xz = y$.
     \end{example}
     
     \begin{frameddefn}[Linguaggio]
@@ -147,14 +147,14 @@
     \end{frameddefn}
 
     \begin{frameddefn}[Automa finito]
-        Un \textbf{automa finito} è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
+        Un \textbf{automa finito}, o \textbf{macchina}, è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
 
         \begin{itemize}
-            \item $Q$ è l'\textbf{insieme degli stati}
-            \item $\Sigma$ è l'\textbf{alfabeto}
-            \item $\func{\delta}{Q \times \Sigma}{Q}$ è la \textbf{funzione di transizione}
+            \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
+            \item $\Sigma$ è l'\textbf{alfabeto} dell'automa, un insieme \textit{finito}
+            \item $\func{\delta}{Q \times \Sigma}{Q}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati
             \item $q_0 \in Q$ è lo \textbf{stato iniziale}
-            \item $F \subseteq Q$ è l'\textbf{insieme degli stati accettanti}
+            \item $F \subseteq Q$ è l'\textbf{insieme degli stati accettanti}, sui quali le stringhe possono terminare
         \end{itemize}
 
     \end{frameddefn}
@@ -170,30 +170,63 @@
                 \node[state] (3) [right of=2] {$q_3$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge [bend left] node {1} (2)
-                    (2) edge [bend left] node {0} (3)
-                    (3) edge [bend left] node {0,1} (2)
-                    (1) edge [loop above] node {0} (1)
-                    (2) edge [loop above] node {1} (2)
+                    (1) edge [bend left] node {\ttt 1} (2)
+                    (2) edge [bend left] node {\ttt 0} (3)
+                    (3) edge [bend left] node {\ttt{0,1}} (2)
+                    (1) edge [loop above] node {\ttt 0} (1)
+                    (2) edge [loop above] node {\ttt 1} (2)
                  ;
              \end{tikzpicture}
-             \caption{Un grafo indiretto pesato.}
-         \end{figure}
+             \caption{Un automa.}
+        \end{figure}
 
         esso può essere descritto secondo la quintupla $(Q, \Sigma, \delta, q_0, F)$ come segue:
 
         \begin{itemize}
             \item $Q = \{q_1, q_2, q_3\}$
-            \item $\Sigma = {0, 1}$
-            \item $\delta$ è la seguente: \begin{center} \begin{tabular}{c|cc} & 0 & 1 \\ \hline $q_1$ & $q_1$ & $q_2$ \\$q_2$ & $q_3$ & $q_2$ \\ $q_3$ & $q_2$ & $q_2$ \end{tabular} \end{center}
+            \item $\Sigma = \{\ttt 0, \ttt 1\}$
+            \item $\delta$ è la seguente: \begin{center} \begin{tabular}{c|cc} & \ttt 0 & \ttt 1 \\ \hline $q_1$ & $q_1$ & $q_2$ \\$q_2$ & $q_3$ & $q_2$ \\ $q_3$ & $q_2$ & $q_2$ \end{tabular} \end{center}
             \item $q_1$ è lo stato iniziale
             \item $F = \{q_2\} \subseteq Q$
         \end{itemize}
-
     \end{example}
 
-    \proof{
-        questo è una prova di dim env
-    }
-    
+    \begin{frameddefn}[Linguaggio di un automa]
+        Sia $M$ un automa; allora il \textbf{linguaggio} di $M$ è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
+    \end{frameddefn}
+
+    \begin{example}[Linguaggio di un automa]
+        Si consideri il seguente automa $M_1$:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state] (1) {$q_1$};
+                \node[state,accepting] (2) [right of=1] {$q_2$};
+
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge [bend left] node {\ttt 1} (2)
+                    (2) edge [bend left] node {\ttt 0} (1)
+                    (1) edge [loop above] node {\ttt 0} (1)
+                    (2) edge [loop above] node {\ttt 1} (2)
+                 ;
+             \end{tikzpicture}
+             \caption{Un automa $M_1$.}
+        \end{figure}
+
+        sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, ci si convince facilmente che $$L(M_1) = \{w \mid w = w_1 w_2 \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
+    \end{example}
+
+    \begin{frameddefn}[Stringhe accettate]
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un automa, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
+
+        \begin{itemize}
+            \item $r_0 = q_0$
+            \item $\forall i \in [1, n - 1] \quad \delta(r_i, w_{i + 1})=r_{i + 1}$
+            \item $r_n \in F$
+        \end{itemize}
+
+        Dato un linguaggio $A$, si ha che $M$ \tbf{riconosce} $A$ se e solo se $A = \{w \mid M \ \mathrm{accetta} \ w\}$.
+    \end{frameddefn}
+
 \end{document}
