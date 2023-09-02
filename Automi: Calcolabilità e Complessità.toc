@@ -5,6 +5,9 @@
 \contentsline {subsubsection}{Segnalazione errori ed eventuali migliorie:}{1}{subsubsection*.4}%
 \contentsline {subsubsection}{Licenza di distribuzione:}{1}{subsubsection*.5}%
 \contentsline {subsubsection}{Contatti dell'autore e ulteriori link:}{1}{subsubsection*.6}%
-\contentsline {chapter}{\numberline {1}New Chapter}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}New Section}{2}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}New subsection}{2}{subsection.1.1.1}%
+\contentsline {chapter}{\numberline {1}Linguaggi regolari}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Automi finiti}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Linguaggi}{2}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Automi finiti}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Operazioni regolari}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Definizioni}{5}{subsection.1.2.1}%

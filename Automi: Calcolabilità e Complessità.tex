@@ -96,11 +96,11 @@
 
     %%%%%%%%%%%%%%%%%%%%%
 
-    \chapter{New Chapter}
+    \chapter{Linguaggi regolari}
 
-    \section{New Section}
+    \section{Automi finiti}
 
-    \subsection{New subsection}
+    \subsection{Linguaggi}
 
     \begin{frameddefn}[Alfabeto]
         Si definisce \textbf{alfabeto} un qualsiasi insieme finito, non vuoto; i suoi elementi sono detti \textbf{simboli}.
@@ -121,7 +121,7 @@
     \end{frameddefn}
 
     \begin{example}[Stringa]
-        Sia $\Sigma = \{\ttt 0,\ttt 1,\ttt x,\ttt y,\ttt z\}$ un alfabeto; allora una sua possibile stringa è $w = x\ttt{1}y\ttt{0}z$.
+        Sia $\Sigma = \{\ttt 0,\ttt 1,\ttt x,\ttt y,\ttt z\}$ un alfabeto; allora una sua possibile stringa è $w = \ttt x \ttt 1 \ttt y \ttt 0 \ttt z$.
     \end{example}
 
     \begin{frameddefn}[Stringa inversa]
@@ -131,7 +131,7 @@
     \begin{frameddefn}[Concatenazione]
         Sia $\Sigma$ un alfabeto, e $x = x_1 x_2 \cdots x_n, y = y_1 y_2 \cdots y_n$ due sue stringhe; allora $xy$ è la stringa ottenuta attraverso la \textbf{concatenazione} di $x$ ed $y$.
 
-        Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $x^k = \underbrace{xx \cdot x}_k$.
+        Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $x^k = \underbrace{xx \cdots x}_k$.
     \end{frameddefn}
 
     \begin{frameddefn}[Prefisso]
@@ -145,6 +145,8 @@
     \begin{frameddefn}[Linguaggio]
         Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro.
     \end{frameddefn}
+
+    \subsection{Automi finiti}
 
     \begin{frameddefn}[Automa finito]
         Un \textbf{automa finito}, o \textbf{macchina}, è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
@@ -177,7 +179,7 @@
                     (2) edge [loop above] node {\ttt 1} (2)
                  ;
              \end{tikzpicture}
-             \caption{Un automa.}
+             \caption{Un automa finito.}
         \end{figure}
 
         esso può essere descritto secondo la quintupla $(Q, \Sigma, \delta, q_0, F)$ come segue:
@@ -228,5 +230,54 @@
 
         Dato un linguaggio $A$, si ha che $M$ \tbf{riconosce} $A$ se e solo se $A = \{w \mid M \ \mathrm{accetta} \ w\}$.
     \end{frameddefn}
+
+    \begin{frameddefn}[Linguaggio regolare]
+        Un linguaggio è detto \tbf{regolare} se e solo se esiste un automa finito che lo riconosce.
+    \end{frameddefn}
+
+    \section{Operazioni regolari}
+
+    \subsection{Definizioni}
+    
+    \begin{frameddefn}[Unione]
+        Siano $A$ e $B$ due linguaggi; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B = \{x \mid x \in A \lor x \in B \}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}[Concatenazione]
+        Siano $A$ e $B$ due linguaggio; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}[Star]
+        Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* = \{x_1 x_2 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\}$$
+
+        Si noti che $k = 0 \implies \varepsilon \in A^*$ per ogni linguaggio $A$.
+    \end{frameddefn}
+
+    \begin{example}[Operazioni regolari]
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che
+
+        \begin{itemize}
+            \item $A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$
+            \item $A \circ B = \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$
+            \item $A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$
+        \end{itemize}
+    \end{example}
+
+    \begin{framedprop}[Chiusura dell'unione]
+        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
+    \end{framedprop}
+
+    \begin{proof}
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due automi finiti $$\left. \begin{array}{l}M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ l'automa finito definito come segue:
+
+        \begin{itemize}
+            \item $Q := Q_1 \times Q_2 = \{(r_1, r_2) \mid r_1 \in Q_1 \land r_2 \in Q_2\}$, scelto tale in quanto permette di avere tutte le possibili combinazioni di stati dei due automi di partenza;
+            \item $\forall (r_1, r_2) \in Q, a \in \Sigma \quad \delta((r_1, r_2), a) := (\delta_1(r_1, a), \delta_2(r_2, a))$, scelta tale in quanto permette di simulare entrambi gli automi di partenza contemporaneamente, mandando ogni stato di $M_1$ ed $M_2$ dove sarebbero andati nei rispettivi automi di appartenenza;
+            \item $q_0 := (q_1, q_2)$, scelto tale in quanto deve essere lo stato in cui entrambe gli automi in ipotesi iniziavano;
+            \item $F := (F_1 \times Q_2) \cup (Q_1 \times F_2) = \{(r_1, r_2) \mid r_1 \in F_1 \lor r_2 \in F_2\}$, scelto tale in quanto permette di simulare gli stati accettanti di entrambi gli automi, e vanno prese tutte le coppie che vedono almeno uno dei due stati come accettanti poiché altrimenti non si accetterebbero delle stringhe accettate da $M_1$ ed $M_2$ in partenza.
+        \end{itemize}
+
+        Allora, poiché $M$ è in grado di simulare $M_1$ ed $M_2$ contemporaneamente, per costruzione accetterà ogni stringa di $A$ e di $B$, dunque riconoscendo $A \cup B$, e dunque $A \cup B$ è regolare per definizione.
+    \end{proof}
 
 \end{document}
