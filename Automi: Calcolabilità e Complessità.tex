@@ -291,6 +291,8 @@
             \item $q_1$ è lo stato iniziale
             \item $F = \{q_4\} \subseteq Q$
         \end{itemize}
+
+        TODO: MOSTRA LA COMPUTAZIONE, È FONDAMENTALE
     \end{example}
 
     \begin{frameddefn}[Stringhe accettate]
@@ -312,8 +314,23 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Sia $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ l'NFA in ipotesi, tale da riconoscere un linguaggio A. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
+
+        Allora, sia $M = (Q', \Sigma_{\varepsilon}, \delta', q_0', F)$ il DFA definito come segue:
+
+        \begin{itemize}
+            \item $Q' := \powerset{(Q)}$, scelto tale da rappresentare ogni possibile stato di $N$;
+            \item $\displaystyle \forall R \in Q', a \in \Sigma \quad \delta'(R, a) := \bigcup_{r \in R}{E(\delta(r, a))}$, scelta tale in quanto, per un certo insieme di stati $R \in Q'$ di $N$, a $\delta'(R, a)$ viene assegnata l'unione degli stati che sarebbero stati raggiunti in $N$ dagli $r \in R$ con $a$, calcolati dunque attraverso $\delta(r, a)$, aggiungendo infine i possibili $\varepsilon$-archi;
+            \item $q_0' := E(\{q_0\})$, scelto tale da far iniziare $M$ esattamente dove aveva inizio $N$, comprendendo anche i possibili $\varepsilon$-archi iniziali;
+            \item $F' := \{R \in Q' \mid \exists r \in R : r \in F\}$, che corrisponde all'insieme degli insiemi di stati di $N$ contenenti almeno uno stato accettante in $N$.
+        \end{itemize}
+
+        Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il DFA costruito emula l'NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
     \end{proof}
+
+    \begin{framedobs}
+        Sia $A$ un linguaggio; allora, $A$ è regolare se e solo se esiste un NFA che lo riconosce.
+    \end{framedobs}
 
     \section{Operazioni regolari}
 
@@ -337,7 +354,7 @@
             \item $F := (F_1 \times Q_2) \cup (Q_1 \times F_2) = \{(r_1, r_2) \mid r_1 \in F_1 \lor r_2 \in F_2\}$, scelto tale in quanto permette di simulare gli stati accettanti di entrambi gli automi, e vanno prese tutte le coppie che vedono almeno uno dei due stati come accettanti poiché altrimenti non si accetterebbero delle stringhe accettate da $M_1$ ed $M_2$ in partenza.
         \end{itemize}
 
-        Allora, poiché $M$ è in grado di simulare $M_1$ ed $M_2$ contemporaneamente, per costruzione accetterà ogni stringa di $A$ e di $B$, dunque riconoscendo $A \cup B$, e dunque $A \cup B$ è regolare per definizione.
+        Allora, poiché $M$ è in grado di simulare $M_1$ ed $M_2$ contemporaneamente, per costruzione accetterà ogni stringa di $A$ e di $B$, dunque riconoscendo $A \cup B$, e di conseguenza $A \cup B$ è regolare per definizione.
     \end{proof}
 
     \begin{frameddefn}[Concatenazione]
