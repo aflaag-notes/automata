@@ -4,4 +4,5 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph04/automata/ma
 
 ## TODO list
 
+- FIXARE CREF CHE NON FUNZIONA
 - rendi più bianche le foto

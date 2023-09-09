@@ -102,7 +102,7 @@
 
     \subsection{Linguaggi}
 
-    \begin{frameddefn}[Alfabeto]
+    \begin{frameddefn}{Alfabeto}
         Si definisce \textbf{alfabeto} un qualsiasi insieme finito, non vuoto; i suoi elementi sono detti \textbf{simboli}.
     \end{frameddefn}
 
@@ -110,9 +110,8 @@
         $\Sigma = \{\ttt 0,\ttt 1,\ttt x,\ttt y,\ttt z\}$ è un alfabeto, composto da 5 simboli.
     \end{example}
 
-    \begin{frameddefn}[Stringa]
+    \begin{frameddefn}{Stringa}
         Sia $\Sigma$ un alfabeto; una \textbf{stringa su $\Sigma$} è una sequenza finita di simboli di $\Sigma$; la \textbf{stringa vuota} appartiene ad ogni alfabeto, ed è denotata con $\varepsilon$.
-
 
         \begin{itemize}
             \item Data una stringa $w$ di $\Sigma$, allora $|w|$ è la lunghezza di $w$.
@@ -124,17 +123,17 @@
         Sia $\Sigma = \{\ttt 0,\ttt 1,\ttt x,\ttt y,\ttt z\}$ un alfabeto; allora una sua possibile stringa è $w = \ttt x \ttt 1 \ttt y \ttt 0 \ttt z$.
     \end{example}
 
-    \begin{frameddefn}[Stringa inversa]
+    \begin{frameddefn}{Stringa inversa}
         Sia $\Sigma$ un alfabeto, e $w = w_1 w_2\cdots w_n$ una sua stringa; allora si definisce l'\textbf{inversa} di $w$ come segue: $w^\mathcal{R}= w_n w_{n - 1}\cdots w_1$
     \end{frameddefn}
 
-    \begin{frameddefn}[Concatenazione]
+    \begin{frameddefn}{Concatenazione}
         Sia $\Sigma$ un alfabeto, e $x = x_1 x_2 \cdots x_n, y = y_1 y_2 \cdots y_n$ due sue stringhe; allora $xy$ è la stringa ottenuta attraverso la \textbf{concatenazione} di $x$ ed $y$.
 
         Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $x^k = \underbrace{xx \cdots x}_k$.
     \end{frameddefn}
 
-    \begin{frameddefn}[Prefisso]
+    \begin{frameddefn}{Prefisso}
         Sia $\Sigma$ un alfabeto, ed $x, y$ due sue stringhe; allora $x$ è detto essere un \textbf{prefisso} di $y$, se $\exists z \mid xz = y$, con $z$ stringa in $\Sigma$.
     \end{frameddefn}
 
@@ -142,13 +141,13 @@
         Sia $\Sigma = \{\ttt a,\ttt  b,\ttt  c\}$ un alfabeto; allora la stringa $x = \ttt{ab}$ è prefisso della stringa $y = \ttt{abc}$, poiché esiste una stringa $z = \ttt c$ tale per cui $xz = y$.
     \end{example}
     
-    \begin{frameddefn}[Linguaggio]
+    \begin{frameddefn}{Linguaggio}
         Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro.
     \end{frameddefn}
 
     \subsection{Automi finiti}
 
-    \begin{frameddefn}[Automa finito]
+    \begin{frameddefn}{Automa finito}
         Un \textbf{automa finito}, o \textbf{macchina}, è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
 
         \begin{itemize}
@@ -193,7 +192,7 @@
         \end{itemize}
     \end{example}
 
-    \begin{frameddefn}[Linguaggio di un automa]
+    \begin{frameddefn}{Linguaggio di un automa}
         Sia $M$ un automa; allora il \textbf{linguaggio} di $M$ è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
     \end{frameddefn}
 
@@ -219,7 +218,7 @@
         sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, ci si convince facilmente che $$L(M_1) = \{w \mid w = w_1 w_2 \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
     \end{example}
 
-    \begin{frameddefn}[Stringhe accettate]
+    \begin{frameddefn}{Stringhe accettate}
         Sia $M = (Q, \Sigma, \delta, q_0, F)$ un automa, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
@@ -231,7 +230,7 @@
         Dato un linguaggio $A$, si ha che $M$ \tbf{riconosce} $A$ se e solo se $A = \{w \mid M \ \mathrm{accetta} \ w\}$.
     \end{frameddefn}
 
-    \begin{frameddefn}[Linguaggio regolare]
+    \begin{frameddefn}{Linguaggio regolare}
         Un linguaggio è detto \tbf{regolare} se e solo se esiste un automa finito che lo riconosce.
     \end{frameddefn}
 
@@ -239,7 +238,7 @@
 
     \subsection{Definizioni}
     
-    \begin{frameddefn}[NFA]
+    \begin{frameddefn}{NFA}
         Un \tbf{NFA} (\tit{Nondeterministic Finite Automaton}) è un automa in cui possono esistere varie scelte per lo stato successivo in ogni punto. Durante la computazione, ogni volta che viene incontrata una scelta, la macchina si \tit{divide}, e ognuno dei vari automi risultanti computa le varie scelte indipendentemente.
 
         Formalmente, un NFA è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
@@ -256,7 +255,7 @@
 
         Se il simbolo di input successivo non compare su alcuno degli archi uscenti dallo stato occupato da una copia della macchina, quella copia cessa di proseguire; inoltre, se \tit{una qualunque copia} della macchina è in uno stato accettante, l'NFA accetta la stringa di input. Si noti che questa divisione è descritta dall'insieme potenza $\mathcal{P}(Q)$, poiché da ogni stato si può arrivare ad un \tit{insieme} di stati.
 
-        Gli automi deterministici vengono anche detti \tbf{DFA} (\tit{Deterministic Finite Automaton}).
+        Gli automi deterministici vengono anche detti \tbf{DFA} (\tit{Deterministic Finite Automaton}). Si noti che il determinismo è un caso particolare di non determinismo, dunque un DFA è sempre anche un NFA.
     \end{frameddefn}
 
     \begin{example}[NFA]
@@ -301,7 +300,7 @@
         Si noti che nel momento in cui vengono incontrati $\varepsilon$-archi si giunge allo stato successivo nello stesso step dell'input incontrato, dunque gli $\varepsilon$-archi \tit{non} producono uno step di esecuzione, ma vengono eseguiti non appena vengono incontrati, e vengono accorpati immediatamente.
     \end{example}
 
-    \begin{frameddefn}[Stringhe accettate]
+    \begin{frameddefn}{Stringhe accettate}
         Sia $N = (Q, \Sigma, \delta, q_0, F)$ un automa, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
@@ -311,11 +310,11 @@
         \end{itemize}
     \end{frameddefn}
 
-    \begin{frameddefn}[Equivalenza tra automi]
+    \begin{frameddefn}{Equivalenza tra automi}
         Due macchine si dicono \tbf{equivalenti} se e solo se riconoscono lo stesso linguaggio.
     \end{frameddefn}
 
-    \begin{framedthm}[Automi equivalenti]
+    \begin{framedthm}[label={nfa equiv}]{DFA equivalente ad NFA}
         Sia $N$ un NFA; allora, esiste un DFA ad esso equivalente.
     \end{framedthm}
 
@@ -333,16 +332,22 @@
 
         Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il DFA costruito emula l'NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
     \end{proof}
-
-    \begin{framedobs}
+    
+    \begin{framedcor}{Linguaggi regolari con NFA}
         Sia $A$ un linguaggio; allora, $A$ è regolare se e solo se esiste un NFA che lo riconosce.
-    \end{framedobs}
+    \end{framedcor}
+
+    \proofiff{
+        Per definizione, $A$ è regolare, dunque esiste un DFA che lo riconosce. Allora, poiché un DFA è sempre anche NFA, segue la tesi.
+    }{
+        Sia $A$ un linguaggio tale da essere riconosciuto da un NFA; allora, per il TODO FIXA STA ROBA NON FUNZIONA \Cref{nfa equiv}, esiste un DFA equivalente all'NFA che riconosce $A$, e dunque per definizione $A$ è regolare.
+    }
 
     \section{Operazioni regolari}
 
     \subsection{Definizioni}
     
-    \begin{frameddefn}[Unione]
+    \begin{frameddefn}{Unione}
         Siano $A$ e $B$ due linguaggi; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B = \{x \mid x \in A \lor x \in B \}$$
     \end{frameddefn}
 
@@ -350,7 +355,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$$
     \end{example}
 
-    \begin{framedprop}[Chiusura dell'unione]
+    \begin{framedprop}{Chiusura dell'unione}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
     \end{framedprop}
 
@@ -368,7 +373,7 @@
     \end{proof}
 
     \begin{proof}[Dimostrazione II]
-        Siano $N_1$ ed $N_2$ i seguenti NFA, tali da riconoscere rispettivamente i due linguaggi $A$ e $B$ in ipotesi: $$\left . \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right .$$ Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ il seguente NFA:
+        Siano $N_1$ ed $N_2$ i seguenti NFA, tali da riconoscere rispettivamente i due linguaggi $A$ e $B$ in ipotesi: $$\left . \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right .$$ Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
 
         \begin{itemize}
             \item $Q = \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato, e $Q$ è scelto tale da includere sia $N_1$ che $N_2$;
@@ -387,7 +392,7 @@
 
     \end{proof}
 
-    \begin{frameddefn}[Concatenazione]
+    \begin{frameddefn}{Concatenazione}
         Siano $A$ e $B$ due linguaggi; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$
     \end{frameddefn}
 
@@ -395,7 +400,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B = \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
     \end{example}
 
-    \begin{framedprop}[Chiusura della concatenazione]
+    \begin{framedprop}{Chiusura della concatenazione}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare.
     \end{framedprop}
 
@@ -403,7 +408,7 @@
         TODO
     \end{proof}
 
-    \begin{frameddefn}[Star]
+    \begin{frameddefn}{Star}
         Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* = \{x_1 x_2 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\}$$
 
         Si noti che $k = 0 \implies \varepsilon \in A^*$ per ogni linguaggio $A$.
@@ -413,11 +418,15 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
     \end{example}
    
-    \begin{framedprop}[Chiusura dell'operazione star]
+    \begin{framedprop}{Chiusura dell'operazione star}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A^*$ è regolare.
     \end{framedprop}
 
     \begin{proof}
-        TODO
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per l'\cref{nfa equiv} esistono due NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+
+        \begin{itemize}
+            \item TODO
+        \end{itemize}
     \end{proof}
 \end{document}
