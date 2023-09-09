@@ -292,7 +292,13 @@
             \item $F = \{q_4\} \subseteq Q$
         \end{itemize}
 
-        TODO: MOSTRA LA COMPUTAZIONE, È FONDAMENTALE
+        L'esecuzione dell'NFA mostrato è la seguente:
+
+        \begin{center}
+            \includegraphics[scale=0.4]{assets/nfa-neg.png}
+        \end{center}
+
+        Si noti che nel momento in cui vengono incontrati $\varepsilon$-archi si giunge allo stato successivo nello stesso step dell'input incontrato, dunque gli $\varepsilon$-archi \tit{non} producono uno step di esecuzione, ma vengono eseguiti non appena vengono incontrati, e vengono accorpati immediatamente.
     \end{example}
 
     \begin{frameddefn}[Stringhe accettate]
@@ -340,12 +346,16 @@
         Siano $A$ e $B$ due linguaggi; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B = \{x \mid x \in A \lor x \in B \}$$
     \end{frameddefn}
 
+    \begin{example}[Unione]
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$$
+    \end{example}
+
     \begin{framedprop}[Chiusura dell'unione]
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
     \end{framedprop}
 
-    \begin{proof}
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due automi finiti $$\left. \begin{array}{l}M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ l'automa finito definito come segue:
+    \begin{proof}[Dimostrazione I]
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due automi finiti $$\left. \begin{array}{c}M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ l'automa finito definito come segue:
 
         \begin{itemize}
             \item $Q := Q_1 \times Q_2 = \{(r_1, r_2) \mid r_1 \in Q_1 \land r_2 \in Q_2\}$, scelto tale in quanto permette di avere tutte le possibili combinazioni di stati dei due automi di partenza;
@@ -357,9 +367,41 @@
         Allora, poiché $M$ è in grado di simulare $M_1$ ed $M_2$ contemporaneamente, per costruzione accetterà ogni stringa di $A$ e di $B$, dunque riconoscendo $A \cup B$, e di conseguenza $A \cup B$ è regolare per definizione.
     \end{proof}
 
+    \begin{proof}[Dimostrazione II]
+        Siano $N_1$ ed $N_2$ i seguenti NFA, tali da riconoscere rispettivamente i due linguaggi $A$ e $B$ in ipotesi: $$\left . \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right .$$ Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ il seguente NFA:
+
+        \begin{itemize}
+            \item $Q = \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato, e $Q$ è scelto tale da includere sia $N_1$ che $N_2$;
+            \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) = \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione;
+            \item $q_0$ è il nuovo stato, che rappresenta lo stato iniziale di $N$;
+            \item $F = F_1 \cup F_2$, scelto tale da costruire $N$ in modo che accetti una stringa se e solo se la accetterebbero $N_1$ o $N_2$.
+        \end{itemize}
+
+        Allora, l'NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per definizione.
+
+        La foto seguente raffigura la dimostrazione costruttiva appena descritta:
+
+        \begin{center}
+            \includegraphics[scale=0.4]{assets/union-neg.png}
+        \end{center}
+
+    \end{proof}
+
     \begin{frameddefn}[Concatenazione]
-        Siano $A$ e $B$ due linguaggio; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$
+        Siano $A$ e $B$ due linguaggi; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$
     \end{frameddefn}
+
+    \begin{example}[Concatenazione]
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B = \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
+    \end{example}
+
+    \begin{framedprop}[Chiusura della concatenazione]
+        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare.
+    \end{framedprop}
+
+    \begin{proof}
+        TODO
+    \end{proof}
 
     \begin{frameddefn}[Star]
         Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* = \{x_1 x_2 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\}$$
@@ -367,14 +409,15 @@
         Si noti che $k = 0 \implies \varepsilon \in A^*$ per ogni linguaggio $A$.
     \end{frameddefn}
 
-    \begin{example}[Operazioni regolari]
-        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che
-
-        \begin{itemize}
-            \item $A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$
-            \item $A \circ B = \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$
-            \item $A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$
-        \end{itemize}
+    \begin{example}[Star]
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
     \end{example}
    
+    \begin{framedprop}[Chiusura dell'operazione star]
+        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A^*$ è regolare.
+    \end{framedprop}
+
+    \begin{proof}
+        TODO
+    \end{proof}
 \end{document}

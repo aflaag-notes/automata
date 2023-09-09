@@ -1708,6 +1708,16 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
+INPUT ./assets/nfa-neg.png
+INPUT ./assets/nfa-neg.png
+INPUT assets/nfa-neg.png
+INPUT ./assets/nfa-neg.png
+INPUT ./assets/nfa-neg.png
+INPUT ./assets/union-neg.png
+INPUT ./assets/union-neg.png
+INPUT assets/union-neg.png
+INPUT ./assets/union-neg.png
+INPUT ./assets/union-neg.png
 INPUT Automi: Calcolabilità e Complessità.aux
 INPUT ./Automi: Calcolabilità e Complessità.out
 INPUT ./Automi: Calcolabilità e Complessità.out
