@@ -142,7 +142,7 @@
     \end{example}
     
     \begin{frameddefn}{Linguaggio}
-        Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro.
+        Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro. Il linguaggio vuoto si indica con $\varnothing$.
     \end{frameddefn}
 
     \subsection{Automi finiti}
@@ -294,7 +294,7 @@
         L'esecuzione dell'NFA mostrato è la seguente:
 
         \begin{center}
-            \includegraphics[scale=0.4]{assets/nfa-neg.png}
+            \includegraphics[scale=0.35]{assets/nfa-neg.png}
         \end{center}
 
         Si noti che nel momento in cui vengono incontrati $\varepsilon$-archi si giunge allo stato successivo nello stesso step dell'input incontrato, dunque gli $\varepsilon$-archi \tit{non} producono uno step di esecuzione, ma vengono eseguiti non appena vengono incontrati, e vengono accorpati immediatamente.
@@ -340,7 +340,7 @@
     \proofiff{
         Per definizione, $A$ è regolare, dunque esiste un DFA che lo riconosce. Allora, poiché un DFA è sempre anche NFA, segue la tesi.
     }{
-        Sia $A$ un linguaggio tale da essere riconosciuto da un NFA; allora, per il TODO FIXA STA ROBA NON FUNZIONA \Cref{nfa equiv}, esiste un DFA equivalente all'NFA che riconosce $A$, e dunque per definizione $A$ è regolare.
+        Sia $A$ un linguaggio tale da essere riconosciuto da un NFA; allora, per il \cref{nfa equiv}, esiste un DFA equivalente all'NFA che riconosce $A$, e dunque per definizione $A$ è regolare.
     }
 
     \section{Operazioni regolari}
@@ -373,21 +373,21 @@
     \end{proof}
 
     \begin{proof}[Dimostrazione II]
-        Siano $N_1$ ed $N_2$ i seguenti NFA, tali da riconoscere rispettivamente i due linguaggi $A$ e $B$ in ipotesi: $$\left . \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right .$$ Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
 
         \begin{itemize}
-            \item $Q = \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato, e $Q$ è scelto tale da includere sia $N_1$ che $N_2$;
-            \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) = \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione;
+            \item $Q := \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato, e $Q$ è scelto tale da includere sia $N_1$ che $N_2$;
+            \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione; infatti, si noti che si è posta $\delta(q_0, \varepsilon) := \{q_1, q_2\}$ in modo da collegare il nuovo stato $q_0$ a $q_1$ e $q_2$, gli stati iniziali di $N_1$ ed $N_2$ rispettivamente;
             \item $q_0$ è il nuovo stato, che rappresenta lo stato iniziale di $N$;
-            \item $F = F_1 \cup F_2$, scelto tale da costruire $N$ in modo che accetti una stringa se e solo se la accetterebbero $N_1$ o $N_2$.
+            \item $F := F_1 \cup F_2$, scelto tale da costruire $N$ in modo che accetti una stringa se e solo se la accetterebbero $N_1$ o $N_2$.
         \end{itemize}
 
         Allora, l'NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per definizione.
 
-        La foto seguente raffigura la dimostrazione costruttiva appena descritta:
+        La seguente rappresentazione raffigura la dimostrazione costruttiva appena descritta:
 
         \begin{center}
-            \includegraphics[scale=0.4]{assets/union-neg.png}
+            \includegraphics[scale=0.35]{assets/union-neg.png}
         \end{center}
 
     \end{proof}
@@ -405,7 +405,22 @@
     \end{framedprop}
 
     \begin{proof}
-        TODO
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+        
+        \begin{itemize}
+            \item $Q := Q_1 \cup Q_2$, scelto tale da includere entrambe gli automi $N_1$ ed $N_2$ di partenza;
+            \item $q_0 := q_1$, scelto tale da far iniziare l'esecuzione dell'automa su $N_1$;
+            \item $F := F_2$, scelto tale da far terminare l'esecuzione dell'automa su $N_2$;
+            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_2\} & q \in F_1 \land a = \varepsilon \\ \delta_2(q, a) & q \in Q_2 \end{array} \right.$, scelta tale da anteporre l'esecuzione di $N_1$ a quella di $N_2$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q \in F_1$ ma $a \neq \varepsilon$, l'esecuzione di $N_1$ non viene alterata; diversamente, se invece $q \in F_1$ e $a = \varepsilon$, all'insieme di stati $\delta_1(q, \varepsilon)$ viene aggiunto $q_2$, ovvero lo stato iniziale di $N_2$, in modo da effettuare la concatenazione tra i due NFA non deterministicamente.
+        \end{itemize}
+
+        Allora, l'NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per definizione.
+
+        La seguente rappresentazione raffigura la dimostrazione costruttiva appena descritta:
+
+        \begin{center}
+            \includegraphics[scale=0.35]{assets/concat-neg.png}
+        \end{center}
     \end{proof}
 
     \begin{frameddefn}{Star}
@@ -419,14 +434,33 @@
     \end{example}
    
     \begin{framedprop}{Chiusura dell'operazione star}
-        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A^*$ è regolare.
+        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare.
     \end{framedprop}
 
     \begin{proof}
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per l'\cref{nfa equiv} esistono due NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+        Per definizione, $A$ è linguaggio regolare, dunque per il \cref{nfa equiv} esiste un NFA $$N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)$$ tale da riconoscere $A$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
 
         \begin{itemize}
-            \item TODO
+            \item $Q := \{q_0\} \cup Q_1$, dove $q_0$ è un nuovo stato, posto prima di $N_1$;
+            \item $q_0$ è il nuovo stato iniziale;
+            \item $F: = \{q_0\} \cup F_1$, poiché $q_0$ deve essere accettante, in modo tale da accettare $\varepsilon$ (si noti che $\varepsilon \in A^*$ per ogni linguaggio $A$);
+            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_1\} & q \in F_1 \land a = \varepsilon \\ \{q_1\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = q_0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da ricominciare l'esecuzione dell'automa ogni volta che viene raggiunto uno stato accettante in $N_1$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q$ è accettante e $a \neq \varepsilon$, l'esecuzione procede normalmente con $\delta_1(q, a)$; differentemente, se $q \in F_1$ ma $a = \varepsilon$, allora l'esecuzione deve ricominciare da capo per poter effettuare la concatenazione multipla delle stringhe in $A$ che caratterizzano l'operazione star, e dunque a $\delta_1(q, a)$ viene aggiunto $q_1$ (lo stato inziale di $N_1$); infine, ponendo $\delta(q_0, \varepsilon) := \{q_1\}$ si realizza l'$\varepsilon$-arco iniziale che collega $q_0$ (il nuovo stato) a $q_1$, al fine di rendere $N$ in grado di accettare $\varepsilon$.
         \end{itemize}
+
+        Allora, poichè l'NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per definizione.
+
+        La seguente rappresentazione raffigura la dimostrazione costruttiva appena descritta:
+
+        \begin{center}
+            \includegraphics[scale=0.35]{assets/star-neg.png}
+        \end{center}
     \end{proof}
+
+    \section{Espressioni regolari}
+
+    \subsection{TODO}
+
+    \begin{frameddefn}{Espressione regolare}
+        TODO
+    \end{frameddefn}
 \end{document}

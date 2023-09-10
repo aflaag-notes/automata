@@ -1720,6 +1720,16 @@ INPUT ./assets/union-neg.png
 INPUT assets/union-neg.png
 INPUT ./assets/union-neg.png
 INPUT ./assets/union-neg.png
+INPUT ./assets/concat-neg.png
+INPUT ./assets/concat-neg.png
+INPUT assets/concat-neg.png
+INPUT ./assets/concat-neg.png
+INPUT ./assets/concat-neg.png
+INPUT ./assets/star-neg.png
+INPUT ./assets/star-neg.png
+INPUT assets/star-neg.png
+INPUT ./assets/star-neg.png
+INPUT ./assets/star-neg.png
 INPUT Automi: Calcolabilità e Complessità.aux
 INPUT ./Automi: Calcolabilità e Complessità.out
 INPUT ./Automi: Calcolabilità e Complessità.out
