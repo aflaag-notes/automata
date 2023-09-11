@@ -130,7 +130,7 @@
     \begin{frameddefn}{Concatenazione}
         Sia $\Sigma$ un alfabeto, e $x = x_1 x_2 \cdots x_n, y = y_1 y_2 \cdots y_n$ due sue stringhe; allora $xy$ è la stringa ottenuta attraverso la \textbf{concatenazione} di $x$ ed $y$.
 
-        Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $x^k = \underbrace{xx \cdots x}_k$.
+        Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $$x^k = \underbrace{xx \cdots x}_{k \ \textrm{volte}}$$.
     \end{frameddefn}
 
     \begin{frameddefn}{Prefisso}
@@ -142,7 +142,7 @@
     \end{example}
     
     \begin{frameddefn}{Linguaggio}
-        Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro. Il linguaggio vuoto si indica con $\varnothing$.
+        Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro. Il linguaggio vuoto si indica con $\emptyset$.
     \end{frameddefn}
 
     \subsection{Automi finiti}
@@ -286,7 +286,7 @@
         \begin{itemize}
             \item $Q = \{q_1, q_2, q_3, q_4\}$
             \item $\Sigma = \{\ttt 0, \ttt 1\}$
-            \item $\delta$ è la seguente: \begin{center} \begin{tabular}{c|ccc} & \ttt 0 & \ttt 1 & $\varepsilon$ \\ \hline $q_1$ & $\{q_1\}$ & $\{q_1, q_2\}$ & $\varnothing$ \\ $q_2$ & $\{q_3\}$ & $\varnothing$ & $\{q_3\}$ \\ $q_3$ & $\varnothing$ & $\{q_4\}$ & $\varnothing$ \\ $q_4$ & $\{q_4\}$ & $\{q_4\}$ & $\varnothing$ \end{tabular} \end{center}
+            \item $\delta$ è la seguente: \begin{center} \begin{tabular}{c|ccc} & \ttt 0 & \ttt 1 & $\varepsilon$ \\ \hline $q_1$ & $\{q_1\}$ & $\{q_1, q_2\}$ & $\emptyset$ \\ $q_2$ & $\{q_3\}$ & $\emptyset$ & $\{q_3\}$ \\ $q_3$ & $\emptyset$ & $\{q_4\}$ & $\emptyset$ \\ $q_4$ & $\{q_4\}$ & $\{q_4\}$ & $\emptyset$ \end{tabular} \end{center}
             \item $q_1$ è lo stato iniziale
             \item $F = \{q_4\} \subseteq Q$
         \end{itemize}
@@ -334,11 +334,11 @@
     \end{proof}
     
     \begin{framedcor}{Linguaggi regolari con NFA}
-        Sia $A$ un linguaggio; allora, $A$ è regolare se e solo se esiste un NFA che lo riconosce.
+        Un linguaggio è regolare se e solo se esiste un NFA che lo riconosce.
     \end{framedcor}
 
     \proofiff{
-        Per definizione, $A$ è regolare, dunque esiste un DFA che lo riconosce. Allora, poiché un DFA è sempre anche NFA, segue la tesi.
+        Sia $A$ un linguaggio regolare, e dunque per definizione esiste un DFA che lo riconosce. Allora, poiché un DFA è sempre anche NFA, segue la tesi.
     }{
         Sia $A$ un linguaggio tale da essere riconosciuto da un NFA; allora, per il \cref{nfa equiv}, esiste un DFA equivalente all'NFA che riconosce $A$, e dunque per definizione $A$ è regolare.
     }
@@ -377,7 +377,7 @@
 
         \begin{itemize}
             \item $Q := \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato, e $Q$ è scelto tale da includere sia $N_1$ che $N_2$;
-            \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione; infatti, si noti che si è posta $\delta(q_0, \varepsilon) := \{q_1, q_2\}$ in modo da collegare il nuovo stato $q_0$ a $q_1$ e $q_2$, gli stati iniziali di $N_1$ ed $N_2$ rispettivamente;
+            \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \emptyset & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione; infatti, si noti che si è posta $\delta(q_0, \varepsilon) := \{q_1, q_2\}$ in modo da collegare il nuovo stato $q_0$ a $q_1$ e $q_2$, gli stati iniziali di $N_1$ ed $N_2$ rispettivamente;
             \item $q_0$ è il nuovo stato, che rappresenta lo stato iniziale di $N$;
             \item $F := F_1 \cup F_2$, scelto tale da costruire $N$ in modo che accetti una stringa se e solo se la accetterebbero $N_1$ o $N_2$.
         \end{itemize}
@@ -444,7 +444,7 @@
             \item $Q := \{q_0\} \cup Q_1$, dove $q_0$ è un nuovo stato, posto prima di $N_1$;
             \item $q_0$ è il nuovo stato iniziale;
             \item $F: = \{q_0\} \cup F_1$, poiché $q_0$ deve essere accettante, in modo tale da accettare $\varepsilon$ (si noti che $\varepsilon \in A^*$ per ogni linguaggio $A$);
-            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_1\} & q \in F_1 \land a = \varepsilon \\ \{q_1\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = q_0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da ricominciare l'esecuzione dell'automa ogni volta che viene raggiunto uno stato accettante in $N_1$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q$ è accettante e $a \neq \varepsilon$, l'esecuzione procede normalmente con $\delta_1(q, a)$; differentemente, se $q \in F_1$ ma $a = \varepsilon$, allora l'esecuzione deve ricominciare da capo per poter effettuare la concatenazione multipla delle stringhe in $A$ che caratterizzano l'operazione star, e dunque a $\delta_1(q, a)$ viene aggiunto $q_1$ (lo stato inziale di $N_1$); infine, ponendo $\delta(q_0, \varepsilon) := \{q_1\}$ si realizza l'$\varepsilon$-arco iniziale che collega $q_0$ (il nuovo stato) a $q_1$, al fine di rendere $N$ in grado di accettare $\varepsilon$.
+            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_1\} & q \in F_1 \land a = \varepsilon \\ \{q_1\} & q = q_0 \land a = \varepsilon \\ \emptyset & q = q_0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da ricominciare l'esecuzione dell'automa ogni volta che viene raggiunto uno stato accettante in $N_1$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q$ è accettante e $a \neq \varepsilon$, l'esecuzione procede normalmente con $\delta_1(q, a)$; differentemente, se $q \in F_1$ ma $a = \varepsilon$, allora l'esecuzione deve ricominciare da capo per poter effettuare la concatenazione multipla delle stringhe in $A$ che caratterizzano l'operazione star, e dunque a $\delta_1(q, a)$ viene aggiunto $q_1$ (lo stato inziale di $N_1$); infine, ponendo $\delta(q_0, \varepsilon) := \{q_1\}$ si realizza l'$\varepsilon$-arco iniziale che collega $q_0$ (il nuovo stato) a $q_1$, al fine di rendere $N$ in grado di accettare $\varepsilon$.
         \end{itemize}
 
         Allora, poichè l'NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per definizione.
@@ -458,9 +458,77 @@
 
     \section{Espressioni regolari}
 
-    \subsection{TODO}
+    \subsection{Definizioni}
 
     \begin{frameddefn}{Espressione regolare}
-        TODO
+        Sia $\Sigma$ un alfabeto; allora, $R$ si definisce \tbf{espressione regolare} se soddisfa una delle seguenti caratteristiche:
+
+        \begin{itemize}
+            \item $R = \emptyset$
+            \item $R = \varepsilon$
+            \item $R \in \Sigma$
+        \end{itemize}
+
+        Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita. Data un'espressione regolare $R$, con $L(R)$ si intende il linguaggio che $R$ descrive, ovvero l'insieme di stringhe che $R$ rappresenta.
     \end{frameddefn}
+
+    \begin{frameddefn}{Unione}
+        Siano $R_1$ ed $R_2$ due espressioni regolari; allora, si definisce l'\tbf{unione} di $R_1$ ed $R_2$ la seguente espressione regolare: $$(R_1 \cup R_2)$$ e rappresenta uno qualsiasi dei caratteri di $R_1$ o di $R_2$.
+
+        Si noti che $R \cup \emptyset = \emptyset$ per qualsiasi espressione regolare $R$.
+    \end{frameddefn}
+
+    \begin{example}[Unione]
+        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di unione su $\Sigma$ è il seguente: $$R = (\ttt a \cup \ttt c)$$ ed il valore di questa espressione equivale da $\ttt a$ oppure $\ttt c$, e dunque $L(R) = \{ \ttt a, \ttt c\}$.
+    \end{example}
+
+    \begin{example}[Espressioni regolari particolari]
+        Sia $\Sigma = \{\ttt 0, \ttt 1\}$ un alfabeto; l'espressione regolare $(\ttt 0 \cup \ttt 1)$ rappresenta il linguaggio che consiste di tutte le stringhe di lunghezza 1 sull'alfabeto $\Sigma$, e dunque l'espressione regolare descritta si abbrevia generalmente con il simbolo $\Sigma$ stesso.
+    \end{example}
+
+    \begin{frameddefn}{Concatenazione}
+        Siano $R_1$ ed $R_2$ due espressioni regolari; allora, si definisce la \tbf{concatenazione} di $R_1$ ed $R_2$ la seguente espressione regolare: $$(R_1 \circ R_2)$$ e rappresenta le stringhe che iniziano per $R_1$ e terminano con $R_2$.
+
+        Per indicare la concatenazione di $R$ con sé stessa, si usa la seguente notazione $$R^k := \underbrace{R \circ \cdots \circ R}_{k \ \textrm{volte}}$$
+
+        Si noti che $R \circ \emptyset = \emptyset$ e $R \circ \varepsilon = R$, per qualsiasi espressione regolare $R$.
+    \end{frameddefn}
+
+    \begin{example}[Concatenazione]
+        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di concatenazione su $\Sigma$ è il seguente: $$R = (\ttt a \circ \ttt c)$$ che può essere scritto equivalentemente come $\ttt a \ttt c$, e dunque $L(R) = \{ \ttt{ac} \}$.
+    \end{example}
+
+    \begin{frameddefn}{Star}
+        Sia $R$ un'espressione regolare; allora, si definisce l'operazione unaria \tbf{star} su $R$ la seguente espressione regolare: $$R^*$$ e tutte rappresenta le stringhe che si possono ottenere concatenando un qualsiasi numero di caratteri di $R$, e descrive dunque il linguaggio che consiste di tutte le stringhe dell'alfabeto di $R$.
+
+        Si noti che $R^*$ comprende $\varepsilon$ per qualsiasi espressione regolare $R$.
+
+        Spesso si usa la notazione $R^+ := RR^*$, ovvero le stringhe che si ottengono attraverso la concatenazione di 1 o più stringhe di $R$. Di conseguenza, si ha che $R^+ \cup \varepsilon = R^*$.
+    \end{frameddefn}
+
+    \begin{example}[Star]
+        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di star su $\Sigma$ è il seguente: $$R = (\Sigma^*)$$ che descrive il linguaggio che consiste di tutte le stringhe sull'alfabeto, e dunque $L(R) = \{\ttt a, \ttt b, \ttt c, \ttt{aa}, \ttt{bb}, \ttt{cc}, \ldots\}$.
+    \end{example}
+
+    \begin{example}[Espressioni regolari]
+        Sia $\Sigma = \{\ttt 0, \ttt 1\}$ un alfabeto; i seguenti sono esempi di espressioni regolari su $\Sigma$:
+        
+        \begin{itemize}
+            \item $\ttt 0 ^* \ttt 1 \ttt 0 ^* = \{w \mid w$ contiene un solo $\ttt 1 \}$;
+            \item $\Sigma ^* \ttt{001} \Sigma ^* = \{ w \mid w$ contiene la stringa $\ttt{001}$ come sottostringa$\}$;
+            \item $\ttt 0 \Sigma ^* \ttt 0 \cup \ttt 1 \Sigma ^* \ttt 1 \cup \ttt 0 \cup \ttt 1 = \{w \mid w$ inizia e termina con lo stesso carattere$\}$, poiché si noti che l'ordine delle operazioni, a meno di parentesi, è (\tit i) star, (\tit{ii}) concatenazione, ed infine (\tit{iii}) unione;
+            \item $(\ttt 0 \cup \varepsilon) (\ttt 1 \cup \varepsilon) = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}\}$;
+            \item $\emptyset ^* = \{ \varepsilon \}$, poiché $\emptyset$ rappresenta il linguaggio vuoto, e dunque l'unica stringa che si può ottenere concatenando un qualsiasi numero di volte elementi del linguaggio vuoto, è $\varepsilon$.
+        \end{itemize}
+    \end{example}
+
+    \begin{framedthm}{Linguaggi ed espressioni regolari}
+        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive.
+    \end{framedthm}
+
+    \proofiff{
+        TODO
+    }{
+        TODO
+    }
 \end{document}
