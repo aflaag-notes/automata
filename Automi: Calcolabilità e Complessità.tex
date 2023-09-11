@@ -96,7 +96,7 @@
 
     %%%%%%%%%%%%%%%%%%%%%
 
-    \chapter{Linguaggi regolari}
+    \chapter{Linguaggi ed espressioni regolari}
 
     \section{Automi finiti}
 
@@ -333,7 +333,7 @@
         Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il DFA costruito emula l'NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
     \end{proof}
     
-    \begin{framedcor}{Linguaggi regolari con NFA}
+    \begin{framedcor}[label={nfa regolare}]{Linguaggi regolari con NFA}
         Un linguaggio è regolare se e solo se esiste un NFA che lo riconosce.
     \end{framedcor}
 
@@ -355,7 +355,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura dell'unione}
+    \begin{framedprop}[label={closure unione}]{Chiusura dell'unione}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
     \end{framedprop}
 
@@ -400,7 +400,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B = \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura della concatenazione}
+    \begin{framedprop}[label={closure concat}]{Chiusura della concatenazione}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare.
     \end{framedprop}
 
@@ -433,7 +433,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
     \end{example}
    
-    \begin{framedprop}{Chiusura dell'operazione star}
+    \begin{framedprop}[label={closure star}]{Chiusura dell'operazione star}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare.
     \end{framedprop}
 
@@ -469,7 +469,15 @@
             \item $R \in \Sigma$
         \end{itemize}
 
-        Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita. Data un'espressione regolare $R$, con $L(R)$ si intende il linguaggio che $R$ descrive, ovvero l'insieme di stringhe che $R$ rappresenta.
+        Un'espressione regolare, dunque, è un modo compatto di definire un linguaggio. Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita.
+
+        Data un'espressione regolare $R$, con $L(R)$ si intende il linguaggio che $R$ descrive, ovvero l'insieme di stringhe che $R$ rappresenta. Dunque, sono vere le seguenti:
+
+        \begin{itemize}
+            \item $L(\emptyset) = \emptyset$
+            \item $L(\varepsilon) = \{ \varepsilon \}$
+            \item $\forall a \in \Sigma \quad L(a) = \{ a\}$
+        \end{itemize}
     \end{frameddefn}
 
     \begin{frameddefn}{Unione}
@@ -499,7 +507,7 @@
     \end{example}
 
     \begin{frameddefn}{Star}
-        Sia $R$ un'espressione regolare; allora, si definisce l'operazione unaria \tbf{star} su $R$ la seguente espressione regolare: $$R^*$$ e tutte rappresenta le stringhe che si possono ottenere concatenando un qualsiasi numero di caratteri di $R$, e descrive dunque il linguaggio che consiste di tutte le stringhe dell'alfabeto di $R$.
+        Sia $R$ un'espressione regolare; allora, si definisce l'operazione unaria \tbf{star} su $R$ la seguente espressione regolare: $$(R^*)$$ e tutte rappresenta le stringhe che si possono ottenere concatenando un qualsiasi numero di caratteri di $R$, e descrive dunque il linguaggio che consiste di tutte le stringhe dell'alfabeto di $R$.
 
         Si noti che $R^*$ comprende $\varepsilon$ per qualsiasi espressione regolare $R$.
 
@@ -522,6 +530,26 @@
         \end{itemize}
     \end{example}
 
+    \subsection{Non determinismo generalizzato}
+    
+    \begin{frameddefn}{GNFA}
+        Un \tbf{GNFA} (\tit{Generalized Nondeterministic Finite Automaton}) è una versione generalizzata di un NFA, in cui gli archi delle transizioni sono espressioni regolari sull'alfabeto dato.
+
+        TODO FORMALE
+
+        Un GNFA legge blocchi di simboli dall'input, e si muove lungo gli archi che sono etichettati da espressioni regolari che possono descrivere il blocco di simboli letto.
+
+        Inoltre, essendo una versione generalizzata di un NFA, un GNFA può avere diversi modi di elaborare la stessa stringa di input, e accetta quest'ultima se la sua elaborazione può far si che il GNFA si trovi in uno stato accettante al suo termine.
+    \end{frameddefn}
+
+    \begin{example}[GNFA]
+        Il seguente è il digramma di un GNFA sull'alfabeto $\Sigma = \{ \ttt a, \ttt b \}.$
+
+        \begin{center}
+            \includegraphics[scale=0.35]{assets/gnfa-neg.png}
+        \end{center}
+    \end{example}
+
     \begin{framedthm}{Linguaggi ed espressioni regolari}
         Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive.
     \end{framedthm}
@@ -529,6 +557,58 @@
     \proofiff{
         TODO
     }{
-        TODO
+        Sia $A$ un linguaggio su un alfabeto $\Sigma$, descritto da un'espressione regolare $R$. Allora, la dimostrazione procede costruendo degli NFA, per casi, come segue:
+
+        \begin{itemize}
+            \item $R = \emptyset \implies L(R) = \emptyset$; allora, il seguente NFA è in grado di riconoscere $L(R)$:
+
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                        \node[initial,state] (1) {$q_0$};
+             
+                        \path[every node/.style={font=\sffamily\small}]
+                         ;
+                     \end{tikzpicture}
+                     \caption{Un NFA in grado di riconoscere $L(\emptyset)$.}
+                \end{figure}
+                
+                L'automa mostrato è descritto dalla quintupla $N = (\{q_0\}, \Sigma, \delta, q_0, \varnothing)$, dove $\forall a \in \Sigma \quad \delta(q_0, a) = \emptyset$.
+
+            \item $R = \varepsilon \implies L(R) = \{\varepsilon\}$; allora, il seguente NFA è in grado di riconoscere $L(R)$:
+
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                        \node[initial,state, accepting] (1) {$q_0$};
+             
+                        \path[every node/.style={font=\sffamily\small}]
+                         ;
+                     \end{tikzpicture}
+                     \caption{Un NFA in grado di riconoscere $L(\varepsilon)$.}
+                \end{figure}
+
+                L'automa mostrato è descritto dalla quintupla $N = (\{q_0\}, \Sigma, \delta, q_0, \{q_0\})$, dove $\forall a \in \Sigma \quad \delta(q_0, a) = \emptyset$.
+
+            \item $R \in \Sigma \implies L(R) = \{a \}$ per qualche $a \in \Sigma$; allora, il seguente NFA è in grado di riconoscere $L(R)$:
+
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                        \node[initial,state] (1) {$q_1$};
+                        \node[state,accepting] (2) [right of=1] {$q_2$};
+
+                        \path[every node/.style={font=\sffamily\small}]
+                        (1) edge node {$a$} (2)
+                        ;                     \end{tikzpicture}
+                    \caption{Un NFA in grado di riconoscere $L(a)$.}
+                \end{figure}
+
+                L'automa mostrato è descritto dalla quintupla $N = (\{q_1, q_2\}, \Sigma, \delta, q_1, \{q_2\})$, dove $\forall q \in \{q_1, q_2\}, x \in \Sigma \quad \delta(q, x) = \left \{ \begin{array}{ll} \{q_2\} & q = q_1 \land x = a \\ \emptyset & q \neq q_1 \lor x \neq a \end{array} \right.$.
+
+            \item si noti che se esistono due espressioni regolari $R_1$ ed $R_2$ tali che $R = R_1 \cup R_2$, oppure $R = R_1 \circ R_2$, o ancora $R = R_1^*$, è sufficiente costruire gli NFA che sono stati costruiti nelle dimostrazioni della \cref{closure unione}, della \cref{closure concat} e della \cref{closure star}.
+        \end{itemize}
+
+        Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa regolare}, $A$ è regolare.
     }
 \end{document}
