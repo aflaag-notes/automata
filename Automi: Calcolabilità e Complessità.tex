@@ -131,6 +131,8 @@
         Sia $\Sigma$ un alfabeto, e $x = x_1 x_2 \cdots x_n, y = y_1 y_2 \cdots y_n$ due sue stringhe; allora $xy$ è la stringa ottenuta attraverso la \textbf{concatenazione} di $x$ ed $y$.
 
         Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $$x^k = \underbrace{xx \cdots x}_{k \ \textrm{volte}}$$
+
+        Si noti che per ogni stringa $x$ su $\Sigma$, si ha che $x^0 = \varepsilon$.
     \end{frameddefn}
 
     \begin{frameddefn}{Prefisso}
@@ -291,11 +293,11 @@
             \item $F = \{q_4\} \subseteq Q$
         \end{itemize}
 
-        L'esecuzione dell'NFA mostrato è la seguente:
-
-        \begin{center}
+        \begin{figure}[H]
+            \centering
             \includegraphics[scale=0.35]{assets/nfa-neg.png}
-        \end{center}
+            \caption{L'immagine rappresenta l'esecuzione dell'NFA descritto.}
+        \end{figure}
 
         Si noti che nel momento in cui vengono incontrati $\varepsilon$-archi si giunge allo stato successivo nello stesso step dell'input incontrato, dunque gli $\varepsilon$-archi \tit{non} producono uno step di esecuzione, ma vengono eseguiti non appena vengono incontrati, e vengono accorpati immediatamente.
     \end{example}
@@ -384,11 +386,11 @@
 
         Allora, l'NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per definizione.
 
-        La seguente rappresentazione raffigura la dimostrazione costruttiva appena descritta:
-
-        \begin{center}
+        \begin{figure}[H]
+            \centering
             \includegraphics[scale=0.35]{assets/union-neg.png}
-        \end{center}
+            \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
+        \end{figure}
 
     \end{proof}
 
@@ -416,11 +418,11 @@
 
         Allora, l'NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per definizione.
 
-        La seguente rappresentazione raffigura la dimostrazione costruttiva appena descritta:
-
-        \begin{center}
+        \begin{figure}[H]
+            \centering
             \includegraphics[scale=0.35]{assets/concat-neg.png}
-        \end{center}
+            \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
+        \end{figure}
     \end{proof}
 
     \begin{frameddefn}{Star}
@@ -449,11 +451,11 @@
 
         Allora, poichè l'NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per definizione.
 
-        La seguente rappresentazione raffigura la dimostrazione costruttiva appena descritta:
-
-        \begin{center}
+        \begin{figure}[H]
+            \centering
             \includegraphics[scale=0.35]{assets/star-neg.png}
-        \end{center}
+            \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
+        \end{figure}
     \end{proof}
 
     \section{Espressioni regolari}
@@ -561,9 +563,11 @@
     \begin{example}[GNFA]
         Il seguente è il digramma di un GNFA sull'alfabeto $\Sigma = \{ \ttt a, \ttt b \}.$
 
-        \begin{center}
-            \includegraphics[scale=0.35]{assets/gnfa-neg.png}
-        \end{center}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.3]{assets/gnfa-neg.png}
+            \caption{Un GNFA.}
+        \end{figure}
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (GNFA)}
@@ -610,16 +614,55 @@
         L'algoritmo inizia prendendo in input un GNFA $G$, ed inizialmente viene controllato il numero di stati di $G$:
         \begin{itemize}
             \item se $|Q|$ è 2, allora sicuramente $Q = \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$, e poiché si vuole resituire l'espressione regolare equivalente a $G$, di fatto quest'ultimo è costituito esclusivamente dall'espressione regolare posta sull'arco tra $q_\mathrm{start}$ e $q_\mathrm{accept}$, dunque è sufficiente restituirla in output (riga 3);
-            \item TODO DA FINIRE
+            \item se $|Q|$ è maggiore di 2, allora viene costruito un GNFA $G'$, avente uno stato in meno, ovvero $q$ (scelto alla riga 5), naturalmente diverso da $q_\mathrm{start}$ e da $q_\mathrm{accept}$; successivamente, per ogni coppia di stati $(q_i, q_j)$, viene definita $\delta'(q_i, q_j)$ in modo tale da accorpare tutte le possibili configurazioni di stati; ad esempio, prendendo in esame il seguente GNFA 
+
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                        \node[state] (1) {$q_i$};
+                        \node[state] (2) [below right of=1] {$q$};
+                        \node[state] (3) [above right of=2] {$q_j$};
+             
+                        \path[every node/.style={font=\sffamily\small}]
+                            (1) edge [bend right, below] node {$R_1$} (2)
+                            (1) edge [bend left] node {$R_4$} (3)
+                            (2) edge [bend right, below] node {$R_3$} (3)
+                            (2) edge [loop below] node {$R_2$} (2)
+                         ;
+                     \end{tikzpicture}
+                \end{figure}
+
+                dove $R_1$, $R_2$, $R_3$ ed $R_4$ sono espressioni regolari, è possibile vedere che il seguente GNFA è ad esso equivalente
+
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                        \node[state] (1) {$q_i$};
+                        \node[state] at (5, 0) (2) {$q_j$};
+             
+                        \path[every node/.style={font=\sffamily\small}]
+                            (1) edge node {$(R_1)(R_2)^*(R_3) \cup (R_4)$} (2)
+                         ;
+                     \end{tikzpicture}
+                \end{figure}
+
+                poiché l'arco che $q$ ha su sé stesso è stato descritto attraverso $(R_2)^*$, gli archi $(q_i, q)$ e $(q, q_j)$ sono stati inseriti per concatenazione, ed infine è stato unito l'altro possibile cammino verso $q_j$ tramite unione; si noti che tale espressione regolare tiene in considerazione tutte le possibili configurazioni di archi tra stati di un GNFA;
+
             \item si noti che, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
         \end{itemize}
 
         Allora, l'algoritmo è in grado di restituire l'espressione regolare equivalente a $G$.
     }
 
-    \begin{proof}
-        TODO
-    \end{proof}
+    \proofind{
+        La dimostrazione procede per induzione su $k$, il numero di stati del GNFA.
+    }{
+        $k = 2$; se $G$ ha solo 2 stati, allora necessariamente $Q = \{q_\mathrm{start}, q_\mathrm{accept}\}$, e dunque $\ttt{convertGNFAtoRegEx}(G) = \delta(q_\mathrm{start}, q_\mathrm{accept})$, alla riga 3.
+    }{
+        se $G$ è un GNFA con $k - 1$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$.
+    }{
+        è necessario dimostrare che, se $G$ è un GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. TODO
+    }
 
     \begin{framedthm}{Linguaggi ed espressioni regolari}
         Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive.
@@ -671,7 +714,8 @@
 
                         \path[every node/.style={font=\sffamily\small}]
                         (1) edge node {$a$} (2)
-                        ;                     \end{tikzpicture}
+                        ;
+                    \end{tikzpicture}
                     \caption{Un NFA in grado di riconoscere $L(a)$.}
                 \end{figure}
 
@@ -685,7 +729,48 @@
 
     \section{Linguaggi non regolari}
 
-    \subsection{TODO}
+    \subsection{Pumping lemma}
 
-    TODO
+    \begin{framedprinc}[label={pigeonhole}]{Principio della piccionaia}
+        Siano $A$ e $B$ due insiemi finiti, tali che $|B| < |A|$. Allora, non esiste alcuna funzione iniettiva $\func{f}{A}{B}$.
+
+        In altri termini, avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno: due volatili dovranno necessariamente condividere la casella.
+    \end{framedprinc}
+
+    \begin{framedlem}{Pumping lemma}
+        Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detta \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \in A \mid s = xyz$, soddisfacenti le seguenti condizioni:
+
+        \begin{itemize}
+            \item $\forall i \ge 0 \quad xy^iz \in A$
+            \item $|y| > 0$ (o, equivalentemente, $y \neq \varepsilon$)
+            \item $|xy| \le p$
+        \end{itemize}
+    \end{framedlem}
+
+    \begin{proof}
+        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
+
+        Si pongano dunque $$\soe{l}{x:= s_1 \cdots s_{j - 1} \\ y := s_j \cdots s_{l - 1} \\ z := s_l \cdots s_n}$$ Allora, si ha che:
+
+        \begin{itemize}
+            \item $x$ porta $M$ da $r_1$ ad $r_j$, $y$ porta $M$ da $r_j$ ad $r_j$ stesso, ed infine $z$ porta $M$ da $r_j$ ad $r_{n + 1}$, e poiché $r_{n + 1} \in F$, $M$ accetta sicuramente $xy^iz$ per ogni $i \ge 0$;
+            \item $j \neq l \implies |y| > 0$;
+            \item $l \le p + 1 \implies |xy| \le p$, poiché $r_l$ è lo stato che viene dopo aver letto $s_{l - 1} \in y$, e dunque nel caso limite si ha che $l = p + 1 \implies |xy| = p$.
+        \end{itemize}
+
+        Allora, sono soddisfatte tutte le condizioni della tesi.
+
+        La seguente rappresentazione raffigura un automa definito come segue: $$M = (\{q_1, \ldots, q_9, \ldots, q_{13}\}, \Sigma, \delta, q_1, \{q_{13}\})$$ dove $|Q| = 13$, e $r_j = r_l = q_9$ è lo stato che si ripete all'interno dei primi $p + 1$ stati della sequenza presi in esame nella dimostrazione.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.35]{assets/pump-neg.png}
+            \caption{L'automa $M$ descritto.}
+        \end{figure}
+
+    \end{proof}
+
+    \begin{example}[Pumping lemma]
+        Sia $B = \{\ttt 0 ^n \ttt 1 ^n \mid n \ge 0\}$ un linguaggio. TODO NON HO CAPITO
+    \end{example}
 \end{document}

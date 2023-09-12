@@ -970,6 +970,17 @@ INPUT /usr/share/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT /usr/share/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
 INPUT /usr/share/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texmf-dist/tex/generic/babel/babel.sty
@@ -1240,16 +1251,6 @@ INPUT /usr/share/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 INPUT /usr/share/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 INPUT /usr/share/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 INPUT /usr/share/texmf-dist/tex/latex/base/ifthen.sty
-INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.multipart.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.multipart.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
-INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 INPUT /usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -1457,6 +1458,16 @@ INPUT ./Nyx/nyx-styles.sty
 INPUT ./Nyx/nyx-styles.sty
 INPUT ./Nyx/nyx-styles.sty
 INPUT ./Nyx/nyx-styles.sty
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.multipart.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.multipart.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 INPUT /usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT ./Nyx/nyx-frames.sty
@@ -1641,6 +1652,13 @@ INPUT /usr/share/texmf-dist/tex/latex/esint/uesint.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/Ustmry.fd
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/Ustmry.fd
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/Ustmry.fd
+INPUT /usr/share/texmf-dist/tex/latex/stmaryrd/Ustmry.fd
+INPUT /usr/share/texmf-dist/fonts/tfm/public/stmaryrd/stmary10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/stmaryrd/stmary8.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/stmaryrd/stmary6.tfm
 INPUT /usr/share/texmf-dist/tex/latex/graphics/color.sty
 INPUT ./Automi: Calcolabilità e Complessità.out
 INPUT Automi: Calcolabilità e Complessità.out
@@ -1712,6 +1730,7 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/stmaryrd/stmary10.tfm
 INPUT ./assets/nfa-neg.png
 INPUT ./assets/nfa-neg.png
 INPUT assets/nfa-neg.png
@@ -1739,6 +1758,11 @@ INPUT assets/gnfa-neg.png
 INPUT ./assets/gnfa-neg.png
 INPUT ./assets/gnfa-neg.png
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
+INPUT ./assets/pump-neg.png
+INPUT ./assets/pump-neg.png
+INPUT assets/pump-neg.png
+INPUT ./assets/pump-neg.png
+INPUT ./assets/pump-neg.png
 INPUT Automi: Calcolabilità e Complessità.aux
 INPUT ./Automi: Calcolabilità e Complessità.out
 INPUT ./Automi: Calcolabilità e Complessità.out
@@ -1748,6 +1772,7 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
