@@ -661,7 +661,7 @@
     }{
         se $G$ è un GNFA con $k - 1$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$.
     }{
-        è necessario dimostrare che, se $G$ è un GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. TODO
+        è necessario dimostrare che, se $G$ è un GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. In primo luogo, è necessario dimostrare che $G$ e $G'$ sono equivalenti, e dunque sia $w$ una stringa accettata da $G$; allora, in un ramo accettante della computazione, $G$ entra in una sequenza di stati $$q_\mathrm{start}, q_1, q_2, \ldots, q_\mathrm{accept}$$ dunque, se il ramo non contiene lo stato rimosso $q$, allora sicuramente $G'$ accetta $w$; viceversa, se $q$ è contenuto all'interno di tale ramo, allora per quanto discusso all'interno dell'idea di dimostrazione, l'espressione regolare inserita al posto dello stato $q$ rimosso è in grado di tenere in considerazione ogni possibile configurazione di archi, e dunque $G'$ accetta sicuramente $w$; infine, è possibile applicare la stessa osservazione per mostrare che una stringa accettata da $G'$ deve essere necessariamente accettata anche da $G$. Allora, poiché $G$ e $G'$ sono equivalenti, e $G$ ha $k$ stati, allora necessariamente al termine del $k$-esimo passo dell'algoritmo, $G'$ avrà $k - 1$ stati, e su di esso è possibile applicare l'ipotesi induttiva.
     }
 
     \begin{framedthm}{Linguaggi ed espressioni regolari}
@@ -773,4 +773,10 @@
     \begin{example}[Pumping lemma]
         Sia $B = \{\ttt 0 ^n \ttt 1 ^n \mid n \ge 0\}$ un linguaggio. TODO NON HO CAPITO
     \end{example}
+
+    \chapter{Linguaggi e grammatiche context-free}
+
+    \section{TODO}
+
+    \subsection{TODO}
 \end{document}
