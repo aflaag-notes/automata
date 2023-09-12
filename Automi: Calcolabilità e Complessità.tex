@@ -103,7 +103,7 @@
     \subsection{Linguaggi}
 
     \begin{frameddefn}{Alfabeto}
-        Si definisce \textbf{alfabeto} un qualsiasi insieme finito, non vuoto; i suoi elementi sono detti \textbf{simboli}.
+        Si definisce \textbf{alfabeto} un qualsiasi insieme finito, non vuoto; i suoi elementi sono detti \textbf{simboli} o \tbf{caratteri}.
     \end{frameddefn}
 
     \begin{example}[Alfabeto]
@@ -111,7 +111,7 @@
     \end{example}
 
     \begin{frameddefn}{Stringa}
-        Sia $\Sigma$ un alfabeto; una \textbf{stringa su $\Sigma$} è una sequenza finita di simboli di $\Sigma$; la \textbf{stringa vuota} appartiene ad ogni alfabeto, ed è denotata con $\varepsilon$.
+        Sia $\Sigma$ un alfabeto; una \textbf{stringa su $\Sigma$} è una sequenza finita di simboli di $\Sigma$; la \textbf{stringa vuota} è denotata con $\varepsilon$.
 
         \begin{itemize}
             \item Data una stringa $w$ di $\Sigma$, allora $|w|$ è la lunghezza di $w$.
@@ -124,13 +124,13 @@
     \end{example}
 
     \begin{frameddefn}{Stringa inversa}
-        Sia $\Sigma$ un alfabeto, e $w = w_1 w_2\cdots w_n$ una sua stringa; allora si definisce l'\textbf{inversa} di $w$ come segue: $w^\mathcal{R}= w_n w_{n - 1}\cdots w_1$
+        Sia $\Sigma$ un alfabeto, e $w = w_1 w_2\cdots w_n$ una sua stringa; allora si definisce l'\textbf{inversa} di $w$ come segue: $$w^\mathcal{R} := w_n w_{n - 1}\cdots w_1$$
     \end{frameddefn}
 
     \begin{frameddefn}{Concatenazione}
         Sia $\Sigma$ un alfabeto, e $x = x_1 x_2 \cdots x_n, y = y_1 y_2 \cdots y_n$ due sue stringhe; allora $xy$ è la stringa ottenuta attraverso la \textbf{concatenazione} di $x$ ed $y$.
 
-        Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $$x^k = \underbrace{xx \cdots x}_{k \ \textrm{volte}}$$.
+        Per indicare una stringa concatenata con se stessa $k$ volte, si utilizza la notazione $$x^k = \underbrace{xx \cdots x}_{k \ \textrm{volte}}$$
     \end{frameddefn}
 
     \begin{frameddefn}{Prefisso}
@@ -300,7 +300,7 @@
         Si noti che nel momento in cui vengono incontrati $\varepsilon$-archi si giunge allo stato successivo nello stesso step dell'input incontrato, dunque gli $\varepsilon$-archi \tit{non} producono uno step di esecuzione, ma vengono eseguiti non appena vengono incontrati, e vengono accorpati immediatamente.
     \end{example}
 
-    \begin{frameddefn}{Stringhe accettate}
+    \begin{frameddefn}{Stringhe accettate (NFA)}
         Sia $N = (Q, \Sigma, \delta, q_0, F)$ un automa, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
@@ -469,7 +469,7 @@
             \item $R \in \Sigma$
         \end{itemize}
 
-        Un'espressione regolare, dunque, è un modo compatto di definire un linguaggio. Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita.
+        Un'espressione regolare, dunque, è un modo compatto di definire un linguaggio. Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita. L'insieme di tutte le espressioni su $\Sigma$ è denotato con $\mathcal{R}$.
 
         Data un'espressione regolare $R$, con $L(R)$ si intende il linguaggio che $R$ descrive, ovvero l'insieme di stringhe che $R$ rappresenta. Dunque, sono vere le seguenti:
 
@@ -522,24 +522,40 @@
         Sia $\Sigma = \{\ttt 0, \ttt 1\}$ un alfabeto; i seguenti sono esempi di espressioni regolari su $\Sigma$:
         
         \begin{itemize}
-            \item $\ttt 0 ^* \ttt 1 \ttt 0 ^* = \{w \mid w$ contiene un solo $\ttt 1 \}$;
-            \item $\Sigma ^* \ttt{001} \Sigma ^* = \{ w \mid w$ contiene la stringa $\ttt{001}$ come sottostringa$\}$;
-            \item $\ttt 0 \Sigma ^* \ttt 0 \cup \ttt 1 \Sigma ^* \ttt 1 \cup \ttt 0 \cup \ttt 1 = \{w \mid w$ inizia e termina con lo stesso carattere$\}$, poiché si noti che l'ordine delle operazioni, a meno di parentesi, è (\tit i) star, (\tit{ii}) concatenazione, ed infine (\tit{iii}) unione;
-            \item $(\ttt 0 \cup \varepsilon) (\ttt 1 \cup \varepsilon) = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}\}$;
-            \item $\emptyset ^* = \{ \varepsilon \}$, poiché $\emptyset$ rappresenta il linguaggio vuoto, e dunque l'unica stringa che si può ottenere concatenando un qualsiasi numero di volte elementi del linguaggio vuoto, è $\varepsilon$.
+            \item $L(\ttt 0 ^* \ttt 1 \ttt 0 ^*) = \{w \mid w$ contiene un solo $\ttt 1 \}$;
+            \item $L(\Sigma ^* \ttt{001} \Sigma ^*) = \{ w \mid w$ contiene la stringa $\ttt{001}$ come sottostringa$\}$;
+            \item $L(\ttt 0 \Sigma ^* \ttt 0 \cup \ttt 1 \Sigma ^* \ttt 1 \cup \ttt 0 \cup \ttt 1) = \{w \mid w$ inizia e termina con lo stesso carattere$\}$, poiché si noti che l'ordine delle operazioni, a meno di parentesi, è (\tit i) star, (\tit{ii}) concatenazione, ed infine (\tit{iii}) unione;
+            \item $L((\ttt 0 \cup \varepsilon) (\ttt 1 \cup \varepsilon)) = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}\}$;
+            \item $L(\emptyset ^*) = \{ \varepsilon \}$, poiché $\emptyset$ rappresenta il linguaggio vuoto, e dunque l'unica stringa che si può ottenere concatenando un qualsiasi numero di volte elementi del linguaggio vuoto, è $\varepsilon$.
         \end{itemize}
     \end{example}
 
     \subsection{Non determinismo generalizzato}
     
-    \begin{frameddefn}{GNFA}
+    \begin{frameddefn}[label={def gnfa}]{GNFA}
         Un \tbf{GNFA} (\tit{Generalized Nondeterministic Finite Automaton}) è una versione generalizzata di un NFA, in cui gli archi delle transizioni sono espressioni regolari sull'alfabeto dato.
-
-        TODO FORMALE
 
         Un GNFA legge blocchi di simboli dall'input, e si muove lungo gli archi che sono etichettati da espressioni regolari che possono descrivere il blocco di simboli letto.
 
         Inoltre, essendo una versione generalizzata di un NFA, un GNFA può avere diversi modi di elaborare la stessa stringa di input, e accetta quest'ultima se la sua elaborazione può far si che il GNFA si trovi in uno stato accettante al suo termine.
+
+        \imp{Nota} All'interno di questi appunti, a meno di specifica, si assume che ogni GNFA preso in considerazione abbia:
+
+        \begin{itemize}
+            \item un solo stato di inizio, privo di archi entranti, connesso con ogni altro stato, ma non con sé stesso;
+            \item un solo stato accettante, privo di archi uscenti, non connesso con altri archi;
+            \item ogni altro stato collegato con ogni altro stato, a meno di quello iniziale, anche con sé stessi.
+        \end{itemize}
+
+        Formalmente, dato un alfabeto $\Sigma$, un GNFA del tipo appena descritto è una quintupla $(Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ definita come segue:
+
+        \begin{itemize}
+            \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
+            \item $\Sigma$ è l'\textbf{alfabeto} dell'automa, un insieme \textit{finito}
+            \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathcal{R}}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathcal{R}$, poiché a differenza di un normale DFA o NFA, un GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare
+            \item $q_{\mathrm{start}} \in Q$ è lo \textbf{stato iniziale}
+            \item $q_{\mathrm{accept}}$ è lo \textbf{stato accettante}
+        \end{itemize}
     \end{frameddefn}
 
     \begin{example}[GNFA]
@@ -550,12 +566,67 @@
         \end{center}
     \end{example}
 
+    \begin{frameddefn}{Stringhe accettate (GNFA)}
+        Sia $G = (Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ un GNFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma^*$; allora, $G$ \tbf{accetta} $w$ se esiste una sequenza di stati $q_0, \ldots, q_n \in Q$ tali per cui
+
+        \begin{itemize}
+            \item $q_0 = q_{\mathrm{start}}$
+            \item $\forall i \in [1, n - 1] \quad w_i \in L(\delta(q_i, q_{i + 1}))$, ovvero, $w_i$ deve far parte del linguaggio rappresentato dall'espressione regolare sull'arco da $q_i$ a $q_{i + 1}$
+            \item $q_n = q_{\mathrm{accept}}$
+        \end{itemize}
+    \end{frameddefn}
+
+    \begin{framedmeth}[label={dfa into gnfa}]{GNFA di un DFA}
+        Sia $M$ un DFA; allora per costruire un GNFA ad esso equivalente, è sufficiente:
+
+        \begin{itemize}
+            \item aggiungere un nuovo stato iniziale, con un $\varepsilon$-arco entrante sul vecchio stato iniziale;
+            \item aggiungere un nuovo stato accettante, con $\varepsilon$-archi entranti provenienti dai vecchi stati accettanti;
+            \item per gli archi con etichette multiple, sostituire questi ultimi con archi aventi come etichetta l'unione delle etichette precedenti;
+            \item aggiungere archi etichettati con $\emptyset$ tra gli stati non collegati (si noti che questa operazione non varia l'automa di partenza, poiché un arco etichettato con $\emptyset$ non potrà mai essere utilizzato)
+        \end{itemize}
+    \end{framedmeth}
+
+    \begin{framedalgo}[label={gnfa into regex}]{Espressione regolare di un GNFA}
+        Dato un GNFA $G = (Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$, l'algoritmo restituisce un'espressione regolare equivalente a $G$.
+
+        \hrule
+        \begin{algorithmic}[1]
+            \Function{convertGNFAtoRegEx}{$G$}
+                \If{$|Q| == 2$}
+                \State \textbf{return} $\delta(q_{\mathrm{start}}, q_{\mathrm{accept}})$
+                \ElsIf{$|Q| > 2$}
+                    \State $q \in Q - \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$
+                    \State $Q' := Q - \{q\}$
+                    \State $\forall q_i \in Q' - \{q_{\mathrm{accept}}\}, q_j \in Q' - \{q_{\mathrm{start}}\} \quad \delta'(q_i, q_j) := \delta(q_i, q)\delta(q, q)^* \delta(q, q_j) \cup \delta(q_i, q_j)$
+                    \State $G' := (Q', \Sigma, \delta', q_{\mathrm{start}}, q_{\mathrm{accept}})$
+                    \State \textbf{return} $\ttt{convertGNFAtoRegEx}(G')$
+                \EndIf
+            \EndFunction
+        \end{algorithmic}
+    \end{framedalgo}
+
+    \idea{
+        L'algoritmo inizia prendendo in input un GNFA $G$, ed inizialmente viene controllato il numero di stati di $G$:
+        \begin{itemize}
+            \item se $|Q|$ è 2, allora sicuramente $Q = \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$, e poiché si vuole resituire l'espressione regolare equivalente a $G$, di fatto quest'ultimo è costituito esclusivamente dall'espressione regolare posta sull'arco tra $q_\mathrm{start}$ e $q_\mathrm{accept}$, dunque è sufficiente restituirla in output (riga 3);
+            \item TODO DA FINIRE
+            \item si noti che, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
+        \end{itemize}
+
+        Allora, l'algoritmo è in grado di restituire l'espressione regolare equivalente a $G$.
+    }
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
     \begin{framedthm}{Linguaggi ed espressioni regolari}
         Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive.
     \end{framedthm}
 
     \proofiff{
-        TODO
+        Sia $A$ un linguaggio regolare; allora, per definizione, esiste un DFA che lo riconosce, e sia questo $M$. Utilizzando il \cref{dfa into gnfa}, è possibile costruire un GNFA che sia equivalente ad $M$; sia quest'ultimo $G$. Allora, è sufficiente applicare l'\cref{gnfa into regex} su $G$ per ottenere l'espressione regolare ad esso equivalente; dunque, segue la tesi.
     }{
         Sia $A$ un linguaggio su un alfabeto $\Sigma$, descritto da un'espressione regolare $R$. Allora, la dimostrazione procede costruendo degli NFA, per casi, come segue:
 
@@ -611,4 +682,10 @@
 
         Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa regolare}, $A$ è regolare.
     }
+
+    \section{Linguaggi non regolari}
+
+    \subsection{TODO}
+
+    TODO
 \end{document}

@@ -16,3 +16,5 @@
 \contentsline {section}{\numberline {1.4}Espressioni regolari}{14}{section.1.4}%
 \contentsline {subsection}{\numberline {1.4.1}Definizioni}{14}{subsection.1.4.1}%
 \contentsline {subsection}{\numberline {1.4.2}Non determinismo generalizzato}{16}{subsection.1.4.2}%
+\contentsline {section}{\numberline {1.5}Linguaggi non regolari}{20}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}TODO}{20}{subsection.1.5.1}%
