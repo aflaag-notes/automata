@@ -780,7 +780,7 @@
 
     \subsection{Definizioni}
 
-    \begin{frameddefn}{Grammatiche context-free}
+    \begin{frameddefn}[breakable]{Grammatiche context-free}
         Una \tbf{grammatica context-free}, o CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
 
         \begin{itemize}
@@ -794,7 +794,7 @@
 
         Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre stringhe a partire da una variabile iniziale, mediante la sequenza di sostituzioni che definisce la CFG. In particolare, partendo dalla variabile iniziale, vengono sostituiti gli elementi alla sinistra del simbolo $\to$, con quelli alla destra.
 
-        Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con $X \to Y | Z$. Siano $u, v, w$ stringhe di variabili in $V$, e $A \to w \in R$; si dice che $uAv$ \tbf{produce} $uwv$, denotato con $uAv \implies uwv$. Se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \implies u_1 \implies \ldots \implies u_k \implies v$$ si dice che $u$ \tbf{deriva} $v$, denotato con $u \ximplies{x} v$.
+        Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con $X \to Y | Z$. Siano $u, v, w$ stringhe di variabili in $V$, e $A \to w \in R$; si dice che $uAv$ \tbf{produce} $uwv$, denotato con $uAv \implies uwv$. Se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \implies u_1 \implies \ldots \implies u_k \implies v$$ si dice che $u$ \tbf{deriva} $v$, denotato con $u \ximplies{*} v$.
     \end{frameddefn}
 
     \begin{example}[CFG]
@@ -840,7 +840,6 @@
         Dunque, la CNF non permette di 
 
         \begin{enumerate}[label=\roman*), font=\itshape]
-        % \begin{enumerate}
             \item avere \tbf{regole unitarie}, ovvero regole della forma $A \to B$;
             \item avere regole della forma $X \to S \in R$ per qualche $X \in V$, ovvero avere $S$ alla destra di una regola.
         \end{enumerate}
