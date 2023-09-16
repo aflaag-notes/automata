@@ -147,10 +147,10 @@
         Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro. Il linguaggio vuoto si indica con $\emptyset$.
     \end{frameddefn}
 
-    \subsection{Automi finiti}
+    \subsection{Determinismo}
 
-    \begin{frameddefn}{Automa finito}
-        Un \textbf{automa finito}, o \textbf{macchina}, è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
+    \begin{frameddefn}{DFA}
+        Un \textbf{DFA} (\tit{Deterministic Finite Automaton}) è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
 
         \begin{itemize}
             \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
@@ -162,8 +162,8 @@
 
     \end{frameddefn}
 
-    \begin{example}[Automa finito]
-        Un esempio di automa finito è il seguente:
+    \begin{example}[DFA]
+        Un esempio di DFA è il seguente:
 
         \begin{figure}[H]
             \centering
@@ -180,7 +180,7 @@
                     (2) edge [loop above] node {\ttt 1} (2)
                  ;
              \end{tikzpicture}
-             \caption{Un automa finito.}
+             \caption{Un DFA.}
         \end{figure}
 
         esso può essere descritto secondo la quintupla $(Q, \Sigma, \delta, q_0, F)$ come segue:
@@ -195,7 +195,7 @@
     \end{example}
 
     \begin{frameddefn}{Linguaggio di un automa}
-        Sia $M$ un automa; allora il \textbf{linguaggio} di $M$ è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
+        Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
     \end{frameddefn}
 
     \begin{example}[Linguaggio di un automa]
@@ -220,8 +220,8 @@
         sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, ci si convince facilmente che $$L(M_1) = \{w \mid w = w_1 w_2 \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
     \end{example}
 
-    \begin{frameddefn}{Stringhe accettate}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un automa, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
+    \begin{frameddefn}{Stringhe accettate (DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
             \item $r_0 = q_0$
@@ -233,7 +233,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Linguaggio regolare}
-        Un linguaggio è detto \tbf{regolare} se e solo se esiste un automa finito che lo riconosce.
+        Un linguaggio è detto \tbf{regolare} se e solo se esiste un DFA che lo riconosce.
     \end{frameddefn}
 
     \section{Non determinismo}
@@ -257,7 +257,7 @@
 
         Se il simbolo di input successivo non compare su alcuno degli archi uscenti dallo stato occupato da una copia della macchina, quella copia cessa di proseguire; inoltre, se \tit{una qualunque copia} della macchina è in uno stato accettante, l'NFA accetta la stringa di input. Si noti che questa divisione è descritta dall'insieme potenza $\mathcal{P}(Q)$, poiché da ogni stato si può arrivare ad un \tit{insieme} di stati.
 
-        Gli automi deterministici vengono anche detti \tbf{DFA} (\tit{Deterministic Finite Automaton}). Si noti che il determinismo è un caso particolare di non determinismo, dunque un DFA è sempre anche un NFA.
+        Si noti che il determinismo è un caso particolare di non determinismo, dunque un DFA è sempre anche un NFA.
     \end{frameddefn}
 
     \begin{example}[NFA]
@@ -303,7 +303,7 @@
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (NFA)}
-        Sia $N = (Q, \Sigma, \delta, q_0, F)$ un automa, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
+        Sia $N = (Q, \Sigma, \delta, q_0, F)$ un NFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
             \item $r_0 = q_0$
@@ -323,7 +323,7 @@
     \begin{proof}
         Sia $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ l'NFA in ipotesi, tale da riconoscere un linguaggio A. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
 
-        Allora, sia $M = (Q', \Sigma_{\varepsilon}, \delta', q_0', F)$ il DFA definito come segue:
+        Allora, sia $M = (Q', \Sigma, \delta', q_0', F)$ il DFA definito come segue:
 
         \begin{itemize}
             \item $Q' := \powerset{(Q)}$, scelto tale da rappresentare ogni possibile stato di $N$;
@@ -790,9 +790,9 @@
             \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il primo simbolo della prima regola della grammatica
         \end{itemize}
 
-        Le CFG sono della forma $$\left . \begin{array}{c} X \to Y \\ \vdots \end{array} \right .$$ dove $X, Y \in V$, e $X \to Y$ è una regola della CFG.
+        Le CFG sono della forma $$\left . \begin{array}{c} X \to Y \\ \vdots \end{array} \right .$$ dove $X, Y \in V$, e $X \to Y \in R$ è una regola della CFG.
 
-        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre stringhe a partire da una variabile iniziale, mediante la sequenza di sostituzioni che definisce la CFG. In particolare, partendo dalla variabile iniziale, vengono sostituiti gli elementi alla sinistra del simbolo $\to$, con quelli alla destra.
+        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre quest'ultime a partire da una variabile iniziale, mediante una sequenza di scambi. In particolare, partendo dalla variabile iniziale, vengono sostituiti gli elementi alla sinistra del simbolo $\to$ di una certa regola in $R$, con quelli alla sua destra.
 
         Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con $X \to Y | Z$. Siano $u, v, w$ stringhe di variabili in $V$, e $A \to w \in R$; si dice che $uAv$ \tbf{produce} $uwv$, denotato con $uAv \implies uwv$. Se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \implies u_1 \implies \ldots \implies u_k \implies v$$ si dice che $u$ \tbf{deriva} $v$, denotato con $u \ximplies{*} v$.
     \end{frameddefn}
@@ -801,7 +801,7 @@
         \label{cfg ex}
         Un esempio di CFG è il seguente: $$\left . \begin{array}{c} A \to \ttt 0 A \ttt 1 \\ A \to B \\ B \to \ttt \# \end{array} \right .$$ In essa, si hanno: $$\left . \begin{array}{c} V := \{A, B\} \\ \Sigma := \{\ttt 0, \ttt 1, \ttt \# \} \\ S := A \in V \end{array} \right. $$
 
-        Da essa, è possibile ottenere la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$
+        Da essa, è possibile ottenere la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $$A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$$
     \end{example}
 
     \begin{frameddefn}{Linguaggio di una grammatica}
@@ -823,11 +823,11 @@
     \end{example}
 
     \begin{frameddefn}{Ambiguità}
-        Sia $G$ una grammatica; se esistono due stringhe $u, v$ con $u \neq v$, tali che esiste una terza stringa $z$ derivata a sinistra, si dice che $G$ genera $z$ \tbf{ambiguamente}, e $G$ si dice essere \tbf{ambigua} se genera strighe ambiguamente.
+        Sia $G$ una grammatica; se esistono due stringhe $u, v$ con $u \neq v$, tali che esiste una terza stringa $z$ derivata a sinistra sia da $u$ che da $v$, si dice che $G$ genera $z$ \tbf{ambiguamente}; inoltre, $G$ si dice essere \tbf{ambigua} se genera stringhe ambiguamente.
     \end{frameddefn}
 
     \begin{frameddefn}{Linguaggi inerentemente ambigui}
-        Un linguaggio si dice essere \tbf{inerentemente ambiguo} se non esistono grammatiche non ambigue che lo possa generare
+        Un linguaggio si dice essere \tbf{inerentemente ambiguo} se non esistono grammatiche non ambigue che lo possano generare.
     \end{frameddefn}
 
     \begin{example}[Linguaggi inerentemente ambigui]
@@ -837,11 +837,11 @@
     \begin{frameddefn}{Forma normale di Chomsky}
         Una CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $$\left . \begin{array}{c} V := \{ A, B, C \} \\ \Sigma := \{ a\} \\ S := A \end{array} \right .$$ e la regola $S \to \varepsilon \in R$ è sempre permessa, chiamata \tbf{$\varepsilon$-regola}.
 
-        Dunque, la CNF non permette di 
+        Dunque, la CNF non permette di
 
         \begin{enumerate}[label=\roman*), font=\itshape]
             \item avere \tbf{regole unitarie}, ovvero regole della forma $A \to B$;
-            \item avere regole della forma $X \to S \in R$ per qualche $X \in V$, ovvero avere $S$ alla destra di una regola.
+            \item avere regole della forma $X \to S \in R$ per qualche $X \in V$, ovvero avere $S$ alla destra del simbolo $\to$ di una regola.
         \end{enumerate}
     \end{frameddefn}
 
@@ -856,9 +856,95 @@
             \item aggiungere $S_0 \in V$, e $S_0 \to S \in R$, in modo da non avere$S$ alla destra di nessuna regola in $R$;
             \item data una variabile $A \in V - \{S\}$ tale che esiste una regola $A \to \varepsilon \in R$, tale regola viene rimossa da $R$, e per ogni regola della forma $X \to uAv \in R$ per qualche $X \in V$ e $u, v$ stringhe di variabili e terminali, viene aggiunta $X \to uv \in R$; se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa
             \item per ogni regola unitaria $A \to B \in R$, quest'ultima viene rimossa, ed ogni regola $B \to u \in R$ per qualche stringa $u$, viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
-            \item infine, ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ (e $u_1, \ldots, u_k$ variabili o terminali) viene rimpiazzata con $$A \to u_1 A_1 , \ldots A_1 \to u_2 A_2 \to A_2 \to u_3 A_3, \ldots, A_{k - 2} \to u_{k - 1}u_k$$, e $A_1, \ldots, A_{k - 2} \in V$; ogni terminale TODO
+            \item infine, ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ (e $u_1, \ldots, u_k$ variabili o terminali) viene rimpiazzata con $$A \to u_1 A_1 , \ldots A_1 \to u_2 A_2 \to A_2 \to u_3 A_3, \ldots, A_{k - 2} \to u_{k - 1}u_k$$ e $A_1, \ldots, A_{k - 2} \in V$; ogni terminale TODO
         \end{itemize}
 
     \end{proof}
+
+    \section{Automi a pila}
+
+    \subsection{Definizioni}
+
+    \begin{frameddefn}{PDA}
+        Un \tbf{PDA} (\tit{Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
+
+        \begin{itemize}
+            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
+            \item $\Sigma$ è l'\tbf{alfabeto} dell'automa, un insieme \tit{finito}
+            \item $\Gamma$ è l'\tbf{alfabeto dello stack} (o \tit{pila})
+            \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{\powerset{(Q \times \Gamma_\varepsilon)}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
+            \item $q_0 \in Q$ è lo \tbf{stato iniziale}
+            \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
+        \end{itemize}
+
+        dove $\Gamma_\varepsilon := \Gamma \cup \{ \varepsilon \}$.
+
+        Un PDA è un NFA dotato di uno \tbf{stack} illimitato, che gli consente di riconoscere alcuni linguaggi non regolari, poiché in esso è in grado di porre i simboli che legge dalla stringa di input, di fatto implementando un sistema di \tit{memoria}.
+        
+        Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un PDA è non deterministico) del codominio di $\delta$, al fine di poter decidere se si vuole salvare il simbolo letto all'interno dello stack o meno (tramite $\varepsilon \in \Gamma$).
+    \end{frameddefn}
+
+    \begin{example}[PDA]
+        \label{pda ex}
+        Un esempio di PDA $(Q, \Sigma, \Gamma, \delta, q_1, F)$ è il seguente:
+
+        \begin{itemize}
+            \item $Q = \{q_1, q_2, q_3, q_4\}$
+            \item $\Sigma = \{ \ttt 0, \ttt 1 \}$
+            \item $\Gamma = \{ \ttt 0, \ttt \$\}$
+            \item $F = \{ q_1, q_4 \}$
+        \end{itemize}
+
+        e $\delta$ è data dalla seguente tabella di transizione:
+
+        \centeredimage{0.3}{assets/delta-pda-neg.png}{L'immagine rappresenta $\delta$ in forma tabellare.}
+    \end{example}
+
+    \begin{frameddefn}{Stringhe accettate (PDA)}
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma_\varepsilon$; allora, $M$ \tbf{accetta} $w$ se esistono una sequenza di stati $r_0, \ldots, r_n \in Q$ e una sequenza di stringhe $s_0, \ldots, s_n \in \Gamma ^*$ tali per cui
+
+        \begin{itemize}
+            \item $r_0 = q_0$
+            \item $s_0 = \varepsilon$, ovvero, lo stack è inizialmente vuoto
+            \item $\forall i \in [1, n - 1] \quad \exists a, b \in \Gamma_\varepsilon, t \in \Gamma^* \mid (r_{i + 1}, b) \in \delta(r_i, w_{i + 1}, a) \land \soe{l}{s_i = at \\ s_{i +1} = bt}$, ovvero, $M$ si muove correttamente in base allo stato, al simbolo nelo stack, ed al prossimo simbolo di input; si noti che le stringhe $s_0, \ldots, s_n$ rappresentano la sequenza del contenuto dello stack che $M$ ha su un ramo accettante della computazione, infatti $s_i = at$ diventa $s_{i + 1} = bt$ con l'iterazione successiva, dunque $a$ è stato sostituito con $b$ in cima alla pila
+            \item $r_n \in F$
+        \end{itemize}
+    \end{frameddefn}
+
+    \begin{example}[Linguaggi riconosciuti da un PDA]
+        Si prenda in considerazione il PDA descritto nell'\cref{pda ex}, e sia questo $M$. Il seguente è il suo diagramma di stato:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state,accepting] (1) {$q_1$};
+                \node[state] (2) [right of=1] {$q_2$};
+                \node[state] (3) [below of=2] {$q_3$};
+                \node[state,accepting] (4) [below of=1] {$q_4$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$\varepsilon, \varepsilon \to \ttt \$$} (2)
+                    (2) edge [loop above] node {$\ttt 0, \varepsilon \to \ttt 0$} (2)
+                    (2) edge node {$\ttt 1, \ttt 0 \to \varepsilon$} (3)
+                    (3) edge [loop below] node {$\ttt 1, \ttt 0 \to \varepsilon$} (3)
+                    (3) edge node {$\varepsilon, \ttt \$ \to \varepsilon$} (4)
+                 ;
+             \end{tikzpicture}
+             \caption{Il PDA $M$.}
+        \end{figure}
+
+        TODO DA FINIRE
+
+    \end{example}
+
+    \begin{framedthm}{CFL e PDA}
+        Un linguaggio è context-free se e solo se esiste un PDA che lo riconosce.
+    \end{framedthm}
+
+    \proofiff{
+        TODO
+    }{
+        TODO
+    }
 
 \end{document}
