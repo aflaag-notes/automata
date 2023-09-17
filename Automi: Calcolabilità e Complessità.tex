@@ -261,6 +261,7 @@
     \end{frameddefn}
 
     \begin{example}[NFA]
+        \label{nfa exec}
         Un esempio di NFA è il seguente:
 
         \begin{figure}[H]
@@ -853,10 +854,10 @@
         Sia un CFL generato da una CFG $G = (V, \Sigma, R, S)$. Allora, è possibile rendere $G$ in CNF attraverso i seguenti passaggi:
 
         \begin{itemize}
-            \item aggiungere $S_0 \in V$, e $S_0 \to S \in R$, in modo da non avere$S$ alla destra di nessuna regola in $R$;
-            \item data una variabile $A \in V - \{S\}$ tale che esiste una regola $A \to \varepsilon \in R$, tale regola viene rimossa da $R$, e per ogni regola della forma $X \to uAv \in R$ per qualche $X \in V$ e $u, v$ stringhe di variabili e terminali, viene aggiunta $X \to uv \in R$; se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa
-            \item per ogni regola unitaria $A \to B \in R$, quest'ultima viene rimossa, ed ogni regola $B \to u \in R$ per qualche stringa $u$, viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
-            \item infine, ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ (e $u_1, \ldots, u_k$ variabili o terminali) viene rimpiazzata con $$A \to u_1 A_1 , \ldots A_1 \to u_2 A_2 \to A_2 \to u_3 A_3, \ldots, A_{k - 2} \to u_{k - 1}u_k$$ e $A_1, \ldots, A_{k - 2} \in V$; ogni terminale TODO
+            \item vengono aggiunte la variabile $S_0 \in V$, e la regola $S_0 \to S \in R$, in modo da non avere $S$ alla destra di nessuna regola in $R$;
+            \item ogni regola $A \to \varepsilon \in R$ per qualche $A \in V - \{S\}$ viene rimossa da $R$, e successivamente per ogni regola della forma $X \to uAv \in R$ per qualche $X \in V$ e $u, v$ stringhe di variabili e terminali, viene aggiunta $X \to uv \in R$; inoltre, se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa;
+            \item ogni regola unitaria $A \to B \in R$ viene rimossa, ed ogni regola $B \to u \in R$ per qualche stringa $u$ di variabili o terminali, viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
+            \item infine, ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ e $u_1, \ldots, u_k$ stringhe di variabili o terminali viene rimpiazzata con le regole $$\left . \begin{array}{c} A \to u_1 A_1  \\ A_1 \to u_2 A_2 \\ A_2 \to u_3 A_3 \\ \vdots \\ A_{k - 2} \to u_{k - 1}u_k \end{array} \right .$$ e $A_1, \ldots, A_{k - 2} \in V$; inoltre, ogni terminale $u_i$ per ogni $i \in [1, k]$ viene rimpiazzato con la nuova varibile $U_i$, e viene aggiunta la regola TODO DA FINIRE
         \end{itemize}
 
     \end{proof}
@@ -906,12 +907,13 @@
         \begin{itemize}
             \item $r_0 = q_0$
             \item $s_0 = \varepsilon$, ovvero, lo stack è inizialmente vuoto
-            \item $\forall i \in [1, n - 1] \quad \exists a, b \in \Gamma_\varepsilon, t \in \Gamma^* \mid (r_{i + 1}, b) \in \delta(r_i, w_{i + 1}, a) \land \soe{l}{s_i = at \\ s_{i +1} = bt}$, ovvero, $M$ si muove correttamente in base allo stato, al simbolo nelo stack, ed al prossimo simbolo di input; si noti che le stringhe $s_0, \ldots, s_n$ rappresentano la sequenza del contenuto dello stack che $M$ ha su un ramo accettante della computazione, infatti $s_i = at$ diventa $s_{i + 1} = bt$ con l'iterazione successiva, dunque $a$ è stato sostituito con $b$ in cima alla pila
+            \item $\forall i \in [1, n - 1] \quad \exists a, b \in \Gamma_\varepsilon, t \in \Gamma^* \mid (r_{i + 1}, b) \in \delta(r_i, w_{i + 1}, a) \land \soe{l}{s_i = at \\ s_{i +1} = bt}$, ovvero, $M$ si muove correttamente in base allo stato, al simbolo nello stack, ed al prossimo simbolo di input; si noti che le stringhe $s_0, \ldots, s_n$ rappresentano di fatto il contenuto dello stack che $M$ ha su un ramo accettante della computazione, infatti $s_i = at$ diventa $s_{i + 1} = bt$ con l'iterazione successiva, dunque $a$ è stato sostituito con $b$ in cima alla pila
             \item $r_n \in F$
         \end{itemize}
     \end{frameddefn}
 
     \begin{example}[Linguaggi riconosciuti da un PDA]
+        \label{pda ex 2}
         Si prenda in considerazione il PDA descritto nell'\cref{pda ex}, e sia questo $M$. Il seguente è il suo diagramma di stato:
 
         \begin{figure}[H]
@@ -933,9 +935,23 @@
              \caption{Il PDA $M$.}
         \end{figure}
 
-        TODO DA FINIRE
+        In questo diagramma, la notazione $\ttt a, \ttt b \to \ttt c$ presente sugli archi sta ad indicare che se viene letto il simbolo $\ttt a$ dall'input, $M$ può sostituire $\ttt b$, se in cima al suo stack (attraverso un'operazione di \tit{pop}) con $\ttt c$ (mediante un'operazione di \tit{push}). Si noti che ognuno dei simboli può essere $\varepsilon$, e dunque
+
+        \begin{itemize}
+            \item $\varepsilon, \ttt b \to \ttt c$ sta a significare che il ramo viene eseguito senza attendere alcun simbolo di input (si noti l'\cref{nfa exec} per il non determinismo)
+            \item $\ttt a, \varepsilon \to \ttt c$ sta a significare che viene eventualmente effettuato solamente il \tit{push} di $\ttt c$ nello stack
+            \item $\ttt a, \ttt b \to \varepsilon$ sta a significare che viene eventualmente effettuato solamente il \tit{pop} di $\ttt b$ dallo stack
+        \end{itemize}
 
     \end{example}
+
+    \begin{framedobs}[label={pda empty stack}]{Stack vuoto (PDA)}
+        Un PDA non è in grado di controllare se il suo stack è vuoto, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex 2}; è importante notare che esso utilizza il simbolo $\ttt \$$ per capire se lo stack è vuoto o meno, poiché viene inserito sin dall'inizio (si osservi l'etichetta $\varepsilon, \varepsilon \to \ttt \$$ sull'arco $(q_1, q_2)$), e dunque se viene letto $\ttt \$$ in cima allo stack, $M$ sa che quello è l'unico elemento contenuto al suo interno, e lo stack è di fatto vuoto.
+    \end{framedobs}
+
+    \begin{framedobs}{Fine dell'input (PDA)}
+        Un PDA non è in grado di controllare se è stata raggiunga la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex 2}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}).
+    \end{framedobs}
 
     \begin{framedthm}{CFL e PDA}
         Un linguaggio è context-free se e solo se esiste un PDA che lo riconosce.
