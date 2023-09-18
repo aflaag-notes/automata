@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.30)  17 SEP 2023 09:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.30)  18 SEP 2023 17:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1470,7 +1470,7 @@ Package hyperref Info: Link coloring ON on input line 38.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<./Nyx/logo.png, id=83, 803.0pt x 301.125pt>
+<./Nyx/logo.png, id=99, 803.0pt x 301.125pt>
 File: ./Nyx/logo.png Graphic file (type png)
 <use ./Nyx/logo.png>
 Package pdftex.def Info: ./Nyx/logo.png  used on input line 39.
@@ -1586,7 +1586,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 292.
 [6]
-<assets/nfa-neg.png, id=214, 679.03688pt x 636.12656pt>
+<assets/nfa-neg.png, id=238, 679.03688pt x 636.12656pt>
 File: assets/nfa-neg.png Graphic file (type png)
 <use assets/nfa-neg.png>
 Package pdftex.def Info: assets/nfa-neg.png  used on input line 299.
@@ -1624,7 +1624,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 380.
 [9]
-<assets/union-neg.png, id=238, 761.84625pt x 611.28375pt>
+<assets/union-neg.png, id=262, 761.84625pt x 611.28375pt>
 File: assets/union-neg.png Graphic file (type png)
 <use assets/union-neg.png>
 Package pdftex.def Info: assets/union-neg.png  used on input line 392.
@@ -1640,7 +1640,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 403.
 [10 <./assets/union-neg.png>]
-<assets/concat-neg.png, id=247, 928.97063pt x 593.21625pt>
+<assets/concat-neg.png, id=271, 928.97063pt x 593.21625pt>
 File: assets/concat-neg.png Graphic file (type png)
 <use assets/concat-neg.png>
 Package pdftex.def Info: assets/concat-neg.png  used on input line 424.
@@ -1667,7 +1667,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 451.
 [12 <./assets/concat-neg.png>]
-<assets/star-neg.png, id=264, 977.15062pt x 375.65344pt>
+<assets/star-neg.png, id=288, 977.15062pt x 375.65344pt>
 File: assets/star-neg.png Graphic file (type png)
 <use assets/star-neg.png>
 Package pdftex.def Info: assets/star-neg.png  used on input line 457.
@@ -1716,7 +1716,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 566.
 [16]
-<assets/gnfa-neg.png, id=294, 854.44218pt x 600.74437pt>
+<assets/gnfa-neg.png, id=318, 854.44218pt x 600.74437pt>
 File: assets/gnfa-neg.png Graphic file (type png)
 <use assets/gnfa-neg.png>
 Package pdftex.def Info: assets/gnfa-neg.png  used on input line 569.
@@ -1776,7 +1776,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 754.
 [21]
-<assets/pump-neg.png, id=349, 940.26282pt x 505.89pt>
+<assets/pump-neg.png, id=373, 940.26282pt x 505.89pt>
 File: assets/pump-neg.png Graphic file (type png)
 <use assets/pump-neg.png>
 Package pdftex.def Info: assets/pump-neg.png  used on input line 768.
@@ -1830,7 +1830,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 894.
 [26]
-<assets/delta-pda-neg.png, id=389, 1047.915pt x 302.63063pt>
+<assets/delta-pda-neg.png, id=414, 1047.915pt x 302.63063pt>
 File: assets/delta-pda-neg.png Graphic file (type png)
 <use assets/delta-pda-neg.png>
 Package pdftex.def Info: assets/delta-pda-neg.png  used on input line 901.
@@ -1846,7 +1846,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 937.
 [27 <./assets/delta-pda-neg.png>]
-Package cleveref Info: loaded `italian' language definitions on input line 959.
+Package cleveref Info: loaded `italian' language definitions on input line 1019.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1855,9 +1855,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 959.
+Package cleveref Info: loaded `italian' language definitions on input line 1019.
 [28]
-Package cleveref Info: loaded `italian' language definitions on input line 966.
+Package cleveref Info: loaded `italian' language definitions on input line 1019.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1866,8 +1866,41 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 966.
-[29] (./Automi: Calcolabilità e Complessità.aux
+Package cleveref Info: loaded `italian' language definitions on input line 1019.
+[29]
+Package cleveref Info: loaded `italian' language definitions on input line 1071.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package cleveref Info: loaded `italian' language definitions on input line 1071.
+[30]
+Package cleveref Info: loaded `italian' language definitions on input line 1084.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package cleveref Info: loaded `italian' language definitions on input line 1084.
+[31]
+Package cleveref Info: loaded `italian' language definitions on input line 1090.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package cleveref Info: loaded `italian' language definitions on input line 1090.
+[32] (./Automi: Calcolabilità e Complessità.aux
 Package cleveref Info: loaded `italian' language definitions on input line 20.
 Package cleveref Info: loaded `italian' language definitions on input line 21.
 )
@@ -1875,24 +1908,24 @@ Package cleveref Info: loaded `italian' language definitions on input line 21.
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `"Automi: Calcolabilità e Complessità".out' has not changed.
-(rerunfilecheck)             Checksum: F475F7E3BF7B08D7F3711B923E251377;2817.
+(rerunfilecheck)             Checksum: ECE605948AC734B7F741AB6535AA45FE;3595.
 Package logreq Info: Writing requests to '"Automi: Calcolabilità e Complessità".run.xml'.
 \openout1 = `"Automi: Calcolabilità e Complessità.run.xml"'.
 
  ) 
 Here is how much of TeX's memory you used:
- 62252 strings out of 477974
- 1431337 string characters out of 5839630
- 2489650 words of memory out of 5000000
- 81500 multiletter control sequences out of 15000+600000
+ 62284 strings out of 477974
+ 1431842 string characters out of 5839630
+ 2494759 words of memory out of 5000000
+ 81517 multiletter control sequences out of 15000+600000
  546076 words of font info for 104 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  119i,12n,125p,1233b,1778s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on "Automi: Calcolabilità e Complessità.pdf" (31 pages, 742943 bytes).
+Output written on "Automi: Calcolabilità e Complessità.pdf" (34 pages, 760661 bytes).
 PDF statistics:
- 571 PDF objects out of 1000 (max. 8388607)
- 465 compressed objects within 5 object streams
- 148 named destinations out of 1000 (max. 500000)
- 211 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 621 PDF objects out of 1000 (max. 8388607)
+ 511 compressed objects within 6 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 243 words of extra memory for PDF output out of 10000 (max. 10000000)
 

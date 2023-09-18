@@ -154,7 +154,7 @@
 
         \begin{itemize}
             \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
-            \item $\Sigma$ è l'\textbf{alfabeto} dell'automa, un insieme \textit{finito}
+            \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito}
             \item $\func{\delta}{Q \times \Sigma}{Q}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati
             \item $q_0 \in Q$ è lo \textbf{stato iniziale}
             \item $F \subseteq Q$ è l'\textbf{insieme degli stati accettanti}, sui quali le stringhe possono terminare
@@ -247,7 +247,7 @@
 
         \begin{itemize}
             \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
-            \item $\Sigma$ è l'\tbf{alfabeto} dell'automa, un insieme \tit{finito}
+            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}
             \item $\delta: Q \times \Sigma_{\varepsilon} \rightarrow \mathcal{P}(Q)$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
             \item $q_0 \in Q$ è lo \tbf{stato iniziale}
             \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
@@ -554,7 +554,7 @@
 
         \begin{itemize}
             \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
-            \item $\Sigma$ è l'\textbf{alfabeto} dell'automa, un insieme \textit{finito}
+            \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito}
             \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathcal{R}}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathcal{R}$, poiché a differenza di un normale DFA o NFA, un GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare
             \item $q_{\mathrm{start}} \in Q$ è lo \textbf{stato iniziale}
             \item $q_{\mathrm{accept}}$ è lo \textbf{stato accettante}
@@ -735,11 +735,11 @@
     \begin{framedprinc}[label={pigeonhole}]{Principio della piccionaia}
         Siano $A$ e $B$ due insiemi finiti, tali che $|B| < |A|$. Allora, non esiste alcuna funzione iniettiva $\func{f}{A}{B}$.
 
-        In altri termini, avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno: due volatili dovranno necessariamente condividere la casella.
+        In altri termini, avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno: alcuni volatili dovranno necessariamente condividere la propria casella.
     \end{framedprinc}
 
     \begin{framedlem}{Pumping lemma}
-        Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detta \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \in A \mid s = xyz$, soddisfacenti le seguenti condizioni:
+        Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \in A \mid s = xyz$, soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
             \item $\forall i \ge 0 \quad xy^iz \in A$
@@ -871,8 +871,8 @@
 
         \begin{itemize}
             \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
-            \item $\Sigma$ è l'\tbf{alfabeto} dell'automa, un insieme \tit{finito}
-            \item $\Gamma$ è l'\tbf{alfabeto dello stack} (o \tit{pila})
+            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}
+            \item $\Gamma$ è l'\tbf{alfabeto dello stack} (o \tit{pila}), un insieme \tit{finito}
             \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{\powerset{(Q \times \Gamma_\varepsilon)}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
             \item $q_0 \in Q$ è lo \tbf{stato iniziale}
             \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
@@ -953,14 +953,138 @@
         Un PDA non è in grado di controllare se è stata raggiunga la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex 2}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}).
     \end{framedobs}
 
+    \begin{framedmeth}[breakable]{Trasformare CFG in DPA}
+        \label{cfg into pda}
+        Si vuole introdurre una notazione per l'inserimento di un'intera stringa all'interno dello stack di $P$, accorpando tale operazione in un solo passo dell'automa. Infatti, con la notazione
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[state] (1) {$q$};
+                \node[state] (2) [right of=1] {$r$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$a, s \to xyz$} (2)
+                 ;
+             \end{tikzpicture}
+             \caption{Un PDA che inserisce una stringa nello stack.}
+        \end{figure}
+
+        presente sull'arco $(q, r)$, per qualche $a \in \Sigma_\varepsilon, s \in \Gamma_\varepsilon$, si sottointende l'inserimento di stati aggiuntivi in grado di realizzare l'operazione seguente:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[state] (1) {$q$};
+                \node[state] (2) [right of=1] {$q_1$};
+                \node[state] (3) [right of=2] {$q_2$};
+                \node[state] (4) [right of=3] {$r$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$a, s \to z$} (2)
+                    (2) edge node {$\varepsilon, \varepsilon \to y$} (3)
+                    (3) edge node {$\varepsilon, \varepsilon \to x$} (4)
+                 ;
+             \end{tikzpicture}
+             \caption{La formalizzazione del PDA precedente.}
+        \end{figure}
+
+        In simboli, la notazione $(r, u) \in \delta(q, a, s)$, per qualche stringa $u := u_1, \ldots, u_n$ sottoindente la seguente: $$\begin{array}{c} (q_1, u_n) \in \delta(q, a, s) \\ \delta(q_1, \varepsilon, \varepsilon) := \{(q_2, u_{n - 1}) \}\\ \vdots \\ \delta(q_{n - 1}, \varepsilon, \varepsilon) := \{(r, u_1)\} \end{array}$$
+
+        Sia $G = (V, \Sigma, R, S)$ una CFG, e sia $E$ l'insieme di stati tali da realizzare l'accorpamento appena descritto, relativo alla grammatica $G$; si vuole dunque costruire un PDA $$P = (\{q_0, q', q\} \cup E, \Sigma, \Gamma, \delta, q_0, \{q\})$$ che sia equivalente a $G$, ed è possibile realizzarlo come segue:
+
+        \begin{itemize}
+            \item $\delta(q_0, \varepsilon, \varepsilon) := \{(q', S \ttt \$) \}$, ovvero, viene inserito $\ttt \$$ come marcatore nello stack di $P$ (si noti l'\cref{pda empty stack}), e successivamente la stringa iniziale $S$ di $G$;
+            \item $\forall A \in V \quad \delta(q', \varepsilon, A) := \{ (q', w) \mid A \to w \in R\}$ dove $w$ è una stringa di $G$; con questa operazione, se viene incontrata una variabile $A$ sulla cima dello stack di $P$, viene scelta una delle regole di $G$ in grado di sostituire $A$, non deterministicamente;
+            \item $\forall a \in \Gamma_\varepsilon \quad \delta(q', a, a) := \{ (q', \varepsilon) \}$ TODO NON HO CAPITO IL PERCHÉ
+            \item $\delta(q', \varepsilon, \ttt \$) := \{(q, \varepsilon) \}$, ovvero, se $\ttt \$$ è in cima allo stack, allora $P$ entra nello stato accettante, in modo tale da accettare l'input solo se quest'ultimo è stato completamente letto
+        \end{itemize}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state] (1) {$q_0$};
+                \node[state] (2) [right of=1] {$q'$};
+                \node[state,accepting] (3) [right of=2] {$q$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$\varepsilon, \varepsilon \to S \ttt \$$} (2)
+                    (2) edge [loop above] node {$(\varepsilon, A \to \varepsilon), (a, a \to \varepsilon a)$} (2)
+                    (2) edge node {$\varepsilon, \ttt \$ \to \varepsilon$} (3)
+                 ;
+             \end{tikzpicture}
+             \caption{Il PDA $P$ appena costruito.}
+        \end{figure}
+
+    \end{framedmeth}
+
     \begin{framedthm}{CFL e PDA}
         Un linguaggio è context-free se e solo se esiste un PDA che lo riconosce.
     \end{framedthm}
 
     \proofiff{
-        TODO
+        Sia $A$ un CFL, e sia $G$ la CFG che lo genera (per definizione); allora, utilizzando il \cref{cfg into pda}, è possibile trasformare $G$ in un PDA ad essa equivalente, e dunque segue la tesi.
     }{
         TODO
     }
+
+    \section{Linguaggi non context-free}
+
+    \subsection{Pumping lemma}
+
+    \begin{framedlem}{Pumping lemma (CFL)}
+        Sia $A$ un CFL; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 5 stringhe $u, v, x, y, z \in A \mid s = uvxyz$ soddisfacenti le seguenti condizioni:
+
+        \begin{itemize}
+            \item $\forall i \ge 0 \quad uv^ixy^iz \in A$
+            \item $|vy| > 0$ (o, equivalentemente, $v \neq \varepsilon \lor y \neq \varepsilon$)
+            \item $|vxy| \le p$
+        \end{itemize}
+    \end{framedlem}
+
+    \begin{proof}
+        Poiché $A$ è un CFG, allora per definizione esiste una CFG $G$ che lo genera. TODO
+    \end{proof}
+    
+    \section{Linguaggi context-free deterministici}
+
+    \subsection{Automi a pila deterministici}
+
+    \begin{frameddefn}{DPDA}
+        Un \tbf{DPDA} (\tit{Deterministic Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
+
+        \begin{itemize}
+            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
+            \item $\Sigma$ è l'\tbf{alfabeto} dell'automa, un insieme \tit{finito}
+            \item $\Sigma$ è l'\tbf{alfabeto dello stack}, un insieme \tit{finito}
+            \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{(Q \times \Gamma_\varepsilon) \cup \{\emptyset \}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
+            \item $q_0 \in Q$ è lo \tbf{stato iniziale}
+            \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
+        \end{itemize}
+
+        Si noti che, nonostante l'automa sia deterministico, un DPDA è in grado di lavorare con $\varepsilon$.
+
+        Poiché un DPDA è la controparte deterministica di un PDA, $\delta$ deve verificare la seguente condizione: per ogni $q \in Q, a \in \Sigma, x \in \Gamma$, solo uno tra $\delta(q, a, x)$, $\delta(q, a, \varepsilon)$, $\delta(q, \varepsilon, x)$ e $\delta(q, \varepsilon, \varepsilon)$ è diverso da $\emptyset$. In particolare, $\delta(q, \varepsilon, x)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-input}, mentre $\delta(q, a, \varepsilon)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-pila}.
+
+        Se la pila del DPDA è vuota, questo può fare mosse solo se $\delta$ specifica una mossa che elimina $\varepsilon$, altrimenti non sono previste mosse lecite ed il DPDA rifiuta l'input senza leggerne il resto; questa situazione viene detta \tit{hanging}. Inoltre, si verifica un rifiuto anche se il DPDA effettua una sequenza infinita di mosse $\varepsilon$-input, senza leggere l'input oltre un certo punto; questa situazione viene detta \tit{looping}.
+    \end{frameddefn}
+
+    \begin{framedlem}{DPDA equivalenti}
+        Ogni DPDA ha un DPDA equivalente che legge sempre l'intera stringa di input; dunque non si presenta mai né \tit{hanging} né \tit{looping}.
+    \end{framedlem}
+
+    \begin{proof}
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un DPDA; in primo luogo, $q_0$ viene rimpiazzato con un nuovo stato iniziale $q_{\mathrm{start}}$; successivamente, $q_{\mathrm{reject}}$ viene aggiunto ad $F$, ed inoltre, per ogni $r \in Q, a \in \Sigma_\varepsilon, x, y \in \Gamma_\varepsilon$ si effettuano le seguenti variazioni:
+
+        \begin{itemize}
+            \item per ogni $q \in Q$ si aggiunge uno stato $q_\mathrm{a}$, ed inoltre $$\forall q \in Q \quad \delta(q, \varepsilon, x) = (r, y) \implies \delta(q_\mathrm{a}, \varepsilon, x) := (r_\mathrm{a}, y)$$ inoltre $$q \in F \implies \delta(q, \varepsilon, x) := (r_\mathrm{a}, y)$$
+        \end{itemize}
+
+        TODO DA FINIRE NON HA NESSUN SENSO QUESTA DIMOSTRAZIONE
+    \end{proof}
+
+    \begin{frameddefn}{DCFL}
+        Sia $M$ un DPDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{DCFL} (\tit{Deterministic Context-Free Language}).
+    \end{frameddefn}
 
 \end{document}

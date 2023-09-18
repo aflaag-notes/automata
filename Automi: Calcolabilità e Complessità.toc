@@ -23,3 +23,7 @@
 \contentsline {subsection}{\numberline {2.1.1}Definizioni}{23}{subsection.2.1.1}%
 \contentsline {section}{\numberline {2.2}Automi a pila}{26}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Definizioni}{26}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Linguaggi non context-free}{30}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Pumping lemma}{30}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Linguaggi context-free deterministici}{31}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Automi a pila deterministici}{31}{subsection.2.4.1}%
