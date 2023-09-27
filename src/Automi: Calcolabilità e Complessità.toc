@@ -6,24 +6,31 @@
 \contentsline {subsubsection}{Licenza di distribuzione:}{1}{subsubsection*.5}%
 \contentsline {subsubsection}{Contatti dell'autore e ulteriori link:}{1}{subsubsection*.6}%
 \contentsline {chapter}{\numberline {1}Linguaggi ed espressioni regolari}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Automi finiti}{2}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Linguaggi}{2}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Determinismo}{3}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Non determinismo}{6}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Definizioni}{6}{subsection.1.2.1}%
-\contentsline {section}{\numberline {1.3}Operazioni regolari}{9}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Definizioni}{9}{subsection.1.3.1}%
-\contentsline {section}{\numberline {1.4}Espressioni regolari}{14}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Definizioni}{14}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Non determinismo generalizzato}{16}{subsection.1.4.2}%
-\contentsline {section}{\numberline {1.5}Linguaggi non regolari}{21}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Pumping lemma}{21}{subsection.1.5.1}%
-\contentsline {chapter}{\numberline {2}Linguaggi e grammatiche context-free}{23}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Grammatiche context-free}{23}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Definizioni}{23}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Automi a pila}{26}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Definizioni}{26}{subsection.2.2.1}%
-\contentsline {section}{\numberline {2.3}Linguaggi non context-free}{30}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Pumping lemma}{30}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Linguaggi context-free deterministici}{31}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Automi a pila deterministici}{31}{subsection.2.4.1}%
+\contentsline {section}{\numberline {1.1}Stringhe e linguaggi}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Stringhe}{2}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Linguaggi}{3}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Funzioni di Hamming}{3}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Determinismo}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Definizioni}{4}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Linguaggi regolari}{6}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Non determinismo}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Definizioni}{7}{subsection.1.3.1}%
+\contentsline {section}{\numberline {1.4}Operazioni regolari}{10}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Unione}{10}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Concatenazione}{12}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Star}{13}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Configurazioni di DFA}{15}{subsection.1.4.4}%
+\contentsline {section}{\numberline {1.5}Espressioni regolari}{16}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Definizioni}{16}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Non determinismo generalizzato}{19}{subsection.1.5.2}%
+\contentsline {section}{\numberline {1.6}Linguaggi non regolari}{24}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Pumping lemma}{24}{subsection.1.6.1}%
+\contentsline {chapter}{\numberline {2}Linguaggi e grammatiche context-free}{26}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Grammatiche context-free}{26}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Definizioni}{26}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Automi a pila}{29}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Definizioni}{29}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Linguaggi non context-free}{33}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Pumping lemma}{33}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Linguaggi context-free deterministici}{34}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Automi a pila deterministici}{34}{subsection.2.4.1}%

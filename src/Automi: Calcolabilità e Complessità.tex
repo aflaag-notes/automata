@@ -4,17 +4,17 @@
 % Packages %
 %%%%%%%%%%%%
 
-\usepackage{./Nyx/nyx-packages}
-\usepackage{./Nyx/nyx-styles}
-\usepackage{./Nyx/nyx-frames}
-\usepackage{./Nyx/nyx-title}
-\usepackage{./Nyx/nyx-macros}
+\usepackage{../Nyx/nyx-packages}
+\usepackage{../Nyx/nyx-styles}
+\usepackage{../Nyx/nyx-frames}
+\usepackage{../Nyx/nyx-title}
+\usepackage{../Nyx/nyx-macros}
 
 %%%%%%%%%%%%%%
 % Title-page %
 %%%%%%%%%%%%%%
 
-\logo{./Nyx/logo.png}
+\logo{../Nyx/logo.png}
 
 \institute{\curlyquotes{\hspace{0.25mm}Sapienza} Università di Roma}
 \faculty{Ingegneria dell'Informazione,\\Informatica e Statistica}
@@ -98,9 +98,9 @@
 
     \chapter{Linguaggi ed espressioni regolari}
 
-    \section{Automi finiti}
+    \section{Stringhe e linguaggi}
 
-    \subsection{Linguaggi}
+    \subsection{Stringhe}
 
     \begin{frameddefn}{Alfabeto}
         Si definisce \textbf{alfabeto} un qualsiasi insieme finito, non vuoto; i suoi elementi sono detti \textbf{simboli} o \tbf{caratteri}.
@@ -143,11 +143,37 @@
         Sia $\Sigma = \{\ttt a,\ttt  b,\ttt  c\}$ un alfabeto; allora la stringa $x = \ttt{ab}$ è prefisso della stringa $y = \ttt{abc}$, poiché esiste una stringa $z = \ttt c$ tale per cui $xz = y$.
     \end{example}
     
+    \subsection{Linguaggi}
+
     \begin{frameddefn}{Linguaggio}
         Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro. Il linguaggio vuoto si indica con $\emptyset$.
     \end{frameddefn}
 
-    \subsection{Determinismo}
+    \begin{example}[Linguaggio binario]
+        Il lingauggio binario, che verrà utilizzato estensivamente, è il seguente: $$\Sigma = \{ \ttt 0, \ttt 1 \}$$
+    \end{example}
+
+    \subsection{Funzioni di Hamming}
+
+    \begin{frameddefn}{Distanza di Hamming}
+        Sia $\Sigma$ un alfabeto, e siano $x, y$ due sue stringhe tali che $|x| = |y|$; si definisce \tbf{distanza di Hamming} tra $x$ ed $y$ il numero di caratteri per cui $x$ ed $y$ differiscono. In simboli, date due stringhe $x = x_1 \cdots x_n, y = y_1 \cdots y_n$ con $n \in \N$, si ha che $$d_H(x, y) := \abs{\{i \in [1, n] \mid x_i \neq y_i \}}$$
+    \end{frameddefn}
+
+    \begin{example}[Distanza di Hamming]
+        Siano $x = \ttt{1011101}$ ed $y = \ttt{1001001}$ due stringhe sull'alfabeto $\Sigma = \{ \ttt 0, \ttt 1 \}$; poiché differiscono per 2 caratteri, si ha che $d_H(x, y) = 2$.
+    \end{example}
+
+    \begin{frameddefn}{Peso di Hamming}
+        Sia $\Sigma = \{\ttt 0, \ldots,  \ttt 9\}$ l'alfabeto composto dalle 10 cifre decimali, e sia $x$ una sua stringa; si definisce \tbf{peso di Hamming} di $x$ il numero di elementi di $x$ diversi da $\ttt 0$. In simboli, data una stringha $x = x_1 \cdots x_n$, con $n \in \N$, si ha che $$w_H(x) := \abs{\{i \in [1, n] \mid x_i \neq \ttt 0\}}$$
+    \end{frameddefn}
+
+    \begin{framedobs}{Peso di Hamming di stringhe binarie}
+        Sia $\Sigma = \{ \ttt 0, \ttt 1 \}$ l'alfabeto binario; allora, il peso di Hamming di una sua stringa è il numero di $\ttt 1$ che la compongono.
+    \end{framedobs}
+
+    \section{Determinismo}
+
+    \subsection{Definizioni}
 
     \begin{frameddefn}{DFA}
         Un \textbf{DFA} (\tit{Deterministic Finite Automaton}) è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
@@ -175,7 +201,7 @@
                 \path[every node/.style={font=\sffamily\small}]
                     (1) edge [bend left] node {\ttt 1} (2)
                     (2) edge [bend left] node {\ttt 0} (3)
-                    (3) edge [bend left] node {\ttt{0,1}} (2)
+                    (3) edge [bend left] node {\ttt{0},\ttt{1}} (2)
                     (1) edge [loop above] node {\ttt 0} (1)
                     (2) edge [loop above] node {\ttt 1} (2)
                  ;
@@ -194,7 +220,7 @@
         \end{itemize}
     \end{example}
 
-    \begin{frameddefn}{Linguaggio di un automa}
+    \begin{frameddefn}[label={def L(M)}]{Linguaggio di un automa}
         Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
     \end{frameddefn}
 
@@ -217,7 +243,7 @@
              \caption{Un automa $M_1$.}
         \end{figure}
 
-        sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, ci si convince facilmente che $$L(M_1) = \{w \mid w = w_1 w_2 \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
+        sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, ci si convince facilmente che $$L(M_1) = \{w \mid w = w_1  \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (DFA)}
@@ -232,9 +258,35 @@
         Dato un linguaggio $A$, si ha che $M$ \tbf{riconosce} $A$ se e solo se $A = \{w \mid M \ \mathrm{accetta} \ w\}$.
     \end{frameddefn}
 
-    \begin{frameddefn}{Linguaggio regolare}
-        Un linguaggio è detto \tbf{regolare} se e solo se esiste un DFA che lo riconosce.
+    \subsection{Linguaggi regolari}
+
+    \begin{frameddefn}[label={ling reg}]{Linguaggio regolare}
+        Un linguaggio è detto \tbf{regolare} se e solo se esiste un DFA che lo riconosce. L'insieme dei linguaggi regolari è denotato con $\mathrm{REG}$.
     \end{frameddefn}
+
+    \begin{example}[Linguaggi regolari]
+        Sia $\Sigma = \{ \ttt 0, \ttt 1 \}$ l'alfabeto binario, ed $L$ il seguente linguaggio: $$L := \{w \mid w = \ttt 0^n \ttt 1, n \in \N - \{ 0 \}\}$$ Tale linguaggio è regolare, poiché esiste il seguente DFA che lo riconosce:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state] (1) {$q_0$};
+                \node[state] (2) [above right of=1] {$q_1$};
+                \node[state,accepting] (3) [below right of=2] {$q_2$};
+                \node[state] (4) [below right of=1] {$q_3$};
+
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge [bend left] node {\ttt 0} (2)
+                    (2) edge [bend left] node {\ttt 1} (3)
+                    (3) edge [bend left] node {\ttt0,\ttt 1} (4)
+                    (1) edge [bend right] node {\ttt 1} (4)
+                    (4) edge [loop above] node {\ttt 0,\ttt 1} (4)
+                    (2) edge [loop above] node {\ttt 0} (2)
+                 ;
+             \end{tikzpicture}
+             \caption{Un DFA che riconosce L.}
+         \end{figure}
+    \end{example}
 
     \section{Non determinismo}
 
@@ -273,11 +325,11 @@
                 \node[state,accepting] (4) [right of=3] {$q_4$};
 
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge [loop above] node {\ttt{0,1}} (1)
+                    (1) edge [loop above] node {\ttt{0},\ttt{1}} (1)
                     (1) edge node {\ttt 1} (2)
-                    (2) edge node {\ttt{0,} $\varepsilon$} (3)
+                    (2) edge node {\ttt{0},$\varepsilon$} (3)
                     (3) edge node {\ttt 1} (4)
-                    (4) edge [loop above] node {\ttt{0,1}} (4)
+                    (4) edge [loop above] node {\ttt{0},\ttt{1}} (4)
                  ;
              \end{tikzpicture}
              \caption{Un NFA.}
@@ -296,7 +348,7 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.35]{assets/nfa-neg.png}
+            \includegraphics[scale=0.35]{../assets/nfa-neg.png}
             \caption{L'immagine rappresenta l'esecuzione dell'NFA descritto.}
         \end{figure}
 
@@ -348,7 +400,7 @@
 
     \section{Operazioni regolari}
 
-    \subsection{Definizioni}
+    \subsection{Unione}
     
     \begin{frameddefn}{Unione}
         Siano $A$ e $B$ due linguaggi; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B = \{x \mid x \in A \lor x \in B \}$$
@@ -389,11 +441,13 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.35]{assets/union-neg.png}
+            \includegraphics[scale=0.35]{../assets/union-neg.png}
             \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
         \end{figure}
 
     \end{proof}
+
+    \subsection{Concatenazione}
 
     \begin{frameddefn}{Concatenazione}
         Siano $A$ e $B$ due linguaggi; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$
@@ -421,21 +475,27 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.35]{assets/concat-neg.png}
+            \includegraphics[scale=0.35]{../assets/concat-neg.png}
             \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
         \end{figure}
     \end{proof}
 
     \begin{frameddefn}{Star}
-        Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* = \{x_1 x_2 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\}$$
+        Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* = \{x_1 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\}$$
 
         Si noti che $k = 0 \implies \varepsilon \in A^*$ per ogni linguaggio $A$.
     \end{frameddefn}
+
+    \subsection{Star}
 
     \begin{example}[Star]
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
     \end{example}
    
+    \begin{example}[Stringhe binarie]
+        Si noti che nel caso di $\Sigma = \{ \ttt 0, \ttt 1 \}$, si ha che $\Sigma^*$ è l'insieme di ogni stringa binaria, di arbitraria lunghezza.
+    \end{example}
+
     \begin{framedprop}[label={closure star}]{Chiusura dell'operazione star}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare.
     \end{framedprop}
@@ -454,10 +514,58 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.35]{assets/star-neg.png}
+            \includegraphics[scale=0.35]{../assets/star-neg.png}
             \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
         \end{figure}
     \end{proof}
+
+    \subsection{Configurazioni di DFA}
+
+    \begin{frameddefn}[label={extended trans}]{Estensione della funzione di transizione}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva:
+
+        \begin{equation*}
+            \resizebox{.98\hsize}{!}{
+                $\forall q \in Q, x \in \Sigma^* \quad \delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$
+            }
+        \end{equation*}
+        
+        Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Configurazione di un DFA}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di M se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Relazione tra configurazioni}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
+    \end{frameddefn}
+
+    \begin{framedobs}{Chiusura transitiva di $\vdash$}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; si noti che la chiusura transitiva della relazione tra configurazioni $\vdash$, ovvero $\vdash^*$, equivale a calcolare gli input attraverso la funzione di transizione estesa $\delta^*$ definita nella \cref{extended trans}.
+    \end{framedobs}
+
+    \begin{example}[Chiusura transitiva di $\vdash$]
+        Sia $M = (Q, \sigma, \delta, q_0, F)$ un DFA, e sia $(p, x) \in Q \times \Sigma ^*$ una sua configurazione durante la computazione di un certo input; inoltre, siano $a, b, c \in \Sigma$ tali che $x = abc$. Inoltre, siano vere le seguenti:
+
+        \begin{itemize}
+            \item $(p, abc) \vdash_M (p_1, bc)$
+            \item $(p_1, bc) \vdash_M (p_2, c)$
+            \item $(p_2, c) \vdash_M (q, \varepsilon)$
+        \end{itemize}
+
+        per certi $p, p_1, p_2, q \in Q$; allora, si ha che $(p, x) \vdash_M^* (q, \varepsilon)$, poiché è possibile raggiungere lo stato $q$, partendo da $p$, attraverso l'input $x = abc$.
+    \end{example}
+
+    \begin{framedobs}{Linguaggio di un automa}
+        Dato un automa $M$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F\}$$
+
+        Si noti che $\delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)$.
+    \end{framedobs}
+
+    \begin{framedobs}{Linguaggi regolari}
+        La \cref{ling reg} si può riscrivere in simboli come segue: $$\mathrm{REG} := \{ L \subseteq \Sigma^* \mid \exists M : L = L(M) \}$$ dove $M$ è un DFA.
+    \end{framedobs}
 
     \section{Espressioni regolari}
 
@@ -518,7 +626,7 @@
     \end{frameddefn}
 
     \begin{example}[Star]
-        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di star su $\Sigma$ è il seguente: $$R = (\Sigma^*)$$ che descrive il linguaggio che consiste di tutte le stringhe sull'alfabeto, e dunque $L(R) = \{\ttt a, \ttt b, \ttt c, \ttt{aa}, \ttt{bb}, \ttt{cc}, \ldots\}$.
+        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di star su $\Sigma$ è il seguente: $$R = (\Sigma^*)$$ che descrive il linguaggio che consiste di tutte le stringhe sull'alfabeto, e dunque $L(R) = \{\varepsilon, \ttt a, \ttt b, \ttt c, \ttt{aa}, \ttt{bb}, \ttt{cc}, \ldots\}$.
     \end{example}
 
     \begin{example}[Espressioni regolari]
@@ -566,7 +674,7 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.3]{assets/gnfa-neg.png}
+            \includegraphics[scale=0.3]{../assets/gnfa-neg.png}
             \caption{Un GNFA.}
         \end{figure}
     \end{example}
@@ -765,7 +873,7 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.35]{assets/pump-neg.png}
+            \includegraphics[scale=0.35]{../assets/pump-neg.png}
             \caption{L'automa $M$ descritto.}
         \end{figure}
 
@@ -898,7 +1006,7 @@
 
         e $\delta$ è data dalla seguente tabella di transizione:
 
-        \centeredimage{0.3}{assets/delta-pda-neg.png}{L'immagine rappresenta $\delta$ in forma tabellare.}
+        \centeredimage{0.3}{../assets/delta-pda-neg.png}{L'immagine rappresenta $\delta$ in forma tabellare.}
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (PDA)}
@@ -955,6 +1063,8 @@
 
     \begin{framedmeth}[breakable]{Trasformare CFG in DPA}
         \label{cfg into pda}
+        TODO DA RILEGGERE E FINIRE
+
         Si vuole introdurre una notazione per l'inserimento di un'intera stringa all'interno dello stack di $P$, accorpando tale operazione in un solo passo dell'automa. Infatti, con la notazione
 
         \begin{figure}[H]
