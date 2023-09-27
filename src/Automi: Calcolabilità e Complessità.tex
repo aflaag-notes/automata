@@ -480,13 +480,13 @@
         \end{figure}
     \end{proof}
 
+    \subsection{Star}
+
     \begin{frameddefn}{Star}
         Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* = \{x_1 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\}$$
 
         Si noti che $k = 0 \implies \varepsilon \in A^*$ per ogni linguaggio $A$.
     \end{frameddefn}
-
-    \subsection{Star}
 
     \begin{example}[Star]
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
