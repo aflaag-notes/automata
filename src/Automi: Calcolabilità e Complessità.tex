@@ -251,7 +251,7 @@
 
         \begin{itemize}
             \item $r_0 = q_0$
-            \item $\forall i \in [1, n - 1] \quad \delta(r_i, w_{i + 1})=r_{i + 1}$
+            \item $\forall i \in [0, n - 1] \quad \delta(r_i, w_{i + 1})=r_{i + 1}$
             \item $r_n \in F$
         \end{itemize}
 
@@ -332,11 +332,11 @@
                     (4) edge [loop above] node {\ttt{0},\ttt{1}} (4)
                  ;
              \end{tikzpicture}
-             \caption{Un NFA.}
+             \caption{L'NFA $N$.}
 
         \end{figure}
 
-        esso può essere descritto secondo la quintupla $(Q, \Sigma, \delta, q_0, F)$ come segue:
+        esso può essere descritto secondo la quintupla $N = (Q, \Sigma, \delta, q_0, F)$ come segue:
 
         \begin{itemize}
             \item $Q = \{q_1, q_2, q_3, q_4\}$
@@ -346,13 +346,15 @@
             \item $F = \{q_4\} \subseteq Q$
         \end{itemize}
 
+        Ad esempio, se $N$ legge l'input $\ttt{010110}$, la sua computazione è la seguente:
+
         \begin{figure}[H]
             \centering
             \includegraphics[scale=0.35]{../assets/nfa-neg.png}
-            \caption{L'immagine rappresenta l'esecuzione dell'NFA descritto.}
+            \caption{L'immagine rappresenta la computazione di $\ttt{010110}$ da parte di $N$.}
         \end{figure}
 
-        Si noti che nel momento in cui vengono incontrati $\varepsilon$-archi si giunge allo stato successivo nello stesso step dell'input incontrato, dunque gli $\varepsilon$-archi \tit{non} producono uno step di esecuzione, ma vengono eseguiti non appena vengono incontrati, e vengono accorpati immediatamente.
+        \imp{Nota} nel momento in cui vengono incontrati $\varepsilon$-archi, si giunge allo stato successivo della computazione nello stesso step dell'input appena elaborato, senza produrre un passo ulteriore, producendo inoltre un nuovo ramo di computazione.
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (NFA)}
@@ -360,7 +362,7 @@
 
         \begin{itemize}
             \item $r_0 = q_0$
-            \item $\forall i \in [1, n - 1] \quad r_{i + 1} \in \delta(r_i, w_{i + 1})$
+            \item $\forall i \in [0, n - 1] \quad r_{i + 1} \in \delta(r_i, w_{i + 1})$
             \item $r_n \in F$
         \end{itemize}
     \end{frameddefn}
@@ -684,7 +686,7 @@
 
         \begin{itemize}
             \item $q_0 = q_{\mathrm{start}}$
-            \item $\forall i \in [1, n - 1] \quad w_i \in L(\delta(q_i, q_{i + 1}))$, ovvero, $w_i$ deve far parte del linguaggio rappresentato dall'espressione regolare sull'arco da $q_i$ a $q_{i + 1}$
+            \item $\forall i \in [0, n - 1] \quad w_i \in L(\delta(q_i, q_{i + 1}))$, ovvero, $w_i$ deve far parte del linguaggio rappresentato dall'espressione regolare sull'arco da $q_i$ a $q_{i + 1}$
             \item $q_n = q_{\mathrm{accept}}$
         \end{itemize}
     \end{frameddefn}
@@ -1015,7 +1017,7 @@
         \begin{itemize}
             \item $r_0 = q_0$
             \item $s_0 = \varepsilon$, ovvero, lo stack è inizialmente vuoto
-            \item $\forall i \in [1, n - 1] \quad \exists a, b \in \Gamma_\varepsilon, t \in \Gamma^* \mid (r_{i + 1}, b) \in \delta(r_i, w_{i + 1}, a) \land \soe{l}{s_i = at \\ s_{i +1} = bt}$, ovvero, $M$ si muove correttamente in base allo stato, al simbolo nello stack, ed al prossimo simbolo di input; si noti che le stringhe $s_0, \ldots, s_n$ rappresentano di fatto il contenuto dello stack che $M$ ha su un ramo accettante della computazione, infatti $s_i = at$ diventa $s_{i + 1} = bt$ con l'iterazione successiva, dunque $a$ è stato sostituito con $b$ in cima alla pila
+            \item $\forall i \in [0, n - 1] \quad \exists a, b \in \Gamma_\varepsilon, t \in \Gamma^* \mid (r_{i + 1}, b) \in \delta(r_i, w_{i + 1}, a) \land \soe{l}{s_i = at \\ s_{i +1} = bt}$, ovvero, $M$ si muove correttamente in base allo stato, al simbolo nello stack, ed al prossimo simbolo di input; si noti che le stringhe $s_0, \ldots, s_n$ rappresentano di fatto il contenuto dello stack che $M$ ha su un ramo accettante della computazione, infatti $s_i = at$ diventa $s_{i + 1} = bt$ con l'iterazione successiva, dunque $a$ è stato sostituito con $b$ in cima alla pila
             \item $r_n \in F$
         \end{itemize}
     \end{frameddefn}
