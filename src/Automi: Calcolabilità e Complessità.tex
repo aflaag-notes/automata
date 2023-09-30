@@ -491,7 +491,7 @@
     \end{frameddefn}
 
     \begin{example}[Star]
-        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e sia $A = \{\ttt{uno}, \ttt{due}\}$ un linguaggio su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
     \end{example}
    
     \begin{example}[Stringhe binarie]
@@ -520,54 +520,6 @@
             \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
         \end{figure}
     \end{proof}
-
-    \subsection{Configurazioni di DFA}
-
-    \begin{frameddefn}[label={extended trans}]{Estensione della funzione di transizione}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva:
-
-        \begin{equation*}
-            \resizebox{.98\hsize}{!}{
-                $\forall q \in Q, x \in \Sigma^* \quad \delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$
-            }
-        \end{equation*}
-        
-        Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
-    \end{frameddefn}
-
-    \begin{frameddefn}{Configurazione di un DFA}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di M se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
-    \end{frameddefn}
-
-    \begin{frameddefn}{Relazione tra configurazioni}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
-    \end{frameddefn}
-
-    \begin{framedobs}{Chiusura transitiva di $\vdash$}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; si noti che la chiusura transitiva della relazione tra configurazioni $\vdash$, ovvero $\vdash^*$, equivale a calcolare gli input attraverso la funzione di transizione estesa $\delta^*$ definita nella \cref{extended trans}.
-    \end{framedobs}
-
-    \begin{example}[Chiusura transitiva di $\vdash$]
-        Sia $M = (Q, \sigma, \delta, q_0, F)$ un DFA, e sia $(p, x) \in Q \times \Sigma ^*$ una sua configurazione durante la computazione di un certo input; inoltre, siano $a, b, c \in \Sigma$ tali che $x = abc$. Inoltre, siano vere le seguenti:
-
-        \begin{itemize}
-            \item $(p, abc) \vdash_M (p_1, bc)$
-            \item $(p_1, bc) \vdash_M (p_2, c)$
-            \item $(p_2, c) \vdash_M (q, \varepsilon)$
-        \end{itemize}
-
-        per certi $p, p_1, p_2, q \in Q$; allora, si ha che $(p, x) \vdash_M^* (q, \varepsilon)$, poiché è possibile raggiungere lo stato $q$, partendo da $p$, attraverso l'input $x = abc$.
-    \end{example}
-
-    \begin{framedobs}{Linguaggio di un automa}
-        Dato un automa $M$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F\}$$
-
-        Si noti che $\delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)$.
-    \end{framedobs}
-
-    \begin{framedobs}{Linguaggi regolari}
-        La \cref{ling reg} si può riscrivere in simboli come segue: $$\mathrm{REG} := \{ L \subseteq \Sigma^* \mid \exists M : L = L(M) \}$$ dove $M$ è un DFA.
-    \end{framedobs}
 
     \section{Espressioni regolari}
 
@@ -628,7 +580,7 @@
     \end{frameddefn}
 
     \begin{example}[Star]
-        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di star su $\Sigma$ è il seguente: $$R = (\Sigma^*)$$ che descrive il linguaggio che consiste di tutte le stringhe sull'alfabeto, e dunque $L(R) = \{\varepsilon, \ttt a, \ttt b, \ttt c, \ttt{aa}, \ttt{bb}, \ttt{cc}, \ldots\}$.
+        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di star su $\Sigma$ è il seguente: $$R = (\Sigma^*)$$ che descrive il linguaggio che consiste di tutte le stringhe possibili sull'alfabeto, e dunque $$L(R) = \{\varepsilon, \ttt a, \ttt b, \ttt c, \ttt{aa}, \ttt{bb}, \ttt{cc}, \ldots\}$$
     \end{example}
 
     \begin{example}[Espressioni regolari]
@@ -642,6 +594,55 @@
             \item $L(\emptyset ^*) = \{ \varepsilon \}$, poiché $\emptyset$ rappresenta il linguaggio vuoto, e dunque l'unica stringa che si può ottenere concatenando un qualsiasi numero di volte elementi del linguaggio vuoto, è $\varepsilon$.
         \end{itemize}
     \end{example}
+
+    \subsection{Configurazioni di DFA}
+
+    \begin{frameddefn}[label={extended trans}]{Estensione della funzione di transizione}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva:
+
+        \begin{equation*}
+            \resizebox{.98\hsize}{!}{
+                $\forall q \in Q, x \in \Sigma^* \quad \delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$
+            }
+        \end{equation*}
+        
+        Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Configurazione di un DFA}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di M se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Relazione tra configurazioni}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
+    \end{frameddefn}
+
+    \begin{framedobs}{Chiusura transitiva di $\vdash$}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; si noti che la chiusura transitiva della relazione tra configurazioni $\vdash$, ovvero $\vdash^*$, equivale a calcolare gli input attraverso la funzione di transizione estesa $\delta^*$ definita nella \cref{extended trans}.
+    \end{framedobs}
+
+    \begin{example}[Chiusura transitiva di $\vdash$]
+        Sia $M = (Q, \sigma, \delta, q_0, F)$ un DFA, e sia $(p, x) \in Q \times \Sigma ^*$ una sua configurazione durante la computazione di un certo input; inoltre, siano $a, b, c \in \Sigma$ tali che $x = abc$. Inoltre, siano vere le seguenti:
+
+        \begin{itemize}
+            \item $(p, abc) \vdash_M (p_1, bc)$
+            \item $(p_1, bc) \vdash_M (p_2, c)$
+            \item $(p_2, c) \vdash_M (q, \varepsilon)$
+        \end{itemize}
+
+        per certi $p, p_1, p_2, q \in Q$; allora, si ha che $(p, x) \vdash_M^* (q, \varepsilon)$, poiché è possibile raggiungere lo stato $q$, partendo da $p$, attraverso l'input $x = abc$.
+    \end{example}
+
+    \begin{framedobs}{Linguaggio di un automa}
+        Dato un automa $M$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F\}$$
+
+        Si noti che $\delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)$.
+    \end{framedobs}
+
+    \begin{framedobs}{Linguaggi regolari}
+        La \cref{ling reg} si può riscrivere in simboli come segue: $$\mathrm{REG} := \{ L \subseteq \Sigma^* \mid \exists M : L = L(M) \}$$ dove $M$ è un DFA.
+    \end{framedobs}
+
 
     \subsection{Non determinismo generalizzato}
     
