@@ -5,4 +5,5 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 ## TODO list
 
 - fare le figure più bianche
+- lezione di ieri
 
