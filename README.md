@@ -5,7 +5,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 ## TODO list
 
 - fare le figure più bianche
-- lezione del 5/10
+- lezione del 4/10
     - dimostrazione chiusura complemento
     - dimostrazione chiusura intersezione
     - configurazioni di nfa
