@@ -405,7 +405,7 @@
     \subsection{Unione}
     
     \begin{frameddefn}{Unione}
-        Siano $A$ e $B$ due linguaggi; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B = \{x \mid x \in A \lor x \in B \}$$
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B := \{x \mid x \in A \lor x \in B \}$$
     \end{frameddefn}
 
     \begin{example}[Unione]
@@ -449,14 +449,32 @@
 
     \end{proof}
 
+    \subsection{Intersezione}
+
+    \begin{frameddefn}{Intersezione}
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{intersezione} di $A$ e $B$ il seguente linguaggio: $$A \cap B := \{x \mid x \in A \land x \in B \}$$
+    \end{frameddefn}
+
+    \begin{example}[Intersezione]
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{uno}, \ttt{tre}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cap B = \{\ttt{uno}\}$$
+    \end{example}
+
+    \begin{framedprop}{Chiusura dell'intersezione}
+        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cap B$ è regolare.
+    \end{framedprop}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
     \subsection{Concatenazione}
 
     \begin{frameddefn}{Concatenazione}
-        Siano $A$ e $B$ due linguaggi; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$ Si noti che per ogni linguaggio $L$ è vero che $\emptyset \circ L = L \circ \emptyset = \{ \varepsilon \} \circ L = L \circ \{ \varepsilon \} = L$.
     \end{frameddefn}
 
     \begin{example}[Concatenazione]
-        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B = \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B := \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
     \end{example}
 
     \begin{framedprop}[label={closure concat}]{Chiusura della concatenazione}
@@ -482,16 +500,24 @@
         \end{figure}
     \end{proof}
 
+    \begin{frameddefn}{Elevamento a potenza}
+        Sia $A$ un linguaggio; allora, si definisce \tbf{elevamento a potenza} di $A$ il seguente linguaggio: $$A^n := \underbrace{A \circ \cdots \circ A}_{n \ \textrm{volte}} = \soe{ll}{A^0 := \{\varepsilon \} & \\ A^n = A^{n -1} \circ A & n \ge 1}$$
+    \end{frameddefn}
+
+    \begin{example}[Elevamento a potenza]
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e sia $A = \{\ttt{uno}, \ttt{due}\}$ un linguaggio su $\Sigma$. Allora, si ha che $$A^2 = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}\}$$
+    \end{example}
+
     \subsection{Star}
 
     \begin{frameddefn}{Star}
-        Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* = \{x_1 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\}$$
+        Sia $A$ un linguaggio; allora, si definisce l'operazione unaria \tbf{star} che definisce il seguente linguaggio: $$A^* := \{x_1 \cdots x_k \mid k \ge 0 \land \forall i \in [1, k] \quad x_i \in A\} = \displaystyle \bigcup_{n \in \N}{L^n}=\{ \varepsilon \} \cup L \cup L^2 \cup \ldots$$
 
         Si noti che $k = 0 \implies \varepsilon \in A^*$ per ogni linguaggio $A$.
     \end{frameddefn}
 
     \begin{example}[Star]
-        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e sia $A = \{\ttt{uno}, \ttt{due}\}$ un linguaggio su $\Sigma$. Allora, si ha che $$A^* = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
+        Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e sia $A = \{\ttt{uno}, \ttt{due}\}$ un linguaggio su $\Sigma$. Allora, si ha che $$A^* := \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}, \ldots\}$$
     \end{example}
    
     \begin{example}[Stringhe binarie]
@@ -520,6 +546,33 @@
             \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
         \end{figure}
     \end{proof}
+
+    \subsection{Complemento}
+
+    \begin{frameddefn}{Complemento}
+        Sia $A$ un linguaggio definito su un alfabeto $\Sigma$; allora si definisce il \tbf{complemento} di $A$ il seguente linguaggio: $$\lnot A := \{x \mid x \notin A\}$$
+    \end{frameddefn}
+
+    \begin{example}[Complemento]
+        Sia $\Sigma = \{\ttt 0, \ttt 1\}$ l'alfabeto binario, e sia $A = \{ \ttt{00}, \ttt{1}\}$ un linguaggio definito su di esso. Allora il suo complemento è il seguente: $$\lnot A = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}, \ttt{10}, \ttt{000}, \ldots\}$$
+    \end{example}
+
+    \begin{framedprop}{Chiusura del complemento}
+        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\lnot A$ è regolare.
+    \end{framedprop}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{frameddefn}{Leggi di De Morgan}
+        Siano $A$ e $B$ definiti su un alfabeto $\Sigma$; allora, sono vere le seguenti, che prendono il nome di \tbf{leggi di De Morgan}:
+
+        \begin{enumerate}[label=\roman*), font=\itshape]
+            \item $\lnot (A \cup B) = \lnot A \cap \lnot B$
+            \item $\lnot (A \cap B) = \lnot A \cup \lnot B$
+        \end{enumerate}
+    \end{frameddefn}
 
     \section{Espressioni regolari}
 
@@ -595,6 +648,8 @@
         \end{itemize}
     \end{example}
 
+    \section{Configurazioni}
+
     \subsection{Configurazioni di DFA}
 
     \begin{frameddefn}[label={extended trans}]{Estensione della funzione di transizione}
@@ -613,7 +668,7 @@
         Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di M se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
     \end{frameddefn}
 
-    \begin{frameddefn}{Relazione tra configurazioni}
+    \begin{frameddefn}[label={rel config}]{Relazione tra configurazioni}
         Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
     \end{frameddefn}
 
@@ -643,8 +698,17 @@
         La \cref{ling reg} si può riscrivere in simboli come segue: $$\mathrm{REG} := \{ L \subseteq \Sigma^* \mid \exists M : L = L(M) \}$$ dove $M$ è un DFA.
     \end{framedobs}
 
+    \begin{framedobs}{Determinismo}
+        Dato un DFA $M = (Q, \Sigma, \delta, q_0, F)$, è possibile fornire una definizione di \tit{determinismo} alternativa, attraverso la relazione tra configurazioni definita nella \cref{rel config}, come segue: $$\forall q \in Q, a \in \Sigma, x \in \Sigma ^* \quad \exists ! p \in Q \mid (q, ax) \vdash_M (p, x)$$
+    \end{framedobs}
 
-    \subsection{Non determinismo generalizzato}
+    \subsection{Configurazioni di NFA}
+
+    TODO
+
+    \section{Non determinismo generalizzato}
+
+    \subsection{Definizioni}
     
     \begin{frameddefn}[label={def gnfa}]{GNFA}
         Un \tbf{GNFA} (\tit{Generalized Nondeterministic Finite Automaton}) è una versione generalizzata di un NFA, in cui gli archi delle transizioni sono espressioni regolari sull'alfabeto dato.
