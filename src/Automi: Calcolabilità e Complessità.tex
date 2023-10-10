@@ -224,6 +224,10 @@
         Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
     \end{frameddefn}
 
+    \begin{frameddefn}[label={ling automata}]{Linguaggi di una classe di automi}
+        Sia $\mathcal{C}$ una classe di automi; allora, l'\tbf{insieme dei linguaggi} riconisciuti dagli automi della classe $\mathcal{C}$ è denotato col seguente simbolismo: $$L(\mathcal{C}) := \{L \mid \exists M \in \mathcal{C} : L(M) = L\}$$ dove $L$ è un linguaggio, ed $M$ è un automa della classe $\mathcal{C}$.
+    \end{frameddefn}
+
     \begin{example}[Linguaggio di un automa]
         Si consideri il seguente automa $M_1$:
 
@@ -287,6 +291,10 @@
              \caption{Un DFA che riconosce $L$.}
          \end{figure}
     \end{example}
+
+    \begin{framedobs}{Linguaggi regolari}
+        Si noti che, per la \cref{ling reg}, e per la \cref{ling automata}, si ha che $$\mathrm{REG} = \mathcal{L}(\mathrm{DFA})$$
+    \end{framedobs}
 
     \section{Non determinismo}
 
@@ -372,7 +380,7 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={nfa equiv}]{DFA equivalente ad NFA}
-        Sia $N$ un NFA; allora, esiste un DFA ad esso equivalente.
+        Sia $N$ un NFA; allora, esiste un DFA ad esso equivalente. In simboli $$\mathcal{L}(\mathrm{NFA}) = \mathcal{L}(\mathrm{DFA})$$
     \end{framedthm}
 
     \begin{proof}
@@ -652,7 +660,7 @@
 
     \subsection{Configurazioni di DFA}
 
-    \begin{frameddefn}[label={extended trans}]{Estensione della funzione di transizione}
+    \begin{frameddefn}[label={extended trans}]{Estensione di $\delta$ dei DFA}
         Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva:
 
         \begin{equation*}
@@ -688,16 +696,6 @@
         per certi $p, p_1, p_2, q \in Q$; allora, si ha che $(p, x) \vdash_M^* (q, \varepsilon)$, poiché è possibile raggiungere lo stato $q$, partendo da $p$, attraverso l'input $x = abc$.
     \end{example}
 
-    \begin{framedobs}{Linguaggio di un automa}
-        Dato un automa $M$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F\}$$
-
-        Si noti che $\delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)$.
-    \end{framedobs}
-
-    \begin{framedobs}{Linguaggi regolari}
-        La \cref{ling reg} si può riscrivere in simboli come segue: $$\mathrm{REG} := \{ L \subseteq \Sigma^* \mid \exists M : L = L(M) \}$$ dove $M$ è un DFA.
-    \end{framedobs}
-
     \begin{framedobs}{Determinismo}
         Dato un DFA $M = (Q, \Sigma, \delta, q_0, F)$, è possibile fornire una definizione di \tit{determinismo} alternativa, attraverso la relazione tra configurazioni definita nella \cref{rel config}, come segue: $$\forall q \in Q, a \in \Sigma, x \in \Sigma ^* \quad \exists ! p \in Q \mid (q, ax) \vdash_M (p, x)$$
     \end{framedobs}
@@ -705,6 +703,12 @@
     \subsection{Configurazioni di NFA}
 
     TODO
+
+    \begin{framedobs}{Linguaggio di un automa}
+        Dato un automa $M$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)\}$$
+
+        Si noti che, nella definizione, verrà presa in considerazione la funzione $\delta^*$ corrispondente alla classe dell'automa $M$ in questione.
+    \end{framedobs}
 
     \section{Non determinismo generalizzato}
 

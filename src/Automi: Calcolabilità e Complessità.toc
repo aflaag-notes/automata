@@ -25,7 +25,7 @@
 \contentsline {subsection}{\numberline {1.5.1}Definizioni}{16}{subsection.1.5.1}%
 \contentsline {section}{\numberline {1.6}Configurazioni}{18}{section.1.6}%
 \contentsline {subsection}{\numberline {1.6.1}Configurazioni di DFA}{18}{subsection.1.6.1}%
-\contentsline {subsection}{\numberline {1.6.2}Configurazioni di NFA}{20}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.2}Configurazioni di NFA}{19}{subsection.1.6.2}%
 \contentsline {section}{\numberline {1.7}Non determinismo generalizzato}{21}{section.1.7}%
 \contentsline {subsection}{\numberline {1.7.1}Definizioni}{21}{subsection.1.7.1}%
 \contentsline {section}{\numberline {1.8}Linguaggi non regolari}{26}{section.1.8}%
