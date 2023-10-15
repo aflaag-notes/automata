@@ -8,5 +8,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 - lezione del 4/10
     - dimostrazione chiusura complemento
     - dimostrazione chiusura intersezione
+    - dimotrazione chiusura potenza
+    - dimostrazione chiusura star alternativa
     - configurazioni di nfa
 
