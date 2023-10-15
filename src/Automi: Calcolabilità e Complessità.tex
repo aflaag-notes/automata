@@ -425,7 +425,7 @@
     \end{framedprop}
 
     \begin{proof}[Dimostrazione I]
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due automi finiti $$\left. \begin{array}{c}M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ l'automa finito definito come segue:
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due DFA $$\left. \begin{array}{c}M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ il DFA definito come segue:
 
         \begin{itemize}
             \item $Q := Q_1 \times Q_2 = \{(r_1, r_2) \mid r_1 \in Q_1 \land r_2 \in Q_2\}$, scelto tale in quanto permette di avere tutte le possibili combinazioni di stati dei due automi di partenza;
@@ -472,7 +472,16 @@
     \end{framedprop}
 
     \begin{proof}
-        TODO
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due DFA $$\centeredsoe{M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)}$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ il DFA definito come segue:
+
+        \begin{itemize}
+            \item $Q := Q_1 \times Q_2 = \{(r_1, r_2) \mid r_1 \in Q_1 \land r_2 \in Q_2\}$, scelto tale in quanto permette di avere tutte le possibili combinazioni di stati dei due automi di partenza;
+            \item $\forall (r_1, r_2) \in Q, a \in \Sigma \quad \delta((r_1, r_2), a) := (\delta_1(r_1, a), \delta_2(r_2, a))$, scelta tale in quanto permette di simulare entrambi gli automi di partenza contemporaneamente, mandando ogni stato di $M_1$ ed $M_2$ dove sarebbe andato nei rispettivi automi di appartenenza;
+            \item $q_0 := (q_1, q_2)$, scelto tale in quanto deve essere lo stato in cui entrambe gli automi in ipotesi iniziavano;
+            \item $F:= F_1 \times F_2 = \{(r_1, r_2) \mid r_1 \in F_1 \land r_2 \in F_2\}$, scelto tale in quanto vanno prese tutte e sole le coppie composte da 2 stati entrambe accettanti negli automi di partenza.
+        \end{itemize}
+
+        Allora, poiché $M$ è in grado di simulare $M_1$ ed $M_2$ contemporaneamente, ma accetta solo quando accettavano entrambe gli automi di partenza, per costruzione accetterà ogni stringa di $A \cap B$, che di conseguenza risulta essere regolare per definizione.
     \end{proof}
 
     \subsection{Concatenazione}
@@ -508,6 +517,8 @@
         \end{figure}
     \end{proof}
 
+    \subsection{Elevamento a potenza}
+
     \begin{frameddefn}{Elevamento a potenza}
         Sia $A$ un linguaggio; allora, si definisce \tbf{elevamento a potenza} di $A$ il seguente linguaggio: $$A^n := \underbrace{A \circ \cdots \circ A}_{n \ \textrm{volte}} = \soe{ll}{A^0 := \{\varepsilon \} & \\ A^n = A^{n -1} \circ A & n \ge 1}$$
     \end{frameddefn}
@@ -517,12 +528,18 @@
     \end{example}
 
     \begin{framedprop}{Chiusura dell'elevamento a potenza}
-        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$, ed $n \in \N$; allora $L^n$ è regolare.
+        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$, ed $n \in \N$; allora $A^n$ è regolare.
     \end{framedprop}
 
-    \begin{proof}
-        TODO
-    \end{proof}
+    \proofind{
+        La dimostrazione procede per induzione su $n \in \N$.
+    }{
+        Per $n = 0$, si ha che $A^0 = \{\varepsilon\}$, il quale è regolare poiché ad esempio il DFA $$M_\varepsilon = (\{q\}, \Sigma, \delta, q, \{q\})$$ è in grado di riconoscerlo.
+    }{
+        Per $n \in \N$, si assume che $A^n$ è regolare.
+    }{
+        Per il caso $n + 1$, si ha che $A^{n + 1} = A^n \circ A$ per definizione dell'elevamento a potenza; inoltre, per ipotesi induttiva $A^n$ è regolare, $A$ è regolare per ipotesi, e poiché $\mathrm{REG}$ è chiuso rispetto alla concatenazione per la \cref{closure concat}, si ha che $A^{n + 1} = A^n \circ A$ è regolare.
+    }
 
     \subsection{Star}
 
@@ -545,7 +562,7 @@
     \end{framedprop}
 
     \begin{proof}
-        Per definizione, $A$ è linguaggio regolare, dunque per il \cref{nfa equiv} esiste un NFA $$N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)$$ tale da riconoscere $A$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+        Per definizione, $A$ è un linguaggio regolare, dunque per il \cref{nfa equiv} esiste un NFA $$N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)$$ tale da riconoscere $A$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
 
         \begin{itemize}
             \item $Q := \{q_0\} \cup Q_1$, dove $q_0$ è un nuovo stato, posto prima di $N_1$;
@@ -578,7 +595,7 @@
     \end{framedprop}
 
     \begin{proof}
-        TODO
+        In ipotesi $A$ è un linguaggio regolare, dunque per definizione esiste un DFA $$M = (Q, \Sigma, \delta, q_0, F)$$ che lo riconosce; allora, è sufficiente considerare il DFA $$M' := (Q, \Sigma, \delta, q_0, Q-F)$$ per ottenere un DFA tale da riconoscere $\lnot A$; allora, $\lnot A$ è regolare per definizione.
     \end{proof}
 
     \begin{frameddefn}{Leggi di De Morgan}
