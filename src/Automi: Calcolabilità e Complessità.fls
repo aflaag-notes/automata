@@ -1858,6 +1858,8 @@ INPUT ../assets/gnfa-neg.png
 INPUT ../assets/gnfa-neg.png
 INPUT ../assets/gnfa-neg.png
 INPUT ../assets/gnfa-neg.png
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecss0800.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecss0800.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
 INPUT ../assets/pump-neg.png
 INPUT ../assets/pump-neg.png
@@ -1869,8 +1871,6 @@ INPUT ../assets/delta-pda-neg.png
 INPUT ../assets/delta-pda-neg.png
 INPUT ../assets/delta-pda-neg.png
 INPUT ../assets/delta-pda-neg.png
-INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecss0800.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecss0800.tfm
 INPUT Automi: Calcolabilità e Complessità.aux
 INPUT ./Automi: Calcolabilità e Complessità.out
 INPUT ./Automi: Calcolabilità e Complessità.out

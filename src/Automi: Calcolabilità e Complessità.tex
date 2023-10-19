@@ -413,7 +413,7 @@
     \subsection{Unione}
     
     \begin{frameddefn}{Unione}
-        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B := \{x \mid x \in A \lor x \in B \}$$
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B := \{x \mid x \in A \lor x \in B \}$$ Si noti che, per ogni linguaggio $L$, è vero che $\emptyset \cup L = L \cup \emptyset = L$.
     \end{frameddefn}
 
     \begin{example}[Unione]
@@ -487,7 +487,14 @@
     \subsection{Concatenazione}
 
     \begin{frameddefn}{Concatenazione}
-        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$ Si noti che per ogni linguaggio $L$ è vero che $\emptyset \circ L = L \circ \emptyset = \{ \varepsilon \} \circ L = L \circ \{ \varepsilon \} = L$.
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$ Si noti che, per ogni linguaggio $L$, è vero che 
+
+        \begin{itemize}
+            \item $\emptyset \circ L = L \circ \emptyset = \emptyset$
+            \item $\{\varepsilon \} \circ L = L \circ \{ \varepsilon \} = L$.
+        \end{itemize}
+
+        Inoltre, il simbolo $\circ$ può essere talvolta omesso.
     \end{frameddefn}
 
     \begin{example}[Concatenazione]
@@ -620,7 +627,7 @@
             \item $R \in \Sigma$
         \end{itemize}
 
-        Un'espressione regolare, dunque, è un modo compatto di definire un linguaggio. Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita. Dato un alfabeto $\Sigma$, la classe delle espressioni regolari è denotata con $\mathrm{re}(\Sigma)$.
+        Un'espressione regolare, dunque, è un modo compatto di definire un linguaggio. Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita. Dato un alfabeto $\Sigma$, la classe delle espressioni regolari definite su di esso è denotata con $\mathrm{re}(\Sigma)$.
 
         Data un'espressione regolare $R$, con $L(R)$ si intende il linguaggio che $R$ descrive, ovvero l'insieme di stringhe che $R$ rappresenta. Dunque, sono vere le seguenti:
 
@@ -634,7 +641,7 @@
     \begin{frameddefn}{Unione}
         Siano $R_1$ ed $R_2$ due espressioni regolari su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione} di $R_1$ ed $R_2$ la seguente espressione regolare: $$(R_1 \cup R_2)$$ e rappresenta uno qualsiasi dei caratteri di $R_1$ o di $R_2$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1, R_2 \in \mathrm{re}(\Sigma) : R = R_1 \cup R_2 \quad L(R) = L(R_1) \cup L(R_2)$$
 
-        Si noti che $R \cup \emptyset = \emptyset$ per qualsiasi espressione regolare $R$.
+        Si noti che, per ogni espressione regolare $R$, è vero che $\emptyset \cup R = R \cup \emptyset = \emptyset$.
     \end{frameddefn}
 
     \begin{example}[Unione]
@@ -642,7 +649,7 @@
     \end{example}
 
     \begin{example}[Espressioni regolari particolari]
-        Sia $\Sigma = \{\ttt 0, \ttt 1\}$ un alfabeto; l'espressione regolare $(\ttt 0 \cup \ttt 1)$ rappresenta il linguaggio che consiste di tutte le stringhe di lunghezza 1 sull'alfabeto $\Sigma$, e dunque l'espressione regolare descritta si abbrevia generalmente con il simbolo $\Sigma$ stesso.
+        Sia $\Sigma = \{\ttt 0, \ttt 1\}$ un alfabeto; l'espressione regolare $(\ttt 0 \cup \ttt 1)$ rappresenta il linguaggio che consiste di tutte le stringhe di lunghezza 1 sull'alfabeto $\Sigma$, e dunque l'espressione regolare descritta si abbrevia talvolta con il simbolo $\Sigma$ stesso.
     \end{example}
 
     \begin{frameddefn}{Concatenazione}
@@ -650,7 +657,14 @@
 
         Per indicare la concatenazione di $R$ con sé stessa, si usa la seguente notazione $$R^k := \underbrace{R \circ \cdots \circ R}_{k \ \textrm{volte}}$$
 
-        Si noti che $R \circ \emptyset = \emptyset$ e $R \circ \varepsilon = R$, per qualsiasi espressione regolare $R$.
+        Si noti che, per ogni espressione regolare $R$, è vero che:
+
+        \begin{itemize}
+            \item $\emptyset \circ R = R \circ \emptyset = \emptyset$
+            \item $\varepsilon \circ R = R \circ \varepsilon = R$
+        \end{itemize}
+
+        Inoltre, il simbolo $\circ$ può essere talvolta omesso.
     \end{frameddefn}
 
     \begin{example}[Concatenazione]
@@ -763,9 +777,9 @@
         \begin{itemize}
             \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
             \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito}
-            \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathcal{L}(\mathrm{re}(\Sigma))}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathcal{L}(\mathrm{re}(\Sigma))$, poiché a differenza di un normale DFA o NFA, un GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare
+            \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathrm{re}(\Sigma)}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathrm{re}(\Sigma)$, poiché a differenza di un normale DFA o NFA, un GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare; inoltre, il dominio di $\delta$ è $(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})$ per evitare di includere l'arco $(q_{\mathrm{accept}}, q_\mathrm{start})$
             \item $q_{\mathrm{start}} \in Q$ è lo \textbf{stato iniziale}
-            \item $q_{\mathrm{accept}}$ è lo \textbf{stato accettante}
+            \item $q_{\mathrm{accept} \in Q}$ è lo \textbf{stato accettante}
         \end{itemize}
     \end{frameddefn}
 
@@ -795,10 +809,55 @@
         \begin{itemize}
             \item aggiungere un nuovo stato iniziale, con un $\varepsilon$-arco entrante sul vecchio stato iniziale;
             \item aggiungere un nuovo stato accettante, con $\varepsilon$-archi entranti provenienti dai vecchi stati accettanti;
-            \item per gli archi con etichette multiple, sostituire questi ultimi con archi aventi come etichetta l'unione delle etichette precedenti;
+            \item sostiuire gli archi con etichette multiple, con archi aventi come etichetta l'unione delle etichette;
             \item aggiungere archi etichettati con $\emptyset$ tra gli stati non collegati (si noti che questa operazione non varia l'automa di partenza, poiché un arco etichettato con $\emptyset$ non potrà mai essere utilizzato)
         \end{itemize}
     \end{framedmeth}
+
+    \begin{example}[GNFA di DFA]
+        \label{gnfa di dfa}
+        Si consideri il seguente DFA $$D = (\{b, c\}, \{\ttt 0, \ttt 1, \ttt 2\}, \delta, b, \{c\})$$ rappresentato come segue:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[state,initial] (1) {$b$};
+                \node[state,accepting] (2) [right of=1] {$c$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$\ttt 2$} (2)
+                    (1) edge [loop above] node {$\ttt 0, \ttt 1$} (1)
+                    (2) edge [loop above] node {$\ttt 0, \ttt 1$} (2)
+                 ;
+             \end{tikzpicture}
+             \caption{Il DFA $D$.}
+        \end{figure}
+
+        Allora, il suo GNFA equivalente è il seguente:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[state,initial] (1) {$a$};
+                \node[state] (2) [right of=1] {$b$};
+                \node[state] (3) [right of=2] {$c$};
+                \node[state,accepting] (4) [right of=3] {$d$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$\varepsilon$} (2)
+                    (1) edge [in=-120,out=-60] node {$\emptyset$} (3)
+                    (1) edge [in=110,out=70] node {$\emptyset$} (4)
+                    (2) edge [bend left] node {$\ttt 2$} (3)
+                    (2) edge [in=120,out=60] node {$\emptyset$} (4)
+                    (3) edge [bend left] node {$\emptyset$} (2)
+                    (3) edge node {$\varepsilon$} (4)
+                    (2) edge [loop above] node {$\ttt 0 \cup \ttt 1$} (2)
+                    (3) edge [loop above] node {$\ttt 0 \cup \ttt 1$} (3)
+                 ;
+             \end{tikzpicture}
+             \caption{Il GNFA di $D$.}
+        \end{figure}
+    \end{example}
 
     \begin{framedalgo}[label={gnfa into regex}]{Espressione regolare di un GNFA}
         Dato un GNFA $G = (Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$, l'algoritmo restituisce un'espressione regolare equivalente a $G$.
@@ -822,8 +881,8 @@
     \idea{
         L'algoritmo inizia prendendo in input un GNFA $G$, ed inizialmente viene controllato il numero di stati di $G$:
         \begin{itemize}
-            \item se $|Q|$ è 2, allora sicuramente $Q = \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$, e poiché si vuole resituire l'espressione regolare equivalente a $G$, di fatto quest'ultimo è costituito esclusivamente dall'espressione regolare posta sull'arco tra $q_\mathrm{start}$ e $q_\mathrm{accept}$, dunque è sufficiente restituirla in output (riga 3);
-            \item se $|Q|$ è maggiore di 2, allora viene costruito un GNFA $G'$, avente uno stato in meno, ovvero $q$ (scelto alla riga 5), naturalmente diverso da $q_\mathrm{start}$ e da $q_\mathrm{accept}$; successivamente, per ogni coppia di stati $(q_i, q_j)$, viene definita $\delta'(q_i, q_j)$ in modo tale da accorpare tutte le possibili configurazioni di stati; ad esempio, prendendo in esame il seguente GNFA 
+            \item se $|Q| = 2$, allora sicuramente $Q = \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$, e poiché si vuole resituire l'espressione regolare equivalente a $G$, di fatto quest'ultimo è costituito esclusivamente dall'espressione regolare posta sull'arco tra $q_\mathrm{start}$ e $q_\mathrm{accept}$, dunque è sufficiente restituirla in output (riga 3);
+            \item se $|Q| > 2$, allora viene costruito un GNFA $G'$, avente uno stato in meno, ovvero $q$ (scelto alla riga 5), naturalmente diverso da $q_\mathrm{start}$ e da $q_\mathrm{accept}$; successivamente, per ogni coppia di stati $(q_i, q_j)$, viene definita $\delta'(q_i, q_j)$ in modo tale da accorpare tutte le possibili configurazioni di stati; ad esempio, prendendo in esame il seguente GNFA 
 
                 \begin{figure}[H]
                     \centering
@@ -855,9 +914,11 @@
                      \end{tikzpicture}
                 \end{figure}
 
-                poiché l'arco che $q$ ha su sé stesso è stato descritto attraverso $(R_2)^*$, gli archi $(q_i, q)$ e $(q, q_j)$ sono stati inseriti per concatenazione, ed infine è stato unito l'altro possibile cammino verso $q_j$ tramite unione; si noti che tale espressione regolare tiene in considerazione tutte le possibili configurazioni di archi tra stati di un GNFA;
+                poiché l'arco che $q$ ha su sé stesso è stato descritto attraverso $(R_2)^*$, gli archi $(q_i, q)$ e $(q, q_j)$ sono stati inseriti per concatenazione, ed infine è stato unito l'altro possibile cammino verso $q_j$ tramite unione;
 
-            \item si noti che, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
+            \item inoltre, si noti che tale espressione regolare tiene in considerazione tutte le possibili configurazioni di archi tra stati di un GNFA, per come è stato definito il GNFA all'interno della \cref{def gnfa}; infatti, per $|Q| > 2$, tra due stati $q_i$ e $q_j$, oltre ad avere la garanzia che esista l'arco $(q_i, q_j)$, esiste sicuramente un terzo stato $q$ intermedio tale per cui esistano archi $(q_i, q)$ e $(q, q_j)$, ed esiste anche l'arco $(q,q)$;
+
+            \item infine, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, per ogni GNFA si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
         \end{itemize}
 
         Allora, l'algoritmo è in grado di restituire l'espressione regolare equivalente a $G$.
@@ -866,15 +927,57 @@
     \proofind{
         La dimostrazione procede per induzione su $k$, il numero di stati del GNFA.
     }{
-        Il caso base si ha per $k = 2$, e se $G$ ha solo 2 stati, allora necessariamente $Q = \{q_\mathrm{start}, q_\mathrm{accept}\}$, e dunque $\ttt{convertGNFAtoRegEx}(G) = \delta(q_\mathrm{start}, q_\mathrm{accept})$, alla riga 3.
+        Se $k = 2$, ovvero se $G$ ha solo 2 stati, necessariamente $Q = \{q_\mathrm{start}, q_\mathrm{accept}\}$, e dunque $\ttt{convertGNFAtoRegEx}(G) = \delta(q_\mathrm{start}, q_\mathrm{accept})$, come descritto nella riga 3.
     }{
         Se $G$ è un GNFA con $k - 1$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$.
     }{
         È necessario dimostrare che, se $G$ è un GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. In primo luogo, è necessario dimostrare che $G$ e $G'$ sono equivalenti, e dunque sia $w$ una stringa accettata da $G$; allora, in un ramo accettante della computazione, $G$ entra in una sequenza di stati $$q_\mathrm{start}, q_1, q_2, \ldots, q_\mathrm{accept}$$ dunque, se il ramo non contiene lo stato rimosso $q$, allora sicuramente $G'$ accetta $w$; viceversa, se $q$ è contenuto all'interno di tale ramo, allora per quanto discusso all'interno dell'idea di dimostrazione, l'espressione regolare inserita al posto dello stato $q$ rimosso è in grado di tenere in considerazione ogni possibile configurazione di archi, e dunque $G'$ accetta sicuramente $w$; infine, è possibile applicare la stessa osservazione per mostrare che una stringa accettata da $G'$ deve essere necessariamente accettata anche da $G$. Allora, poiché $G$ e $G'$ sono equivalenti, e $G$ ha $k$ stati, allora necessariamente al termine del $k$-esimo passo dell'algoritmo, $G'$ avrà $k - 1$ stati, e su di esso è possibile applicare l'ipotesi induttiva.
     }
 
+    \begin{example}[Espressioni regolari di GNFA]
+        Sia $G$ il GNFA dell'\cref{gnfa di dfa}; allora, la sua espressione regolare equivalente è ottenibile attraverso i seguenti passaggi:
+
+        \begin{itemize}
+            \item viene inizialmente rimosso lo stato $b$, ottenendo l'automa $G'$:
+
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                        \node[state,initial] (1) {$a$};
+                        \node[state] at (6,0) (3) {$c$};
+                        \node[state,accepting] at (11,0) (4) {$d$};
+             
+                        \path[every node/.style={font=\sffamily\small}]
+                            (1) edge node {$\emptyset \cup \varepsilon (\ttt 0 \cup \ttt 1)^* \ttt2 = (\ttt 0 \cup \ttt 1)^*\ttt 2$} (3)
+                            (3) edge node {$\varepsilon \cup \emptyset (\ttt 0 \cup \ttt 1)^* \emptyset = \varepsilon$} (4)
+                            (1) edge [in=135,out=45] node {$\emptyset \cup \varepsilon (\ttt 0 \cup \ttt 1)^* \emptyset = \emptyset$} (4)
+                            (3) edge [loop below] node {$(\ttt 0 \cup \ttt 1) \cup \emptyset(\ttt 0 \cup \ttt 1)^* \ttt 2= \ttt 0 \cup \ttt 1$} (3)
+                         ;
+                     \end{tikzpicture}
+                     \caption{$G'$, ovvero il GNFA $G$, dopo aver rimosso $b$.}
+                \end{figure}
+
+            \item successivamente, viene rimosso lo stato $c$, ottenendo l'automa $G''$:
+
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                        \node[state,initial] (1) {$a$};
+                        \node[state,accepting] at (9,0) (4) {$d$};
+             
+                        \path[every node/.style={font=\sffamily\small}]
+                            (1) edge node {$\emptyset \cup (\ttt 0 \cup \ttt 1)^* \ttt 2 (\ttt 0 \cup \ttt 1)^* \varepsilon = (\ttt 0 \cup \ttt 1)^* \ttt 2 (\ttt 0 \cup \ttt 1)^*$} (4)
+                         ;
+                     \end{tikzpicture}
+                     \caption{$G''$, ovvero il GNFA $G'$, dopo aver rimosso $c$.}
+                \end{figure}
+
+            \item allora, poiché $G''$ ha 2 stati, l'espressione regolare cercata --- equivalente a $G$ --- è posta sull'arco $(a,d)$, ed è $$(\ttt 0 \cup \ttt 1)^* \ttt 2 (\ttt 0 \cup \ttt 1)^*$$
+        \end{itemize}
+    \end{example}
+
     \begin{framedthm}{Linguaggi ed espressioni regolari}
-        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli $$\mathrm{REG} = \mathcal{L}(\mathrm{re}(\Sigma))$$
+        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli, per un certo alfabeto $\Sigma$ si ha che $$\mathrm{REG} = \mathcal{L}(\mathrm{re}(\Sigma))$$
     \end{framedthm}
 
     \proofiff{
@@ -946,7 +1049,7 @@
         In altri termini, avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno: alcuni volatili dovranno necessariamente condividere la propria casella.
     \end{framedprinc}
 
-    \begin{framedlem}{Pumping lemma}
+    \begin{framedlem}[label={pumping}]{Pumping lemma}
         Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \in A \mid s = xyz$, soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
@@ -968,16 +1071,17 @@
         \end{itemize}
 
         Allora, sono soddisfatte tutte le condizioni della tesi.
+    \end{proof}
 
-        La seguente rappresentazione raffigura un automa definito come segue: $$M = (\{q_1, \ldots, q_9, \ldots, q_{13}\}, \Sigma, \delta, q_1, \{q_{13}\})$$ dove $|Q| = 13$, e $r_j = r_l = q_9$ è lo stato che si ripete all'interno dei primi $p + 1$ stati della sequenza presi in esame nella dimostrazione.
+    \begin{example}[Dimostrazione del pumping lemma]
+        La seguente rappresentazione raffigura un automa definito come segue: $$M = (\{q_1, \ldots, q_9, \ldots, q_{13}\}, \Sigma, \delta, q_1, \{q_{13}\})$$ dove $|Q| = 13$, e $r_j = r_l = q_9$ è lo stato che si ripete all'interno dei primi $p + 1$ stati della sequenza presa in esame nella dimostrazione del \cref{pumping}.
 
         \begin{figure}[H]
             \centering
             \includegraphics[scale=0.35]{../assets/pump-neg.png}
             \caption{L'automa $M$ descritto.}
         \end{figure}
-
-    \end{proof}
+    \end{example}
 
     \begin{example}[Pumping lemma]
         Sia $B = \{\ttt 0 ^n \ttt 1 ^n \mid n \ge 0\}$ un linguaggio. TODO NON HO CAPITO
