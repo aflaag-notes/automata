@@ -1053,8 +1053,12 @@
 
         In altri termini, avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno: alcuni volatili dovranno necessariamente condividere la propria casella.
     \end{framedprinc}
+    
+    \begin{frameddefn}{Linguaggio non regolare}
+        Un linguaggio $A$ si definisce \tbf{non regolare} se non esiste un DFA in grado di riconoscerlo. In simboli $$A \notin \mathrm{REG}$$
+    \end{frameddefn}
 
-    \begin{framedlem}[label={pumping}]{Pumping lemma}
+    \begin{framedlem}[label={pumping}]{Pumping lemma (REG)}
         Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \in A \mid s = xyz$, soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
@@ -1065,12 +1069,12 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
+        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, poiché $p := |Q|$, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
 
         Si pongano dunque $$\soe{l}{x:= s_1 \cdots s_{j - 1} \\ y := s_j \cdots s_{l - 1} \\ z := s_l \cdots s_n}$$ Allora, si ha che:
 
         \begin{itemize}
-            \item $x$ porta $M$ da $r_1$ ad $r_j$, $y$ porta $M$ da $r_j$ ad $r_j$ stesso, ed infine $z$ porta $M$ da $r_j$ ad $r_{n + 1}$, e poiché $r_{n + 1} \in F$, $M$ accetta sicuramente $xy^iz$ per ogni $i \ge 0$;
+            \item $x$ porta $M$ da $r_1$ ad $r_j$, $y$ porta $M$ da $r_j = r_l$ ad $r_j$ --- dunque $y$ porta $M$ da $r_j$ ad $r_j$ stesso --- ed infine $z$ porta $M$ da $r_j$ ad $r_{n + 1}$, e poiché $r_{n + 1} \in F$, $M$ accetta sicuramente $xy^iz$ per ogni $i \ge 0$;
             \item $j \neq l \implies |y| > 0$;
             \item $l \le p + 1 \implies |xy| \le p$, poiché $r_l$ è lo stato che viene dopo aver letto $s_{l - 1} \in y$, e dunque nel caso limite si ha che $l = p + 1 \implies |xy| = p$.
         \end{itemize}
