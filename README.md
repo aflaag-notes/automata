@@ -9,5 +9,4 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - dimostrazione chiusura star alternativa
     - configurazioni di nfa
 - esempio secondo verso teorema 1.7.1.1
-- cambia algoritmo
 

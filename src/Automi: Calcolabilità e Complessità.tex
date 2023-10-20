@@ -870,7 +870,12 @@
                 \ElsIf{$|Q| > 2$}
                     \State $q \in Q - \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$
                     \State $Q' := Q - \{q\}$
-                    \State $\forall q_i \in Q' - \{q_{\mathrm{accept}}\}, q_j \in Q' - \{q_{\mathrm{start}}\} \quad \delta'(q_i, q_j) := \delta(q_i, q)\delta(q, q)^* \delta(q, q_j) \cup \delta(q_i, q_j)$
+                    % \State $\forall q_i \in Q' - \{q_{\mathrm{accept}}\}, q_j \in Q' - \{q_{\mathrm{start}}\} \quad \delta'(q_i, q_j) := \delta(q_i, q)\delta(q, q)^* \delta(q, q_j) \cup \delta(q_i, q_j)$
+                    \For{$q_i \in Q' - \{q_\mathrm{accept}\}$}
+                        \For{$q_j \in Q' - \{q_\mathrm{start}\}$}
+                            \State $\delta'(q_i, q_j) := \delta(q_i, q)\delta(q, q)^* \delta(q, q_j) \cup \delta(q_i, q_j)$
+                        \EndFor
+                    \EndFor
                     \State $G' := (Q', \Sigma, \delta', q_{\mathrm{start}}, q_{\mathrm{accept}})$
                     \State \textbf{return} $\ttt{convertGNFAtoRegEx}(G')$
                 \EndIf
@@ -916,7 +921,7 @@
 
                 poiché l'arco che $q$ ha su sé stesso è stato descritto attraverso $(R_2)^*$, gli archi $(q_i, q)$ e $(q, q_j)$ sono stati inseriti per concatenazione, ed infine è stato unito l'altro possibile cammino verso $q_j$ tramite unione;
 
-            \item inoltre, si noti che tale espressione regolare tiene in considerazione tutte le possibili configurazioni di archi tra stati di un GNFA, per come è stato definito il GNFA all'interno della \cref{def gnfa}; infatti, per $|Q| > 2$, tra due stati $q_i$ e $q_j$, oltre ad avere la garanzia che esista l'arco $(q_i, q_j)$, esiste sicuramente un terzo stato $q$ intermedio tale per cui esistano archi $(q_i, q)$ e $(q, q_j)$, ed esiste anche l'arco $(q,q)$;
+            \item inoltre, si noti che tale espressione regolare --- contenuta nella riga 9 --- tiene in considerazione tutte le possibili configurazioni di archi tra stati di un GNFA, per come è stato definito il GNFA all'interno della \cref{def gnfa}; infatti, per $|Q| > 2$, tra due stati $q_i$ e $q_j$, oltre ad avere la garanzia che esista l'arco $(q_i, q_j)$, esiste sicuramente un terzo stato $q$ intermedio tale per cui esistano archi $(q_i, q)$ e $(q, q_j)$, ed esiste anche l'arco $(q,q)$;
 
             \item infine, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, per ogni GNFA si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
         \end{itemize}
