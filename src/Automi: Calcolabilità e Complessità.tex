@@ -1058,7 +1058,7 @@
         Un linguaggio $A$ si definisce \tbf{non regolare} se non esiste un DFA in grado di riconoscerlo. In simboli $$A \notin \mathrm{REG}$$
     \end{frameddefn}
 
-    \begin{framedlem}[label={pumping}]{Pumping lemma (REG)}
+    \begin{framedlem}[label={pumping reg}]{Pumping lemma (REG)}
         Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \in A \mid s = xyz$, soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
@@ -1083,7 +1083,7 @@
     \end{proof}
 
     \begin{example}[Dimostrazione del pumping lemma]
-        La seguente rappresentazione raffigura un automa definito come segue: $$M = (\{q_1, \ldots, q_9, \ldots, q_{13}\}, \Sigma, \delta, q_1, \{q_{13}\})$$ dove $|Q| = 13$, e $r_j = r_l = q_9$ è lo stato che si ripete all'interno dei primi $p + 1$ stati della sequenza presa in esame nella dimostrazione del \cref{pumping}.
+        La seguente rappresentazione raffigura un automa definito come segue: $$M = (\{q_1, \ldots, q_9, \ldots, q_{13}\}, \Sigma, \delta, q_1, \{q_{13}\})$$ dove $|Q| = 13$, e $r_j = r_l = q_9$ è lo stato che si ripete all'interno dei primi $p + 1$ stati della sequenza presa in esame nella dimostrazione del \cref{pumping reg}.
 
         \begin{figure}[H]
             \centering
@@ -1093,7 +1093,15 @@
     \end{example}
 
     \begin{example}[Pumping lemma]
-        Sia $B = \{\ttt 0 ^n \ttt 1 ^n \mid n \ge 0\}$ un linguaggio. TODO NON HO CAPITO
+        Sia $L = \{\ttt 0 ^n \ttt 1 ^n \mid n \ge 0\}$ un linguaggio; per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Dunque, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z \in L$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
+
+        \begin{itemize}
+            \item $k := |x| \implies x = \ttt 0^k$, poiché $x$ è composta solo da $\ttt 0$
+            \item $m := |y| > 0 \implies y = \ttt 0^m$, poiché $y$ è composta solo da $\ttt 0$ (ed almeno uno)
+            \item $|xy| \le p \implies k + m \le p \implies z = \ttt 0^{p-m-k} \ttt 1^p$ per gli $\ttt 0$ restanti
+        \end{itemize}
+
+        e, ponendo ad esempio $i = 2$, si ottiene che $$xy^2z = \ttt 0^k \ttt 0^{2m} \ttt 0^{p-m-k} \ttt 1^p$$ ma il numero di $\ttt 1$ di questa stringa è pari a $p$, mentre il numero di $\ttt 0$ è pari a $$k + 2m + (p - m - k) = m + p$$ e poiché $m > 0$, si ha che $m + p > p$. Dunque $xy^2z \notin L$ poiché non è una stringa della forma $\ttt 0 ^n \ttt 1^n \ \lightning$.
     \end{example}
 
     \chapter{Linguaggi e grammatiche context-free}
