@@ -1135,7 +1135,7 @@
         \label{cfg ex}
         Un esempio di CFG è il seguente: $$\left . \begin{array}{c} A \to \ttt 0 A \ttt 1 \\ A \to B \\ B \to \ttt \# \end{array} \right .$$ In essa, si hanno: $$\left . \begin{array}{c} V := \{A, B\} \\ \Sigma := \{\ttt 0, \ttt 1, \ttt \# \} \\ S := A \in V \end{array} \right. $$
 
-        Da essa, è possibile ottenere la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $$A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$$
+        Da essa, è possibile ottenere ad esempio la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $$A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$$
     \end{example}
 
     \begin{frameddefn}{Linguaggio di una grammatica}
@@ -1146,6 +1146,16 @@
 
     \begin{example}[CFL]
         Si prenda in esame la CFG dell'\cref{cfg ex}, e sia essa $G$. Allora, in tale grammatica il linguaggio risulta essere $$L(G) = \{\ttt 0 ^n \ttt \# \ttt 1 ^n \mid n \ge 0\}$$
+    \end{example}
+
+    \begin{example}[Grammatiche e linguaggi]
+        I seguenti sono esempi di linguaggi, e corrispondenti grammatiche che li descrivono:
+
+        \begin{itemize}
+            \item il linguaggio $L_1 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w \ \mathrm{contiene \ almeno \ tre \ \ttt 1}\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S_1 \to X \ttt 1 X \ttt 1 X \\ X \to \varepsilon \ | \ \ttt 0 X \ | \ \ttt 1 X}$$
+            \item il linguaggio $L_2 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w = w ^\mathcal{R} \land |w| \equiv 0 \ (\bmod \ 2)\}$ è descritto dalla seguente grammatica: $$S \to \ttt 0 S \ttt 0 \ | \ \ttt 1 S \ttt 1 \ | \ \varepsilon$$
+            \item il linguaggio $L_3 := \{\ttt a^i \ttt b^j \ttt c^{i + j} \mid i, j \ge 0\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S \to \ttt a S \ttt c \ | \ X \\ X \to \ttt b S \ttt c \ | \ \varepsilon}$$
+        \end{itemize}
     \end{example}
 
     \begin{frameddefn}{Unione di grammatiche}
@@ -1164,16 +1174,31 @@
         Siano $G_1$ e $G_2$ le seguenti grammatiche $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la grammatica $G$, unione di $G_1$ e $G_2$, è la grammatica seguente: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$
     \end{example}
 
+    \begin{framedmeth}{CFG di DFA}
+        Dato un DFA $D = (Q, \Sigma, \delta, q_0, F)$, per ottenere una grammatica $G = (V, \Sigma, R, S)$ tale che $L(D) = L(G)$, è necessario:
+
+        \begin{itemize}
+            \item associare una variabile $V_i$, per ogni stato $q_i \in Q$, con $i \in [1, n]$ (assumendo $|Q| = n$);
+            \item porre $S = V_0$;
+            \item introdurre una regola $V_i \to \ttt a V_j$ se vale $\delta(q_i, \ttt a) = q_j$ per qualche coppia di stati $q_i, q_j \in Q$;
+            \item aggiungere la regola $V_i \to \varepsilon$ se $q_i \in F$.
+        \end{itemize}
+    \end{framedmeth}
+
+    \subsection{Ambiguità}
+
     \begin{frameddefn}{Derivazione a sinistra}
         Sia $G$ una grammatica; una stringa si dice essere \tbf{derivata a sinistra} se è stata ottenuta applicando regole di $G$ sulle variabili più a sinistra disponibili.
     \end{frameddefn}
 
     \begin{example}[Derivazione a sinistra]
-        TODO
+        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \\ E \to E \ttt * E \\ E \to \ttt ( E \ttt ) \ | \ \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * \ttt a$$
     \end{example}
 
     \begin{frameddefn}{Ambiguità}
-        Sia $G$ una grammatica; se esistono due stringhe $u, v$ con $u \neq v$, tali che esiste una terza stringa $z$ derivata a sinistra sia da $u$ che da $v$, si dice che $G$ genera $z$ \tbf{ambiguamente}; inoltre, $G$ si dice essere \tbf{ambigua} se genera stringhe ambiguamente.
+        Sia $G$ una grammatica; se esistono due stringhe $u, v$ con $u \neq v$, tali che esiste una terza stringa $z$ \tit{derivata a sinistra} sia da $u$ che da $v$ attraverso le regole di $G$, si dice che $G$ genera $z$ \tbf{ambiguamente}.
+
+        Simmetricamente, $G$ si dice essere \tbf{ambigua} se genera stringhe ambiguamente.
     \end{frameddefn}
 
     \begin{frameddefn}{Linguaggi inerentemente ambigui}
@@ -1183,6 +1208,8 @@
     \begin{example}[Linguaggi inerentemente ambigui]
         TODO $\{\ttt a ^i \ttt b^j \ttt c^k \mid i = j \lor j = k\}$
     \end{example}
+
+    \subsection{Forma normale di Chomsky}
 
     \begin{frameddefn}{Forma normale di Chomsky}
         Una CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $$\left . \begin{array}{c} V := \{ A, B, C \} \\ \Sigma := \{ a\} \\ S := A \end{array} \right .$$ e la regola $S \to \varepsilon \in R$ è sempre permessa, chiamata \tbf{$\varepsilon$-regola}.
