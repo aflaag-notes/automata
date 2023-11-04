@@ -1110,7 +1110,15 @@
 
     \subsection{Definizioni}
 
-    \begin{frameddefn}[breakable]{Grammatica context-free}
+    \begin{frameddefn}{Grammatica}
+        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre quest'ultime a partire da una variabile iniziale, mediante una sequenza di scambi.
+
+        Una regola è scritta con il simbolismo $$A \rightarrow B$$ la quale indica che la variabile $A$ può essere sostituita con $B$. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con $X \to Y \ | \ Z$.
+
+        Siano $u, v, w$ stringhe di variabili in $V$, e $A \to w \in R$; si dice che $uAv$ \tbf{produce} $uwv$, denotato con $uAv \implies uwv$. Se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che $u$ \tbf{deriva} $v$, denotato con $u \derives v$.
+    \end{frameddefn}
+
+    \begin{frameddefn}{CFG}
         Una \tbf{grammatica context-free}, o CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
 
         \begin{itemize}
@@ -1120,11 +1128,7 @@
             \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il primo simbolo della prima regola della grammatica
         \end{itemize}
 
-        Le CFG sono della forma $$\left . \begin{array}{c} X \to Y \\ \vdots \end{array} \right .$$ dove $X, Y \in V$, e $X \to Y \in R$ è una regola della CFG.
-
-        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre quest'ultime a partire da una variabile iniziale, mediante una sequenza di scambi. In particolare, partendo dalla variabile iniziale, vengono sostituiti gli elementi alla sinistra del simbolo $\to$ di una certa regola in $R$, con quelli alla sua destra.
-
-        Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con $X \to Y | Z$. Siano $u, v, w$ stringhe di variabili in $V$, e $A \to w \in R$; si dice che $uAv$ \tbf{produce} $uwv$, denotato con $uAv \implies uwv$. Se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \implies u_1 \implies \ldots \implies u_k \implies v$$ si dice che $u$ \tbf{deriva} $v$, denotato con $u \ximplies{*} v$.
+        Le CFG si scrivono nella forma $$\left . \begin{array}{c} X \to Y \\ \vdots \end{array} \right .$$ dove $X, Y \in V$, e $X \to Y \in R$ è una regola della CFG.
     \end{frameddefn}
 
     \begin{example}[CFG]
@@ -1135,13 +1139,29 @@
     \end{example}
 
     \begin{frameddefn}{Linguaggio di una grammatica}
-        Data una grammatica $G$, il suo \tbf{linguaggio} è l'insieme delle stringhe che la grammatica $G$ è in grado di generare, ed è denotato con $L(G)$. In simboli, data una grammatica $G$, si ha che $$L(G) = \{w \in \Sigma ^* \mid S \ximplies{*} w\}$$
+        Data una grammatica $G$, il suo \tbf{linguaggio} è l'insieme delle stringhe che la grammatica $G$ è in grado di generare, ed è denotato con $L(G)$. In simboli, data una grammatica $G$, si ha che $$L(G) = \{w \in \Sigma ^* \mid S \derives w\}$$
 
         Se $G$ è una CFG, allora $L(G)$ è detto \tbf{linguaggio context-free}, o CFL (\tit{Context-Free Language}).
     \end{frameddefn}
 
     \begin{example}[CFL]
         Si prenda in esame la CFG dell'\cref{cfg ex}, e sia essa $G$. Allora, in tale grammatica il linguaggio risulta essere $$L(G) = \{\ttt 0 ^n \ttt \# \ttt 1 ^n \mid n \ge 0\}$$
+    \end{example}
+
+    \begin{frameddefn}{Unione di grammatiche}
+        Siano $G_1, \ldots, G_n$ delle grammatiche; allora, l'\tbf{unione delle grammatiche} è una grammatica $G$ tale che $$L(G)= \displaystyle \bigcup_{i = 1}^n{L(G_i)}$$
+    \end{frameddefn}
+
+    \begin{framedprop}{Unione di grammatiche}
+        Siano $G_1, \ldots, G_n$ delle grammatiche, tali che $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Allora, la loro unione è la grammatica $G = (V, \Sigma, R, S)$ seguente: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ dove $S$ è una nuova variabile iniziale.
+    \end{framedprop}
+
+    \begin{proof}
+        Per dimostrare la tesi, è sufficiente dimostrare che $\displaystyle L(G) = \bigcup_{i = 1}^n{L(G_i)}$ per doppia implicazione, e dunque \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$}
+    \end{proof}
+
+    \begin{example}[Unione di grammatiche]
+        Siano $G_1$ e $G_2$ le seguenti grammatiche $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la grammatica $G$, unione di $G_1$ e $G_2$, è la grammatica seguente: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$
     \end{example}
 
     \begin{frameddefn}{Derivazione a sinistra}
