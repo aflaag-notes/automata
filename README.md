@@ -12,6 +12,8 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 - appunti 27/10
     - controlla gli appunti di simone
         - aggiungi albero di derivazione
+- appunti 08/11
+    - finire
 - esempio secondo verso teorema 1.7.1.1
 - rileggere
     - 2.1 fino a 2.1.2.2

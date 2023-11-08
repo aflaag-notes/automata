@@ -1093,7 +1093,8 @@
     \end{example}
 
     \begin{example}[Pumping lemma]
-        Sia $L = \{\ttt 0 ^n \ttt 1 ^n \mid n \ge 0\}$ un linguaggio; per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Dunque, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z \in L$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
+        \label{non reg ex}
+        Sia $L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$ un linguaggio; per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Dunque, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z \in L$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
 
         \begin{itemize}
             \item $k := |x| \implies x = \ttt 0^k$, poiché $x$ è composta solo da $\ttt 0$
@@ -1212,7 +1213,7 @@
     \subsection{Forma normale di Chomsky}
 
     \begin{frameddefn}{Forma normale di Chomsky}
-        Una CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $$\left . \begin{array}{c} V := \{ A, B, C \} \\ \Sigma := \{ a\} \\ S := A \end{array} \right .$$ e la regola $S \to \varepsilon \in R$ è sempre permessa, chiamata \tbf{$\varepsilon$-regola}.
+        Una CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $$\left . \begin{array}{c} V := \{ A, B, C \} \\ \Sigma := \{ a\} \\ S := A \end{array} \right .$$ e la regola $S \to \varepsilon \in R$ è sempre ammessa, chiamata \tbf{$\varepsilon$-regola}.
 
         Dunque, la CNF non permette di
 
@@ -1258,12 +1259,12 @@
 
         Un PDA è un NFA dotato di uno \tbf{stack} illimitato, che gli consente di riconoscere alcuni linguaggi non regolari, poiché in esso è in grado di porre i simboli che legge dalla stringa di input, di fatto implementando un sistema di \tit{memoria}.
         
-        Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un PDA è non deterministico) del codominio di $\delta$, al fine di poter decidere se si vuole salvare il simbolo letto all'interno dello stack o meno (tramite $\varepsilon \in \Gamma$).
+        Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un PDA è non deterministico) del codominio di $\delta$, al fine di decidere se salvare il simbolo letto all'interno dello stack  (tramite $\varepsilon \in \Gamma$ stesso). Dunque, un'operazione di un PDA sul suo stack può essere un \tit{push}, un \tit{pop}, o entrambe --- ottenendo l'effetto di rimpiazzare l'elemento in cima allo stack.
     \end{frameddefn}
 
     \begin{example}[PDA]
         \label{pda ex}
-        Un esempio di PDA $(Q, \Sigma, \Gamma, \delta, q_1, F)$ è il seguente:
+        Un esempio di PDA $M = (Q, \Sigma, \Gamma, \delta, q_1, F)$ è il seguente:
 
         \begin{itemize}
             \item $Q = \{q_1, q_2, q_3, q_4\}$
@@ -1275,6 +1276,35 @@
         e $\delta$ è data dalla seguente tabella di transizione:
 
         \centeredimage{0.3}{../assets/delta-pda-neg.png}{L'immagine rappresenta $\delta$ in forma tabellare.}
+
+        Dunque, il suo diagramma di stato è il seguente:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state,accepting] (1) {$q_1$};
+                \node[state] (2) [right of=1] {$q_2$};
+                \node[state] (3) [below of=2] {$q_3$};
+                \node[state,accepting] (4) [below of=1] {$q_4$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$\varepsilon; \varepsilon \to \ttt \$$} (2)
+                    (2) edge [loop above] node {$\ttt 0; \varepsilon \to \ttt 0$} (2)
+                    (2) edge node {$\ttt 1; \ttt 0 \to \varepsilon$} (3)
+                    (3) edge [loop below] node {$\ttt 1; \ttt 0 \to \varepsilon$} (3)
+                    (3) edge node {$\varepsilon; \ttt \$ \to \varepsilon$} (4)
+                 ;
+             \end{tikzpicture}
+             \caption{Il PDA $M$.}
+        \end{figure}
+
+        La notazione $a; b \to c$ presente sugli archi di questo diagramma sta ad indicare che se viene letto il simbolo $a$ dall'input, $M$ può sostituire $b$, se in cima al suo stack (attraverso un'operazione di \tit{pop}) con $c$ (mediante un'operazione di \tit{push}). Si noti inoltre che ognuno dei simboli può essere $\varepsilon$, e dunque
+
+        \begin{itemize}
+            \item $\varepsilon; b \to c$ indica che il ramo viene eseguito senza attendere alcun simbolo di input (si noti l'\cref{nfa exec} per il non determinismo)
+            \item $a; \varepsilon \to c$ indica che, alla lettura di $a$, viene effettuato solamente il \tit{push} di $c$ nello stack
+            \item $a; b \to \varepsilon$ indica che, alla lettura di $a$, viene effettuato solamente il \tit{pop} di $b$ dallo stack
+        \end{itemize}
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (PDA)}
@@ -1288,9 +1318,29 @@
         \end{itemize}
     \end{frameddefn}
 
-    \begin{example}[Linguaggi riconosciuti da un PDA]
-        \label{pda ex 2}
-        Si prenda in considerazione il PDA descritto nell'\cref{pda ex}, e sia questo $M$. Il seguente è il suo diagramma di stato:
+    \begin{framedobs}[label={pda empty stack}]{Stack vuoto}
+        Un PDA non è in grado di controllare se il suo stack è vuoto, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex}; è importante notare che esso utilizza il simbolo $\ttt \$$ per capire se lo stack è vuoto o meno, poiché viene inserito sin dall'inizio (si osservi l'etichetta $\varepsilon; \varepsilon \to \ttt \$$ sull'arco $(q_1, q_2)$), e dunque se viene letto $\ttt \$$ in cima allo stack, $M$ sa che quello è l'unico elemento contenuto al suo interno, e lo stack è di fatto vuoto.
+    \end{framedobs}
+
+    \begin{framedobs}{Fine dell'input}
+        Un PDA non è in grado di controllare se è stata raggiunga la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}).
+    \end{framedobs}
+
+    \begin{framedobs}{Linguaggi non regolari e PDA}
+        Si consideri il PDA dell'\cref{pda ex}; esso opera come segue:
+
+        \begin{itemize}
+            \item viene posto $\ttt \$$ all'interno dello stack;
+            \item fintanto che viene letto \ttt 0, viene pushato \ttt 0 nello stack;
+            \item non appena viene letto \ttt 1, e fintanto che viene letto \ttt 1, viene rimosso \ttt 0 dallo stack;
+            \item se all'interno dello stack è presente $\ttt \$$, allora l'automa accetta.
+        \end{itemize}
+
+        Dunque, di fatto, il PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}.
+    \end{framedobs}
+
+    \begin{example}[PDA]
+        Si consideri il seguente PDA:
 
         \begin{figure}[H]
             \centering
@@ -1301,35 +1351,20 @@
                 \node[state,accepting] (4) [below of=1] {$q_4$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge node {$\varepsilon, \varepsilon \to \ttt \$$} (2)
-                    (2) edge [loop above] node {$\ttt 0, \varepsilon \to \ttt 0$} (2)
-                    (2) edge node {$\ttt 1, \ttt 0 \to \varepsilon$} (3)
-                    (3) edge [loop below] node {$\ttt 1, \ttt 0 \to \varepsilon$} (3)
-                    (3) edge node {$\varepsilon, \ttt \$ \to \varepsilon$} (4)
+                    (1) edge node {$\varepsilon; \varepsilon \to \ttt \$$} (2)
+                    (2) edge [loop above] node {$\centeredsoe{\ttt 0; \varepsilon \to \ttt 0 \\ 1; \varepsilon \to \ttt 1}$} (2)
+                    (2) edge node {$\ttt \&; \varepsilon \to \varepsilon$} (3)
+                    (3) edge [loop below] node {$\centeredsoe{\ttt 0; \ttt 0 \to \varepsilon \\ \ttt 1 ; \ttt 1 \to \varepsilon}$} (3)
+                    (3) edge node {$\varepsilon; \ttt \$ \to \varepsilon$} (4)
                  ;
              \end{tikzpicture}
-             \caption{Il PDA $M$.}
+             \caption{Un PDA.}
         \end{figure}
 
-        In questo diagramma, la notazione $\ttt a, \ttt b \to \ttt c$ presente sugli archi sta ad indicare che se viene letto il simbolo $\ttt a$ dall'input, $M$ può sostituire $\ttt b$, se in cima al suo stack (attraverso un'operazione di \tit{pop}) con $\ttt c$ (mediante un'operazione di \tit{push}). Si noti che ognuno dei simboli può essere $\varepsilon$, e dunque
-
-        \begin{itemize}
-            \item $\varepsilon, \ttt b \to \ttt c$ sta a significare che il ramo viene eseguito senza attendere alcun simbolo di input (si noti l'\cref{nfa exec} per il non determinismo)
-            \item $\ttt a, \varepsilon \to \ttt c$ sta a significare che viene eventualmente effettuato solamente il \tit{push} di $\ttt c$ nello stack
-            \item $\ttt a, \ttt b \to \varepsilon$ sta a significare che viene eventualmente effettuato solamente il \tit{pop} di $\ttt b$ dallo stack
-        \end{itemize}
-
+        Esso è in grado di riconoscere il linguaggio $$L=\{w \in \{\ttt 0, \ttt 1\}^* \mid w \ttt \& w ^\mathcal{R}\}$$ poiché TODO
     \end{example}
 
-    \begin{framedobs}[label={pda empty stack}]{Stack vuoto (PDA)}
-        Un PDA non è in grado di controllare se il suo stack è vuoto, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex 2}; è importante notare che esso utilizza il simbolo $\ttt \$$ per capire se lo stack è vuoto o meno, poiché viene inserito sin dall'inizio (si osservi l'etichetta $\varepsilon, \varepsilon \to \ttt \$$ sull'arco $(q_1, q_2)$), e dunque se viene letto $\ttt \$$ in cima allo stack, $M$ sa che quello è l'unico elemento contenuto al suo interno, e lo stack è di fatto vuoto.
-    \end{framedobs}
-
-    \begin{framedobs}{Fine dell'input (PDA)}
-        Un PDA non è in grado di controllare se è stata raggiunga la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex 2}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}).
-    \end{framedobs}
-
-    \begin{framedmeth}[breakable]{Trasformare CFG in DPA}
+    \begin{framedmeth}[breakable]{Trasformare CFG in PDA}
         \label{cfg into pda}
         TODO DA RILEGGERE E FINIRE
 
@@ -1406,6 +1441,8 @@
         TODO
     }
 
+    \subsection{Configurazioni di PDA}
+
     \section{Linguaggi non context-free}
 
     \subsection{Pumping lemma}
@@ -1424,45 +1461,45 @@
         Poiché $A$ è un CFG, allora per definizione esiste una CFG $G$ che lo genera. TODO
     \end{proof}
     
-    \section{Linguaggi context-free deterministici}
-
-    \subsection{Automi a pila deterministici}
-
-    \begin{frameddefn}{DPDA}
-        Un \tbf{DPDA} (\tit{Deterministic Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
-
-        \begin{itemize}
-            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
-            \item $\Sigma$ è l'\tbf{alfabeto} dell'automa, un insieme \tit{finito}
-            \item $\Sigma$ è l'\tbf{alfabeto dello stack}, un insieme \tit{finito}
-            \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{(Q \times \Gamma_\varepsilon) \cup \{\emptyset \}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
-            \item $q_0 \in Q$ è lo \tbf{stato iniziale}
-            \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
-        \end{itemize}
-
-        Si noti che, nonostante l'automa sia deterministico, un DPDA è in grado di lavorare con $\varepsilon$.
-
-        Poiché un DPDA è la controparte deterministica di un PDA, $\delta$ deve verificare la seguente condizione: per ogni $q \in Q, a \in \Sigma, x \in \Gamma$, solo uno tra $\delta(q, a, x)$, $\delta(q, a, \varepsilon)$, $\delta(q, \varepsilon, x)$ e $\delta(q, \varepsilon, \varepsilon)$ è diverso da $\emptyset$. In particolare, $\delta(q, \varepsilon, x)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-input}, mentre $\delta(q, a, \varepsilon)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-pila}.
-
-        Se la pila del DPDA è vuota, questo può fare mosse solo se $\delta$ specifica una mossa che elimina $\varepsilon$, altrimenti non sono previste mosse lecite ed il DPDA rifiuta l'input senza leggerne il resto; questa situazione viene detta \tit{hanging}. Inoltre, si verifica un rifiuto anche se il DPDA effettua una sequenza infinita di mosse $\varepsilon$-input, senza leggere l'input oltre un certo punto; questa situazione viene detta \tit{looping}.
-    \end{frameddefn}
-
-    \begin{framedlem}{DPDA equivalenti}
-        Ogni DPDA ha un DPDA equivalente che legge sempre l'intera stringa di input; dunque non si presenta mai né \tit{hanging} né \tit{looping}.
-    \end{framedlem}
-
-    \begin{proof}
-        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un DPDA; in primo luogo, $q_0$ viene rimpiazzato con un nuovo stato iniziale $q_{\mathrm{start}}$; successivamente, $q_{\mathrm{reject}}$ viene aggiunto ad $F$, ed inoltre, per ogni $r \in Q, a \in \Sigma_\varepsilon, x, y \in \Gamma_\varepsilon$ si effettuano le seguenti variazioni:
-
-        \begin{itemize}
-            \item per ogni $q \in Q$ si aggiunge uno stato $q_\mathrm{a}$, ed inoltre $$\forall q \in Q \quad \delta(q, \varepsilon, x) = (r, y) \implies \delta(q_\mathrm{a}, \varepsilon, x) := (r_\mathrm{a}, y)$$ inoltre $$q \in F \implies \delta(q, \varepsilon, x) := (r_\mathrm{a}, y)$$
-        \end{itemize}
-
-        TODO DA FINIRE NON HA NESSUN SENSO QUESTA DIMOSTRAZIONE
-    \end{proof}
-
-    \begin{frameddefn}{DCFL}
-        Sia $M$ un DPDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{DCFL} (\tit{Deterministic Context-Free Language}).
-    \end{frameddefn}
+    % \section{Linguaggi context-free deterministici}
+    %
+    % \subsection{Automi a pila deterministici}
+    %
+    % \begin{frameddefn}{DPDA}
+    %     Un \tbf{DPDA} (\tit{Deterministic Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
+    %
+    %     \begin{itemize}
+    %         \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
+    %         \item $\Sigma$ è l'\tbf{alfabeto} dell'automa, un insieme \tit{finito}
+    %         \item $\Sigma$ è l'\tbf{alfabeto dello stack}, un insieme \tit{finito}
+    %         \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{(Q \times \Gamma_\varepsilon) \cup \{\emptyset \}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
+    %         \item $q_0 \in Q$ è lo \tbf{stato iniziale}
+    %         \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
+    %     \end{itemize}
+    %
+    %     Si noti che, nonostante l'automa sia deterministico, un DPDA è in grado di lavorare con $\varepsilon$.
+    %
+    %     Poiché un DPDA è la controparte deterministica di un PDA, $\delta$ deve verificare la seguente condizione: per ogni $q \in Q, a \in \Sigma, x \in \Gamma$, solo uno tra $\delta(q, a, x)$, $\delta(q, a, \varepsilon)$, $\delta(q, \varepsilon, x)$ e $\delta(q, \varepsilon, \varepsilon)$ è diverso da $\emptyset$. In particolare, $\delta(q, \varepsilon, x)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-input}, mentre $\delta(q, a, \varepsilon)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-pila}.
+    %
+    %     Se la pila del DPDA è vuota, questo può fare mosse solo se $\delta$ specifica una mossa che elimina $\varepsilon$, altrimenti non sono previste mosse lecite ed il DPDA rifiuta l'input senza leggerne il resto; questa situazione viene detta \tit{hanging}. Inoltre, si verifica un rifiuto anche se il DPDA effettua una sequenza infinita di mosse $\varepsilon$-input, senza leggere l'input oltre un certo punto; questa situazione viene detta \tit{looping}.
+    % \end{frameddefn}
+    %
+    % \begin{framedlem}{DPDA equivalenti}
+    %     Ogni DPDA ha un DPDA equivalente che legge sempre l'intera stringa di input; dunque non si presenta mai né \tit{hanging} né \tit{looping}.
+    % \end{framedlem}
+    %
+    % \begin{proof}
+    %     Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un DPDA; in primo luogo, $q_0$ viene rimpiazzato con un nuovo stato iniziale $q_{\mathrm{start}}$; successivamente, $q_{\mathrm{reject}}$ viene aggiunto ad $F$, ed inoltre, per ogni $r \in Q, a \in \Sigma_\varepsilon, x, y \in \Gamma_\varepsilon$ si effettuano le seguenti variazioni:
+    %
+    %     \begin{itemize}
+    %         \item per ogni $q \in Q$ si aggiunge uno stato $q_\mathrm{a}$, ed inoltre $$\forall q \in Q \quad \delta(q, \varepsilon, x) = (r, y) \implies \delta(q_\mathrm{a}, \varepsilon, x) := (r_\mathrm{a}, y)$$ inoltre $$q \in F \implies \delta(q, \varepsilon, x) := (r_\mathrm{a}, y)$$
+    %     \end{itemize}
+    %
+    %     TODO DA FINIRE NON HA NESSUN SENSO QUESTA DIMOSTRAZIONE
+    % \end{proof}
+    %
+    % \begin{frameddefn}{DCFL}
+    %     Sia $M$ un DPDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{DCFL} (\tit{Deterministic Context-Free Language}).
+    % \end{frameddefn}
 
 \end{document}
