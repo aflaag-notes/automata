@@ -16,5 +16,5 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - finire
 - esempio secondo verso teorema 1.7.1.1
 - rileggere
-    - 2.1 fino a 2.1.2.2
+    - capitolo 2
 

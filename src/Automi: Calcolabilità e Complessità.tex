@@ -1094,7 +1094,7 @@
 
     \begin{example}[Pumping lemma]
         \label{non reg ex}
-        Sia $L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$ un linguaggio; per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Dunque, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z \in L$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
+        Si consideri il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z \in L$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
 
         \begin{itemize}
             \item $k := |x| \implies x = \ttt 0^k$, poiché $x$ è composta solo da $\ttt 0$
@@ -1336,7 +1336,7 @@
             \item se all'interno dello stack è presente $\ttt \$$, allora l'automa accetta.
         \end{itemize}
 
-        Dunque, di fatto, il PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}.
+        Dunque, di fatto, il PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Infine, lo stato $q_1$ è accettante per poter riconoscere la stringa $\varepsilon$. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}.
     \end{framedobs}
 
     \begin{example}[PDA]
@@ -1345,7 +1345,7 @@
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
-                \node[initial,state,accepting] (1) {$q_1$};
+                \node[initial,state] (1) {$q_1$};
                 \node[state] (2) [right of=1] {$q_2$};
                 \node[state] (3) [below of=2] {$q_3$};
                 \node[state,accepting] (4) [below of=1] {$q_4$};
@@ -1361,11 +1361,17 @@
              \caption{Un PDA.}
         \end{figure}
 
-        Esso è in grado di riconoscere il linguaggio $$L=\{w \in \{\ttt 0, \ttt 1\}^* \mid w \ttt \& w ^\mathcal{R}\}$$ poiché TODO
+        Esso è in grado di riconoscere il linguaggio $$L=\{w \in \{\ttt 0, \ttt 1\}^* \mid w \ttt \& w ^\mathcal{R}\}$$ poiché:
+
+        \begin{itemize}
+            \item pone $\ttt \$$ all'interno dello stack, per sapere quando quest'ultimo diventa vuoto;
+            \item pone all'interno dello stack qualsiasi simbolo diverso da $\ttt \&$;
+            \item una volta letto il simbolo $\ttt \&$, l'automa cambia stato lasciando lo stack intatto, ed inizia a rimuovere da questo ogni simbolo che viene letto, \tit{solo se coincide con il simbolo posto sulla sua cima}; di fatto, questa tecnica controlla che i simboli che vengono letti dopo $\ttt \&$ siano l'\tit{opposto} di come sono stati letti inizialmente;
+            \item se trova $\ttt \$$ nello stack --- e dunque quest'ultimo è vuoto --- accetta.
+        \end{itemize}
     \end{example}
 
-    \begin{framedmeth}[breakable]{Trasformare CFG in PDA}
-        \label{cfg into pda}
+    \begin{framedmeth}[label={cfg into pda},breakable]{Trasformare CFG in PDA}
         TODO DA RILEGGERE E FINIRE
 
         Si vuole introdurre una notazione per l'inserimento di un'intera stringa all'interno dello stack di $P$, accorpando tale operazione in un solo passo dell'automa. Infatti, con la notazione
