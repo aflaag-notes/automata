@@ -259,13 +259,16 @@
             \item $r_n \in F$
         \end{itemize}
 
-        Dato un linguaggio $A$, si ha che $M$ \tbf{riconosce} $A$ se e solo se $A = \{w \mid M \ \mathrm{accetta} \ w\}$.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Linguaggi riconosciuti da automi}
+        Dato un linguaggio $A$, ed un automa $M$, si dice che $M$ \tbf{riconosce} $A$ se e solo se $$A = \{w \mid M \ \mathrm{accetta} \ w\}$$
     \end{frameddefn}
 
     \subsection{Linguaggi regolari}
 
     \begin{frameddefn}[label={ling reg}]{Linguaggio regolare}
-        Un linguaggio è detto \tbf{regolare} se e solo se esiste un DFA che lo riconosce. La classe dei linguaggi regolari è denotata con $\mathrm{REG}$.
+        Un linguaggio è detto \tbf{regolare} se e solo se esiste un DFA che lo riconosce. La classe dei linguaggi regolari è denotata con $\mathrm{REG}$. Allora, in simboli, si ha che $$\mathrm{REG} := \mathcal{L}(\mathrm{DFA})$$
     \end{frameddefn}
 
     \begin{example}[Linguaggi regolari]
@@ -292,10 +295,6 @@
          \end{figure}
     \end{example}
 
-    \begin{framedobs}{Linguaggi regolari}
-        Si noti che, per la \cref{ling reg}, e per la \cref{ling automata}, si ha che $$\mathrm{REG} = \mathcal{L}(\mathrm{DFA})$$
-    \end{framedobs}
-
     \section{Non determinismo}
 
     \subsection{Definizioni}
@@ -317,7 +316,7 @@
 
         Se il simbolo di input successivo non compare su alcuno degli archi uscenti dallo stato occupato da una copia della macchina, quella copia cessa di proseguire; inoltre, se \tit{una qualunque copia} della macchina è in uno stato accettante, l'NFA accetta la stringa di input. Si noti che questa divisione è descritta dall'insieme potenza $\mathcal{P}(Q)$, poiché da ogni stato si può arrivare ad un \tit{insieme} di stati.
 
-        Si noti che il determinismo è un caso particolare di non determinismo, dunque un DFA è sempre anche un NFA.
+        Si noti che il determinismo è un caso particolare di non determinismo, dunque un DFA è sempre anche un NFA; in simboli $\mathrm{DFA} \subseteq \mathrm{NFA}$.
     \end{frameddefn}
 
     \begin{example}[NFA]
@@ -376,15 +375,15 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Equivalenza tra automi}
-        Due macchine si dicono \tbf{equivalenti} se e solo se riconoscono lo stesso linguaggio.
+        Due automi si dicono \tbf{equivalenti} se e solo se riconoscono lo stesso linguaggio.
     \end{frameddefn}
 
-    \begin{framedthm}[label={nfa equiv}]{DFA equivalente ad NFA}
-        Sia $N$ un NFA; allora, esiste un DFA ad esso equivalente. In simboli $$\mathcal{L}(\mathrm{NFA}) = \mathcal{L}(\mathrm{DFA})$$
+    \begin{framedthm}[label={nfa equiv}]{DFA ed NFA}
+        Le classi dei DFA e degli NFA sono equivalenti; in simboli $$\mathcal{L}(\mathrm{NFA}) = \mathcal{L}(\mathrm{DFA})$$
     \end{framedthm}
 
-    \begin{proof}
-        Sia $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ l'NFA in ipotesi, tale da riconoscere un linguaggio A. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
+    \proofiff{
+        Si noti che $$\mathcal{L}(\mathrm{NFA}) \subseteq \mathcal{L}(\mathrm{DFA}) \iff \forall A \in \mathcal{L}(\mathrm{NFA}) \quad \exists M \in \mathrm{DFA} \mid A = L(M)$$ Allora, sia $A \in \mathcal{L}(\mathrm{NFA})$, e dunque esiste un NFA $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ in grado di riconoscerlo. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
 
         Allora, sia $M = (Q', \Sigma, \delta', q_0', F)$ il DFA definito come segue:
 
@@ -396,17 +395,17 @@
         \end{itemize}
 
         Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il DFA costruito emula l'NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
-    \end{proof}
+    }{
+        Poiché il determinismo è un caso particolare del non determinismo, si ha che $$\mathrm{DFA} \subseteq \mathrm{NFA} \implies \mathcal{L}(\mathrm{DFA}) \subseteq \mathcal{L}(\mathrm{NFA})$$
+    }
     
-    \begin{framedcor}[label={nfa regolare}]{Linguaggi regolari con NFA}
-        Un linguaggio è regolare se e solo se esiste un NFA che lo riconosce.
+    \begin{framedcor}[label={nfa regolare}]{Linguaggi regolari ed NFA}
+        Un linguaggio è regolare se e solo se esiste un NFA che lo riconosce; in simboli $$\mathrm{REG} = \mathcal{L}(\mathrm{NFA})$$
     \end{framedcor}
 
-    \proofiff{
-        Sia $A$ un linguaggio regolare, e dunque per definizione esiste un DFA che lo riconosce. Allora, poiché un DFA è sempre anche NFA, segue la tesi.
-    }{
-        Sia $A$ un linguaggio tale da essere riconosciuto da un NFA; allora, per il \cref{nfa equiv}, esiste un DFA equivalente all'NFA che riconosce $A$, e dunque per definizione $A$ è regolare.
-    }
+    \begin{proof}
+        Per il \cref{nfa equiv}, si ha che $$\mathrm{REG} := \mathcal{L}(\mathrm{DFA}) = \mathcal{L}(\mathrm{NFA})$$ e dunque segue la tesi.
+    \end{proof}
 
     \section{Operazioni regolari}
 
@@ -981,7 +980,7 @@
         \end{itemize}
     \end{example}
 
-    \begin{framedthm}{Linguaggi ed espressioni regolari}
+    \begin{framedthm}[label={ling expr reg}]{Linguaggi ed espressioni regolari}
         Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli, per un certo alfabeto $\Sigma$ si ha che $$\mathrm{REG} = \mathcal{L}(\mathrm{re}(\Sigma))$$
     \end{framedthm}
 
@@ -1044,12 +1043,16 @@
         Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa regolare}, $A$ è regolare.
     }
 
+    \begin{framedobs}{Equivalenze tra classi di automi}
+        Si noti che, dal \cref{ling expr reg}, dall'\cref{gnfa into regex}, e dal \cref{dfa into gnfa}, si ha che $$\mathrm{REG} = \mathcal{L}(\mathrm{re}(\Sigma)) \supseteq \mathcal{L}(\mathrm{GNFA}) \supseteq \mathrm{REG}$$ dunque, segue l'importante risultato: $$\mathrm{REG} := \mathcal{L}(\mathrm{DFA}) = \mathcal{L}(\mathrm{NFA}) = \mathcal{L}(\mathrm{GNFA}) = \mathcal{L}(\mathrm{re}(\Sigma))$$
+    \end{framedobs}
+
     \section{Linguaggi non regolari}
 
     \subsection{Pumping lemma}
 
     \begin{framedprinc}[label={pigeonhole}]{Principio della piccionaia}
-        Siano $A$ e $B$ due insiemi finiti, tali che $|B| < |A|$. Allora, non esiste alcuna funzione iniettiva $\func{f}{A}{B}$.
+        Siano $A$ e $B$ due insiemi finiti, tali che $|B| < |A|$; allora, non esiste alcuna funzione iniettiva $\func{f}{A}{B}$.
 
         In altri termini, avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno: alcuni volatili dovranno necessariamente condividere la propria casella.
     \end{framedprinc}
@@ -1336,7 +1339,7 @@
             \item se all'interno dello stack è presente $\ttt \$$, allora l'automa accetta.
         \end{itemize}
 
-        Dunque, di fatto, il PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Infine, lo stato $q_1$ è accettante per poter riconoscere la stringa $\varepsilon$. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}.
+        Dunque, di fatto, il PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Infine, lo stato $q_1$ è accettante per poter riconoscere la stringa $\varepsilon$. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}. In simboli, si ha che $$\mathrm{REG} \subsetneq \mathcal{L}(\mathrm{PDA})$$
     \end{framedobs}
 
     \begin{example}[PDA]
@@ -1438,7 +1441,7 @@
     \end{framedmeth}
 
     \begin{framedthm}{CFL e PDA}
-        Un linguaggio è context-free se e solo se esiste un PDA che lo riconosce.
+        Un linguaggio è context-free se e solo se esiste un PDA che lo riconosce; in simboli $$\mathrm{CFL} = \mathcal{L}(\mathrm{PDA})$$
     \end{framedthm}
 
     \proofiff{
