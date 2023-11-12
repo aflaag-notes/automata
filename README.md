@@ -4,7 +4,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 
 ## TODO list
 
-- CONTROLLA ERRORE DEL PROF CHE AVEVAMO TROVATO CON SIMONE
+- finire i TODOs sparsi
 - fare le figure più bianche
 - appunti 4/10
     - dimostrazione chiusura star alternativa
@@ -15,8 +15,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 - appunti 08/11
     - finire
 - appunti 09/11
-    - tutto
-- esempio secondo verso teorema 1.7.1.1
+    - ci sono i TODO dove mancano le cose
 - rileggere
     - capitolo 2
 

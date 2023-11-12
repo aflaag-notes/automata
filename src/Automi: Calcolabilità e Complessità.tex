@@ -220,12 +220,19 @@
         \end{itemize}
     \end{example}
 
-    \begin{frameddefn}[label={def L(M)}]{Linguaggio di un automa}
-        Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
+    \begin{frameddefn}{Stringhe accettate (DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
+
+        \begin{itemize}
+            \item $r_0 = q_0$
+            \item $\forall i \in [0, n - 1] \quad \delta(r_i, w_{i + 1})=r_{i + 1}$
+            \item $r_n \in F$
+        \end{itemize}
+
     \end{frameddefn}
 
-    \begin{frameddefn}[label={ling automata}]{Linguaggi di una classe di automi}
-        Sia $\mathcal{C}$ una classe di automi; allora, l'\tbf{insieme dei linguaggi} riconisciuti dagli automi della classe $\mathcal{C}$ è denotato col seguente simbolismo: $$L(\mathcal{C}) := \{L \mid \exists M \in \mathcal{C} : L(M) = L\}$$ dove $L$ è un linguaggio, ed $M$ è un automa della classe $\mathcal{C}$.
+    \begin{frameddefn}[label={def L(M)}]{Linguaggio di un automa}
+        Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
     \end{frameddefn}
 
     \begin{example}[Linguaggio di un automa]
@@ -247,22 +254,15 @@
              \caption{Un automa $M_1$.}
         \end{figure}
 
-        sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, ci si convince facilmente che $$L(M_1) = \{w \mid w = w_1  \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
+        sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, è facilmente verificabile che $$L(M_1) = \{w \mid w = w_1  \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
     \end{example}
-
-    \begin{frameddefn}{Stringhe accettate (DFA)}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
-
-        \begin{itemize}
-            \item $r_0 = q_0$
-            \item $\forall i \in [0, n - 1] \quad \delta(r_i, w_{i + 1})=r_{i + 1}$
-            \item $r_n \in F$
-        \end{itemize}
-
-    \end{frameddefn}
 
     \begin{frameddefn}{Linguaggi riconosciuti da automi}
         Dato un linguaggio $A$, ed un automa $M$, si dice che $M$ \tbf{riconosce} $A$ se e solo se $$A = \{w \mid M \ \mathrm{accetta} \ w\}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}[label={ling automata}]{Linguaggi di una classe di automi}
+        Sia $\mathcal{C}$ una classe di automi; allora, l'\tbf{insieme dei linguaggi} riconisciuti dagli automi della classe $\mathcal{C}$ è denotato col seguente simbolismo: $$L(\mathcal{C}) := \{L \mid \exists M \in \mathcal{C} : L(M) = L\}$$ dove $L$ è un linguaggio, ed $M$ è un automa della classe $\mathcal{C}$.
     \end{frameddefn}
 
     \subsection{Linguaggi regolari}
@@ -374,6 +374,8 @@
         \end{itemize}
     \end{frameddefn}
 
+    \subsection{Equivalenze}
+
     \begin{frameddefn}{Equivalenza tra automi}
         Due automi si dicono \tbf{equivalenti} se e solo se riconoscono lo stesso linguaggio.
     \end{frameddefn}
@@ -396,7 +398,7 @@
 
         Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il DFA costruito emula l'NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
     }{
-        Poiché il determinismo è un caso particolare del non determinismo, si ha che $$\mathrm{DFA} \subseteq \mathrm{NFA} \implies \mathcal{L}(\mathrm{DFA}) \subseteq \mathcal{L}(\mathrm{NFA})$$
+        Poiché il determinismo è un caso particolare del non determinismo, si ha che $\mathrm{DFA} \subseteq \mathrm{NFA} \implies \mathcal{L}(\mathrm{DFA}) \subseteq \mathcal{L}(\mathrm{NFA})$.
     }
     
     \begin{framedcor}[label={nfa regolare}]{Linguaggi regolari ed NFA}
@@ -702,23 +704,15 @@
 
     \subsection{Configurazioni di DFA}
 
-    \begin{frameddefn}[label={extended trans}]{Estensione di $\delta$ dei DFA}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva:
-
-        \begin{equation*}
-            \resizebox{.98\hsize}{!}{
-                $\forall q \in Q, x \in \Sigma^* \quad \delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$
-            }
-        \end{equation*}
-        
-        Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
+    \begin{frameddefn}[label={extended trans}]{Estensione di $\delta$ (DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva: $$\delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$$ Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
     \end{frameddefn}
 
-    \begin{frameddefn}{Configurazione di un DFA}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di M se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
+    \begin{frameddefn}{Configurazione (DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di $M$ se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
     \end{frameddefn}
 
-    \begin{frameddefn}[label={rel config}]{Relazione tra configurazioni}
+    \begin{frameddefn}[label={rel config}]{Relazione tra configurazioni (DFA)}
         Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
     \end{frameddefn}
 
@@ -801,6 +795,8 @@
             \item $q_n = q_{\mathrm{accept}}$
         \end{itemize}
     \end{frameddefn}
+
+    \subsection{Equivalenze}
 
     \begin{framedmeth}[label={dfa into gnfa}]{GNFA di DFA}
         Sia $M$ un DFA; allora per costruire un GNFA ad esso equivalente, è sufficiente:
@@ -1225,13 +1221,17 @@
         \end{itemize}
     \end{framedmeth}
 
-    \begin{framedthm}{CFL generati da CFG in CNF}
+    \begin{framedlem}{CFL generati da CFG in CNF}
         Ogni CFL è generato da una CFG in forma normale di Chomsky.
-    \end{framedthm}
+    \end{framedlem}
 
     \begin{proof}
         Sia $L$ un CFL generato da una CFG $G$; allora, attraverso il \cref{cfg into cnf}, è possibile rendere $G$ in forma normale di Chomsky, e dunque segue la tesi.
     \end{proof}
+
+    \begin{example}[Convertire CFG in CNF]
+        TODO
+    \end{example}
 
     \section{Operazioni su grammatiche}
 
@@ -1396,53 +1396,59 @@
         \end{itemize}
     \end{example}
 
-    \begin{framedmeth}[label={cfg into pda},breakable]{PDA di una CFG}
-        TODO DA RILEGGERE E FINIRE
+    \subsection{Equivalenze}
 
-        Si vuole introdurre una notazione per l'inserimento di un'intera stringa all'interno dello stack di $P$, accorpando tale operazione in un solo passo dell'automa. Infatti, con la notazione
+    \begin{frameddefn}[label={insert stack}]{Inserimento di stringhe nello stack}
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \ldots u_k \in \Gamma_\varepsilon^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \ldots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma_\varepsilon, xyz \in \Gamma_\varepsilon^*$.
+    \end{frameddefn}
+
+    \begin{example}[Inserimenti di stringhe nello stack]
+        Si consideri il seguente PDA:
 
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
-                \node[state] (1) {$q$};
-                \node[state] (2) [right of=1] {$r$};
+                \node[state] (1) {$p$};
+                \node[state] (2) [right of=1] {$q$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge node {$a, s \to xyz$} (2)
+                    (1) edge node {$a; s \to xyz$} (2)
                  ;
              \end{tikzpicture}
              \caption{Un PDA che inserisce una stringa nello stack.}
         \end{figure}
 
-        presente sull'arco $(q, r)$, per qualche $a \in \Sigma_\varepsilon, s \in \Gamma_\varepsilon$, si sottointende l'inserimento di stati aggiuntivi in grado di realizzare l'operazione seguente:
+        per certi $a \in \Sigma_\varepsilon, s \in \Gamma_\varepsilon, xyz \in \Gamma_\varepsilon^*$; dunque, con la notazione presente sull'arco $(p, q)$ verrà sottointesa la seguente successione di stati --- per certi stati $r_1, r_2 \in Q$:
 
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
-                \node[state] (1) {$q$};
-                \node[state] (2) [right of=1] {$q_1$};
-                \node[state] (3) [right of=2] {$q_2$};
-                \node[state] (4) [right of=3] {$r$};
+                \node[state] (1) {$p$};
+                \node[state] (2) [right of=1] {$r_1$};
+                \node[state] (3) [right of=2] {$r_2$};
+                \node[state] (4) [right of=3] {$q$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge node {$a, s \to z$} (2)
-                    (2) edge node {$\varepsilon, \varepsilon \to y$} (3)
-                    (3) edge node {$\varepsilon, \varepsilon \to x$} (4)
+                    (1) edge node {$a; s \to z$} (2)
+                    (2) edge node {$\varepsilon; \varepsilon \to y$} (3)
+                    (3) edge node {$\varepsilon; \varepsilon \to x$} (4)
                  ;
              \end{tikzpicture}
              \caption{La formalizzazione del PDA precedente.}
         \end{figure}
+    \end{example}
 
-        In simboli, la notazione $(r, u) \in \delta(q, a, s)$, per qualche stringa $u := u_1, \ldots, u_n$ sottoindente la seguente: $$\begin{array}{c} (q_1, u_n) \in \delta(q, a, s) \\ \delta(q_1, \varepsilon, \varepsilon) := \{(q_2, u_{n - 1}) \}\\ \vdots \\ \delta(q_{n - 1}, \varepsilon, \varepsilon) := \{(r, u_1)\} \end{array}$$
-
-        Sia $G = (V, \Sigma, R, S)$ una CFG, e sia $E$ l'insieme di stati tali da realizzare l'accorpamento appena descritto, relativo alla grammatica $G$; si vuole dunque costruire un PDA $$P = (\{q_0, q', q\} \cup E, \Sigma, \Gamma, \delta, q_0, \{q\})$$ che sia equivalente a $G$, ed è possibile realizzarlo come segue:
+    \begin{framedmeth}[label={cfg into pda}]{PDA di CFG}
+        Sia $G = (V, \Sigma, R, S)$ una CFG, e sia $E$ l'insieme di stati tale da permettere di utilizzare la notazione descritta nella \cref{insert stack}; per costruire un PDA equivalente a $G$, che avrà la forma $$P = (\{q_0, q', q\} \cup E, \Sigma, V \cup \Sigma, \delta, q_0, \{q\})$$ si definiscono i seguenti:
 
         \begin{itemize}
             \item $\delta(q_0, \varepsilon, \varepsilon) := \{(q', S \ttt \$) \}$, ovvero, viene inserito $\ttt \$$ come marcatore nello stack di $P$ (si noti l'\cref{pda empty stack}), e successivamente la stringa iniziale $S$ di $G$;
-            \item $\forall A \in V \quad \delta(q', \varepsilon, A) := \{ (q', w) \mid A \to w \in R\}$ dove $w$ è una stringa di $G$; con questa operazione, se viene incontrata una variabile $A$ sulla cima dello stack di $P$, viene scelta una delle regole di $G$ in grado di sostituire $A$, non deterministicamente;
-            \item $\forall a \in \Gamma_\varepsilon \quad \delta(q', a, a) := \{ (q', \varepsilon) \}$ TODO NON HO CAPITO IL PERCHÉ
-            \item $\delta(q', \varepsilon, \ttt \$) := \{(q, \varepsilon) \}$, ovvero, se $\ttt \$$ è in cima allo stack, allora $P$ entra nello stato accettante, in modo tale da accettare l'input solo se quest'ultimo è stato completamente letto
+            \item $\forall A \in V \quad \delta(q', \varepsilon, A) := \{ (q', w) \mid A \to w \in R, w \in (V \cup \Sigma)^*\}$ poiché, se viene incontrata una variabile $A$ sulla cima dello stack di $P$, viene scelta una delle regole di $G$ in grado di sostituire $A$ (si noti che la sostituzione verrà effettuata non deterministicamente);
+            \item $\forall a \in \Sigma \quad \delta(q', a, a) := \{ (q', \varepsilon) \}$ per rimuovere i terminali dallo stack, evitando che possano essere ulteriormente rimpiazzati;
+            \item $\delta(q', \varepsilon, \ttt \$) := \{(q, \varepsilon) \}$ per sfruttare il marcatore \ttt \$.
         \end{itemize}
+
+        Il seguente è un diagramma che raffigura $P$ (a meno degli stati in $E$):
 
         \begin{figure}[H]
             \centering
@@ -1452,15 +1458,18 @@
                 \node[state,accepting] (3) [right of=2] {$q$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge node {$\varepsilon, \varepsilon \to S \ttt \$$} (2)
-                    (2) edge [loop above] node {$(\varepsilon, A \to \varepsilon), (a, a \to \varepsilon a)$} (2)
-                    (2) edge node {$\varepsilon, \ttt \$ \to \varepsilon$} (3)
+                    (1) edge node {$\varepsilon; \varepsilon \to S \ttt \$$} (2)
+                    (2) edge [loop above] node {$\centeredsoe{\forall A \to w \in R \quad \varepsilon; A \to w \\ \forall a \in \Sigma \quad a; a \to \varepsilon}$} (2)
+                    (2) edge node {$\varepsilon; \ttt \$ \to \varepsilon$} (3)
                  ;
              \end{tikzpicture}
              \caption{Il PDA $P$ appena costruito.}
         \end{figure}
-
     \end{framedmeth}
+
+    \begin{example}[PDA di CFG]
+        TODO
+    \end{example}
 
     \begin{framedthm}{CFL e PDA}
         Un linguaggio è context-free se e solo se esiste un PDA che lo riconosce; in simboli $$\mathrm{CFL} = \mathcal{L}(\mathrm{PDA})$$
@@ -1471,8 +1480,6 @@
     }{
         TODO
     }
-
-    \subsection{Configurazioni di PDA}
 
     \section{Linguaggi non context-free}
 

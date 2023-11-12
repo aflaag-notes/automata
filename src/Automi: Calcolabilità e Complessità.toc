@@ -15,6 +15,7 @@
 \contentsline {subsection}{\numberline {1.2.2}Linguaggi regolari}{6}{subsection.1.2.2}%
 \contentsline {section}{\numberline {1.3}Non determinismo}{7}{section.1.3}%
 \contentsline {subsection}{\numberline {1.3.1}Definizioni}{7}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Equivalenze}{9}{subsection.1.3.2}%
 \contentsline {section}{\numberline {1.4}Operazioni regolari}{10}{section.1.4}%
 \contentsline {subsection}{\numberline {1.4.1}Unione}{10}{subsection.1.4.1}%
 \contentsline {subsection}{\numberline {1.4.2}Intersezione}{12}{subsection.1.4.2}%
@@ -24,23 +25,24 @@
 \contentsline {subsection}{\numberline {1.4.6}Complemento}{17}{subsection.1.4.6}%
 \contentsline {section}{\numberline {1.5}Espressioni regolari}{18}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Definizioni}{18}{subsection.1.5.1}%
-\contentsline {section}{\numberline {1.6}Configurazioni}{21}{section.1.6}%
-\contentsline {subsection}{\numberline {1.6.1}Configurazioni di DFA}{21}{subsection.1.6.1}%
-\contentsline {subsection}{\numberline {1.6.2}Configurazioni di NFA}{22}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.6}Configurazioni}{20}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Configurazioni di DFA}{20}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Configurazioni di NFA}{21}{subsection.1.6.2}%
 \contentsline {section}{\numberline {1.7}Non determinismo generalizzato}{23}{section.1.7}%
 \contentsline {subsection}{\numberline {1.7.1}Definizioni}{23}{subsection.1.7.1}%
-\contentsline {section}{\numberline {1.8}Linguaggi non regolari}{29}{section.1.8}%
-\contentsline {subsection}{\numberline {1.8.1}Pumping lemma}{29}{subsection.1.8.1}%
-\contentsline {chapter}{\numberline {2}Linguaggi e grammatiche context-free}{32}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Grammatiche context-free}{32}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Definizioni}{32}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Ambiguità}{34}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Forma normale di Chomsky}{35}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Operazioni su grammatiche}{37}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Unione}{37}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Concatenazione}{38}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Automi a pila}{38}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Definizioni}{38}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Configurazioni di PDA}{44}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Linguaggi non context-free}{44}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Pumping lemma}{44}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {1.7.2}Equivalenze}{24}{subsection.1.7.2}%
+\contentsline {section}{\numberline {1.8}Linguaggi non regolari}{30}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}Pumping lemma}{30}{subsection.1.8.1}%
+\contentsline {chapter}{\numberline {2}Linguaggi e grammatiche context-free}{33}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Grammatiche context-free}{33}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Definizioni}{33}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Ambiguità}{35}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Forma normale di Chomsky}{36}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Operazioni su grammatiche}{38}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Unione}{38}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Concatenazione}{39}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Automi a pila}{39}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Definizioni}{39}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Equivalenze}{43}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Linguaggi non context-free}{45}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Pumping lemma}{45}{subsection.2.4.1}%
