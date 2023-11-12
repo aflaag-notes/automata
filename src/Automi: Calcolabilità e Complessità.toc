@@ -34,10 +34,13 @@
 \contentsline {chapter}{\numberline {2}Linguaggi e grammatiche context-free}{32}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Grammatiche context-free}{32}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Definizioni}{32}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Ambiguità}{35}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Forma normale di Chomsky}{36}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Automi a pila}{38}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Definizioni}{38}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Configurazioni di PDA}{44}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Linguaggi non context-free}{44}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Pumping lemma}{44}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.1.2}Ambiguità}{34}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Forma normale di Chomsky}{35}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Operazioni su grammatiche}{37}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Unione}{37}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Concatenazione}{38}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Automi a pila}{38}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Definizioni}{38}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Configurazioni di PDA}{44}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Linguaggi non context-free}{44}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Pumping lemma}{44}{subsection.2.4.1}%

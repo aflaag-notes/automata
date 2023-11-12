@@ -419,7 +419,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$$
     \end{example}
 
-    \begin{framedprop}[label={closure unione}]{Chiusura dell'unione}
+    \begin{framedprop}[label={closure unione}]{Chiusura sull'unione}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
     \end{framedprop}
 
@@ -466,7 +466,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{uno}, \ttt{tre}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cap B = \{\ttt{uno}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura dell'intersezione}
+    \begin{framedprop}{Chiusura sull'intersezione}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cap B$ è regolare.
     \end{framedprop}
 
@@ -500,7 +500,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B := \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
     \end{example}
 
-    \begin{framedprop}[label={closure concat}]{Chiusura della concatenazione}
+    \begin{framedprop}[label={closure concat}]{Chiusura sulla concatenazione}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare.
     \end{framedprop}
 
@@ -533,7 +533,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e sia $A = \{\ttt{uno}, \ttt{due}\}$ un linguaggio su $\Sigma$. Allora, si ha che $$A^2 = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura dell'elevamento a potenza}
+    \begin{framedprop}{Chiusura sull'elevamento a potenza}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$, ed $n \in \N$; allora $A^n$ è regolare.
     \end{framedprop}
 
@@ -563,7 +563,7 @@
         Si noti che nel caso di $\Sigma = \{ \ttt 0, \ttt 1 \}$, si ha che $\Sigma^*$ è l'insieme di ogni stringa binaria, di arbitraria lunghezza.
     \end{example}
 
-    \begin{framedprop}[label={closure star}]{Chiusura dell'operazione star}
+    \begin{framedprop}[label={closure star}]{Chiusura sull'operazione star}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare.
     \end{framedprop}
 
@@ -596,7 +596,7 @@
         Sia $\Sigma = \{\ttt 0, \ttt 1\}$ l'alfabeto binario, e sia $A = \{ \ttt{00}, \ttt{1}\}$ un linguaggio definito su di esso. Allora il suo complemento è il seguente: $$\lnot A = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}, \ttt{10}, \ttt{000}, \ldots\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura del complemento}
+    \begin{framedprop}{Chiusura sul complemento}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\lnot A$ è regolare.
     \end{framedprop}
 
@@ -802,7 +802,7 @@
         \end{itemize}
     \end{frameddefn}
 
-    \begin{framedmeth}[label={dfa into gnfa}]{GNFA di un DFA}
+    \begin{framedmeth}[label={dfa into gnfa}]{GNFA di DFA}
         Sia $M$ un DFA; allora per costruire un GNFA ad esso equivalente, è sufficiente:
 
         \begin{itemize}
@@ -1162,22 +1162,6 @@
         \end{itemize}
     \end{example}
 
-    \begin{frameddefn}{Unione di grammatiche}
-        Siano $G_1, \ldots, G_n$ delle grammatiche; allora, l'\tbf{unione delle grammatiche} è una grammatica $G$ tale che $$L(G)= \displaystyle \bigcup_{i = 1}^n{L(G_i)}$$
-    \end{frameddefn}
-
-    \begin{framedprop}{Unione di grammatiche}
-        Siano $G_1, \ldots, G_n$ delle grammatiche, tali che $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Allora, la loro unione è la grammatica $G = (V, \Sigma, R, S)$ seguente: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ dove $S$ è una nuova variabile iniziale.
-    \end{framedprop}
-
-    \begin{proof}
-        Per dimostrare la tesi, è sufficiente dimostrare che $\displaystyle L(G) = \bigcup_{i = 1}^n{L(G_i)}$ per doppia implicazione, e dunque \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$}
-    \end{proof}
-
-    \begin{example}[Unione di grammatiche]
-        Siano $G_1$ e $G_2$ le seguenti grammatiche $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la grammatica $G$, unione di $G_1$ e $G_2$, è la grammatica seguente: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$
-    \end{example}
-
     \begin{framedmeth}{CFG di DFA}
         Dato un DFA $D = (Q, \Sigma, \delta, q_0, F)$, per ottenere una grammatica $G = (V, \Sigma, R, S)$ tale che $L(D) = L(G)$, è necessario:
 
@@ -1188,7 +1172,7 @@
             \item aggiungere la regola $V_i \to \varepsilon$ se $q_i \in F$.
         \end{itemize}
     \end{framedmeth}
-
+   
     \subsection{Ambiguità}
 
     \begin{frameddefn}{Derivazione a sinistra}
@@ -1196,7 +1180,7 @@
     \end{frameddefn}
 
     \begin{example}[Derivazione a sinistra]
-        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \\ E \to E \ttt * E \\ E \to \ttt ( E \ttt ) \ | \ \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * \ttt a$$
+        TODO
     \end{example}
 
     \begin{frameddefn}{Ambiguità}
@@ -1204,6 +1188,10 @@
 
         Simmetricamente, $G$ si dice essere \tbf{ambigua} se genera stringhe ambiguamente.
     \end{frameddefn}
+
+    \begin{example}[Stringhe generate ambiguamente]
+        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \\ E \to E \ttt * E \\ E \to \ttt ( E \ttt ) \ | \ \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * \ttt a$$ Si noti però che è possibile ottenere questa stringa applicando anche la seguente derivazione a destra: $$TODO$$
+    \end{example}
 
     \begin{frameddefn}{Linguaggi inerentemente ambigui}
         Un linguaggio si dice essere \tbf{inerentemente ambiguo} se non esistono grammatiche non ambigue che lo possano generare.
@@ -1226,12 +1214,8 @@
         \end{enumerate}
     \end{frameddefn}
 
-    \begin{framedthm}{CFL generati da CFG in CNF}
-        Ogni CFL è generato da una CFG in forma normale di Chomsky.
-    \end{framedthm}
-
-    \begin{proof}
-        Sia un CFL generato da una CFG $G = (V, \Sigma, R, S)$. Allora, è possibile rendere $G$ in CNF attraverso i seguenti passaggi:
+    \begin{framedmeth}[label={cfg into cnf}]{CNF di CFG}
+        Sia $G = (V, \Sigma, R, S)$ una CFG; allora, è possibile rendere $G$ in CNF attraverso i seguenti passaggi:
 
         \begin{itemize}
             \item vengono aggiunte la variabile $S_0 \in V$, e la regola $S_0 \to S \in R$, in modo da non avere $S$ alla destra di nessuna regola in $R$;
@@ -1239,8 +1223,46 @@
             \item ogni regola unitaria $A \to B \in R$ viene rimossa, ed ogni regola $B \to u \in R$ per qualche stringa $u$ di variabili o terminali, viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
             \item infine, ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ e $u_1, \ldots, u_k$ stringhe di variabili o terminali viene rimpiazzata con le regole $$\left . \begin{array}{c} A \to u_1 A_1  \\ A_1 \to u_2 A_2 \\ A_2 \to u_3 A_3 \\ \vdots \\ A_{k - 2} \to u_{k - 1}u_k \end{array} \right .$$ e $A_1, \ldots, A_{k - 2} \in V$; inoltre, ogni terminale $u_i$ per ogni $i \in [1, k]$ viene rimpiazzato con la nuova varibile $U_i$, e viene aggiunta la regola TODO DA FINIRE
         \end{itemize}
+    \end{framedmeth}
 
+    \begin{framedthm}{CFL generati da CFG in CNF}
+        Ogni CFL è generato da una CFG in forma normale di Chomsky.
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $L$ un CFL generato da una CFG $G$; allora, attraverso il \cref{cfg into cnf}, è possibile rendere $G$ in forma normale di Chomsky, e dunque segue la tesi.
     \end{proof}
+
+    \section{Operazioni su grammatiche}
+
+    \subsection{Unione}
+
+    \begin{frameddefn}{Unione di grammatiche}
+        Siano $G_1, \ldots, G_n$ delle grammatiche; allora, l'\tbf{unione delle grammatiche} è una grammatica $G$ tale che $$L(G)= \displaystyle \bigcup_{i = 1}^n{L(G_i)}$$
+    \end{frameddefn}
+
+    \begin{framedprop}{Chiusura sull'unione}
+        Siano $G_1, \ldots, G_n$ delle grammatiche, tali che $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Allora, la loro unione è la grammatica $G = (V, \Sigma, R, S)$ seguente: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ dove $S$ è una nuova variabile iniziale.
+    \end{framedprop}
+
+    \begin{proof}
+        Per dimostrare la tesi, è sufficiente dimostrare che $\displaystyle L(G) = \bigcup_{i = 1}^n{L(G_i)}$ per doppia implicazione, e dunque \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$}
+    \end{proof}
+
+    \begin{example}[Unione di grammatiche]
+        Siano $G_1$ e $G_2$ le seguenti grammatiche $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la grammatica $G$, unione di $G_1$ e $G_2$, è la grammatica seguente: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$
+    \end{example}
+
+    \subsection{Concatenazione}
+
+    \begin{frameddefn}{Concatenazione di grammatiche}
+        TODO
+    \end{frameddefn}
+
+    \begin{framedprop}{Chiusura sulla concatenazione}
+        TODO
+    \end{framedprop}
+
 
     \section{Automi a pila}
 
@@ -1374,7 +1396,7 @@
         \end{itemize}
     \end{example}
 
-    \begin{framedmeth}[label={cfg into pda},breakable]{Trasformare CFG in PDA}
+    \begin{framedmeth}[label={cfg into pda},breakable]{PDA di una CFG}
         TODO DA RILEGGERE E FINIRE
 
         Si vuole introdurre una notazione per l'inserimento di un'intera stringa all'interno dello stack di $P$, accorpando tale operazione in un solo passo dell'automa. Infatti, con la notazione
