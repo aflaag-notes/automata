@@ -1439,7 +1439,7 @@
     \end{example}
 
     \begin{framedmeth}[label={cfg into pda}]{PDA di CFG}
-        Sia $G = (V, \Sigma, R, S)$ una CFG, e sia $E$ l'insieme di stati tale da permettere di utilizzare la notazione descritta nella \cref{insert stack}; per costruire un PDA equivalente a $G$, che avrà la forma $$P = (\{q_0, q', q\} \cup E, \Sigma, V \cup \Sigma, \delta, q_0, \{q\})$$ si definiscono i seguenti:
+        Sia $G = (V, \Sigma, R, S)$ una CFG, e sia $E$ l'insieme di stati tale da permettere di utilizzare la notazione descritta nella \cref{insert stack}; per costruire un PDA in grado di riconoscere $L(G)$, che avrà la forma $$P = (\{q_0, q', q\} \cup E, \Sigma, V \cup \Sigma, \delta, q_0, \{q\})$$ si definiscono i seguenti:
 
         \begin{itemize}
             \item $\delta(q_0, \varepsilon, \varepsilon) := \{(q', S \ttt \$) \}$, ovvero, viene inserito $\ttt \$$ come marcatore nello stack di $P$ (si noti l'\cref{pda empty stack}), e successivamente la stringa iniziale $S$ di $G$;
@@ -1468,7 +1468,35 @@
     \end{framedmeth}
 
     \begin{example}[PDA di CFG]
-        TODO
+        Si consideri la seguente CFG: $$G: \centeredsoe{S \to \ttt a T \ttt b \smid \ttt b \\ T \to T \ttt a \smid \varepsilon}$$
+
+        Attraverso il \cref{cfg into pda}, si ottiene il seguente PDA, in grado di riconoscere $L(G)$:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state] (1) {$q_0$};
+                \node[state] (2) [right of=1] {$r_1$};
+                \node[state] (3) [right of=2] {$q'$};
+                \node[state] (5) [below of=1] {$r_2$};
+                \node[state] (6) [below right of=5] {$r_3$};
+                \node[state] (7) [right of=3] {$r_4$};
+                \node[state,accepting] (4) [below of=7] {$q$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$\varepsilon; \varepsilon \to \ttt \$$} (2)
+                    (2) edge node {$\varepsilon; \varepsilon \to S$} (3)
+                    (3) edge [loop above] node {$\centeredsoe{\varepsilon; S \to \ttt b \\ \varepsilon; T \to \varepsilon \\ \ttt a ; \ttt a \to \varepsilon \\ \ttt b ; \ttt b \to \varepsilon}$} (3)
+                    (3) edge [bend right] node {$\varepsilon; \ttt \$ \to \varepsilon$} (4)
+                    (3) edge node {$\varepsilon; S \to \ttt b$} (5)
+                    (3) edge [bend right, below] node {$\varepsilon; T \to \ttt a$} (7)
+                    (5) edge node {$\varepsilon; \varepsilon \to T$} (6)
+                    (6) edge [bend right] node {$\varepsilon; \varepsilon \to \ttt a$} (3)
+                    (7) edge [bend right, above] node {$\varepsilon; \varepsilon \to T$} (3)
+                 ;
+             \end{tikzpicture}
+             \caption{Un PDA in grado di riconoscere $L(G)$.}
+        \end{figure}
     \end{example}
 
     \begin{framedthm}{CFL e PDA}
