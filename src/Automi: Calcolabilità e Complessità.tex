@@ -1119,7 +1119,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}{CFG}
-        Una \tbf{grammatica context-free}, o CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
+        Una \tbf{grammatica context-free} --- detta anche \tbf{acontestuale} ---, o CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
 
         \begin{itemize}
             \item $V$ è l'insieme delle \tbf{variabili}, un insieme \tit{finito}
@@ -1186,27 +1186,24 @@
     \end{frameddefn}
 
     \begin{example}[Stringhe generate ambiguamente]
-        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \\ E \to E \ttt * E \\ E \to \ttt ( E \ttt ) \ | \ \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * \ttt a$$ Si noti però che è possibile ottenere questa stringa applicando anche la seguente derivazione a destra: $$TODO$$
+        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \smid E \ttt * E \smid \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Si noti però che è possibile ottenere questa stringa applicando anche la seguente derivazione a destra: $$E \yields E \ttt + E \yields \ttt a \ttt + E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Dunque, la grammatica descritta risulta essere ambigua, poiché esistono due derivazioni a sinistra per la stringa $\ttt{a+a*a}$.
     \end{example}
 
     \begin{frameddefn}{Linguaggi inerentemente ambigui}
         Un linguaggio si dice essere \tbf{inerentemente ambiguo} se non esistono grammatiche non ambigue che lo possano generare.
     \end{frameddefn}
 
-    \begin{example}[Linguaggi inerentemente ambigui]
-        TODO $\{\ttt a ^i \ttt b^j \ttt c^k \mid i = j \lor j = k\}$
-    \end{example}
-
     \subsection{Forma normale di Chomsky}
 
     \begin{frameddefn}{Forma normale di Chomsky}
-        Una CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $$\left . \begin{array}{c} V := \{ A, B, C \} \\ \Sigma := \{ a\} \\ S := A \end{array} \right .$$ e la regola $S \to \varepsilon \in R$ è sempre ammessa, chiamata \tbf{$\varepsilon$-regola}.
+        Una CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $A, B, C \in V$, $a \in \Sigma$, $S := A$, e la regola $S \to \varepsilon \in R$ è sempre ammessa, la quale prende il nome di \tbf{$\varepsilon$-regola}.
 
         Dunque, la CNF non permette di
 
         \begin{enumerate}[label=\roman*), font=\itshape]
-            \item avere \tbf{regole unitarie}, ovvero regole della forma $A \to B$;
-            \item avere regole della forma $X \to S \in R$ per qualche $X \in V$, ovvero avere $S$ alla destra del simbolo $\to$ di una regola.
+            \item avere \tbf{regole unitarie}, ovvero regole della forma $X \to B \in R$, con $X,B \in V$;
+            \item avere regole della forma $X \to u \in R$, con $u \in (V \cup \Sigma)^* - \Sigma$;
+            \item avere regole della forma $X \to S \in R$, con $X \in V$.
         \end{enumerate}
     \end{frameddefn}
 
@@ -1215,9 +1212,10 @@
 
         \begin{itemize}
             \item vengono aggiunte la variabile $S_0 \in V$, e la regola $S_0 \to S \in R$, in modo da non avere $S$ alla destra di nessuna regola in $R$;
-            \item ogni regola $A \to \varepsilon \in R$ per qualche $A \in V - \{S\}$ viene rimossa da $R$, e successivamente per ogni regola della forma $X \to uAv \in R$ per qualche $X \in V$ e $u, v$ stringhe di variabili e terminali, viene aggiunta $X \to uv \in R$; inoltre, se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa;
-            \item ogni regola unitaria $A \to B \in R$ viene rimossa, ed ogni regola $B \to u \in R$ per qualche stringa $u$ di variabili o terminali, viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
-            \item infine, ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ e $u_1, \ldots, u_k$ stringhe di variabili o terminali viene rimpiazzata con le regole $$\left . \begin{array}{c} A \to u_1 A_1  \\ A_1 \to u_2 A_2 \\ A_2 \to u_3 A_3 \\ \vdots \\ A_{k - 2} \to u_{k - 1}u_k \end{array} \right .$$ e $A_1, \ldots, A_{k - 2} \in V$; inoltre, ogni terminale $u_i$ per ogni $i \in [1, k]$ viene rimpiazzato con la nuova varibile $U_i$, e viene aggiunta la regola TODO DA FINIRE
+            \item ogni regola $A \to \varepsilon \in R$ --- con $A \in V - \{S\}$ --- viene rimossa da $R$, e successivamente per ogni regola della forma $X \to uAv \in R$ --- per qualche $X \in V$ e $u, v \in (V \cup \Sigma)^*$ --- viene aggiunta $X \to uv \in R$; inoltre, se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa;
+            \item ogni regola unitaria $A \to B \in R$ viene rimossa, e per ogni regola $B \to u \in R$ --- con $u \in (V \cup \Sigma)^*$ --- viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
+            \item ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ --- dove $u_1, \ldots, u_k \in (V \cup \Sigma)^*$ --- viene rimpiazzata con le regole $$\left . \begin{array}{c} A \to u_1 A_1  \\ A_1 \to u_2 A_2 \\ A_2 \to u_3 A_3 \\ \vdots \\ A_{k - 2} \to u_{k - 1}u_k \end{array} \right .$$ dove $A_1, \ldots, A_{k - 2} \in V$, creando dunque una \tit{catena di sostituzioni}, al fine di avere al più 2 variabili o terminali alla destra delle regole;
+            \item infine, ogni $u_i \in \Sigma$ (dunque terminale) --- per ogni $i \in [1, k]$ --- viene rimpiazzato con una nuova varibile $U_i \in V$, e viene aggiunta la regola $U_i \to u_i \in R$.
         \end{itemize}
     \end{framedmeth}
 
@@ -1263,6 +1261,9 @@
         TODO
     \end{framedprop}
 
+    \begin{proof}
+        Omessa.
+    \end{proof}
 
     \section{Automi a pila}
 
@@ -1399,7 +1400,7 @@
     \subsection{Equivalenze}
 
     \begin{frameddefn}[label={insert stack}]{Inserimento di stringhe nello stack}
-        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \ldots u_k \in \Gamma_\varepsilon^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \ldots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma_\varepsilon, xyz \in \Gamma_\varepsilon^*$.
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \ldots u_k \in \Gamma^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \ldots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$.
     \end{frameddefn}
 
     \begin{example}[Inserimenti di stringhe nello stack]
@@ -1418,7 +1419,7 @@
              \caption{Un PDA che inserisce una stringa nello stack.}
         \end{figure}
 
-        per certi $a \in \Sigma_\varepsilon, s \in \Gamma_\varepsilon, xyz \in \Gamma_\varepsilon^*$; dunque, con la notazione presente sull'arco $(p, q)$ verrà sottointesa la seguente successione di stati --- per certi stati $r_1, r_2 \in Q$:
+        per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$; dunque, con la notazione presente sull'arco $(p, q)$ verrà sottointesa la seguente successione di stati --- per certi stati $r_1, r_2 \in Q$:
 
         \begin{figure}[H]
             \centering
@@ -1552,9 +1553,12 @@
         \begin{itemize}
             \item porre $V := \{A_{p,q} \mid p, q \in Q'\}$
             \item porre $S := A_{q_0, q_\mathrm{accept}}$
-            \item definire $R$ come segue:
+            \item definire $R$ come segue: \centeredeq{0.9}{$\centeredsoe{R := \{A_{p,p} \to \varepsilon \mid p \in Q'\} \ \cup \\ \cup \ \{A_{p,q} \to a A_{r,s}b \mid p, q, r, s \in Q', a, b \in \Sigma_\varepsilon, u \in \Gamma, (r, u) \in \delta'(p, a, \varepsilon), (q, \varepsilon) \in \delta(s, b, u)\} \ \cup \\ \cup \ \{A_{p,q} \to A_{p,r}A_{r,q} \in R \mid p, q, r \in Q'\}}$}
+
+                poiché:
+
                 \begin{itemize}
-                    \item TODO
+                    \item il primo insieme genera una regola TODO DA FINIRE 
                 \end{itemize}
         \end{itemize}
 
