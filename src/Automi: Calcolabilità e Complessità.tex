@@ -355,11 +355,7 @@
 
         Ad esempio, se $N$ legge l'input $\ttt{010110}$, la sua computazione è la seguente:
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.35]{../assets/nfa-neg.png}
-            \caption{L'immagine rappresenta la computazione di $\ttt{010110}$ da parte di $N$.}
-        \end{figure}
+        \centeredimage{0.3}{../assets/nfa.png}
 
         \imp{Nota} nel momento in cui vengono incontrati $\varepsilon$-archi, si giunge allo stato successivo della computazione nello stesso step dell'input appena elaborato, senza produrre un passo ulteriore, producendo inoltre un nuovo ramo di computazione.
     \end{example}
@@ -448,14 +444,9 @@
             \item $F := F_1 \cup F_2$, scelto tale da costruire $N$ in modo che accetti una stringa se e solo se la accetterebbero $N_1$ o $N_2$.
         \end{itemize}
 
+        \centeredimage[Rappresentazione dell'NFA $N$ descritto.]{0.25}{../assets/union.png}
+
         Allora, l'NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per definizione.
-
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.35]{../assets/union-neg.png}
-            \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
-        \end{figure}
-
     \end{proof}
 
     \subsection{Intersezione}
@@ -516,13 +507,9 @@
             \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_2\} & q \in F_1 \land a = \varepsilon \\ \delta_2(q, a) & q \in Q_2 \end{array} \right.$, scelta tale da anteporre l'esecuzione di $N_1$ a quella di $N_2$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q \in F_1$ ma $a \neq \varepsilon$, l'esecuzione di $N_1$ non viene alterata; diversamente, se invece $q \in F_1$ e $a = \varepsilon$, all'insieme di stati $\delta_1(q, \varepsilon)$ viene aggiunto $q_2$, ovvero lo stato iniziale di $N_2$, in modo da effettuare la concatenazione tra i due NFA non deterministicamente.
         \end{itemize}
 
-        Allora, l'NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per definizione.
+        \centeredimage[Rappresentazione dell'NFA $N$ descritto.]{0.25}{../assets/concat.png}
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.35]{../assets/concat-neg.png}
-            \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
-        \end{figure}
+        Allora, l'NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per definizione.
     \end{proof}
 
     \subsection{Elevamento a potenza}
@@ -579,13 +566,9 @@
             \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_1\} & q \in F_1 \land a = \varepsilon \\ \{q_1\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = q_0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da ricominciare l'esecuzione dell'automa ogni volta che viene raggiunto uno stato accettante in $N_1$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q$ è accettante e $a \neq \varepsilon$, l'esecuzione procede normalmente con $\delta_1(q, a)$; differentemente, se $q \in F_1$ ma $a = \varepsilon$, allora l'esecuzione deve ricominciare da capo per poter effettuare la concatenazione multipla delle stringhe in $A$ che caratterizzano l'operazione star, e dunque a $\delta_1(q, a)$ viene aggiunto $q_1$ (lo stato inziale di $N_1$); infine, ponendo $\delta(q_0, \varepsilon) := \{q_1\}$ si realizza l'$\varepsilon$-arco iniziale che collega $q_0$ (il nuovo stato) a $q_1$, al fine di rendere $N$ in grado di accettare $\varepsilon$.
         \end{itemize}
 
+        \centeredimage[Rappresentazione dell'NFA $N$ descritto.]{0.25}{../assets/star.png}
+        
         Allora, poichè l'NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per definizione.
-
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.35]{../assets/star-neg.png}
-            \caption{L'immagine raffigura la dimostrazione costruttiva descritta.}
-        \end{figure}
     \end{proof}
 
     \subsection{Complemento}
@@ -779,11 +762,7 @@
     \begin{example}[GNFA]
         Il seguente è il digramma di un GNFA sull'alfabeto $\Sigma = \{ \ttt a, \ttt b \}.$
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.3]{../assets/gnfa-neg.png}
-            \caption{Un GNFA.}
-        \end{figure}
+        \centeredimage[Un GNFA.]{0.25}{../assets/gnfa.png}
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (GNFA)}
@@ -1058,7 +1037,7 @@
     \end{frameddefn}
 
     \begin{framedlem}[label={pumping reg}]{Pumping lemma (REG)}
-        Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \in A \mid s = xyz$, soddisfacenti le seguenti condizioni:
+        Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \mid s = xyz$, soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
             \item $\forall i \ge 0 \quad xy^iz \in A$
@@ -1084,16 +1063,12 @@
     \begin{example}[Dimostrazione del pumping lemma]
         La seguente rappresentazione raffigura un automa definito come segue: $$M = (\{q_1, \ldots, q_9, \ldots, q_{13}\}, \Sigma, \delta, q_1, \{q_{13}\})$$ dove $|Q| = 13$, e $r_j = r_l = q_9$ è lo stato che si ripete all'interno dei primi $p + 1$ stati della sequenza presa in esame nella dimostrazione del \cref{pumping reg}.
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.35]{../assets/pump-neg.png}
-            \caption{L'automa $M$ descritto.}
-        \end{figure}
+        \centeredimage[L'automa $M$ descritto]{0.25}{../assets/pump_reg.png}
     \end{example}
 
-    \begin{example}[Pumping lemma]
+    \begin{example}[Pumping lemma in REG]
         \label{non reg ex}
-        Si consideri il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z \in L$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
+        Si consideri il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
 
         \begin{itemize}
             \item $k := |x| \implies x = \ttt 0^k$, poiché $x$ è composta solo da $\ttt 0$
@@ -1104,6 +1079,17 @@
         e, ponendo ad esempio $i = 2$, si ottiene che $$xy^2z = \ttt 0^k \ttt 0^{2m} \ttt 0^{p-m-k} \ttt 1^p$$ ma il numero di $\ttt 1$ di questa stringa è pari a $p$, mentre il numero di $\ttt 0$ è pari a $$k + 2m + (p - m - k) = m + p$$ e poiché $m > 0$, si ha che $m + p > p$. Dunque $xy^2z \notin L$ poiché non è una stringa della forma $\ttt 0 ^n \ttt 1^n \ \lightning$.
     \end{example}
 
+    \begin{framedobs}{Condizioni del pumping lemma (REG)}
+        Si noti che la seconda condizione del \cref{pumping reg} stabilisce che $y \neq \varepsilon$, poiché altrimenti il teorema sarebbe trivialmente verificato; infatti, ammettendo $y = \varepsilon$, dato un linguaggio $A \in \mathrm{REG}$, e presa una sua stringa $s \in A$, ponendo $p := |x|$ esistono sicuramente stringhe $x, z \mid s = xz$ tali da verificare le restanti condizioni del lemma, infatti:
+
+        \begin{itemize}
+            \item $\forall i \ge 0 \quad xy^iz = x \varepsilon^iz  = xz =: s \in A$
+            \item $|xy| = |x \varepsilon| = |x| \le p := |x|$
+        \end{itemize}
+
+        e non sarebbe necessaria l'ipotesi per cui $A$ debba essere regolare; dunque, non sarebbe possibile utilizzare tale lemma per determinare la classe di un dato linguaggio.
+    \end{framedobs}
+
     \chapter{Linguaggi e grammatiche context-free}
 
     \section{Grammatiche context-free}
@@ -1111,11 +1097,11 @@
     \subsection{Definizioni}
 
     \begin{frameddefn}{Grammatica}
-        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre quest'ultime a partire da una variabile iniziale, mediante una sequenza di scambi.
+        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre quest'ultime a partire da una variabile iniziale, mediante una sequenza di scambi. Le regole sono scritte nella forma $$\alpha A \beta \to \alpha \gamma \beta$$
+    \end{frameddefn}
 
-        Una regola è scritta con il simbolismo $$A \rightarrow B$$ la quale indica che la variabile $A$ può essere sostituita con $B$. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con $X \to Y \ | \ Z$.
-
-        Siano $u, v, w$ stringhe di variabili in $V$, e $A \to w \in R$; si dice che $uAv$ \tbf{produce} $uwv$, denotato con $uAv \implies uwv$. Se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che $u$ \tbf{deriva} $v$, denotato con $u \derives v$.
+    \begin{frameddefn}{Acontestualità}
+        Si definisce \tbf{acontestualità} la condizione per cui il lato sinistro delle regole di una grammatica è composto sempre da un solo simbolo.
     \end{frameddefn}
 
     \begin{frameddefn}{CFG}
@@ -1125,10 +1111,12 @@
             \item $V$ è l'insieme delle \tbf{variabili}, un insieme \tit{finito}
             \item $\Sigma$ è l'insieme dei \tbf{terminali}, un insieme \tit{finito}, dove $\Sigma \cap V = \varnothing$
             \item $R$ è l'insieme delle \tbf{regole} o \tbf{produzioni}, un insieme \tit{finito}
-            \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il primo simbolo della prima regola della grammatica
+            \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il simbolo alla sinistra della prima regola della grammatica
         \end{itemize}
 
-        Le CFG si scrivono nella forma $$\left . \begin{array}{c} X \to Y \\ \vdots \end{array} \right .$$ dove $X, Y \in V$, e $X \to Y \in R$ è una regola della CFG.
+        Le CFG si scrivono nella forma $$X \to Y$$ dove $X \in V$ e $X \to Y \in R$ è una regola della CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \ | \ Z$.
+
+        Siano $u, v, w$ stringhe, e $A \to w \in R$; allora si dice che $uAv$ \tbf{produce} $uwv$, denotato con $$uAv \yields uwv$$ Date due stringhe $u, v$, se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che $u$ \tbf{deriva} $v$, ed è denotato con $u \derives v$.
     \end{frameddefn}
 
     \begin{example}[CFG]
@@ -1140,7 +1128,9 @@
 
     \begin{frameddefn}{Linguaggio di una grammatica}
         Data una grammatica $G$, il suo \tbf{linguaggio} è l'insieme delle stringhe che la grammatica $G$ è in grado di generare, ed è denotato con $L(G)$. In simboli, data una grammatica $G$, si ha che $$L(G) = \{w \in \Sigma ^* \mid S \derives w\}$$
+    \end{frameddefn}
 
+    \begin{frameddefn}{CFL}
         Se $G$ è una CFG, allora $L(G)$ è detto \tbf{linguaggio context-free}, o CFL (\tit{Context-Free Language}).
     \end{frameddefn}
 
@@ -1186,7 +1176,7 @@
     \end{frameddefn}
 
     \begin{example}[Stringhe generate ambiguamente]
-        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \smid E \ttt * E \smid \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Si noti però che è possibile ottenere questa stringa applicando anche la seguente derivazione a destra: $$E \yields E \ttt + E \yields \ttt a \ttt + E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Dunque, la grammatica descritta risulta essere ambigua, poiché esistono due derivazioni a sinistra per la stringa $\ttt{a+a*a}$.
+        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \smid E \ttt * E \smid \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Si noti però che è possibile ottenere questa stringa applicando anche la seguente derivazione a sinistra: $$E \yields E \ttt + E \yields \ttt a \ttt + E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Dunque, la grammatica descritta risulta essere ambigua, poiché esistono due derivazioni a sinistra per la stringa $\ttt{a+a*a}$.
     \end{example}
 
     \begin{frameddefn}{Linguaggi inerentemente ambigui}
@@ -1231,31 +1221,23 @@
         TODO
     \end{example}
 
-    \section{Operazioni su grammatiche}
+    \section{Operazioni context-free}
 
     \subsection{Unione}
 
-    \begin{frameddefn}{Unione di grammatiche}
-        Siano $G_1, \ldots, G_n$ delle grammatiche; allora, l'\tbf{unione delle grammatiche} è una grammatica $G$ tale che $$L(G)= \displaystyle \bigcup_{i = 1}^n{L(G_i)}$$
-    \end{frameddefn}
-
     \begin{framedprop}{Chiusura sull'unione}
-        Siano $G_1, \ldots, G_n$ delle grammatiche, tali che $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Allora, la loro unione è la grammatica $G = (V, \Sigma, R, S)$ seguente: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ dove $S$ è una nuova variabile iniziale.
+        Siano $L_1, \ldots, L_n$ dei CFL; allora $\displaystyle \bigcup_{i =1}^n{L_i}$ è un CFL.
     \end{framedprop}
 
     \begin{proof}
-        Per dimostrare la tesi, è sufficiente dimostrare che $\displaystyle L(G) = \bigcup_{i = 1}^n{L(G_i)}$ per doppia implicazione, e dunque \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$}
+        Poiché $L_1, \ldots, L_n$ sono CFL, allora esistono delle CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{CFL}$ per definizione; allora, si consideri la seguente CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
     \end{proof}
 
-    \begin{example}[Unione di grammatiche]
-        Siano $G_1$ e $G_2$ le seguenti grammatiche $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la grammatica $G$, unione di $G_1$ e $G_2$, è la grammatica seguente: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$
+    \begin{example}[Unione di CFL]
+        Siano $L_1$ ed $L_2$ due CFL generati rispettivamente dalle seguenti CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la seguente CFG $G$: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
     \end{example}
 
     \subsection{Concatenazione}
-
-    \begin{frameddefn}{Concatenazione di grammatiche}
-        TODO
-    \end{frameddefn}
 
     \begin{framedprop}{Chiusura sulla concatenazione}
         TODO
@@ -1301,7 +1283,7 @@
 
         e $\delta$ è data dalla seguente tabella di transizione:
 
-        \centeredimage{0.3}{../assets/delta-pda-neg.png}{L'immagine rappresenta $\delta$ in forma tabellare.}
+        \centeredimage{0.3}{../assets/delta_pda.png}
 
         Dunque, il suo diagramma di stato è il seguente:
 
@@ -1570,7 +1552,7 @@
     \subsection{Pumping lemma}
 
     \begin{framedlem}{Pumping lemma (CFL)}
-        Sia $A$ un CFL; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 5 stringhe $u, v, x, y, z \in A \mid s = uvxyz$ soddisfacenti le seguenti condizioni:
+        Sia $A$ un CFL; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 5 stringhe $u, v, x, y, z \mid s = uvxyz$ soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
             \item $\forall i \ge 0 \quad uv^ixy^iz \in A$
@@ -1580,9 +1562,65 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un CFG, allora per definizione esiste una CFG $G$ che lo genera. TODO
+        Poiché $A$ è un CFL, per definizione esiste una CFG $G= (V, \Sigma, R, S)$ che lo genera; sia $b$ il massimo numero di simboli nel lato destro di una regola in $R$, e dunque all'interno di ogni albero sintattico che è possibile costruire attraverso $G$ non sarà possibile avere un nodo con più di $b$ figli. Dunque, partendo da $S$, per la prima sostituzione effettuata, si avranno al più $b$ foglie all'interno dell'albero; per la seconda, se ne avranno al più $b^2$, ed in generale, un albero di altezza al più $h$ avrà al più $b^h$ foglie, dunque la stringa generata avrà lunghezza al più $b^h$. Di conseguenza, una stringa di lunghezza pari almeno a $b^h + 1$ deve essere stata generata da un albero avente altezza pari almeno ad $h + 1$.
+
+        Sia $p := b^{|V| + 1}$, e sia $s \in A$ tale che $|s| \ge p$; si noti che $b^{|V| + 1} \ge b^{|V|} + 1$, e poiché $s$ ha lunghezza pari almeno a $p$, allora --- per quanto detto precedentemente --- $s$ deve essere stata generata attraverso un albero sintattico avente altezza pari almeno a $|V| + 1$. Sia allora $\tau$ l'albero sintattico con minor numero di nodi tale da generare $s$; poiché $h_\tau \ge |V| + 1$, il cammino $\mathscr{C}$ più lungo dalla radice ad una foglia in $\tau$ ha lunghezza almeno $|V| + 1$, avente dunque almeno $|V| + 2$ nodi, dove il primo è la radice --- ovvero $S$, una variabile --- l'ultimo è la foglia --- necessariamente un terminale --- e tutti gli altri nodi nel mezzo sono variabili; dunque il cammino è composto da almeno $|V| + 1$ variabili. Si noti che $G = (V, \Sigma, R, S)$, dunque il numero di variabili di $G$ è $|V|$; allora, per il \cref{pigeonhole}, all'interno del cammino preso in considerazione, deve esistere TODO ALMENO? una variabile ripetuta più di 1 volta, e sia questa $\rho$. Si asssuma che $\rho \neq S$. TODO SE $\rho = S$???
+
+        Siano $u, v, x, y, z$ scelte come segue:
+
+        \centeredimage{0.15}{../assets/pump_cfl1.png}
+
+        Poiché $\rho$ è ripetuta, è possibile sostituire il suo sottoalbero nei punti in cui essa si ripete, ottenendo ad esempio i due seguenti alberi sintattici ancora validi:
+        
+        \centeredimage{0.3}{../assets/pump_cfl2.png}
+
+        Si noti che: 
+
+        \begin{itemize}
+            \item sostituzione di sinistra genera la stringa $uxz$, che dunque è in $A$, mentre la sostituzione di sinistra genera la stringa $uv^2xy^2z$, che dunque è in $A$ anch'essa, e si noti che sarebbe possibile continuare a sostituire il sottoalbero di $\rho$ ripetutamente nella rappresentazione di destra; dunque, questo dimostra la prima condizione del lemma, ovvero $\forall i \ge 0 \quad uv^ixy^iz \in A$;
+            \item se $v = y = \varepsilon$, allora TODO NON HO CAPITO
+            \item l'occorrenza più in alto di $\rho$ genera la stringa $vxy$, e $\rho$ è stata scelta diversa da $S$, dunque $\rho$ deve necessariamente trovarsi tra le $|V| + 1$ variabili più in basso di $\mathscr{C}$, il quale era stato scelto tale che fosse il più lungo cammino dalla radice ad una foglia; allora, il sottoalbero di $\rho$ è alto al più $|V| + 1$ TODO PERCHÉ NON $|V|$??, dunque per quanto detto precedentemente, tale albero può generare una stringa di lunghezza al più $b^{|V|} + 1 =: p$, e dunque $|vxy| \le p$.
+        \end{itemize}
+
+        Allora, sono soddisfatte tutte le condizioni della tesi.
     \end{proof}
-    
+
+    \begin{example}[Pumping lemma in CFL]
+        TODO
+    \end{example}
+
+    \begin{framedobs}{Condizioni del pumping lemma (CFL)}
+        TODO
+    \end{framedobs}
+
+    %    \begin{figure}[H]
+    %        \centering
+    %        \begin{tikzpicture}[-,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw=none,font=\sffamily\normalsize}]
+    %            \node[main node] (1) {$q_1$};
+    %            \node[main node] (3) [below left of=1] {$s_2$};
+    %            \node[main node] (2) [left of=3] {$s_1$};
+    %            \node[main node] (4) [right of=3] {$\ldots$};
+    %            \node[main node] (5) [right of=4] {$s_b$};
+    %            \node[main node] (7) [below of=2] {$\ldots$};
+    %            \node[main node] (6) [left of=7] {$s^1_1$};
+    %            \node[main node] (8) [right of=7] {$s^1_b$};
+    %            \node[main node] (10) [below of=5] {$\ldots$};
+    %            \node[main node] (9) [left of=10] {$s^b_1$};
+    %            \node[main node] (11) [right of=10] {$s^b_b$};
+    % 
+    %            \path[every node/.style={font=\sffamily\small}]
+    %                (1) edge (2)
+    %                (1) edge (3)
+    %                (1) edge (5)
+    %                (2) edge (6)
+    %                (2) edge (8)
+    %                (5) edge (9)
+    %                (5) edge (11)
+    %            ;
+    %         \end{tikzpicture}
+    %         \caption{Rappresentazione dell'albero sintattico descritto.}
+    %    \end{figure}
+
     % \section{Linguaggi context-free deterministici}
     %
     % \subsection{Automi a pila deterministici}

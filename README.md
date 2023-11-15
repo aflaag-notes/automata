@@ -5,7 +5,6 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 ## TODO list
 
 - finire i TODOs sparsi
-- fare le figure più bianche
 - appunti 4/10
     - dimostrazione chiusura star alternativa
     - configurazioni di nfa (forse?)
@@ -13,6 +12,9 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - finire
 - appunti 09/11
     - configurazioni di pda (forse?)
+- appunti 15/11
+    - finire pumping lemma
+    - esempio pumping lemma
 - rileggere
     - capitolo 2
 

@@ -37,12 +37,12 @@
 \contentsline {section}{\numberline {2.1}Grammatiche context-free}{33}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Definizioni}{33}{subsection.2.1.1}%
 \contentsline {subsection}{\numberline {2.1.2}Ambiguità}{35}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Forma normale di Chomsky}{36}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Operazioni su grammatiche}{38}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Unione}{38}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.1.3}Forma normale di Chomsky}{37}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Operazioni context-free}{39}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Unione}{39}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Concatenazione}{39}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Automi a pila}{39}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Definizioni}{39}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Equivalenze}{43}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Linguaggi non context-free}{47}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Pumping lemma}{47}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.3}Automi a pila}{40}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Definizioni}{40}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Equivalenze}{44}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Linguaggi non context-free}{48}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Pumping lemma}{48}{subsection.2.4.1}%
