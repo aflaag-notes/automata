@@ -13,8 +13,8 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 - appunti 09/11
     - configurazioni di pda (forse?)
 - appunti 15/11
-    - finire pumping lemma
-    - esempio pumping lemma
+    - FAI GLI ALBERI
+    - tutto
 - rileggere
     - capitolo 2
 
