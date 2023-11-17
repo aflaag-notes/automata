@@ -1530,21 +1530,34 @@
 
         Si noti che, per costruzione di $P'$, si ha che $L(P) = L(P')$, poiché $P'$ è una versione di $P$ in cui le transizioni possono effettuare solamente un'operazione per volta sullo stack, è presente un solo stato accettante e viene svuotato lo stack prima di accettare le stringhe.
 
-        Allora, per costruire una CFG $G = (V, \Sigma, R, S)$ tale che $L(G) = L(P')$, è sufficiente:
+        Si consideri ora la CFG $G = (V, \Sigma, R, S)$ definita come segue:
 
         \begin{itemize}
-            \item porre $V := \{A_{p,q} \mid p, q \in Q'\}$
-            \item porre $S := A_{q_0, q_\mathrm{accept}}$
-            \item definire $R$ come segue: \centeredeq{0.9}{$\centeredsoe{R := \{A_{p,p} \to \varepsilon \mid p \in Q'\} \ \cup \\ \cup \ \{A_{p,q} \to a A_{r,s}b \mid p, q, r, s \in Q', a, b \in \Sigma_\varepsilon, u \in \Gamma, (r, u) \in \delta'(p, a, \varepsilon), (q, \varepsilon) \in \delta(s, b, u)\} \ \cup \\ \cup \ \{A_{p,q} \to A_{p,r}A_{r,q} \in R \mid p, q, r \in Q'\}}$}
-
-                poiché:
-
-                \begin{itemize}
-                    \item il primo insieme genera una regola TODO DA FINIRE 
-                \end{itemize}
+            \item $V := \{A_{p,q} \mid p, q \in Q'\}$
+            \item $S := A_{q_0, q_\mathrm{accept}}$
+            \item l'insieme di regole $R$ è composto dall'unione dei seguenti: \centeredeq{0.9}{$\centeredsoe{R := \{A_{p,p} \to \varepsilon \mid p \in Q'\} \ \cup \\ \cup \ \{A_{p,q} \to a A_{r,s}b \mid p, q, r, s \in Q', a, b \in \Sigma_\varepsilon, \exists u \in \Gamma : (r, u) \in \delta'(p, a, \varepsilon), (q, \varepsilon) \in \delta(s, b, u)\} \ \cup \\ \cup \ \{A_{p,q} \to A_{p,r}A_{r,q} \in R \mid p, q, r \in Q'\}}$}
         \end{itemize}
 
-        Allora, poiché $L(G) = L(P') = L(P) = L$, segue la tesi.
+        Dunque, il linguaggio di $G$ è il seguente: $$L(G) = \{w \in \Sigma^* \mid A_{q_0, q_{\mathrm{accept}}} \derives w\}$$
+
+        La dimostrazione procederà ora provando che $L(G) = L(P')$. A tal scopo, sarebbe dunque sufficiente dimostrare che una stringa è accettata da $P'$ se e solo se è derivabile, attraverso le regole di $G$, a partire da $A_{q_0, q_\mathrm{accept}}$, ma è possibile generalizzare questa proposizione dimostrando che, per ogni coppia di stati $p, q \in Q'$, $A_{p,q}$ è in grado di derivare una stringa $w$ se e solo se $w$ porta $P'$ dallo stato $p$ --- avendo lo stack vuoto --- allo stato $q$ --- avendo ancora lo stack vuoto.
+
+        \begin{enumerate}[label=]
+            \item \tit{Prima implicazione.} La dimostrazione procede per induzione sul numero di passaggi nella derivazione di $w$, a partire da $A_{p,q}$, attraverso le regole in $R$.
+                \begin{enumerate}[label=]
+                    \item \tit{Caso base.} Se la derivazione è composta solamente da 1 passaggio, allora è stata utilizzata una regola della forma $A_{p,q} \to u_1 \ldots u_k$ dove $u_1, \ldots u_k \in \Sigma^*$, dunque esclusivamente terminali. Si noti però che le uniche regole della grammatica che vedono solamente terminali sulla loro destra sono le regole del primo insieme di definizione di $R$, ovvero forma $A_{p,p} \to \varepsilon$ dunque, se $P'$ si trova nello stato $p$, avendo lo stack vuoto, sicuramente $\varepsilon$ è in grado di portare $P'$ in $p$ stesso, manentendo vuoto lo stack.
+                    \item \tit{Ipotesi induttiva forte.} Dati due stati $p, q \in Q'$, se $A_{p,q}$ è in grado di derivare una stringa $w$, applicando al più $k$ passaggi --- con $k \ge 1$ --- allora $w$ porta $P'$ dallo stato $p$ --- avendo lo stack vuoto --- allo stato $q$ --- avendo ancora lo stack vuoto.
+                    \item \tit{Passo induttivo.} È necessario dimostare che l'ipotesi induttiva è ancora verificata per derivazioni costituite da $k + 1$ passaggi. Si consideri dunque una stringa $w$ tale che $A_{p,q} \derives w$ con $k + 1$ passaggi; per costruzione di $R$, il primo passaggio può essere $A_{p,q} \yields aA_{r,s}b$ per certi stati $r, s \in Q'$ e terminali $a, b \in \Sigma_\varepsilon$, oppure $A_{p,q} \yields A_{p,r} A{r,q}$ per un qualche stato $r \in Q'$, e dunque:
+
+                        \begin{itemize}
+                            \item nel primo caso, si verfica che, TODO DA CAPIRE BENE FORSE DIPENDE DALLA DEFINIZIONE DI P' NON LO SO
+                            \item differentemente, nel secondo caso, TODO
+                        \end{itemize}
+                \end{enumerate}
+            \item \tit{Seconda implicazione.}
+        \end{enumerate}
+
+        In particolare, $A_{q_0, q_\mathrm{accept}}$ è in grado di derivare una stringa $w$ se e solo se $w$ porta $P'$ dallo stato $q_0$ --- avendo lo stack vuoto --- allo stato $q_\mathrm{accept}$ --- avendo ancora lo stack vuoto, o equivalentemente, $P'$ accetta $w$. Allora, segue che $$A_{q_0, q_\mathrm{accept}} \derives w \iff w \in L(G) \iff w \in L(P') \iff L(G) = L(P')$$ Allora, poiché $L(G) = L(P') = L(P) = L$, segue la tesi.
     }
 
     \section{Linguaggi non context-free}

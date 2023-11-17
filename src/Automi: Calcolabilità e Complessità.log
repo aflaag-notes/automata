@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.30)  16 NOV 2023 09:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.30)  17 NOV 2023 12:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2100,11 +2100,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 1483.
 [45]
-Overfull \hbox (9.70024pt too wide) detected at line 1548
+Overfull \hbox (9.70024pt too wide) detected at line 1561
 \OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 p; q \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 Q; a \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 ^^F\OML/cmm/m/it/12 ; b; c \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 ^^@[] (\OML/cmm/m/it/12 q; c\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 ^^N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 p; a; b\OT1/cmr/m/n/12 )  =[]\OMS/cmsy/m/n/12 )  9\OML/cmm/m/it/12 r \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 Q[] \OMS/cmsy/m/n/12 j []
  []
 
-Package cleveref Info: loaded `italian' language definitions on input line 1548.
+Package cleveref Info: loaded `italian' language definitions on input line 1561.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2112,13 +2112,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 1548.
+Package cleveref Info: loaded `italian' language definitions on input line 1561.
 [46]
-Overfull \hbox (9.69672pt too wide) detected at line 1548
+Overfull \hbox (9.7204pt too wide) detected at line 1561
 []
  []
 
-Package cleveref Info: loaded `italian' language definitions on input line 1563.
+Package cleveref Info: loaded `italian' language definitions on input line 1561.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2126,14 +2126,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 1563.
+Package cleveref Info: loaded `italian' language definitions on input line 1561.
 [47]
-<../assets/pump_cfl1.png, id=740, 1172.38pt x 810.02625pt>
+Package cleveref Info: loaded `italian' language definitions on input line 1576.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package cleveref Info: loaded `italian' language definitions on input line 1576.
+[48]
+<../assets/pump_cfl1.png, id=749, 1172.38pt x 810.02625pt>
 File: ../assets/pump_cfl1.png Graphic file (type png)
 <use ../assets/pump_cfl1.png>
-Package pdftex.def Info: ../assets/pump_cfl1.png  used on input line 1571.
+Package pdftex.def Info: ../assets/pump_cfl1.png  used on input line 1584.
 (pdftex.def)             Requested size: 175.84941pt x 121.49869pt.
-Package cleveref Info: loaded `italian' language definitions on input line 1574.
+Package cleveref Info: loaded `italian' language definitions on input line 1587.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2142,14 +2153,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 1574.
-[48 <../assets/pump_cfl1.png>]
-<../assets/pump_cfl2.png, id=748, 1332.98pt x 435.6275pt>
+Package cleveref Info: loaded `italian' language definitions on input line 1587.
+[49 <../assets/pump_cfl1.png>]
+<../assets/pump_cfl2.png, id=757, 1332.98pt x 435.6275pt>
 File: ../assets/pump_cfl2.png Graphic file (type png)
 <use ../assets/pump_cfl2.png>
-Package pdftex.def Info: ../assets/pump_cfl2.png  used on input line 1575.
+Package pdftex.def Info: ../assets/pump_cfl2.png  used on input line 1588.
 (pdftex.def)             Requested size: 399.89708pt x 130.68925pt.
-Package cleveref Info: loaded `italian' language definitions on input line 1665.
+Package cleveref Info: loaded `italian' language definitions on input line 1678.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2158,8 +2169,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 1665.
-[49 <../assets/pump_cfl2.png>] (./Automi: Calcolabilità e Complessità.aux
+Package cleveref Info: loaded `italian' language definitions on input line 1678.
+[50 <../assets/pump_cfl2.png>] (./Automi: Calcolabilità e Complessità.aux
 Package cleveref Info: loaded `italian' language definitions on input line 20.
 Package cleveref Info: loaded `italian' language definitions on input line 21.
 )
@@ -2173,8 +2184,8 @@ Package logreq Info: Writing requests to '"Automi: Calcolabilità e Complessità
 
  ) 
 Here is how much of TeX's memory you used:
- 63547 strings out of 477974
- 1462710 string characters out of 5839630
+ 63553 strings out of 477974
+ 1462752 string characters out of 5839630
  2531264 words of memory out of 5000000
  82638 multiletter control sequences out of 15000+600000
  547371 words of font info for 114 fonts, out of 8000000 for 9000
@@ -2182,10 +2193,10 @@ Here is how much of TeX's memory you used:
  119i,16n,125p,1233b,2112s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texm
 f-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb>
-Output written on "Automi: Calcolabilità e Complessità.pdf" (52 pages, 1169295 bytes).
+Output written on "Automi: Calcolabilità e Complessità.pdf" (53 pages, 1173709 bytes).
 PDF statistics:
- 959 PDF objects out of 1000 (max. 8388607)
- 808 compressed objects within 9 object streams
- 270 named destinations out of 1000 (max. 500000)
+ 969 PDF objects out of 1000 (max. 8388607)
+ 817 compressed objects within 9 object streams
+ 276 named destinations out of 1000 (max. 500000)
  405 words of extra memory for PDF output out of 10000 (max. 10000000)
 
