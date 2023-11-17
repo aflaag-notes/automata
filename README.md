@@ -15,6 +15,8 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 - appunti 15/11
     - FAI GLI ALBERI
     - tutto
+- appunti 17/11
+    - da finire
 - rileggere
     - capitolo 2
 

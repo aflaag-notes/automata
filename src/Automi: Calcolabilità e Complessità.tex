@@ -1068,7 +1068,7 @@
 
     \begin{example}[Pumping lemma in REG]
         \label{non reg ex}
-        Si consideri il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
+        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
 
         \begin{itemize}
             \item $k := |x| \implies x = \ttt 0^k$, poiché $x$ è composta solo da $\ttt 0$
@@ -1564,7 +1564,7 @@
 
     \subsection{Pumping lemma}
 
-    \begin{framedlem}{Pumping lemma (CFL)}
+    \begin{framedlem}[label={pump cfl}]{Pumping lemma (CFL)}
         Sia $A$ un CFL; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 5 stringhe $u, v, x, y, z \mid s = uvxyz$ soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
@@ -1599,8 +1599,59 @@
     \end{proof}
 
     \begin{example}[Pumping lemma in CFL]
-        TODO
+        \label{pump cfl ex1}
+        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \ttt 2 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w:=\ttt 0^p \ttt 1^p \ttt 2 ^p \implies |w| = 3p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1 ^p \ttt 2^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
+
+        \begin{itemize}
+            \item $vxy$ contiene solamente $\ttt 0$, dunque $v^0xy^0$ contiene solamente $\ttt 0$
+            \item $vxy$ contiene solamente $\ttt 1$, dunque $v^0xy^0$ contiene solamente $\ttt 1$
+            \item $vxy$ contiene solamente $\ttt 2$, dunque $v^0xy^0$ contiene solamente $\ttt 2$
+            \item $vxy$ contiene soltanto $\ttt 0$ e $\ttt 1$, dunque $v^0xy^0$ può contenere solo $\ttt 0$, solo $\ttt 1$ o sia $\ttt 0$ che $\ttt 1$
+            \item $vxy$ contiene soltanto $\ttt 1$ e $\ttt 2$, dunque $v^0xy^0$ può contenere solo $\ttt 1$, solo $\ttt 2$, o sia $\ttt 1$ che $\ttt 2$
+        \end{itemize}
+        
+        e dunque, indipendentemente dalla scelta di $v, x, y$ TODO DA FINIRE IL FINALE NON HA SENSO
     \end{example}
+
+    \begin{framedcor}{$\mathrm{CFL}$ non è chiuso sull'intersezione}
+        Siano $L_1$ ed $L_2$ due CFL; allora $L_1 \cap L_2$ non è necessariamente un CFL.
+    \end{framedcor}
+
+    \begin{proof}
+        Siano $G_1$ e $G_2$ le due seguenti CFG: $$\centeredsoe{G_1: \centeredsoe{S \to TU \\ T \to \ttt 0 T \ttt 1 \smid \varepsilon \\ U \to \ttt 2 U \smid \varepsilon} \quad G_2: \centeredsoe{S \to UT \\ T \to \ttt 1 T \ttt 2 \smid \varepsilon \\ U \to \ttt 0 U \smid \varepsilon}}$$ Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{CFL}$ per loro stessa definizione, segue la tesi.
+    \end{proof}
+
+    \begin{example}[Pumping lemma in CFL]
+        \label{pump cfl ex2}
+        Si consideri il linguaggio $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e per assurdo, sia $L \in \mathrm{CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w := \ttt 0 ^p \ttt 1 ^p \ttt 0 ^p \ttt 1 ^p \implies |w| = 4p > p$$ avente sicuramente lunghezza maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1^p \ttt 0^p \ttt 1^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
+
+        \begin{itemize}
+            \item $vxy$ contiene solamente $\ttt 0$ o solamente $\ttt 1$, e dunque assumendo che ad esempio si trovi nella prima porzione di $\ttt 0$ di $w$, per ogni $i > 1$ si ha che la stringa diventa della forma $$w := \ttt 0 ^{p + k} \ttt 1 \ttt 0 \ttt 1$$ per qualche $k$, e dunque non può essere della forma $w'w'$ con $w' \in \{\ttt 0, \ttt1\}^*$;
+            \item $vxy$ contiene sia $\ttt 0$ che $\ttt 1$, e dunque $vxy$ si trova a cavallo tra due sequenze di $\ttt 0$ ed $\ttt 1$; allora, assumendo che ad esempio si trovi nella prima regione di $w$ che comprende sia $\ttt 0$ che \ttt 1, per ogni $i > 1$, si ha che la stringa diventa della forma $$w := \ttt 0 ^{p + j} \ttt 1 ^{p + h} \ttt 0 ^p \ttt 1 ^ p$$ per qualche $j$ ed $h$, e dunque non può essere della forma $w'w'$ con $w' \in \{\ttt 0, \ttt 1\}^*$.
+        \end{itemize}
+        
+        Allora, in nessuno dei casi possibili $w := u v^i x y^i z \in L$ $\lightning$.
+    \end{example}
+
+    \begin{framedcor}{$\mathrm{CFL}$ non è chiuso sul complemento}
+        Sia $L$ un CFL; allora $\lnot L$ non è necessariamente un CFL.
+    \end{framedcor}
+
+    \begin{proof}
+        Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \implies \lnot L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$: $$G: \centeredsoe{S \to A \smid B \smid AB \smid BA \\ A \to \ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1 \\ B \to \ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1}$$ e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
+
+        Dunque, si ha che:
+
+        \begin{itemize}
+            \item presa una stringa $x \in \lnot L$, e sia $n := |x|$; se $|x|$ è dispari allora
+                \begin{itemize}
+                    \item se $x$ ha \ttt 0 al centro, allora $A \derives x$
+                    \item se ha un \ttt 1 al centro, allora $B \derives x$
+                \end{itemize}
+                
+                diversamente, se $n$ è pari, allora sia $i$ tale che $x_i \neq x_{\frac{n}{2} + i}$ --- si noti che $i$ deve necessariamente esistere, poiché se non esistesse allora vorrebbe dire che $\forall i \in [1, n] \quad x_i = x_{\frac{n}{2} + 1} \iff \exists w \in \{\ttt 0, \ttt 1\}^* \mid x = ww \iff x \in L$; siano inoltre $$\centeredsoe{u := x_1 \ldots x_{2i - 1} \implies |u| = 2i - 1 - 1 + 1 \\ v := x_{2i} \ldots x_n \implies |v| = n - 2i + 1}$$ due sottostringhe di $x = uv$ di lunghezza dispari --- si noti che $n - 2i + 1$ è dispari poiché $n$ è pari in ipotesi; allora, i due caratteri centrali di $u$ e $v$ saranno rispettivamente $$\centeredsoe{x_{\frac{2i-1+1}{2}} = x_i \\ x_{\frac{n + 2i}{2}} = x_{\frac{n}{2} + 1}}$$ allora, poiché $x_i \neq x_{\frac{n}{2} + 1}$, e questi sono proprio i centri di due sottostringhe di $x$, aventi lunghezza dispari, si ha che $x$ può essere generata attraverso le regole di $G$, poiché sono presenti le regole $S \to AB \smid BA$
+        \end{itemize}
+    \end{proof}
 
     \begin{framedobs}{Condizioni del pumping lemma (CFL)}
         TODO
