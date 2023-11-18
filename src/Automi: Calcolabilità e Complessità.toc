@@ -44,5 +44,5 @@
 \contentsline {section}{\numberline {2.3}Automi a pila}{40}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Definizioni}{40}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Equivalenze}{44}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Linguaggi non context-free}{49}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Pumping lemma}{49}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.4}Linguaggi non context-free}{50}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Pumping lemma}{50}{subsection.2.4.1}%
