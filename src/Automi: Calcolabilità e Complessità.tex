@@ -1545,19 +1545,32 @@
         \begin{enumerate}[label=]
             \item \tit{Prima implicazione.} La dimostrazione procede per induzione sul numero di passaggi nella derivazione di $w$, a partire da $A_{p,q}$, attraverso le regole in $R$.
                 \begin{enumerate}[label=]
-                    \item \tit{Caso base.} Se la derivazione è composta solamente da 1 passaggio, allora è stata utilizzata una regola della forma $A_{p,q} \to u_1 \ldots u_k$ dove $u_1, \ldots u_k \in \Sigma^*$, dunque esclusivamente terminali. Si noti però che le uniche regole della grammatica che vedono solamente terminali sulla loro destra sono le regole del primo insieme di definizione di $R$, ovvero forma $A_{p,p} \to \varepsilon$ dunque, se $P'$ si trova nello stato $p$, avendo lo stack vuoto, sicuramente $\varepsilon$ è in grado di portare $P'$ in $p$ stesso, manentendo vuoto lo stack.
+                    \item \tit{Caso base.} Se la derivazione è composta solamente da 1 passaggio, allora è stata utilizzata una regola della forma $A_{p,q} \to u_1 \ldots u_k$ dove $u_1, \ldots u_k \in \Sigma^*$, dunque esclusivamente terminali. Si noti però che le uniche regole della grammatica che vedono solamente terminali sulla loro destra sono le regole del primo insieme di definizione di $R$, ovvero forma $A_{p,p} \to \varepsilon$ dunque, se $P'$ si trova nello stato $p$, avendo lo stack vuoto, sicuramente $\varepsilon$ è in grado di portare $P'$ in $p$ stesso, mantentendo vuoto lo stack.
                     \item \tit{Ipotesi induttiva forte.} Dati due stati $p, q \in Q'$, se $A_{p,q}$ è in grado di derivare una stringa $w$, applicando al più $k$ passaggi --- con $k \ge 1$ --- allora $w$ porta $P'$ dallo stato $p$ --- avendo lo stack vuoto --- allo stato $q$ --- avendo ancora lo stack vuoto.
-                    \item \tit{Passo induttivo.} È necessario dimostare che l'ipotesi induttiva è ancora verificata per derivazioni costituite da $k + 1$ passaggi. Si consideri dunque una stringa $w$ tale che $A_{p,q} \derives w$ con $k + 1$ passaggi; per costruzione di $R$, il primo passaggio può essere $A_{p,q} \yields aA_{r,s}b$ per certi stati $r, s \in Q'$ e terminali $a, b \in \Sigma_\varepsilon$, oppure $A_{p,q} \yields A_{p,r} A{r,q}$ per un qualche stato $r \in Q'$, e dunque:
+                    \item \tit{Passo induttivo.} È necessario dimostare che l'ipotesi induttiva è ancora verificata per derivazioni costituite da $k + 1$ passaggi. Si consideri dunque una stringa $w$ tale che $A_{p,q} \derives w$ con $k + 1$ passaggi; per costruzione di $R$, il primo passaggio può essere $A_{p,q} \yields aA_{r,s}b \derives x$ per certi stati $r, s \in Q'$ e terminali $a, b \in \Sigma_\varepsilon$, oppure $A_{p,q} \yields A_{p,r} A_{r,q} \derives x$ per un qualche stato $r \in Q'$, e dunque:
 
                         \begin{itemize}
-                            \item nel primo caso, si verfica che, TODO DA CAPIRE BENE FORSE DIPENDE DALLA DEFINIZIONE DI P' NON LO SO
-                            \item differentemente, nel secondo caso, TODO
+                            \item nel primo caso, sia $y$ la sottostringa di $w$ generata da $A_{r,s}$, dunque $A_{r,s} \derives y \implies w = ayb$, e si noti che $y$ è stata derivata con $k$ passaggi; allora, per ipotesi induttiva forte, $y$ porta $P'$ dallo stato $r$ --- avendo lo stack vuoto --- allo stato $s$ --- avendo ancora lo stack vuoto; inoltre, per costruzione di $R$, si ha che $$A_{p,q} \to a A_{r,s}b \in R \iff \exists u \in \Gamma \mid \soe{l}{(r, u) \in \delta'(p, a , \varepsilon) \\ (q, \varepsilon) \in \delta'(s, b, u)}$$ e dunque, assumendo che $P'$ abbia lo stack vuoto:
+                                
+                                \begin{itemize}
+                                    \item se si trova nello stato $p$, leggendo $a$, $P'$ può andare nello stato $r$, inserendo $u$ nello stack;
+                                    \item se si trova nello stato $r$, leggendo $y$, $P'$ può andare nello stato $s$, lasciando lo stack invariato --- per ipotesi induttiva forte;
+                                    \item se si trova nello stato $s$, leggendo $b$, $P'$ può andare nello stato $q$, rimuovendo $u$ dallo stack.
+                                \end{itemize}
+
+                                allora $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack.
+                            \item differentemente, nel secondo caso, siano $y$ e $z$ sottostringhe di $w$ generate rispettivamente da $A_{p, r}$ ed $A_{r, q}$ dunque $\soe{l}{A_{p,r} \derives y \\ A_{r,q} \derives z} \implies w = yz$, e si noti che $y$ e $z$ sono state derivate con $k + 1$ passaggi; allora, per ipotesi induttiva forte, $y$ e $z$ portano, rispettivamente, $P'$ dagli stati $p$ ed $r$ --- avendo lo stack vuoto --- agli stati $r$ e $q$ --- avendo ancora lo stack vuoto; allora, $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack.
                         \end{itemize}
                 \end{enumerate}
-            \item \tit{Seconda implicazione.}
+            \item \tit{Seconda implicazione.} La dimostrazione procede per induzione sul numero di passaggi --- aventi lo stack vuoto --- nella computazione di $w$, da parte di $P'$, tra gli stati $p$ e $q$.
+                \begin{enumerate}[label=]
+                    \item \tit{Caso base.}
+                    \item \tit{Ipoesi induttiva forte.}
+                    \item \tit{Passo induttivo.}
+                \end{enumerate}
         \end{enumerate}
 
-        In particolare, $A_{q_0, q_\mathrm{accept}}$ è in grado di derivare una stringa $w$ se e solo se $w$ porta $P'$ dallo stato $q_0$ --- avendo lo stack vuoto --- allo stato $q_\mathrm{accept}$ --- avendo ancora lo stack vuoto, o equivalentemente, $P'$ accetta $w$. Allora, segue che $$A_{q_0, q_\mathrm{accept}} \derives w \iff w \in L(G) \iff w \in L(P') \iff L(G) = L(P')$$ Allora, poiché $L(G) = L(P') = L(P) = L$, segue la tesi.
+        In particolare, $A_{q_0, q_\mathrm{accept}}$ è in grado di derivare una stringa $w$ se e solo se $w$ porta $P'$ dallo stato $q_0$ --- avendo lo stack vuoto --- allo stato $q_\mathrm{accept}$ --- avendo ancora lo stack vuoto --- o equivalentemente, $P'$ accetta $w$. Allora, segue che $$A_{q_0, q_\mathrm{accept}} \derives w \iff w \in L(G) \iff w \in L(P')$$ e dunque, poiché $L(G) = L(P') = L(P) = L$, segue la tesi.
     }
 
     \section{Linguaggi non context-free}
@@ -1638,19 +1651,22 @@
     \end{framedcor}
 
     \begin{proof}
-        Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \implies \lnot L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$: $$G: \centeredsoe{S \to A \smid B \smid AB \smid BA \\ A \to \ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1 \\ B \to \ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1}$$ e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
+        Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \iff \lnot L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$: $$G: \centeredsoe{S \to A \smid B \smid AB \smid BA \\ A \to \ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1 \\ B \to \ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1}$$ e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
 
         Dunque, si ha che:
 
         \begin{itemize}
-            \item presa una stringa $x \in \lnot L$, e sia $n := |x|$; se $|x|$ è dispari allora
+            \item presa una stringa $x \in \lnot L$, e ponendo $n := |x|$, se $n$ è dispari allora
                 \begin{itemize}
                     \item se $x$ ha \ttt 0 al centro, allora $A \derives x$
                     \item se ha un \ttt 1 al centro, allora $B \derives x$
                 \end{itemize}
                 
-                diversamente, se $n$ è pari, allora sia $i$ tale che $x_i \neq x_{\frac{n}{2} + i}$ --- si noti che $i$ deve necessariamente esistere, poiché se non esistesse allora vorrebbe dire che $\forall i \in [1, n] \quad x_i = x_{\frac{n}{2} + 1} \iff \exists w \in \{\ttt 0, \ttt 1\}^* \mid x = ww \iff x \in L$; siano inoltre $$\centeredsoe{u := x_1 \ldots x_{2i - 1} \implies |u| = 2i - 1 - 1 + 1 \\ v := x_{2i} \ldots x_n \implies |v| = n - 2i + 1}$$ due sottostringhe di $x = uv$ di lunghezza dispari --- si noti che $n - 2i + 1$ è dispari poiché $n$ è pari in ipotesi; allora, i due caratteri centrali di $u$ e $v$ saranno rispettivamente $$\centeredsoe{x_{\frac{2i-1+1}{2}} = x_i \\ x_{\frac{n + 2i}{2}} = x_{\frac{n}{2} + 1}}$$ allora, poiché $x_i \neq x_{\frac{n}{2} + 1}$, e questi sono proprio i centri di due sottostringhe di $x$, aventi lunghezza dispari, si ha che $x$ può essere generata attraverso le regole di $G$, poiché sono presenti le regole $S \to AB \smid BA$
+                diversamente, se $n$ è pari, allora sia $i$ tale che $x_i \neq x_{\frac{n}{2} + i}$ --- si noti che $i$ deve necessariamente esistere, poiché se non esistesse allora vorrebbe dire che $\forall i \in [1, n] \quad x_i = x_{\frac{n}{2} + 1} \iff \exists w \in \{\ttt 0, \ttt 1\}^* \mid x = ww \iff x \in L$; siano inoltre $$\centeredsoe{u := x_1 \ldots x_{2i - 1} \implies |u| = 2i - 1 - 1 + 1 \\ v := x_{2i} \ldots x_n \implies |v| = n - 2i + 1}$$ due sottostringhe di $x = uv$ di lunghezza dispari --- si noti che $n - 2i + 1$ è dispari poiché $n$ è pari in ipotesi; allora, i due caratteri centrali di $u$ e $v$ saranno rispettivamente $$\centeredsoe{m(u) = x_{\frac{2i-1+1}{2}} = x_i \\ m(v) =x_{\frac{n + 2i}{2}} = x_{\frac{n}{2} + 1}}$$ allora, poiché $x_i \neq x_{\frac{n}{2} + 1}$, e questi sono proprio i centri di due sottostringhe di $x$, aventi lunghezza dispari, si ha che $x$ può essere generata attraverso le regole di $G$, poiché in essa sono presenti le regole $S \to AB \smid BA$; questo dimostra che $x \in \lnot L \implies S \derives x$;
+            \item presa una stringa $x$ tale che $S \derives x$, e ponendo $n := |x|$, se $n$ è dispari allora sicuramente $x \notin L \iff x \in \lnot L$; differentemente, se $n$ è pari, allora la stringa è stata generata attraverso una delle regole $S \to AB \smid BA$ necessariamente, e dunque --- senza perdita di generalità --- assumendo che $x$ sia stata ottenuta attraverso la regola $S \to AB$, devono esistere $u, v \in \{\ttt 0, \ttt 1\}^* \mid x = uv \land A \derives u \land B \derives v$, dove $u$ e $v$ sono due stringhe aventi lunghezza dispari; siano allora $l := |u| \implies |v| = n - l$, ottenendo che $$m (u) = x_{\frac{l + 1}{2}} = u_{\frac{l + 1}{2}} = \ttt 0 \neq \ttt 1 = v_{\frac{n - l + 1}{2}} = x_{\frac{n - l + 1}{2} + l} = x_{\frac{n + l + 1}{2}} = m(v)$$ allora, poiché $m(u)$ ed $m(v)$ devono necessariamente trovarsi l'uno nella prima metà di $x$, l'altro nella seconda metà (indipendentemente dalla scelta di $u$ e $v$) si ha che la stringa $x$ è necessariamente costituita da due stringhe $w, w' \in \{\ttt 0, \ttt 1\}^* \mid w \neq w'$, poiché differiscono per almeno un carattere, ovvero $m(u) \neq m(v)$, di conseguenza $x \notin \L \iff x \in \lnot L$; questo dimostra che $S \derives x \implies x \in \lnot L$.
         \end{itemize}
+
+        Dunque, poiché $S \derives x \iff x \in \lnot L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \lnot L \iff \lnot L \in \mathrm{CFL}$$ e dunque segue la tesi.
     \end{proof}
 
     \begin{framedobs}{Condizioni del pumping lemma (CFL)}
