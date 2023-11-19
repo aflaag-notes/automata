@@ -417,7 +417,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$$
     \end{example}
 
-    \begin{framedprop}[label={closure unione}]{Chiusura sull'unione}
+    \begin{framedprop}[label={closure unione}]{Chiusura sull'unione (REG)}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
     \end{framedprop}
 
@@ -459,7 +459,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{uno}, \ttt{tre}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cap B = \{\ttt{uno}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sull'intersezione}
+    \begin{framedprop}{Chiusura sull'intersezione (REG)}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cap B$ è regolare.
     \end{framedprop}
 
@@ -493,7 +493,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B := \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
     \end{example}
 
-    \begin{framedprop}[label={closure concat}]{Chiusura sulla concatenazione}
+    \begin{framedprop}[label={closure concat}]{Chiusura sulla concatenazione (REG)}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare.
     \end{framedprop}
 
@@ -522,7 +522,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e sia $A = \{\ttt{uno}, \ttt{due}\}$ un linguaggio su $\Sigma$. Allora, si ha che $$A^2 = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sull'elevamento a potenza}
+    \begin{framedprop}{Chiusura sull'elevamento a potenza (REG)}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$, ed $n \in \N$; allora $A^n$ è regolare.
     \end{framedprop}
 
@@ -552,7 +552,7 @@
         Si noti che nel caso di $\Sigma = \{ \ttt 0, \ttt 1 \}$, si ha che $\Sigma^*$ è l'insieme di ogni stringa binaria, di arbitraria lunghezza.
     \end{example}
 
-    \begin{framedprop}[label={closure star}]{Chiusura sull'operazione star}
+    \begin{framedprop}[label={closure star}]{Chiusura sull'operazione star (REG)}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare.
     \end{framedprop}
 
@@ -581,7 +581,7 @@
         Sia $\Sigma = \{\ttt 0, \ttt 1\}$ l'alfabeto binario, e sia $A = \{ \ttt{00}, \ttt{1}\}$ un linguaggio definito su di esso. Allora il suo complemento è il seguente: $$\lnot A = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}, \ttt{10}, \ttt{000}, \ldots\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sul complemento}
+    \begin{framedprop}{Chiusura sul complemento (REG)}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\lnot A$ è regolare.
     \end{framedprop}
 
@@ -589,14 +589,18 @@
         In ipotesi $A$ è un linguaggio regolare, dunque per definizione esiste un DFA $$M = (Q, \Sigma, \delta, q_0, F)$$ che lo riconosce; allora, è sufficiente considerare il DFA $$M' := (Q, \Sigma, \delta, q_0, Q-F)$$ per ottenere un DFA tale da riconoscere $\lnot A$; allora, $\lnot A$ è regolare per definizione.
     \end{proof}
 
-    \begin{frameddefn}{Leggi di De Morgan}
+    \begin{framedprop}{Leggi di De Morgan}
         Siano $A$ e $B$ definiti su un alfabeto $\Sigma$; allora, sono vere le seguenti, che prendono il nome di \tbf{leggi di De Morgan}:
 
         \begin{enumerate}[label=\roman*), font=\itshape]
             \item $\lnot (A \cup B) = \lnot A \cap \lnot B$
             \item $\lnot (A \cap B) = \lnot A \cup \lnot B$
         \end{enumerate}
-    \end{frameddefn}
+    \end{framedprop}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
 
     \section{Espressioni regolari}
 
@@ -1221,32 +1225,6 @@
         TODO
     \end{example}
 
-    \section{Operazioni context-free}
-
-    \subsection{Unione}
-
-    \begin{framedprop}{Chiusura sull'unione}
-        Siano $L_1, \ldots, L_n$ dei CFL; allora $\displaystyle \bigcup_{i =1}^n{L_i}$ è un CFL.
-    \end{framedprop}
-
-    \begin{proof}
-        Poiché $L_1, \ldots, L_n$ sono CFL, allora esistono delle CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{CFL}$ per definizione; allora, si consideri la seguente CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
-    \end{proof}
-
-    \begin{example}[Unione di CFL]
-        Siano $L_1$ ed $L_2$ due CFL generati rispettivamente dalle seguenti CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la seguente CFG $G$: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
-    \end{example}
-
-    \subsection{Concatenazione}
-
-    \begin{framedprop}{Chiusura sulla concatenazione}
-        TODO
-    \end{framedprop}
-
-    \begin{proof}
-        Omessa.
-    \end{proof}
-
     \section{Automi a pila}
 
     \subsection{Definizioni}
@@ -1590,6 +1568,20 @@
 
     \subsection{Pumping lemma}
 
+    \begin{framedprop}{Altezza delle derivazioni di CFG in CNF}
+        Sia $G = (V, \Sigma, R, S)$ una CFG in CNF, e $x \in L(G)$ una sua stringa; allora, se $h$ è l'altezza all'albero di derivazione di $x$, si ha che $$|x| \le 2^{h - 1}$$
+    \end{framedprop}
+
+    \proofstrind{
+        La dimostrazione procede per induzione sull'altezza $h$ dell'albero di derivazione di $x$.
+    }{
+        Se $h = 1$, e dunque la derivazione è costituita da un solo passaggio, poiché $G$ è in CNF in ipotesi, allora la regola applicata deve necessariamente essere della forma $S \to a \in R$ con $a \in \Sigma$, e dunque $x$ è costituita esclusivamente da un singolo simbolo (terminale); allora, poiché $$|x| \le 2^{h - 1} = 2^{1 - 1} = 2^0 = 1$$ la tesi è verificata.
+    }{
+        Data una stringa $x \in L(G)$ il cui albero di derivazione abbia altezza al più $h$, è vero che $|x| \le 2^{h +1}$
+    }{
+        È necessario dimostrare che la tesi è verificata per ogni stringa $x \in L(G)$ il cui albero di derivazione abbia altezza $h + 1$. Si noti che, poiché $G$ è in CNF, il primo passaggio dell'albero di derivazione di $x$ deve necessariamente essere stato ottenuto attraverso una regola della forma $S \to AB$ per qualche $aA, B \in V$, e dunque devono esistere $y, z$ sottostringhe di $x = yz$ --- e dunque $|x| = |y| + |z|$ --- tali che $A \derives y$ e $B \derives z$. Poiché la derivazione $S \derives x$ ha altezza $h + 1$, allora le derivazioni di $y$ e di $z$ devono avere altezza $h$, e dunque per essi è possibile applicare l'ipotesi induttiva forte, e dunque si verifica che $$\soe{l}{|y| \le 2^{h - 1} \\ |z| \le 2^{h - 1}} \implies |x| = |y| + |z| \le 2^{h - 1} + 2^{h - 1} = 2^h = 2^{(h + 1) - 1}$$ allora segue la tesi.
+    }
+
     \begin{framedlem}[label={pump cfl}]{Pumping lemma (CFL)}
         Sia $A$ un CFL; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 5 stringhe $u, v, x, y, z \mid s = uvxyz$ soddisfacenti le seguenti condizioni:
 
@@ -1601,28 +1593,32 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un CFL, per definizione esiste una CFG $G= (V, \Sigma, R, S)$ che lo genera; sia $b$ il massimo numero di simboli nel lato destro di una regola in $R$, e dunque all'interno di ogni albero sintattico che è possibile costruire attraverso $G$ non sarà possibile avere un nodo con più di $b$ figli. Dunque, partendo da $S$, per la prima sostituzione effettuata, si avranno al più $b$ foglie all'interno dell'albero; per la seconda, se ne avranno al più $b^2$, ed in generale, un albero di altezza al più $h$ avrà al più $b^h$ foglie, dunque la stringa generata avrà lunghezza al più $b^h$. Di conseguenza, una stringa di lunghezza pari almeno a $b^h + 1$ deve essere stata generata da un albero avente altezza pari almeno ad $h + 1$.
-
-        Sia $p := b^{|V| + 1}$, e sia $s \in A$ tale che $|s| \ge p$; si noti che $b^{|V| + 1} \ge b^{|V|} + 1$, e poiché $s$ ha lunghezza pari almeno a $p$, allora --- per quanto detto precedentemente --- $s$ deve essere stata generata attraverso un albero sintattico avente altezza pari almeno a $|V| + 1$. Sia allora $\tau$ l'albero sintattico con minor numero di nodi tale da generare $s$; poiché $h_\tau \ge |V| + 1$, il cammino $\mathscr{C}$ più lungo dalla radice ad una foglia in $\tau$ ha lunghezza almeno $|V| + 1$, avente dunque almeno $|V| + 2$ nodi, dove il primo è la radice --- ovvero $S$, una variabile --- l'ultimo è la foglia --- necessariamente un terminale --- e tutti gli altri nodi nel mezzo sono variabili; dunque il cammino è composto da almeno $|V| + 1$ variabili. Si noti che $G = (V, \Sigma, R, S)$, dunque il numero di variabili di $G$ è $|V|$; allora, per il \cref{pigeonhole}, all'interno del cammino preso in considerazione, deve esistere TODO ALMENO? una variabile ripetuta più di 1 volta, e sia questa $\rho$. Si asssuma che $\rho \neq S$. TODO SE $\rho = S$???
-
-        Siano $u, v, x, y, z$ scelte come segue:
-
-        \centeredimage{0.15}{../assets/pump_cfl1.png}
-
-        Poiché $\rho$ è ripetuta, è possibile sostituire il suo sottoalbero nei punti in cui essa si ripete, ottenendo ad esempio i due seguenti alberi sintattici ancora validi:
-        
-        \centeredimage{0.3}{../assets/pump_cfl2.png}
-
-        Si noti che: 
-
-        \begin{itemize}
-            \item sostituzione di sinistra genera la stringa $uxz$, che dunque è in $A$, mentre la sostituzione di sinistra genera la stringa $uv^2xy^2z$, che dunque è in $A$ anch'essa, e si noti che sarebbe possibile continuare a sostituire il sottoalbero di $\rho$ ripetutamente nella rappresentazione di destra; dunque, questo dimostra la prima condizione del lemma, ovvero $\forall i \ge 0 \quad uv^ixy^iz \in A$;
-            \item se $v = y = \varepsilon$, allora TODO NON HO CAPITO
-            \item l'occorrenza più in alto di $\rho$ genera la stringa $vxy$, e $\rho$ è stata scelta diversa da $S$, dunque $\rho$ deve necessariamente trovarsi tra le $|V| + 1$ variabili più in basso di $\mathscr{C}$, il quale era stato scelto tale che fosse il più lungo cammino dalla radice ad una foglia; allora, il sottoalbero di $\rho$ è alto al più $|V| + 1$ TODO PERCHÉ NON $|V|$??, dunque per quanto detto precedentemente, tale albero può generare una stringa di lunghezza al più $b^{|V|} + 1 =: p$, e dunque $|vxy| \le p$.
-        \end{itemize}
-
-        Allora, sono soddisfatte tutte le condizioni della tesi.
+        Poiché $A$ è un CFL, per definizione esiste una CFG $G = (V, \Sigma, R, S)$ che lo genera; sia allora $p = 2^{|V|}$. TODO
     \end{proof}
+
+    % \begin{proof}
+    %     Poiché $A$ è un CFL, per definizione esiste una CFG $G= (V, \Sigma, R, S)$ che lo genera; sia $b$ il massimo numero di simboli nel lato destro di una regola in $R$, e dunque all'interno di ogni albero sintattico che è possibile costruire attraverso $G$ non sarà possibile avere un nodo con più di $b$ figli. Dunque, partendo da $S$, per la prima sostituzione effettuata, si avranno al più $b$ foglie all'interno dell'albero; per la seconda, se ne avranno al più $b^2$, ed in generale, un albero di altezza al più $h$ avrà al più $b^h$ foglie, dunque la stringa generata avrà lunghezza al più $b^h$. Di conseguenza, una stringa di lunghezza pari almeno a $b^h + 1$ deve essere stata generata da un albero avente altezza pari almeno ad $h + 1$.
+    %
+    %     Sia $p := b^{|V| + 1}$, e sia $s \in A$ tale che $|s| \ge p$; si noti che $b^{|V| + 1} \ge b^{|V|} + 1$, e poiché $s$ ha lunghezza pari almeno a $p$, allora --- per quanto detto precedentemente --- $s$ deve essere stata generata attraverso un albero sintattico avente altezza pari almeno a $|V| + 1$. Sia allora $\tau$ l'albero sintattico con minor numero di nodi tale da generare $s$; poiché $h_\tau \ge |V| + 1$, il cammino $\mathscr{C}$ più lungo dalla radice ad una foglia in $\tau$ ha lunghezza almeno $|V| + 1$, avente dunque almeno $|V| + 2$ nodi, dove il primo è la radice --- ovvero $S$, una variabile --- l'ultimo è la foglia --- necessariamente un terminale --- e tutti gli altri nodi nel mezzo sono variabili; dunque il cammino è composto da almeno $|V| + 1$ variabili. Si noti che $G = (V, \Sigma, R, S)$, dunque il numero di variabili di $G$ è $|V|$; allora, per il \cref{pigeonhole}, all'interno del cammino preso in considerazione, deve esistere TODO ALMENO? una variabile ripetuta più di 1 volta, e sia questa $\rho$. Si asssuma che $\rho \neq S$. TODO SE $\rho = S$???
+    %
+    %     Siano $u, v, x, y, z$ scelte come segue:
+    %
+    %     \centeredimage{0.15}{../assets/pump_cfl1.png}
+    %
+    %     Poiché $\rho$ è ripetuta, è possibile sostituire il suo sottoalbero nei punti in cui essa si ripete, ottenendo ad esempio i due seguenti alberi sintattici ancora validi:
+    %     
+    %     \centeredimage{0.3}{../assets/pump_cfl2.png}
+    %
+    %     Si noti che: 
+    %
+    %     \begin{itemize}
+    %         \item sostituzione di sinistra genera la stringa $uxz$, che dunque è in $A$, mentre la sostituzione di sinistra genera la stringa $uv^2xy^2z$, che dunque è in $A$ anch'essa, e si noti che sarebbe possibile continuare a sostituire il sottoalbero di $\rho$ ripetutamente nella rappresentazione di destra; dunque, questo dimostra la prima condizione del lemma, ovvero $\forall i \ge 0 \quad uv^ixy^iz \in A$;
+    %         \item se $v = y = \varepsilon$, allora TODO NON HO CAPITO
+    %         \item l'occorrenza più in alto di $\rho$ genera la stringa $vxy$, e $\rho$ è stata scelta diversa da $S$, dunque $\rho$ deve necessariamente trovarsi tra le $|V| + 1$ variabili più in basso di $\mathscr{C}$, il quale era stato scelto tale che fosse il più lungo cammino dalla radice ad una foglia; allora, il sottoalbero di $\rho$ è alto al più $|V| + 1$ TODO PERCHÉ NON $|V|$??, dunque per quanto detto precedentemente, tale albero può generare una stringa di lunghezza al più $b^{|V|} + 1 =: p$, e dunque $|vxy| \le p$.
+    %     \end{itemize}
+    %
+    %     Allora, sono soddisfatte tutte le condizioni della tesi.
+    % \end{proof}
 
     \begin{example}[Pumping lemma in CFL]
         \label{pump cfl ex1}
@@ -1639,14 +1635,6 @@
         e dunque, indipendentemente dalla scelta di $v, x, y$ TODO DA FINIRE IL FINALE NON HA SENSO
     \end{example}
 
-    \begin{framedcor}{$\mathrm{CFL}$ non è chiuso sull'intersezione}
-        Siano $L_1$ ed $L_2$ due CFL; allora $L_1 \cap L_2$ non è necessariamente un CFL.
-    \end{framedcor}
-
-    \begin{proof}
-        Siano $G_1$ e $G_2$ le due seguenti CFG: $$\centeredsoe{G_1: \centeredsoe{S \to TU \\ T \to \ttt 0 T \ttt 1 \smid \varepsilon \\ U \to \ttt 2 U \smid \varepsilon} \quad G_2: \centeredsoe{S \to UT \\ T \to \ttt 1 T \ttt 2 \smid \varepsilon \\ U \to \ttt 0 U \smid \varepsilon}}$$ Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{CFL}$ per loro stessa definizione, segue la tesi.
-    \end{proof}
-
     \begin{example}[Pumping lemma in CFL]
         \label{pump cfl ex2}
         Si consideri il linguaggio $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e per assurdo, sia $L \in \mathrm{CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w := \ttt 0 ^p \ttt 1 ^p \ttt 0 ^p \ttt 1 ^p \implies |w| = 4p > p$$ avente sicuramente lunghezza maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1^p \ttt 0^p \ttt 1^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
@@ -1659,9 +1647,61 @@
         Allora, in nessuno dei casi possibili $w := u v^i x y^i z \in L$ $\lightning$.
     \end{example}
 
-    \begin{framedcor}{$\mathrm{CFL}$ non è chiuso sul complemento}
+    \begin{framedobs}{Condizioni del pumping lemma (CFL)}
+        TODO
+    \end{framedobs}
+
+    \section{Operazioni context-free}
+
+    \subsection{Unione}
+
+    \begin{framedprop}{Chiusura sull'unione (CFL)}
+        Siano $L_1, \ldots, L_n$ dei CFL; allora $\displaystyle \bigcup_{i =1}^n{L_i}$ è un CFL.
+    \end{framedprop}
+
+    \begin{proof}
+        Poiché $L_1, \ldots, L_n$ sono CFL, allora esistono delle CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{CFL}$ per definizione; allora, si consideri la seguente CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
+    \end{proof}
+
+    \begin{example}[Unione di CFL]
+        Siano $L_1$ ed $L_2$ due CFL generati rispettivamente dalle seguenti CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la seguente CFG $G$: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
+    \end{example}
+
+    \subsection{Concatenazione}
+
+    \begin{framedprop}{Chiusura sulla concatenazione (CFL)}
+        TODO
+    \end{framedprop}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \subsection{Star}
+
+    \begin{framedprop}{Chiusura sull'operazione star (CFL)}
+        TODO.
+    \end{framedprop}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \subsection{Intersezione}
+
+    \begin{framedprop}{$\mathrm{CFL}$ non è chiuso sull'intersezione}
+        Siano $L_1$ ed $L_2$ due CFL; allora $L_1 \cap L_2$ non è necessariamente un CFL.
+    \end{framedprop}
+
+    \begin{proof}
+        Siano $G_1$ e $G_2$ le due seguenti CFG: $$\centeredsoe{G_1: \centeredsoe{S \to TU \\ T \to \ttt 0 T \ttt 1 \smid \varepsilon \\ U \to \ttt 2 U \smid \varepsilon} \quad G_2: \centeredsoe{S \to UT \\ T \to \ttt 1 T \ttt 2 \smid \varepsilon \\ U \to \ttt 0 U \smid \varepsilon}}$$ Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{CFL}$ per loro stessa definizione, segue la tesi.
+    \end{proof}
+
+    \subsection{Complemento}
+
+    \begin{framedprop}{$\mathrm{CFL}$ non è chiuso sul complemento}
         Sia $L$ un CFL; allora $\lnot L$ non è necessariamente un CFL.
-    \end{framedcor}
+    \end{framedprop}
 
     \begin{proof}
         Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \iff \lnot L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$: $$G: \centeredsoe{S \to A \smid B \smid AB \smid BA \\ A \to \ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1 \\ B \to \ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1}$$ e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
@@ -1681,10 +1721,6 @@
 
         Dunque, poiché $S \derives x \iff x \in \lnot L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \lnot L \iff \lnot L \in \mathrm{CFL}$$ e dunque segue la tesi.
     \end{proof}
-
-    \begin{framedobs}{Condizioni del pumping lemma (CFL)}
-        TODO
-    \end{framedobs}
 
     %    \begin{figure}[H]
     %        \centering

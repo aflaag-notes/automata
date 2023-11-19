@@ -1901,16 +1901,6 @@ INPUT ../assets/delta_pda.png
 INPUT ../assets/delta_pda.png
 INPUT ../assets/delta_pda.png
 INPUT ../assets/delta_pda.png
-INPUT ../assets/pump_cfl1.png
-INPUT ../assets/pump_cfl1.png
-INPUT ../assets/pump_cfl1.png
-INPUT ../assets/pump_cfl1.png
-INPUT ../assets/pump_cfl1.png
-INPUT ../assets/pump_cfl2.png
-INPUT ../assets/pump_cfl2.png
-INPUT ../assets/pump_cfl2.png
-INPUT ../assets/pump_cfl2.png
-INPUT ../assets/pump_cfl2.png
 INPUT Automi: Calcolabilità e Complessità.aux
 INPUT ./Automi: Calcolabilità e Complessità.out
 INPUT ./Automi: Calcolabilità e Complessità.out
@@ -1930,7 +1920,6 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb
-INPUT /usr/share/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb
