@@ -1568,7 +1568,7 @@
 
     \subsection{Pumping lemma}
 
-    \begin{framedprop}{Altezza delle derivazioni di CFG in CNF}
+    \begin{framedprop}[label={prop pre pump cfl}]{Altezza di derivazioni su CFG in CNF}
         Sia $G = (V, \Sigma, R, S)$ una CFG in CNF, e $x \in L(G)$ una sua stringa; allora, se $h$ è l'altezza all'albero di derivazione di $x$, si ha che $$|x| \le 2^{h - 1}$$
     \end{framedprop}
 
@@ -1593,7 +1593,9 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un CFL, per definizione esiste una CFG $G = (V, \Sigma, R, S)$ che lo genera; sia allora $p = 2^{|V|}$. TODO
+        Poiché $A$ è un CFL, per definizione esiste una CFG $G = (V, \Sigma, R, S)$ che lo genera, e si assuma --- senza perdita di generalità, per il \cref{cfg into cnf} --- che $G$ sia in CNF; sia allora $p := 2^{|V|}$. Inoltre, sia $s \in A \mid |s| \ge p$, e dunque per la \cref{prop pre pump cfl}, poiché $G$ è in CNF, si ha che $$p := 2^{|V|} \le |s| \le 2^{h - 1} \implies 2^{|V|} \le 2^{h - 1} \iff |V| + 1 \le h$$ dove $h$ è l'altezza dell'albero di derivazione di $s$.
+
+        TODO DA FINIRE
     \end{proof}
 
     % \begin{proof}
@@ -1628,7 +1630,7 @@
             \item $vxy$ contiene solamente $\ttt 0$, dunque $v^0xy^0$ contiene solamente $\ttt 0$
             \item $vxy$ contiene solamente $\ttt 1$, dunque $v^0xy^0$ contiene solamente $\ttt 1$
             \item $vxy$ contiene solamente $\ttt 2$, dunque $v^0xy^0$ contiene solamente $\ttt 2$
-            \item $vxy$ contiene soltanto $\ttt 0$ e $\ttt 1$, dunque $v^0xy^0$ può contenere solo $\ttt 0$, solo $\ttt 1$ o sia $\ttt 0$ che $\ttt 1$
+            \item $vxy$ contiene soltanto $\ttt 0$ e $\ttt 1$, dunque $v^0xy^0$ può contenere solo $\ttt 0$, solo $\ttt 1$, o sia $\ttt 0$ che $\ttt 1$
             \item $vxy$ contiene soltanto $\ttt 1$ e $\ttt 2$, dunque $v^0xy^0$ può contenere solo $\ttt 1$, solo $\ttt 2$, o sia $\ttt 1$ che $\ttt 2$
         \end{itemize}
         
