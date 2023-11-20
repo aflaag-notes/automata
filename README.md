@@ -17,6 +17,4 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - tutto
 - appunti 17/11
     - da finire
-- rileggere
-    - capitolo 2
 
