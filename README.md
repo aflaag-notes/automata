@@ -4,7 +4,8 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 
 ## TODO list
 
-- finire i TODOs sparsi
+- generali
+    - finire i TODOs sparsi
 - appunti 4/10
     - dimostrazione chiusura star alternativa
     - configurazioni di nfa (forse?)
