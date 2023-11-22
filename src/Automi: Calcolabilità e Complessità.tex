@@ -1230,7 +1230,9 @@
     \subsection{Definizioni}
 
     \begin{frameddefn}{PDA}
-        Un \tbf{PDA} (\tit{Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
+        Un \tbf{PDA} (\tit{Pushdown Automaton}) è un NFA dotato di uno \tbf{stack} illimitato, che gli consente di riconoscere alcuni linguaggi non regolari, poiché in esso è in grado di porre i simboli che legge dalla stringa di input, di fatto implementando un sistema di \tit{memoria}.
+
+        Formalmente, un PDA è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
 
         \begin{itemize}
             \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
@@ -1243,14 +1245,12 @@
 
         dove $\Gamma_\varepsilon := \Gamma \cup \{ \varepsilon \}$.
 
-        Un PDA è un NFA dotato di uno \tbf{stack} illimitato, che gli consente di riconoscere alcuni linguaggi non regolari, poiché in esso è in grado di porre i simboli che legge dalla stringa di input, di fatto implementando un sistema di \tit{memoria}.
-        
         Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un PDA è non deterministico) del codominio di $\delta$, al fine di decidere se salvare il simbolo letto all'interno dello stack  (tramite $\varepsilon \in \Gamma$ stesso). Dunque, un'operazione di un PDA sul suo stack può essere un \tit{push}, un \tit{pop}, o entrambe --- ottenendo l'effetto di rimpiazzare l'elemento in cima allo stack.
     \end{frameddefn}
 
     \begin{example}[PDA]
         \label{pda ex}
-        Un esempio di PDA $M = (Q, \Sigma, \Gamma, \delta, q_1, F)$ è il seguente:
+        Un esempio di PDA $P = (Q, \Sigma, \Gamma, \delta, q_1, F)$ è il seguente:
 
         \begin{itemize}
             \item $Q = \{q_1, q_2, q_3, q_4\}$
@@ -1281,7 +1281,7 @@
                     (3) edge node {$\varepsilon; \ttt \$ \to \varepsilon$} (4)
                  ;
              \end{tikzpicture}
-             \caption{Il PDA $M$.}
+             \caption{Il PDA $P$.}
         \end{figure}
 
         La notazione $a; b \to c$ presente sugli archi di questo diagramma sta ad indicare che se viene letto il simbolo $a$ dall'input, $M$ può sostituire $b$, se in cima al suo stack (attraverso un'operazione di \tit{pop}) con $c$ (mediante un'operazione di \tit{push}). Si noti inoltre che ognuno dei simboli può essere $\varepsilon$, e dunque
@@ -1793,4 +1793,71 @@
     %     Sia $M$ un DPDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{DCFL} (\tit{Deterministic Context-Free Language}).
     % \end{frameddefn}
 
+    \chapter{TODO}
+
+    \section{Macchine di Turing}
+
+    \subsection{Definizioni}
+
+    \begin{frameddefn}[breakable]{TM}
+        Una \tbf{TM} (\tit{Turing Machine}) è un automa fornito di un nastro illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
+
+        Formalmente, una TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove
+
+        \begin{itemize}
+            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
+            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}, tale che $\blankchar \notin \Sigma$
+            \item $\Gamma$ è l'\tbf{alfabeto del nastro}, un insieme \tit{finito} tale che $\Sigma \subseteq \Gamma$ e $\blankchar \in \Gamma$
+            \item $\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R\}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
+            \item $q_0 \in Q$ è lo \tbf{stato iniziale}
+            \item $q_\mathrm{accept} \in Q$ è lo \tbf{stato di accettazione}
+            \item $q_\mathrm{reject} \in Q$ è lo \tbf{stato di rifiuto}, tale che $q_\mathrm{accept} \neq q_\mathrm{reject}$
+        \end{itemize}
+
+        Si noti che il nastro di una TM può essere limitato a destra, limitato a sinistra, o illimitato da entrambe le estremità, poiché è possibile dimostrare l'equivalenza delle 3 tipologie di nastri descritti; dunque, all'interno di questi appunti, a meno di specifica, si assume che la TM in questione è costituita da un nastro limitato a sinistra.
+
+        Inizialmente, il nastro di una macchina di Turing contiene solamente la stringa di input, e tutto il resto è vuoto, dunque la TM riceve una stringa di input $w = w_1 \ldots w_n \in \Sigma^*$ sulle $n$ celle più a sinistra del nastro, e le celle restanti contengono il simbolo $\sqcup$ (letto \curlyquotes{\tit{blank}}).
+
+        Per la computazione delle TM, si noti la segnatura della funzione di transizione $\delta$: essa considera lo stato corrente ed il carattere che si trova sulla cella puntata dalla testina, e restituisce il prossimo stato, il carattere con cui sovrascrivere la cella corrente, e una direzione da prendere, indicata con $\mathrm L$ (\tit{left}, e dunque la testina si sposterà a sinistra) o $\mathrm R$ (\tit{right}, e dunque la testina si sposterà a destra). Se la testina si trova sulla prima cella --- quella più a sinistra, nell'assunzione considerata --- e prova a spostarsi a sinistra, essa non effettuerà alcuno spostamento. Si noti che, se la TM non raggiunge mai lo stato di accettazione o di rifiuto, la macchina non può terminare e la computazione proseguirà per sempre.
+    \end{frameddefn}
+
+    \begin{example}[TM]
+        Un esempio di TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ è il seguente:
+
+        \begin{itemize}
+            \item $Q = \{q_\mathrm{accept}, q_\mathrm{reject}, q_0, q_1, q_2, q_3\}$
+            \item $\Sigma = \{\ttt 0, \ttt 1\}$
+            \item $\Gamma = \{\sqcup, \ttt 0, \ttt 1, \ttt x, \ttt y\}$
+        \end{itemize}
+
+        e $\delta$ segue dal suo diagramma:
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[initial,state,accepting] (1) {$q_0$};
+                \node[state] (2) [above right of=1] {$q_1$};
+                \node[state] (3) [right of=2] {$q_2$};
+                \node[state] (4) [below right of=3] {$q_\mathrm{accept}$};
+                \node[state] (5) [below right of=1] {$q_\mathrm{reject}$};
+     
+                \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node {$0 \to \ttt x; \mathrm R$} (2)
+                    (2) edge [loop above] node {$\ttt 1 \to \ttt y ; \mathrm R$} (2)
+                    (2) edge [bend left, left] node {$\ttt \blankchar \to \blankchar ; \mathrm R$} (5)
+                    (2) edge node {$\ttt 0 \to \ttt x; \mathrm R$} (3)
+                    (3) edge [bend left] node {$\centeredsoe{\ttt 0 \to \ttt 0 ; \mathrm R \\ \ttt 1 \to \ttt 1 ; \mathrm R}$} (5)
+                    (3) edge node {$\blankchar \to \blankchar ; \mathrm R$} (4)
+                    (1) edge [bend right, left] node {$\centeredsoe{\blankchar \to \blankchar ; \mathrm R\\ \ttt 1 \to \ttt 1 ; \mathrm R}$} (5)
+                 ;
+             \end{tikzpicture}
+             \caption{La TM $M$.}
+         \end{figure}
+         
+         La notazione $a \to b;c$ presente sugli archi di questo diagramma sta ad indicare che viene letto il simbolo $a \in \Gamma$ sulla cella puntata correntemente dalla testina, questo viene rimpiazzato col simbolo $b \in \Gamma$, e la testina si sposta verso $c \in \{\mathrm L, \mathrm R\}$.
+    \end{example}
+
+    \begin{frameddefn}{Turing-riconoscibilità}
+        Un linguaggio è detto \tbf{Turing-riconoscibile} se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$.
+    \end{frameddefn}
 \end{document}

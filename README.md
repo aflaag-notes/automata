@@ -18,4 +18,6 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - tutto
 - appunti 17/11
     - da finire
+- appunti 22/11
+    - da finire
 
