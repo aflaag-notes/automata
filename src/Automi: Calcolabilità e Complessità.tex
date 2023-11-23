@@ -361,7 +361,7 @@
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (NFA)}
-        Sia $N = (Q, \Sigma, \delta, q_0, F)$ un NFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
+        Sia $N = (Q, \Sigma, \delta, q_0, F)$ un NFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $N$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
             \item $r_0 = q_0$
@@ -1294,7 +1294,7 @@
     \end{example}
 
     \begin{frameddefn}{Stringhe accettate (PDA)}
-        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma_\varepsilon$; allora, $M$ \tbf{accetta} $w$ se esistono una sequenza di stati $r_0, \ldots, r_n \in Q$ e una sequenza di stringhe $s_0, \ldots, s_n \in \Gamma ^*$ tali per cui
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma_\varepsilon$; allora, $P$ \tbf{accetta} $w$ se esistono una sequenza di stati $r_0, \ldots, r_n \in Q$ e una sequenza di stringhe $s_0, \ldots, s_n \in \Gamma ^*$ tali per cui
 
         \begin{itemize}
             \item $r_0 = q_0$
@@ -1360,7 +1360,7 @@
     \subsection{Equivalenze}
 
     \begin{frameddefn}[label={insert stack}]{Inserimento di stringhe nello stack}
-        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \ldots u_k \in \Gamma^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \ldots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$.
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \cdots u_k \in \Gamma^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \cdots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$.
     \end{frameddefn}
 
     \begin{example}[Inserimenti di stringhe nello stack]
@@ -1799,7 +1799,7 @@
 
     \subsection{Definizioni}
 
-    \begin{frameddefn}[breakable]{TM}
+    \begin{frameddefn}[label={tm}, breakable]{TM}
         Una \tbf{TM} (\tit{Turing Machine}) è un automa fornito di un nastro illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
 
         Formalmente, una TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove
@@ -1860,8 +1860,42 @@
          Si noti che, all'interno dei diagrammi delle TM, lo stato di rifiuto, e gli archi in esso entranti, sono generalmente omessi per brevità, implicitando che ogni stato $q$ che non presenta transizioni esplicitamente rappresentate descrive in realtà archi $(q, q_\mathrm{reject})$.
     \end{example}
 
+    \subsection{Configurazioni di TM}
+
+    \begin{frameddefn}{Configurazione (TM)}
+        Sia $M= (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una TM; con il simbolismo $$u \ q \ v$$ per certi $u, v \in \Gamma^*, q \in Q$ si denota una \tbf{configurazione} di $M$, dove $q$ rappresenta lo stato attuale della computazione di un certo input, $uv$ è la stringa che descrive il nastro (si assume che, dopo l'ultimo simbolo di $v$, il nastro contenga solo $\blankchar$), e la posizione della testina è sul primo simbolo di $v$.
+    \end{frameddefn}
+
+    \begin{example}[Configurazioni di TM]
+        Data la seguente TM
+
+        \centeredimage{0.3}{../assets/tm_ex.png}
+
+        si ha che la sua configurazione è $$\ttt{1011} \ q_7 \ \ttt{01111}$$
+    \end{example}
+
+    \begin{frameddefn}{Produzione di configurazioni}
+        Siano $C_1$ e $C_2$ due configurazioni di una certa macchina di Turing descritta dalla 7-tupla $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$; si dice che \tbf{$C_1$ produce $C_2$} se e solo se $M$ può passare da $C_1$ a $C_2$ in un unico passo. In simboli $$\centeredsoe{ua \ q_i \ bv \quad \mathrm{produce} \quad u \ q_j \ acv \iff \delta(q_i, b) = (q_j, c, \mathrm L) \\ ua \ q_i \ bv \quad \mathrm{produce} \quad uac \ q_j v \iff \delta(q_i, b) = (q_j, c, \mathrm R)}$$ per certi $u, v \in \Gamma^*$, $a, b, c \in \Gamma$ e $q_i, q_j \in Q$.
+    \end{frameddefn}
+
+    \begin{framedobs}{Configurazioni particolari}
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una TM; se la TM si trova sull'estremità sinistra del nastro, dunque sul primo carattere, la configurazione corrente è $q_i \ bv$ per certi $q_i \in Q$ e $b \in \Gamma, v \in \Gamma^*$; dunque, se si verifica una transizione che comporta una mossa a sinistra ed un rimpiazzo sel simbolo $b$ con $c \in \Gamma$, per quando detto nella \cref{tm}, si ha che la prossima configurazione di $M$ sarà $q_j \ cv$ per qualche $q_j \in Q$. Se invece la TM si trova sull'estremità destra --- dunque al termine dell'input fornito sul nastro --- la configurazione corrente è $ua \ q_i \ \blankchar$ per certi $q_i \in Q$ e $a \in \Gamma, u \in \Gamma^*$, ma per brevità il simbolo $\blankchar$ verrà omesso, assumendo che i simboli $\blankchar$ seguano la parte del nastro rappresentata dalla configurazione.
+
+        Dunque, dato un input $w$, posto sul nastro, la \tit{configurazione iniziale} di $M$ è denotata con $q_0 \ w$, mentre le \tit{configurazioni di accettazione e rifiuto} --- dette anche \tit{configurazioni di arresto}, poiché non producono ulteriori configurazioni --- sono descritte rispettivamente con $q_\mathrm{accept}$ e $q_\mathrm{reject}$.
+    \end{framedobs}
+
+    \begin{frameddefn}{Stringhe accettate (TM)}
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una TM, e sia $w = w_1 \cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di configurazioni $C_0, \ldots, C_n$ tali per cui
+
+        \begin{itemize}
+            \item $C_0 = q_0 \ w$
+            \item $\forall i \in [0, n - 1] \quad C_i \ \mathrm{produce} \ C_{i + 1}$
+            \item $C_n = q_\mathrm{accept}$
+        \end{itemize}
+    \end{frameddefn}
+
     \begin{frameddefn}{Turing-riconoscibilità}
-        Un linguaggio è detto \tbf{Turing-riconoscibile} se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$, dunque in simboli $$L \in \mathrm{REC} \iff \exists M \in \mathrm{TM} \mid L(M) = L$$
+        Un linguaggio è detto \tbf{Turing-riconoscibile} (o \tbf{ricorsivamente enumerabile}) se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$, dunque in simboli $$L \in \mathrm{REC} \iff \exists M \in \mathrm{TM} \mid L(M) = L$$
     \end{frameddefn}
 
     \begin{example}[Linguaggi Turing-riconoscibili]
@@ -1892,6 +1926,37 @@
     \end{framedobs}
 
     \begin{frameddefn}{Turing-decidibilità}
-        Un linguaggio è detto \tbf{Turing-decidibile} se esiste un decisore che lo riconosce. La classe dei linguaggi Turing-decidibili è denotata con $\mathrm{DEC}$.
+        Un linguaggio è detto \tbf{Turing-decidibile} (o \tbf{ricorsivo}) se esiste un decisore che lo riconosce. La classe dei linguaggi Turing-decidibili è denotata con $\mathrm{DEC}$.
     \end{frameddefn}
+
+    \begin{framedobs}{Turing-decidibilità}
+        Si noti che $\mathrm{DEC} \subseteq \mathrm{CEC}$, poiché un linguaggio turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa
+    \end{framedobs}
+
+    \section{Varianti di macchine di Turing}
+
+    \subsection{Macchina di Turing con testina ferma}
+
+    \begin{frameddefn}{Macchina di Turing con testina ferma}
+        Sia \tbf{macchina di Turing con testina ferma} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{\mathrm L, \mathrm R, \mathrm S\}}$$ in cui il simbolo $\mathrm S$ (\tit{stay}) indica che la testina della TM non si muove.
+    \end{frameddefn}
+
+    \begin{framedprop}{Equivalenza delle TM con testina ferma}
+        Sia $M$ una macchina di Turing con testina ferma, allora esiste una TM $M'$ ad essa equivalente.
+    \end{framedprop}
+
+    \proofiff{
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una macchina di Turing con testina ferma; di conseguenza, nel prodotto cartesiano del codominio di $\delta$ è presente l'insieme $\{ \mathrm L, \mathrm R, \mathrm S\}$, e dunque per costruire una macchina di Turing $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ equivalente ad $M$, è sufficiente inserire nuovi stati in $Q'$ tali che $$\forall p, q \in Q, a, b \in \Gamma \quad \delta(p, a) = (q, b, \mathrm S) \implies \exists r \in Q' \mid \soe{l}{\delta'(p, a) = (r, b, \mathrm R) \\ \delta'(r, \gamma) = (p, \gamma, \mathrm L)}$$ per un certo $\gamma \in \Gamma$, dove $r \in Q'$ è il nuovo stato, dunque facendo spostare la testina in una direzione --- in questo caso, verso destra --- e poi facendola spostare nuovamente nella direzione opposta --- dunque in questo caso, verso sinistra.
+    }{
+        Sia $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ una TM; allora, la segnatura della funzione di transizione di $M'$ segue dalla \cref{tm}, dunque nel prodotto cartesiano del suo codominio è presente l'insieme $\{\mathrm L, \mathrm R\}$, e poiché $$\{\mathrm L, \mathrm R\} \subseteq \{\mathrm L, \mathrm R, \mathrm S\}$$ allora è possibile considerare $M'$ stessa come macchina di Turing con testina ferma, che però non presenta mai il simbolo $\mathrm S$ all'interno delle transizioni.
+    }
+
+    \subsection{Macchina di Turing multinastro}
+
+    TODO
+
+    \subsection{Macchina di Turing non deterministica}
+
+    TODO
+
 \end{document}
