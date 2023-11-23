@@ -1818,10 +1818,11 @@
 
         Inizialmente, il nastro di una macchina di Turing contiene solamente la stringa di input, e tutto il resto è vuoto, dunque la TM riceve una stringa di input $w = w_1 \ldots w_n \in \Sigma^*$ sulle $n$ celle più a sinistra del nastro, e le celle restanti contengono il simbolo $\sqcup$ (letto \curlyquotes{\tit{blank}}).
 
-        Per la computazione delle TM, si noti la segnatura della funzione di transizione $\delta$: essa considera lo stato corrente ed il carattere che si trova sulla cella puntata dalla testina, e restituisce il prossimo stato, il carattere con cui sovrascrivere la cella corrente, e una direzione da prendere, indicata con $\mathrm L$ (\tit{left}, e dunque la testina si sposterà a sinistra) o $\mathrm R$ (\tit{right}, e dunque la testina si sposterà a destra). Se la testina si trova sulla prima cella --- quella più a sinistra, nell'assunzione considerata --- e prova a spostarsi a sinistra, essa non effettuerà alcuno spostamento. Si noti che, se la TM non raggiunge mai lo stato di accettazione o di rifiuto, la macchina non può terminare e la computazione proseguirà per sempre.
+        Per la computazione delle TM, si noti la segnatura della funzione di transizione $\delta$: essa considera lo stato corrente ed il carattere che si trova sulla cella puntata dalla testina, e restituisce il prossimo stato, il carattere con cui sovrascrivere la cella corrente, e una direzione da prendere, indicata con $\mathrm L$ (\tit{left}, e dunque la testina si sposterà a sinistra) o $\mathrm R$ (\tit{right}, e dunque la testina si sposterà a destra). Se la testina si trova sulla prima cella --- quella più a sinistra, nell'assunzione considerata --- e prova a spostarsi a sinistra, essa non effettuerà alcuno spostamento. Si noti che, se la TM non raggiunge mai lo stato di accettazione o di rifiuto, la macchina non può terminare e la computazione proseguirà per sempre (\tit{looping}).
     \end{frameddefn}
 
     \begin{example}[TM]
+        \label{tm ex}
         Un esempio di TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ è il seguente:
 
         \begin{itemize}
@@ -1835,14 +1836,14 @@
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
-                \node[initial,state,accepting] (1) {$q_0$};
+                \node[initial,state] (1) {$q_0$};
                 \node[state] (2) [above right of=1] {$q_1$};
                 \node[state] (3) [right of=2] {$q_2$};
                 \node[state] (4) [below right of=3] {$q_\mathrm{accept}$};
                 \node[state] (5) [below right of=1] {$q_\mathrm{reject}$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge node {$0 \to \ttt x; \mathrm R$} (2)
+                    (1) edge node {$\ttt 0 \to \ttt x; \mathrm R$} (2)
                     (2) edge [loop above] node {$\ttt 1 \to \ttt y ; \mathrm R$} (2)
                     (2) edge [bend left, left] node {$\ttt \blankchar \to \blankchar ; \mathrm R$} (5)
                     (2) edge node {$\ttt 0 \to \ttt x; \mathrm R$} (3)
@@ -1854,10 +1855,43 @@
              \caption{La TM $M$.}
          \end{figure}
          
-         La notazione $a \to b;c$ presente sugli archi di questo diagramma sta ad indicare che viene letto il simbolo $a \in \Gamma$ sulla cella puntata correntemente dalla testina, questo viene rimpiazzato col simbolo $b \in \Gamma$, e la testina si sposta verso $c \in \{\mathrm L, \mathrm R\}$.
+         La notazione $a \to b;c$ presente sugli archi di questo diagramma sta ad indicare che viene letto il simbolo $a \in \Gamma$ sulla cella puntata correntemente dalla testina, questo viene rimpiazzato col simbolo $b \in \Gamma$, e la testina si sposta verso $c \in \{\mathrm L, \mathrm R\}$. Dunque, per non sovrascrivere la cella corrente, è sufficiente porre $a \to a; c$ come etichetta dell'arco in questione.
+         
+         Si noti che, all'interno dei diagrammi delle TM, lo stato di rifiuto, e gli archi in esso entranti, sono generalmente omessi per brevità, implicitando che ogni stato $q$ che non presenta transizioni esplicitamente rappresentate descrive in realtà archi $(q, q_\mathrm{reject})$.
     \end{example}
 
     \begin{frameddefn}{Turing-riconoscibilità}
-        Un linguaggio è detto \tbf{Turing-riconoscibile} se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$.
+        Un linguaggio è detto \tbf{Turing-riconoscibile} se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$, dunque in simboli $$L \in \mathrm{REC} \iff \exists M \in \mathrm{TM} \mid L(M) = L$$
+    \end{frameddefn}
+
+    \begin{example}[Linguaggi Turing-riconoscibili]
+        Si consideri la TM $M$ descritta all'interno dell'\cref{tm ex}; si noti che essa, per sua costruzione, è in grado di riconoscere il linguaggio $L$ descritto dall'espressione regolare $\ttt 0 \ttt 1^* \ttt 1$, poiché si comporta come segue:
+
+        \begin{itemize}
+            \item partendo dallo stato iniziale $q_0$, se viene letto uno \ttt 0, la TM lo sovrascrive con il carattere \ttt x, e si sposta a destra, andando nello stato $q_1$;
+            \item se ora viene letto un \ttt 1, la TM lo sovrascrive con il carattere \ttt y, e si sposta ancora a destra, ma rimane nello stato $q_1$;
+            \item se ora viene letto uno \ttt 0, la TM lo sovrascrive con il carattere \ttt x, e si sposta ancora a destra, andando nello stato $q_2$;
+            \item infine, se viene letto $\blankchar$, la macchina non sovrascrive il carattere, si sposta a destra (la direzione è irrilevante in questo caso) e termina accettando l'input --- dunque andando nello stato $q_\mathrm{accept}$;
+        \end{itemize}
+
+        In ogni altro caso, la macchina rifiuta immediatamente.
+
+        Allora, poiché esiste una TM $M$ tale per cui $L(M) = L$, si ha che $L \in \mathrm{REC}$.
+    \end{example}
+
+    \begin{example}[Linguaggi Turing-riconoscibili]
+        TODO
+    \end{example}
+
+    \begin{frameddefn}{Decisore}
+        Una macchina di Turing è detta \tbf{decisore} se termina sempre, dunque se accetta o rifiuta per qualsiasi input, non andando mai in \tit{loop}.
+    \end{frameddefn}
+
+    \begin{framedobs}{Decisori}
+        Data una TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$, e ponendo $$\centeredsoe{L(M) := \{w \in \Sigma^* \mid M \ \mathrm{accetta} \ w\} \\ R(M) := \{w \in \Sigma^* \mid M \ \mathrm{rifiuta} \ w\}}$$ si ha che, in generale $$L(M) \cup R(M) \subseteq \Sigma^*$$ poiché $M$ potrebbe andare in loop, e dunque $$M \ \mathrm{decisore} \iff L(M) \cup R(M) = \Sigma^*$$
+    \end{framedobs}
+
+    \begin{frameddefn}{Turing-decidibilità}
+        Un linguaggio è detto \tbf{Turing-decidibile} se esiste un decisore che lo riconosce. La classe dei linguaggi Turing-decidibili è denotata con $\mathrm{DEC}$.
     \end{frameddefn}
 \end{document}

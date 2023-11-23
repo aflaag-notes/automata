@@ -17,6 +17,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - FAI GLI ALBERI
     - tutto
 - appunti 17/11
+    - pumping lemma cfl
     - da finire
 - appunti 22/11
     - da finire
