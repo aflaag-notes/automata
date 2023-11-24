@@ -1927,22 +1927,24 @@
 
     \begin{frameddefn}{Turing-decidibilità}
         Un linguaggio è detto \tbf{Turing-decidibile} (o \tbf{ricorsivo}) se esiste un decisore che lo riconosce. La classe dei linguaggi Turing-decidibili è denotata con $\mathrm{DEC}$.
+
+        Simmetricamente, se un linguaggio $L$ è Turing-decidibile per qualche decisore $M$, allora si dice che $M$ \tbf{decide} $L$.
     \end{frameddefn}
 
     \begin{framedobs}{Turing-decidibilità}
-        Si noti che $\mathrm{DEC} \subseteq \mathrm{CEC}$, poiché un linguaggio turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa
+        Si noti che $\mathrm{DEC} \subseteq \mathrm{CEC}$, poiché un linguaggio turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
     \end{framedobs}
 
     \section{Varianti di macchine di Turing}
 
     \subsection{Macchina di Turing con testina ferma}
 
-    \begin{frameddefn}{Macchina di Turing con testina ferma}
-        Sia \tbf{macchina di Turing con testina ferma} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{\mathrm L, \mathrm R, \mathrm S\}}$$ in cui il simbolo $\mathrm S$ (\tit{stay}) indica che la testina della TM non si muove.
+    \begin{frameddefn}[label={stay tm}]{Macchina di Turing con testina ferma}
+        Una \tbf{macchina di Turing con testina ferma} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{\mathrm L, \mathrm R, \mathrm S\}}$$ in cui il simbolo $\mathrm S$ (\tit{stay}) indica che la testina della TM non si muove.
     \end{frameddefn}
 
-    \begin{framedprop}{Equivalenza delle TM con testina ferma}
-        Sia $M$ una macchina di Turing con testina ferma, allora esiste una TM $M'$ ad essa equivalente.
+    \begin{framedprop}[label={stay tm equiv}]{Equivalenza delle TM con testina ferma}
+        Sia $M$ una macchina di Turing con testina ferma; allora esiste una TM $M'$ ad essa equivalente.
     \end{framedprop}
 
     \proofiff{
@@ -1953,7 +1955,19 @@
 
     \subsection{Macchina di Turing multinastro}
 
-    TODO
+    \begin{frameddefn}[label={multitape}]{Macchina di Turing multinastro}
+        Una \tbf{macchina di Turing multinastro} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma^k}{Q \times \Gamma^k \times \{ \mathrm L, \mathrm R, \mathrm S\}^k}$$ dove $k \ge 1$ è il numero di nastri della macchina.
+    \end{frameddefn}
+
+    \begin{framedprop}{Equivalenza delle TM multinastro}
+        Sia $M$ una macchina di Turing multinastro; allora esiste una TM $M'$ ad essa equivalente.
+    \end{framedprop}
+
+    \proofiff{
+        TODO
+    }{
+        Per $k = 1$, si ha che la funzione di transizione $\delta$ descritta nella \cref{multitape} diventa $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R, \mathrm S\}}$$ che rappresenta la funzione di transizione delle macchine di Turing con testina ferma (si veda la \cref{stay tm}); allora, per la \cref{stay tm equiv}, si ha che ogni macchina di Turing $M'$, poiché è anche una macchina di Turing con testina ferma, è una macchina di Turing multinastro avente $k = 1$ nella funzione $\delta$.
+    }
 
     \subsection{Macchina di Turing non deterministica}
 
