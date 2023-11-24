@@ -21,4 +21,6 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - da finire
 - appunti 22/11
     - da finire
+- appunti 24/11
+    - tutto
 

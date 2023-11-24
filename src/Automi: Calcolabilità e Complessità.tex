@@ -1800,7 +1800,7 @@
     \subsection{Definizioni}
 
     \begin{frameddefn}[label={tm}, breakable]{TM}
-        Una \tbf{TM} (\tit{Turing Machine}) è un automa fornito di un nastro illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
+        Una \tbf{TM} (\tit{Turing Machine}) è un automa fornito di un nastro (o \tit{tape}) illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
 
         Formalmente, una TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove
 
@@ -1956,15 +1956,31 @@
     \subsection{Macchina di Turing multinastro}
 
     \begin{frameddefn}[label={multitape}]{Macchina di Turing multinastro}
-        Una \tbf{macchina di Turing multinastro} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma^k}{Q \times \Gamma^k \times \{ \mathrm L, \mathrm R, \mathrm S\}^k}$$ dove $k \ge 1$ è il numero di nastri della macchina.
+        Una \tbf{macchina di Turing multinastro} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma^k}{Q \times \Gamma^k \times \{ \mathrm L, \mathrm R, \mathrm S\}^k}$$ dove $k \ge 1$ è il numero di nastri --- e di testine --- della macchina.
     \end{frameddefn}
+
+    \begin{framedobs}[label={tape shift}]{Operazione di \tit{shift} sul nastro}
+        Le macchine di Turing sono in grado di effettuare operazioni di \tit{shift} di 1 cella a destra o a sinistra dell'intero nastro, semplicemente scansionando tutto quest'ultimo, e rimpiazzando ogni carattere con quello letto precedentemente.
+    \end{framedobs}
+
+    \begin{framedobs}[label={tape start}]{Inizio del nastro}
+        Una TM non è in grado di sapere se la sua testina si trova all'inizio dell'input, ma è possibile ottenere questo comportamento effettuando uno \tit{shift} a destra dell'intero nastro (si noti l'\cref{tape shift}), e successivamente ponendo un simbolo sentinella --- dunque che non sia già presente nell'alfabeto del nastro --- nella prima cella.
+    \end{framedobs}
 
     \begin{framedprop}{Equivalenza delle TM multinastro}
         Sia $M$ una macchina di Turing multinastro; allora esiste una TM $M'$ ad essa equivalente.
     \end{framedprop}
 
     \proofiff{
-        TODO
+        Sia $M$ una macchina di Turing multinastro; si vuole dunque costruire una macchina di Turing $M'$ tale da simulare $M$. Poiché $M'$ è una TM, essa è costituita da un solo nastro, e qunque per simulare $M$ è necessario suddividere il nastro di $M'"$ in regioni, che saranno delimitate da un nuovo carattere \ttt \#, e per simulare le testine di ogni nastro, verrà utilizzata una versione marcata dei caratteri in $\Gamma$, al fine di segnare \curlyquotes{virtualmente} la posizione di ogni testina in ogni nastro. Dunque, dato un input $w = w_1 \cdots w_n$ sul nastro di $M'$, si ha che:
+
+        \begin{itemize}
+            \item inizialmente $M'$ trasforma il nastro nel formato descritto, e dunque da $$w_1 w_2 \cdots w_n \ \blankchar \ldots$$ viene effetuato uno \tit{shift} a destra del nastro (si veda l'\cref{tape shift}), anteposto il carattere \ttt \# al suo inizio (si veda l'\cref{tape start}), e successivamente inseriti i seguenti caratteri marcati per segnare le testine virtuali: $$\ttt \# \stackrel{\bullet}{w_1} w_2 \cdots w_n \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \ldots \ \ttt \#$$
+            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiornando oppurtunamente i simboli marcati con TODO per simulare lo spostamento di ogni testina su ogni nastro; successivamente, viene effettuaa una seconda scansione, per simulare i rimpiazzi dei simboli sulle celle, descritti dalla $\delta$;
+            \item se una qualsiasi testina virtuale effettua uno spostamento a destra, e si trova su un \ttt \# --- dunque a cavallo tra 2 nastri simulati --- allora $M'$ deve simulare il fatto che, nel nastro reale, la reale testina in $M$ starebbe leggendo una porzione di nastro vuota, non letta precedentemente; allora, viene effettuato uno \tit{shift} verso destra di tutto il nastro di $M'$, dalla cella corrente in poi, e sulla cella corrente viene posto il carattere $\blankchar$;
+        \end{itemize}
+
+        Di conseguenza, $M'$ risulta essere in grado di simulare correttamente il comportamento di ogni nastro della macchina di Turing multinastro $M$, e dunque segue la tesi.
     }{
         Per $k = 1$, si ha che la funzione di transizione $\delta$ descritta nella \cref{multitape} diventa $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R, \mathrm S\}}$$ che rappresenta la funzione di transizione delle macchine di Turing con testina ferma (si veda la \cref{stay tm}); allora, per la \cref{stay tm equiv}, si ha che ogni macchina di Turing $M'$, poiché è anche una macchina di Turing con testina ferma, è una macchina di Turing multinastro avente $k = 1$ nella funzione $\delta$.
     }
