@@ -175,8 +175,8 @@
 
     \subsection{Definizioni}
 
-    \begin{frameddefn}{DFA}
-        Un \textbf{DFA} (\tit{Deterministic Finite Automaton}) è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
+    \begin{frameddefn}{\DFA}
+        Un \textbf{\DFA} (\tit{Deterministic Finite Automaton}) è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
 
         \begin{itemize}
             \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
@@ -188,8 +188,8 @@
 
     \end{frameddefn}
 
-    \begin{example}[DFA]
-        Un esempio di DFA è il seguente:
+    \begin{example}[\DFA]
+        Un esempio di \DFA è il seguente:
 
         \begin{figure}[H]
             \centering
@@ -206,7 +206,7 @@
                     (2) edge [loop above] node {\ttt 1} (2)
                  ;
              \end{tikzpicture}
-             \caption{Un DFA.}
+             \caption{Un \DFA.}
         \end{figure}
 
         esso può essere descritto secondo la quintupla $(Q, \Sigma, \delta, q_0, F)$ come segue:
@@ -220,8 +220,8 @@
         \end{itemize}
     \end{example}
 
-    \begin{frameddefn}{Stringhe accettate (DFA)}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
+    \begin{frameddefn}{Stringhe accettate (\DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
             \item $r_0 = q_0$
@@ -268,11 +268,11 @@
     \subsection{Linguaggi regolari}
 
     \begin{frameddefn}[label={ling reg}]{Linguaggio regolare}
-        Un linguaggio è detto \tbf{regolare} se e solo se esiste un DFA che lo riconosce. La classe dei linguaggi regolari è denotata con $\mathrm{REG}$. Allora, in simboli, si ha che $$\mathrm{REG} := \mathcal{L}(\mathrm{DFA})$$
+        Un linguaggio è detto \tbf{regolare} se e solo se esiste un \DFA che lo riconosce. La classe dei linguaggi regolari è denotata con $\mathrm{\REG}$. Allora, in simboli, si ha che $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA})$$
     \end{frameddefn}
 
     \begin{example}[Linguaggi regolari]
-        Sia $\Sigma = \{ \ttt 0, \ttt 1 \}$ l'alfabeto binario, ed $L$ il seguente linguaggio: $$L := \{w \mid w = \ttt 0^n \ttt 1, n \in \N - \{ 0 \}\}$$ Tale linguaggio è regolare, poiché esiste il seguente DFA che lo riconosce:
+        Sia $\Sigma = \{ \ttt 0, \ttt 1 \}$ l'alfabeto binario, ed $L$ il seguente linguaggio: $$L := \{w \mid w = \ttt 0^n \ttt 1, n \in \N - \{ 0 \}\}$$ Tale linguaggio è regolare, poiché esiste il seguente \DFA che lo riconosce:
 
         \begin{figure}[H]
             \centering
@@ -291,7 +291,7 @@
                     (2) edge [loop above] node {\ttt 0} (2)
                  ;
              \end{tikzpicture}
-             \caption{Un DFA che riconosce $L$.}
+             \caption{Un \DFA che riconosce $L$.}
          \end{figure}
     \end{example}
 
@@ -299,10 +299,10 @@
 
     \subsection{Definizioni}
     
-    \begin{frameddefn}{NFA}
-        Un \tbf{NFA} (\tit{Nondeterministic Finite Automaton}) è un automa in cui possono esistere varie scelte per lo stato successivo in ogni punto. Durante la computazione, ogni volta che viene incontrata una scelta, la macchina si \tit{divide}, e ognuno dei vari automi risultanti computa le varie scelte indipendentemente.
+    \begin{frameddefn}{\NFA}
+        Un \tbf{\NFA} (\tit{Nondeterministic Finite Automaton}) è un automa in cui possono esistere varie scelte per lo stato successivo in ogni punto. Durante la computazione, ogni volta che viene incontrata una scelta, la macchina si \tit{divide}, e ognuno dei vari automi risultanti computa le varie scelte indipendentemente.
 
-        Formalmente, un NFA è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
+        Formalmente, un \NFA è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
 
         \begin{itemize}
             \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
@@ -314,14 +314,14 @@
 
         dove $\Sigma_{\varepsilon} := \Sigma \cup \{\varepsilon\}$.
 
-        Se il simbolo di input successivo non compare su alcuno degli archi uscenti dallo stato occupato da una copia della macchina, quella copia cessa di proseguire; inoltre, se \tit{una qualunque copia} della macchina è in uno stato accettante, l'NFA accetta la stringa di input. Si noti che questa divisione è descritta dall'insieme potenza $\mathcal{P}(Q)$, poiché da ogni stato si può arrivare ad un \tit{insieme} di stati.
+        Se il simbolo di input successivo non compare su alcuno degli archi uscenti dallo stato occupato da una copia della macchina, quella copia cessa di proseguire; inoltre, se \tit{una qualunque copia} della macchina è in uno stato accettante, l'\NFA accetta la stringa di input. Si noti che questa divisione è descritta dall'insieme potenza $\mathcal{P}(Q)$, poiché da ogni stato si può arrivare ad un \tit{insieme} di stati.
 
-        Si noti che il determinismo è un caso particolare di non determinismo, dunque un DFA è sempre anche un NFA; in simboli $\mathrm{DFA} \subseteq \mathrm{NFA}$.
+        Si noti che il determinismo è un caso particolare di non determinismo, dunque un \DFA è sempre anche un \NFA; in simboli $\mathrm{\DFA} \subseteq \mathrm{\NFA}$.
     \end{frameddefn}
 
-    \begin{example}[NFA]
+    \begin{example}[\NFA]
         \label{nfa exec}
-        Un esempio di NFA è il seguente:
+        Un esempio di \NFA è il seguente:
 
         \begin{figure}[H]
             \centering
@@ -339,7 +339,7 @@
                     (4) edge [loop above] node {\ttt{0},\ttt{1}} (4)
                  ;
              \end{tikzpicture}
-             \caption{L'NFA $N$.}
+             \caption{L'\NFA $N$.}
 
         \end{figure}
 
@@ -360,8 +360,8 @@
         \imp{Nota} nel momento in cui vengono incontrati $\varepsilon$-archi, si giunge allo stato successivo della computazione nello stesso step dell'input appena elaborato, senza produrre un passo ulteriore, producendo inoltre un nuovo ramo di computazione.
     \end{example}
 
-    \begin{frameddefn}{Stringhe accettate (NFA)}
-        Sia $N = (Q, \Sigma, \delta, q_0, F)$ un NFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $N$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
+    \begin{frameddefn}{Stringhe accettate (\NFA)}
+        Sia $N = (Q, \Sigma, \delta, q_0, F)$ un \NFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $N$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
 
         \begin{itemize}
             \item $r_0 = q_0$
@@ -376,14 +376,14 @@
         Due automi si dicono \tbf{equivalenti} se e solo se riconoscono lo stesso linguaggio.
     \end{frameddefn}
 
-    \begin{framedthm}[label={nfa equiv}]{DFA ed NFA}
-        Le classi dei DFA e degli NFA sono equivalenti; in simboli $$\mathcal{L}(\mathrm{NFA}) = \mathcal{L}(\mathrm{DFA})$$
+    \begin{framedthm}[label={nfa equiv}]{\DFA ed \NFA}
+        Le classi dei \DFA e degli \NFA sono equivalenti; in simboli $$\mathcal{L}(\mathrm{\NFA}) = \mathcal{L}(\mathrm{\DFA})$$
     \end{framedthm}
 
     \proofiff{
-        Si noti che $$\mathcal{L}(\mathrm{NFA}) \subseteq \mathcal{L}(\mathrm{DFA}) \iff \forall A \in \mathcal{L}(\mathrm{NFA}) \quad \exists M \in \mathrm{DFA} \mid A = L(M)$$ Allora, sia $A \in \mathcal{L}(\mathrm{NFA})$, e dunque esiste un NFA $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ in grado di riconoscerlo. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
+        Si noti che $$\mathcal{L}(\mathrm{\NFA}) \subseteq \mathcal{L}(\mathrm{\DFA}) \iff \forall A \in \mathcal{L}(\mathrm{\NFA}) \quad \exists M \in \mathrm{\DFA} \mid A = L(M)$$ Allora, sia $A \in \mathcal{L}(\mathrm{\NFA})$, e dunque esiste un \NFA $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ in grado di riconoscerlo. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
 
-        Allora, sia $M = (Q', \Sigma, \delta', q_0', F)$ il DFA definito come segue:
+        Allora, sia $M = (Q', \Sigma, \delta', q_0', F)$ il \DFA definito come segue:
 
         \begin{itemize}
             \item $Q' := \powerset{(Q)}$, scelto tale da rappresentare ogni possibile stato di $N$;
@@ -392,17 +392,17 @@
             \item $F' := \{R \in Q' \mid \exists r \in R : r \in F\}$, che corrisponde all'insieme degli insiemi di stati di $N$ contenenti almeno uno stato accettante in $N$.
         \end{itemize}
 
-        Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il DFA costruito emula l'NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
+        Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il \DFA costruito emula l'\NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
     }{
-        Poiché il determinismo è un caso particolare del non determinismo, si ha che $\mathrm{DFA} \subseteq \mathrm{NFA} \implies \mathcal{L}(\mathrm{DFA}) \subseteq \mathcal{L}(\mathrm{NFA})$.
+        Poiché il determinismo è un caso particolare del non determinismo, si ha che $\mathrm{\DFA} \subseteq \mathrm{\NFA} \implies \mathcal{L}(\mathrm{\DFA}) \subseteq \mathcal{L}(\mathrm{\NFA})$.
     }
     
-    \begin{framedcor}[label={nfa regolare}]{Linguaggi regolari ed NFA}
-        Un linguaggio è regolare se e solo se esiste un NFA che lo riconosce; in simboli $$\mathrm{REG} = \mathcal{L}(\mathrm{NFA})$$
+    \begin{framedcor}[label={nfa regolare}]{Linguaggi regolari ed \NFA}
+        Un linguaggio è regolare se e solo se esiste un \NFA che lo riconosce; in simboli $$\mathrm{\REG} = \mathcal{L}(\mathrm{\NFA})$$
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{nfa equiv}, si ha che $$\mathrm{REG} := \mathcal{L}(\mathrm{DFA}) = \mathcal{L}(\mathrm{NFA})$$ e dunque segue la tesi.
+        Per il \cref{nfa equiv}, si ha che $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA})$$ e dunque segue la tesi.
     \end{proof}
 
     \section{Operazioni regolari}
@@ -417,12 +417,12 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cup B = \{\ttt{uno}, \ttt{due}, \ttt{tre}, \ttt{quattro}\}$$
     \end{example}
 
-    \begin{framedprop}[label={closure unione}]{Chiusura sull'unione (REG)}
+    \begin{framedprop}[label={closure unione}]{Chiusura sull'unione (\REG)}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
     \end{framedprop}
 
     \begin{proof}[Dimostrazione I]
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due DFA $$\left. \begin{array}{c}M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ il DFA definito come segue:
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due \DFA $$\left. \begin{array}{c}M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ il \DFA definito come segue:
 
         \begin{itemize}
             \item $Q := Q_1 \times Q_2 = \{(r_1, r_2) \mid r_1 \in Q_1 \land r_2 \in Q_2\}$, scelto tale in quanto permette di avere tutte le possibili combinazioni di stati dei due automi di partenza;
@@ -435,18 +435,18 @@
     \end{proof}
 
     \begin{proof}[Dimostrazione II]
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due \NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'\NFA costruito come segue:
 
         \begin{itemize}
             \item $Q := \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato, e $Q$ è scelto tale da includere sia $N_1$ che $N_2$;
-            \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione; infatti, si noti che si è posta $\delta(q_0, \varepsilon) := \{q_1, q_2\}$ in modo da collegare il nuovo stato $q_0$ a $q_1$ e $q_2$, gli stati iniziali di $N_1$ ed $N_2$ rispettivamente;
+            \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli \NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione; infatti, si noti che si è posta $\delta(q_0, \varepsilon) := \{q_1, q_2\}$ in modo da collegare il nuovo stato $q_0$ a $q_1$ e $q_2$, gli stati iniziali di $N_1$ ed $N_2$ rispettivamente;
             \item $q_0$ è il nuovo stato, che rappresenta lo stato iniziale di $N$;
             \item $F := F_1 \cup F_2$, scelto tale da costruire $N$ in modo che accetti una stringa se e solo se la accetterebbero $N_1$ o $N_2$.
         \end{itemize}
 
-        \centeredimage[Rappresentazione dell'NFA $N$ descritto.]{0.25}{../assets/union.png}
+        \centeredimage[Rappresentazione dell'\NFA $N$ descritto.]{0.25}{../assets/union.png}
 
-        Allora, l'NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per definizione.
+        Allora, l'\NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per definizione.
     \end{proof}
 
     \subsection{Intersezione}
@@ -459,12 +459,12 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{uno}, \ttt{tre}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cap B = \{\ttt{uno}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sull'intersezione (REG)}
+    \begin{framedprop}{Chiusura sull'intersezione (\REG)}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cap B$ è regolare.
     \end{framedprop}
 
     \begin{proof}
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due DFA $$\centeredsoe{M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)}$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ il DFA definito come segue:
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque esistono due \DFA $$\centeredsoe{M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)}$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $M = (Q, \Sigma, \delta, q_0, F)$ il \DFA definito come segue:
 
         \begin{itemize}
             \item $Q := Q_1 \times Q_2 = \{(r_1, r_2) \mid r_1 \in Q_1 \land r_2 \in Q_2\}$, scelto tale in quanto permette di avere tutte le possibili combinazioni di stati dei due automi di partenza;
@@ -493,23 +493,23 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{tre}, \ttt{quattro}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \circ B := \{\ttt{unotre}, \ttt{unoquattro}, \ttt{duetre}, \ttt{duequattro}\}$$
     \end{example}
 
-    \begin{framedprop}[label={closure concat}]{Chiusura sulla concatenazione (REG)}
+    \begin{framedprop}[label={closure concat}]{Chiusura sulla concatenazione (\REG)}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare.
     \end{framedprop}
 
     \begin{proof}
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due \NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'\NFA costruito come segue:
         
         \begin{itemize}
             \item $Q := Q_1 \cup Q_2$, scelto tale da includere entrambe gli automi $N_1$ ed $N_2$ di partenza;
             \item $q_0 := q_1$, scelto tale da far iniziare l'esecuzione dell'automa su $N_1$;
             \item $F := F_2$, scelto tale da far terminare l'esecuzione dell'automa su $N_2$;
-            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_2\} & q \in F_1 \land a = \varepsilon \\ \delta_2(q, a) & q \in Q_2 \end{array} \right.$, scelta tale da anteporre l'esecuzione di $N_1$ a quella di $N_2$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q \in F_1$ ma $a \neq \varepsilon$, l'esecuzione di $N_1$ non viene alterata; diversamente, se invece $q \in F_1$ e $a = \varepsilon$, all'insieme di stati $\delta_1(q, \varepsilon)$ viene aggiunto $q_2$, ovvero lo stato iniziale di $N_2$, in modo da effettuare la concatenazione tra i due NFA non deterministicamente.
+            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_2\} & q \in F_1 \land a = \varepsilon \\ \delta_2(q, a) & q \in Q_2 \end{array} \right.$, scelta tale da anteporre l'esecuzione di $N_1$ a quella di $N_2$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q \in F_1$ ma $a \neq \varepsilon$, l'esecuzione di $N_1$ non viene alterata; diversamente, se invece $q \in F_1$ e $a = \varepsilon$, all'insieme di stati $\delta_1(q, \varepsilon)$ viene aggiunto $q_2$, ovvero lo stato iniziale di $N_2$, in modo da effettuare la concatenazione tra i due \NFA non deterministicamente.
         \end{itemize}
 
-        \centeredimage[Rappresentazione dell'NFA $N$ descritto.]{0.25}{../assets/concat.png}
+        \centeredimage[Rappresentazione dell'\NFA $N$ descritto.]{0.25}{../assets/concat.png}
 
-        Allora, l'NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per definizione.
+        Allora, l'\NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per definizione.
     \end{proof}
 
     \subsection{Elevamento a potenza}
@@ -522,18 +522,18 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e sia $A = \{\ttt{uno}, \ttt{due}\}$ un linguaggio su $\Sigma$. Allora, si ha che $$A^2 = \{\varepsilon, \ttt{uno}, \ttt{due}, \ttt{unouno}, \ttt{unodue}, \ttt{dueuno}, \ttt{duedue}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sull'elevamento (REG)}
+    \begin{framedprop}{Chiusura sull'elevamento (\REG)}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$, ed $n \in \N$; allora $A^n$ è regolare.
     \end{framedprop}
 
     \proofind{
         La dimostrazione procede per induzione su $n \in \N$.
     }{
-        Per $n = 0$, si ha che $A^0 = \{\varepsilon\}$, il quale è regolare poiché ad esempio il DFA $$M_\varepsilon = (\{q\}, \Sigma, \delta, q, \{q\})$$ è in grado di riconoscerlo.
+        Per $n = 0$, si ha che $A^0 = \{\varepsilon\}$, il quale è regolare poiché ad esempio il \DFA $$M_\varepsilon = (\{q\}, \Sigma, \delta, q, \{q\})$$ è in grado di riconoscerlo.
     }{
         Per $n \in \N$, si assume che $A^n$ è regolare.
     }{
-        Per il caso $n + 1$, si ha che $A^{n + 1} = A^n \circ A$ per definizione dell'elevamento a potenza; inoltre, per ipotesi induttiva $A^n$ è regolare, $A$ è regolare per ipotesi, e poiché $\mathrm{REG}$ è chiuso rispetto alla concatenazione per la \cref{closure concat}, si ha che $A^{n + 1} = A^n \circ A$ è regolare.
+        Per il caso $n + 1$, si ha che $A^{n + 1} = A^n \circ A$ per definizione dell'elevamento a potenza; inoltre, per ipotesi induttiva $A^n$ è regolare, $A$ è regolare per ipotesi, e poiché $\mathrm{\REG}$ è chiuso rispetto alla concatenazione per la \cref{closure concat}, si ha che $A^{n + 1} = A^n \circ A$ è regolare.
     }
 
     \subsection{Star}
@@ -552,12 +552,12 @@
         Si noti che nel caso di $\Sigma = \{ \ttt 0, \ttt 1 \}$, si ha che $\Sigma^*$ è l'insieme di ogni stringa binaria, di arbitraria lunghezza.
     \end{example}
 
-    \begin{framedprop}[label={closure star}]{Chiusura sull'operazione star (REG)}
+    \begin{framedprop}[label={closure star}]{Chiusura sull'operazione star (\REG)}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare.
     \end{framedprop}
 
     \begin{proof}
-        Per definizione, $A$ è un linguaggio regolare, dunque per il \cref{nfa equiv} esiste un NFA $$N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)$$ tale da riconoscere $A$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'NFA costruito come segue:
+        Per definizione, $A$ è un linguaggio regolare, dunque per il \cref{nfa equiv} esiste un \NFA $$N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)$$ tale da riconoscere $A$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'\NFA costruito come segue:
 
         \begin{itemize}
             \item $Q := \{q_0\} \cup Q_1$, dove $q_0$ è un nuovo stato, posto prima di $N_1$;
@@ -566,9 +566,9 @@
             \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_1\} & q \in F_1 \land a = \varepsilon \\ \{q_1\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = q_0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da ricominciare l'esecuzione dell'automa ogni volta che viene raggiunto uno stato accettante in $N_1$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q$ è accettante e $a \neq \varepsilon$, l'esecuzione procede normalmente con $\delta_1(q, a)$; differentemente, se $q \in F_1$ ma $a = \varepsilon$, allora l'esecuzione deve ricominciare da capo per poter effettuare la concatenazione multipla delle stringhe in $A$ che caratterizzano l'operazione star, e dunque a $\delta_1(q, a)$ viene aggiunto $q_1$ (lo stato inziale di $N_1$); infine, ponendo $\delta(q_0, \varepsilon) := \{q_1\}$ si realizza l'$\varepsilon$-arco iniziale che collega $q_0$ (il nuovo stato) a $q_1$, al fine di rendere $N$ in grado di accettare $\varepsilon$.
         \end{itemize}
 
-        \centeredimage[Rappresentazione dell'NFA $N$ descritto.]{0.25}{../assets/star.png}
+        \centeredimage[Rappresentazione dell'\NFA $N$ descritto.]{0.25}{../assets/star.png}
         
-        Allora, poichè l'NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per definizione.
+        Allora, poichè l'\NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per definizione.
     \end{proof}
 
     \subsection{Complemento}
@@ -581,12 +581,12 @@
         Sia $\Sigma = \{\ttt 0, \ttt 1\}$ l'alfabeto binario, e sia $A = \{ \ttt{00}, \ttt{1}\}$ un linguaggio definito su di esso. Allora il suo complemento è il seguente: $$\lnot A = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}, \ttt{10}, \ttt{000}, \ldots\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sul complemento (REG)}
+    \begin{framedprop}{Chiusura sul complemento (\REG)}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\lnot A$ è regolare.
     \end{framedprop}
 
     \begin{proof}
-        In ipotesi $A$ è un linguaggio regolare, dunque per definizione esiste un DFA $$M = (Q, \Sigma, \delta, q_0, F)$$ che lo riconosce; allora, è sufficiente considerare il DFA $$M' := (Q, \Sigma, \delta, q_0, Q-F)$$ per ottenere un DFA tale da riconoscere $\lnot A$; allora, $\lnot A$ è regolare per definizione.
+        In ipotesi $A$ è un linguaggio regolare, dunque per definizione esiste un \DFA $$M = (Q, \Sigma, \delta, q_0, F)$$ che lo riconosce; allora, è sufficiente considerare il \DFA $$M' := (Q, \Sigma, \delta, q_0, Q-F)$$ per ottenere un \DFA tale da riconoscere $\lnot A$; allora, $\lnot A$ è regolare per definizione.
     \end{proof}
 
     \begin{framedprop}{Leggi di De Morgan}
@@ -689,26 +689,26 @@
 
     \section{Configurazioni}
 
-    \subsection{Configurazioni di DFA}
+    \subsection{Configurazioni di \DFA}
 
-    \begin{frameddefn}[label={extended trans}]{Estensione di $\delta$ (DFA)}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva: $$\delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$$ Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
+    \begin{frameddefn}[label={extended trans}]{Estensione di $\delta$ (\DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva: $$\delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$$ Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il \DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
     \end{frameddefn}
 
-    \begin{frameddefn}{Configurazione (DFA)}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di $M$ se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
+    \begin{frameddefn}{Configurazione (\DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA; una tupla $(q, x) \in Q \times \Sigma^*$ è detta \tbf{configurazione} di $M$ se $q$ è pari allo stato attuale della computazione di un certo input, ed $x$ è la porzione di input rimanente da leggere.
     \end{frameddefn}
 
-    \begin{frameddefn}[label={rel config}]{Relazione tra configurazioni (DFA)}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
+    \begin{frameddefn}[label={rel config}]{Relazione tra configurazioni (\DFA)}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
     \end{frameddefn}
 
     \begin{framedobs}{Chiusura transitiva di $\vdash$}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un DFA; si noti che la chiusura transitiva della relazione tra configurazioni $\vdash$, ovvero $\vdash^*$, equivale a calcolare gli input attraverso la funzione di transizione estesa $\delta^*$ definita nella \cref{extended trans}.
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA; si noti che la chiusura transitiva della relazione tra configurazioni $\vdash$, ovvero $\vdash^*$, equivale a calcolare gli input attraverso la funzione di transizione estesa $\delta^*$ definita nella \cref{extended trans}.
     \end{framedobs}
 
     \begin{example}[Chiusura transitiva di $\vdash$]
-        Sia $M = (Q, \sigma, \delta, q_0, F)$ un DFA, e sia $(p, x) \in Q \times \Sigma ^*$ una sua configurazione durante la computazione di un certo input; inoltre, siano $a, b, c \in \Sigma$ tali che $x = abc$. Inoltre, siano vere le seguenti:
+        Sia $M = (Q, \sigma, \delta, q_0, F)$ un \DFA, e sia $(p, x) \in Q \times \Sigma ^*$ una sua configurazione durante la computazione di un certo input; inoltre, siano $a, b, c \in \Sigma$ tali che $x = abc$. Inoltre, siano vere le seguenti:
 
         \begin{itemize}
             \item $(p, abc) \vdash_M (p_1, bc)$
@@ -720,10 +720,10 @@
     \end{example}
 
     \begin{framedobs}{Determinismo}
-        Dato un DFA $M = (Q, \Sigma, \delta, q_0, F)$, è possibile fornire una definizione di \tit{determinismo} alternativa, attraverso la relazione tra configurazioni definita nella \cref{rel config}, come segue: $$\forall q \in Q, a \in \Sigma, x \in \Sigma ^* \quad \exists ! p \in Q \mid (q, ax) \vdash_M (p, x)$$
+        Dato un \DFA $M = (Q, \Sigma, \delta, q_0, F)$, è possibile fornire una definizione di \tit{determinismo} alternativa, attraverso la relazione tra configurazioni definita nella \cref{rel config}, come segue: $$\forall q \in Q, a \in \Sigma, x \in \Sigma ^* \quad \exists ! p \in Q \mid (q, ax) \vdash_M (p, x)$$
     \end{framedobs}
 
-    \subsection{Configurazioni di NFA}
+    \subsection{Configurazioni di \NFA}
 
     TODO
 
@@ -737,14 +737,14 @@
 
     \subsection{Definizioni}
     
-    \begin{frameddefn}[label={def gnfa}]{GNFA}
-        Un \tbf{GNFA} (\tit{Generalized Nondeterministic Finite Automaton}) è una versione generalizzata di un NFA, in cui gli archi delle transizioni sono espressioni regolari sull'alfabeto dato.
+    \begin{frameddefn}[label={def gnfa}]{\GNFA}
+        Un \tbf{\GNFA} (\tit{Generalized Nondeterministic Finite Automaton}) è una versione generalizzata di un \NFA, in cui gli archi delle transizioni sono espressioni regolari sull'alfabeto dato.
 
-        Un GNFA legge blocchi di simboli dall'input, e si muove lungo gli archi che sono etichettati da espressioni regolari che possono descrivere il blocco di simboli letto.
+        Un \GNFA legge blocchi di simboli dall'input, e si muove lungo gli archi che sono etichettati da espressioni regolari che possono descrivere il blocco di simboli letto.
 
-        Inoltre, essendo una versione generalizzata di un NFA, un GNFA può avere diversi modi di elaborare la stessa stringa di input, e accetta quest'ultima se la sua elaborazione può far si che il GNFA si trovi in uno stato accettante al suo termine.
+        Inoltre, essendo una versione generalizzata di un \NFA, un \GNFA può avere diversi modi di elaborare la stessa stringa di input, e accetta quest'ultima se la sua elaborazione può far si che il \GNFA si trovi in uno stato accettante al suo termine.
 
-        \imp{Nota} All'interno di questi appunti, a meno di specifica, si assume che ogni GNFA preso in considerazione abbia:
+        \imp{Nota} All'interno di questi appunti, a meno di specifica, si assume che ogni \GNFA preso in considerazione abbia:
 
         \begin{itemize}
             \item un solo stato di inizio, privo di archi entranti, connesso con ogni altro stato, ma non con sé stesso;
@@ -752,25 +752,25 @@
             \item ogni altro stato collegato con ogni altro stato, a meno di quello iniziale, anche con sé stessi.
         \end{itemize}
 
-        Formalmente, dato un alfabeto $\Sigma$, un GNFA del tipo appena descritto è una quintupla $(Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ definita come segue:
+        Formalmente, dato un alfabeto $\Sigma$, un \GNFA del tipo appena descritto è una quintupla $(Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ definita come segue:
 
         \begin{itemize}
             \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
             \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito}
-            \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathrm{re}(\Sigma)}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathrm{re}(\Sigma)$, poiché a differenza di un normale DFA o NFA, un GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare; inoltre, il dominio di $\delta$ è $(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})$ per evitare di includere l'arco $(q_{\mathrm{accept}}, q_\mathrm{start})$
+            \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathrm{re}(\Sigma)}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathrm{re}(\Sigma)$, poiché a differenza di un normale \DFA o \NFA, un \GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare; inoltre, il dominio di $\delta$ è $(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})$ per evitare di includere l'arco $(q_{\mathrm{accept}}, q_\mathrm{start})$
             \item $q_{\mathrm{start}} \in Q$ è lo \textbf{stato iniziale}
             \item $q_{\mathrm{accept} \in Q}$ è lo \textbf{stato accettante}
         \end{itemize}
     \end{frameddefn}
 
-    \begin{example}[GNFA]
-        Il seguente è il digramma di un GNFA sull'alfabeto $\Sigma = \{ \ttt a, \ttt b \}.$
+    \begin{example}[\GNFA]
+        Il seguente è il digramma di un \GNFA sull'alfabeto $\Sigma = \{ \ttt a, \ttt b \}.$
 
-        \centeredimage[Un GNFA.]{0.25}{../assets/gnfa.png}
+        \centeredimage[Un \GNFA.]{0.25}{../assets/gnfa.png}
     \end{example}
 
-    \begin{frameddefn}{Stringhe accettate (GNFA)}
-        Sia $G = (Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ un GNFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma^*$; allora, $G$ \tbf{accetta} $w$ se esiste una sequenza di stati $q_0, \ldots, q_n \in Q$ tali per cui
+    \begin{frameddefn}{Stringhe accettate (\GNFA)}
+        Sia $G = (Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ un \GNFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma^*$; allora, $G$ \tbf{accetta} $w$ se esiste una sequenza di stati $q_0, \ldots, q_n \in Q$ tali per cui
 
         \begin{itemize}
             \item $q_0 = q_{\mathrm{start}}$
@@ -781,8 +781,8 @@
 
     \subsection{Equivalenze}
 
-    \begin{framedmeth}[label={dfa into gnfa}]{GNFA di DFA}
-        Sia $M$ un DFA; allora per costruire un GNFA ad esso equivalente, è sufficiente:
+    \begin{framedmeth}[label={dfa into gnfa}]{\GNFA di \DFA}
+        Sia $M$ un \DFA; allora per costruire un \GNFA ad esso equivalente, è sufficiente:
 
         \begin{itemize}
             \item aggiungere un nuovo stato iniziale, con un $\varepsilon$-arco entrante sul vecchio stato iniziale;
@@ -792,9 +792,9 @@
         \end{itemize}
     \end{framedmeth}
 
-    \begin{example}[GNFA di DFA]
+    \begin{example}[\GNFA di \DFA]
         \label{gnfa di dfa}
-        Si consideri il seguente DFA $$D = (\{b, c\}, \{\ttt 0, \ttt 1, \ttt 2\}, \delta, b, \{c\})$$ rappresentato come segue:
+        Si consideri il seguente \DFA $$D = (\{b, c\}, \{\ttt 0, \ttt 1, \ttt 2\}, \delta, b, \{c\})$$ rappresentato come segue:
 
         \begin{figure}[H]
             \centering
@@ -808,10 +808,10 @@
                     (2) edge [loop above] node {$\ttt 0, \ttt 1$} (2)
                  ;
              \end{tikzpicture}
-             \caption{Il DFA $D$.}
+             \caption{Il \DFA $D$.}
         \end{figure}
 
-        Allora, il suo GNFA equivalente è il seguente:
+        Allora, il suo \GNFA equivalente è il seguente:
 
         \begin{figure}[H]
             \centering
@@ -833,12 +833,12 @@
                     (3) edge [loop above] node {$\ttt 0 \cup \ttt 1$} (3)
                  ;
              \end{tikzpicture}
-             \caption{Il GNFA di $D$.}
+             \caption{Il \GNFA di $D$.}
         \end{figure}
     \end{example}
 
     \begin{framedalgo}[label={gnfa into regex}]{Espressione regolare di un GNFA}
-        Dato un GNFA $G = (Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$, l'algoritmo restituisce un'espressione regolare equivalente a $G$.
+        Dato un \GNFA $G = (Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$, l'algoritmo restituisce un'espressione regolare equivalente a $G$.
 
         \hrule
         \begin{algorithmic}[1]
@@ -862,10 +862,10 @@
     \end{framedalgo}
 
     \idea{
-        L'algoritmo inizia prendendo in input un GNFA $G$, ed inizialmente viene controllato il numero di stati di $G$:
+        L'algoritmo inizia prendendo in input un \GNFA $G$, ed inizialmente viene controllato il numero di stati di $G$:
         \begin{itemize}
             \item se $|Q| = 2$, allora sicuramente $Q = \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$, e poiché si vuole resituire l'espressione regolare equivalente a $G$, di fatto quest'ultimo è costituito esclusivamente dall'espressione regolare posta sull'arco tra $q_\mathrm{start}$ e $q_\mathrm{accept}$, dunque è sufficiente restituirla in output (riga 3);
-            \item se $|Q| > 2$, allora viene costruito un GNFA $G'$, avente uno stato in meno, ovvero $q$ (scelto alla riga 5), naturalmente diverso da $q_\mathrm{start}$ e da $q_\mathrm{accept}$; successivamente, per ogni coppia di stati $(q_i, q_j)$, viene definita $\delta'(q_i, q_j)$ in modo tale da accorpare tutte le possibili configurazioni di stati; ad esempio, prendendo in esame il seguente GNFA 
+            \item se $|Q| > 2$, allora viene costruito un \GNFA $G'$, avente uno stato in meno, ovvero $q$ (scelto alla riga 5), naturalmente diverso da $q_\mathrm{start}$ e da $q_\mathrm{accept}$; successivamente, per ogni coppia di stati $(q_i, q_j)$, viene definita $\delta'(q_i, q_j)$ in modo tale da accorpare tutte le possibili configurazioni di stati; ad esempio, prendendo in esame il seguente \GNFA 
 
                 \begin{figure}[H]
                     \centering
@@ -883,7 +883,7 @@
                      \end{tikzpicture}
                 \end{figure}
 
-                dove $R_1$, $R_2$, $R_3$ ed $R_4$ sono espressioni regolari, è possibile vedere che il seguente GNFA è ad esso equivalente
+                dove $R_1$, $R_2$, $R_3$ ed $R_4$ sono espressioni regolari, è possibile vedere che il seguente \GNFA è ad esso equivalente
 
                 \begin{figure}[H]
                     \centering
@@ -899,26 +899,26 @@
 
                 poiché l'arco che $q$ ha su sé stesso è stato descritto attraverso $(R_2)^*$, gli archi $(q_i, q)$ e $(q, q_j)$ sono stati inseriti per concatenazione, ed infine è stato unito l'altro possibile cammino verso $q_j$ tramite unione;
 
-            \item inoltre, si noti che tale espressione regolare --- contenuta nella riga 9 --- tiene in considerazione tutte le possibili configurazioni di archi tra stati di un GNFA, per come è stato definito il GNFA all'interno della \cref{def gnfa}; infatti, per $|Q| > 2$, tra due stati $q_i$ e $q_j$, oltre ad avere la garanzia che esista l'arco $(q_i, q_j)$, esiste sicuramente un terzo stato $q$ intermedio tale per cui esistano archi $(q_i, q)$ e $(q, q_j)$, ed esiste anche l'arco $(q,q)$;
+            \item inoltre, si noti che tale espressione regolare --- contenuta nella riga 9 --- tiene in considerazione tutte le possibili configurazioni di archi tra stati di un \GNFA, per come è stato definito il \GNFA all'interno della \cref{def gnfa}; infatti, per $|Q| > 2$, tra due stati $q_i$ e $q_j$, oltre ad avere la garanzia che esista l'arco $(q_i, q_j)$, esiste sicuramente un terzo stato $q$ intermedio tale per cui esistano archi $(q_i, q)$ e $(q, q_j)$, ed esiste anche l'arco $(q,q)$;
 
-            \item infine, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, per ogni GNFA si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
+            \item infine, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, per ogni \GNFA si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
         \end{itemize}
 
         Allora, l'algoritmo è in grado di restituire l'espressione regolare equivalente a $G$.
     }
 
     \proofind{
-        La dimostrazione procede per induzione su $k$, il numero di stati del GNFA.
+        La dimostrazione procede per induzione su $k$, il numero di stati del \GNFA.
     }{
         Se $k = 2$, ovvero se $G$ ha solo 2 stati, necessariamente $Q = \{q_\mathrm{start}, q_\mathrm{accept}\}$, e dunque $\ttt{convertGNFAtoRegEx}(G) = \delta(q_\mathrm{start}, q_\mathrm{accept})$, come descritto nella riga 3.
     }{
-        Se $G$ è un GNFA con $k - 1$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$.
+        Se $G$ è un \GNFA con $k - 1$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$.
     }{
-        È necessario dimostrare che, se $G$ è un GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. In primo luogo, è necessario dimostrare che $G$ e $G'$ sono equivalenti, e dunque sia $w$ una stringa accettata da $G$; allora, in un ramo accettante della computazione, $G$ entra in una sequenza di stati $$q_\mathrm{start}, q_1, q_2, \ldots, q_\mathrm{accept}$$ dunque, se il ramo non contiene lo stato rimosso $q$, allora sicuramente $G'$ accetta $w$; viceversa, se $q$ è contenuto all'interno di tale ramo, allora per quanto discusso all'interno dell'idea di dimostrazione, l'espressione regolare inserita al posto dello stato $q$ rimosso è in grado di tenere in considerazione ogni possibile configurazione di archi, e dunque $G'$ accetta sicuramente $w$; infine, è possibile applicare la stessa osservazione per mostrare che una stringa accettata da $G'$ deve essere necessariamente accettata anche da $G$. Allora, poiché $G$ e $G'$ sono equivalenti, e $G$ ha $k$ stati, allora necessariamente al termine del $k$-esimo passo dell'algoritmo, $G'$ avrà $k - 1$ stati, e su di esso è possibile applicare l'ipotesi induttiva.
+        È necessario dimostrare che, se $G$ è un \GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. In primo luogo, è necessario dimostrare che $G$ e $G'$ sono equivalenti, e dunque sia $w$ una stringa accettata da $G$; allora, in un ramo accettante della computazione, $G$ entra in una sequenza di stati $$q_\mathrm{start}, q_1, q_2, \ldots, q_\mathrm{accept}$$ dunque, se il ramo non contiene lo stato rimosso $q$, allora sicuramente $G'$ accetta $w$; viceversa, se $q$ è contenuto all'interno di tale ramo, allora per quanto discusso all'interno dell'idea di dimostrazione, l'espressione regolare inserita al posto dello stato $q$ rimosso è in grado di tenere in considerazione ogni possibile configurazione di archi, e dunque $G'$ accetta sicuramente $w$; infine, è possibile applicare la stessa osservazione per mostrare che una stringa accettata da $G'$ deve essere necessariamente accettata anche da $G$. Allora, poiché $G$ e $G'$ sono equivalenti, e $G$ ha $k$ stati, allora necessariamente al termine del $k$-esimo passo dell'algoritmo, $G'$ avrà $k - 1$ stati, e su di esso è possibile applicare l'ipotesi induttiva.
     }
 
-    \begin{example}[Espressioni regolari di GNFA]
-        Sia $G$ il GNFA dell'\cref{gnfa di dfa}; allora, la sua espressione regolare equivalente è ottenibile attraverso i seguenti passaggi:
+    \begin{example}[Espressioni regolari di \GNFA]
+        Sia $G$ il \GNFA dell'\cref{gnfa di dfa}; allora, la sua espressione regolare equivalente è ottenibile attraverso i seguenti passaggi:
 
         \begin{itemize}
             \item viene inizialmente rimosso lo stato $b$, ottenendo l'automa $G'$:
@@ -937,7 +937,7 @@
                             (3) edge [loop below] node {$(\ttt 0 \cup \ttt 1) \cup \emptyset(\ttt 0 \cup \ttt 1)^* \ttt 2= \ttt 0 \cup \ttt 1$} (3)
                          ;
                      \end{tikzpicture}
-                     \caption{$G'$, ovvero il GNFA $G$, dopo aver rimosso $b$.}
+                     \caption{$G'$, ovvero il \GNFA $G$, dopo aver rimosso $b$.}
                 \end{figure}
 
             \item successivamente, viene rimosso lo stato $c$, ottenendo l'automa $G''$:
@@ -952,7 +952,7 @@
                             (1) edge node {$\emptyset \cup (\ttt 0 \cup \ttt 1)^* \ttt 2 (\ttt 0 \cup \ttt 1)^* \varepsilon = (\ttt 0 \cup \ttt 1)^* \ttt 2 (\ttt 0 \cup \ttt 1)^*$} (4)
                          ;
                      \end{tikzpicture}
-                     \caption{$G''$, ovvero il GNFA $G'$, dopo aver rimosso $c$.}
+                     \caption{$G''$, ovvero il \GNFA $G'$, dopo aver rimosso $c$.}
                 \end{figure}
 
             \item allora, poiché $G''$ ha 2 stati, l'espressione regolare cercata --- equivalente a $G$ --- è posta sull'arco $(a,d)$, ed è $$(\ttt 0 \cup \ttt 1)^* \ttt 2 (\ttt 0 \cup \ttt 1)^*$$
@@ -960,16 +960,16 @@
     \end{example}
 
     \begin{framedthm}[label={ling expr reg}]{Linguaggi ed espressioni regolari}
-        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli, per un certo alfabeto $\Sigma$ si ha che $$\mathrm{REG} = \mathcal{L}(\mathrm{re}(\Sigma))$$
+        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli, per un certo alfabeto $\Sigma$ si ha che $$\mathrm{\REG} = \mathcal{L}(\mathrm{re}(\Sigma))$$
     \end{framedthm}
 
     \proofiff{
-        Sia $A$ un linguaggio regolare; allora, per definizione, esiste un DFA che lo riconosce, e sia questo $M$. Utilizzando il \cref{dfa into gnfa}, è possibile costruire un GNFA che sia equivalente ad $M$; sia quest'ultimo $G$. Allora, è sufficiente applicare l'\cref{gnfa into regex} su $G$ per ottenere l'espressione regolare ad esso equivalente; dunque, segue la tesi.
+        Sia $A$ un linguaggio regolare; allora, per definizione, esiste un \DFA che lo riconosce, e sia questo $M$. Utilizzando il \cref{dfa into gnfa}, è possibile costruire un \GNFA che sia equivalente ad $M$; sia quest'ultimo $G$. Allora, è sufficiente applicare l'\cref{gnfa into regex} su $G$ per ottenere l'espressione regolare ad esso equivalente; dunque, segue la tesi.
     }{
-        Sia $A$ un linguaggio su un alfabeto $\Sigma$, descritto da un'espressione regolare $R$. Allora, la dimostrazione procede costruendo degli NFA, per casi, come segue:
+        Sia $A$ un linguaggio su un alfabeto $\Sigma$, descritto da un'espressione regolare $R$. Allora, la dimostrazione procede costruendo degli \NFA, per casi, come segue:
 
         \begin{itemize}
-            \item $R = \emptyset \implies L(R) = \emptyset$; allora, il seguente NFA è in grado di riconoscere $L(R)$:
+            \item $R = \emptyset \implies L(R) = \emptyset$; allora, il seguente \NFA è in grado di riconoscere $L(R)$:
 
                 \begin{figure}[H]
                     \centering
@@ -979,12 +979,12 @@
                         \path[every node/.style={font=\sffamily\small}]
                          ;
                      \end{tikzpicture}
-                     \caption{Un NFA in grado di riconoscere $L(\emptyset)$.}
+                     \caption{Un \NFA in grado di riconoscere $L(\emptyset)$.}
                 \end{figure}
                 
                 L'automa mostrato è descritto dalla quintupla $N = (\{q_0\}, \Sigma, \delta, q_0, \varnothing)$, dove $\forall a \in \Sigma \quad \delta(q_0, a) = \emptyset$.
 
-            \item $R = \varepsilon \implies L(R) = \{\varepsilon\}$; allora, il seguente NFA è in grado di riconoscere $L(R)$:
+            \item $R = \varepsilon \implies L(R) = \{\varepsilon\}$; allora, il seguente \NFA è in grado di riconoscere $L(R)$:
 
                 \begin{figure}[H]
                     \centering
@@ -994,12 +994,12 @@
                         \path[every node/.style={font=\sffamily\small}]
                          ;
                      \end{tikzpicture}
-                     \caption{Un NFA in grado di riconoscere $L(\varepsilon)$.}
+                     \caption{Un \NFA in grado di riconoscere $L(\varepsilon)$.}
                 \end{figure}
 
                 L'automa mostrato è descritto dalla quintupla $N = (\{q_0\}, \Sigma, \delta, q_0, \{q_0\})$, dove $\forall a \in \Sigma \quad \delta(q_0, a) = \emptyset$.
 
-            \item $R \in \Sigma \implies L(R) = \{a \}$ per qualche $a \in \Sigma$; allora, il seguente NFA è in grado di riconoscere $L(R)$:
+            \item $R \in \Sigma \implies L(R) = \{a \}$ per qualche $a \in \Sigma$; allora, il seguente \NFA è in grado di riconoscere $L(R)$:
 
                 \begin{figure}[H]
                     \centering
@@ -1011,19 +1011,19 @@
                         (1) edge node {$a$} (2)
                         ;
                     \end{tikzpicture}
-                    \caption{Un NFA in grado di riconoscere $L(a)$.}
+                    \caption{Un \NFA in grado di riconoscere $L(a)$.}
                 \end{figure}
 
                 L'automa mostrato è descritto dalla quintupla $N = (\{q_1, q_2\}, \Sigma, \delta, q_1, \{q_2\})$, dove $\forall q \in \{q_1, q_2\}, x \in \Sigma \quad \delta(q, x) = \left \{ \begin{array}{ll} \{q_2\} & q = q_1 \land x = a \\ \emptyset & q \neq q_1 \lor x \neq a \end{array} \right.$.
 
-            \item si noti che se esistono due espressioni regolari $R_1$ ed $R_2$ tali che $R = R_1 \cup R_2$, oppure $R = R_1 \circ R_2$, o ancora $R = R_1^*$, è sufficiente costruire gli NFA che sono stati costruiti nelle dimostrazioni della \cref{closure unione}, della \cref{closure concat} e della \cref{closure star}.
+            \item si noti che se esistono due espressioni regolari $R_1$ ed $R_2$ tali che $R = R_1 \cup R_2$, oppure $R = R_1 \circ R_2$, o ancora $R = R_1^*$, è sufficiente costruire gli \NFA che sono stati costruiti nelle dimostrazioni della \cref{closure unione}, della \cref{closure concat} e della \cref{closure star}.
         \end{itemize}
 
-        Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa regolare}, $A$ è regolare.
+        Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un \NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa regolare}, $A$ è regolare.
     }
 
     \begin{framedobs}{Equivalenze tra classi di automi}
-        Si noti che, dal \cref{ling expr reg}, dall'\cref{gnfa into regex}, e dal \cref{dfa into gnfa}, si ha che $$\mathrm{REG} = \mathcal{L}(\mathrm{re}(\Sigma)) \supseteq \mathcal{L}(\mathrm{GNFA}) \supseteq \mathrm{REG}$$ dunque, segue l'importante risultato: $$\mathrm{REG} := \mathcal{L}(\mathrm{DFA}) = \mathcal{L}(\mathrm{NFA}) = \mathcal{L}(\mathrm{GNFA}) = \mathcal{L}(\mathrm{re}(\Sigma))$$
+        Si noti che, dal \cref{ling expr reg}, dall'\cref{gnfa into regex}, e dal \cref{dfa into gnfa}, si ha che $$\mathrm{\REG} = \mathcal{L}(\mathrm{re}(\Sigma)) \supseteq \mathcal{L}(\mathrm{\GNFA}) \supseteq \mathrm{\REG}$$ dunque, segue l'importante risultato: $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA}) = \mathcal{L}(\mathrm{\GNFA}) = \mathcal{L}(\mathrm{re}(\Sigma))$$
     \end{framedobs}
 
     \section{Linguaggi non regolari}
@@ -1037,10 +1037,10 @@
     \end{framedprinc}
     
     \begin{frameddefn}{Linguaggio non regolare}
-        Un linguaggio $A$ si definisce \tbf{non regolare} se non esiste un DFA in grado di riconoscerlo. In simboli $$A \notin \mathrm{REG}$$
+        Un linguaggio $A$ si definisce \tbf{non regolare} se non esiste un \DFA in grado di riconoscerlo. In simboli $$A \notin \mathrm{\REG}$$
     \end{frameddefn}
 
-    \begin{framedlem}[label={pumping reg}]{Pumping lemma (REG)}
+    \begin{framedlem}[label={pumping reg}]{Pumping lemma (\REG)}
         Sia $A$ un linguaggio regolare; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 3 stringhe $x, y, z \mid s = xyz$, soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
@@ -1051,7 +1051,7 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, poiché $p := |Q|$, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
+        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un \DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, poiché $p := |Q|$, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
 
         Si pongano dunque $$\soe{l}{x:= s_1 \cdots s_{j - 1} \\ y := s_j \cdots s_{l - 1} \\ z := s_l \cdots s_n}$$ Allora, si ha che:
 
@@ -1070,9 +1070,9 @@
         \centeredimage[L'automa $M$ descritto]{0.25}{../assets/pump_reg.png}
     \end{example}
 
-    \begin{example}[Pumping lemma in REG]
+    \begin{example}[Pumping lemma in \REG]
         \label{non reg ex}
-        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{REG}$, e dunque per esso vale il \cref{pumping reg}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
+        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{\REG}$, e dunque per esso vale il \cref{pumping reg}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$s := \ttt 0 ^p \ttt 1^p \implies |s| = 2p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|xy| \le p$, ma poiché $s := \ttt 0^p \ttt 1^p = xy^iz$ per ogni $i \in \N$, allora necessariamente la stringa $xy$ è composta da soli $\ttt 0$, ed inoltre $|y| > 0$ implica che $y$ ha almeno uno $\ttt 0$. Siano allora
 
         \begin{itemize}
             \item $k := |x| \implies x = \ttt 0^k$, poiché $x$ è composta solo da $\ttt 0$
@@ -1083,8 +1083,8 @@
         e, ponendo ad esempio $i = 2$, si ottiene che $$xy^2z = \ttt 0^k \ttt 0^{2m} \ttt 0^{p-m-k} \ttt 1^p$$ ma il numero di $\ttt 1$ di questa stringa è pari a $p$, mentre il numero di $\ttt 0$ è pari a $$k + 2m + (p - m - k) = m + p$$ e poiché $m > 0$, si ha che $m + p > p$. Dunque $xy^2z \notin L$ poiché non è una stringa della forma $\ttt 0 ^n \ttt 1^n \ \lightning$.
     \end{example}
 
-    \begin{framedobs}{Condizioni del pumping lemma (REG)}
-        Si noti che la seconda condizione del \cref{pumping reg} stabilisce che $y \neq \varepsilon$, poiché altrimenti il teorema sarebbe trivialmente verificato; infatti, ammettendo $y = \varepsilon$, dato un linguaggio $A \in \mathrm{REG}$, e presa una sua stringa $s \in A$, ponendo $p := |x|$ esistono sicuramente stringhe $x, z \mid s = xz$ tali da verificare le restanti condizioni del lemma, infatti:
+    \begin{framedobs}{Condizioni del pumping lemma (\REG)}
+        Si noti che la seconda condizione del \cref{pumping reg} stabilisce che $y \neq \varepsilon$, poiché altrimenti il teorema sarebbe trivialmente verificato; infatti, ammettendo $y = \varepsilon$, dato un linguaggio $A \in \mathrm{\REG}$, e presa una sua stringa $s \in A$, ponendo $p := |x|$ esistono sicuramente stringhe $x, z \mid s = xz$ tali da verificare le restanti condizioni del lemma, infatti:
 
         \begin{itemize}
             \item $\forall i \ge 0 \quad xy^iz = x \varepsilon^iz  = xz =: s \in A$
@@ -1108,8 +1108,8 @@
         Si definisce \tbf{acontestualità} la condizione per cui il lato sinistro delle regole di una grammatica è composto sempre da un solo simbolo.
     \end{frameddefn}
 
-    \begin{frameddefn}{CFG}
-        Una \tbf{grammatica context-free} --- detta anche \tbf{acontestuale} ---, o CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
+    \begin{frameddefn}{\CFG}
+        Una \tbf{grammatica context-free} --- detta anche \tbf{acontestuale} ---, o \CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
 
         \begin{itemize}
             \item $V$ è l'insieme delle \tbf{variabili}, un insieme \tit{finito}
@@ -1118,14 +1118,14 @@
             \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il simbolo alla sinistra della prima regola della grammatica
         \end{itemize}
 
-        Le CFG si scrivono nella forma $$X \to Y$$ dove $X \in V$ e $X \to Y \in R$ è una regola della CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \ | \ Z$.
+        Le \CFG si scrivono nella forma $$X \to Y$$ dove $X \in V$ e $X \to Y \in R$ è una regola della \CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \ | \ Z$.
 
         Siano $u, v, w$ stringhe, e $A \to w \in R$; allora si dice che $uAv$ \tbf{produce} $uwv$, denotato con $$uAv \yields uwv$$ Date due stringhe $u, v$, se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che $u$ \tbf{deriva} $v$, ed è denotato con $u \derives v$.
     \end{frameddefn}
 
-    \begin{example}[CFG]
+    \begin{example}[\CFG]
         \label{cfg ex}
-        Un esempio di CFG è il seguente: $$\left . \begin{array}{c} A \to \ttt 0 A \ttt 1 \\ A \to B \\ B \to \ttt \# \end{array} \right .$$ In essa, si hanno: $$\left . \begin{array}{c} V := \{A, B\} \\ \Sigma := \{\ttt 0, \ttt 1, \ttt \# \} \\ S := A \in V \end{array} \right. $$
+        Un esempio di \CFG è il seguente: $$\left . \begin{array}{c} A \to \ttt 0 A \ttt 1 \\ A \to B \\ B \to \ttt \# \end{array} \right .$$ In essa, si hanno: $$\left . \begin{array}{c} V := \{A, B\} \\ \Sigma := \{\ttt 0, \ttt 1, \ttt \# \} \\ S := A \in V \end{array} \right. $$
 
         Da essa, è possibile ottenere ad esempio la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $$A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$$
     \end{example}
@@ -1134,12 +1134,12 @@
         Data una grammatica $G$, il suo \tbf{linguaggio} è l'insieme delle stringhe che la grammatica $G$ è in grado di generare, ed è denotato con $L(G)$. In simboli, data una grammatica $G$, si ha che $$L(G) = \{w \in \Sigma ^* \mid S \derives w\}$$
     \end{frameddefn}
 
-    \begin{frameddefn}{CFL}
-        Se $G$ è una CFG, allora $L(G)$ è detto \tbf{linguaggio context-free}, o CFL (\tit{Context-Free Language}).
+    \begin{frameddefn}{\CFL}
+        Se $G$ è una \CFG, allora $L(G)$ è detto \tbf{linguaggio context-free}, o \CFL (\tit{Context-Free Language}).
     \end{frameddefn}
 
-    \begin{example}[CFL]
-        Si prenda in esame la CFG dell'\cref{cfg ex}, e sia essa $G$. Allora, in tale grammatica il linguaggio risulta essere $$L(G) = \{\ttt 0 ^n \ttt \# \ttt 1 ^n \mid n \ge 0\}$$
+    \begin{example}[\CFL]
+        Si prenda in esame la \CFG dell'\cref{cfg ex}, e sia essa $G$. Allora, in tale grammatica il linguaggio risulta essere $$L(G) = \{\ttt 0 ^n \ttt \# \ttt 1 ^n \mid n \ge 0\}$$
     \end{example}
 
     \begin{example}[Grammatiche e linguaggi]
@@ -1152,8 +1152,8 @@
         \end{itemize}
     \end{example}
 
-    \begin{framedmeth}{CFG di DFA}
-        Dato un DFA $D = (Q, \Sigma, \delta, q_0, F)$, per ottenere una grammatica $G = (V, \Sigma, R, S)$ tale che $L(D) = L(G)$, è necessario:
+    \begin{framedmeth}{\CFG di \DFA}
+        Dato un \DFA $D = (Q, \Sigma, \delta, q_0, F)$, per ottenere una grammatica $G = (V, \Sigma, R, S)$ tale che $L(D) = L(G)$, è necessario:
 
         \begin{itemize}
             \item associare una variabile $V_i$, per ogni stato $q_i \in Q$, con $i \in [1, n]$ (assumendo $|Q| = n$);
@@ -1190,7 +1190,7 @@
     \subsection{Forma normale di Chomsky}
 
     \begin{frameddefn}{Forma normale di Chomsky}
-        Una CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $A, B, C \in V$, $a \in \Sigma$, $S := A$, e la regola $S \to \varepsilon \in R$ è sempre ammessa, la quale prende il nome di \tbf{$\varepsilon$-regola}.
+        Una \CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $A, B, C \in V$, $a \in \Sigma$, $S := A$, e la regola $S \to \varepsilon \in R$ è sempre ammessa, la quale prende il nome di \tbf{$\varepsilon$-regola}.
 
         Dunque, la CNF non permette di
 
@@ -1201,8 +1201,8 @@
         \end{enumerate}
     \end{frameddefn}
 
-    \begin{framedmeth}[label={cfg into cnf}]{CNF di CFG}
-        Sia $G = (V, \Sigma, R, S)$ una CFG; allora, è possibile rendere $G$ in CNF attraverso i seguenti passaggi:
+    \begin{framedmeth}[label={cfg into cnf}]{CNF di \CFG}
+        Sia $G = (V, \Sigma, R, S)$ una \CFG; allora, è possibile rendere $G$ in CNF attraverso i seguenti passaggi:
 
         \begin{itemize}
             \item vengono aggiunte la variabile $S_0 \in V$, e la regola $S_0 \to S \in R$, in modo da non avere $S$ alla destra di nessuna regola in $R$;
@@ -1213,15 +1213,15 @@
         \end{itemize}
     \end{framedmeth}
 
-    \begin{framedlem}{CFL generati da CFG in CNF}
-        Ogni CFL è generato da una CFG in forma normale di Chomsky.
+    \begin{framedlem}{\CFL generati da \CFG in CNF}
+        Ogni \CFL è generato da una \CFG in forma normale di Chomsky.
     \end{framedlem}
 
     \begin{proof}
-        Sia $L$ un CFL generato da una CFG $G$; allora, attraverso il \cref{cfg into cnf}, è possibile rendere $G$ in forma normale di Chomsky, e dunque segue la tesi.
+        Sia $L$ un \CFL generato da una \CFG $G$; allora, attraverso il \cref{cfg into cnf}, è possibile rendere $G$ in forma normale di Chomsky, e dunque segue la tesi.
     \end{proof}
 
-    \begin{example}[Convertire CFG in CNF]
+    \begin{example}[Convertire \CFG in CNF]
         TODO
     \end{example}
 
@@ -1229,10 +1229,10 @@
 
     \subsection{Definizioni}
 
-    \begin{frameddefn}{PDA}
-        Un \tbf{PDA} (\tit{Pushdown Automaton}) è un NFA dotato di uno \tbf{stack} illimitato, che gli consente di riconoscere alcuni linguaggi non regolari, poiché in esso è in grado di porre i simboli che legge dalla stringa di input, di fatto implementando un sistema di \tit{memoria}.
+    \begin{frameddefn}{\PDA}
+        Un \tbf{\PDA} (\tit{Pushdown Automaton}) è un \NFA dotato di uno \tbf{stack} illimitato, che gli consente di riconoscere alcuni linguaggi non regolari, poiché in esso è in grado di porre i simboli che legge dalla stringa di input, di fatto implementando un sistema di \tit{memoria}.
 
-        Formalmente, un PDA è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
+        Formalmente, un \PDA è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
 
         \begin{itemize}
             \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
@@ -1245,12 +1245,12 @@
 
         dove $\Gamma_\varepsilon := \Gamma \cup \{ \varepsilon \}$.
 
-        Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un PDA è non deterministico) del codominio di $\delta$, al fine di decidere se salvare il simbolo letto all'interno dello stack  (tramite $\varepsilon \in \Gamma$ stesso). Dunque, un'operazione di un PDA sul suo stack può essere un \tit{push}, un \tit{pop}, o entrambe --- ottenendo l'effetto di rimpiazzare l'elemento in cima allo stack.
+        Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del \PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un \PDA è non deterministico) del codominio di $\delta$, al fine di decidere se salvare il simbolo letto all'interno dello stack  (tramite $\varepsilon \in \Gamma$ stesso). Dunque, un'operazione di un \PDA sul suo stack può essere un \tit{push}, un \tit{pop}, o entrambe --- ottenendo l'effetto di rimpiazzare l'elemento in cima allo stack.
     \end{frameddefn}
 
-    \begin{example}[PDA]
+    \begin{example}[\PDA]
         \label{pda ex}
-        Un esempio di PDA $P = (Q, \Sigma, \Gamma, \delta, q_1, F)$ è il seguente:
+        Un esempio di \PDA $P = (Q, \Sigma, \Gamma, \delta, q_1, F)$ è il seguente:
 
         \begin{itemize}
             \item $Q = \{q_1, q_2, q_3, q_4\}$
@@ -1281,7 +1281,7 @@
                     (3) edge node {$\varepsilon; \ttt \$ \to \varepsilon$} (4)
                  ;
              \end{tikzpicture}
-             \caption{Il PDA $P$.}
+             \caption{Il \PDA $P$.}
         \end{figure}
 
         La notazione $a; b \to c$ presente sugli archi di questo diagramma sta ad indicare che se viene letto il simbolo $a$ dall'input, $M$ può sostituire $b$, se in cima al suo stack (attraverso un'operazione di \tit{pop}) con $c$ (mediante un'operazione di \tit{push}). Si noti inoltre che ognuno dei simboli può essere $\varepsilon$, e dunque
@@ -1293,8 +1293,8 @@
         \end{itemize}
     \end{example}
 
-    \begin{frameddefn}{Stringhe accettate (PDA)}
-        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma_\varepsilon$; allora, $P$ \tbf{accetta} $w$ se esistono una sequenza di stati $r_0, \ldots, r_n \in Q$ e una sequenza di stringhe $s_0, \ldots, s_n \in \Gamma ^*$ tali per cui
+    \begin{frameddefn}{Stringhe accettate (\PDA)}
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un \PDA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma_\varepsilon$; allora, $P$ \tbf{accetta} $w$ se esistono una sequenza di stati $r_0, \ldots, r_n \in Q$ e una sequenza di stringhe $s_0, \ldots, s_n \in \Gamma ^*$ tali per cui
 
         \begin{itemize}
             \item $r_0 = q_0$
@@ -1305,15 +1305,15 @@
     \end{frameddefn}
 
     \begin{framedobs}[label={pda empty stack}]{Stack vuoto}
-        Un PDA non è in grado di controllare se il suo stack è vuoto, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex}; è importante notare che esso utilizza il simbolo $\ttt \$$ per capire se lo stack è vuoto o meno, poiché viene inserito sin dall'inizio (si osservi l'etichetta $\varepsilon; \varepsilon \to \ttt \$$ sull'arco $(q_1, q_2)$), e dunque se viene letto $\ttt \$$ in cima allo stack, $M$ sa che quello è l'unico elemento contenuto al suo interno, e lo stack è di fatto vuoto.
+        Un \PDA non è in grado di controllare se il suo stack è vuoto, ma è possibile ottenere questo effetto come segue: si prenda in esame il \PDA $M$ dell'\cref{pda ex}; è importante notare che esso utilizza il simbolo $\ttt \$$ per capire se lo stack è vuoto o meno, poiché viene inserito sin dall'inizio (si osservi l'etichetta $\varepsilon; \varepsilon \to \ttt \$$ sull'arco $(q_1, q_2)$), e dunque se viene letto $\ttt \$$ in cima allo stack, $M$ sa che quello è l'unico elemento contenuto al suo interno, e lo stack è di fatto vuoto.
     \end{framedobs}
 
     \begin{framedobs}{Fine dell'input}
-        Un PDA non è in grado di controllare se è stata raggiunga la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il PDA $M$ dell'\cref{pda ex}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}).
+        Un \PDA non è in grado di controllare se è stata raggiunga la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il \PDA $M$ dell'\cref{pda ex}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}).
     \end{framedobs}
 
-    \begin{framedobs}{Linguaggi non regolari e PDA}
-        Si consideri il PDA dell'\cref{pda ex}; esso opera come segue:
+    \begin{framedobs}{Linguaggi non regolari e \PDA}
+        Si consideri il \PDA dell'\cref{pda ex}; esso opera come segue:
 
         \begin{itemize}
             \item viene posto $\ttt \$$ all'interno dello stack;
@@ -1322,11 +1322,11 @@
             \item se all'interno dello stack è presente $\ttt \$$, allora l'automa accetta.
         \end{itemize}
 
-        Dunque, di fatto, il PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Infine, lo stato $q_1$ è accettante per poter riconoscere la stringa $\varepsilon$. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}. In simboli, si ha che $$\mathrm{REG} \subsetneq \mathcal{L}(\mathrm{PDA})$$
+        Dunque, di fatto, il \PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Infine, lo stato $q_1$ è accettante per poter riconoscere la stringa $\varepsilon$. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}. In simboli, si ha che $$\mathrm{\REG} \subsetneq \mathcal{L}(\mathrm{\PDA})$$
     \end{framedobs}
 
-    \begin{example}[PDA]
-        Si consideri il seguente PDA:
+    \begin{example}[\PDA]
+        Si consideri il seguente \PDA:
 
         \begin{figure}[H]
             \centering
@@ -1344,7 +1344,7 @@
                     (3) edge node {$\varepsilon; \ttt \$ \to \varepsilon$} (4)
                  ;
              \end{tikzpicture}
-             \caption{Un PDA.}
+             \caption{Un \PDA.}
         \end{figure}
 
         Esso è in grado di riconoscere il linguaggio $$L=\{w \in \{\ttt 0, \ttt 1\}^* \mid w \ttt \& w ^\mathcal{R}\}$$ poiché:
@@ -1360,11 +1360,11 @@
     \subsection{Equivalenze}
 
     \begin{frameddefn}[label={insert stack}]{Inserimento di stringhe nello stack}
-        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \cdots u_k \in \Gamma^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \cdots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$.
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un \PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \cdots u_k \in \Gamma^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \cdots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un \PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$.
     \end{frameddefn}
 
     \begin{example}[Inserimenti di stringhe nello stack]
-        Si consideri il seguente PDA:
+        Si consideri il seguente \PDA:
 
         \begin{figure}[H]
             \centering
@@ -1376,7 +1376,7 @@
                     (1) edge node {$a; s \to xyz$} (2)
                  ;
              \end{tikzpicture}
-             \caption{Un PDA che inserisce una stringa nello stack.}
+             \caption{Un \PDA che inserisce una stringa nello stack.}
         \end{figure}
 
         per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$; dunque, con la notazione presente sull'arco $(p, q)$ verrà sottointesa la seguente successione di stati --- per certi stati $r_1, r_2 \in Q$:
@@ -1395,12 +1395,12 @@
                     (3) edge node {$\varepsilon; \varepsilon \to x$} (4)
                  ;
              \end{tikzpicture}
-             \caption{La formalizzazione del PDA precedente.}
+             \caption{La formalizzazione del \PDA precedente.}
         \end{figure}
     \end{example}
 
-    \begin{framedmeth}[label={cfg into pda}]{PDA di CFG}
-        Sia $G = (V, \Sigma, R, S)$ una CFG, e sia $E$ l'insieme di stati tale da permettere di utilizzare la notazione descritta nella \cref{insert stack}; per costruire un PDA in grado di riconoscere $L(G)$, che avrà la forma $$P := (\{q_0, q', q\} \cup E, \Sigma, V \cup \Sigma, \delta, q_0, \{q\})$$ si definiscono i seguenti:
+    \begin{framedmeth}[label={cfg into pda}]{\PDA di \CFG}
+        Sia $G = (V, \Sigma, R, S)$ una \CFG, e sia $E$ l'insieme di stati tale da permettere di utilizzare la notazione descritta nella \cref{insert stack}; per costruire un \PDA in grado di riconoscere $L(G)$, che avrà la forma $$P := (\{q_0, q', q\} \cup E, \Sigma, V \cup \Sigma, \delta, q_0, \{q\})$$ si definiscono i seguenti:
 
         \begin{itemize}
             \item $\delta(q_0, \varepsilon, \varepsilon) := \{(q', S \ttt \$) \}$, ovvero, viene inserito $\ttt \$$ come marcatore nello stack di $P$ (si noti l'\cref{pda empty stack}), e successivamente la stringa iniziale $S$ di $G$;
@@ -1424,14 +1424,14 @@
                     (2) edge node {$\varepsilon; \ttt \$ \to \varepsilon$} (3)
                  ;
              \end{tikzpicture}
-             \caption{Il PDA $P$ appena costruito.}
+             \caption{Il \PDA $P$ appena costruito.}
         \end{figure}
     \end{framedmeth}
 
-    \begin{example}[PDA di CFG]
-        Si consideri la seguente CFG: $$G: \centeredsoe{S \to \ttt a T \ttt b \smid \ttt b \\ T \to T \ttt a \smid \varepsilon}$$
+    \begin{example}[\PDA di \CFG]
+        Si consideri la seguente \CFG: $$G: \centeredsoe{S \to \ttt a T \ttt b \smid \ttt b \\ T \to T \ttt a \smid \varepsilon}$$
 
-        Attraverso il \cref{cfg into pda}, si ottiene il seguente PDA, in grado di riconoscere $L(G)$:
+        Attraverso il \cref{cfg into pda}, si ottiene il seguente \PDA, in grado di riconoscere $L(G)$:
 
         \begin{figure}[H]
             \centering
@@ -1456,18 +1456,18 @@
                     (7) edge [bend right, above] node {$\varepsilon; \varepsilon \to T$} (3)
                  ;
              \end{tikzpicture}
-             \caption{Un PDA in grado di riconoscere $L(G)$.}
+             \caption{Un \PDA in grado di riconoscere $L(G)$.}
         \end{figure}
     \end{example}
 
-    \begin{framedthm}{CFL e PDA}
-        Un linguaggio è context-free se e solo se esiste un PDA che lo riconosce; in simboli $$\mathrm{CFL} = \mathcal{L}(\mathrm{PDA})$$
+    \begin{framedthm}{\CFL e \PDA}
+        Un linguaggio è context-free se e solo se esiste un \PDA che lo riconosce; in simboli $$\mathrm{\CFL} = \mathcal{L}(\mathrm{\PDA})$$
     \end{framedthm}
 
     \proofiff{
-        Sia $L$ un CFL, e dunque per definizione esiste una CFG $G$ tale che $L(G) = L$; allora, utilizzando il \cref{cfg into pda}, è possibile trasformare $G$ in un PDA ad essa equivalente --- ovvero, tale da riconoscere $L(G)$ --- dunque segue la tesi.
+        Sia $L$ un \CFL, e dunque per definizione esiste una \CFG $G$ tale che $L(G) = L$; allora, utilizzando il \cref{cfg into pda}, è possibile trasformare $G$ in un \PDA ad essa equivalente --- ovvero, tale da riconoscere $L(G)$ --- dunque segue la tesi.
     }{
-        Sia $L$ un linguaggio riconosciuto da un PDA definito come $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ --- dunque $L = L(P)$ --- e si consideri il seguente PDA $$P' := (Q', \Sigma, \Gamma, \delta', q_0, F')$$ tale che:
+        Sia $L$ un linguaggio riconosciuto da un \PDA definito come $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ --- dunque $L = L(P)$ --- e si consideri il seguente \PDA $$P' := (Q', \Sigma, \Gamma, \delta', q_0, F')$$ tale che:
 
         \begin{itemize}
             \item ogni transizione di stati possa effettuare solamente un'operazione di \tit{push} o \tit{pop}, \tit{non simultaneamente}, dunque avente $\delta'$ definita come segue: $$\forall p, q \in Q, a \in \Sigma, b, c \in \Gamma^* \quad (q, c) \in \delta(p, a, b) \implies \exists r \in Q' \mid \soe{l}{(r, \varepsilon) \in \delta'(p, a, b) \\ (q, c) \in \delta'(r, \varepsilon, \varepsilon)}$$ al fine di trasformare la seguente transizione
@@ -1508,7 +1508,7 @@
 
         Si noti che, per costruzione di $P'$, si ha che $L(P) = L(P')$, poiché $P'$ è una versione di $P$ in cui le transizioni possono effettuare solamente un'operazione per volta sullo stack, è presente un solo stato accettante e viene svuotato lo stack prima di accettare le stringhe.
 
-        Si consideri ora la CFG $G = (V, \Sigma, R, S)$ definita come segue:
+        Si consideri ora la \CFG $G = (V, \Sigma, R, S)$ definita come segue:
 
         \begin{itemize}
             \item $V := \{A_{p,q} \mid p, q \in Q'\}$
@@ -1568,8 +1568,8 @@
 
     \subsection{Pumping lemma}
 
-    \begin{framedprop}[label={prop pre pump cfl}]{Altezza di derivazioni su CFG in CNF}
-        Sia $G = (V, \Sigma, R, S)$ una CFG in CNF, e $x \in L(G)$ una sua stringa; allora, se $h$ è l'altezza all'albero di derivazione di $x$, si ha che $$|x| \le 2^{h - 1}$$
+    \begin{framedprop}[label={prop pre pump cfl}]{Altezza di derivazioni su \CFG in CNF}
+        Sia $G = (V, \Sigma, R, S)$ una \CFG in CNF, e $x \in L(G)$ una sua stringa; allora, se $h$ è l'altezza all'albero di derivazione di $x$, si ha che $$|x| \le 2^{h - 1}$$
     \end{framedprop}
 
     \proofstrind{
@@ -1582,8 +1582,8 @@
         È necessario dimostrare che la tesi è verificata per ogni stringa $x \in L(G)$ il cui albero di derivazione abbia altezza $h + 1$. Si noti che, poiché $G$ è in CNF, il primo passaggio dell'albero di derivazione di $x$ deve necessariamente essere stato ottenuto attraverso una regola della forma $S \to AB$ per qualche $aA, B \in V$, e dunque devono esistere $y, z$ sottostringhe di $x = yz$ --- e dunque $|x| = |y| + |z|$ --- tali che $A \derives y$ e $B \derives z$. Poiché la derivazione $S \derives x$ ha altezza $h + 1$, allora le derivazioni di $y$ e di $z$ devono avere altezza $h$, e dunque per essi è possibile applicare l'ipotesi induttiva forte, e dunque si verifica che $$\soe{l}{|y| \le 2^{h - 1} \\ |z| \le 2^{h - 1}} \implies |x| = |y| + |z| \le 2^{h - 1} + 2^{h - 1} = 2^h = 2^{(h + 1) - 1}$$ allora segue la tesi.
     }
 
-    \begin{framedlem}[label={pump cfl}]{Pumping lemma (CFL)}
-        Sia $A$ un CFL; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 5 stringhe $u, v, x, y, z \mid s = uvxyz$ soddisfacenti le seguenti condizioni:
+    \begin{framedlem}[label={pump cfl}]{Pumping lemma (\CFL)}
+        Sia $A$ un \CFL; allora, esiste un $p \in \N$, detto \tbf{lunghezza del pumping}, tale che per ogni stringa $s \in A$ tale per cui $|s| \ge p$, esistono 5 stringhe $u, v, x, y, z \mid s = uvxyz$ soddisfacenti le seguenti condizioni:
 
         \begin{itemize}
             \item $\forall i \ge 0 \quad uv^ixy^iz \in A$
@@ -1593,13 +1593,13 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un CFL, per definizione esiste una CFG $G = (V, \Sigma, R, S)$ che lo genera, e si assuma --- senza perdita di generalità, per il \cref{cfg into cnf} --- che $G$ sia in CNF; sia allora $p := 2^{|V|}$. Inoltre, sia $s \in A \mid |s| \ge p$, e dunque per la \cref{prop pre pump cfl}, poiché $G$ è in CNF, si ha che $$p := 2^{|V|} \le |s| \le 2^{h - 1} \implies 2^{|V|} \le 2^{h - 1} \iff |V| + 1 \le h$$ dove $h$ è l'altezza dell'albero di derivazione di $s$.
+        Poiché $A$ è un \CFL, per definizione esiste una \CFG $G = (V, \Sigma, R, S)$ che lo genera, e si assuma --- senza perdita di generalità, per il \cref{cfg into cnf} --- che $G$ sia in CNF; sia allora $p := 2^{|V|}$. Inoltre, sia $s \in A \mid |s| \ge p$, e dunque per la \cref{prop pre pump cfl}, poiché $G$ è in CNF, si ha che $$p := 2^{|V|} \le |s| \le 2^{h - 1} \implies 2^{|V|} \le 2^{h - 1} \iff |V| + 1 \le h$$ dove $h$ è l'altezza dell'albero di derivazione di $s$.
 
         TODO DA FINIRE
     \end{proof}
 
     % \begin{proof}
-    %     Poiché $A$ è un CFL, per definizione esiste una CFG $G= (V, \Sigma, R, S)$ che lo genera; sia $b$ il massimo numero di simboli nel lato destro di una regola in $R$, e dunque all'interno di ogni albero sintattico che è possibile costruire attraverso $G$ non sarà possibile avere un nodo con più di $b$ figli. Dunque, partendo da $S$, per la prima sostituzione effettuata, si avranno al più $b$ foglie all'interno dell'albero; per la seconda, se ne avranno al più $b^2$, ed in generale, un albero di altezza al più $h$ avrà al più $b^h$ foglie, dunque la stringa generata avrà lunghezza al più $b^h$. Di conseguenza, una stringa di lunghezza pari almeno a $b^h + 1$ deve essere stata generata da un albero avente altezza pari almeno ad $h + 1$.
+    %     Poiché $A$ è un \CFL, per definizione esiste una \CFG $G= (V, \Sigma, R, S)$ che lo genera; sia $b$ il massimo numero di simboli nel lato destro di una regola in $R$, e dunque all'interno di ogni albero sintattico che è possibile costruire attraverso $G$ non sarà possibile avere un nodo con più di $b$ figli. Dunque, partendo da $S$, per la prima sostituzione effettuata, si avranno al più $b$ foglie all'interno dell'albero; per la seconda, se ne avranno al più $b^2$, ed in generale, un albero di altezza al più $h$ avrà al più $b^h$ foglie, dunque la stringa generata avrà lunghezza al più $b^h$. Di conseguenza, una stringa di lunghezza pari almeno a $b^h + 1$ deve essere stata generata da un albero avente altezza pari almeno ad $h + 1$.
     %
     %     Sia $p := b^{|V| + 1}$, e sia $s \in A$ tale che $|s| \ge p$; si noti che $b^{|V| + 1} \ge b^{|V|} + 1$, e poiché $s$ ha lunghezza pari almeno a $p$, allora --- per quanto detto precedentemente --- $s$ deve essere stata generata attraverso un albero sintattico avente altezza pari almeno a $|V| + 1$. Sia allora $\tau$ l'albero sintattico con minor numero di nodi tale da generare $s$; poiché $h_\tau \ge |V| + 1$, il cammino $\mathscr{C}$ più lungo dalla radice ad una foglia in $\tau$ ha lunghezza almeno $|V| + 1$, avente dunque almeno $|V| + 2$ nodi, dove il primo è la radice --- ovvero $S$, una variabile --- l'ultimo è la foglia --- necessariamente un terminale --- e tutti gli altri nodi nel mezzo sono variabili; dunque il cammino è composto da almeno $|V| + 1$ variabili. Si noti che $G = (V, \Sigma, R, S)$, dunque il numero di variabili di $G$ è $|V|$; allora, per il \cref{pigeonhole}, all'interno del cammino preso in considerazione, deve esistere TODO ALMENO? una variabile ripetuta più di 1 volta, e sia questa $\rho$. Si asssuma che $\rho \neq S$. TODO SE $\rho = S$???
     %
@@ -1622,9 +1622,9 @@
     %     Allora, sono soddisfatte tutte le condizioni della tesi.
     % \end{proof}
 
-    \begin{example}[Pumping lemma in CFL]
+    \begin{example}[Pumping lemma in \CFL]
         \label{pump cfl ex1}
-        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \ttt 2 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w:=\ttt 0^p \ttt 1^p \ttt 2 ^p \implies |w| = 3p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1 ^p \ttt 2^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
+        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \ttt 2 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{\CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w:=\ttt 0^p \ttt 1^p \ttt 2 ^p \implies |w| = 3p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1 ^p \ttt 2^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
 
         \begin{itemize}
             \item $vxy$ contiene solamente $\ttt 0$, dunque $v^0xy^0$ contiene solamente $\ttt 0$
@@ -1637,9 +1637,9 @@
         e dunque, indipendentemente dalla scelta di $v, x, y$ TODO DA FINIRE IL FINALE NON HA SENSO
     \end{example}
 
-    \begin{example}[Pumping lemma in CFL]
+    \begin{example}[Pumping lemma in \CFL]
         \label{pump cfl ex2}
-        Si consideri il linguaggio $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e per assurdo, sia $L \in \mathrm{CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w := \ttt 0 ^p \ttt 1 ^p \ttt 0 ^p \ttt 1 ^p \implies |w| = 4p > p$$ avente sicuramente lunghezza maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1^p \ttt 0^p \ttt 1^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
+        Si consideri il linguaggio $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e per assurdo, sia $L \in \mathrm{\CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w := \ttt 0 ^p \ttt 1 ^p \ttt 0 ^p \ttt 1 ^p \implies |w| = 4p > p$$ avente sicuramente lunghezza maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1^p \ttt 0^p \ttt 1^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
 
         \begin{itemize}
             \item $vxy$ contiene solamente $\ttt 0$ o solamente $\ttt 1$, e dunque assumendo che ad esempio si trovi nella prima porzione di $\ttt 0$ di $w$, per ogni $i > 1$ si ha che la stringa diventa della forma $$w := \ttt 0 ^{p + k} \ttt 1 \ttt 0 \ttt 1$$ per qualche $k$, e dunque non può essere della forma $w'w'$ con $w' \in \{\ttt 0, \ttt1\}^*$;
@@ -1649,7 +1649,7 @@
         Allora, in nessuno dei casi possibili $w := u v^i x y^i z \in L$ $\lightning$.
     \end{example}
 
-    \begin{framedobs}{Condizioni del pumping lemma (CFL)}
+    \begin{framedobs}{Condizioni del pumping lemma (\CFL)}
         TODO
     \end{framedobs}
 
@@ -1657,21 +1657,21 @@
 
     \subsection{Unione}
 
-    \begin{framedprop}{Chiusura sull'unione (CFL)}
-        Siano $L_1, \ldots, L_n$ dei CFL; allora $\displaystyle \bigcup_{i =1}^n{L_i}$ è un CFL.
+    \begin{framedprop}{Chiusura sull'unione (\CFL)}
+        Siano $L_1, \ldots, L_n$ dei \CFL; allora $\displaystyle \bigcup_{i =1}^n{L_i}$ è un \CFL.
     \end{framedprop}
 
     \begin{proof}
-        Poiché $L_1, \ldots, L_n$ sono CFL, allora esistono delle CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{CFL}$ per definizione; allora, si consideri la seguente CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
+        Poiché $L_1, \ldots, L_n$ sono \CFL, allora esistono delle \CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una \CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{\CFL}$ per definizione; allora, si consideri la seguente \CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
     \end{proof}
 
-    \begin{example}[Unione di CFL]
-        Siano $L_1$ ed $L_2$ due CFL generati rispettivamente dalle seguenti CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la seguente CFG $G$: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
+    \begin{example}[Unione di \CFL]
+        Siano $L_1$ ed $L_2$ due \CFL generati rispettivamente dalle seguenti \CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la seguente \CFG $G$: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
     \end{example}
 
     \subsection{Concatenazione}
 
-    \begin{framedprop}{Chiusura sulla concatenazione (CFL)}
+    \begin{framedprop}{Chiusura sulla concatenazione (\CFL)}
         TODO
     \end{framedprop}
 
@@ -1681,7 +1681,7 @@
 
     \subsection{Star}
 
-    \begin{framedprop}{Chiusura sull'operazione star (CFL)}
+    \begin{framedprop}{Chiusura sull'operazione star (\CFL)}
         TODO.
     \end{framedprop}
 
@@ -1691,18 +1691,18 @@
 
     \subsection{Intersezione}
 
-    \begin{framedprop}{$\mathrm{CFL}$ non è chiuso sull'intersezione}
-        Siano $L_1$ ed $L_2$ due CFL; allora $L_1 \cap L_2$ non è necessariamente un CFL.
+    \begin{framedprop}{$\mathrm{\CFL}$ non è chiuso sull'intersezione}
+        Siano $L_1$ ed $L_2$ due \CFL; allora $L_1 \cap L_2$ non è necessariamente un \CFL.
     \end{framedprop}
 
     \begin{proof}
-        Siano $G_1$ e $G_2$ le due seguenti CFG: $$\centeredsoe{G_1: \centeredsoe{S \to TU \\ T \to \ttt 0 T \ttt 1 \smid \varepsilon \\ U \to \ttt 2 U \smid \varepsilon} \quad G_2: \centeredsoe{S \to UT \\ T \to \ttt 1 T \ttt 2 \smid \varepsilon \\ U \to \ttt 0 U \smid \varepsilon}}$$ Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{CFL}$ per loro stessa definizione, segue la tesi.
+        Siano $G_1$ e $G_2$ le due seguenti \CFG: $$\centeredsoe{G_1: \centeredsoe{S \to TU \\ T \to \ttt 0 T \ttt 1 \smid \varepsilon \\ U \to \ttt 2 U \smid \varepsilon} \quad G_2: \centeredsoe{S \to UT \\ T \to \ttt 1 T \ttt 2 \smid \varepsilon \\ U \to \ttt 0 U \smid \varepsilon}}$$ Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{\CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{\CFL}$ per loro stessa definizione, segue la tesi.
     \end{proof}
 
     \subsection{Complemento}
 
-    \begin{framedprop}{$\mathrm{CFL}$ non è chiuso sul complemento}
-        Sia $L$ un CFL; allora $\lnot L$ non è necessariamente un CFL.
+    \begin{framedprop}{$\mathrm{\CFL}$ non è chiuso sul complemento}
+        Sia $L$ un \CFL; allora $\lnot L$ non è necessariamente un \CFL.
     \end{framedprop}
 
     \begin{proof}
@@ -1721,7 +1721,7 @@
             \item presa una stringa $x$ tale che $S \derives x$, e ponendo $n := |x|$, se $n$ è dispari allora sicuramente $x \notin L \iff x \in \lnot L$; differentemente, se $n$ è pari, allora la stringa è stata generata attraverso una delle regole $S \to AB \smid BA$ necessariamente, e dunque --- senza perdita di generalità --- assumendo che $x$ sia stata ottenuta attraverso la regola $S \to AB$, devono esistere $u, v \in \{\ttt 0, \ttt 1\}^* \mid x = uv \land A \derives u \land B \derives v$, dove $u$ e $v$ sono due stringhe aventi lunghezza dispari; siano allora $l := |u| \implies |v| = n - l$, ottenendo che $$m (u) = x_{\frac{l + 1}{2}} = u_{\frac{l + 1}{2}} = \ttt 0 \neq \ttt 1 = v_{\frac{n - l + 1}{2}} = x_{\frac{n - l + 1}{2} + l} = x_{\frac{n + l + 1}{2}} = m(v)$$ allora, poiché $m(u)$ ed $m(v)$ devono necessariamente trovarsi l'uno nella prima metà di $x$, l'altro nella seconda metà (indipendentemente dalla scelta di $u$ e $v$) si ha che la stringa $x$ è necessariamente costituita da due stringhe $w, w' \in \{\ttt 0, \ttt 1\}^* \mid w \neq w'$, poiché differiscono per almeno un carattere, ovvero $m(u) \neq m(v)$, di conseguenza $x \notin \L \iff x \in \lnot L$; questo dimostra che $S \derives x \implies x \in \lnot L$.
         \end{itemize}
 
-        Dunque, poiché $S \derives x \iff x \in \lnot L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \lnot L \iff \lnot L \in \mathrm{CFL}$$ e dunque segue la tesi.
+        Dunque, poiché $S \derives x \iff x \in \lnot L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \lnot L \iff \lnot L \in \mathrm{\CFL}$$ e dunque segue la tesi.
     \end{proof}
 
     %    \begin{figure}[H]
@@ -1756,8 +1756,8 @@
     %
     % \subsection{Automi a pila deterministici}
     %
-    % \begin{frameddefn}{DPDA}
-    %     Un \tbf{DPDA} (\tit{Deterministic Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
+    % \begin{frameddefn}{D\PDA}
+    %     Un \tbf{D\PDA} (\tit{Deterministic Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
     %
     %     \begin{itemize}
     %         \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
@@ -1768,19 +1768,19 @@
     %         \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
     %     \end{itemize}
     %
-    %     Si noti che, nonostante l'automa sia deterministico, un DPDA è in grado di lavorare con $\varepsilon$.
+    %     Si noti che, nonostante l'automa sia deterministico, un D\PDA è in grado di lavorare con $\varepsilon$.
     %
-    %     Poiché un DPDA è la controparte deterministica di un PDA, $\delta$ deve verificare la seguente condizione: per ogni $q \in Q, a \in \Sigma, x \in \Gamma$, solo uno tra $\delta(q, a, x)$, $\delta(q, a, \varepsilon)$, $\delta(q, \varepsilon, x)$ e $\delta(q, \varepsilon, \varepsilon)$ è diverso da $\emptyset$. In particolare, $\delta(q, \varepsilon, x)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-input}, mentre $\delta(q, a, \varepsilon)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-pila}.
+    %     Poiché un D\PDA è la controparte deterministica di un \PDA, $\delta$ deve verificare la seguente condizione: per ogni $q \in Q, a \in \Sigma, x \in \Gamma$, solo uno tra $\delta(q, a, x)$, $\delta(q, a, \varepsilon)$, $\delta(q, \varepsilon, x)$ e $\delta(q, \varepsilon, \varepsilon)$ è diverso da $\emptyset$. In particolare, $\delta(q, \varepsilon, x)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-input}, mentre $\delta(q, a, \varepsilon)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-pila}.
     %
-    %     Se la pila del DPDA è vuota, questo può fare mosse solo se $\delta$ specifica una mossa che elimina $\varepsilon$, altrimenti non sono previste mosse lecite ed il DPDA rifiuta l'input senza leggerne il resto; questa situazione viene detta \tit{hanging}. Inoltre, si verifica un rifiuto anche se il DPDA effettua una sequenza infinita di mosse $\varepsilon$-input, senza leggere l'input oltre un certo punto; questa situazione viene detta \tit{looping}.
+    %     Se la pila del D\PDA è vuota, questo può fare mosse solo se $\delta$ specifica una mossa che elimina $\varepsilon$, altrimenti non sono previste mosse lecite ed il D\PDA rifiuta l'input senza leggerne il resto; questa situazione viene detta \tit{hanging}. Inoltre, si verifica un rifiuto anche se il D\PDA effettua una sequenza infinita di mosse $\varepsilon$-input, senza leggere l'input oltre un certo punto; questa situazione viene detta \tit{looping}.
     % \end{frameddefn}
     %
-    % \begin{framedlem}{DPDA equivalenti}
-    %     Ogni DPDA ha un DPDA equivalente che legge sempre l'intera stringa di input; dunque non si presenta mai né \tit{hanging} né \tit{looping}.
+    % \begin{framedlem}{D\PDA equivalenti}
+    %     Ogni D\PDA ha un D\PDA equivalente che legge sempre l'intera stringa di input; dunque non si presenta mai né \tit{hanging} né \tit{looping}.
     % \end{framedlem}
     %
     % \begin{proof}
-    %     Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un DPDA; in primo luogo, $q_0$ viene rimpiazzato con un nuovo stato iniziale $q_{\mathrm{start}}$; successivamente, $q_{\mathrm{reject}}$ viene aggiunto ad $F$, ed inoltre, per ogni $r \in Q, a \in \Sigma_\varepsilon, x, y \in \Gamma_\varepsilon$ si effettuano le seguenti variazioni:
+    %     Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un D\PDA; in primo luogo, $q_0$ viene rimpiazzato con un nuovo stato iniziale $q_{\mathrm{start}}$; successivamente, $q_{\mathrm{reject}}$ viene aggiunto ad $F$, ed inoltre, per ogni $r \in Q, a \in \Sigma_\varepsilon, x, y \in \Gamma_\varepsilon$ si effettuano le seguenti variazioni:
     %
     %     \begin{itemize}
     %         \item per ogni $q \in Q$ si aggiunge uno stato $q_\mathrm{a}$, ed inoltre $$\forall q \in Q \quad \delta(q, \varepsilon, x) = (r, y) \implies \delta(q_\mathrm{a}, \varepsilon, x) := (r_\mathrm{a}, y)$$ inoltre $$q \in F \implies \delta(q, \varepsilon, x) := (r_\mathrm{a}, y)$$
@@ -1789,8 +1789,8 @@
     %     TODO DA FINIRE NON HA NESSUN SENSO QUESTA DIMOSTRAZIONE
     % \end{proof}
     %
-    % \begin{frameddefn}{DCFL}
-    %     Sia $M$ un DPDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{DCFL} (\tit{Deterministic Context-Free Language}).
+    % \begin{frameddefn}{D\CFL}
+    %     Sia $M$ un D\PDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{D\CFL} (\tit{Deterministic Context-Free Language}).
     % \end{frameddefn}
 
     \chapter{Decidibilità}
@@ -1799,10 +1799,10 @@
 
     \subsection{Definizioni}
 
-    \begin{frameddefn}[label={tm},breakable]{TM}
-        Una \tbf{TM} (\tit{Turing Machine}) è un automa fornito di un nastro (o \tit{tape}) illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
+    \begin{frameddefn}[label={tm},breakable]{\TM}
+        Una \tbf{\TM} (\tit{Turing Machine}) è un automa fornito di un nastro (o \tit{tape}) illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
 
-        Formalmente, una TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove
+        Formalmente, una \TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove
 
         \begin{itemize}
             \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
@@ -1814,16 +1814,16 @@
             \item $q_\mathrm{reject} \in Q$ è lo \tbf{stato di rifiuto}, tale che $q_\mathrm{accept} \neq q_\mathrm{reject}$
         \end{itemize}
 
-        Si noti che il nastro di una TM può essere limitato a destra, limitato a sinistra, o illimitato da entrambe le estremità, poiché è possibile dimostrare l'equivalenza delle 3 tipologie di nastri descritti; dunque, all'interno di questi appunti, a meno di specifica, si assume che la TM in questione è costituita da un nastro limitato a sinistra.
+        Si noti che il nastro di una \TM può essere limitato a destra, limitato a sinistra, o illimitato da entrambe le estremità, poiché è possibile dimostrare l'equivalenza delle 3 tipologie di nastri descritti; dunque, all'interno di questi appunti, a meno di specifica, si assume che la \TM in questione è costituita da un nastro limitato a sinistra.
 
-        Inizialmente, il nastro di una macchina di Turing contiene solamente la stringa di input, e tutto il resto è vuoto, dunque la TM riceve una stringa di input $w = w_1 \ldots w_n \in \Sigma^*$ sulle $n$ celle più a sinistra del nastro, e le celle restanti contengono il simbolo $\sqcup$ (letto \curlyquotes{\tit{blank}}).
+        Inizialmente, il nastro di una macchina di Turing contiene solamente la stringa di input, e tutto il resto è vuoto, dunque la \TM riceve una stringa di input $w = w_1 \ldots w_n \in \Sigma^*$ sulle $n$ celle più a sinistra del nastro, e le celle restanti contengono il simbolo $\sqcup$ (letto \curlyquotes{\tit{blank}}).
 
-        Per la computazione delle TM, si noti la segnatura della funzione di transizione $\delta$: essa considera lo stato corrente ed il carattere che si trova sulla cella puntata dalla testina, e restituisce il prossimo stato, il carattere con cui sovrascrivere la cella corrente, e una direzione da prendere, indicata con $\mathrm L$ (\tit{left}, e dunque la testina si sposterà a sinistra) o $\mathrm R$ (\tit{right}, e dunque la testina si sposterà a destra). Se la testina si trova sulla prima cella --- quella più a sinistra, nell'assunzione considerata --- e prova a spostarsi a sinistra, essa non effettuerà alcuno spostamento. Si noti che, se la TM non raggiunge mai lo stato di accettazione o di rifiuto, la macchina non può terminare e la computazione proseguirà per sempre (\tit{looping}).
+        Per la computazione delle \TM, si noti la segnatura della funzione di transizione $\delta$: essa considera lo stato corrente ed il carattere che si trova sulla cella puntata dalla testina, e restituisce il prossimo stato, il carattere con cui sovrascrivere la cella corrente, e una direzione da prendere, indicata con $\mathrm L$ (\tit{left}, e dunque la testina si sposterà a sinistra) o $\mathrm R$ (\tit{right}, e dunque la testina si sposterà a destra). Se la testina si trova sulla prima cella --- quella più a sinistra, nell'assunzione considerata --- e prova a spostarsi a sinistra, essa non effettuerà alcuno spostamento. Si noti che, se la \TM non raggiunge mai lo stato di accettazione o di rifiuto, la macchina non può terminare e la computazione proseguirà per sempre (\tit{looping}).
     \end{frameddefn}
 
-    \begin{example}[TM]
+    \begin{example}[\TM]
         \label{tm ex}
-        Un esempio di TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ è il seguente:
+        Un esempio di \TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ è il seguente:
 
         \begin{itemize}
             \item $Q = \{q_\mathrm{accept}, q_\mathrm{reject}, q_0, q_1, q_2, q_3\}$
@@ -1852,22 +1852,22 @@
                     (1) edge [bend right, left] node {$\centeredsoe{\blankchar \to \blankchar ; \mathrm R\\ \ttt 1 \to \ttt 1 ; \mathrm R}$} (5)
                  ;
              \end{tikzpicture}
-             \caption{La TM $M$.}
+             \caption{La \TM $M$.}
          \end{figure}
          
          La notazione $a \to b;c$ presente sugli archi di questo diagramma sta ad indicare che viene letto il simbolo $a \in \Gamma$ sulla cella puntata correntemente dalla testina, questo viene rimpiazzato col simbolo $b \in \Gamma$, e la testina si sposta verso $c \in \{\mathrm L, \mathrm R\}$. Dunque, per non sovrascrivere la cella corrente, è sufficiente porre $a \to a; c$ come etichetta dell'arco in questione.
          
-         Si noti che, all'interno dei diagrammi delle TM, lo stato di rifiuto, e gli archi in esso entranti, sono generalmente omessi per brevità, implicitando che ogni stato $q$ che non presenta transizioni esplicitamente rappresentate descrive in realtà archi $(q, q_\mathrm{reject})$.
+         Si noti che, all'interno dei diagrammi delle \TM, lo stato di rifiuto, e gli archi in esso entranti, sono generalmente omessi per brevità, implicitando che ogni stato $q$ che non presenta transizioni esplicitamente rappresentate descrive in realtà archi $(q, q_\mathrm{reject})$.
     \end{example}
 
-    \subsection{Configurazioni di TM}
+    \subsection{Configurazioni di \TM}
 
-    \begin{frameddefn}{Configurazione (TM)}
-        Sia $M= (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una TM; con il simbolismo $$u \ q \ v$$ per certi $u, v \in \Gamma^*, q \in Q$ si denota una \tbf{configurazione} di $M$, dove $q$ rappresenta lo stato attuale della computazione di un certo input, $uv$ è la stringa che descrive il nastro (si assume che, dopo l'ultimo simbolo di $v$, il nastro contenga solo $\blankchar$), e la posizione della testina è sul primo simbolo di $v$.
+    \begin{frameddefn}{Configurazione (\TM)}
+        Sia $M= (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; con il simbolismo $$u \ q \ v$$ per certi $u, v \in \Gamma^*, q \in Q$ si denota una \tbf{configurazione} di $M$, dove $q$ rappresenta lo stato attuale della computazione di un certo input, $uv$ è la stringa che descrive il nastro (si assume che, dopo l'ultimo simbolo di $v$, il nastro contenga solo $\blankchar$), e la posizione della testina è sul primo simbolo di $v$.
     \end{frameddefn}
 
-    \begin{example}[Configurazioni di TM]
-        Data la seguente TM
+    \begin{example}[Configurazioni di \TM]
+        Data la seguente \TM
 
         \centeredimage{0.3}{../assets/tm_ex.png}
 
@@ -1879,13 +1879,13 @@
     \end{frameddefn}
 
     \begin{framedobs}{Configurazioni particolari}
-        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una TM; se la TM si trova sull'estremità sinistra del nastro, dunque sul primo carattere, la configurazione corrente è $q_i \ bv$ per certi $q_i \in Q$ e $b \in \Gamma, v \in \Gamma^*$; dunque, se si verifica una transizione che comporta una mossa a sinistra ed un rimpiazzo sel simbolo $b$ con $c \in \Gamma$, per quando detto nella \cref{tm}, si ha che la prossima configurazione di $M$ sarà $q_j \ cv$ per qualche $q_j \in Q$. Se invece la TM si trova sull'estremità destra --- dunque al termine dell'input fornito sul nastro --- la configurazione corrente è $ua \ q_i \ \blankchar$ per certi $q_i \in Q$ e $a \in \Gamma, u \in \Gamma^*$, ma per brevità il simbolo $\blankchar$ verrà omesso, assumendo che i simboli $\blankchar$ seguano la parte del nastro rappresentata dalla configurazione.
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; se la \TM si trova sull'estremità sinistra del nastro, dunque sul primo carattere, la configurazione corrente è $q_i \ bv$ per certi $q_i \in Q$ e $b \in \Gamma, v \in \Gamma^*$; dunque, se si verifica una transizione che comporta una mossa a sinistra ed un rimpiazzo sel simbolo $b$ con $c \in \Gamma$, per quando detto nella \cref{tm}, si ha che la prossima configurazione di $M$ sarà $q_j \ cv$ per qualche $q_j \in Q$. Se invece la \TM si trova sull'estremità destra --- dunque al termine dell'input fornito sul nastro --- la configurazione corrente è $ua \ q_i \ \blankchar$ per certi $q_i \in Q$ e $a \in \Gamma, u \in \Gamma^*$, ma per brevità il simbolo $\blankchar$ verrà omesso, assumendo che i simboli $\blankchar$ seguano la parte del nastro rappresentata dalla configurazione.
 
         Dunque, dato un input $w$, posto sul nastro, la \tit{configurazione iniziale} di $M$ è denotata con $q_0 \ w$, mentre le \tit{configurazioni di accettazione e rifiuto} --- dette anche \tit{configurazioni di arresto}, poiché non producono ulteriori configurazioni --- sono descritte rispettivamente con $q_\mathrm{accept}$ e $q_\mathrm{reject}$.
     \end{framedobs}
 
-    \begin{frameddefn}{Stringhe accettate (TM)}
-        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una TM, e sia $w = w_1 \cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di configurazioni $C_0, \ldots, C_n$ tali per cui
+    \begin{frameddefn}{Stringhe accettate (\TM)}
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM, e sia $w = w_1 \cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $M$ \tbf{accetta} $w$ se esiste una sequenza di configurazioni $C_0, \ldots, C_n$ tali per cui
 
         \begin{itemize}
             \item $C_0 = q_0 \ w$
@@ -1895,22 +1895,22 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Turing-riconoscibilità}
-        Un linguaggio è detto \tbf{Turing-riconoscibile} (o \tbf{ricorsivamente enumerabile}) se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$, dunque in simboli $$L \in \mathrm{REC} \iff \exists M \in \mathrm{TM} \mid L(M) = L$$
+        Un linguaggio è detto \tbf{Turing-riconoscibile} (o \tbf{ricorsivamente enumerabile}) se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$, dunque in simboli $$L \in \mathrm{REC} \iff \exists M \in \mathrm{\TM} \mid L(M) = L$$
     \end{frameddefn}
 
     \begin{example}[Linguaggi Turing-riconoscibili]
-        Si consideri la TM $M$ descritta all'interno dell'\cref{tm ex}; si noti che essa, per sua costruzione, è in grado di riconoscere il linguaggio $L$ descritto dall'espressione regolare $\ttt 0 \ttt 1^* \ttt 1$, poiché si comporta come segue:
+        Si consideri la \TM $M$ descritta all'interno dell'\cref{tm ex}; si noti che essa, per sua costruzione, è in grado di riconoscere il linguaggio $L$ descritto dall'espressione regolare $\ttt 0 \ttt 1^* \ttt 1$, poiché si comporta come segue:
 
         \begin{itemize}
-            \item partendo dallo stato iniziale $q_0$, se viene letto uno \ttt 0, la TM lo sovrascrive con il carattere \ttt x, e si sposta a destra, andando nello stato $q_1$;
-            \item se ora viene letto un \ttt 1, la TM lo sovrascrive con il carattere \ttt y, e si sposta ancora a destra, ma rimane nello stato $q_1$;
-            \item se ora viene letto uno \ttt 0, la TM lo sovrascrive con il carattere \ttt x, e si sposta ancora a destra, andando nello stato $q_2$;
+            \item partendo dallo stato iniziale $q_0$, se viene letto uno \ttt 0, la \TM lo sovrascrive con il carattere \ttt x, e si sposta a destra, andando nello stato $q_1$;
+            \item se ora viene letto un \ttt 1, la \TM lo sovrascrive con il carattere \ttt y, e si sposta ancora a destra, ma rimane nello stato $q_1$;
+            \item se ora viene letto uno \ttt 0, la \TM lo sovrascrive con il carattere \ttt x, e si sposta ancora a destra, andando nello stato $q_2$;
             \item infine, se viene letto $\blankchar$, la macchina non sovrascrive il carattere, si sposta a destra (la direzione è irrilevante in questo caso) e termina accettando l'input --- dunque andando nello stato $q_\mathrm{accept}$;
         \end{itemize}
 
         In ogni altro caso, la macchina rifiuta immediatamente.
 
-        Allora, poiché esiste una TM $M$ tale per cui $L(M) = L$, si ha che $L \in \mathrm{REC}$.
+        Allora, poiché esiste una \TM $M$ tale per cui $L(M) = L$, si ha che $L \in \mathrm{REC}$.
     \end{example}
 
     \begin{example}[Linguaggi Turing-riconoscibili]
@@ -1922,7 +1922,7 @@
     \end{frameddefn}
 
     \begin{framedobs}{Decisori}
-        Data una TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$, e ponendo $$\centeredsoe{L(M) := \{w \in \Sigma^* \mid M \ \mathrm{accetta} \ w\} \\ R(M) := \{w \in \Sigma^* \mid M \ \mathrm{rifiuta} \ w\}}$$ si ha che, in generale $$L(M) \cup R(M) \subseteq \Sigma^*$$ poiché $M$ potrebbe andare in loop, e dunque $$M \ \mathrm{decisore} \iff L(M) \cup R(M) = \Sigma^*$$
+        Data una \TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$, e ponendo $$\centeredsoe{L(M) := \{w \in \Sigma^* \mid M \ \mathrm{accetta} \ w\} \\ R(M) := \{w \in \Sigma^* \mid M \ \mathrm{rifiuta} \ w\}}$$ si ha che, in generale $$L(M) \cup R(M) \subseteq \Sigma^*$$ poiché $M$ potrebbe andare in loop, e dunque $$M \ \mathrm{decisore} \iff L(M) \cup R(M) = \Sigma^*$$
     \end{framedobs}
 
     \begin{frameddefn}{Turing-decidibilità}
@@ -1940,17 +1940,17 @@
     \subsection{Macchine di Turing con testina ferma}
 
     \begin{frameddefn}[label={stay tm}]{Macchina di Turing con testina ferma}
-        Una \tbf{macchina di Turing con testina ferma} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q - \{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{Q \times \Gamma \times \{\mathrm L, \mathrm R, \mathrm S\}}$$ in cui il simbolo $\mathrm S$ (\tit{stay}) indica che la testina della TM non si muove.
+        Una \tbf{macchina di Turing con testina ferma} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q - \{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{Q \times \Gamma \times \{\mathrm L, \mathrm R, \mathrm S\}}$$ in cui il simbolo $\mathrm S$ (\tit{stay}) indica che la testina della \TM non si muove.
     \end{frameddefn}
 
-    \begin{framedprop}[label={stay tm equiv}]{Equivalenza delle TM con testina ferma}
-        Sia $M$ una macchina di Turing con testina ferma; allora esiste una TM $M'$ ad essa equivalente.
+    \begin{framedprop}[label={stay tm equiv}]{Equivalenza delle \TM con testina ferma}
+        Sia $M$ una macchina di Turing con testina ferma; allora esiste una \TM $M'$ ad essa equivalente.
     \end{framedprop}
 
     \proofiff{
         Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una macchina di Turing con testina ferma; di conseguenza, nel prodotto cartesiano del codominio di $\delta$ è presente l'insieme $\{ \mathrm L, \mathrm R, \mathrm S\}$, e dunque per costruire una macchina di Turing $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ equivalente ad $M$, è sufficiente inserire nuovi stati in $Q'$ tali che $$\forall p, q \in Q, a, b \in \Gamma \quad \delta(p, a) = (q, b, \mathrm S) \implies \exists r \in Q' \mid \soe{l}{\delta'(p, a) = (r, b, \mathrm R) \\ \delta'(r, \gamma) = (p, \gamma, \mathrm L)}$$ per un certo $\gamma \in \Gamma$, dove $r \in Q'$ è il nuovo stato, dunque facendo spostare la testina in una direzione --- in questo caso, verso destra --- e poi facendola spostare nuovamente nella direzione opposta --- dunque in questo caso, verso sinistra.
     }{
-        Sia $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ una TM; allora, la segnatura della funzione di transizione di $M'$ segue dalla \cref{tm}, dunque nel prodotto cartesiano del suo codominio è presente l'insieme $\{\mathrm L, \mathrm R\}$, e poiché $$\{\mathrm L, \mathrm R\} \subseteq \{\mathrm L, \mathrm R, \mathrm S\}$$ allora è possibile considerare $M'$ stessa come macchina di Turing con testina ferma, che però non presenta mai il simbolo $\mathrm S$ all'interno delle transizioni.
+        Sia $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ una \TM; allora, la segnatura della funzione di transizione di $M'$ segue dalla \cref{tm}, dunque nel prodotto cartesiano del suo codominio è presente l'insieme $\{\mathrm L, \mathrm R\}$, e poiché $$\{\mathrm L, \mathrm R\} \subseteq \{\mathrm L, \mathrm R, \mathrm S\}$$ allora è possibile considerare $M'$ stessa come macchina di Turing con testina ferma, che però non presenta mai il simbolo $\mathrm S$ all'interno delle transizioni.
     }
 
     \subsection{Macchine di Turing multinastro}
@@ -1964,15 +1964,15 @@
     \end{framedobs}
 
     \begin{framedobs}[label={tape start}]{Inizio del nastro}
-        Una TM non è in grado di sapere se la sua testina si trova all'inizio dell'input, ma è possibile ottenere questo comportamento effettuando uno \tit{shift} a destra dell'intero nastro (si noti l'\cref{tape shift}), e successivamente ponendo un simbolo sentinella --- dunque che non sia già presente nell'alfabeto del nastro --- nella prima cella.
+        Una \TM non è in grado di sapere se la sua testina si trova all'inizio dell'input, ma è possibile ottenere questo comportamento effettuando uno \tit{shift} a destra dell'intero nastro (si noti l'\cref{tape shift}), e successivamente ponendo un simbolo sentinella --- dunque che non sia già presente nell'alfabeto del nastro --- nella prima cella.
     \end{framedobs}
 
-    \begin{framedprop}{Equivalenza delle TM multinastro}
-        Sia $M$ una macchina di Turing multinastro; allora esiste una TM $M'$ ad essa equivalente.
+    \begin{framedprop}{Equivalenza delle \TM multinastro}
+        Sia $M$ una macchina di Turing multinastro; allora esiste una \TM $M'$ ad essa equivalente.
     \end{framedprop}
 
     \proofiff{
-        Sia $M$ una macchina di Turing multinastro; si vuole dunque costruire una macchina di Turing $M'$ tale da simulare $M$. Poiché $M'$ è una TM, essa è costituita da un solo nastro, e qunque per simulare $M$ è necessario suddividere il nastro di $M'"$ in regioni, che saranno delimitate da un nuovo carattere \ttt \#, e per simulare le testine di ogni nastro, verrà utilizzata una versione marcata dei caratteri in $\Gamma$, al fine di segnare \curlyquotes{virtualmente} la posizione di ogni testina in ogni nastro. Dunque, dato un input $w = w_1 \cdots w_n$ sul nastro di $M'$, si ha che:
+        Sia $M$ una macchina di Turing multinastro; si vuole dunque costruire una macchina di Turing $M'$ tale da simulare $M$. Poiché $M'$ è una \TM, essa è costituita da un solo nastro, e qunque per simulare $M$ è necessario suddividere il nastro di $M'"$ in regioni, che saranno delimitate da un nuovo carattere \ttt \#, e per simulare le testine di ogni nastro, verrà utilizzata una versione marcata dei caratteri in $\Gamma$, al fine di segnare \curlyquotes{virtualmente} la posizione di ogni testina in ogni nastro. Dunque, dato un input $w = w_1 \cdots w_n$ sul nastro di $M'$, si ha che:
 
         \begin{itemize}
             \item inizialmente $M'$ trasforma il nastro nel formato descritto, e dunque da $$w_1 w_2 \cdots w_n \ \blankchar \ldots$$ viene effetuato uno \tit{shift} a destra del nastro (si veda l'\cref{tape shift}), anteposto il carattere \ttt \# al suo inizio (si veda l'\cref{tape start}), e successivamente inseriti i seguenti caratteri marcati per segnare le testine virtuali: $$\ttt \# \stackrel{\bullet}{w_1} w_2 \cdots w_n \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \ldots \ \ttt \#$$
@@ -1987,12 +1987,12 @@
 
     \subsection{Macchine di Turing non deterministiche}
 
-    \begin{frameddefn}{NTM}
-        Una \tbf{NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q-\{q_\mathrm{accept}, q_\mathrm{reject}\} \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una NTM computa non deterministicamente.
+    \begin{frameddefn}{N\TM}
+        Una \tbf{\NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q-\{q_\mathrm{accept}, q_\mathrm{reject}\} \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una \NTM computa non deterministicamente.
     \end{frameddefn}
 
-    \begin{framedprop}{Equivalenza delle NTM}
-        Sia $N$ una NTM; allora esiste una TM $M$ ad essa equivalente.
+    \begin{framedprop}{Equivalenza delle N\TM}
+        Sia $N$ una N\TM; allora esiste una \TM $M$ ad essa equivalente.
     \end{framedprop}
 
     \proofiff{TODO}{TODO}
@@ -2004,7 +2004,7 @@
     \end{frameddefn}
 
     \begin{framedprop}{Equivalenza degli enumeratori}
-        Sia $E$ un enumeratore; allora esiste una TM $M$ ad esso equivalente.
+        Sia $E$ un enumeratore; allora esiste una \TM $M$ ad esso equivalente.
     \end{framedprop}
 
     \proofiff{
@@ -2033,10 +2033,10 @@
 
     \section{Problema dell'accettazione}
 
-    \subsection{DFA}
+    \subsection{\DFA}
 
-    \begin{frameddefn}{boh}
-        $\mathsf{DFA}$
+    \begin{frameddefn}{TODO}
+        TODO
     \end{frameddefn}
 
 \end{document}
