@@ -1793,13 +1793,13 @@
     %     Sia $M$ un DPDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{DCFL} (\tit{Deterministic Context-Free Language}).
     % \end{frameddefn}
 
-    \chapter{TODO}
+    \chapter{Decidibilità}
 
     \section{Macchine di Turing}
 
     \subsection{Definizioni}
 
-    \begin{frameddefn}[label={tm}, breakable]{TM}
+    \begin{frameddefn}[label={tm},breakable]{TM}
         Una \tbf{TM} (\tit{Turing Machine}) è un automa fornito di un nastro (o \tit{tape}) illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
 
         Formalmente, una TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove
@@ -1808,7 +1808,7 @@
             \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
             \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}, tale che $\blankchar \notin \Sigma$
             \item $\Gamma$ è l'\tbf{alfabeto del nastro}, un insieme \tit{finito} tale che $\Sigma \subseteq \Gamma$ e $\blankchar \in \Gamma$
-            \item $\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R\}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
+            \item $\func{\delta}{(Q- \{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R\}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
             \item $q_0 \in Q$ è lo \tbf{stato iniziale}
             \item $q_\mathrm{accept} \in Q$ è lo \tbf{stato di accettazione}
             \item $q_\mathrm{reject} \in Q$ è lo \tbf{stato di rifiuto}, tale che $q_\mathrm{accept} \neq q_\mathrm{reject}$
@@ -1937,10 +1937,10 @@
 
     \section{Varianti di macchine di Turing}
 
-    \subsection{Macchina di Turing con testina ferma}
+    \subsection{Macchine di Turing con testina ferma}
 
     \begin{frameddefn}[label={stay tm}]{Macchina di Turing con testina ferma}
-        Una \tbf{macchina di Turing con testina ferma} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{\mathrm L, \mathrm R, \mathrm S\}}$$ in cui il simbolo $\mathrm S$ (\tit{stay}) indica che la testina della TM non si muove.
+        Una \tbf{macchina di Turing con testina ferma} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q - \{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{Q \times \Gamma \times \{\mathrm L, \mathrm R, \mathrm S\}}$$ in cui il simbolo $\mathrm S$ (\tit{stay}) indica che la testina della TM non si muove.
     \end{frameddefn}
 
     \begin{framedprop}[label={stay tm equiv}]{Equivalenza delle TM con testina ferma}
@@ -1953,10 +1953,10 @@
         Sia $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ una TM; allora, la segnatura della funzione di transizione di $M'$ segue dalla \cref{tm}, dunque nel prodotto cartesiano del suo codominio è presente l'insieme $\{\mathrm L, \mathrm R\}$, e poiché $$\{\mathrm L, \mathrm R\} \subseteq \{\mathrm L, \mathrm R, \mathrm S\}$$ allora è possibile considerare $M'$ stessa come macchina di Turing con testina ferma, che però non presenta mai il simbolo $\mathrm S$ all'interno delle transizioni.
     }
 
-    \subsection{Macchina di Turing multinastro}
+    \subsection{Macchine di Turing multinastro}
 
     \begin{frameddefn}[label={multitape}]{Macchina di Turing multinastro}
-        Una \tbf{macchina di Turing multinastro} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q \times \Gamma^k}{Q \times \Gamma^k \times \{ \mathrm L, \mathrm R, \mathrm S\}^k}$$ dove $k \ge 1$ è il numero di nastri --- e di testine --- della macchina.
+        Una \tbf{macchina di Turing multinastro} è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q  - \{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma^k}{Q \times \Gamma^k \times \{ \mathrm L, \mathrm R, \mathrm S\}^k}$$ dove $k \ge 1$ è il numero di nastri --- e di testine --- della macchina.
     \end{frameddefn}
 
     \begin{framedobs}[label={tape shift}]{Operazione di \tit{shift} sul nastro}
@@ -1976,7 +1976,7 @@
 
         \begin{itemize}
             \item inizialmente $M'$ trasforma il nastro nel formato descritto, e dunque da $$w_1 w_2 \cdots w_n \ \blankchar \ldots$$ viene effetuato uno \tit{shift} a destra del nastro (si veda l'\cref{tape shift}), anteposto il carattere \ttt \# al suo inizio (si veda l'\cref{tape start}), e successivamente inseriti i seguenti caratteri marcati per segnare le testine virtuali: $$\ttt \# \stackrel{\bullet}{w_1} w_2 \cdots w_n \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \ldots \ \ttt \#$$
-            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiornando oppurtunamente i simboli marcati con TODO per simulare lo spostamento di ogni testina su ogni nastro; successivamente, viene effettuaa una seconda scansione, per simulare i rimpiazzi dei simboli sulle celle, descritti dalla $\delta$;
+            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiornando oppurtunamente i simboli marcati con $\bullet$ per simulare lo spostamento di ogni testina su ogni nastro; successivamente, viene effettuaa una seconda scansione, per simulare i rimpiazzi dei simboli sulle celle, descritti dalla $\delta$;
             \item se una qualsiasi testina virtuale effettua uno spostamento a destra, e si trova su un \ttt \# --- dunque a cavallo tra 2 nastri simulati --- allora $M'$ deve simulare il fatto che, nel nastro reale, la reale testina in $M$ starebbe leggendo una porzione di nastro vuota, non letta precedentemente; allora, viene effettuato uno \tit{shift} verso destra di tutto il nastro di $M'$, dalla cella corrente in poi, e sulla cella corrente viene posto il carattere $\blankchar$;
         \end{itemize}
 
@@ -1985,8 +1985,28 @@
         Per $k = 1$, si ha che la funzione di transizione $\delta$ descritta nella \cref{multitape} diventa $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R, \mathrm S\}}$$ che rappresenta la funzione di transizione delle macchine di Turing con testina ferma (si veda la \cref{stay tm}); allora, per la \cref{stay tm equiv}, si ha che ogni macchina di Turing $M'$, poiché è anche una macchina di Turing con testina ferma, è una macchina di Turing multinastro avente $k = 1$ nella funzione $\delta$.
     }
 
-    \subsection{Macchina di Turing non deterministica}
+    \subsection{Macchine di Turing non deterministiche}
 
-    TODO
+    \begin{frameddefn}{NTM}
+        Una \tbf{NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q-\{q_\mathrm{accept}, q_\mathrm{reject}\} \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una NTM computa non deterministicamente.
+    \end{frameddefn}
+
+    \begin{framedprop}{Equivalenza delle NTM}
+        Sia $N$ una NTM; allora esiste una TM $M$ ad essa equivalente.
+    \end{framedprop}
+
+    \proofiff{TODO}{TODO}
+
+    \subsection{Enumeratori}
+
+    \begin{frameddefn}{Enumeratore}
+        Un \tbf{enumeratore} è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ --- dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm} --- connesso ad una stampante (ad esempio un nastro secondario), la quale stampa le stringhe di TODO DA FINIRE
+    \end{frameddefn}
+
+    \begin{framedprop}{Equivalenza degli enumeratori}
+        Sia $E$ un enumeratore; allora esiste una TM $M$ ad esso equivalente.
+    \end{framedprop}
+
+    \proofiff{TODO}{TODO}
 
 \end{document}

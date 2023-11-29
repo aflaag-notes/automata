@@ -5,6 +5,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 ## TODO list
 
 - generali
+    - CAMBIA IL CENTRAMENTO ALLE GRAMMATICHE PER FAVORE DI DIO
     - finire i TODOs sparsi
 - appunti 4/10
     - dimostrazione chiusura star alternativa
@@ -17,10 +18,10 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - FAI GLI ALBERI
     - tutto
 - appunti 17/11
-    - pumping lemma cfl
+    - pumping lemma da finire
     - da finire
 - appunti 22/11
     - da finire
 - appunti 24/11
-    - tutto
+    - da finire
 
