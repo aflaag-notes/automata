@@ -23,7 +23,7 @@
 \title{Automi: Calcolabilità e Complessità}
 \subtitle{Appunti integrati con il libro "Introduzione alla teoria della computazione", Michael Sipser}
 
-% \author{\textit{Author}\\TODO: DECOMMENTARE QUESTA SEZIONE}
+% \author{\textit{Author}\\TODO: \DECOMMENTARE QUESTA SEZIONE}
 % \author{\textit{Author}\\Simone Bianco}
 \author{\textit{Author}\\Alessio Bandiera}
 % \supervisor{Linus \textsc{Torvalds}}
@@ -78,7 +78,7 @@
 
     \subsubsection{Contatti dell'autore e ulteriori link:}
     \begin{itemize}
-        % \item TODO: DECOMMENTARE QUESTA SEZIONE
+        % \item TODO: \DECOMMENTARE QUESTA SEZIONE
 
         % Simone
         % 
@@ -615,7 +615,7 @@
             \item $R \in \Sigma$
         \end{itemize}
 
-        Un'espressione regolare, dunque, è un modo compatto di definire un linguaggio. Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita. Dato un alfabeto $\Sigma$, la classe delle espressioni regolari definite su di esso è denotata con $\mathrm{re}(\Sigma)$.
+        Un'espressione regolare, dunque, è un modo compatto di definire un linguaggio. Si noti che le definizioni successive sono in grado di espandere la definizione appena fornita. Dato un alfabeto $\Sigma$, la classe delle espressioni regolari definite su di esso è denotata con $\mathrm{re}(\Sigma)$. La classe di tutte le espressioni regolari è denotata con \REX.
 
         Data un'espressione regolare $R$, con $L(R)$ si intende il linguaggio che $R$ descrive, ovvero l'insieme di stringhe che $R$ rappresenta. Dunque, sono vere le seguenti:
 
@@ -660,9 +660,7 @@
     \end{example}
 
     \begin{frameddefn}{Star}
-        Sia $R$ un'espressione regolare; allora, si definisce l'operazione unaria \tbf{star} su $R$ la seguente espressione regolare: $$(R^*)$$ e tutte rappresenta le stringhe che si possono ottenere concatenando un qualsiasi numero di caratteri di $R$, e descrive dunque il linguaggio che consiste di tutte le stringhe dell'alfabeto di $R$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1 \in \mathrm{re}(\Sigma) : R = R_1^* \quad L(R) = L(R_1)^*$$
-
-        Si noti che $R^*$ comprende $\varepsilon$ per qualsiasi espressione regolare $R$.
+        Sia $R$ un'espressione regolare; allora, si definisce l'operazione unaria \tbf{star} su $R$ la seguente espressione regolare: $$(R^*)$$ e tutte rappresenta le stringhe che si possono ottenere concatenando un qualsiasi numero di caratteri di $R$, e descrive dunque il linguaggio che consiste di tutte le stringhe dell'alfabeto di $R$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1 \in \mathrm{re}(\Sigma) : R = R_1^* \quad L(R) = L(R_1)^*$$ Si noti che $R^*$ comprende $\varepsilon$ per qualsiasi espressione regolare $R$.
 
         Spesso si usa la notazione $R^+ := RR^*$, ovvero le stringhe che si ottengono attraverso la concatenazione di 1 o più stringhe di $R$. Di conseguenza, si ha che $R^+ \cup \varepsilon = R^*$.
     \end{frameddefn}
@@ -960,7 +958,7 @@
     \end{example}
 
     \begin{framedthm}[label={ling expr reg}]{Linguaggi ed espressioni regolari}
-        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli, per un certo alfabeto $\Sigma$ si ha che $$\mathrm{\REG} = \mathcal{L}(\mathrm{re}(\Sigma))$$
+        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli, per un certo alfabeto $\Sigma$ si ha che $$\mathrm{\REG} = \mathcal{L}(\REX)$$
     \end{framedthm}
 
     \proofiff{
@@ -1023,7 +1021,7 @@
     }
 
     \begin{framedobs}{Equivalenze tra classi di automi}
-        Si noti che, dal \cref{ling expr reg}, dall'\cref{gnfa into regex}, e dal \cref{dfa into gnfa}, si ha che $$\mathrm{\REG} = \mathcal{L}(\mathrm{re}(\Sigma)) \supseteq \mathcal{L}(\mathrm{\GNFA}) \supseteq \mathrm{\REG}$$ dunque, segue l'importante risultato: $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA}) = \mathcal{L}(\mathrm{\GNFA}) = \mathcal{L}(\mathrm{re}(\Sigma))$$
+        Si noti che, dal \cref{ling expr reg}, dall'\cref{gnfa into regex}, e dal \cref{dfa into gnfa}, si ha che $$\mathrm{\REG} = \mathcal{L}(\REX) \supseteq \mathcal{L}(\mathrm{\GNFA}) \supseteq \mathrm{\REG}$$ dunque, segue l'importante risultato: $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA}) = \mathcal{L}(\mathrm{\GNFA}) = \mathcal{L}(\REX)$$
     \end{framedobs}
 
     \section{Linguaggi non regolari}
@@ -1775,7 +1773,7 @@
     %     Se la pila del D\PDA è vuota, questo può fare mosse solo se $\delta$ specifica una mossa che elimina $\varepsilon$, altrimenti non sono previste mosse lecite ed il D\PDA rifiuta l'input senza leggerne il resto; questa situazione viene detta \tit{hanging}. Inoltre, si verifica un rifiuto anche se il D\PDA effettua una sequenza infinita di mosse $\varepsilon$-input, senza leggere l'input oltre un certo punto; questa situazione viene detta \tit{looping}.
     % \end{frameddefn}
     %
-    % \begin{framedlem}{D\PDA equivalenti}
+    % \begin{framedlem}{\DPDA equivalenti}
     %     Ogni D\PDA ha un D\PDA equivalente che legge sempre l'intera stringa di input; dunque non si presenta mai né \tit{hanging} né \tit{looping}.
     % \end{framedlem}
     %
@@ -1895,7 +1893,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Turing-riconoscibilità}
-        Un linguaggio è detto \tbf{Turing-riconoscibile} (o \tbf{ricorsivamente enumerabile}) se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{REC}$, dunque in simboli $$L \in \mathrm{REC} \iff \exists M \in \mathrm{\TM} \mid L(M) = L$$
+        Un linguaggio è detto \tbf{Turing-riconoscibile} (o \tbf{ricorsivamente enumerabile}) se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{\REC}$, dunque in simboli $$L \in \mathrm{\REC} \iff \exists M \in \mathrm{\TM} \mid L(M) = L$$
     \end{frameddefn}
 
     \begin{example}[Linguaggi Turing-riconoscibili]
@@ -1910,7 +1908,7 @@
 
         In ogni altro caso, la macchina rifiuta immediatamente.
 
-        Allora, poiché esiste una \TM $M$ tale per cui $L(M) = L$, si ha che $L \in \mathrm{REC}$.
+        Allora, poiché esiste una \TM $M$ tale per cui $L(M) = L$, si ha che $L \in \mathrm{\REC}$.
     \end{example}
 
     \begin{example}[Linguaggi Turing-riconoscibili]
@@ -1926,13 +1924,13 @@
     \end{framedobs}
 
     \begin{frameddefn}{Turing-decidibilità}
-        Un linguaggio è detto \tbf{Turing-decidibile} (o \tbf{ricorsivo}) se esiste un decisore che lo riconosce. La classe dei linguaggi Turing-decidibili è denotata con $\mathrm{DEC}$.
+        Un linguaggio è detto \tbf{Turing-decidibile} (o \tbf{ricorsivo}) se esiste un decisore che lo riconosce. La classe dei linguaggi Turing-decidibili è denotata con $\mathrm{\DEC}$.
 
         Simmetricamente, se un linguaggio $L$ è Turing-decidibile per qualche decisore $M$, allora si dice che $M$ \tbf{decide} $L$.
     \end{frameddefn}
 
     \begin{framedobs}{Turing-decidibilità}
-        Si noti che $\mathrm{DEC} \subseteq \mathrm{CEC}$, poiché un linguaggio turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
+        Si noti che $\mathrm{\DEC} \subseteq \mathrm{CEC}$, poiché un linguaggio turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
     \end{framedobs}
 
     \section{Varianti di macchine di Turing}
@@ -1987,15 +1985,19 @@
 
     \subsection{Macchine di Turing non deterministiche}
 
-    \begin{frameddefn}{N\TM}
+    \begin{frameddefn}{\NTM}
         Una \tbf{\NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q-\{q_\mathrm{accept}, q_\mathrm{reject}\} \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una \NTM computa non deterministicamente.
     \end{frameddefn}
 
-    \begin{framedprop}{Equivalenza delle N\TM}
-        Sia $N$ una N\TM; allora esiste una \TM $M$ ad essa equivalente.
+    \begin{framedprop}[label={ntm tm}]{Equivalenza delle \NTM}
+        Sia $N$ una \NTM; allora esiste una \TM $M$ ad essa equivalente.
     \end{framedprop}
 
-    \proofiff{TODO}{TODO}
+    \proofiff{
+        TODO
+    }{
+        TODO
+    }
 
     \subsection{Enumeratori}
 
@@ -2031,12 +2033,86 @@
         Poiché si assume la tesi di Church-Turing, si ha che dato un \tit{algoritmo}, esiste una \tit{macchina di Turing} che può eseguirlo. Dunque, all'interno di questi appunti verrà assunta l'intercambiabilità tra gli algoritmi (o metodi) descritti, e le macchine di Turing.
     \end{framedobs}
 
-    \section{Problema dell'accettazione}
+    \section{Linguaggi decidibili}
 
-    \subsection{\DFA}
+    \subsection{Codifiche}
+    
+    \begin{framedobs}{Codifiche}
+        Sia $O$ un oggetto; poichè una \TM può prendere in input qualsiasi oggetto, ammesso che sia codificato attraverso una quaclhe codifica predeterminata, all'interno di questi appunti si utilizzerà il simbolismo $\abk{O}$ per sottointendere una qualche codifica del dato oggetto $O$, in modo che sia possibile rappresentare $O$ sul nastro di una \TM.
+    \end{framedobs}
 
-    \begin{frameddefn}{TODO}
-        TODO
+    \begin{example}[Codifiche di $\delta$]
+        Sia $\delta$ la funzione di transizione di un \DFA; allora, una sua possibile codifica potrebbe essere scrivere ogni riga della rappresentazione tabellare di $\delta$, separata da un \ttt \#.
+    \end{example}
+
+    \subsection{Problema dell'accettazione}
+
+    \begin{frameddefn}{Linguaggio di accettazione}
+        Si definiscono \tbf{linguaggi di accettazione} i linguaggi definiti come segue $$A_\mathcal{C} := \{\abk{B, w} \mid B \in \mathcal{C} , w \in L(B)\}$$ Dunque, per sua definizione, controllare che l'oggetto $B \in \mathcal{C}$ accetti $w$ equivale a controllare che $\abk{B,w}$ sia in $A_\mathcal{C}$.
     \end{frameddefn}
 
+    \begin{framedthm}[label={a_dfa}]{Decidibilità di $A_\DFA$}
+        $A_\DFA$ è decidibile; in simboli $$A_\DFA := \{\abk{B, w} \mid B \in \DFA, w \in L(B)\} \in \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $M$ una macchina di Turing; stabilita una qualche codifica per $\abk{B, w}$, per prima cosa, $M$ controlla che sul nastro sia descritta una codifica valida per $\abk{B,w}$, ed in caso contrario rifiuta. Successivamente, $M$ deve simulare la transizione di stati definita dalla $\delta$ di $B$, e può farlo servendosi delle infinite delle del suo nastro, aggiornando opportunamente lo stato corrente. Allora, $M$ accetta se e solo se $B$ avrebbe accettato, e rifiuta se e solo se $B$ avrebbe rifiutato; allora $M$ non va mai in loop, e dunque è un decisore.
+    \end{proof}
+
+    \begin{framedthm}[label={a_nfa}]{Decidibilità di $A_\NFA$}
+        $A_\NFA$ è decidibile; in simboli $$A_\NFA := \{\abk{B, w} \mid B \in \NFA, w \in L(B)\} \in \DEC$$
+    \end{framedthm}
+
+    \begin{proof}[Dimostrazione I]
+        Una volta controllata la validità della codifica in input, è possibile utilizzare una \NTM per simulare l'\NFA posto sul nastro, e dunque la \NTM accetterebbe se e solo se l'\NFA accetterebbe, e rifiuterebbe se e solo se l'\NFA rifiuterebbe; allora, poiché l'\NTM non può andare in loop, per la \cref{ntm tm} segue la tesi.
+    \end{proof}
+
+    \begin{proof}[Dimostrazione II]
+        Una volta controllata la validità della codifica in input, utilizzando l'algoritmo di conversione presentato all'interno della dimostrazione del \cref{nfa equiv} per convertire un \NFA in un \DFA, è possibile trasformare l'\NFA in input in un \DFA (grazie a quanto detto all'interno dell'\cref{alg tm}); allora, per il \cref{a_dfa}, segue la tesi.
+    \end{proof}
+
+    \begin{framedthm}{Decidibilità di $A_\REX$}
+        $A_\REX$ è decidibile; in simboli $$A_\REX := \{\abk{R, w} \mid R \in \REX, w \in L(R)\} \in \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Una volta controllata la validità della codifica in input, utilizzando l'algoritmo di conversione presentato all'interno della dimostrazione del \cref{ling expr reg} per convertire un'espressione regolare in un \NFA, è possibile trasformare l'espressione regolare in input un in \NFA (grazie a quanto detto all'interno dell'\cref{alg tm}); allora, per il \cref{a_nfa}, segue la tesi.
+    \end{proof}
+
+    \begin{framedthm}{Decidibilità di $A_\CFG$}
+        $A_\CFG$ è decidibile; in simboli $$A_\CFG := \{\abk{G, w} \mid G \in \CFG, w \in L(G)\} \in \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Se una grammatica $G$ è in CNF, allora ogni stringa $w$, avente lunghezza $|w| := n \ge 1$, derivabile attraverso le regole di $G$, richiede esattamente $2n - 1$ passaggi. La dimostrazione procede per induzione sulla lunghezza della stirnga $w$.
+
+        \begin{enumerate}[label=]
+            \item \tit{Caso base}. Per $n = 1$, poiché $G$ è in CNF, si ha che l'unica regola che può aver prodotto la stringa $w$ è della forma $S \to a$ dove $a \in \Sigma$, ed infatti il numero di passaggi è pari a $$2n - 1 = 2 \cdot 1 -1 = 2 - 1 = 1$$
+            \item \tit{Ipotesi induttiva forte}. Data una grammatica $G$ in CNF, ogni stringa non vuota $w$ lunga al più $n$ derivabile attraverso le sue regole, richiede esattamente $2n-1$ passaggi.
+            \item \tit{Passo induttivo}. È necessario dimostrare la tesi per una stringa $w$ tale che $|w| = n + 1$. Poiché $G$ è in CNF, le sue regole possono essere della forma $A \to BC$, oppure $D \to a$ con $a \in \Sigma$; allora, assumendo che $w$ abbia lunghezza $n + 1$ con $n > 1$, il numero di passaggi per derivare $w$ deve essere maggiore 1 (come dimostrato nel caso base), e dunque deve esistere una regola della forma $A \to BC$ che possa aver prodotto $w$; dunque, esisteranno due sottostringhe $y$ e $z$ di $w$, tali che $B \derives y$ e $C \derives z$, e sicuramente non vuote, poiché sono state generate da una regola della forma $A \to BC$. Dunque, poiché non sono vuote, e sono sottostringhe di $w$, hanno lunghezza al più $n$, e di conseguenza su di esse è possibile applicare l'ipotesi induttiva forte. Allora, ponendo $|y| := k$ e $|z| := |w| - |y| = n + 1 - k$, si ha che $y$ è stata derivata attraverso $$2k - 1$$ passaggi, mentre $w$ attraverso $$2(n+ 1 - k) - 1 = 2n+2-2k -1 = 2n-2k+1 = 2(n -k) + 1$$ passaggi. Allora, $w$ deve essere stata derivata attraverso il numero di passaggi di $y$, il numero di passaggi di $z$, e il passaggio $A \to BC$ stesso, e dunque $$[2k - 1] + [2(n - k) + 1 ] + 1= 2k -1 +2n -2k +1 + 1 = 2n + 1$$ e dunque segue la tesi, poiché $$2(n + 1) - 1= 2n + 2 - 1 = 2n +1$$
+        \end{enumerate}
+
+        Allora, una volta controollata la validità dlela codifica in input, è possibile convertire la \CFG in CNF (si veda l'\cref{alg tm}), attraverso il \cref{cfg into cnf}, e dunque:
+
+        \begin{itemize}
+            \item se la stringa $w$ ha lunghezza 0, la macchina di Turing che esegue tale algoritmo controlla che la regola $S \to \varepsilon$ sia presente in $G$, altrimenti rifiuta;
+            \item se la stringa $w$ ha lunghezza $n \ge 1$, la macchina di Turing che esegue tale algoritmo lista tutte le derivazioni di $G$ in CNF aventi lunghezza $2n - 1$, e se $w$ è presente in una di queste la \TM accetta, altrimenti rifiuta.
+        \end{itemize}
+
+        Allora la macchina di Turing presentata non può andare in loop, quindi è un decisore, e dunque segue la tesi.
+    \end{proof}
+
+    \subsection{Test del vuoto}
+
+    \begin{frameddefn}{Linguaggio del vuoto}
+        Si definiscono \tbf{linguaggi del vuoto} i linguaggi definiti come segue $$E_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C}: L(A) = \emptyset\}$$ Dunque, per sua definizione, controllare che il linguaggio di $A \in \mathcal{C}$ sia vuoto equivale a controllare che $\abk{A}$ sia in $E_\mathcal{C}$.
+    \end{frameddefn}
+
+    \begin{framedthm}{Decidibilità di $E_\DFA$}
+        $E_\DFA$ è decidibile; in simboli $$E_\DFA := \{\abk{A} \mid A \in \DFA: L(A) = \emptyset \}$$
+    \end{framedthm}
+
+    \begin{proof}
+        Una volta controllata la validità della codifica in input, è possibile interpretare il \DFA come un grafo, e dunque controllare che il \DFA non accetti alcuna stringa equivale a controllare se esiste non esiste alcun cammino dallo stato iniziale del \DFA ad un qualsiasi suo stato accettante; allora, usando ad esempio una visita dei nodi in DFS (\tit{Depth-First Search}) --- realizzabile grazie all'\cref{alg tm} --- una macchina di Turing che esegue tale algoritmo accetterebbe se e solo se non è presente alcun cammino, e dunque non può andare in loop; allora, segue la tesi.
+    \end{proof}
 \end{document}

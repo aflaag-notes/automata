@@ -26,8 +26,8 @@
 \contentsline {section}{\numberline {1.5}Espressioni regolari}{18}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Definizioni}{18}{subsection.1.5.1}%
 \contentsline {section}{\numberline {1.6}Configurazioni}{20}{section.1.6}%
-\contentsline {subsection}{\numberline {1.6.1}Configurazioni di \textsf {DFA}}{20}{subsection.1.6.1}%
-\contentsline {subsection}{\numberline {1.6.2}Configurazioni di \textsf {NFA}}{21}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.1}Configurazioni di \textsf {DFA}\xspace }{20}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Configurazioni di \textsf {NFA}\xspace }{21}{subsection.1.6.2}%
 \contentsline {section}{\numberline {1.7}Non determinismo generalizzato}{23}{section.1.7}%
 \contentsline {subsection}{\numberline {1.7.1}Definizioni}{23}{subsection.1.7.1}%
 \contentsline {subsection}{\numberline {1.7.2}Equivalenze}{24}{subsection.1.7.2}%
@@ -52,12 +52,14 @@
 \contentsline {chapter}{\numberline {3}Decidibilità}{55}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Macchine di Turing}{55}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Definizioni}{55}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Configurazioni di \textsf {TM}}{57}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.2}Configurazioni di \textsf {TM}\xspace }{57}{subsection.3.1.2}%
 \contentsline {section}{\numberline {3.2}Varianti di macchine di Turing}{60}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Macchine di Turing con testina ferma}{60}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Macchine di Turing multinastro}{61}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Macchine di Turing non deterministiche}{62}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}Enumeratori}{63}{subsection.3.2.4}%
 \contentsline {subsection}{\numberline {3.2.5}Tesi di Church-Turing}{63}{subsection.3.2.5}%
-\contentsline {section}{\numberline {3.3}Problema dell'accettazione}{64}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}\textsf {DFA}}{64}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.3}Linguaggi decidibili}{64}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Codifiche}{64}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Problema dell'accettazione}{64}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Test del vuoto}{66}{subsection.3.3.3}%
