@@ -1897,7 +1897,7 @@
     \end{frameddefn}
 
     \begin{example}[Linguaggi Turing-riconoscibili]
-        Si consideri la \TM $M$ descritta all'interno dell'\cref{tm ex}; si noti che essa, per sua costruzione, è in grado di riconoscere il linguaggio $L$ descritto dall'espressione regolare $\ttt 0 \ttt 1^* \ttt 1$, poiché si comporta come segue:
+        Si consideri la \TM $M$ descritta all'interno dell'\cref{tm ex}; si noti che essa, per sua costruzione, è in grado di riconoscere il linguaggio $L$ descritto dall'espressione regolare $\ttt 0 \ttt 1^* \ttt 0$, poiché si comporta come segue:
 
         \begin{itemize}
             \item partendo dallo stato iniziale $q_0$, se viene letto uno \ttt 0, la \TM lo sovrascrive con il carattere \ttt x, e si sposta a destra, andando nello stato $q_1$;
@@ -1930,7 +1930,7 @@
     \end{frameddefn}
 
     \begin{framedobs}{Turing-decidibilità}
-        Si noti che $\mathrm{\DEC} \subseteq \mathrm{CEC}$, poiché un linguaggio turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
+        Si noti che $\mathrm{\DEC} \subseteq \REC$, poiché un linguaggio Turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
     \end{framedobs}
 
     \section{Varianti di macchine di Turing}
@@ -2084,22 +2084,38 @@
     \end{framedthm}
 
     \begin{proof}
-        Se una grammatica $G$ è in CNF, allora ogni stringa $w$, avente lunghezza $|w| := n \ge 1$, derivabile attraverso le regole di $G$, richiede esattamente $2n - 1$ passaggi. La dimostrazione procede per induzione sulla lunghezza della stirnga $w$.
+        Se una grammatica $G$ è in CNF, allora ogni stringa $w$, avente lunghezza $n := |w| \ge 1$, derivabile attraverso le regole di $G$, richiede esattamente $2n - 1$ passaggi. La dimostrazione procede per induzione sulla lunghezza della stirnga $w$.
 
         \begin{enumerate}[label=]
             \item \tit{Caso base}. Per $n = 1$, poiché $G$ è in CNF, si ha che l'unica regola che può aver prodotto la stringa $w$ è della forma $S \to a$ dove $a \in \Sigma$, ed infatti il numero di passaggi è pari a $$2n - 1 = 2 \cdot 1 -1 = 2 - 1 = 1$$
             \item \tit{Ipotesi induttiva forte}. Data una grammatica $G$ in CNF, ogni stringa non vuota $w$ lunga al più $n$ derivabile attraverso le sue regole, richiede esattamente $2n-1$ passaggi.
-            \item \tit{Passo induttivo}. È necessario dimostrare la tesi per una stringa $w$ tale che $|w| = n + 1$. Poiché $G$ è in CNF, le sue regole possono essere della forma $A \to BC$, oppure $D \to a$ con $a \in \Sigma$; allora, assumendo che $w$ abbia lunghezza $n + 1$ con $n > 1$, il numero di passaggi per derivare $w$ deve essere maggiore 1 (come dimostrato nel caso base), e dunque deve esistere una regola della forma $A \to BC$ che possa aver prodotto $w$; dunque, esisteranno due sottostringhe $y$ e $z$ di $w$, tali che $B \derives y$ e $C \derives z$, e sicuramente non vuote, poiché sono state generate da una regola della forma $A \to BC$. Dunque, poiché non sono vuote, e sono sottostringhe di $w$, hanno lunghezza al più $n$, e di conseguenza su di esse è possibile applicare l'ipotesi induttiva forte. Allora, ponendo $|y| := k$ e $|z| := |w| - |y| = n + 1 - k$, si ha che $y$ è stata derivata attraverso $$2k - 1$$ passaggi, mentre $w$ attraverso $$2(n+ 1 - k) - 1 = 2n+2-2k -1 = 2n-2k+1 = 2(n -k) + 1$$ passaggi. Allora, $w$ deve essere stata derivata attraverso il numero di passaggi di $y$, il numero di passaggi di $z$, e il passaggio $A \to BC$ stesso, e dunque $$[2k - 1] + [2(n - k) + 1 ] + 1= 2k -1 +2n -2k +1 + 1 = 2n + 1$$ e dunque segue la tesi, poiché $$2(n + 1) - 1= 2n + 2 - 1 = 2n +1$$
+            \item \tit{Passo induttivo}. È necessario dimostrare la tesi per una stringa $w$ tale che $|w| = n + 1$. Poiché $G$ è in CNF, le sue regole possono essere della forma $A \to BC$, oppure $D \to a$ con $a \in \Sigma$; allora, assumendo che $w$ abbia lunghezza $n + 1$ con $n > 1$, il numero di passaggi per derivare $w$ deve essere maggiore 1 (come dimostrato nel caso base), e dunque deve esistere una regola della forma $A \to BC$ che possa aver prodotto $w$; dunque, esisteranno due sottostringhe $y$ e $z$ di $w$, tali che $B \derives y$ e $C \derives z$, e sicuramente non vuote, poiché sono state generate da una regola della forma $A \to BC$. Dunque, poiché non sono vuote, e sono sottostringhe di $w$, hanno lunghezza al più $n$, e di conseguenza su di esse è possibile applicare l'ipotesi induttiva forte. Allora, ponendo $k := |y|$, e di conseguenza $|z| = |w| - |y| = n + 1 - k$, si ha che $y$ è stata derivata attraverso $$2k - 1$$ passaggi, mentre $w$ attraverso $$2(n+ 1 - k) - 1 = 2n+2-2k -1 = 2n-2k+1 = 2(n -k) + 1$$ passaggi. Allora, $w$ deve essere stata derivata attraverso i passaggi per derivare $y$, i passaggi per derivare $z$, ed il passaggio $A \to BC$ stesso, e dunque sono $$[2k - 1] + [2(n - k) + 1 ] + 1= 2k -1 +2n -2k +1 + 1 = 2n + 1$$ passaggi. Allora segue la tesi, poiché $$2(n + 1) - 1= 2n + 2 - 1 = 2n +1$$
         \end{enumerate}
 
-        Allora, una volta controollata la validità dlela codifica in input, è possibile convertire la \CFG in CNF (si veda l'\cref{alg tm}), attraverso il \cref{cfg into cnf}, e dunque:
+        Una volta controllata la validità dlela codifica in input, è possibile convertire la \CFG in CNF (si veda l'\cref{alg tm}), attraverso il \cref{cfg into cnf}, e dunque:
 
         \begin{itemize}
             \item se la stringa $w$ ha lunghezza 0, la macchina di Turing che esegue tale algoritmo controlla che la regola $S \to \varepsilon$ sia presente in $G$, altrimenti rifiuta;
-            \item se la stringa $w$ ha lunghezza $n \ge 1$, la macchina di Turing che esegue tale algoritmo lista tutte le derivazioni di $G$ in CNF aventi lunghezza $2n - 1$, e se $w$ è presente in una di queste la \TM accetta, altrimenti rifiuta.
+            \item se la stringa $w$ ha lunghezza $n \ge 1$, la macchina di Turing che esegue tale algoritmo lista tutte le derivazioni di $G$, resa in CNF, aventi lunghezza $2n - 1$ (sufficiente per quanto dimostrato precedentemente), le quali sono in numero \tit{finito} --- dunque la \TM non va in loop --- e se $w$ è presente in una di queste, la \TM accetta, altrimenti rifiuta.
         \end{itemize}
 
         Allora la macchina di Turing presentata non può andare in loop, quindi è un decisore, e dunque segue la tesi.
+    \end{proof}
+
+    \begin{framedthm}{Riconoscibilità di $A_\TM$}
+        $A_\TM$ è riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \in \REC$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedthm}{Indecidibilità di $A_\TM$}
+        $A_\TM$ è indecidibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \in \REC - \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
     \end{proof}
 
     \subsection{Test del vuoto}

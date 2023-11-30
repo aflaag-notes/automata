@@ -62,4 +62,4 @@
 \contentsline {section}{\numberline {3.3}Linguaggi decidibili}{64}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Codifiche}{64}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Problema dell'accettazione}{64}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Test del vuoto}{66}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.3}Test del vuoto}{67}{subsection.3.3.3}%
