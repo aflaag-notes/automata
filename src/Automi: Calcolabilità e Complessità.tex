@@ -1719,7 +1719,7 @@
             \item presa una stringa $x$ tale che $S \derives x$, e ponendo $n := |x|$, se $n$ è dispari allora sicuramente $x \notin L \iff x \in \lnot L$; differentemente, se $n$ è pari, allora la stringa è stata generata attraverso una delle regole $S \to AB \smid BA$ necessariamente, e dunque --- senza perdita di generalità --- assumendo che $x$ sia stata ottenuta attraverso la regola $S \to AB$, devono esistere $u, v \in \{\ttt 0, \ttt 1\}^* \mid x = uv \land A \derives u \land B \derives v$, dove $u$ e $v$ sono due stringhe aventi lunghezza dispari; siano allora $l := |u| \implies |v| = n - l$, ottenendo che $$m (u) = x_{\frac{l + 1}{2}} = u_{\frac{l + 1}{2}} = \ttt 0 \neq \ttt 1 = v_{\frac{n - l + 1}{2}} = x_{\frac{n - l + 1}{2} + l} = x_{\frac{n + l + 1}{2}} = m(v)$$ allora, poiché $m(u)$ ed $m(v)$ devono necessariamente trovarsi l'uno nella prima metà di $x$, l'altro nella seconda metà (indipendentemente dalla scelta di $u$ e $v$) si ha che la stringa $x$ è necessariamente costituita da due stringhe $w, w' \in \{\ttt 0, \ttt 1\}^* \mid w \neq w'$, poiché differiscono per almeno un carattere, ovvero $m(u) \neq m(v)$, di conseguenza $x \notin \L \iff x \in \lnot L$; questo dimostra che $S \derives x \implies x \in \lnot L$.
         \end{itemize}
 
-        Dunque, poiché $S \derives x \iff x \in \lnot L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \lnot L \iff \lnot L \in \mathrm{\CFL}$$ e dunque segue la tesi.
+        Dunque, poiché $S \derives x \iff x \in \lnot L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \lnot L \implies \lnot L \in \mathrm{\CFL}$$ e dunque segue la tesi.
     \end{proof}
 
     %    \begin{figure}[H]
