@@ -459,7 +459,7 @@
         Sia $\Sigma = \{\ttt a , \ldots, \ttt z\}$ l'alfabeto composto da 26 lettere, e siano $A = \{\ttt{uno}, \ttt{due}\}$ e $B = \{\ttt{uno}, \ttt{tre}\}$ due linguaggi su $\Sigma$. Allora, si ha che $$A \cap B = \{\ttt{uno}\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sull'intersezione (\REG)}
+    \begin{framedprop}[label={closure inters}]{Chiusura sull'intersezione (\REG)}
         Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cap B$ è regolare.
     \end{framedprop}
 
@@ -581,7 +581,7 @@
         Sia $\Sigma = \{\ttt 0, \ttt 1\}$ l'alfabeto binario, e sia $A = \{ \ttt{00}, \ttt{1}\}$ un linguaggio definito su di esso. Allora il suo complemento è il seguente: $$\lnot A = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}, \ttt{10}, \ttt{000}, \ldots\}$$
     \end{example}
 
-    \begin{framedprop}{Chiusura sul complemento (\REG)}
+    \begin{framedprop}[label={closure compl}]{Chiusura sul complemento (\REG)}
         Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\lnot A$ è regolare.
     \end{framedprop}
 
@@ -2047,8 +2047,8 @@
 
     \subsection{Problema dell'accettazione}
 
-    \begin{frameddefn}{Linguaggio di accettazione}
-        Si definiscono \tbf{linguaggi di accettazione} i linguaggi definiti come segue $$A_\mathcal{C} := \{\abk{B, w} \mid B \in \mathcal{C} , w \in L(B)\}$$ Dunque, per sua definizione, controllare che l'oggetto $B \in \mathcal{C}$ accetti $w$ equivale a controllare che $\abk{B,w}$ sia in $A_\mathcal{C}$.
+    \begin{frameddefn}{Linguaggi di accettazione}
+        Si definiscono \tbf{linguaggi di accettazione} i linguaggi definiti come segue $$A_\mathcal{C} := \{\abk{B, w} \mid B \in \mathcal{C} , w \in L(B)\}$$ Dunque, per tale definizione, controllare che $B \in \mathcal{C}$ accetti/descriva $w$ equivale a controllare che $\abk{B,w}$ sia in $A_\mathcal{C}$.
     \end{frameddefn}
 
     \begin{framedthm}[label={a_dfa}]{Decidibilità di $A_\DFA$}
@@ -2118,17 +2118,54 @@
         TODO
     \end{proof}
 
-    \subsection{Test del vuoto}
+    \subsection{Problema del vuoto}
 
-    \begin{frameddefn}{Linguaggio del vuoto}
-        Si definiscono \tbf{linguaggi del vuoto} i linguaggi definiti come segue $$E_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C}: L(A) = \emptyset\}$$ Dunque, per sua definizione, controllare che il linguaggio di $A \in \mathcal{C}$ sia vuoto equivale a controllare che $\abk{A}$ sia in $E_\mathcal{C}$.
+    \begin{frameddefn}{Linguaggi del vuoto}
+        Si definiscono \tbf{linguaggi del vuoto} i linguaggi definiti come segue $$E_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C}: L(A) = \emptyset\}$$ Dunque, per tale definizione, controllare che il linguaggio di $A \in \mathcal{C}$ sia vuoto equivale a controllare che $\abk{A}$ sia in $E_\mathcal{C}$.
     \end{frameddefn}
 
-    \begin{framedthm}{Decidibilità di $E_\DFA$}
-        $E_\DFA$ è decidibile; in simboli $$E_\DFA := \{\abk{A} \mid A \in \DFA: L(A) = \emptyset \}$$
+    \begin{framedthm}[label={dec e_dfa}]{Decidibilità di $E_\DFA$}
+        $E_\DFA$ è decidibile; in simboli $$E_\DFA := \{\abk{A} \mid A \in \DFA: L(A) = \emptyset \} \in \DEC$$
     \end{framedthm}
 
     \begin{proof}
         Una volta controllata la validità della codifica in input, è possibile interpretare il \DFA come un grafo, e dunque controllare che il \DFA non accetti alcuna stringa equivale a controllare se esiste non esiste alcun cammino dallo stato iniziale del \DFA ad un qualsiasi suo stato accettante; allora, usando ad esempio una visita dei nodi in DFS (\tit{Depth-First Search}) --- realizzabile grazie all'\cref{alg tm} --- una macchina di Turing che esegue tale algoritmo accetterebbe se e solo se non è presente alcun cammino, e dunque non può andare in loop; allora, segue la tesi.
+    \end{proof}
+
+    \subsection{Problema dell'uguaglianza}
+
+    \begin{frameddefn}{Linguaggi dell'uguaglianza}
+        Si definiscono \tbf{linguaggi dell'uguaglianza} i linguaggi definiti come segue: $$EQ_\mathcal{C} := \{\abk{A, B} \mid A, B \in \mathcal{C} : L(A) = L(B)\}$$ Dunque, per tale definizione, controllare che $A \in \mathcal{C}$ sia equivalente a $B \in \mathcal{C}$ equivale a controllare che $\abk{A,B}$ sia in $EQ_\mathcal{C}$.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Differenza simmetrica}
+        Siano $A$ e $B$ due insiemi; allora, si definisce \tbf{differenza simmetrica} tra $A$ e $B$ la seguente: $$A \ \Delta \ B := (A \cap \lnot B) \cup (\lnot A \cap B)$$
+    \end{frameddefn}
+
+    \begin{framedobs}{Differenza simmetrica graficamente}
+        TODO
+    \end{framedobs}
+
+    \begin{framedprop}[label={prop diff simm}]{Differenza simmetrica vuota}
+        Dati due insiemi $A$ e $B$ si ha che $$A \ \Delta \ B = \varnothing \iff A = B$$
+    \end{framedprop}
+
+    \proofiff{
+        Per assurdo, sia $A \ \Delta \ B = \varnothing$ e $A \neq B$; si noti che $A \neq B$ se e solo se esiste $x \in A - B$, oppure $x \in B - A$, e dunque
+
+        \begin{itemize}
+            \item $x \in A - B \implies x \in A \land x \notin B \implies x \in A \cap \lnot B \implies A \ \Delta \ B \neq \varnothing$ $\lightning$
+            \item $x \in B - A \implies x \in B \land x \notin A \implies x \in \lnot A \cap B \implies A \ \Delta \ B \neq \varnothing$ $\lightning$
+        \end{itemize}
+    }{
+        Per dimostrare la tesi, è sufficiente considerare che $$A = B \implies A \cap \lnot B = \lnot A \cap B = \varnothing \implies A \ \Delta \ B = \varnothing$$
+    }
+
+    \begin{framedthm}{Decidibilità di $EQ_\DFA$}
+        $EQ_\DFA$ è decidibile; in simboli $$EQ_\DFA := \{\abk{A, B} \mid A, B \in \DFA : L(A) = L(B) \} \in \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Una volta controllata la validità della codifica in input, è possibile convertire i due \DFA $A$ e $B$ in un terzo \DFA $C$, utilizzando gli algoritmi presentati all'interno della \cref{closure unione}, della \cref{closure inters} e della \cref{closure compl}, tale che $$L(C) = L(A) \ \Delta \ L(B)$$ e dunque per la \cref{prop diff simm}, si ha che $$L(A) = L(B) \iff L(C) = \varnothing = \emptyset$$ Allora, utilizzando la macchina di Turing costruita all'interno del \cref{dec e_dfa} sull'input $\abk{C}$ se la macchina accetta, allora $L(C) = \emptyset$, e dunque $A$ è equivalente a $B$, altrimenti rifiuta. Inoltre, TODO DA FINIRE RISCRIVI CON LE MACCHINE NON IMPLICITE
     \end{proof}
 \end{document}
