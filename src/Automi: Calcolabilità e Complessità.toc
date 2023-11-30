@@ -58,9 +58,9 @@
 \contentsline {subsection}{\numberline {3.2.2}Macchine di Turing multinastro}{61}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Macchine di Turing non deterministiche}{62}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}Enumeratori}{63}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}Tesi di Church-Turing}{63}{subsection.3.2.5}%
-\contentsline {section}{\numberline {3.3}Linguaggi decidibili}{64}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Codifiche}{64}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Problema dell'accettazione}{64}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Problema del vuoto}{67}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Problema dell'uguaglianza}{67}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.3}Linguaggi decidibili}{63}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Tesi di Church-Turing}{63}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Codifiche}{64}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Problema dell'accettazione}{64}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Problema del vuoto}{67}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Problema dell'uguaglianza}{68}{subsection.3.3.5}%
