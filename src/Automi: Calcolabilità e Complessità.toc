@@ -53,6 +53,8 @@
 \contentsline {section}{\numberline {3.1}Macchine di Turing}{55}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Definizioni}{55}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}Configurazioni di \textsf {TM}\xspace }{57}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Turing-riconoscibilità}{58}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Turing-decidibilità}{59}{subsection.3.1.4}%
 \contentsline {section}{\numberline {3.2}Varianti di macchine di Turing}{60}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Macchine di Turing con testina ferma}{60}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Macchine di Turing multinastro}{61}{subsection.3.2.2}%
