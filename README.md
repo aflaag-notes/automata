@@ -6,6 +6,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 
 - generali
     - CAMBIA IL CENTRAMENTO ALLE GRAMMATICHE PER FAVORE DI DIO
+    - fai le operazioni regolari in simboli
     - finire i TODOs sparsi
 - appunti 4/10
     - dimostrazione chiusura star alternativa

@@ -64,5 +64,5 @@
 \contentsline {subsection}{\numberline {3.3.1}Tesi di Church-Turing}{63}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Codifiche}{64}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Problema dell'accettazione}{64}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Problema del vuoto}{70}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}Problema dell'uguaglianza}{71}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.4}Problema del vuoto}{71}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Problema dell'uguaglianza}{72}{subsection.3.3.5}%

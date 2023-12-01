@@ -1933,7 +1933,7 @@
         Simmetricamente, se un linguaggio $L$ è Turing-decidibile per qualche decisore $M$, allora si dice che $M$ \tbf{decide} $L$.
     \end{frameddefn}
 
-    \begin{framedobs}{Turing-decidibilità}
+    \begin{framedobs}[label={dec in rec}]{Turing-decidibilità}
         Si noti che $\mathrm{\DEC} \subseteq \REC$, poiché un linguaggio Turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
     \end{framedobs}
 
@@ -2118,7 +2118,7 @@
         TODO
     \end{proof}
 
-    \begin{framedthm}{Riconoscibilità di $A_\TM$}
+    \begin{framedthm}[label={a_tm in rec}]{Riconoscibilità di $A_\TM$}
         $A_\TM$ è Turing-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \in \REC$$
     \end{framedthm}
 
@@ -2163,7 +2163,7 @@
             \end{tabular}
         \end{center}
 
-        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \lnot f(i)_i$$ e per sua definizione stessa, non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
+        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \lnot f(i)_i$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
     \end{proof}
 
     \begin{framedprop}[label={bij set}]{Biezioni tra insiemi}
@@ -2188,17 +2188,41 @@
             \end{tabular}
         \end{center}
 
-        Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque manda ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è.
+        Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque mappa ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è. Questo prova che l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile.
+
+        Poiché l'insieme \TM è numerabile per il \cref{num tm}, anche ogni sottoinsieme di \TM deve necessariamente esserlo; allora, fissato un alfabeto $\Sigma$, si consideri l'insieme delle macchine di Turing definite su $\Sigma$; si noti che, per quanto dimostrato precedentemente, l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile. Allora, deve necessariamente esistere qualche linguaggio, definito su $\Sigma$, che non può essere riconosciuto da nessuna macchina di Turing definita su $\Sigma$ stesso; di conseguenza, segue la tesi.
     \end{proof}
 
-    \begin{framedthm}{Indecidibilità di $A_\TM$}
+    \begin{framedthm}[label={a_tm not in dec}]{Indecidibilità di $A_\TM$}
         $A_\TM$ è indecidibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \in \REC - \DEC$$
     \end{framedthm}
 
     \begin{proof}
-        TODO boh
+        TODO
     \end{proof}
     
+    \begin{frameddefn}{CoTuring-riconoscibilità}
+        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile.
+    \end{frameddefn}
+
+    \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità e decidibilità}
+        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$L \in \DEC \iff L, \lnot L \in \REC$$
+    \end{framedthm}
+
+    \proofiff{
+        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\lnot L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \lnot L$, $\lnot L \in \DEC$ per definizione stessa, e dunque $\lnot L \in \REC$.
+    }{
+        TODO
+    }
+
+    \begin{framedcor}{Non-riconoscibilità di $\lnot A_\TM$}
+        $A_\TM$ non è coTuring-riconoscibile, o equivalentemente, $\lnot A_\TM$ non è Turing-riconoscibile; in simboli $$\lnot A_\TM \notin \REC$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff \lnot A_\TM \notin \REC$$
+    \end{proof}
+
     \subsection{Problema del vuoto}
 
     \begin{frameddefn}{Linguaggi del vuoto}
@@ -2237,11 +2261,27 @@
 
     \begin{frameddefn}{Differenza simmetrica}
         Siano $A$ e $B$ due insiemi; allora, si definisce \tbf{differenza simmetrica} tra $A$ e $B$ la seguente: $$A \ \Delta \ B := (A \cap \lnot B) \cup (\lnot A \cap B)$$
-    \end{frameddefn}
 
-    \begin{framedobs}{Differenza simmetrica graficamente}
-        TODO
-    \end{framedobs}
+        Graficamente, dati due insiemi $A$ e $B$ all'interno di un insieme universo $U$, la differenza simmetrica $A \ \Delta \ B$ è colorata in grigio nel seguente diagramma:
+
+        \begin{center}
+            \begin{tikzpicture}[fill=gray]
+                \scope
+                \clip (-2,-2) rectangle (2,2)
+                      (1,0) circle (1);
+                \fill (0,0) circle (1);
+                \endscope
+                \scope
+                \clip (-2,-2) rectangle (2,2)
+                      (0,0) circle (1);
+                \fill (1,0) circle (1);
+                \endscope
+                \draw (0,0) circle (1) (0,1)  node [text=black,above] {$A$}
+                      (1,0) circle (1) (1,1)  node [text=black,above] {$B$}
+                      (-2,-2) rectangle (3,2) node [text=black,above] {$U$};
+            \end{tikzpicture}
+        \end{center}
+    \end{frameddefn}
 
     \begin{framedprop}[label={prop diff simm}]{Differenza simmetrica vuota}
         Dati due insiemi $A$ e $B$, si ha che $$A \ \Delta \ B = \varnothing \iff A = B$$
