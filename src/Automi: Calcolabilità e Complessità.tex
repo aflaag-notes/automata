@@ -2019,7 +2019,7 @@
         TODO
     }
   
-    \section{Problemi computabili}
+    \section{Linguaggi Turing-riconoscibili e Turing-decidibili}
 
     \subsection{Tesi di Church-Turing}
 
@@ -2039,7 +2039,7 @@
         Poiché si assume la tesi di Church-Turing, si ha che dato un \tit{algoritmo}, esiste una \tit{macchina di Turing} che può eseguirlo. Dunque, all'interno di questi appunti verrà assunta l'intercambiabilità tra gli algoritmi (o metodi) descritti, e le macchine di Turing.
     \end{framedobs}
 
-    \subsection{Codifiche}
+    \subsection{Linguaggi non Turing-riconoscibili}
     
     \begin{framedobs}{Codifiche}
         Sia $O$ un oggetto; poichè una \TM può prendere in input qualsiasi oggetto, ammesso che sia codificato attraverso una quaclhe codifica predeterminata, all'interno di questi appunti si utilizzerà il simbolismo $\abk{O}$ per sottointendere una qualche codifica del dato oggetto $O$, in modo che sia possibile rappresentare $O$ sul nastro di una \TM.
@@ -2048,6 +2048,73 @@
     \begin{example}[Codifiche di $\delta$]
         Sia $\delta$ la funzione di transizione di un \DFA; allora, una sua possibile codifica potrebbe essere scrivere ogni riga della rappresentazione tabellare di $\delta$, separata da un \ttt \#.
     \end{example}
+
+    \begin{frameddefn}{Numerabilità}
+        Un insieme $A$ è detto \tbf{numerabile} se e solo se esiste una biezione $\func{f}{\N}{A}$.
+    \end{frameddefn}
+
+    \begin{example}[Numeri pari]
+        L'insieme $$P := \{2n \mid n \in \N\}$$ dei numeri pari è numerabile, poiché la funzione $$\funcmap{f}{\N}{P}{n}{2n}$$ è biettiva; infatti è iniettiva poiché $$\forall x, y \in \N \quad f(x) = f(y) \iff 2x = 2y \implies x = y$$ ed è suriettiva poiché $$\forall p \in P \quad \exists x \in \N \mid p = 2x$$ (altrimenti $p$ non sarebbe pari).
+    \end{example}
+
+    \begin{framedlem}[label={num tm}]{Numerabilità delle macchine di Turing}
+        L'insieme delle macchine di Turing è numerabile; dunque, esiste una biezione $\func{f}{\N}{\TM}$.
+    \end{framedlem}
+
+    \begin{proof}
+        Sia $\Sigma$ un alfabeto contenente dei caratteri che rendano possibile codificare ogni macchina di Turing in una codifica $\abk{M}$ per ogni $M \in \TM$; sia dunque $\prec$ una relazione d'ordine su $\Sigma^*$ definita come segue: $$\forall x, y \in \Sigma^* \quad x \prec y \iff \soe{ll}{|x| < |y| & |x| \neq |y| \\ x \prec_l y & l := |x| = |y|}$$ dove $\prec_l$ è la relazione d'ordine dell'ordinamento lessicografico. Si noti che, per sua stessa definizione, la relazione d'ordine $\prec$ risulta essere totale; di conseguenza, è possibile ordinare \tit{totalmente} le stringhe presenti in $\Sigma^*$, ed è dunque possibile definire una biezione $\func{f}{\N}{\Sigma^*}$ (è sufficiente associare $i \in \N$ con l'$i$-esima stringa ottenutta dall'ordinamento descritto). Questo dimostra che $\Sigma^*$ è numerabile, per qualsiasi alfabeto $\Sigma$ (una volta stabilito un ordinamento lessicografico per caratteri esterni alle lettere dell'alfabeto canonico, se presenti).
+
+        Dunque, poiché con l'alfabeto $\Sigma$ scelto è possibile codificare ogni macchina di Turing \TM, questo dimostra che è possibile numerare anche le macchine di Turing. Allora \TM è numerabile.
+    \end{proof}
+
+    \begin{framedprop}[label={not num B}]{Non-numerabilità di $\mathcal B$}
+        Sia $\mathcal B$ l'insieme delle stringhe binarie di lunghezza infinita; in simboli $$\mathcal B := \{w \in \{\ttt 0, \ttt 1\}^* \mid |w| = + \infty\}$$ Allora $\mathcal B$ non è numerabile.
+    \end{framedprop}
+
+    \begin{proof}
+        La tecnica che verrà utilizzata è nota in letteratura come \href{https://it.wikipedia.org/wiki/Argomento_diagonale_di_Cantor}{Argomento diagonale di Cantor}, attraverso la quale Cantor ha dimostrato che $\R$ non è numerabile.
+
+        Per assurdo, sia $\mathcal B$ numerabile; allora, per definizione, esiste una biezione $\func{f}{\N}{\mathcal B}$. Si assuma ad esempio che $f$ sia la seguente mappa biunivoca:
+        \begin{center}
+            \begin{tabular}{cccccccc}
+                $f(0)$ & $=$ & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 0 & \ttt 1 & $\ldots$ \\
+                $f(1)$ & $=$ & \ttt 1 & \ttt 0 & \ttt 0 & \ttt 1 & \ttt 0 & $\ldots$ \\
+                $f(2)$ & $=$ & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 0 & $\ldots$ \\
+                $f(3)$ & $=$ & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 1 & $\ldots$ \\
+                $f(4)$ & $=$ & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 1 & $\ldots$ \\
+                $\vdots$ & & & & \vdots & & &
+            \end{tabular}
+        \end{center}
+
+        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \lnot f(i)_i$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
+    \end{proof}
+
+    \begin{framedprop}[label={bij set}]{Biezioni tra insiemi}
+        Siano $A$ e $B$ due insiemi; allora esiste una biezione $\func{f}{A}{B}$ se e solo se $|A| = |B|$.
+    \end{framedprop}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \begin{framedlem}{Linguaggi non Turing-riconiscibili}
+        Esistono linguaggi non Turing-riconiscibili; in simboli, dato un alfabeto $\Sigma$ si ha che $$\exists L \in \powerset(\Sigma^*) \mid L \notin \REC$$
+    \end{framedlem}
+
+    \begin{proof}
+        Dato un linguaggio $L$ definito su un qualche alfabeto $\Sigma$, ordinato secondo l'ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm}, si definisce \tit{sequenza caratteristica} di $L$ una stringa binaria $\chi_L$ in cui l'$i$-esimo carattere di $\chi_L$ è \ttt 1 se e solo se l'$i$-esima stringa di $L$ (rispetto a $\prec$) è presente in $\Sigma^*$. Ad esempio, dato $$L := \{\ttt 1, \ttt{01}, \ttt{010}\}$$, definito sull'alfabeto binario (il quale è ordinabile su $\prec$), si ha che $\chi_L$ è ottenuta come segue:
+        \begin{center}
+            \begin{tabular}{cccccccccccccccc}
+                $\Sigma^*$ & $=$ & $\{$ & $\varepsilon$, & \ttt 0, & \ttt 1, & \ttt{00}, & \ttt{01}, & \ttt{10}, & \ttt{11}, & \ttt{000}, & \ttt{001}, & \ttt{010}, & \ttt{011}, & $\ldots$ & $\}$ \\
+                $L$ & $:=$ & $\{$ & & & \ttt 1, & & \ttt{01}, & & & & \ttt{010} & & &  & $\}$ \\
+                $\chi_L$ & $:=$ & & \ttt 0 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 0 & \ttt 0  & \ttt 0 & \ttt 1 & \ttt 0 & $\cdots$ &
+            \end{tabular}
+        \end{center}
+
+        Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque mappa ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è. Questo prova che l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile.
+
+        Poiché l'insieme \TM è numerabile per il \cref{num tm}, anche ogni sottoinsieme di \TM deve necessariamente esserlo; allora, fissato un alfabeto $\Sigma$, si consideri l'insieme delle macchine di Turing definite su $\Sigma$; si noti che, per quanto dimostrato precedentemente, l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile. Allora, deve necessariamente esistere qualche linguaggio, definito su $\Sigma$, che non può essere riconosciuto da nessuna macchina di Turing definita su $\Sigma$ stesso; di conseguenza, segue la tesi.
+    \end{proof}
 
     \subsection{Problema dell'accettazione}
 
@@ -2124,73 +2191,6 @@
 
     \begin{proof}
         TODO
-    \end{proof}
-
-    \begin{frameddefn}{Numerabilità}
-        Un insieme $A$ è detto \tbf{numerabile} se e solo se esiste una biezione $\func{f}{\N}{A}$.
-    \end{frameddefn}
-
-    \begin{example}[Numeri pari]
-        L'insieme $$P := \{2n \mid n \in \N\}$$ dei numeri pari è numerabile, poiché la funzione $$\funcmap{f}{\N}{P}{n}{2n}$$ è biettiva; infatti è iniettiva poiché $$\forall x, y \in \N \quad f(x) = f(y) \iff 2x = 2y \implies x = y$$ ed è suriettiva poiché $$\forall p \in P \quad \exists x \in \N \mid p = 2x$$ (altrimenti $p$ non sarebbe pari).
-    \end{example}
-
-    \begin{framedlem}[label={num tm}]{Numerabilità delle macchine di Turing}
-        L'insieme delle macchine di Turing è numerabile; dunque, esiste una biezione $\func{f}{\N}{\TM}$.
-    \end{framedlem}
-
-    \begin{proof}
-        Sia $\Sigma$ un alfabeto contenente dei caratteri che rendano possibile codificare ogni macchina di Turing in una codifica $\abk{M}$ per ogni $M \in \TM$; sia dunque $\prec$ una relazione d'ordine su $\Sigma^*$ definita come segue: $$\forall x, y \in \Sigma^* \quad x \prec y \iff \soe{ll}{|x| < |y| & |x| \neq |y| \\ x \prec_l y & l := |x| = |y|}$$ dove $\prec_l$ è la relazione d'ordine dell'ordinamento lessicografico. Si noti che, per sua stessa definizione, la relazione d'ordine $\prec$ risulta essere totale; di conseguenza, è possibile ordinare \tit{totalmente} le stringhe presenti in $\Sigma^*$, ed è dunque possibile definire una biezione $\func{f}{\N}{\Sigma^*}$ (è sufficiente associare $i \in \N$ con l'$i$-esima stringa ottenutta dall'ordinamento descritto). Questo dimostra che $\Sigma^*$ è numerabile, per qualsiasi alfabeto $\Sigma$ (una volta stabilito un ordinamento lessicografico per caratteri esterni alle lettere dell'alfabeto canonico, se presenti).
-
-        Dunque, poiché con l'alfabeto $\Sigma$ scelto è possibile codificare ogni macchina di Turing \TM, questo dimostra che è possibile numerare anche le macchine di Turing. Allora \TM è numerabile.
-    \end{proof}
-
-    \begin{framedprop}[label={not num B}]{Non-numerabilità di $\mathcal B$}
-        Sia $\mathcal B$ l'insieme delle stringhe binarie di lunghezza infinita; in simboli $$\mathcal B := \{w \in \{\ttt 0, \ttt 1\}^* \mid |w| = + \infty\}$$ Allora $\mathcal B$ non è numerabile.
-    \end{framedprop}
-
-    \begin{proof}
-        La tecnica che verrà utilizzata è nota in letteratura come \href{https://it.wikipedia.org/wiki/Argomento_diagonale_di_Cantor}{Argomento diagonale di Cantor}, attraverso la quale Cantor ha dimostrato che $\R$ non è numerabile.
-
-        Per assurdo, sia $\mathcal B$ numerabile; allora, per definizione, esiste una biezione $\func{f}{\N}{\mathcal B}$. Si assuma ad esempio che $f$ sia la seguente mappa biunivoca:
-        \begin{center}
-            \begin{tabular}{cccccccc}
-                $f(0)$ & $=$ & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 0 & \ttt 1 & $\ldots$ \\
-                $f(1)$ & $=$ & \ttt 1 & \ttt 0 & \ttt 0 & \ttt 1 & \ttt 0 & $\ldots$ \\
-                $f(2)$ & $=$ & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 0 & $\ldots$ \\
-                $f(3)$ & $=$ & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 1 & $\ldots$ \\
-                $f(4)$ & $=$ & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 1 & $\ldots$ \\
-                $\vdots$ & & & & \vdots & & &
-            \end{tabular}
-        \end{center}
-
-        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \lnot f(i)_i$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
-    \end{proof}
-
-    \begin{framedprop}[label={bij set}]{Biezioni tra insiemi}
-        Siano $A$ e $B$ due insiemi; allora esiste una biezione $\func{f}{A}{B}$ se e solo se $|A| = |B|$.
-    \end{framedprop}
-
-    \begin{proof}
-        Omessa.
-    \end{proof}
-
-    \begin{framedlem}{Linguaggi non Turing-riconiscibili}
-        Esistono linguaggi non Turing-riconiscibili; in simboli, dato un alfabeto $\Sigma$ si ha che $$\exists L \in \powerset(\Sigma^*) \mid L \notin \REC$$
-    \end{framedlem}
-
-    \begin{proof}
-        Dato un linguaggio $L$ definito su un qualche alfabeto $\Sigma$, ordinato secondo l'ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm}, si definisce \tit{sequenza caratteristica} di $L$ una stringa binaria $\chi_L$ in cui l'$i$-esimo carattere di $\chi_L$ è \ttt 1 se e solo se l'$i$-esima stringa di $L$ (rispetto a $\prec$) è presente in $\Sigma^*$. Ad esempio, dato $$L := \{\ttt 1, \ttt{01}, \ttt{010}\}$$, definito sull'alfabeto binario (il quale è ordinabile su $\prec$), si ha che $\chi_L$ è ottenuta come segue:
-        \begin{center}
-            \begin{tabular}{cccccccccccccccc}
-                $\Sigma^*$ & $=$ & $\{$ & $\varepsilon$, & \ttt 0, & \ttt 1, & \ttt{00}, & \ttt{01}, & \ttt{10}, & \ttt{11}, & \ttt{000}, & \ttt{001}, & \ttt{010}, & \ttt{011}, & $\ldots$ & $\}$ \\
-                $L$ & $:=$ & $\{$ & & & \ttt 1, & & \ttt{01}, & & & & \ttt{010} & & &  & $\}$ \\
-                $\chi_L$ & $:=$ & & \ttt 0 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 0 & \ttt 0  & \ttt 0 & \ttt 1 & \ttt 0 & $\cdots$ &
-            \end{tabular}
-        \end{center}
-
-        Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque mappa ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è. Questo prova che l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile.
-
-        Poiché l'insieme \TM è numerabile per il \cref{num tm}, anche ogni sottoinsieme di \TM deve necessariamente esserlo; allora, fissato un alfabeto $\Sigma$, si consideri l'insieme delle macchine di Turing definite su $\Sigma$; si noti che, per quanto dimostrato precedentemente, l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile. Allora, deve necessariamente esistere qualche linguaggio, definito su $\Sigma$, che non può essere riconosciuto da nessuna macchina di Turing definita su $\Sigma$ stesso; di conseguenza, segue la tesi.
     \end{proof}
 
     \begin{framedthm}[label={a_tm not in dec}]{Indecidibilità di $A_\TM$}
