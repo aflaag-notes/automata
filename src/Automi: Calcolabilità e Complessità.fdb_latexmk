@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber Automi: Calcolabilità e Complessità"] 1701343032 "Automi: Calcolabilità e Complessità.bcf" "Automi: Calcolabilità e Complessità.bbl" "Automi: Calcolabilità e Complessità" 1701542307 2
-  "Automi: Calcolabilità e Complessità.bcf" 1701542307 106652 37e852c976e785a4cd766daafd7c931b "pdflatex"
+["biber Automi: Calcolabilità e Complessità"] 1701343032 "Automi: Calcolabilità e Complessità.bcf" "Automi: Calcolabilità e Complessità.bbl" "Automi: Calcolabilità e Complessità" 1701548352 2
+  "Automi: Calcolabilità e Complessità.bcf" 1701548352 106652 37e852c976e785a4cd766daafd7c931b "pdflatex"
   (generated)
   "Automi: Calcolabilità e Complessità.bbl"
   "Automi: Calcolabilità e Complessità.blg"
   (rewritten before read)
-["pdflatex"] 1701542293 "Automi: Calcolabilità e Complessità.tex" "Automi: Calcolabilità e Complessità.pdf" "Automi: Calcolabilità e Complessità" 1701542307 0
+["pdflatex"] 1701548339 "Automi: Calcolabilità e Complessità.tex" "Automi: Calcolabilità e Complessità.pdf" "Automi: Calcolabilità e Complessità" 1701548352 0
   "../Nyx/logo.png" 1700821952 91419 8de48debf770a599a084520c83ce5d80 ""
   "../Nyx/nyx-frames.sty" 1701540405 2897 52f45de66f906d6adc47d65869e6e616 ""
   "../Nyx/nyx-macros.sty" 1701540386 7787 fd4a2073b8cb69282f9303773ce9f107 ""
@@ -380,12 +380,12 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1689853683 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1693381028 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1693380976 6769488 5b7e4d8b8dc08b722ee96f876127df85 ""
-  "Automi: Calcolabilità e Complessità.aux" 1701542307 21525 33a4088ef3a3c70a85df887a0e35bcf3 "pdflatex"
+  "Automi: Calcolabilità e Complessità.aux" 1701548352 21525 20bb96c410978164be56ce3cf21b6d5a "pdflatex"
   "Automi: Calcolabilità e Complessità.bbl" 0 -1 0 "biber Automi: Calcolabilità e Complessità"
-  "Automi: Calcolabilità e Complessità.out" 1701542307 9475 90d39e7ef551098ac3f5e4b59a441c22 "pdflatex"
-  "Automi: Calcolabilità e Complessità.run.xml" 1701542307 2510 0ebefd57c37ccd7c4a9d58f444b8399f "pdflatex"
-  "Automi: Calcolabilità e Complessità.tex" 1701542277 182053 fe94eb2d3ebc8423674038595038eb53 ""
-  "Automi: Calcolabilità e Complessità.toc" 1701542307 5755 ed6cbb866c7054b7d596d9b604974721 "pdflatex"
+  "Automi: Calcolabilità e Complessità.out" 1701548352 9475 90d39e7ef551098ac3f5e4b59a441c22 "pdflatex"
+  "Automi: Calcolabilità e Complessità.run.xml" 1701548352 2510 0ebefd57c37ccd7c4a9d58f444b8399f "pdflatex"
+  "Automi: Calcolabilità e Complessità.tex" 1701548339 183530 d83be73599606a6d02c4d47d66b7184c ""
+  "Automi: Calcolabilità e Complessità.toc" 1701548352 5755 b31e533e5327a674526b3febfd442f19 "pdflatex"
   (generated)
   "Automi: Calcolabilità e Complessità.aux"
   "Automi: Calcolabilità e Complessità.bcf"

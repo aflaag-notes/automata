@@ -2102,7 +2102,7 @@
     \end{framedlem}
 
     \begin{proof}
-        Dato un linguaggio $L$ definito su un qualche alfabeto $\Sigma$, ordinato secondo l'ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm}, si definisce \tit{sequenza caratteristica} di $L$ una stringa binaria $\chi_L$ in cui l'$i$-esimo carattere di $\chi_L$ è \ttt 1 se e solo se l'$i$-esima stringa di $L$ (rispetto a $\prec$) è presente in $\Sigma^*$. Ad esempio, dato $$L := \{\ttt 1, \ttt{01}, \ttt{010}\}$$, definito sull'alfabeto binario (il quale è ordinabile su $\prec$), si ha che $\chi_L$ è ottenuta come segue:
+        Dato un linguaggio $L$ definito su un qualche alfabeto $\Sigma$, ordinato secondo l'ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm}, si definisce \tit{sequenza caratteristica} di $L$ una stringa binaria $\chi_L$ in cui l'$i$-esimo carattere di $\chi_L$ è \ttt 1 se e solo se l'$i$-esima stringa di $L$ (rispetto a $\prec$) è presente in $\Sigma^*$. Ad esempio, dato $$L := \{\ttt 1, \ttt{01}, \ttt{010}\}$$ definito sull'alfabeto binario (il quale è ordinabile su $\prec$), si ha che $\chi_L$ è ottenuta come segue:
         \begin{center}
             \begin{tabular}{cccccccccccccccc}
                 $\Sigma^*$ & $=$ & $\{$ & $\varepsilon$, & \ttt 0, & \ttt 1, & \ttt{00}, & \ttt{01}, & \ttt{10}, & \ttt{11}, & \ttt{000}, & \ttt{001}, & \ttt{010}, & \ttt{011}, & $\ldots$ & $\}$ \\
@@ -2198,21 +2198,23 @@
     \end{framedthm}
 
     \begin{proof}
-        Per assurdo, sia $A_\TM \in \DEC$, e dunque per definizione esiste un decisore $H$ tale che $L(H) = A_\TM$. Allora, poiché è un decisore, $H$ computa come segue: $$\forall M \in \TM, w \in L(M) \quad H(\abk{M,w}) = \soe{ll}{\textrm{accetta} & M \ \textrm{accetta} \ w \\ \textrm{rifiuta} & M \ \textrm{rifiuta} \ w}$$ dove la sintassi $H(\abk{M,w})$ indica che $H$ prende computa avendo la codifica $\abk{M,w}$ sul nastro. Sia ora $D$ una macchina di Turing avente $H$ come sua sottoprocedura, la quale viene chiamata quando l'input di $M$ è la descrizione --- ossia la codifica --- di $M$ stessa (ovvero $\abk{M}$). Inoltre, $D$ computa come segue: $$\forall M \in \TM \quad D(\abk{M}) = \soe{ll}{\textrm{accetta} & M \ \textrm{rifiuta} \ \abk{M} \\ \textrm{rifiuta} & M \ \textrm{accetta} \ \abk{M}}$$ dunque $D$ inverte il risultato ottenuto computando $H(\abk{M, \abk{M}})$. Allora, si ha che se $M$ è pari a $D$ stesso, si ottiene che $$D(\abk{D}) = \soe{ll}{\textrm{accetta} & D \ \textrm{rifiuta} \ \abk{D} \\ \textrm{rifiuta} & D \ \textrm{accetta} \ \abk{D}}$$ che rappresenta chiaramente un assurdo $\lightning$.
+        Per assurdo, sia $A_\TM \in \DEC$, e dunque per definizione esiste un decisore $H$ tale che $L(H) = A_\TM$. Allora, poiché è un decisore, $H$ computa come segue: $$\forall M \in \TM, w \in L(M) \quad H(\abk{M,w}) = \soe{ll}{\textrm{accetta} & M \ \textrm{accetta} \ w \\ \textrm{rifiuta} & M \ \textrm{rifiuta} \ w}$$ dove la sintassi $H(\abk{M,w})$ indica che $H$ prende computa avendo la codifica $\abk{M,w}$ sul nastro. Sia ora $D$ una macchina di Turing avente $H$ come sua sottoprocedura, la quale viene chiamata quando l'input di $M$ è la descrizione di $M$ stessa (ovvero $\abk{M}$). Inoltre, $D$ computa come segue: $$\forall M \in \TM \quad D(\abk{M}) = \soe{ll}{\textrm{accetta} & H(\abk{M, \abk{M}}) \ \textrm{rifiuta} \iff M \ \textrm{rifiuta} \ \abk{M} \\ \textrm{rifiuta} & H(\abk{M, \abk{M}}) \ \textrm{accetta} \iff M \ \textrm{accetta} \ \abk{M}}$$ dunque $D$ inverte il risultato ottenuto computando $H(\abk{M, \abk{M}})$. Allora, si ha che se $M$ è pari a $D$ stesso, si ottiene che $$D(\abk{D}) = \soe{ll}{\textrm{accetta} & H(\abk{D, \abk{D}}) \ \textrm{rifiuta} \iff D \ \textrm{rifiuta} \ \abk{D} \\ \textrm{rifiuta} & H(\abk{D, \abk{D}}) \ \textrm{accetta} \iff D \ \textrm{accetta} \ \abk{D}}$$ che rappresenta chiaramente un assurdo $\lightning$.
     \end{proof}
     
     \begin{frameddefn}{CoTuring-riconoscibilità}
-        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi coTuring-riconoscibili è denotata con \COREC. Allora, in simboli, dato un alfabeto $\Sigma$, si ha che $$\COREC := \{L \in \powerset(\Sigma^*) \mid \lnot L \in \REC\}$$
+        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi coTuring-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \lnot L \in \REC$$
     \end{frameddefn}
 
     \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità e decidibilità}
-        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$L \in \DEC \iff L \in \COREC$$
+        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$L \in \DEC \iff L \in \REC \cap \COREC$$
     \end{framedthm}
 
     \proofiff{
-        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\lnot L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \lnot L$, $\lnot L \in \DEC$ per definizione stessa, e dunque $\lnot L \in \REC$. Allora $L \in \COREC$.
+        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\lnot L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \lnot L$, si ha che $\lnot L \in \DEC$ per definizione stessa, ed in particolare $$\lnot L \in \DEC \implies \lnot L \in \REC \iff L \in \COREC$$
     }{
-        TODO
+        Sia $L$ tale che $L \in \REC$ e $L \in \COREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\lnot L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\lnot L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \lnot L = \Sigma^* \\ L \cap \lnot L = \varnothing}$$ e dunque $w \in L \iff w \notin \lnot L$. Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
+
+        Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\lnot L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
     }
 
     \begin{framedcor}{Non-riconoscibilità di $\lnot A_\TM$}
@@ -2220,7 +2222,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff \lnot A_\TM \notin \REC \iff A_\TM \notin \COREC$$
+        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff A_\TM \notin \COREC$$
     \end{proof}
 
     \subsection{Problema del vuoto}
