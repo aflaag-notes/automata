@@ -2198,29 +2198,29 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Per assurdo, sia $A_\TM \in \DEC$, e dunque per definizione esiste un decisore $H$ tale che $L(H) = A_\TM$. Allora, poiché è un decisore, $H$ computa come segue: $$\forall M \in \TM, w \in L(M) \quad H(\abk{M,w}) = \soe{ll}{\textrm{accetta} & M \ \textrm{accetta} \ w \\ \textrm{rifiuta} & M \ \textrm{rifiuta} \ w}$$ dove la sintassi $H(\abk{M,w})$ indica che $H$ prende computa avendo la codifica $\abk{M,w}$ sul nastro. Sia ora $D$ una macchina di Turing avente $H$ come sua sottoprocedura, la quale viene chiamata quando l'input di $M$ è la descrizione --- ossia la codifica --- di $M$ stessa (ovvero $\abk{M}$). Inoltre, $D$ computa come segue: $$\forall M \in \TM \quad D(\abk{M}) = \soe{ll}{\textrm{accetta} & M \ \textrm{rifiuta} \ \abk{M} \\ \textrm{rifiuta} & M \ \textrm{accetta} \ \abk{M}}$$ dunque $D$ inverte il risultato ottenuto computando $H(\abk{M, \abk{M}})$. Allora, si ha che se $M$ è pari a $D$ stesso, si ottiene che $$D(\abk{D}) = \soe{ll}{\textrm{accetta} & D \ \textrm{rifiuta} \ \abk{D} \\ \textrm{rifiuta} & D \ \textrm{accetta} \ \abk{D}}$$ che rappresenta chiaramente un assurdo $\lightning$.
     \end{proof}
     
     \begin{frameddefn}{CoTuring-riconoscibilità}
-        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile.
+        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi coTuring-riconoscibili è denotata con \COREC. Allora, in simboli, dato un alfabeto $\Sigma$, si ha che $$\COREC := \{L \in \powerset(\Sigma^*) \mid \lnot L \in \REC\}$$
     \end{frameddefn}
 
     \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità e decidibilità}
-        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$L \in \DEC \iff L, \lnot L \in \REC$$
+        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$L \in \DEC \iff L \in \COREC$$
     \end{framedthm}
 
     \proofiff{
-        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\lnot L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \lnot L$, $\lnot L \in \DEC$ per definizione stessa, e dunque $\lnot L \in \REC$.
+        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\lnot L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \lnot L$, $\lnot L \in \DEC$ per definizione stessa, e dunque $\lnot L \in \REC$. Allora $L \in \COREC$.
     }{
         TODO
     }
 
     \begin{framedcor}{Non-riconoscibilità di $\lnot A_\TM$}
-        $A_\TM$ non è coTuring-riconoscibile, o equivalentemente, $\lnot A_\TM$ non è Turing-riconoscibile; in simboli $$\lnot A_\TM \notin \REC$$
+        $A_\TM$ non è coTuring-riconoscibile; in simboli $$A_\TM \notin \COREC$$
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff \lnot A_\TM \notin \REC$$
+        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff \lnot A_\TM \notin \REC \iff A_\TM \notin \COREC$$
     \end{proof}
 
     \subsection{Problema del vuoto}
