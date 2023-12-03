@@ -1969,7 +1969,7 @@
         Una \TM non è in grado di sapere se la sua testina si trova all'inizio dell'input, ma è possibile ottenere questo comportamento effettuando uno \tit{shift} a destra dell'intero nastro (si noti l'\cref{tape shift}), e successivamente ponendo un simbolo sentinella --- dunque che non sia già presente nell'alfabeto del nastro --- nella prima cella.
     \end{framedobs}
 
-    \begin{framedprop}{Equivalenza delle \TM multinastro}
+    \begin{framedprop}[label={multitape equiv}]{Equivalenza delle \TM multinastro}
         Sia $M$ una macchina di Turing multinastro; allora esiste una \TM $M'$ ad essa equivalente.
     \end{framedprop}
 
@@ -1990,7 +1990,7 @@
     \subsection{Macchine di Turing non deterministiche}
 
     \begin{frameddefn}{\NTM}
-        Una \tbf{\NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{Q-\{q_\mathrm{accept}, q_\mathrm{reject}\} \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una \NTM computa non deterministicamente.
+        Una \tbf{\NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q-\{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una \NTM computa non deterministicamente.
     \end{frameddefn}
 
     \begin{framedprop}[label={ntm tm}]{Equivalenza delle \NTM}
@@ -2093,9 +2093,18 @@
         Siano $A$ e $B$ due insiemi; allora esiste una biezione $\func{f}{A}{B}$ se e solo se $|A| = |B|$.
     \end{framedprop}
 
-    \begin{proof}
-        Omessa.
-    \end{proof}
+    \proofiff{
+        Siano $A$ e $B$ insiemi, sui quali è definita una biezione $\func{f}{A}{B}$; allora:
+
+        \begin{itemize}
+            \item $f$ è biettiva, ed in particolare è iniettiva, e dunque $$\forall x_1, x_2 \in A \quad x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$$ il che implica necessariamente che $|A| \subseteq |B|$;
+            \item $f$ è biettiva, ed in particolare è suriettiva, e dunque $$\forall y \in B \quad \exists x \in A \mid f(x) = y$$ il che implica necessariamente che $|B| \subseteq |A|$.
+        \end{itemize}
+
+        Allora $|A| = |B|$, come volevasi dimostrare.
+    }{
+        Se $A$ e $B$ sono due insiemi tali che $|A| = |B|$, allora è sicuramente possibile definire una mappa \tit{uno-ad-uno} che associa gli elementi di $A$ con gli elementi di $B$, poiché non possono essere presenti elementi in eccesso o in difetto in nessuno dei due insiemi in quanto hanno la stessa cardinalità; dunque, segue la tesi.
+    }
 
     \begin{framedlem}{Linguaggi non Turing-riconiscibili}
         Esistono linguaggi non Turing-riconiscibili; in simboli, dato un alfabeto $\Sigma$ si ha che $$\exists L \in \powerset(\Sigma^*) \mid L \notin \REC$$
@@ -2167,7 +2176,7 @@
             \item \tit{Passo induttivo}. È necessario dimostrare la tesi per una stringa $w$ tale che $|w| = n + 1$. Poiché $G$ è in CNF, le sue regole possono essere della forma $A \to BC$, oppure $D \to a$ con $a \in \Sigma$; allora, assumendo che $w$ abbia lunghezza $n + 1$ con $n > 1$, il numero di passaggi per derivare $w$ deve essere maggiore 1 (come dimostrato nel caso base), e dunque deve esistere una regola della forma $A \to BC$ che possa aver prodotto $w$; dunque, esisteranno due sottostringhe $y$ e $z$ di $w$, tali che $B \derives y$ e $C \derives z$, e sicuramente non vuote, poiché sono state generate da una regola della forma $A \to BC$. Dunque, poiché non sono vuote, e sono sottostringhe di $w$, hanno lunghezza al più $n$, e di conseguenza su di esse è possibile applicare l'ipotesi induttiva forte. Allora, ponendo $k := |y|$, e di conseguenza $|z| = |w| - |y| = n + 1 - k$, si ha che $y$ è stata derivata attraverso $$2k - 1$$ passaggi, mentre $w$ attraverso $$2(n+ 1 - k) - 1 = 2n+2-2k -1 = 2n-2k+1 = 2(n -k) + 1$$ passaggi. Allora, $w$ deve essere stata derivata attraverso i passaggi per derivare $y$, i passaggi per derivare $z$, ed il passaggio $A \to BC$ stesso, e dunque sono $$[2k - 1] + [2(n - k) + 1 ] + 1= 2k -1 +2n -2k +1 + 1 = 2n + 1$$ passaggi. Allora segue la tesi, poiché $$2(n + 1) - 1= 2n + 2 - 1 = 2n +1$$
         \end{enumerate}
 
-        Sia dunque $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può convertire la \CFG fornita in input in CNF attraverso il \cref{cfg into cnf} (grazie all'\cref{alg tm}), e successivamente
+        Sia dunque $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può convertire la \CFG --- fornita in input --- in CNF, attraverso il \cref{cfg into cnf} (grazie all'\cref{alg tm}), e successivamente
 
         \begin{itemize}
             \item se la stringa $w$ ha lunghezza 0, $M$ controlla che la regola $S \to \varepsilon$ sia presente in $G$, altrimenti rifiuta;
@@ -2185,12 +2194,32 @@
         Sia $L \in \CFL$, e dunque per definizione esiste una $G \in \CFG$ tale che $L(G) = L$; affinché $L$ sia decidibile, deve esistere una \TM in grado di deciderlo, e dunque di riconoscere ogni sua stringa $w \in L$, senza andare mai in loop. Si consideri ora la \TM costruita all'interno della dimostrazione del \cref{a_cfg in dec}, la quale decide se una data stringa appartiene al linguaggio di una data \CFG, e sia questa $M_G$. Allora, per decidere $L$ è sufficiente costruire una \TM $M$ --- avente $M_G$ come sua sottoprocedura --- tale che, data una stringa $w \in L$ in input, esegua $M_G$ su $\abk{G, w}$ per stabilire se $w \in L(G)$. Allora $M$ è un decisore poiché $M_G$ è un decisore, e dunque segue la tesi.
     \end{proof}
 
+    \begin{frameddefn}{Macchina di Turing universale}
+        Si definisce \tbf{macchina di Turing universale} una macchina di Turing in grado di simulare qualsiasi altra macchina di Turing.
+    \end{frameddefn}
+
     \begin{framedthm}[label={a_tm in rec}]{Riconoscibilità di $A_\TM$}
         $A_\TM$ è Turing-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \in \REC$$
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Sia $M$ una macchina di Turing multinastro; una volta controllata la validità della codifica in input (presente su uno dei due nastri), sia $M$ tale da computare come segue:
+
+        \begin{itemize}
+            \item uno dei due nastri viene utilizzato da $M$ per mantenere le codifiche della macchina di Turing in input, che comprendono:
+                \begin{itemize}
+                    \item il numero di stati $\abk{|Q|}$
+                    \item il numero di simboli dell'alfabeto dell'automa $\abk{|\Sigma|}$
+                    \item il numero di simboli dell'alfabeto del nastro $\abk{|\Gamma|}$
+                    \item la funzione $\abk{\delta}$, descritta attraverso codifica di tuple $\abk{\abk{q, x}, \abk{r, y, z}}$ che costituiscono coppie input-output presenti nella rappresentazione insiemistica della funzione di transizione $\delta$ (dunque, si ha che $q, r \in Q, x, y \in \Gamma, z \in \{\mathrm L ,\mathrm R\}$)
+                \end{itemize}
+            \item l'altro nastro viene utilizzato da $M$ per mantenere lo stato della configurazione corrente della macchina di Turing che $M$ deve simulare, indicata attraverso la codifica $\abk{a, q, b}$ (dove $q \in Q, a, b \in \Gamma^*$)
+            \item allora, $M$ inizialmente scansiona il primo nastro, cercando $\abk{\delta}$;
+            \item successivamente, per ogni codifica di regole $\abk{\abk{q, x}, \abk{r, y, z}}$, se $x = b_1$, la codifica della configurazione corrente viene aggiornata in base alla transizione considerata, altrimenti $M$ passa alla regola successiva;
+            \item se la condifica della configurazione corrente, presente sul secondo nastro, contiene $q_\mathrm{accept}$ o $q_\mathrm{reject}$, $M$ accetta o rifiuta rispettivamente.
+        \end{itemize}
+
+        Allora $M$ è in grado di simulare la macchina di Turing che gli è stata fornita in input; si noti però che se la macchina che $M$ sta simulando va in loop, anche $M$ va in loop necessariamente. Allora $M$ riconosce $A_\TM$, ma non lo decide. Inoltre, per la \cref{multitape equiv} si ha che esiste una \TM $U$ equivalente alla $M$ descritta, che risulta dunque essere una macchina di Turing universale. Allora, poiché $U$ è equivalente ad $M$, $U$ riconosce (ma non decide) $A_\TM$, e dunque segue la tesi.
     \end{proof}
 
     \begin{framedthm}[label={a_tm not in dec}]{Indecidibilità di $A_\TM$}
