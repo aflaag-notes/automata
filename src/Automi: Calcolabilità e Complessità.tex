@@ -2154,7 +2154,7 @@
         Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può utilizzare l'algoritmo di conversione presentato all'interno della dimostrazione del \cref{ling expr reg} per convertire l'espressione regolare fornita in input in un \NFA (grazie all'\cref{alg tm}); allora, per il \cref{a_nfa}, segue la tesi.
     \end{proof}
 
-    \begin{framedthm}{Decidibilità di $A_\CFG$}
+    \begin{framedthm}[label={a_cfg in dec}]{Decidibilità di $A_\CFG$}
         $A_\CFG$ è decidibile; in simboli $$A_\CFG := \{\abk{G, w} \mid G \in \CFG, w \in L(G)\} \in \DEC$$
     \end{framedthm}
 
@@ -2182,7 +2182,7 @@
     \end{framedcor}
 
     \begin{proof}
-        TODO
+        Sia $L \in \CFL$, e dunque per definizione esiste una $G \in \CFG$ tale che $L(G) = L$; affinché $L$ sia decidibile, deve esistere una \TM in grado di deciderlo, e dunque di riconoscere ogni sua stringa $w \in L$, senza andare mai in loop. Si consideri ora la \TM costruita all'interno della dimostrazione del \cref{a_cfg in dec}, la quale decide se una data stringa appartiene al linguaggio di una data \CFG, e sia questa $M_G$. Allora, per decidere $L$ è sufficiente costruire una \TM $M$ --- avente $M_G$ come sua sottoprocedura --- tale che, data una stringa $w \in L$ in input, esegua $M_G$ su $\abk{G, w}$ per stabilire se $w \in L(G)$. Allora $M$ è un decisore poiché $M_G$ è un decisore, e dunque segue la tesi.
     \end{proof}
 
     \begin{framedthm}[label={a_tm in rec}]{Riconoscibilità di $A_\TM$}
@@ -2206,7 +2206,7 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità e decidibilità}
-        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$L \in \DEC \iff L \in \REC \cap \COREC$$
+        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$\DEC = \REC \cap \COREC$$
     \end{framedthm}
 
     \proofiff{
@@ -2228,7 +2228,7 @@
     \subsection{Problema del vuoto}
 
     \begin{frameddefn}{Linguaggi del vuoto}
-        Si definiscono \tbf{linguaggi del vuoto} i linguaggi definiti come segue $$E_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C}: L(A) = \emptyset\}$$
+        Si definiscono \tbf{linguaggi del vuoto} i linguaggi definiti come segue $$E_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C}: L(A) = \varnothing\}$$
     \end{frameddefn}
 
     \begin{framedobs}{Decidibilità dei linguaggi $E_\mathcal C$}
@@ -2236,7 +2236,7 @@
     \end{framedobs}
 
     \begin{framedthm}[label={dec e_dfa}]{Decidibilità di $E_\DFA$}
-        $E_\DFA$ è decidibile; in simboli $$E_\DFA := \{\abk{A} \mid A \in \DFA: L(A) = \emptyset \} \in \DEC$$
+        $E_\DFA$ è decidibile; in simboli $$E_\DFA := \{\abk{A} \mid A \in \DFA: L(A) = \varnothing \} \in \DEC$$
     \end{framedthm}
 
     \begin{proof}
@@ -2244,11 +2244,19 @@
     \end{proof}
 
     \begin{framedthm}{Decidibilità di $E_\CFG$}
-        $E_\CFG$ è decidibile; in simboli $$E_\CFG := \{\abk{G} \mid G \in \CFG: L(G) = \emptyset \} \in \DEC$$
+        $E_\CFG$ è decidibile; in simboli $$E_\CFG := \{\abk{G} \mid G \in \CFG: L(G) = \varnothing \} \in \DEC$$
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può utilizzare il seguente algoritmo --- grazie all'\cref{alg tm} --- per stabilire se il linguaggio della grammatica $G = (V, \Sigma, R, S)$ presente sul suo nasstro sia vuoto:
+
+        \begin{itemize}
+            \item $M$ marca inizialmente tutti i simboli terminali di $G$;
+            \item fintanto che sono presenti variabili non marcate, $M$ marca ripetutamente ogni variabile $A \in V$ tale che $A \to U_1 \cdots U_k \in R$, dove $U_1, \ldots, U_k \in (V \cup \Sigma)^*$ sono già stati tutti marcati;
+            \item accetta se e solo se $S$ non è marcata, altrimenti rifiuta.
+        \end{itemize}
+
+        Di conseguenza, l'algoritmo che sta eseguendo $M$ su $G$, partendo dai terminali di quest'ultima, controlla che sia possibile ripercorrere gli alberi di derivazione dai terminali fino ad $S$, attraverso le regole in $R$, sfruttate \curlyquotes{al contrario}. Allora, se al termine dell'algoritmo $S$ è marcata, esiste una sequenza di terminali derivabile da $S$, e dunque $L(G) \neq \varnothing$.
     \end{proof}
 
     \subsection{Problema dell'uguaglianza}
@@ -2305,7 +2313,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può convertire i due \DFA $A$ e $B$ forniti in input in un terzo \DFA $C$ --- utilizzando gli algoritmi presentati all'interno della \cref{closure unione}, della \cref{closure inters} e della \cref{closure compl} --- tale che $$L(C) = L(A) \ \Delta \ L(B)$$ e dunque per la \cref{prop diff simm}, si ha che $$L(A) = L(B) \iff L(C) = \varnothing = \emptyset$$ Sia $M'$ la \TM costruita all'interno del \cref{dec e_dfa}; allora, $M$ può utilizzare $M'$ sull'input $\abk{C}$, poiché se $M'$ accetta, allora $L(C) = \emptyset$, e dunque $A$ è equivalente a $B$; allora $M$ accetta se e solo se $M'$ accetta, e poiché $M'$ è decisore per la dimostrazione del \cref{dec e_dfa} stessa, segue la tesi.
+        Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può convertire i due \DFA $A$ e $B$ forniti in input in un terzo \DFA $C$ --- utilizzando gli algoritmi presentati all'interno della \cref{closure unione}, della \cref{closure inters} e della \cref{closure compl} --- tale che $$L(C) = L(A) \ \Delta \ L(B)$$ e dunque per la \cref{prop diff simm}, si ha che $$L(A) = L(B) \iff L(C) = \varnothing$$ Sia $M'$ la \TM costruita all'interno del \cref{dec e_dfa}; allora, $M$ può utilizzare $M'$ sull'input $\abk{C}$, poiché se $M'$ accetta, allora $L(C) = \varnothing$, e dunque $A$ è equivalente a $B$; allora $M$ accetta se e solo se $M'$ accetta, e poiché $M'$ è decisore per la dimostrazione del \cref{dec e_dfa} stessa, segue la tesi.
     \end{proof}
 
     \begin{framedthm}{Indecidibilità di $EQ_\CFG$}
