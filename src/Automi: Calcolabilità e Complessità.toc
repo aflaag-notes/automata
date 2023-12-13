@@ -72,4 +72,4 @@
 \contentsline {section}{\numberline {4.2}Linguaggi non Turing-decidibili}{78}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Problema della terminazione}{78}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Problema del vuoto}{79}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Problema della regolarità}{80}{section.4.3}%
+\contentsline {subsection}{\numberline {4.2.3}Problema della regolarità}{80}{subsection.4.2.3}%

@@ -2452,7 +2452,7 @@
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $L(M')$ rifiuta, ovvero se e solo se $L(M') \neq \varnothing$, e per costruzione di $M'$ si ha che $L(M') = \{ w\}$ necessariamente; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo non è possibile per il \cref{a_tm not in dec} $\lightning$.
     \end{proof}
 
-    \section{Problema della regolarità}
+    \subsection{Problema della regolarità}
 
     \begin{frameddefn}{Linguaggi di regolarità}
         Si definiscono \tbf{linguaggi di regolarità} i linguaggi definiti come segue $$REG_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C} , L(A) \in \REG\}$$
