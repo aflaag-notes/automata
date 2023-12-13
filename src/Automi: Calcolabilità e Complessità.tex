@@ -2261,7 +2261,7 @@
     \end{frameddefn}
 
     \begin{framedobs}{Decidibilità dei linguaggi $E_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio di accettazione è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se il linguaggio di un certo oggetto in $\mathcal C$ è vuoto} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $E_\mathcal C$, controllare che il linguaggio di $A \in \mathcal{C}$ sia vuoto equivale a controllare che $\abk{A}$ sia in $E_\mathcal{C}$.
+        Si noti che, dimostrare che un linguaggio del vuoto è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se il linguaggio di un certo oggetto in $\mathcal C$ è vuoto} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $E_\mathcal C$, controllare che il linguaggio di $A \in \mathcal{C}$ sia vuoto equivale a controllare che $\abk{A}$ sia in $E_\mathcal{C}$.
     \end{framedobs}
 
     \begin{framedthm}[label={dec e_dfa}]{Decidibilità di $E_\DFA$}
@@ -2295,7 +2295,7 @@
     \end{frameddefn}
 
     \begin{framedobs}{Decidibilità dei linguaggi $EQ_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio di accettazione è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se due oggetti in $\mathcal C$ siano equivalenti} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $EQ_\mathcal C$, controllare che $A \in \mathcal{C}$ sia equivalente a $B \in \mathcal C$ corrisponde a controllare che $\abk{A,B}$ sia in $EQ_\mathcal{C}$.
+        Si noti che, dimostrare che un linguaggio dell'uguaglianza è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se due oggetti in $\mathcal C$ siano equivalenti} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $EQ_\mathcal C$, controllare che $A \in \mathcal{C}$ sia equivalente a $B \in \mathcal C$ corrisponde a controllare che $\abk{A,B}$ sia in $EQ_\mathcal{C}$.
     \end{framedobs}
 
     \begin{frameddefn}{Differenza simmetrica}
@@ -2351,5 +2351,112 @@
 
     \begin{proof}
         Omessa.
+    \end{proof}
+
+    \chapter{Riducibilità}
+
+    \section{Linguaggi non Turing-decidibili}
+
+    \section{Riduzione}
+
+    \begin{frameddefn}{Riduzione}
+        Una \tbf{riduzione} è un modo di convertire un problema in un altro, in modo tale che una soluzione al secondo possa essere utilizzata per risolvere il primo.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Funzione calcolabile}
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile} se esiste una macchina di Turing che, su qualsiasi input $w \in \Sigma^*$, si ferma avendo solamente $f(w)$ sul nastro.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Riducibilità mediante funzione}
+        Un lingauggio $A$ si dice \tbf{riducibile mediante funzione} al linguaggio $B$, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ La funzione $f$ prende il nome di \tbf{riduzione da $A$ a $B$}.
+    \end{frameddefn}
+
+    \begin{framedthm}{Decidibilità mediante riduzione}
+        Siano $A$ e $B$ due linguaggi; se $A \leq_\mathrm m B$, e $B$ è decidibile, allora $A$ è decidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \DEC} \implies A \in \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedcor}{Indecidibilità mediante riduzione}
+        Siano $A$ e $B$ due linguaggi; se $A \leq_\mathrm m B$, ed $A$ è indecidibile, allora $B$ è indecidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \DEC} \implies B \notin \DEC$$
+    \end{framedcor}
+
+    \subsection{Problema della fermata}
+
+    \begin{frameddefn}{Linguaggi di fermata}
+        Si definiscono \tbf{linguaggi di fermata} i linguaggi definiti come segue $$HALT_\mathcal{C} := \{\abk{A, w} \mid A \in \mathcal{C} , A \ \textrm{si ferma su input} \ w\}$$
+    \end{frameddefn}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedobs}{Decidibilità dei linguaggi $HALT_\mathcal C$}
+        Si noti che, dimostrare che un linguaggio di fermata è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se un certo oggetto in $\mathcal C$ si ferma su input $w$} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $HALT_\mathcal C$, controllare che $A \in \mathcal{C}$ si fermi su input $w$ equivale a controllare che $\abk{A,w}$ sia in $HALT_\mathcal{C}$.
+    \end{framedobs}
+
+    \begin{framedthm}{Indecidibilità di $HALT_\TM$}
+        $HALT_\TM$ è indecidibile; in simboli $$HALT_\TM := \{\abk{M, w} \mid M \in \TM , M \ \textrm{si ferma su input} \ w\} \notin \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Per assurdo, sia $HALT_\TM$ decidibile, e dunque per esso esiste un decisore $H$; di conseguenza $H(\abk{M, w})$ accetta se e solo se $M$ si ferma avendo $w$ come input. Si consideri ora una macchina di Turing $D$ --- avente $H$ come sua sottoprocedura --- che, data in input una codifica $\abk{M, w}$, computa come segue:
+
+        \begin{itemize}
+            \item esegue $H(\abk{M,w})$;
+            \item se $H$ rifiuta, allora $M$ va in loop avendo $w$ come input, e dunque rifiuta;
+            \item se $H$ accetta, allora $M$ si ferma avendo $w$ come input, e dunque procede a simulare $M$ stessa;
+            \item ora, $D$ accetta se $M$ accetta, e rifiuta se $M$ rifiuta.
+        \end{itemize}
+
+        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo è assurdo per il \cref{a_tm not in dec} $\lightning$.
+
+        Dunque, $A_\TM$ è riducibile ad $HALT_\TM$, poiché se $HALT_\TM$ fosse decidibile, anche $A_\TM$ lo sarebbe.
+    \end{proof}
+
+    \subsection{Problema del vuoto}
+
+    \begin{framedthm}{Indecidibilità di $E_\TM$}
+        $E_\TM$ è indecidibile; in simboli $$E_\TM := \{\abk{M} \mid M \in \TM : L(M) = \varnothing \} \notin \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Per assurdo, sia $E_\TM$ decidibile, e dunque per esso esiste un decisore $H$; di conseguenza $H(\abk{M})$ accetta se e solo se $L(M) = \varnothing$. Si consideri ora una macchina di Turing $D$ --- avente $D$ come sue sottoprocedura --- che, data in input una codifica $\abk{M, w}$, computa come segue:
+
+        \begin{itemize}
+            \item modifica la macchina $M$ input come segue:
+                \begin{itemize}
+                    \item se l'input di $M$ è $w$, computa normalmente;
+                    \item se l'input di $M$ non è $w$, rifiuta;
+                \end{itemize}
+                e sia $M'$ la versione modificata di $M$ (si noti che questa modifica è possibile, poiché a $D$ è necessario sufficiente aggiungere degli stati ad $M$ che controllino l'input fornito, e computare come descritto);
+            \item esegue $H(\abk{M'})$;
+            \item se $H$ accetta, allora $L(M') = \varnothing$, e dunque rifiuta;
+            \item se $H$ rifiuta, allora $L(M') \neq \varnothing$, e dunque accetta.
+        \end{itemize}
+
+        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $L(M')$ rifiuta, ovvero se e solo se $L(M') \neq \varnothing$, e per costruzione di $M'$ si ha che $L(M') = \{ w\}$ necessariamente; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo non è possibile per il \cref{a_tm not in dec} $\lightning$.
+
+        Dunque, $A_\TM$ è riducibile ad $E_\TM$, poiché se $E_\TM$ fosse riducibile, anche $A_\TM$ lo sarebbe.
+    \end{proof}
+
+    \section{Problema della regolarità}
+
+    \begin{frameddefn}{Linguaggi di regolarità}
+        Si definiscono \tbf{linguaggi di regolarità} i linguaggi definiti come segue $$REG_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C} , L(A) \in \REG\}$$
+    \end{frameddefn}
+
+    \begin{framedobs}{Decidibilità dei linguaggi $REG_\mathcal C$}
+        Si noti che, dimostrare che un linguaggio di regolarità è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se il linguaggio di un certo oggetto in $\mathcal C$ sia regolare} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $REG_\mathcal C$, controllare che il linguaggio di $A \in \mathcal{C}$ sia regolare equivale a controllare che $\abk{A}$ sia in $REG_\mathcal{C}$.
+    \end{framedobs}
+
+    \begin{framedthm}{Indecidibilità di $REG_\TM$}
+        $REG_\TM$ è indecidibile; in simboli $$REG_\TM := \{\abk{M} \mid M \in \TM , L(M) \in \REG\} \notin \DEC$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
     \end{proof}
 \end{document}

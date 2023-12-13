@@ -66,3 +66,9 @@
 \contentsline {subsection}{\numberline {3.3.3}Problema dell'accettazione}{67}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Problema del vuoto}{73}{subsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.3.5}Problema dell'uguaglianza}{74}{subsection.3.3.5}%
+\contentsline {chapter}{\numberline {4}Riducibilità}{77}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Linguaggi non Turing-decidibili}{77}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Riduzione}{77}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Problema della fermata}{78}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Problema del vuoto}{79}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Problema della regolarità}{80}{section.4.3}%
