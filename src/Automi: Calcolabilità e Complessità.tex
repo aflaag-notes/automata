@@ -2355,9 +2355,9 @@
 
     \chapter{Riducibilità}
 
-    \section{Linguaggi non Turing-decidibili}
-
     \section{Riduzione}
+
+    \subsection{Definizioni}
 
     \begin{frameddefn}{Riduzione}
         Una \tbf{riduzione} è un modo di convertire un problema in un altro, in modo tale che una soluzione al secondo possa essere utilizzata per risolvere il primo.
@@ -2368,25 +2368,39 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Riducibilità mediante funzione}
-        Un lingauggio $A$ si dice \tbf{riducibile mediante funzione} al linguaggio $B$, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ La funzione $f$ prende il nome di \tbf{riduzione da $A$ a $B$}.
+        Siano $A$ e $B$ definiti su un alfabeto $\Sigma$; $A$ si dice \tbf{riducibile mediante funzione} a $B$, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ La funzione $f$ prende il nome di \tbf{riduzione} da $A$ a $B$.
     \end{frameddefn}
 
-    \begin{framedthm}{Decidibilità mediante riduzione}
-        Siano $A$ e $B$ due linguaggi; se $A \leq_\mathrm m B$, e $B$ è decidibile, allora $A$ è decidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \DEC} \implies A \in \DEC$$
+    \begin{framedthm}[label={dec w red}]{Decidibilità mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, e $B$ è decidibile, allora $A$ è decidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \DEC} \implies A \in \DEC$$
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Poiché $B \in \DEC$ in ipotesi, esiste un decisore $M$ tale che $M$ decide $B$; inoltre, poichè $A \leq_\mathrm m B$, esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale per cui $A$ sia riducibile a $B$. Sia dunque $N$ una macchina di Turing che, data in input una stringa $w \in \Sigma^*$, computa come segue:
+
+        \begin{itemize}
+            \item computa $f(w)$;
+            \item simula $M$ avente $f(w)$ come input; 
+            \item $N$ accetta se e solo se $M$ accetta.
+        \end{itemize}
+
+        Allora, per costruzione di $N$, e per riducibilità di $A$ a $B$, si ha che $$w \in L(N) \iff f(w) \in L(M) = B \iff w \in A$$ e dunque $N$ decide $A$.
     \end{proof}
 
     \begin{framedcor}{Indecidibilità mediante riduzione}
-        Siano $A$ e $B$ due linguaggi; se $A \leq_\mathrm m B$, ed $A$ è indecidibile, allora $B$ è indecidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \DEC} \implies B \notin \DEC$$
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $A$ è indecidibile, allora $B$ è indecidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \DEC} \implies B \notin \DEC$$
     \end{framedcor}
 
-    \subsection{Problema della fermata}
+    \begin{proof}
+        Per assurdo, sia $B \in \DEC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{dec w red}, si ha che $A \in \DEC$ $\lightning$.
+    \end{proof} 
 
-    \begin{frameddefn}{Linguaggi di fermata}
-        Si definiscono \tbf{linguaggi di fermata} i linguaggi definiti come segue $$HALT_\mathcal{C} := \{\abk{A, w} \mid A \in \mathcal{C} , A \ \textrm{si ferma su input} \ w\}$$
+    \section{Linguaggi non Turing-decidibili}
+
+    \subsection{Problema della terminazione}
+
+    \begin{frameddefn}{Linguaggi di terminazione}
+        Si definiscono \tbf{linguaggi di terminazione} i linguaggi definiti come segue $$HALT_\mathcal{C} := \{\abk{A, w} \mid A \in \mathcal{C} , A \ \textrm{si ferma su input} \ w\}$$
     \end{frameddefn}
 
     \begin{proof}
@@ -2394,7 +2408,7 @@
     \end{proof}
 
     \begin{framedobs}{Decidibilità dei linguaggi $HALT_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio di fermata è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se un certo oggetto in $\mathcal C$ si ferma su input $w$} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $HALT_\mathcal C$, controllare che $A \in \mathcal{C}$ si fermi su input $w$ equivale a controllare che $\abk{A,w}$ sia in $HALT_\mathcal{C}$.
+        Si noti che, dimostrare che un linguaggio di terminazione è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se un certo oggetto in $\mathcal C$ si ferma su input $w$} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $HALT_\mathcal C$, controllare che $A \in \mathcal{C}$ si fermi su input $w$ equivale a controllare che $\abk{A,w}$ sia in $HALT_\mathcal{C}$.
     \end{framedobs}
 
     \begin{framedthm}{Indecidibilità di $HALT_\TM$}
