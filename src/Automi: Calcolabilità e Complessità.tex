@@ -2412,8 +2412,6 @@
         \end{itemize}
 
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo è assurdo per il \cref{a_tm not in dec} $\lightning$.
-
-        Dunque, $A_\TM$ è riducibile ad $HALT_\TM$, poiché se $HALT_\TM$ fosse decidibile, anche $A_\TM$ lo sarebbe.
     \end{proof}
 
     \subsection{Problema del vuoto}
@@ -2438,8 +2436,6 @@
         \end{itemize}
 
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $L(M')$ rifiuta, ovvero se e solo se $L(M') \neq \varnothing$, e per costruzione di $M'$ si ha che $L(M') = \{ w\}$ necessariamente; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo non è possibile per il \cref{a_tm not in dec} $\lightning$.
-
-        Dunque, $A_\TM$ è riducibile ad $E_\TM$, poiché se $E_\TM$ fosse riducibile, anche $A_\TM$ lo sarebbe.
     \end{proof}
 
     \section{Problema della regolarità}
