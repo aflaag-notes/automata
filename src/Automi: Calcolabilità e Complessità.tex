@@ -2364,7 +2364,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Funzione calcolabile}
-        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile} se esiste una macchina di Turing che, su qualsiasi input $w \in \Sigma^*$, si ferma avendo solamente $f(w)$ sul nastro.
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile} se esiste una macchina di Turing che, su qualsiasi input $w \in \Sigma^*$, se si ferma, ha solo $f(w)$ sul suo nastro.
     \end{frameddefn}
 
     \begin{frameddefn}{Riducibilità mediante funzione}
@@ -2393,7 +2393,7 @@
 
     \begin{proof}
         Per assurdo, sia $B \in \DEC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{dec w red}, si ha che $A \in \DEC$ $\lightning$.
-    \end{proof} 
+    \end{proof}
 
     \section{Linguaggi non Turing-decidibili}
 
@@ -2403,10 +2403,6 @@
         Si definiscono \tbf{linguaggi di terminazione} i linguaggi definiti come segue $$HALT_\mathcal{C} := \{\abk{A, w} \mid A \in \mathcal{C} , A \ \textrm{si ferma su input} \ w\}$$
     \end{frameddefn}
 
-    \begin{proof}
-        TODO
-    \end{proof}
-
     \begin{framedobs}{Decidibilità dei linguaggi $HALT_\mathcal C$}
         Si noti che, dimostrare che un linguaggio di terminazione è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se un certo oggetto in $\mathcal C$ si ferma su input $w$} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $HALT_\mathcal C$, controllare che $A \in \mathcal{C}$ si fermi su input $w$ equivale a controllare che $\abk{A,w}$ sia in $HALT_\mathcal{C}$.
     \end{framedobs}
@@ -2415,13 +2411,13 @@
         $HALT_\TM$ è indecidibile; in simboli $$HALT_\TM := \{\abk{M, w} \mid M \in \TM , M \ \textrm{si ferma su input} \ w\} \notin \DEC$$
     \end{framedthm}
 
-    \begin{proof}
+    \begin{proof}[Dimostrazione I]
         Per assurdo, sia $HALT_\TM$ decidibile, e dunque per esso esiste un decisore $H$; di conseguenza $H(\abk{M, w})$ accetta se e solo se $M$ si ferma avendo $w$ come input. Si consideri ora una macchina di Turing $D$ --- avente $H$ come sua sottoprocedura --- che, data in input una codifica $\abk{M, w}$, computa come segue:
 
         \begin{itemize}
-            \item esegue $H(\abk{M,w})$;
-            \item se $H$ rifiuta, allora $M$ va in loop avendo $w$ come input, e dunque rifiuta;
-            \item se $H$ accetta, allora $M$ si ferma avendo $w$ come input, e dunque procede a simulare $M$ stessa;
+            \item $D$ esegue $H(\abk{M,w})$;
+            \item se $H$ rifiuta, allora $M$ va in loop avendo $w$ come input, e dunque $D$ rifiuta;
+            \item se $H$ accetta, allora $M$ si ferma avendo $w$ come input, e dunque $D$ procede a simulare $M$ stessa:
             \begin{itemize}
                 \item se $M$ accetta, $D$ accetta
                 \item se $M$ rifiuta, $D$ rifiuta.
@@ -2429,6 +2425,22 @@
         \end{itemize}
 
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo è assurdo per il \cref{a_tm not in dec} $\lightning$.
+    \end{proof}
+
+    \begin{proof}[Dimostrazione II]
+        Si consideri la macchina di Turing $F$ che, data in input una codifica $\abk{M, w}$, computa come segue:
+
+        \begin{itemize}
+            \item $F$ costruisce una macchina di Turing $M'$ che, data in input una stringa $x$, computa come segue:
+                \begin{itemize}
+                    \item $F$ esegue $M(x)$
+                    \item se $M$ accetta, $F$ accetta;
+                    \item se $M$ rifiuta, $F$ cicla (ad esempio muovendo la testina verso una direzione per sempre);
+                \end{itemize}
+            \item restituisce $\abk{M', w}$ sul suo nastro.
+        \end{itemize}
+
+        Si noti dunque che, poiché $F$ si ferma solo se ha $\abk{M', w}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $f$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \implies w \in L(M')$$ per definizione di $A_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$w \in L(M') \implies f(\abk{M, w}) = \abk{M', w} \in HALT_\TM$$ per definizione di $HALT_\TM$; viceversa, si ha che \centeredeq{0.9}{$\abk{M, w} \notin A_\TM \iff w \notin L(M) \implies M'(w) \ \textrm{va in loop} \implies f(\abk{M, w}) = \abk{M', w} \notin HALT_\TM$} e dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in HALT_\TM$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m HALT_\TM$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, è verificata la tesi per cui $HALT_\TM \notin \DEC$.
     \end{proof}
 
     \subsection{Problema del vuoto}
@@ -2441,15 +2453,15 @@
         Per assurdo, sia $E_\TM$ decidibile, e dunque per esso esiste un decisore $H$; di conseguenza $H(\abk{M})$ accetta se e solo se $L(M) = \varnothing$. Si consideri ora una macchina di Turing $D$ --- avente $H$ come sua sottoprocedura --- che, data in input una codifica $\abk{M, w}$, computa come segue:
 
         \begin{itemize}
-            \item modifica la macchina $M$ input in modo che, data in input una stringa $x$, computi come segue:
+            \item $D$ costruisce una macchina di Turing $M'$ che, data in input una stringa $x$, computa come segue:
                 \begin{itemize}
-                    \item se l'input $x$ di $M$ è proprio $w$, computa normalmente;
-                    \item se l'input $x$ di $M$ non è $w$, rifiuta;
+                    \item se l'input $x$ di $M$ è proprio $w$, $M'$ accetta se $M$ accetta;
+                    \item se l'input $x$ di $M$ non è $w$, $M'$ rifiuta;
                 \end{itemize}
-                e sia $M'$ la versione modificata di $M$ (si noti che questa modifica è realizzabile da parte di $D$, poiché è sufficiente aggiungere degli stati ad $M$ che controllino l'input fornito, e computare come descritto);
-            \item esegue $H(\abk{M'})$;
-            \item se $H$ accetta, allora $L(M') = \varnothing$, e dunque rifiuta;
-            \item se $H$ rifiuta, allora $L(M') \neq \varnothing$, e dunque accetta.
+                (si noti che questa macchina è realizzabile poiché è sufficiente aggiungere ad $M$ degli stati che controllano l'input fornito, e computare come descritto);
+            \item $D$ esegue $H(\abk{M'})$;
+            \item se $H$ accetta, allora $L(M') = \varnothing$, e dunque $D$ rifiuta;
+            \item se $H$ rifiuta, allora $L(M') \neq \varnothing$, e dunque $D$ accetta.
         \end{itemize}
 
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ rifiuta, ovvero se e solo se $L(M') \neq \varnothing$, e per costruzione di $M'$ si ha che $L(M') \neq \varnothing \iff L(M') = \{ w\}$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo non è possibile per il \cref{a_tm not in dec} $\lightning$.
@@ -2473,14 +2485,14 @@
         Per assurdo, sia $REG_\TM$ decidibile, e dunque per esso esiste un decisore $H$; di conseguenza $H(\abk{M})$ accetta se e solo se $L(M) \in \REG$. Si consideri ora una macchina di Turing $D$ --- avente $H$ come sua sottoprocedura --- che, data in input una codifica $\abk{M, w}$, computa come segue:
 
         \begin{itemize}
-            \item costruisce una macchina di Turing $M'$ che, data in input una stringa $x$, computa come segue:
+            \item $D$ costruisce una macchina di Turing $M'$ che, data in input una stringa $x$, computa come segue:
                 \begin{itemize}
-                    \item se l'input $x$ di $M'$ ha la forma $\ttt 0^n \ttt 1 ^n$ (per qualche $n \in \N$), accetta;
-                    \item se l'input $x$ di $M'$ non ha tale forma, accetta se $M(w)$ accetta (dunque ignorando $x$);
+                    \item se l'input $x$ di $M'$ ha la forma $\ttt 0^n \ttt 1 ^n$ (per qualche $n \in \N$), $M'$ accetta;
+                    \item se l'input $x$ di $M'$ non ha tale forma, $M'$ accetta se $M(w)$ accetta (dunque ignorando $x$);
                 \end{itemize}
-            \item esegue $H(\abk{M'})$;
-            \item se $H$ accetta, allora $L(M') \in \REG$, e dunque accetta;
-            \item se $H$ rifiuta, allora $L(M') \in \REG$, e dunque rifiuta.
+            \item $D$ esegue $H(\abk{M'})$;
+            \item se $H$ accetta, allora $L(M') \in \REG$, e dunque $D$ accetta;
+            \item se $H$ rifiuta, allora $L(M') \in \REG$, e dunque $D$ rifiuta.
         \end{itemize}
 
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ accetta, ovvero se $L(M') \in \REG$, e per costruzione di $M'$ si ha che $L(M') \in \REG \iff \soe{l}{x \notin \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\} \\ M(w) \ \textrm{accetta}}$ TODO DA FINIRE NON HO CAPITO
@@ -2496,9 +2508,9 @@
         Per assurdo, sia $EQ_\TM$ decidibile, e dunque per esso esiste un decisore $H$; di conseguenza $H(\abk{M_1}, {M_2})$ accetta se e solo se $L(M_1)= L(M_2)$. Si consideri ora una macchina di Turing $D$ --- avente $H$ come sua sottoprocedura --- che, data in input una codifica $\abk{M}$, computa come segue:
 
         \begin{itemize}
-            \item esegue $H(\abk{M, M_\mathrm{reject}})$, dove $M_\mathrm{reject }$ è una macchina di Turing che rifiuta ogni input, e dunque $L(M_\mathrm{reject}) = \varnothing$;
-            \item se $H$ accetta, allora $L(M) = L(M_\mathrm{reject}) = \varnothing$, e dunque accetta;
-            \item se $H$ rifiuta, allora $L(M) \neq L(M_\mathrm{reject}) = \varnothing$, e dunque rifiuta.
+            \item $D$ esegue $H(\abk{M, M_\mathrm{reject}})$, dove $M_\mathrm{reject }$ è una macchina di Turing che rifiuta ogni input, e dunque $L(M_\mathrm{reject}) = \varnothing$;
+            \item se $H$ accetta, allora $L(M) = L(M_\mathrm{reject}) = \varnothing$, e dunque $D$ accetta;
+            \item se $H$ rifiuta, allora $L(M) \neq L(M_\mathrm{reject}) = \varnothing$, e dunque $D$ rifiuta.
         \end{itemize}
 
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$, se $L(M) = \varnothing$, poiché attraverso $H$ controlla che il linguaggio di $M$ coincida con $L(M_\mathrm{reject})= \varnothing$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $E_\TM \in \DEC$, ma questo non è possibile per il \cref{e_tm not in dec} $\lightning$.
