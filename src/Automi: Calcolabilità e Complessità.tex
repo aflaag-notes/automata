@@ -2234,7 +2234,7 @@
         Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi coTuring-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \overline L \in \REC$$
     \end{frameddefn}
 
-    \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità e decidibilità}
+    \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità}
         Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$\DEC = \REC \cap \COREC$$
     \end{framedthm}
 
@@ -2246,7 +2246,7 @@
         Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\overline L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
     }
 
-    \begin{framedcor}{Non-riconoscibilità di $\overline A_\TM$}
+    \begin{framedcor}[label={a_tm not in corec}]{Irriconoscibilità di $\overline{A_\TM}$}
         $A_\TM$ non è coTuring-riconoscibile; in simboli $$A_\TM \notin \COREC$$
     \end{framedcor}
 
@@ -2371,7 +2371,7 @@
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ si dice \tbf{riducibile mediante funzione} a $B$, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ e la funzione $f$ prende il nome di \tbf{riduzione} da $A$ a $B$.
     \end{frameddefn}
     
-    \begin{framedlem}{Riducibilità dei complementi}
+    \begin{framedlem}[label={red compl}]{Riducibilità dei complementi}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm m B \iff \overline A \leq_\mathrm m \overline B$$
     \end{framedlem}
 
@@ -2434,7 +2434,7 @@
             \end{itemize}
         \end{itemize}
 
-        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo è assurdo per il \cref{a_tm not in dec} $\lightning$.
+        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. Allora, l'esistenza di $D$ dimostrerebbe che $A_\TM \in \DEC$, ma questo è assurdo per il \cref{a_tm not in dec} $\lightning$.
     \end{proof}
 
     \begin{proof}[Dimostrazione II]
@@ -2443,14 +2443,14 @@
         \begin{itemize}
             \item $F$ costruisce una macchina di Turing $M'$ che, data in input una stringa $x$, computa come segue:
                 \begin{itemize}
-                    \item $F$ esegue $M(x)$
-                    \item se $M$ accetta, $F$ accetta;
-                    \item se $M$ rifiuta, $F$ cicla (ad esempio muovendo la testina verso una direzione per sempre);
+                    \item $M'$ esegue $M(x)$
+                    \item se $M$ accetta, $M'$ accetta;
+                    \item se $M$ rifiuta, $M'$ cicla (ad esempio muovendo la testina verso una direzione per sempre);
                 \end{itemize}
-            \item restituisce $\abk{M', w}$ sul suo nastro.
+            \item $F$ restituisce $\abk{M', w}$ sul suo nastro.
         \end{itemize}
 
-        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M', w}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $f$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \implies w \in L(M')$$ per definizione di $A_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$w \in L(M') \implies f(\abk{M, w}) = \abk{M', w} \in HALT_\TM$$ per definizione di $HALT_\TM$; viceversa, si ha che \centeredeq{0.9}{$\abk{M, w} \notin A_\TM \iff w \notin L(M) \implies M'(w) \ \textrm{va in loop} \implies f(\abk{M, w}) = \abk{M', w} \notin HALT_\TM$} e dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in HALT_\TM$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m HALT_\TM$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, è verificata la tesi per cui $HALT_\TM \notin \DEC$ per il \cref{dec w red cor}.
+        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M', w}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M, w}}{\abk{M', w}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff w \in L(M')$$ per definizione di $A_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$w \in L(M') \iff f(\abk{M, w}) = \abk{M', w} \in HALT_\TM$$ per definizione di $HALT_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in HALT_\TM$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m HALT_\TM$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, è verificata la tesi per cui $HALT_\TM \notin \DEC$ per il \cref{dec w red cor}.
     \end{proof}
 
     \subsection{Problema del vuoto}
@@ -2474,7 +2474,7 @@
             \item se $H$ rifiuta, allora $L(M') \neq \varnothing$, e dunque $D$ accetta.
         \end{itemize}
 
-        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ rifiuta, ovvero se e solo se $L(M') \neq \varnothing$, e per costruzione di $M'$ si ha che $L(M') \neq \varnothing \iff L(M') = \{ w\}$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $A_\TM \in \DEC$, ma questo non è possibile per il \cref{a_tm not in dec} $\lightning$.
+        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ rifiuta, ovvero se e solo se $L(M') \neq \varnothing$, e per costruzione di $M'$ si ha che $L(M') \neq \varnothing \iff L(M') = \{ w\}$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. Allora, l'esistenza di $D$ dimostrerebbe che $A_\TM \in \DEC$, ma questo non è possibile per il \cref{a_tm not in dec} $\lightning$.
     \end{proof}
 
     \subsection{Problema della regolarità}
@@ -2523,7 +2523,7 @@
             \item se $H$ rifiuta, allora $L(M) \neq L(M_\mathrm{reject}) = \varnothing$, e dunque $D$ rifiuta.
         \end{itemize}
 
-        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$, se $L(M) = \varnothing$, poiché attraverso $H$ controlla che il linguaggio di $M$ coincida con $L(M_\mathrm{reject})= \varnothing$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $E_\TM \in \DEC$, ma questo non è possibile per il \cref{e_tm not in dec} $\lightning$.
+        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$, se $L(M) = \varnothing$, poiché attraverso $H$ controlla che il linguaggio di $M$ coincida con $L(M_\mathrm{reject})= \varnothing$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. Allora, l'esistenza di $D$ dimostrerebbe che $E_\TM \in \DEC$, ma questo non è possibile per il \cref{e_tm not in dec} $\lightning$.
     \end{proof}
 
     \begin{proof}[Dimostrazione II]
@@ -2531,10 +2531,10 @@
 
         \begin{itemize}
             \item $F$ costruisce una macchina di Turing $M'$ che, data in input una stringa $x$, rifiuta sempre --- e dunque $L(M') = \varnothing$;
-            \item restituisce $\abk{M, M'}$ sul suo nastro.
+            \item $F$ restituisce $\abk{M, M'}$ sul suo nastro.
         \end{itemize}
         
-        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M, M'}$ sul natro, per qualsiasi input $\abk{M}$, la funzione $f$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M} \in E_\TM \iff L(M) = \varnothing = L(M')$$ per definizione di $E_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$L(M') = L(M) \iff f(\abk{M}) = \abk{M, M'} \in EQ_\TM$$ per definizione di $EQ_\TM$. Allora, per definizione, segue che $$E_\TM \leq_\mathrm m EQ_\TM$$ e poiché $E_\TM \notin \DEC$ per il \cref{e_tm not in dec}, è verificata la tesi per cui $EQ_\TM \notin \DEC$ per il \cref{dec w red cor}.
+        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M, M'}$ sul natro, per qualsiasi input $\abk{M}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M}}{\abk{M, M'}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M} \in E_\TM \iff L(M) = \varnothing = L(M')$$ per definizione di $E_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$L(M') = L(M) \iff f(\abk{M}) = \abk{M, M'} \in EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M} \in E_\TM \iff f(\abk{M}) \in EQ_\TM $$ Allora, per definizione, segue che $$E_\TM \leq_\mathrm m EQ_\TM$$ e poiché $E_\TM \notin \DEC$ per il \cref{e_tm not in dec}, è verificata la tesi per cui $EQ_\TM \notin \DEC$ per il \cref{dec w red cor}.
     \end{proof}
 
     \section{Turing-riconoscibilità mediante riduzione}
@@ -2559,5 +2559,26 @@
 
     \subsection{Problema dell'uguaglianza}
 
+    \begin{framedthm}{Irriconoscibilità di $EQ_\TM$}
+        $EQ_\TM$ non è Turing-riconoscibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \REC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Si consideri la macchina di Turing $F$ che, data in input una codifica $\abk{M, w}$, computa come segue:
+
+        \begin{itemize}
+            \item $F$ costruisce una macchina di Turing $M_1$ che, data in input una stringa $x$, rifiuta sempre --- e dunque $L(M_1) = \varnothing$;
+            \item $F$ costruisce una macchina di Turing $M_2$ che, data in input una stringa $x$, computa come segue:
+                \begin{itemize}
+                    \item $M_2$ esegue $M(w)$ (dunque ignorando $x$);
+                    \item se $M$ accetta, $M_2$ accetta;
+                    \item se $M$ rifiuta o cicla, $M_2$ rifiuta;
+                \end{itemize}
+                dunque, se $M$ accetta $w$, $M_2$ riconosce $\Sigma^*$, altrimenti $M_2$ riconosce $\varnothing$;
+            \item $F$ restituisce $\abk{M_1, M_2}$ sul suo nastro.
+        \end{itemize}
+
+        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M_1, M_2}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M, w}}{\abk{M_1, M_2}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma ^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1) = \varnothing \neq L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \notin EQ_\TM \iff \abk{M_1, M_2} \in \overline{EQ_\TM}$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in \overline{EQ_\TM}$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, si ha che $\overline{EQ_\TM} \notin \DEC$ per il \cref{dec w red cor}. Di conseguenza, per il \cref{red compl} si ottiene che $$A_\TM \leq_\mathrm m \overline {EQ_\TM} \iff \overline{A_\TM} \leq_\mathrm m EQ_\TM$$ e poiché $\overline{A_\TM} \notin \REC$ per il \cref{a_tm not in corec}, allora è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{rec w red cor}.
+    \end{proof}
 
 \end{document}

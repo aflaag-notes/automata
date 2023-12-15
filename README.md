@@ -5,6 +5,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 ## TODO list
 
 - generali
+    - GLI OVERLINE POTREBBERO ESSERE ROTTI, FIXERAI RILEGGENDO
     - CAMBIA IL CENTRAMENTO ALLE GRAMMATICHE PER FAVORE DI DIO
     - RIMPIAZZA ANCHE TUTTI GLI SMID
     - fai le operazioni regolari in simboli
@@ -21,9 +22,5 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - tutto
 - appunti 17/11
     - pumping lemma da finire
-    - da finire
-- appunti 22/11
-    - da finire
-- appunti 24/11
     - da finire
 
