@@ -2247,7 +2247,7 @@
     }
 
     \begin{framedcor}[label={a_tm not in corec}]{Irriconoscibilità di $\overline{A_\TM}$}
-        $A_\TM$ non è coTuring-riconoscibile; in simboli $$A_\TM \notin \COREC$$
+        $A_\TM$ non è coTuring-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \notin \COREC$$
     \end{framedcor}
 
     \begin{proof}
@@ -2559,7 +2559,7 @@
 
     \subsection{Problema dell'uguaglianza}
 
-    \begin{framedthm}{Irriconoscibilità di $EQ_\TM$}
+    \begin{framedthm}[label={eq_tm not in rec}]{Irriconoscibilità di $EQ_\TM$}
         $EQ_\TM$ non è Turing-riconoscibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \REC$$
     \end{framedthm}
 
@@ -2581,4 +2581,11 @@
         Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M_1, M_2}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M, w}}{\abk{M_1, M_2}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma ^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1) = \varnothing \neq L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \notin EQ_\TM \iff \abk{M_1, M_2} \in \overline{EQ_\TM}$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in \overline{EQ_\TM}$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, si ha che $\overline{EQ_\TM} \notin \DEC$ per il \cref{dec w red cor}. Di conseguenza, per il \cref{red compl} si ottiene che $$A_\TM \leq_\mathrm m \overline {EQ_\TM} \iff \overline{A_\TM} \leq_\mathrm m EQ_\TM$$ e poiché $\overline{A_\TM} \notin \REC$ per il \cref{a_tm not in corec}, allora è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{rec w red cor}.
     \end{proof}
 
+    \begin{framedthm}{Irriconoscibilità di $\overline{EQ_\TM}$}
+        $EQ_\TM$ non è coTuring-riconoscibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \COREC$$
+    \end{framedthm}
+
+    \begin{proof}
+        Si consideri la dimostrazione del \cref{eq_tm not in rec}; in essa, la \TM $F$ costruisce due macchine di Turing $M_1$ ed $M_2$, dove la prima riconosce $\varnothing$. Se $M_1$ fosse invece tale da accettare sempre, riconoscerebbe $\Sigma^*$, e dunque si avrebbe che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1)=L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \notin EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in EQ_\TM$$ Allora, per definizione, segue $$A_\TM \leq_\mathrm m EQ_\TM$$ e poiché $A_\TM \in \DEC$ per il \cref{a_tm not in dec}, si ha che $EQ_\TM \notin \DEC$ per il \cref{dec w red cor}. Di conseguenza, per il \cref{red compl} si ottiene che $$A_\TM \leq_\mathrm m EQ_\TM \iff \overline{A_\TM} \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $\overline{A_\TM} \notin \REC$ per il \cref{a_tm not in corec}, allora è verificata la tesi per cui $\overline{EQ_\TM} \notin \REC \iff EQ_\TM \notin \COREC$, per il \cref{rec w red cor}.
+    \end{proof}
 \end{document}
