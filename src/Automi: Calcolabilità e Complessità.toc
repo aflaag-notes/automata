@@ -69,8 +69,12 @@
 \contentsline {chapter}{\numberline {4}Riducibilità}{77}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Riduzione}{77}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Definizioni}{77}{subsection.4.1.1}%
-\contentsline {section}{\numberline {4.2}Linguaggi non Turing-decidibili}{78}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Problema della terminazione}{78}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Problema del vuoto}{80}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Problema della regolarità}{81}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Problema dell'uguaglianza}{82}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.2}Decidibilità mediante riduzione}{78}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Teoremi}{78}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Problema della terminazione}{79}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Problema del vuoto}{80}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Problema della regolarità}{81}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Problema dell'uguaglianza}{82}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Turing-riconoscibilità mediante riduzione}{83}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Teoremi}{83}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Problema dell'uguaglianza}{84}{subsection.4.3.2}%

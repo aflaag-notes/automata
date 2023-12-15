@@ -574,27 +574,27 @@
     \subsection{Complemento}
 
     \begin{frameddefn}{Complemento}
-        Sia $A$ un linguaggio definito su un alfabeto $\Sigma$; allora si definisce il \tbf{complemento} di $A$ il seguente linguaggio: $$\lnot A := \{x \mid x \notin A\}$$
+        Sia $A$ un linguaggio definito su un alfabeto $\Sigma$; allora si definisce il \tbf{complemento} di $A$ il seguente linguaggio: $$\overline A := \{x \mid x \notin A\}$$
     \end{frameddefn}
 
     \begin{example}[Complemento]
-        Sia $\Sigma = \{\ttt 0, \ttt 1\}$ l'alfabeto binario, e sia $A = \{ \ttt{00}, \ttt{1}\}$ un linguaggio definito su di esso. Allora il suo complemento è il seguente: $$\lnot A = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}, \ttt{10}, \ttt{000}, \ldots\}$$
+        Sia $\Sigma = \{\ttt 0, \ttt 1\}$ l'alfabeto binario, e sia $A = \{ \ttt{00}, \ttt{1}\}$ un linguaggio definito su di esso. Allora il suo complemento è il seguente: $$\overline A = \{\varepsilon, \ttt 0, \ttt 1, \ttt{01}, \ttt{10}, \ttt{000}, \ldots\}$$
     \end{example}
 
     \begin{framedprop}[label={closure compl}]{Chiusura sul complemento (\REG)}
-        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\lnot A$ è regolare.
+        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\overline A$ è regolare.
     \end{framedprop}
 
     \begin{proof}
-        In ipotesi $A$ è un linguaggio regolare, dunque per definizione esiste un \DFA $$M = (Q, \Sigma, \delta, q_0, F)$$ che lo riconosce; allora, è sufficiente considerare il \DFA $$M' := (Q, \Sigma, \delta, q_0, Q-F)$$ per ottenere un \DFA tale da riconoscere $\lnot A$; allora, $\lnot A$ è regolare per definizione.
+        In ipotesi $A$ è un linguaggio regolare, dunque per definizione esiste un \DFA $$M = (Q, \Sigma, \delta, q_0, F)$$ che lo riconosce; allora, è sufficiente considerare il \DFA $$M' := (Q, \Sigma, \delta, q_0, Q-F)$$ per ottenere un \DFA tale da riconoscere $\overline A$; allora, $\overline A$ è regolare per definizione.
     \end{proof}
 
     \begin{framedprop}{Leggi di De Morgan}
         Siano $A$ e $B$ definiti su un alfabeto $\Sigma$; allora, sono vere le seguenti, che prendono il nome di \tbf{leggi di De Morgan}:
 
         \begin{enumerate}[label=\roman*), font=\itshape]
-            \item $\lnot (A \cup B) = \lnot A \cap \lnot B$
-            \item $\lnot (A \cap B) = \lnot A \cup \lnot B$
+            \item $\overline (A \cup B) = \overline A \cap \overline B$
+            \item $\overline (A \cap B) = \overline A \cup \overline B$
         \end{enumerate}
     \end{framedprop}
 
@@ -1700,26 +1700,26 @@
     \subsection{Complemento}
 
     \begin{framedprop}{$\mathrm{\CFL}$ non è chiuso sul complemento}
-        Sia $L$ un \CFL; allora $\lnot L$ non è necessariamente un \CFL.
+        Sia $L$ un \CFL; allora $\overline L$ non è necessariamente un \CFL.
     \end{framedprop}
 
     \begin{proof}
-        Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \iff \lnot L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$: $$G: \centeredsoe{S \to A \smid B \smid AB \smid BA \\ A \to \ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1 \\ B \to \ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1}$$ e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
+        Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \iff \overline L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$: $$G: \centeredsoe{S \to A \smid B \smid AB \smid BA \\ A \to \ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1 \\ B \to \ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1}$$ e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
 
         Dunque, si ha che:
 
         \begin{itemize}
-            \item presa una stringa $x \in \lnot L$, e ponendo $n := |x|$, se $n$ è dispari allora
+            \item presa una stringa $x \in \overline L$, e ponendo $n := |x|$, se $n$ è dispari allora
                 \begin{itemize}
                     \item se $x$ ha \ttt 0 al centro, allora $A \derives x$
                     \item se ha un \ttt 1 al centro, allora $B \derives x$
                 \end{itemize}
                 
-                diversamente, se $n$ è pari, allora sia $i$ tale che $x_i \neq x_{\frac{n}{2} + i}$ --- si noti che $i$ deve necessariamente esistere, poiché se non esistesse allora vorrebbe dire che $\forall i \in [1, n] \quad x_i = x_{\frac{n}{2} + 1} \iff \exists w \in \{\ttt 0, \ttt 1\}^* \mid x = ww \iff x \in L$; siano inoltre $$\centeredsoe{u := x_1 \ldots x_{2i - 1} \implies |u| = 2i - 1 - 1 + 1 \\ v := x_{2i} \ldots x_n \implies |v| = n - 2i + 1}$$ due sottostringhe di $x = uv$ di lunghezza dispari --- si noti che $n - 2i + 1$ è dispari poiché $n$ è pari in ipotesi; allora, i due caratteri centrali di $u$ e $v$ saranno rispettivamente $$\centeredsoe{m(u) = x_{\frac{2i-1+1}{2}} = x_i \\ m(v) =x_{\frac{n + 2i}{2}} = x_{\frac{n}{2} + 1}}$$ allora, poiché $x_i \neq x_{\frac{n}{2} + 1}$, e questi sono proprio i centri di due sottostringhe di $x$, aventi lunghezza dispari, si ha che $x$ può essere generata attraverso le regole di $G$, poiché in essa sono presenti le regole $S \to AB \smid BA$; questo dimostra che $x \in \lnot L \implies S \derives x$;
-            \item presa una stringa $x$ tale che $S \derives x$, e ponendo $n := |x|$, se $n$ è dispari allora sicuramente $x \notin L \iff x \in \lnot L$; differentemente, se $n$ è pari, allora la stringa è stata generata attraverso una delle regole $S \to AB \smid BA$ necessariamente, e dunque --- senza perdita di generalità --- assumendo che $x$ sia stata ottenuta attraverso la regola $S \to AB$, devono esistere $u, v \in \{\ttt 0, \ttt 1\}^* \mid x = uv \land A \derives u \land B \derives v$, dove $u$ e $v$ sono due stringhe aventi lunghezza dispari; siano allora $l := |u| \implies |v| = n - l$, ottenendo che $$m (u) = x_{\frac{l + 1}{2}} = u_{\frac{l + 1}{2}} = \ttt 0 \neq \ttt 1 = v_{\frac{n - l + 1}{2}} = x_{\frac{n - l + 1}{2} + l} = x_{\frac{n + l + 1}{2}} = m(v)$$ allora, poiché $m(u)$ ed $m(v)$ devono necessariamente trovarsi l'uno nella prima metà di $x$, l'altro nella seconda metà (indipendentemente dalla scelta di $u$ e $v$) si ha che la stringa $x$ è necessariamente costituita da due stringhe $w, w' \in \{\ttt 0, \ttt 1\}^* \mid w \neq w'$, poiché differiscono per almeno un carattere, ovvero $m(u) \neq m(v)$, di conseguenza $x \notin \L \iff x \in \lnot L$; questo dimostra che $S \derives x \implies x \in \lnot L$.
+                diversamente, se $n$ è pari, allora sia $i$ tale che $x_i \neq x_{\frac{n}{2} + i}$ --- si noti che $i$ deve necessariamente esistere, poiché se non esistesse allora vorrebbe dire che $\forall i \in [1, n] \quad x_i = x_{\frac{n}{2} + 1} \iff \exists w \in \{\ttt 0, \ttt 1\}^* \mid x = ww \iff x \in L$; siano inoltre $$\centeredsoe{u := x_1 \ldots x_{2i - 1} \implies |u| = 2i - 1 - 1 + 1 \\ v := x_{2i} \ldots x_n \implies |v| = n - 2i + 1}$$ due sottostringhe di $x = uv$ di lunghezza dispari --- si noti che $n - 2i + 1$ è dispari poiché $n$ è pari in ipotesi; allora, i due caratteri centrali di $u$ e $v$ saranno rispettivamente $$\centeredsoe{m(u) = x_{\frac{2i-1+1}{2}} = x_i \\ m(v) =x_{\frac{n + 2i}{2}} = x_{\frac{n}{2} + 1}}$$ allora, poiché $x_i \neq x_{\frac{n}{2} + 1}$, e questi sono proprio i centri di due sottostringhe di $x$, aventi lunghezza dispari, si ha che $x$ può essere generata attraverso le regole di $G$, poiché in essa sono presenti le regole $S \to AB \smid BA$; questo dimostra che $x \in \overline L \implies S \derives x$;
+            \item presa una stringa $x$ tale che $S \derives x$, e ponendo $n := |x|$, se $n$ è dispari allora sicuramente $x \notin L \iff x \in \overline L$; differentemente, se $n$ è pari, allora la stringa è stata generata attraverso una delle regole $S \to AB \smid BA$ necessariamente, e dunque --- senza perdita di generalità --- assumendo che $x$ sia stata ottenuta attraverso la regola $S \to AB$, devono esistere $u, v \in \{\ttt 0, \ttt 1\}^* \mid x = uv \land A \derives u \land B \derives v$, dove $u$ e $v$ sono due stringhe aventi lunghezza dispari; siano allora $l := |u| \implies |v| = n - l$, ottenendo che $$m (u) = x_{\frac{l + 1}{2}} = u_{\frac{l + 1}{2}} = \ttt 0 \neq \ttt 1 = v_{\frac{n - l + 1}{2}} = x_{\frac{n - l + 1}{2} + l} = x_{\frac{n + l + 1}{2}} = m(v)$$ allora, poiché $m(u)$ ed $m(v)$ devono necessariamente trovarsi l'uno nella prima metà di $x$, l'altro nella seconda metà (indipendentemente dalla scelta di $u$ e $v$) si ha che la stringa $x$ è necessariamente costituita da due stringhe $w, w' \in \{\ttt 0, \ttt 1\}^* \mid w \neq w'$, poiché differiscono per almeno un carattere, ovvero $m(u) \neq m(v)$, di conseguenza $x \notin \L \iff x \in \overline L$; questo dimostra che $S \derives x \implies x \in \overline L$.
         \end{itemize}
 
-        Dunque, poiché $S \derives x \iff x \in \lnot L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \lnot L \implies \lnot L \in \mathrm{\CFL}$$ e dunque segue la tesi.
+        Dunque, poiché $S \derives x \iff x \in \overline L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \overline L \implies \overline L \in \mathrm{\CFL}$$ e dunque segue la tesi.
     \end{proof}
 
     %    \begin{figure}[H]
@@ -2086,7 +2086,7 @@
             \end{tabular}
         \end{center}
 
-        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \lnot f(i)_i$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
+        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \overline f(i)_i$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
     \end{proof}
 
     \begin{framedprop}[label={bij set}]{Biezioni tra insiemi}
@@ -2231,7 +2231,7 @@
     \end{proof}
     
     \begin{frameddefn}{CoTuring-riconoscibilità}
-        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi coTuring-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \lnot L \in \REC$$
+        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi coTuring-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \overline L \in \REC$$
     \end{frameddefn}
 
     \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità e decidibilità}
@@ -2239,14 +2239,14 @@
     \end{framedthm}
 
     \proofiff{
-        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\lnot L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \lnot L$, si ha che $\lnot L \in \DEC$ per definizione stessa, ed in particolare $$\lnot L \in \DEC \implies \lnot L \in \REC \iff L \in \COREC$$
+        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\overline L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \overline L$, si ha che $\overline L \in \DEC$ per definizione stessa, ed in particolare $$\overline L \in \DEC \implies \overline L \in \REC \iff L \in \COREC$$
     }{
-        Sia $L$ tale che $L \in \REC$ e $L \in \COREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\lnot L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\lnot L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \lnot L = \Sigma^* \\ L \cap \lnot L = \varnothing}$$ e dunque $w \in L \iff w \notin \lnot L$. Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
+        Sia $L$ tale che $L \in \REC$ e $L \in \COREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\overline L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\overline L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \overline L = \Sigma^* \\ L \cap \overline L = \varnothing}$$ e dunque $w \in L \iff w \notin \overline L$. Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
 
-        Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\lnot L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
+        Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\overline L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
     }
 
-    \begin{framedcor}{Non-riconoscibilità di $\lnot A_\TM$}
+    \begin{framedcor}{Non-riconoscibilità di $\overline A_\TM$}
         $A_\TM$ non è coTuring-riconoscibile; in simboli $$A_\TM \notin \COREC$$
     \end{framedcor}
 
@@ -2299,7 +2299,7 @@
     \end{framedobs}
 
     \begin{frameddefn}{Differenza simmetrica}
-        Siano $A$ e $B$ due insiemi; allora, si definisce \tbf{differenza simmetrica} tra $A$ e $B$ la seguente: $$A \ \Delta \ B := (A \cap \lnot B) \cup (\lnot A \cap B)$$
+        Siano $A$ e $B$ due insiemi; allora, si definisce \tbf{differenza simmetrica} tra $A$ e $B$ la seguente: $$A \ \Delta \ B := (A \cap \overline B) \cup (\overline A \cap B)$$
 
         Graficamente, dati due insiemi $A$ e $B$ all'interno di un insieme universo $U$, la differenza simmetrica $A \ \Delta \ B$ è colorata in grigio nel seguente diagramma:
 
@@ -2330,11 +2330,11 @@
         Per assurdo, sia $A \ \Delta \ B = \varnothing$ e $A \neq B$; si noti che $A \neq B$ se e solo se esiste $x \in A - B$, oppure $x \in B - A$, e dunque
 
         \begin{itemize}
-            \item $x \in A - B \implies x \in A \land x \notin B \implies x \in A \cap \lnot B \implies A \ \Delta \ B \neq \varnothing$ $\lightning$
-            \item $x \in B - A \implies x \in B \land x \notin A \implies x \in \lnot A \cap B \implies A \ \Delta \ B \neq \varnothing$ $\lightning$
+            \item $x \in A - B \implies x \in A \land x \notin B \implies x \in A \cap \overline B \implies A \ \Delta \ B \neq \varnothing$ $\lightning$
+            \item $x \in B - A \implies x \in B \land x \notin A \implies x \in \overline A \cap B \implies A \ \Delta \ B \neq \varnothing$ $\lightning$
         \end{itemize}
     }{
-        Per dimostrare la tesi, è sufficiente considerare che $$A = B \implies A \cap \lnot B = \lnot A \cap B = \varnothing \implies A \ \Delta \ B = \varnothing$$
+        Per dimostrare la tesi, è sufficiente considerare che $$A = B \implies A \cap \overline B = \overline A \cap B = \varnothing \implies A \ \Delta \ B = \varnothing$$
     }
 
     \begin{framedthm}{Decidibilità di $EQ_\DFA$}
@@ -2368,8 +2368,20 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Riducibilità mediante funzione}
-        Siano $A$ e $B$ definiti su un alfabeto $\Sigma$; $A$ si dice \tbf{riducibile mediante funzione} a $B$, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ La funzione $f$ prende il nome di \tbf{riduzione} da $A$ a $B$.
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ si dice \tbf{riducibile mediante funzione} a $B$, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ e la funzione $f$ prende il nome di \tbf{riduzione} da $A$ a $B$.
     \end{frameddefn}
+    
+    \begin{framedlem}{Riducibilità dei complementi}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm m B \iff \overline A \leq_\mathrm m \overline B$$
+    \end{framedlem}
+
+    \begin{proof}
+        Si assuma $A \leq_\mathrm m B$, senza perdita di generalità; allora, per definizione, esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B$. Allora, si ha che $$w \in \overline A \iff w \notin A \iff f(w) \notin B \iff f(w) \in \overline B$$ e dunque $f$, poiché calcolabile, è anche la riduzione da $\overline A$ a $\overline B$, dunque per definizione segue che $\overline A \leq_\mathrm m \overline B$.
+    \end{proof}
+
+    \section{Decidibilità mediante riduzione}
+
+    \subsection{Teoremi}
 
     \begin{framedthm}[label={dec w red}]{Decidibilità mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, e $B$ è decidibile, allora $A$ è decidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \DEC} \implies A \in \DEC$$
@@ -2387,15 +2399,13 @@
         Allora, per costruzione di $N$, e per riducibilità di $A$ a $B$, si ha che $$w \in L(N) \iff f(w) \in L(M) = B \iff w \in A$$ e dunque $N$ decide $A$.
     \end{proof}
 
-    \begin{framedcor}{Indecidibilità mediante riduzione}
+    \begin{framedcor}[label={dec w red cor}]{Indecidibilità mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $A$ è indecidibile, allora $B$ è indecidibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \DEC} \implies B \notin \DEC$$
     \end{framedcor}
 
     \begin{proof}
         Per assurdo, sia $B \in \DEC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{dec w red}, si ha che $A \in \DEC$ $\lightning$.
     \end{proof}
-
-    \section{Linguaggi non Turing-decidibili}
 
     \subsection{Problema della terminazione}
 
@@ -2440,7 +2450,7 @@
             \item restituisce $\abk{M', w}$ sul suo nastro.
         \end{itemize}
 
-        Si noti dunque che, poiché $F$ si ferma solo se ha $\abk{M', w}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $f$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \implies w \in L(M')$$ per definizione di $A_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$w \in L(M') \implies f(\abk{M, w}) = \abk{M', w} \in HALT_\TM$$ per definizione di $HALT_\TM$; viceversa, si ha che \centeredeq{0.9}{$\abk{M, w} \notin A_\TM \iff w \notin L(M) \implies M'(w) \ \textrm{va in loop} \implies f(\abk{M, w}) = \abk{M', w} \notin HALT_\TM$} e dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in HALT_\TM$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m HALT_\TM$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, è verificata la tesi per cui $HALT_\TM \notin \DEC$.
+        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M', w}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $f$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \implies w \in L(M')$$ per definizione di $A_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$w \in L(M') \implies f(\abk{M, w}) = \abk{M', w} \in HALT_\TM$$ per definizione di $HALT_\TM$; viceversa, si ha che \centeredeq{0.9}{$\abk{M, w} \notin A_\TM \iff w \notin L(M) \implies M'(w) \ \textrm{va in loop} \implies f(\abk{M, w}) = \abk{M', w} \notin HALT_\TM$} e dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in HALT_\TM$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m HALT_\TM$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, è verificata la tesi per cui $HALT_\TM \notin \DEC$ per il \cref{dec w red cor}.
     \end{proof}
 
     \subsection{Problema del vuoto}
@@ -2504,7 +2514,7 @@
         $EQ_\TM$ è indecidibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \DEC$$
     \end{framedthm}
 
-    \begin{proof}
+    \begin{proof}[Dimostrazione I]
         Per assurdo, sia $EQ_\TM$ decidibile, e dunque per esso esiste un decisore $H$; di conseguenza $H(\abk{M_1}, {M_2})$ accetta se e solo se $L(M_1)= L(M_2)$. Si consideri ora una macchina di Turing $D$ --- avente $H$ come sua sottoprocedura --- che, data in input una codifica $\abk{M}$, computa come segue:
 
         \begin{itemize}
@@ -2515,4 +2525,39 @@
 
         Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$, se $L(M) = \varnothing$, poiché attraverso $H$ controlla che il linguaggio di $M$ coincida con $L(M_\mathrm{reject})= \varnothing$; inoltre, si noti che $D$ non può andare in loop, e dunque $D$ è un decisore. L'esistenza di $D$ dimostrerebbe dunque che $E_\TM \in \DEC$, ma questo non è possibile per il \cref{e_tm not in dec} $\lightning$.
     \end{proof}
+
+    \begin{proof}[Dimostrazione II]
+        Si consideri la macchina di Turing $F$ che, data in input una codifica $\abk{M}$, computa come segue:
+
+        \begin{itemize}
+            \item $F$ costruisce una macchina di Turing $M'$ che, data in input una stringa $x$, rifiuta sempre --- e dunque $L(M') = \varnothing$;
+            \item restituisce $\abk{M, M'}$ sul suo nastro.
+        \end{itemize}
+        
+        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M, M'}$ sul natro, per qualsiasi input $\abk{M}$, la funzione $f$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M} \in E_\TM \iff L(M) = \varnothing = L(M')$$ per definizione di $E_\TM$ e per costruzione di $M'$ rispettivamente; inoltre $$L(M') = L(M) \iff f(\abk{M}) = \abk{M, M'} \in EQ_\TM$$ per definizione di $EQ_\TM$. Allora, per definizione, segue che $$E_\TM \leq_\mathrm m EQ_\TM$$ e poiché $E_\TM \notin \DEC$ per il \cref{e_tm not in dec}, è verificata la tesi per cui $EQ_\TM \notin \DEC$ per il \cref{dec w red cor}.
+    \end{proof}
+
+    \section{Turing-riconoscibilità mediante riduzione}
+
+    \subsection{Teoremi}
+
+    \begin{framedthm}[label={rec w red}]{Turing-riconoscibilità mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, e $B$ è Turing-riconoscibile, allora $A$ è Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \REC} \implies A \in \REC$$
+    \end{framedthm}
+
+    \begin{proof}
+        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate sono riconoscitori e non decisori; verrà dunque omessa.
+    \end{proof}
+
+    \begin{framedcor}[label={rec w red cor}]{Turing-irriconoscibilità mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $A$ non è Turing-riconoscibile, allora $B$ non è Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \REC} \implies B \notin \REC$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \REC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{rec w red} si ha che $A \in \REC$ $\lightning$.
+    \end{proof}
+
+    \subsection{Problema dell'uguaglianza}
+
+
 \end{document}
