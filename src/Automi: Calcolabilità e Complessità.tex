@@ -2828,7 +2828,7 @@
         TODO
     \end{framedthm}
 
-    \subsection{Class \NTIME}
+    \subsection{Classe \NTIME}
 
     \begin{frameddefn}{Classe \NTIME}
         Data una funzione $\func{t}{\N}{\R^+}$, si definisce \tbf{classe di complessità di tempo $\NTIME(t(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing non deterministica in $O(t(n))$.
@@ -2847,6 +2847,8 @@
     \begin{frameddefn}{Classe \NPclass}
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo polinomiale} da una \NTM il seguente insieme $$\NPclass = \bigcup_{k \in \N}{\NTIME \rbk{n^k}}$$
     \end{frameddefn}
+
+    \subsection{Classe \NEXP}
 
     \begin{frameddefn}{Classe \NEXP}
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo esponenziale} da una \NTM il seguente insieme $$\NEXP = \bigcup_{k \in \N}{\NTIME \rbk{2^{n^k}}}$$
