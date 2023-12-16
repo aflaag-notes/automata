@@ -2778,7 +2778,7 @@
     \subsection{Classe \Pclass}
 
     \begin{frameddefn}{Classe \Pclass}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass = \bigcup_{k \in \N}{\DTIME\rbk(n^k)}$$
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass = \bigcup_{k \in \N}{\DTIME\rbk{n^k}}$$
     \end{frameddefn}
 
     \begin{frameddefn}{}
@@ -2803,7 +2803,7 @@
             \item se tra i vertici marcati è presente $t$, allora $M$ accetta.
         \end{itemize}
 
-        Dunque, poiché $\abk{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), e dunque $\abs{E} = O(n)$, la complessità temporale di $M$ risulta essere $$O\rbk(n^k) + \abs{E} \cdot O\rbk(n^k) + O\rbk(n^k) = O(n) \cdot O\rbk(n^k) = O(n^{k + 1}) \implies PATH \in \Pclass$$
+        Dunque, poiché $\abk{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), e dunque $\abs{E} = O(n)$, la complessità temporale di $M$ risulta essere $$O\rbk{n^k} + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
     \end{proof}
 
     \subsection{Classe \EXP}
@@ -2835,11 +2835,11 @@
     \end{frameddefn}
 
     \begin{framedprop}{Tempo polinomiale in \NTIME}
-        Dato un linguaggio $L$, si ha che $$L \in \NTIME\rbk(n^k) \implies L \in \DTIME \rbk{2^{O\rbk(n^k)}}$$
+        Dato un linguaggio $L$, si ha che $$L \in \NTIME\rbk{n^k} \implies L \in \DTIME \rbk{2^{O\rbk{n^k}}}$$
     \end{framedprop}
 
     \begin{proof}
-        Sia $L \in \NTIME\rbk(n^k)$, e dunque per definizione esiste una \NTM che decide $L$ in $O\rbk{n^k}$; allora, per il \cref{ntm time}, si ha che $L \in \DTIME \rbk{2^{O\rbk(n^k)}}$.
+        Sia $L \in \NTIME\rbk{n^k}$, e dunque per definizione esiste una \NTM che decide $L$ in $O\rbk{n^k}$; allora, per il \cref{ntm time}, si ha che $L \in \DTIME \rbk{2^{O\rbk{n^k}}}$.
     \end{proof}
 
     \subsection{Classe \NPclass}
