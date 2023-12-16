@@ -377,7 +377,7 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={nfa equiv}]{\DFA ed \NFA}
-        Le classi dei \DFA e degli \NFA sono equivalenti; in simboli $$\mathcal{L}(\mathrm{\NFA}) = \mathcal{L}(\mathrm{\DFA})$$
+        Le classi dei \DFA e degli \NFA sono equivalenti; in simboli $$\REG := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA}) $$
     \end{framedthm}
 
     \proofiff{
@@ -1020,9 +1020,13 @@
         Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un \NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa regolare}, $A$ è regolare.
     }
 
-    \begin{framedobs}{Equivalenze tra classi di automi}
-        Si noti che, dal \cref{ling expr reg}, dall'\cref{gnfa into regex}, e dal \cref{dfa into gnfa}, si ha che $$\mathrm{\REG} = \mathcal{L}(\REX) \supseteq \mathcal{L}(\mathrm{\GNFA}) \supseteq \mathrm{\REG}$$ dunque, segue l'importante risultato: $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA}) = \mathcal{L}(\mathrm{\GNFA}) = \mathcal{L}(\REX)$$
-    \end{framedobs}
+    \begin{framedcor}{Equivalenze tra classi di automi}
+         Si verifica che $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA}) = \mathcal{L}(\mathrm{\GNFA}) = \mathcal{L}(\REX)$$
+    \end{framedcor}
+
+    \begin{proof}
+        Dal \cref{nfa equiv}, dal \cref{ling expr reg}, dall'\cref{gnfa into regex}, e dal \cref{dfa into gnfa}, si ha che $$\mathcal{L}(\NFA) = \mathrm{\REG} = \mathcal{L}(\REX) \supseteq \mathcal{L}(\mathrm{\GNFA}) \supseteq \mathrm{\REG}$$ e dunque segue la tesi.
+    \end{proof}
 
     \section{Linguaggi non regolari}
 
@@ -1150,7 +1154,7 @@
         \end{itemize}
     \end{example}
 
-    \begin{framedmeth}{\CFG di \DFA}
+    \begin{framedmeth}[label={dfa into cfg}]{\CFG di \DFA}
         Dato un \DFA $D = (Q, \Sigma, \delta, q_0, F)$, per ottenere una grammatica $G = (V, \Sigma, R, S)$ tale che $L(D) = L(G)$, è necessario:
 
         \begin{itemize}
@@ -1160,6 +1164,14 @@
             \item aggiungere la regola $V_i \to \varepsilon$ se $q_i \in F$.
         \end{itemize}
     \end{framedmeth}
+
+    \begin{framedcor}[label={reg subset cfl}]{Linguaggi regolari e context-free}
+        Si verifica che $$\REG \subsetneq \CFL$$
+    \end{framedcor}
+
+    \begin{proof}
+        Sia $L \in \REG$, e dunque per definizione esiste un \DFA $M$ tale che  $L(M) = L$; dunque, attraverso il \cref{dfa into cfg} è possibile convertire $M$ in una \CFG $G$, tale che $L(G) = L(M) = L$; allora, segue la tesi.
+    \end{proof}
    
     \subsection{Ambiguità}
 
@@ -1199,7 +1211,7 @@
         \end{enumerate}
     \end{frameddefn}
 
-    \begin{framedmeth}[label={cfg into cnf}]{CNF di \CFG}
+    \begin{framedmeth}[label={cfg into cnf}, breakable]{CNF di \CFG}
         Sia $G = (V, \Sigma, R, S)$ una \CFG; allora, è possibile rendere $G$ in CNF attraverso i seguenti passaggi:
 
         \begin{itemize}
@@ -1934,7 +1946,7 @@
     \end{frameddefn}
 
     \begin{framedobs}[label={dec in rec}]{Turing-decidibilità}
-        Si noti che $\mathrm{\DEC} \subseteq \REC$, poiché un linguaggio Turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
+        Si noti che $\mathrm{\DEC} \subset \REC$, poiché un linguaggio Turing-decidibile è sicuramente Turing-riconoscibile, per definizione stessa.
     \end{framedobs}
 
     \section{Varianti di macchine di Turing}
@@ -1974,11 +1986,11 @@
     \end{framedprop}
 
     \proofiff{
-        Sia $M$ una macchina di Turing multinastro; si vuole dunque costruire una macchina di Turing $M'$ tale da simulare $M$. Poiché $M'$ è una \TM, essa è costituita da un solo nastro, e qunque per simulare $M$ è necessario suddividere il nastro di $M'"$ in regioni, che saranno delimitate da un nuovo carattere \ttt \#, e per simulare le testine di ogni nastro, verrà utilizzata una versione marcata dei caratteri in $\Gamma$, al fine di segnare \curlyquotes{virtualmente} la posizione di ogni testina in ogni nastro. Dunque, dato un input $w = w_1 \cdots w_n$ sul nastro di $M'$, si ha che:
+        Sia $M$ una macchina di Turing multinastro; si vuole dunque costruire una macchina di Turing $M'$ tale da simulare $M$. Poiché $M'$ è una \TM, essa è costituita da un solo nastro, e qunque per simulare $M$ è necessario suddividere il nastro di $M'"$ in regioni, che saranno delimitate da un nuovo carattere \ttt \#, e per simulare le testine di ogni nastro, verrà utilizzata una versione marcata dei caratteri in $\Gamma$, al fine di segnare \curlyquotes{virtualmente} la posizione di ogni testina in ogni nastro. Dunque, si ha che:
 
         \begin{itemize}
-            \item inizialmente $M'$ trasforma il nastro nel formato descritto, e dunque da $$w_1 w_2 \cdots w_n \ \blankchar \ldots$$ viene effetuato uno \tit{shift} a destra del nastro (si veda l'\cref{tape shift}), anteposto il carattere \ttt \# al suo inizio (si veda l'\cref{tape start}), e successivamente inseriti i seguenti caratteri marcati per segnare le testine virtuali: $$\ttt \# \stackrel{\bullet}{w_1} w_2 \cdots w_n \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \stackrel{\bullet}{\blankchar} \ \ttt \# \ \ldots \ \ttt \#$$
-            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiornando oppurtunamente i simboli marcati con $\bullet$ per simulare lo spostamento di ogni testina su ogni nastro; successivamente, viene effettuaa una seconda scansione, per simulare i rimpiazzi dei simboli sulle celle, descritti dalla $\delta$;
+            \item inizialmente $M'$ trasforma il nastro nel formato descritto, e dunque viene effetuato uno \tit{shift} a destra del nastro (si veda l'\cref{tape shift}), anteposto il carattere \ttt \# al suo inizio (si veda l'\cref{tape start}), e successivamente inseriti i seguenti caratteri marcati per segnare le testine virtuali: $$\ttt \# \stackrel{\bullet}{w_1} w_2 \cdots w_n \ \ttt \# \ \stackrel{\bullet}{x_1} x_2 \cdots x_m \ \ttt \# \ \ldots \ \ttt \# \ \stackrel{\bullet}{y_1} y_2 \cdots y_j \ \ttt \# \ \blankchar \ \ldots$$
+            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiornando oppurtunamente i simboli marcati con $\bullet$ per simulare lo spostamento di ogni testina su ogni nastro; successivamente, viene effettua una seconda scansione, per simulare i rimpiazzi dei simboli sulle celle, descritti dalla $\delta$;
             \item se una qualsiasi testina virtuale effettua uno spostamento a destra, e si trova su un \ttt \# --- dunque a cavallo tra 2 nastri simulati --- allora $M'$ deve simulare il fatto che, nel nastro reale, la reale testina in $M$ starebbe leggendo una porzione di nastro vuota, non letta precedentemente; allora, viene effettuato uno \tit{shift} verso destra di tutto il nastro di $M'$, dalla cella corrente in poi, e sulla cella corrente viene posto il carattere $\blankchar$;
         \end{itemize}
 
@@ -2106,7 +2118,7 @@
         Se $A$ e $B$ sono due insiemi tali che $|A| = |B|$, allora è sicuramente possibile definire una mappa \tit{uno-ad-uno} che associa gli elementi di $A$ con gli elementi di $B$, poiché non possono essere presenti elementi in eccesso o in difetto in nessuno dei due insiemi in quanto hanno la stessa cardinalità; dunque, segue la tesi.
     }
 
-    \begin{framedlem}{Linguaggi non Turing-riconiscibili}
+    \begin{framedlem}[label={exists lang not in rec}]{Linguaggi non Turing-riconiscibili}
         Esistono linguaggi non Turing-riconiscibili; in simboli, dato un alfabeto $\Sigma$ si ha che $$\exists L \in \powerset(\Sigma^*) \mid L \notin \REC$$
     \end{framedlem}
 
@@ -2186,8 +2198,8 @@
         Allora $M$ non può andare in loop, quindi è un decisore, e dunque segue la tesi.
     \end{proof}
 
-    \begin{framedcor}{Decidibilità dei \CFL}
-        Ogni \CFL è decidibile; in simboli $$\CFL \subseteq \DEC$$
+    \begin{framedcor}[label={cfl subset dec}]{Decidibilità dei \CFL}
+        Ogni \CFL è decidibile; in simboli $$\CFL \subsetneq \DEC$$
     \end{framedcor}
 
     \begin{proof}
@@ -2230,6 +2242,14 @@
         Per assurdo, sia $A_\TM \in \DEC$, e dunque per definizione esiste un decisore $H$ tale che $L(H) = A_\TM$. Allora, poiché è un decisore, $H$ computa come segue: $$\forall M \in \TM, w \in L(M) \quad H(\abk{M,w}) = \soe{ll}{\textrm{accetta} & M \ \textrm{accetta} \ w \\ \textrm{rifiuta} & M \ \textrm{rifiuta} \ w}$$ dove la sintassi $H(\abk{M,w})$ indica che $H$ computa avendo la codifica $\abk{M,w}$ sul nastro. Sia ora $D$ una macchina di Turing avente $H$ come sua sottoprocedura, la quale viene chiamata quando l'input di $M$ è la descrizione di $M$ stessa (ovvero $\abk{M}$). Inoltre, $D$ computa come segue: $$\forall M \in \TM \quad D(\abk{M}) = \soe{ll}{\textrm{accetta} & H(\abk{M, \abk{M}}) \ \textrm{rifiuta} \iff M \ \textrm{rifiuta} \ \abk{M} \\ \textrm{rifiuta} & H(\abk{M, \abk{M}}) \ \textrm{accetta} \iff M \ \textrm{accetta} \ \abk{M}}$$ dunque $D$ inverte il risultato ottenuto computando $H(\abk{M, \abk{M}})$. Allora, si ha che se $M$ è pari a $D$ stesso, si ottiene che $$D(\abk{D}) = \soe{ll}{\textrm{accetta} & H(\abk{D, \abk{D}}) \ \textrm{rifiuta} \iff D \ \textrm{rifiuta} \ \abk{D} \\ \textrm{rifiuta} & H(\abk{D, \abk{D}}) \ \textrm{accetta} \iff D \ \textrm{accetta} \ \abk{D}}$$ che rappresenta chiaramente un assurdo $\lightning$.
     \end{proof}
     
+    \begin{framedcor}{Gerarchia dei linguaggi di Chomsky}
+        Dato un alfabeto $\Sigma$, si ha che $$\REG \subsetneq \CFL \subsetneq \DEC \subsetneq \REC \subsetneq \powerset(\Sigma^*)$$
+    \end{framedcor}
+
+    \begin{proof}
+        La tesi segue direttamente dal \cref{reg subset cfl}, dal \cref{cfl subset dec}, dal'\cref{dec in rec}, dal \cref{a_tm not in dec} e dal \cref{exists lang not in rec}.
+    \end{proof}
+
     \begin{frameddefn}{Co-Turing-riconoscibilità}
         Un linguaggio è detto \tbf{co-Turing-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi co-Turing-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \overline L \in \REC$$
     \end{frameddefn}
@@ -2379,7 +2399,7 @@
         Si assuma $A \leq_\mathrm m B$, senza perdita di generalità; allora, per definizione, esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B$. Allora, si ha che $$w \in \overline A \iff w \notin A \iff f(w) \notin B \iff f(w) \in \overline B$$ e dunque $f$, poiché calcolabile, è anche la riduzione da $\overline A$ a $\overline B$, dunque per definizione segue che $\overline A \leq_\mathrm m \overline B$.
     \end{proof}
 
-    \section{Decidibilità mediante riduzione}
+    \section{Turing-decidibilità mediante riduzione}
 
     \subsection{Teoremi}
 
@@ -2637,7 +2657,7 @@
 
     \chapter{Complessità temporale}
 
-    \section{TODO}
+    \section{Analisi asintotica}
     
     \subsection{$O$-grande ed $o$-piccolo}
 
@@ -2670,11 +2690,11 @@
         Si noti che, date due funzioni $\func{f,g}{\N}{\R^+}$, per definizione stessa si ha che $$f(n) = o(g(n)) \implies f(n)= O(g(n))$$
     \end{framedobs}
 
-    \begin{framedprop}{Algebra asintotica}
+    \begin{framedprop}[label={alg asintotica}]{Algebra asintotica}
         Siano $\func{f, g, h}{\N}{\R^+}$; allora, si ha che:
         
         \begin{itemize}
-            \item $\forall c \in \R \quad f(n) = c \cdot g(n) \implies f(n) = o(g(n))$
+            \item $\forall c \in \R \quad f(n) = c \cdot o(g(n)) \implies f(n) = o(g(n))$
             \item $f(n) = o(g(n)) + o(h(n)) \implies f(n) = o(\max(g(n), h(n)))$
             \item $f(n) = o(g(n)) \cdot o(h(n)) \implies f(n) = o(g(n) \cdot h(n))$
         \end{itemize}
@@ -2682,4 +2702,169 @@
         Si noti che tali regole valgono anche per $O$-grande, per l'\cref{small o big o obs}.
     \end{framedprop}
 
+    \subsection{Varianti di macchine di Turing}
+
+    \begin{framedthm}{Relazione tra \TM e \TM multinastro}
+        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $M$ una macchina di Turing multinastro avente tempo $t(n)$; allora, esiste una \TM $M'$, equivalente a $M$, avente tempo $O(t^2(n))$.
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $M$ una macchina di Turing a $k$-nastri avente tempo di esecuzione $t(n)$, e si consideri la \TM $M'$ costruita all'interno della prima implicazione della dimostrazione della \cref{multitape equiv}. Dunque, si ha che:
+
+        \begin{itemize}
+            \item il numero di nastri $k$ non dipende dall'input, ed è dunque costante;
+            \item si assuma $n$ essere la lunghezza della stringa più lunga tra le stringhe presenti sui nastri di $M$; allora, per trasformare il nastro nel formato descritto all'interno della dimostrazione --- ovvero effettuando uno \tit{shift} verso destra, anteponendo \ttt \# all'inizio e inserendo i caratteri marcati per segnare le testine virtuali --- sono necessari $O(n) + O(n) + O(n) = O(n)$ passi;
+            \item si considerino le parti attive dei nastri di $M$: nel caso peggiore (ovvero se la testina di $M$ non fa altro che spostarsi a destra), ognuna di queste ha lunghezza $t(n)$, poiché $M$ utilizza $t(n)$ celle del nastro in $t(n)$ passi; di conseguenza, una scansione della parte attiva del nastro di $M'$ impiega $k \cdot O(t(n))= O(t(n))$ passi;
+            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiorna le testina virtuali, e successivamente effettua una seconda scansione per simulare i rimpiazzi; allora, un singolo passo di $M$ impiega $2 \cdot O(t(n)) = O(t(n))$;
+            \item allora, poiché il numero di passi da simulare è $t(n)$, la complessità temporale di $M$ risulta essere $$O(n) + t(n) \cdot O(t(n)) = O(t^2(n))$$
+        \end{itemize}
+    \end{proof}
+
+    \begin{framedthm}[label={ntm time}]{Relazione tra \TM ed \NTM}
+        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $M$ una macchina di Turing non deterministica avente tempo $t(n)$; allora, esiste una \TM $M'$, equivalente a $M$, avente tempo $2^{O(t(n))}$.
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \section{Classi di complessità di tempo}
+
+    \subsection{Classe \DTIME}
+
+    \begin{frameddefn}{Classe \DTIME}
+        Data una funzione $\func{t}{\N}{\R^+}$, si definisce \tbf{classe di complessità di tempo $\DTIME(t(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing --- \tit{varianti escluse} --- in $O(t(n))$.
+    \end{frameddefn}
+
+    \begin{example}[Classe di complessità di tempo]
+        Si consideri una macchina di Turing $M$ --- in grado di decidere $L= \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$ --- che, data in input una stringa $x$, computa come segue: 
+
+        \begin{enumerate}
+            \item scorre il nastro: se è presente uno \ttt 0 alla destra di un \ttt 1, rifiuta;
+            \item torna all'inizio del nastro;
+            \item fintanto che sono presenti almeno uno \ttt 0 ed almeno un \ttt 1, ripete i seguenti passi:
+                \begin{enumerate}[label=\arabic*.]
+                    \setcounter{enumii}{3}
+                    \setcounter{enumi}{6}
+                    \item scorre il nastro: se trova uno \ttt 0, lo rimpiazza con \ttt x;
+                    \item scorre il nastro: se trova uno \ttt 1, lo rimipazza con \ttt x;
+                    \item torna all'inizio del nastro;
+                \end{enumerate}
+            \item scorre il nastro: se sono presenti solo \ttt x sul nastro, accetta.
+        \end{enumerate}
+
+        Se uno qualsiasi dei passaggi menzionati non è effettuabile, $M$ rifiuta; dunque ci si convince facilmente che $M$ decide $L$ come richiesto.
+
+        Analizzando la complessità temporale di $M$, si ottiene che:
+
+        \begin{itemize}
+            \item l'istruzione 1 richiede $n$ passi, ed ha dunque costo $O(n)$;
+            \item l'istruzione 2 richiede $n$ passi, ed ha dunque costo $O(n)$;
+            \item l'istruzione 3 dipende dalle istruzioni che ripete, e dunque
+
+                \begin{itemize}
+                    \item l'istruzione 4 richiede $n$ passi, ed ha dunque costo $O(n)$;
+                    \item analogamente all'istruzione 4, l'istruzione 5 ha costo $O(n)$;
+                    \item analogamente all'istruzione 2, l'istruzione 6 ha costo $O(n)$;
+                \end{itemize}
+
+                inoltre, si noti che l'istruzione 3 ripete le istruzioni 4, 5 e 6 al più $\dfrac{n}{2}$ volte, poiché ad ogni iterazione vengono rimossi uno \ttt 0 ed un \ttt 1 insieme; allora, per via dei costi delle istruzioni che ripete, l'istruzione 3 ha costo pari a $$\centeredsoe{\dfrac{n}{2} \cdot [O(n) + O(n) + O(n)] = \dfrac{n}{2} \cdot O(\max(n, n, n)) = \\ = \dfrac{n}{2} \cdot O(n) = \dfrac{1}{2} \cdot n \cdot O(n) = \dfrac{1}{2} \cdot O(n \cdot n) = \dfrac{1}{2} \cdot O(n^2) = O(n^2)}$$ (si veda la \cref{alg asintotica});
+            \item analogamente all'istruzione 2, l'istruzione 7 ha costo $O(n)$.
+        \end{itemize}
+
+        Allora, il costo temporale di $M$ risulta essere $$O(n) + O(n) + O(n^2) + O(n) = O(\max(n, n, n^2, n)) = O(n^2)$$ (si veda la \cref{alg asintotica}) e dunque, segue che $L \in \DTIME \rbk{n^2}$.
+    \end{example}
+
+    \subsection{Classe \Pclass}
+
+    \begin{frameddefn}{Classe \Pclass}
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass = \bigcup_{k \in \N}{\DTIME\rbk(n^k)}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}{}
+        TODO PAG 304
+    \end{frameddefn}
+
+    \begin{framedthm}{$PATH$ in \Pclass}
+        Sia $PATH$ il linguaggio definito come segue: $$PATH = \{\abk{G, s, t} \mid G = (V, E) \ \textrm{grafo diretto con un cammino $s \to t$}\}$$ Allora, si ha che $PATH \in \Pclass$.
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $M$ una macchina di Turing che, data in input una codifica $\abk{G, s, t}$, una volta controllata la validità della codifica in input, computa come segue:
+
+        \begin{itemize}
+            \item cerca il vertice $s$ tra i vertici di $G$;
+            \item una volta trovato, marca $s$;
+            \item finche non vengono marcati tutti i vertici di $G$:
+
+                \begin{itemize}
+                    \item marca ogni vertice avente un arco entrante da un vertice già marcato;
+                \end{itemize}
+            \item se tra i vertici marcati è presente $t$, allora $M$ accetta.
+        \end{itemize}
+
+        Dunque, poiché $\abk{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), e dunque $\abs{E} = O(n)$, la complessità temporale di $M$ risulta essere $$O\rbk(n^k) + \abs{E} \cdot O\rbk(n^k) + O\rbk(n^k) = O(n) \cdot O\rbk(n^k) = O(n^{k + 1}) \implies PATH \in \Pclass$$
+    \end{proof}
+
+    \subsection{Classe \EXP}
+
+    \begin{frameddefn}{Classe \EXP}
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo esponenziale} da una \TM a singolo nastro il seguente insieme $$\EXP = \bigcup_{k \in N}{\DTIME \rbk{2^{n^k}}}$$
+    \end{frameddefn}
+
+    \begin{framedprop}{Relazione tra \Pclass e \EXP}
+        Si verifica che $\Pclass \subsetneq \EXP$
+    \end{framedprop}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \begin{frameddefn}{Cammino hamiltoniano}
+        Sia $G = (V, E)$ un grafo; un \tbf{cammino hamiltoniano} su $G$ è un cammino che passa una sola volta per ogni nodo di $G$.
+    \end{frameddefn}
+
+    \begin{framedthm}{$HAMPATH$ in \EXP}
+        TODO
+    \end{framedthm}
+
+    \subsection{Class \NTIME}
+
+    \begin{frameddefn}{Classe \NTIME}
+        Data una funzione $\func{t}{\N}{\R^+}$, si definisce \tbf{classe di complessità di tempo $\NTIME(t(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing non deterministica in $O(t(n))$.
+    \end{frameddefn}
+
+    \begin{framedprop}{Tempo polinomiale in \NTIME}
+        Dato un linguaggio $L$, si ha che $$L \in \NTIME\rbk(n^k) \implies L \in \DTIME \rbk{2^{O\rbk(n^k)}}$$
+    \end{framedprop}
+
+    \begin{proof}
+        Sia $L \in \NTIME\rbk(n^k)$, e dunque per definizione esiste una \NTM che decide $L$ in $O\rbk{n^k}$; allora, per il \cref{ntm time}, si ha che $L \in \DTIME \rbk{2^{O\rbk(n^k)}}$.
+    \end{proof}
+
+    \subsection{Classe \NPclass}
+    
+    \begin{frameddefn}{Classe \NPclass}
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo polinomiale} da una \NTM il seguente insieme $$\NPclass = \bigcup_{k \in \N}{\NTIME \rbk{n^k}}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}{Classe \NEXP}
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo esponenziale} da una \NTM il seguente insieme $$\NEXP = \bigcup_{k \in \N}{\NTIME \rbk{2^{n^k}}}$$
+    \end{frameddefn}
+
+    \begin{framedprop}{Relazione tra \NPclass e \NEXP}
+        Si verifica che $\NPclass \subsetneq \NEXP$
+    \end{framedprop}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \begin{framedcor}{Gerarchia temporale}
+        TODO
+    \end{framedcor}
+
+    \begin{proof}
+        TODO
+    \end{proof}
 \end{document}

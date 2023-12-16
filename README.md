@@ -11,6 +11,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - RIMPIAZZA ANCHE TUTTI GLI SMID
     - fai le operazioni regolari in simboli
     - finire i TODOs sparsi
+    - PARLA DEGLI ALBERI
 - appunti 4/10
     - dimostrazione chiusura star alternativa
     - configurazioni di nfa (forse?)
