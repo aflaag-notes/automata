@@ -5,6 +5,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 ## TODO list
 
 - generali
+    - considera di rimuovere le osservazioni in chapters 3 e 4, o quantomeno unificale in una sola più generale tipo
     - GLI OVERLINE POTREBBERO ESSERE ROTTI, FIXERAI RILEGGENDO
     - CAMBIA IL CENTRAMENTO ALLE GRAMMATICHE PER FAVORE DI DIO
     - RIMPIAZZA ANCHE TUTTI GLI SMID

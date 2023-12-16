@@ -77,4 +77,10 @@
 \contentsline {subsection}{\numberline {4.2.5}Problema dell'uguaglianza}{82}{subsection.4.2.5}%
 \contentsline {section}{\numberline {4.3}Turing-riconoscibilità mediante riduzione}{83}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Teoremi}{83}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Problema dell'uguaglianza}{84}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Problema dell'uguaglianza}{85}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Esercizi}{86}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Indecidibilità}{86}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Irriconoscibilità}{86}{subsection.4.4.2}%
+\contentsline {chapter}{\numberline {5}Complessità temporale}{87}{chapter.5}%
+\contentsline {section}{\numberline {5.1}TODO}{87}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}$O$-grande ed $o$-piccolo}{87}{subsection.5.1.1}%

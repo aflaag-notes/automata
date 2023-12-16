@@ -1912,6 +1912,40 @@ INPUT ../assets/tm_ex.png
 INPUT ../assets/tm_ex.png
 INPUT ../assets/tm_ex.png
 INPUT ../assets/tm_ex.png
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasy7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasyb10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasyb10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/stmaryrd/stmary10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/stmaryrd/stmary10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/stmaryrd/stmary7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm
 INPUT Automi: Calcolabilità e Complessità.aux
 INPUT ./Automi: Calcolabilità e Complessità.out
 INPUT ./Automi: Calcolabilità e Complessità.out

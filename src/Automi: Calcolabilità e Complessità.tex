@@ -2230,12 +2230,12 @@
         Per assurdo, sia $A_\TM \in \DEC$, e dunque per definizione esiste un decisore $H$ tale che $L(H) = A_\TM$. Allora, poiché è un decisore, $H$ computa come segue: $$\forall M \in \TM, w \in L(M) \quad H(\abk{M,w}) = \soe{ll}{\textrm{accetta} & M \ \textrm{accetta} \ w \\ \textrm{rifiuta} & M \ \textrm{rifiuta} \ w}$$ dove la sintassi $H(\abk{M,w})$ indica che $H$ computa avendo la codifica $\abk{M,w}$ sul nastro. Sia ora $D$ una macchina di Turing avente $H$ come sua sottoprocedura, la quale viene chiamata quando l'input di $M$ è la descrizione di $M$ stessa (ovvero $\abk{M}$). Inoltre, $D$ computa come segue: $$\forall M \in \TM \quad D(\abk{M}) = \soe{ll}{\textrm{accetta} & H(\abk{M, \abk{M}}) \ \textrm{rifiuta} \iff M \ \textrm{rifiuta} \ \abk{M} \\ \textrm{rifiuta} & H(\abk{M, \abk{M}}) \ \textrm{accetta} \iff M \ \textrm{accetta} \ \abk{M}}$$ dunque $D$ inverte il risultato ottenuto computando $H(\abk{M, \abk{M}})$. Allora, si ha che se $M$ è pari a $D$ stesso, si ottiene che $$D(\abk{D}) = \soe{ll}{\textrm{accetta} & H(\abk{D, \abk{D}}) \ \textrm{rifiuta} \iff D \ \textrm{rifiuta} \ \abk{D} \\ \textrm{rifiuta} & H(\abk{D, \abk{D}}) \ \textrm{accetta} \iff D \ \textrm{accetta} \ \abk{D}}$$ che rappresenta chiaramente un assurdo $\lightning$.
     \end{proof}
     
-    \begin{frameddefn}{CoTuring-riconoscibilità}
-        Un linguaggio è detto \tbf{coTuring-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi coTuring-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \overline L \in \REC$$
+    \begin{frameddefn}{Co-Turing-riconoscibilità}
+        Un linguaggio è detto \tbf{co-Turing-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi co-Turing-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \overline L \in \REC$$
     \end{frameddefn}
 
-    \begin{framedthm}[label={coturing thm}]{CoTuring-riconoscibilità}
-        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e coTuring-riconoscibile; in simboli $$\DEC = \REC \cap \COREC$$
+    \begin{framedthm}[label={coturing thm}]{Co-Turing-riconoscibilità}
+        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e co-Turing-riconoscibile; in simboli $$\DEC = \REC \cap \COREC$$
     \end{framedthm}
 
     \proofiff{
@@ -2247,7 +2247,7 @@
     }
 
     \begin{framedcor}[label={a_tm not in corec}]{Irriconoscibilità di $\overline{A_\TM}$}
-        $A_\TM$ non è coTuring-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \notin \COREC$$
+        $A_\TM$ non è co-Turing-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \notin \COREC$$
     \end{framedcor}
 
     \begin{proof}
@@ -2557,6 +2557,30 @@
         Per assurdo, sia $B \in \REC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{rec w red} si ha che $A \in \REC$ $\lightning$.
     \end{proof}
 
+    \begin{framedcor}[label={corec w red}]{Co-riconoscibilità mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $B$ è co-Turing-riconoscibile, allora $A$ è co-Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \COREC} \implies A \in \COREC$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per il \cref{red compl} si ha che $$A \leq_\mathrm m B \iff \overline{A} \leq_\mathrm m \overline B$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m \overline B \\ B \in \COREC \iff \overline B \in \REC} \implies \overline A \in \REC \iff A \in \COREC$$ 
+    \end{proof}
+
+    \begin{framedcor}[label={corec w red cor}]{Co-irriconoscibilità mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $A$ non è co-Turing-riconoscibile, allora $B$ è non co-Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \COREC} \implies B \notin \COREC$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \COREC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{corec w red}, si ha che $A \in \COREC$ $\lightning$.
+    \end{proof}
+
+    \begin{framedcor}{Riducibilità al proprio complemento}
+        Sia $A$ un linguaggio tale da essere riducibile al suo complemento; allora, se $A$ è Turing-riconoscibile, è anche decidibile. In simboli $$\soe{l}{A \leq_\mathrm m \overline A \\ A \in \REC} \implies A \in \DEC$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per il \cref{red compl} si ha che $$A \leq_\mathrm m \overline A \iff \overline A \leq_\mathrm m \overline {\overline A} = A$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m A \\ A \in \REC} \implies \overline A \in \REC \iff A \in \COREC$$ e poiché $$\DEC = \REC \cap \COREC$$ per il \cref{coturing thm}, segue che $A \in \DEC$.
+    \end{proof}
+
     \subsection{Problema dell'uguaglianza}
 
     \begin{framedthm}[label={eq_tm not in rec}]{Irriconoscibilità di $EQ_\TM$}
@@ -2578,14 +2602,84 @@
             \item $F$ restituisce $\abk{M_1, M_2}$ sul suo nastro.
         \end{itemize}
 
-        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M_1, M_2}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M, w}}{\abk{M_1, M_2}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma ^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1) = \varnothing \neq L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \notin EQ_\TM \iff \abk{M_1, M_2} \in \overline{EQ_\TM}$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in \overline{EQ_\TM}$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $A_\TM \notin \DEC$ per il \cref{a_tm not in dec}, si ha che $\overline{EQ_\TM} \notin \DEC$ per il \cref{dec w red cor}. Di conseguenza, per il \cref{red compl} si ottiene che $$A_\TM \leq_\mathrm m \overline {EQ_\TM} \iff \overline{A_\TM} \leq_\mathrm m EQ_\TM$$ e poiché $\overline{A_\TM} \notin \REC$ per il \cref{a_tm not in corec}, allora è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{rec w red cor}.
+        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M_1, M_2}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M, w}}{\abk{M_1, M_2}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma ^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1) = \varnothing \neq L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \notin EQ_\TM \iff \abk{M_1, M_2} \in \overline{EQ_\TM}$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in \overline{EQ_\TM}$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $A_\TM \notin \COREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $\overline{EQ_\TM} \notin \COREC \iff EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
     \end{proof}
 
     \begin{framedthm}{Irriconoscibilità di $\overline{EQ_\TM}$}
-        $EQ_\TM$ non è coTuring-riconoscibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \COREC$$
+        $EQ_\TM$ non è co-Turing-riconoscibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \COREC$$
     \end{framedthm}
 
     \begin{proof}
-        Si consideri la dimostrazione del \cref{eq_tm not in rec}; in essa, la \TM $F$ costruisce due macchine di Turing $M_1$ ed $M_2$, dove la prima riconosce $\varnothing$. Se $M_1$ fosse invece tale da accettare sempre, riconoscerebbe $\Sigma^*$, e dunque si avrebbe che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1)=L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \in EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in EQ_\TM$$ Allora, per definizione, segue $$A_\TM \leq_\mathrm m EQ_\TM$$ e poiché $A_\TM \in \DEC$ per il \cref{a_tm not in dec}, si ha che $EQ_\TM \notin \DEC$ per il \cref{dec w red cor}. Di conseguenza, per il \cref{red compl} si ottiene che $$A_\TM \leq_\mathrm m EQ_\TM \iff \overline{A_\TM} \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $\overline{A_\TM} \notin \REC$ per il \cref{a_tm not in corec}, allora è verificata la tesi per cui $\overline{EQ_\TM} \notin \REC \iff EQ_\TM \notin \COREC$, per il \cref{rec w red cor}.
+        Si consideri la dimostrazione del \cref{eq_tm not in rec}; in essa, la \TM $F$ costruisce due macchine di Turing $M_1$ ed $M_2$, dove la prima riconosce $\varnothing$. Se $M_1$ fosse invece tale da accettare sempre, riconoscerebbe $\Sigma^*$, e dunque si avrebbe che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1)=L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \in EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in EQ_\TM$$ Allora, per definizione, segue $$A_\TM \leq_\mathrm m EQ_\TM$$ e poiché $A_\TM \notin \COREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
     \end{proof}
+
+    \section{Esercizi}
+
+    \subsection{Indecidibilità}
+    
+    \begin{framedprob}{Indecidibilità di $ODD_\TM$}
+        TODO
+    \end{framedprob}
+
+    \begin{framedprob}{Indecidibilità di $START \textsf -0_\TM$}
+        TODO
+    \end{framedprob}
+
+    \begin{framedprob}{Indecidibilità di $UNION \textsf -ALL_\TM$}
+        TODO
+    \end{framedprob}
+
+    \subsection{Irriconoscibilità}
+
+    \begin{framedprob}{Irriconoscibilità di $ODD_\TM$}
+        TODO
+    \end{framedprob}
+
+    \chapter{Complessità temporale}
+
+    \section{TODO}
+    
+    \subsection{$O$-grande ed $o$-piccolo}
+
+    \begin{frameddefn}{Complessità temporale di una \TM}
+        Sia $D$ un decisore; si definisce \tbf{complessità temporale} (o \tbf{tempo di esecuzione}) di $D$ la funzione $\func{f}{\N}{\N}$ tale che $f(n)$ sia il numero massimo di passi che $D$ utilizza per processare una stringa di lunghezza $n$.
+    \end{frameddefn}
+
+    \begin{example}[Complessità temporali di \TM]
+        Sia $D$ un decisore che, data in input una stringa $x$, sposta la testina verso destra finché non legge $\blankchar$, e quando legge quest'ultimo accetta. Allora, se input è presente una stringa avente lunghezza $n$, $D$ impiega esattamente $n$ passi a processarla, e dunque $f(n) = n \implies f \equiv \id$.
+    \end{example}
+
+    \begin{frameddefn}{$O$-grande}
+        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-grande} di $g(n)$ se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) \leq c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = O(g(n))$$ Viceversa, $g(n)$ è detto essere \tbf{limite superiore asintotico} per $f(n)$.
+    \end{frameddefn}
+
+    \begin{example}[$O$-grande]
+        \label{big o ex}
+        Siano $f(n) = 100 n^2$ e $g(n) = n^3$; poiché esistono $c = 10$ ed $n_0 = 10$ tali che $$\forall n \ge n_0 = 10 \quad f(n) = 100 n^2 \leq 10 \cdot n^3 = c \cdot g(n)$$ si ha che $f(n) = O(g(n))$ per definizione.
+    \end{example}
+
+    \begin{frameddefn}{$o$-piccolo}
+        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-piccolo} di $g(n)$ se e solo se $$\lim_{n \to + \infty}{\dfrac{f(n)}{g(n)}} = 0$$ o equivalentemente, se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) < c \cdot g(n)$$
+    \end{frameddefn}
+
+    \begin{example}[$o$-piccolo]
+        Si consideri l'\cref{big o ex}; poiché sono stati scelti $c = n_0 = 10$, per $n = n_0$ si ottiene che $$f(n_0) = f(10) = 100 \cdot 10^2 = 10000 = 10 \cdot 1000 = 10 \cdot 10^3 = 10 \cdot g(10) = c \cdot g(n_0)$$ Allora, scegliendo $n_0$ tale da essere maggiore di 10 --- dunque ad esempio 11 --- si ha che $$\forall n \ge n_0 = 11 \quad f(n) = 100 n^2 < 10 \cdot n^3 = c \cdot g(n)$$ e dunque $f(n) = o(g(n))$ per definizione.
+    \end{example}
+
+    \begin{framedobs}[label={small o big o obs}]{$O$-piccolo ed $o$-grande}
+        Si noti che, date due funzioni $\func{f,g}{\N}{\R^+}$, per definizione stessa si ha che $$f(n) = o(g(n)) \implies f(n)= O(g(n))$$
+    \end{framedobs}
+
+    \begin{framedprop}{Algebra asintotica}
+        Siano $\func{f, g, h}{\N}{\R^+}$; allora, si ha che:
+        
+        \begin{itemize}
+            \item $\forall c \in \R \quad f(n) = c \cdot g(n) \implies f(n) = o(g(n))$
+            \item $f(n) = o(g(n)) + o(h(n)) \implies f(n) = o(\max(g(n), h(n)))$
+            \item $f(n) = o(g(n)) \cdot o(h(n)) \implies f(n) = o(g(n) \cdot h(n))$
+        \end{itemize}
+
+        Si noti che tali regole valgono anche per $O$-grande, per l'\cref{small o big o obs}.
+    \end{framedprop}
+
 \end{document}
