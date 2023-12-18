@@ -2855,11 +2855,11 @@
     \end{frameddefn}
 
     \begin{framedobs}{Lunghezza dei certificati di verificatori}
-        Sia $V$ un verificatore che computa in $O(f(n))$ per qualche $f$, e sia $\abk{w, c} \in L(V)$; la lunghezza di $c$ deve necessariamente essere in $O(f(n))$ --- rispetto alla lunghezza di $w$ --- poiché $O(f(n))$ è proprio il tempo di cui $V$ dispone per computare.
+        Sia $V$ un verificatore in tempo polinomiale, e sia $\abk{w, c} \in L(V)$; la lunghezza di $c$ deve necessariamente essere polinomiale --- rispetto alla lunghezza di $w$ --- poiché polinomiale è proprio il tempo di cui $V$ dispone.
     \end{framedobs}
 
     \begin{framedthm}{Classe \NPclass}
-        \NPclass è la classe dei linguaggi verificabili in tempo polinomiale.
+        \NPclass è la classe dei linguaggi verificabili in tempo polinomiale
     \end{framedthm}
 
     \proofiff{

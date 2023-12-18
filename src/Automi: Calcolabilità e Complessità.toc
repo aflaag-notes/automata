@@ -89,5 +89,6 @@
 \contentsline {subsection}{\numberline {5.2.1}Classe \textsf {DTIME}\xspace }{90}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}Classe \textsf {P}\xspace }{91}{subsection.5.2.2}%
 \contentsline {subsection}{\numberline {5.2.3}Classe \textsf {EXP}\xspace }{92}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Class \textsf {NTIME}\xspace }{92}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}Classe \textsf {NP}\xspace }{93}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.4}Classe \textsf {NTIME}\xspace }{92}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Classe \textsf {NP}\xspace }{92}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}Classe \textsf {NEXP}\xspace }{94}{subsection.5.2.6}%
