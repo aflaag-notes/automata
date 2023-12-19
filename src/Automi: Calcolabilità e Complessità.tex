@@ -57,14 +57,14 @@
     
     \subsubsection{Prerequisiti consigliati:}
     \begin{itemize}
-        \item TODO: DA DECIDERE
+        \item Corso di \tit{Progettazione di Algoritmi}.
     \end{itemize}
 
     \quad
 
     \subsubsection{Segnalazione errori ed eventuali migliorie:}
     
-    Per segnalare eventuali errori e/o migliorie possibili, si prega di utilizzare il \textbf{sistema di Issues fornito da GitHub} all'interno della pagina della repository stessa contenente questi ed altri appunti (link fornito al di sotto), utilizzando uno dei template già forniti compilando direttamente i campi richiesti.
+    Per segnalare eventuali errori e/o migliorie possibili, si prega di utilizzare il \textbf{sistema di Issues fornito da GitHub} all'interno della pagina della repository stessa contenente questi ed altri appunti (link fornito al di sotto).
 
     Gli appunti sono in continuo aggiornamento, pertanto, previa segnalazione, si prega di controllare se l'errore sia ancora presente nella versione più recente.
 
@@ -98,7 +98,7 @@
 
     \chapter{Linguaggi ed espressioni regolari}
 
-    \section{Stringhe e linguaggi}
+    \section{Linguaggi}
 
     \subsection{Stringhe}
 
@@ -111,11 +111,11 @@
     \end{example}
 
     \begin{frameddefn}{Stringa}
-        Sia $\Sigma$ un alfabeto; una \textbf{stringa su $\Sigma$} è una sequenza finita di simboli di $\Sigma$; la \textbf{stringa vuota} è denotata con $\varepsilon$.
+        Sia $\Sigma$ un alfabeto; una \textbf{stringa su $\Sigma$} è una sequenza finita di simboli di $\Sigma$; la \textbf{stringa vuota} è denotata con $\varepsilon$; inoltre
 
         \begin{itemize}
-            \item Data una stringa $w$ di $\Sigma$, allora $|w|$ è la lunghezza di $w$.
-            \item Se $w$ ha lunghezza $n \in \mathbb{N}$, allora è possibile scrivere che $w = w_1 w_2 \cdots w_n$ con $w_i \in \Sigma$ e $i \in [1, n]$.
+            \item data una stringa $w$ su $\Sigma$, $|w|$ è la lunghezza di $w$;
+            \item se $w$ ha lunghezza $n \in \mathbb{N}$, allora è possibile scrivere che $w = w_1 w_2 \cdots w_n$ con $w_i \in \Sigma$ e $i \in [1, n]$.
         \end{itemize}
     \end{frameddefn}
 
@@ -136,17 +136,19 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Prefisso}
-        Sia $\Sigma$ un alfabeto, ed $x, y$ due sue stringhe; allora $x$ è detto essere un \textbf{prefisso} di $y$, se $\exists z \mid xz = y$, con $z$ stringa in $\Sigma$.
+        Sia $\Sigma$ un alfabeto, ed $x, y$ due sue stringhe; allora $x$ è detto essere un \textbf{prefisso} di $y$ se $\exists z \mid xz = y$, con $z$ stringa in $\Sigma$.
     \end{frameddefn}
 
     \begin{example}[Prefisso]
-        Sia $\Sigma = \{\ttt a,\ttt  b,\ttt  c\}$ un alfabeto; allora la stringa $x = \ttt{ab}$ è prefisso della stringa $y = \ttt{abc}$, poiché esiste una stringa $z = \ttt c$ tale per cui $xz = y$.
+        Sia $\Sigma = \{\ttt a,\ttt  b,\ttt  c\}$ un alfabeto; allora la stringa $x = \ttt{ab}$ è prefisso della stringa $y = \ttt{abc}$, poiché esiste una stringa $z = \ttt c$ tale per cui $xz = \ttt{abc} = y$.
     \end{example}
     
     \subsection{Linguaggi}
 
     \begin{frameddefn}{Linguaggio}
-        Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$. Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro. Il linguaggio vuoto si indica con $\emptyset$.
+        Sia $\Sigma$ un alfabeto; si definisce \textbf{linguaggio} un insieme di stringhe di $\Sigma$; dunque, un linguaggio $L$ su $\Sigma$ è un elemento $L \in \powerset(\Sigma)$.
+
+        Un linguaggio è detto \textbf{prefisso}, se nessun suo elemento è prefisso di un altro. Il linguaggio vuoto si indica con $\emptyset$.
     \end{frameddefn}
 
     \begin{example}[Linguaggio binario]
@@ -164,7 +166,7 @@
     \end{example}
 
     \begin{frameddefn}{Peso di Hamming}
-        Sia $\Sigma = \{\ttt 0, \ldots,  \ttt 9\}$ l'alfabeto composto dalle 10 cifre decimali, e sia $x$ una sua stringa; si definisce \tbf{peso di Hamming} di $x$ il numero di elementi di $x$ diversi da $\ttt 0$. In simboli, data una stringha $x = x_1 \cdots x_n$, con $n \in \N$, si ha che $$w_H(x) := \abs{\{i \in [1, n] \mid x_i \neq \ttt 0\}}$$
+        Sia $\Sigma = \{\ttt 0, \ldots,  \ttt 9\}$ l'alfabeto composto dalle 10 cifre decimali, e sia $x$ una sua stringa; si definisce \tbf{peso di Hamming} di $x$ il numero di elementi di $x$ diversi da $\ttt 0$. In simboli, data una stringa $x = x_1 \cdots x_n$, con $n \in \N$, si ha che $$w_H(x) := \abs{\{i \in [1, n] \mid x_i \neq \ttt 0\}}$$
     \end{frameddefn}
 
     \begin{framedobs}{Peso di Hamming di stringhe binarie}
@@ -176,14 +178,14 @@
     \subsection{Definizioni}
 
     \begin{frameddefn}{\DFA}
-        Un \textbf{\DFA} (\tit{Deterministic Finite Automaton}) è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
+        Un \textbf{\DFA} (\tit{Deterministic Finite Automaton}) è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove:
 
         \begin{itemize}
-            \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
-            \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito}
-            \item $\func{\delta}{Q \times \Sigma}{Q}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati
-            \item $q_0 \in Q$ è lo \textbf{stato iniziale}
-            \item $F \subseteq Q$ è l'\textbf{insieme degli stati accettanti}, sui quali le stringhe possono terminare
+            \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito};
+            \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito};
+            \item $\func{\delta}{Q \times \Sigma}{Q}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati;
+            \item $q_0 \in Q$ è lo \textbf{stato iniziale};
+            \item $F \subseteq Q$ è l'\textbf{insieme degli stati accettanti}, sui quali le stringhe possono terminare.
         \end{itemize}
 
     \end{frameddefn}
@@ -232,7 +234,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}[label={def L(M)}]{Linguaggio di un automa}
-        Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme $L(M)$ contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
+        Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme, indicato con $L(M)$, contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
     \end{frameddefn}
 
     \begin{example}[Linguaggio di un automa]
@@ -262,7 +264,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}[label={ling automata}]{Linguaggi di una classe di automi}
-        Sia $\mathcal{C}$ una classe di automi; allora, l'\tbf{insieme dei linguaggi} riconisciuti dagli automi della classe $\mathcal{C}$ è denotato col seguente simbolismo: $$L(\mathcal{C}) := \{L \mid \exists M \in \mathcal{C} : L(M) = L\}$$ dove $L$ è un linguaggio, ed $M$ è un automa della classe $\mathcal{C}$.
+        Sia $\mathcal{C}$ una classe di automi; allora, l'\tbf{insieme dei linguaggi} riconisciuti dagli automi della classe $\mathcal{C}$ è definito come segue: $$\mathcal L(\mathcal{C}) := \{L \mid \exists M \in \mathcal{C} : L(M) = L\}$$ dove $L$ è un linguaggio, ed $M$ è un automa della classe $\mathcal{C}$.
     \end{frameddefn}
 
     \subsection{Linguaggi regolari}
@@ -300,23 +302,21 @@
     \subsection{Definizioni}
     
     \begin{frameddefn}{\NFA}
-        Un \tbf{\NFA} (\tit{Nondeterministic Finite Automaton}) è un automa in cui possono esistere varie scelte per lo stato successivo in ogni punto. Durante la computazione, ogni volta che viene incontrata una scelta, la macchina si \tit{divide}, e ognuno dei vari automi risultanti computa le varie scelte indipendentemente.
+        Un \tbf{\NFA} (\tit{Nondeterministic Finite Automaton}) è un automa in cui possono esistere varie scelte per lo stato successivo in ogni punto della computazione; infatti, ogni volta che si presenta una scelta, la computazione si \tit{ramifica}, ed ognuno degli automi nei vari rami computa tali scelte indipendentemente.
 
-        Formalmente, un \NFA è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove
+        Formalmente, un \NFA è una quintupla $(Q, \Sigma, \delta, q_0, F)$, dove:
 
         \begin{itemize}
-            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
-            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}
-            \item $\delta: Q \times \Sigma_{\varepsilon} \rightarrow \mathcal{P}(Q)$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
-            \item $q_0 \in Q$ è lo \tbf{stato iniziale}
-            \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
+            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito};
+            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito};
+            \item $\delta: Q \times \Sigma_{\varepsilon} \rightarrow \mathcal{P}(Q)$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati;
+            \item $q_0 \in Q$ è lo \tbf{stato iniziale};
+            \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti};
         \end{itemize}
 
         dove $\Sigma_{\varepsilon} := \Sigma \cup \{\varepsilon\}$.
 
-        Se il simbolo di input successivo non compare su alcuno degli archi uscenti dallo stato occupato da una copia della macchina, quella copia cessa di proseguire; inoltre, se \tit{una qualunque copia} della macchina è in uno stato accettante, l'\NFA accetta la stringa di input. Si noti che questa divisione è descritta dall'insieme potenza $\mathcal{P}(Q)$, poiché da ogni stato si può arrivare ad un \tit{insieme} di stati.
-
-        Si noti che il determinismo è un caso particolare di non determinismo, dunque un \DFA è sempre anche un \NFA; in simboli $\mathrm{\DFA} \subseteq \mathrm{\NFA}$.
+        Se il simbolo di input successivo non compare su alcuno degli archi uscenti dallo stato corrente in una data ramificazione di computazione, tale ramo cessa di proseguire; inoltre, se \tit{una qualunque copia} della macchina è in uno stato accettante, l'\NFA accetta la stringa di input. Si noti che questa divisione è descritta dall'insieme potenza $\mathcal{P}(Q)$, poiché da ogni stato si può arrivare ad un \tit{insieme} di stati.
     \end{frameddefn}
 
     \begin{example}[\NFA]
@@ -357,8 +357,12 @@
 
         \centeredimage{0.3}{../assets/nfa.png}
 
-        \imp{Nota} nel momento in cui vengono incontrati $\varepsilon$-archi, si giunge allo stato successivo della computazione nello stesso step dell'input appena elaborato, senza produrre un passo ulteriore, producendo inoltre un nuovo ramo di computazione.
+        \imp{Nota} nel momento in cui vengono incontrati $\varepsilon$-archi, si giunge allo stato successivo della computazione nello stesso step dell'input appena elaborato, dunque \tit{senza produrre un passo ulteriore}, producendo inoltre un \tit{nuovo ramo di computazione}.
     \end{example}
+
+    \begin{framedobs}[label={non det obs}]{Determinismo e non determinismo}
+        Si noti che il determinismo è un caso particolare di non determinismo, dunque un \DFA è sempre anche un \NFA; in simboli $\mathrm{\DFA} \subseteq \mathrm{\NFA}$.
+    \end{framedobs}
 
     \begin{frameddefn}{Stringhe accettate (\NFA)}
         Sia $N = (Q, \Sigma, \delta, q_0, F)$ un \NFA, e sia $w = w_1\cdots w_n$ una stringa tale per cui $\forall i \in [1, n] \quad w_i \in \Sigma$; allora, $N$ \tbf{accetta} $w$ se esiste una sequenza di stati $r_0, \ldots, r_n \in Q$ tali per cui
@@ -377,10 +381,12 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={nfa equiv}]{\DFA ed \NFA}
-        Le classi dei \DFA e degli \NFA sono equivalenti; in simboli $$\REG := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA}) $$
+        Le classi dei \DFA e degli \NFA sono equivalenti; in simboli $$\REG := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA})$$
     \end{framedthm}
 
     \proofiff{
+        Per l'\cref{non det obs} si ha che $$\mathrm{\DFA} \subseteq \mathrm{\NFA} \implies \mathcal{L}(\mathrm{\DFA}) \subseteq \mathcal{L}(\mathrm{\NFA})$$
+    }{
         Si noti che $$\mathcal{L}(\mathrm{\NFA}) \subseteq \mathcal{L}(\mathrm{\DFA}) \iff \forall A \in \mathcal{L}(\mathrm{\NFA}) \quad \exists M \in \mathrm{\DFA} \mid A = L(M)$$ Allora, sia $A \in \mathcal{L}(\mathrm{\NFA})$, e dunque esiste un \NFA $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ in grado di riconoscerlo. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
 
         Allora, sia $M = (Q', \Sigma, \delta', q_0', F)$ il \DFA definito come segue:
@@ -389,28 +395,16 @@
             \item $Q' := \powerset{(Q)}$, scelto tale da rappresentare ogni possibile stato di $N$;
             \item $\displaystyle \forall R \in Q', a \in \Sigma \quad \delta'(R, a) := \bigcup_{r \in R}{E(\delta(r, a))}$, scelta tale in quanto, per un certo insieme di stati $R \in Q'$ di $N$, a $\delta'(R, a)$ viene assegnata l'unione degli stati che sarebbero stati raggiunti in $N$ dagli $r \in R$ con $a$, calcolati dunque attraverso $\delta(r, a)$, aggiungendo infine i possibili $\varepsilon$-archi;
             \item $q_0' := E(\{q_0\})$, scelto tale da far iniziare $M$ esattamente dove aveva inizio $N$, comprendendo anche i possibili $\varepsilon$-archi iniziali;
-            \item $F' := \{R \in Q' \mid \exists r \in R : r \in F\}$, che corrisponde all'insieme degli insiemi di stati di $N$ contenenti almeno uno stato accettante in $N$.
+            \item $F' := \{R \in Q' \mid R \cap F \neq \varnothing\}$, che corrisponde all'insieme degli insiemi di stati di $N$ contenenti almeno uno stato accettante in $N$.
         \end{itemize}
 
         Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il \DFA costruito emula l'\NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
-    }{
-        Poiché il determinismo è un caso particolare del non determinismo, si ha che $\mathrm{\DFA} \subseteq \mathrm{\NFA} \implies \mathcal{L}(\mathrm{\DFA}) \subseteq \mathcal{L}(\mathrm{\NFA})$.
     }
     
-    \begin{framedcor}[label={nfa regolare}]{Linguaggi regolari ed \NFA}
-        Un linguaggio è regolare se e solo se esiste un \NFA che lo riconosce; in simboli $$\mathrm{\REG} = \mathcal{L}(\mathrm{\NFA})$$
-    \end{framedcor}
-
-    \begin{proof}
-        Per il \cref{nfa equiv}, si ha che $$\mathrm{\REG} := \mathcal{L}(\mathrm{\DFA}) = \mathcal{L}(\mathrm{\NFA})$$ e dunque segue la tesi.
-    \end{proof}
-
-    \section{Operazioni regolari}
-
     \subsection{Unione}
     
     \begin{frameddefn}{Unione}
-        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione} di $A$ e $B$ il seguente linguaggio: $$A \cup B := \{x \mid x \in A \lor x \in B \}$$ Si noti che, per ogni linguaggio $L$, è vero che $\emptyset \cup L = L \cup \emptyset = L$.
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione di $A$ e $B$} il seguente linguaggio: $$A \cup B := \{x \mid x \in A \lor x \in B \}$$ Si noti che, per ogni linguaggio $L$, è vero che $\emptyset \cup L = L \cup \emptyset = L$.
     \end{frameddefn}
 
     \begin{example}[Unione]
@@ -418,7 +412,7 @@
     \end{example}
 
     \begin{framedprop}[label={closure unione}]{Chiusura sull'unione (\REG)}
-        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare.
+        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cup B$ è regolare. In simboli $$\forall A, B \in \REG \quad A \cup B \in \REG$$
     \end{framedprop}
 
     \begin{proof}[Dimostrazione I]
@@ -428,17 +422,17 @@
             \item $Q := Q_1 \times Q_2 = \{(r_1, r_2) \mid r_1 \in Q_1 \land r_2 \in Q_2\}$, scelto tale in quanto permette di avere tutte le possibili combinazioni di stati dei due automi di partenza;
             \item $\forall (r_1, r_2) \in Q, a \in \Sigma \quad \delta((r_1, r_2), a) := (\delta_1(r_1, a), \delta_2(r_2, a))$, scelta tale in quanto permette di simulare entrambi gli automi di partenza contemporaneamente, mandando ogni stato di $M_1$ ed $M_2$ dove sarebbe andato nei rispettivi automi di appartenenza;
             \item $q_0 := (q_1, q_2)$, scelto tale in quanto deve essere lo stato in cui entrambe gli automi in ipotesi iniziavano;
-            \item $F := (F_1 \times Q_2) \cup (Q_1 \times F_2) = \{(r_1, r_2) \mid r_1 \in F_1 \lor r_2 \in F_2\}$, scelto tale in quanto permette di simulare gli stati accettanti di entrambi gli automi, e vanno prese tutte le coppie che vedono almeno uno dei due stati come accettanti poiché altrimenti non si accetterebbero delle stringhe accettate da $M_1$ ed $M_2$ in partenza.
+            \item $F := (F_1 \times Q_2) \cup (Q_1 \times F_2) = \{(r_1, r_2) \mid r_1 \in F_1 \lor r_2 \in F_2\}$, scelto tale in quanto permette di simulare gli stati accettanti di entrambi gli automi, e vanno prese tutte le coppie che vedono almeno uno dei due stati come accettante, poiché altrimenti non si accetterebbero delle stringhe accettate o da $M_1$, o ed $M_2$.
         \end{itemize}
 
         Allora, poiché $M$ è in grado di simulare $M_1$ ed $M_2$ contemporaneamente, per costruzione accetterà ogni stringa di $A$ e di $B$, dunque riconoscendo $A \cup B$, e di conseguenza $A \cup B$ è regolare per definizione.
     \end{proof}
 
     \begin{proof}[Dimostrazione II]
-        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due \NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'\NFA costruito come segue:
+        Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due \NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'\NFA definito come segue:
 
         \begin{itemize}
-            \item $Q := \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato, e $Q$ è scelto tale da includere sia $N_1$ che $N_2$;
+            \item $Q := \{q_0\} \cup Q_1 \cup Q_2$, dove $q_0$ è un nuovo stato --- dunque $Q$ è scelto tale da includere gli stati sia di $N_1$ che di $N_2$;
             \item $\forall q \in Q, a \in \Sigma_{\varepsilon} \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 \\ \delta_2(q, a) & q \in Q_2 \\ \{q_1, q_2\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = 0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da poter eseguire contemporaneamente gli \NFA $N_1$ ed $N_2$, definendo per casi la funzione di transizione; infatti, si noti che si è posta $\delta(q_0, \varepsilon) := \{q_1, q_2\}$ in modo da collegare il nuovo stato $q_0$ a $q_1$ e $q_2$, gli stati iniziali di $N_1$ ed $N_2$ rispettivamente;
             \item $q_0$ è il nuovo stato, che rappresenta lo stato iniziale di $N$;
             \item $F := F_1 \cup F_2$, scelto tale da costruire $N$ in modo che accetti una stringa se e solo se la accetterebbero $N_1$ o $N_2$.
@@ -446,13 +440,13 @@
 
         \centeredimage[Rappresentazione dell'\NFA $N$ descritto.]{0.25}{../assets/union.png}
 
-        Allora, l'\NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per definizione.
+        Allora, l'\NFA risultante $N$ è in grado di computare contemporaneamente $N_1$ ed $N_2$, ed è dunque in grado di riconoscere $A$ e $B$ contemporaneamente; di conseguenza, $N$ riconosce $A \cup B$, che risulta dunque essere regolare per il \cref{nfa equiv}.
     \end{proof}
 
     \subsection{Intersezione}
 
     \begin{frameddefn}{Intersezione}
-        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{intersezione} di $A$ e $B$ il seguente linguaggio: $$A \cap B := \{x \mid x \in A \land x \in B \}$$
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce l'\tbf{intersezione di $A$ e $B$} il seguente linguaggio: $$A \cap B := \{x \mid x \in A \land x \in B \}$$
     \end{frameddefn}
 
     \begin{example}[Intersezione]
@@ -460,7 +454,7 @@
     \end{example}
 
     \begin{framedprop}[label={closure inters}]{Chiusura sull'intersezione (\REG)}
-        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cap B$ è regolare.
+        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \cap B$ è regolare. In simboli $$\forall A, B \in \REG \quad A \cap B \in \REG$$
     \end{framedprop}
 
     \begin{proof}
@@ -479,7 +473,7 @@
     \subsection{Concatenazione}
 
     \begin{frameddefn}{Concatenazione}
-        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce la \tbf{concatenazione} di $A$ e $B$ il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$ Si noti che, per ogni linguaggio $L$, è vero che 
+        Siano $A$ e $B$ due linguaggi su un alfabeto $\Sigma$; allora, si definisce la \tbf{concatenazione di $A$ e $B$} il seguente linguaggio: $$A \circ B = \{xy \mid x \in A \land y \in B\}$$ Si noti che, per ogni linguaggio $L$, è vero che 
 
         \begin{itemize}
             \item $\emptyset \circ L = L \circ \emptyset = \emptyset$
@@ -494,14 +488,14 @@
     \end{example}
 
     \begin{framedprop}[label={closure concat}]{Chiusura sulla concatenazione (\REG)}
-        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare.
+        Siano $A$ e $B$ due linguaggi regolari su un alfabeto $\Sigma$; allora $A \circ B$ è regolare. In simboli $$\forall A, B \in \REG \quad A \circ B \in \REG$$
     \end{framedprop}
 
     \begin{proof}
         Per definizione, $A$ e $B$ sono linguaggi regolari, dunque per il \cref{nfa equiv} esistono due \NFA $$\left. \begin{array}{c}N_1 = (Q_1, \Sigma, \delta_1, q_1, F_1) \\ N_2 = (Q_2, \Sigma, \delta_2, q_2, F_2) \end{array} \right.$$ tali da riconoscere rispettivamente $A$ e $B$. Allora, sia $N = (Q, \Sigma, \delta, q_0, F)$ l'\NFA costruito come segue:
         
         \begin{itemize}
-            \item $Q := Q_1 \cup Q_2$, scelto tale da includere entrambe gli automi $N_1$ ed $N_2$ di partenza;
+            \item $Q := Q_1 \cup Q_2$, scelto tale da includere gli stati di entrambe gli automi $N_1$ ed $N_2$ di partenza;
             \item $q_0 := q_1$, scelto tale da far iniziare l'esecuzione dell'automa su $N_1$;
             \item $F := F_2$, scelto tale da far terminare l'esecuzione dell'automa su $N_2$;
             \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_2\} & q \in F_1 \land a = \varepsilon \\ \delta_2(q, a) & q \in Q_2 \end{array} \right.$, scelta tale da anteporre l'esecuzione di $N_1$ a quella di $N_2$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q \in F_1$ ma $a \neq \varepsilon$, l'esecuzione di $N_1$ non viene alterata; diversamente, se invece $q \in F_1$ e $a = \varepsilon$, all'insieme di stati $\delta_1(q, \varepsilon)$ viene aggiunto $q_2$, ovvero lo stato iniziale di $N_2$, in modo da effettuare la concatenazione tra i due \NFA non deterministicamente.
@@ -509,13 +503,13 @@
 
         \centeredimage[Rappresentazione dell'\NFA $N$ descritto.]{0.25}{../assets/concat.png}
 
-        Allora, l'\NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per definizione.
+        Allora, l'\NFA $N$ costruito computa inizialmente $N_1$, e se vengono raggiunti suoi stati accettanti, l'esecuzione prosegue attraverso $N_2$, al fine di realizzare la concatenazione tra le stringhe. Di conseguenza, l'automa è in grado di riconoscere $A \circ B$ per costruzione, e dunque $A \circ B$ è regolare per il \cref{nfa equiv}.
     \end{proof}
 
     \subsection{Elevamento a potenza}
 
     \begin{frameddefn}{Elevamento a potenza}
-        Sia $A$ un linguaggio; allora, si definisce \tbf{elevamento a potenza} di $A$ il seguente linguaggio: $$A^n := \underbrace{A \circ \cdots \circ A}_{n \ \textrm{volte}} = \soe{ll}{A^0 := \{\varepsilon \} & \\ A^n = A^{n -1} \circ A & n \ge 1}$$
+        Sia $A$ un linguaggio; allora, si definisce \tbf{elevamento a potenza di $A$} il seguente linguaggio: $$A^n := \underbrace{A \circ \cdots \circ A}_{n \ \textrm{volte}} = \soe{ll}{A^0 := \{\varepsilon \} & \\ A^n = A^{n -1} \circ A & n \ge 1}$$
     \end{frameddefn}
 
     \begin{example}[Elevamento a potenza]
@@ -523,7 +517,7 @@
     \end{example}
 
     \begin{framedprop}{Chiusura sull'elevamento (\REG)}
-        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$, ed $n \in \N$; allora $A^n$ è regolare.
+        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$, ed $n \in \N$; allora $A^n$ è regolare. In simboli $$\forall A \in \REG, n \in \N \quad A^n \in \REG$$
     \end{framedprop}
 
     \proofind{
@@ -531,7 +525,7 @@
     }{
         Per $n = 0$, si ha che $A^0 = \{\varepsilon\}$, il quale è regolare poiché ad esempio il \DFA $$M_\varepsilon = (\{q\}, \Sigma, \delta, q, \{q\})$$ è in grado di riconoscerlo.
     }{
-        Per $n \in \N$, si assume che $A^n$ è regolare.
+        Per $n \in \N$, si assume che $A^n$ sia regolare.
     }{
         Per il caso $n + 1$, si ha che $A^{n + 1} = A^n \circ A$ per definizione dell'elevamento a potenza; inoltre, per ipotesi induttiva $A^n$ è regolare, $A$ è regolare per ipotesi, e poiché $\mathrm{\REG}$ è chiuso rispetto alla concatenazione per la \cref{closure concat}, si ha che $A^{n + 1} = A^n \circ A$ è regolare.
     }
@@ -553,7 +547,7 @@
     \end{example}
 
     \begin{framedprop}[label={closure star}]{Chiusura sull'operazione star (\REG)}
-        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare.
+        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $A^*$ è regolare. In simboli $$\forall A \in \REG \quad A^* \in \REG$$
     \end{framedprop}
 
     \begin{proof}
@@ -563,18 +557,18 @@
             \item $Q := \{q_0\} \cup Q_1$, dove $q_0$ è un nuovo stato, posto prima di $N_1$;
             \item $q_0$ è il nuovo stato iniziale;
             \item $F: = \{q_0\} \cup F_1$, poiché $q_0$ deve essere accettante, in modo tale da accettare $\varepsilon$ (si noti che $\varepsilon \in A^*$ per ogni linguaggio $A$);
-            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_1\} & q \in F_1 \land a = \varepsilon \\ \{q_1\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = q_0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da ricominciare l'esecuzione dell'automa ogni volta che viene raggiunto uno stato accettante in $N_1$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q$ è accettante e $a \neq \varepsilon$, l'esecuzione procede normalmente con $\delta_1(q, a)$; differentemente, se $q \in F_1$ ma $a = \varepsilon$, allora l'esecuzione deve ricominciare da capo per poter effettuare la concatenazione multipla delle stringhe in $A$ che caratterizzano l'operazione star, e dunque a $\delta_1(q, a)$ viene aggiunto $q_1$ (lo stato inziale di $N_1$); infine, ponendo $\delta(q_0, \varepsilon) := \{q_1\}$ si realizza l'$\varepsilon$-arco iniziale che collega $q_0$ (il nuovo stato) a $q_1$, al fine di rendere $N$ in grado di accettare $\varepsilon$.
+            \item $\forall q \in Q, a \in \Sigma_\varepsilon \quad \delta(q, a) := \left \{ \begin{array}{ll} \delta_1(q, a) & q \in Q_1 - F_1 \lor (q \in F_1 \land a \neq \varepsilon) \\ \delta_1(q, a) \cup \{q_1\} & q \in F_1 \land a = \varepsilon \\ \{q_1\} & q = q_0 \land a = \varepsilon \\ \varnothing & q = q_0 \land a \neq \varepsilon \end{array} \right.$, scelta tale da ricominciare l'esecuzione dell'automa ogni volta che viene raggiunto uno stato accettante in $N_1$; infatti, se $q \in Q_1 - F_1$ (è uno stato non accettante di $N_1$), oppure $q$ è accettante e $a \neq \varepsilon$, l'esecuzione procede normalmente con $\delta_1(q, a)$; differentemente, se $q \in F_1$ ma $a = \varepsilon$, allora l'esecuzione deve ricominciare da capo per poter effettuare la concatenazione multipla delle stringhe in $A$ che caratterizzano l'operazione star, e dunque a $\delta_1(q, a)$ viene aggiunto $q_1$ (lo stato inziale di $N_1$); infine, ponendo $\delta(q_0, \varepsilon) := \{q_1\}$ si realizza l'$\varepsilon$-arco iniziale che collega $q_0$ (il nuovo stato) a $q_1$.
         \end{itemize}
 
         \centeredimage[Rappresentazione dell'\NFA $N$ descritto.]{0.25}{../assets/star.png}
         
-        Allora, poichè l'\NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per definizione.
+        Allora, poichè l'\NFA $N$ è in grado di ricominciare l'esecuzione ogni volta che questa sarebbe terminata in $N_1$, è in grado di accettare molteplici copie concatenate delle stringhe in $A$, in maniera non deterministica, e dunque per definizione $N$ riconosce $A^*$, il quale risulta allora essere regolare per il \cref{nfa equiv}.
     \end{proof}
 
     \subsection{Complemento}
 
     \begin{frameddefn}{Complemento}
-        Sia $A$ un linguaggio definito su un alfabeto $\Sigma$; allora si definisce il \tbf{complemento} di $A$ il seguente linguaggio: $$\overline A := \{x \mid x \notin A\}$$
+        Sia $A$ un linguaggio definito su un alfabeto $\Sigma$; allora si definisce il \tbf{complemento di $A$} il seguente linguaggio: $$\overline A := \{x \in \Sigma^* \mid x \notin A\}$$
     \end{frameddefn}
 
     \begin{example}[Complemento]
@@ -582,7 +576,7 @@
     \end{example}
 
     \begin{framedprop}[label={closure compl}]{Chiusura sul complemento (\REG)}
-        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\overline A$ è regolare.
+        Sia $A$ un linguaggio regolare su un alfabeto $\Sigma$; allora $\overline A$ è regolare. In simboli $$\forall A \in \REG \quad \overline A \in \REG$$
     \end{framedprop}
 
     \begin{proof}
@@ -593,8 +587,8 @@
         Siano $A$ e $B$ definiti su un alfabeto $\Sigma$; allora, sono vere le seguenti, che prendono il nome di \tbf{leggi di De Morgan}:
 
         \begin{enumerate}[label=\roman*), font=\itshape]
-            \item $\overline (A \cup B) = \overline A \cap \overline B$
-            \item $\overline (A \cap B) = \overline A \cup \overline B$
+            \item $\overline{A \cup B} = \overline A \cap \overline B$
+            \item $\overline{A \cap B} = \overline A \cup \overline B$
         \end{enumerate}
     \end{framedprop}
 
@@ -1017,7 +1011,7 @@
             \item si noti che se esistono due espressioni regolari $R_1$ ed $R_2$ tali che $R = R_1 \cup R_2$, oppure $R = R_1 \circ R_2$, o ancora $R = R_1^*$, è sufficiente costruire gli \NFA che sono stati costruiti nelle dimostrazioni della \cref{closure unione}, della \cref{closure concat} e della \cref{closure star}.
         \end{itemize}
 
-        Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un \NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa regolare}, $A$ è regolare.
+        Allora, per qualsiasi espressione regolare $R$, tale da descrivere un certo linguaggio $A$, è possibile costruire un \NFA che riconosce il linguaggio che $R$ descrive. Allora, per il \cref{nfa equiv}, $A$ è regolare.
     }
 
     \begin{framedcor}{Equivalenze tra classi di automi}
@@ -1120,7 +1114,7 @@
             \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il simbolo alla sinistra della prima regola della grammatica
         \end{itemize}
 
-        Le \CFG si scrivono nella forma $$X \to Y$$ dove $X \in V$ e $X \to Y \in R$ è una regola della \CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \ | \ Z$.
+        Le \CFG si scrivono nella forma $$X \to Y$$ dove $X \in V$ e $X \to Y \in R$ è una regola della \CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \smid Z$.
 
         Siano $u, v, w$ stringhe, e $A \to w \in R$; allora si dice che $uAv$ \tbf{produce} $uwv$, denotato con $$uAv \yields uwv$$ Date due stringhe $u, v$, se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che $u$ \tbf{deriva} $v$, ed è denotato con $u \derives v$.
     \end{frameddefn}
@@ -1148,9 +1142,9 @@
         I seguenti sono esempi di linguaggi, e corrispondenti grammatiche che li descrivono:
 
         \begin{itemize}
-            \item il linguaggio $L_1 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w \ \mathrm{contiene \ almeno \ tre \ \ttt 1}\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S_1 \to X \ttt 1 X \ttt 1 X \\ X \to \varepsilon \ | \ \ttt 0 X \ | \ \ttt 1 X}$$
-            \item il linguaggio $L_2 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w = w ^\mathcal{R} \land |w| \equiv 0 \ (\bmod \ 2)\}$ è descritto dalla seguente grammatica: $$S \to \ttt 0 S \ttt 0 \ | \ \ttt 1 S \ttt 1 \ | \ \varepsilon$$
-            \item il linguaggio $L_3 := \{\ttt a^i \ttt b^j \ttt c^{i + j} \mid i, j \ge 0\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S \to \ttt a S \ttt c \ | \ X \\ X \to \ttt b S \ttt c \ | \ \varepsilon}$$
+            \item il linguaggio $L_1 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w \ \mathrm{contiene \ almeno \ tre \ \ttt 1}\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S_1 \to X \ttt 1 X \ttt 1 X \\ X \to \varepsilon \smid \ttt 0 X \smid \ttt 1 X}$$
+            \item il linguaggio $L_2 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w = w ^\mathcal{R} \land |w| \equiv 0 \ (\bmod \ 2)\}$ è descritto dalla seguente grammatica: $$S \to \ttt 0 S \ttt 0 \smid \ttt 1 S \ttt 1 \smid \varepsilon$$
+            \item il linguaggio $L_3 := \{\ttt a^i \ttt b^j \ttt c^{i + j} \mid i, j \ge 0\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S \to \ttt a S \ttt c \smid X \\ X \to \ttt b S \ttt c \smid \varepsilon}$$
         \end{itemize}
     \end{example}
 
@@ -1672,11 +1666,11 @@
     \end{framedprop}
 
     \begin{proof}
-        Poiché $L_1, \ldots, L_n$ sono \CFL, allora esistono delle \CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una \CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{\CFL}$ per definizione; allora, si consideri la seguente \CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \ | \ \ldots \ | \ S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
+        Poiché $L_1, \ldots, L_n$ sono \CFL, allora esistono delle \CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una \CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{\CFL}$ per definizione; allora, si consideri la seguente \CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \smid \ldots \smid S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
     \end{proof}
 
     \begin{example}[Unione di \CFL]
-        Siano $L_1$ ed $L_2$ due \CFL generati rispettivamente dalle seguenti \CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon}$$ Allora, la seguente \CFG $G$: $$G: \centeredsoe{S \to S_1 \ | \ S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \ | \ \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \ | \ \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
+        Siano $L_1$ ed $L_2$ due \CFL generati rispettivamente dalle seguenti \CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \smid \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \smid \varepsilon}$$ Allora, la seguente \CFG $G$: $$G: \centeredsoe{S \to S_1 \smid S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \smid \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \smid \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
     \end{example}
 
     \subsection{Concatenazione}
@@ -2411,13 +2405,13 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Funzione calcolabile}
-        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile} se esiste una macchina di Turing che, su qualsiasi input $w \in \Sigma^*$, se si ferma, ha solo $f(w)$ sul suo nastro.
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile} se esiste una macchina di Turing che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
     \end{frameddefn}
 
     \begin{frameddefn}{Riducibilità mediante funzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ si dice \tbf{riducibile mediante funzione} a $B$, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ e la funzione $f$ prende il nome di \tbf{riduzione} da $A$ a $B$.
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile mediante funzione a $B$}, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ e la funzione $f$ prende il nome di \tbf{riduzione di $A$ a $B$}.
     \end{frameddefn}
-    
+
     \begin{framedlem}[label={red compl}]{Riducibilità dei complementi}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm m B \iff \overline A \leq_\mathrm m \overline B$$
     \end{framedlem}
@@ -2438,8 +2432,8 @@
         Poiché $B \in \DEC$ in ipotesi, esiste un decisore $M$ tale che $M$ decide $B$; inoltre, poichè $A \leq_\mathrm m B$, esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale per cui $A$ sia riducibile a $B$. Sia dunque $N$ una macchina di Turing che, data in input una stringa $w \in \Sigma^*$, computa come segue:
 
         \begin{itemize}
-            \item computa $f(w)$;
-            \item simula $M$ avente $f(w)$ come input; 
+            \item $N$ computa $f(w)$;
+            \item $N$ simula $M$ avente $f(w)$ come input; 
             \item $N$ accetta se e solo se $M$ accetta.
         \end{itemize}
 
@@ -2831,6 +2825,30 @@
         \end{itemize}
 
         Dunque, poiché $\abs{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), sicuramente $\abs{E} = O(n)$, e dunque la complessità temporale di $M$ risulta essere (rispettivamente per ogni istruzione): $$O\rbk{n^k} + O(1) + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
+    \end{proof}
+    
+    \begin{frameddefn}{Funzione polinomialmente calcolabile}
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione polinomialmente calcolabile} se esiste una macchina di Turing in tempo polinomiale che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Riduzione polinomiale mediante funzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$}, se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $A \leq_\mathrm P B$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
+    \end{frameddefn}
+
+    \begin{framedthm}[label={p w red}]{In \Pclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \Pclass, allora $A$ è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \Pclass} \implies A \in \Pclass$$
+    \end{framedthm}
+
+    \begin{proof}
+        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano in tempo polinomiale; verrà dunque omessa.
+    \end{proof}
+
+    \begin{framedcor}[label={p with red cor}]{Non in \Pclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $A$ non è in \Pclass, allora $B$ non è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \notin \Pclass} \implies B \notin \Pclass$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \Pclass$; allora, poiché $A \leq_\mathrm P B$, per il \cref{p w red}, si ha che $A \in \Pclass$ $\lightning$.
     \end{proof}
 
     \subsection{Classe \EXP}
