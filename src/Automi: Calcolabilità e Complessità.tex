@@ -2010,9 +2010,36 @@
     \end{framedprop}
 
     \proofiff{
-        TODO
+        Sia $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \NTM, e si consideri l'albero di computazione che $N$ produce elaborando gli input, associando un \tit{indirizzo} ad ogni nodo dell'albero, come segue:
+
+        \begin{itemize}
+            \item alla radice $r$ dell'albero viene assegnato l'indirizzo $\varepsilon$;
+            \item ad ogni altro nodo $v$ diverso dalla radice, viene assegnato l'indirizzo $xa$, dove $x$ è l'indirizzo del padre di $v$, ed $a$ è un numero in $[1, b]$, dove $b$ è il numero di figli del nodo dell'albero avente maggior numero di figli.
+        \end{itemize}
+
+        Ad esempio, l'indirizzo $\ttt 1 \ttt 3 \ttt 2$ indica il secondo figlio del terzo figlio del primo figlio della radice dell'albero di computazione di $N$. Si consideri allora una \TM $M$ a 3 nastri, dove
+
+        \begin{itemize}
+            \item il primo nastro contiene l'input di $N$;
+            \item il secondo nastro mantiene una copia del primo nastro, corrispondente a qualche diramazione della sua computazione non deterministica;
+            \item il terzo nastro contiene l'indirizzo del nodo dell'albero di computazione non deterministica corrente.
+        \end{itemize}
+
+        e dunque, data in input una stringa $w$, $M$ computa come segue:
+
+        \begin{itemize}
+            \item inizialmente, il primo nastro di $M$ contiene $w$, il secondo è vuoto ed il terzo contiene $\varepsilon$;
+            \item $M$ ripete i seguenti passi:
+                \begin{itemize}
+                    \item $M$ copia il primo nastro sul secondo;
+                    \item $M$ simula la ramificazione della computazione non deterministica di $N$ correntemente sul secondo nastro, controllando prima di eseguire ogni passo quale scelta fare tra quelle consentite dalla funzione di transizione $\delta$; se la simulazione di $N$ accetta la stringa, $M$ accetta;
+                    \item se non rimangono più simboli sul terzo nastro, o la simultazione rifiuta la stringa, $M$ sostituisce la stringa sul terzo nastro con il prossimo indirizzo da controllare.
+                \end{itemize}
+        \end{itemize}
+
+        Dunque, la macchina $M$ simula la computazione di $N$ esplorando l'albero di computazione di $N$ in BFS (\tit{Breadth-First Search}), poiché se l'esplorazione avvenisse in DFS si rischierebbe di entrare in un ramo di computazione potenzialamente infinito, senza trovare un ramo che avrebbe potuto accettare l'input. Allora, per la \cref{multitape equiv}, segue la tesi.
     }{
-        TODO
+        Sia $M$ una \TM; allora, poiché una macchina di Turing è una particolare macchina di Turing non deterministica, segue la tesi.
     }
 
     \subsection{Enumeratori}
@@ -2760,7 +2787,7 @@
         \begin{itemize}
             \item l'istruzione 1 richiede $n$ passi, ed ha dunque costo $O(n)$;
             \item l'istruzione 2 richiede $n$ passi, ed ha dunque costo $O(n)$;
-            \item l'istruzione 3 dipende dalle istruzioni che ripete, e dunque
+            \item il tempo dell'istruzione 3 dipende dalle istruzioni che ripete, e dunque
 
                 \begin{itemize}
                     \item l'istruzione 4 richiede $n$ passi, ed ha dunque costo $O(n)$;
@@ -2786,7 +2813,7 @@
     \end{frameddefn}
 
     \begin{framedthm}{$PATH$ in \Pclass}
-        Sia $PATH$ il linguaggio definito come segue: $$PATH = \{\abk{G, s, t} \mid G = (V, E) \ \textrm{grafo diretto con un cammino $s \to t$}\}$$ Allora, si ha che $PATH \in \Pclass$.
+        Sia $PATH$ il linguaggio definito come segue: $$PATH := \{\abk{G, s, t} \mid G = (V, E) \ \textrm{grafo diretto con un cammino $s \to t$}\}$$ Allora, si ha che $PATH \in \Pclass$.
     \end{framedthm}
 
     \begin{proof}
@@ -2803,7 +2830,7 @@
             \item se tra i vertici marcati è presente $t$, allora $M$ accetta.
         \end{itemize}
 
-        Dunque, poiché $\abk{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), e dunque $\abs{E} = O(n)$, la complessità temporale di $M$ risulta essere $$O\rbk{n^k} + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
+        Dunque, poiché $\abs{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), sicuramente $\abs{E} = O(n)$, e dunque la complessità temporale di $M$ risulta essere (rispettivamente per ogni istruzione): $$O\rbk{n^k} + O(1) + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
     \end{proof}
 
     \subsection{Classe \EXP}
@@ -2836,7 +2863,7 @@
 
     \subsection{Classe \NPclass}
     
-    \begin{frameddefn}{Classe \NPclass}
+    \begin{frameddefn}[label={np def}]{Classe \NPclass}
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo polinomiale} da una \NTM il seguente insieme $$\NPclass = \bigcup_{k \in \N}{\NTIME \rbk{n^k}}$$
     \end{frameddefn}
 
@@ -2858,15 +2885,61 @@
         Sia $V$ un verificatore che computa in $O(f(n))$ per qualche $f$, e sia $\abk{w, c} \in L(V)$; la lunghezza di $c$ deve necessariamente essere in $O(f(n))$ --- rispetto alla lunghezza di $w$ --- poiché $O(f(n))$ è proprio il tempo di cui $V$ dispone per computare.
     \end{framedobs}
 
-    \begin{framedthm}{Classe \NPclass}
-        \NPclass è la classe dei linguaggi verificabili in tempo polinomiale.
+    \begin{framedthm}[label={np verif}]{Linguaggi polinomialmente verificabili}
+        \NPclass è la classe dei linguaggi polinomialmente verificabili.
     \end{framedthm}
 
     \proofiff{
-        TODO
+        Sia $L \in \NPclass$, e dunque per la \cref{np def} esiste una \NTM $N$ che decide $L = L(N)$ non deterministicamente in tempo polinomiale; sia allora $V$ un decisore che, data in input una configurazione $\abk{w, c}$, computa come segue:
+
+        \begin{itemize}
+            \item $V$ interpreta $c$ come un indirizzo (come descritto nella dimostrazione della \cref{ntm tm});
+            \item $V$ simula $N$ su input $w$, eseguendo le scelte dettate dall'indirizzo $c$;
+            \item $V$ accetta se la simulazione di $N$ accetta.
+        \end{itemize}
+
+        Allora, per costruzione di $V$, si ha che $$w \in L = L(N) \iff \exists c \in \Sigma^* \mid \abk{w, c} \in L(V)$$ e, sempre per costruzione di $V$, ciò avviene se e solo se esiste un ramo di $N$ che accetta $w$. Inoltre, poiché $L \in \NPclass$, la lunghezza dei rami dell'albero di computazione di $N$ è necessariamente in $O(n^k)$, e dunque se un certificato $c$ descrive una serie di scelte tali che $N$ accetta $w$, la lunghezza di $c$ deve necessariamente essere in $O(n^k)$ anch'essa. Infine, poiché $c$ rappresenta indirizzi di computazione di $N$, ed $N \in \NTIME\rbk{n^k}$, se una stringa $w$ ha lunghezza $n$, la sua computazione è in $O(n^k)$, e dunque l'indirizzo TODO DA FINIRE
     }{
-        TODO
+        Sia $L$ un linguaggio polinomialmente verificabile, e dunque esiste un verificatore $V$ che verifica $L$ polinomialmente. Sia allora $N$ una \NTM --- avente $V$ come sottoprocedura --- che, data una codifica $\abk{w}$, computa come segue:
+
+        \begin{itemize}
+            \item $N$ sceglie casualmente una stringa $c$ avente lunghezza polinomiale;
+            \item $N$ simula $V(\abk{w, c})$
+            \item $N$ accetta se $V$ accetta.
+        \end{itemize}
+
+        Poiché $N$ computa non deterministicamente, il primo passo genererà un albero di computazione in cui ogni ramo elaborerà un solo certificato $c$ avente lunghezza polinomiale; inoltre, poiché $V$ verifica $L$, deve esistere un certificato tale per cui il suo ramo di computazione sia accettante. Dunque, poiché per costruzione $N$ riconosce tutte e sole le stringhe $w$ tali per cui esiste un certificato $c$ tale che $\abk{w, c} \in L(V)$, segue che $L = L(N) \implies L \in \NPclass$.
     }
+
+    \begin{frameddefn}{Grafo tricolorabile}
+        Un grafo è detto \tbf{tricolorabile} se ad ogni suo nodo è possibile assegnare un colore diverso dai suoi nodi adiacenti, utilizzando al più 3 colori.
+    \end{frameddefn}
+
+    \begin{framedthm}{$3COL$ in \NPclass}
+        Sia $3COL$ il linguaggio definito come segue: $$3COL := \{\abk{G} \mid G = (V_G, E_G) \ \textrm{grafo tricolorabile}\}$$ Allora, si ha che $3COL \in \NPclass$.
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $V$ una macchina di Turing che, data una codifica $\abk{w, c}$ in input, computa come segue:
+
+        \begin{enumerate}
+            \item interpreta $w$ come $\abk{G}$, dove $G = (V_G, E_G)$ è un grafo;
+            \item interpreta $c$ come $\abk{c_1, \ldots, c_{\abs{V_G}}}$, e $\forall k \in [1, \abs{V_G}] \quad c_k \in \{\mathrm R, \mathrm G, \mathrm B\}$, dunque $c$ viene come possibile tricolorazione di $G$;
+            \item se esiste un arco $(v_i, v_j) \in E_G$, con $i, j \in [1, \abs{V_G}] \mid i \neq j$ tale che $c_i = c_j$, $V$ rifiuta; se tali archi non esistono, $V$ accetta.
+        \end{enumerate}
+
+        Dunque, poiché $V$ accetta $\abk{w, c}$
+
+        Allora, si ha che:
+
+        \begin{itemize}
+            \item l'istruzione 1 ha costo $O(\abs w) = O(n)$;
+            \item l'istruzione 2 ha costo $O()$ TODO DA FINIRE
+            \item l'istruzione 3 è costituita da un ciclo, il cui corpo ha costo $O(1)$, e viene eseguito $\abs{E_G}$ volte, e dunque ha costo $O(\abs{E_G}) \cdot O(1) = O(\abs{E_G})$; si noti però che, nel caso peggiore, ogni nodo del grafo è connesso con ogni altro nodo, e dunque $O(\abs E_G) = O(\abs V_G^2) = O(n^2)$.
+        \end{itemize}
+
+        In conclusione, $V$ ha costo pari a $$O(n) + TODO + O(n^2) = TODO$$ dunque $V$ è un verificatore polinomiale, e per il \cref{np verif} segue che $3COL \in \NPclass$.
+    \end{proof}
 
     \subsection{Classe \NEXP}
 
@@ -2887,6 +2960,6 @@
     \end{framedcor}
 
     \begin{proof}
-        Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
+        Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora, la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
     \end{proof}
 \end{document}
