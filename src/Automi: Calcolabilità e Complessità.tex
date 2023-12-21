@@ -2803,11 +2803,15 @@
         Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass = \bigcup_{k \in \N}{\DTIME\rbk{n^k}}$$
     \end{frameddefn}
 
-    \begin{frameddefn}{}
-        TODO PAG 304
-    \end{frameddefn}
+    \begin{framedobs}{Classe \Pclass}
+        La classe di problemi descritti dai linguaggi in \Pclass è particolarmente importante, poiché \Pclass corrisponde approssimativamente alla classe dei problemi che sono realisticamente risolvibili su un computer, in tempi ragionevoli.
+    \end{framedobs}
 
-    \begin{framedthm}{$PATH$ in \Pclass}
+    \begin{framedobs}{Rappresentazione di grafi}
+        Nelle prossime dimostrazioni si assumerà che sia possibile definire una codifica coerente per rappresentare grafi $G = (V, E)$, al fine di fornire questi in input a macchine di Turing; un esempio potrebbe essere quello della matrice di adiacenza, in cui la generica cella è definita come segue: $$\forall i, j \in [1, \abs{V}] \quad m_{i, j} = \soe{ll}{1 & (v_i, v_j) \in E \\ 0 & (v_i, v_j) \notin E}$$ dove $v_i, v_j\in V$.
+    \end{framedobs}
+
+    \begin{framedthm}[label={path in p}]{$PATH$ in \Pclass}
         Sia $PATH$ il linguaggio definito come segue: $$PATH := \{\abk{G, s, t} \mid G = (V, E) \ \textrm{grafo diretto con un cammino $s \to t$}\}$$ Allora, si ha che $PATH \in \Pclass$.
     \end{framedthm}
 
@@ -2954,11 +2958,15 @@
         \begin{itemize}
             \item l'istruzione 1 ha costo $O(\abs w) = O(n)$;
             \item l'istruzione 2 ha costo $O()$ TODO DA FINIRE
-            \item l'istruzione 3 è costituita da un ciclo, il cui corpo ha costo $O(1)$, e viene eseguito $\abs{E_G}$ volte, e dunque ha costo $O(\abs{E_G}) \cdot O(1) = O(\abs{E_G})$; si noti però che, nel caso peggiore, ogni nodo del grafo è connesso con ogni altro nodo, e dunque $O(\abs E_G) = O(\abs V_G^2) = O(n^2)$.
+            \item l'istruzione 3 è costituita da un ciclo, il cui corpo ha costo $O(1)$, e viene eseguito $\abs{E_G}$ volte, e dunque ha costo $O(\abs{E_G}) \cdot O(1) = O(\abs{E_G})$; si noti però che, nel caso peggiore, ogni nodo del grafo è connesso con ogni altro nodo, e dunque $O(\abs E_G) = O(\abs{V_G}^2) = O(n^2)$.
         \end{itemize}
 
         In conclusione, $V$ ha costo pari a $$O(n) + TODO + O(n^2) = TODO$$ dunque $V$ è un verificatore polinomiale, e per il \cref{np verif} segue che $3COL \in \NPclass$.
     \end{proof}
+
+    \begin{framedthm}{$CLIQUE$ in \Pclass}
+        TODO
+    \end{framedthm}
 
     \subsection{Classe \NEXP}
 
@@ -2981,4 +2989,14 @@
     \begin{proof}
         Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora, la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
     \end{proof}
+
+    \section{NP-completezza}
+
+    \subsection{Problema aperto}
+
+    \begin{framedobs}{\curlyquotes{\Pclass versus \NPclass problem}}
+        Uno dei \href{https://en.wikipedia.org/wiki/Millennium_Prize_Problems#P_versus_NP}{problemi del millennio} consiste nello stabilire se \href{https://en.wikipedia.org/wiki/P_versus_NP_problem}{\Pclass coincide o meno con \NPclass}. Intuitivamente, è possibile interpretare tale problema aperto attraverso il seguente quesito: \tit{per tutti i problemi per cui un algoritmo può verificare efficientemente la correttezza di una data soluzione, esiste un algoritmo che è anche in grado di trovare tale soluzione efficientemente?}
+        
+        È ritenuto che $\Pclass \neq \NPclass$, ma tutt'ora non è ancora stato dimostrato.
+    \end{framedobs}
 \end{document}
