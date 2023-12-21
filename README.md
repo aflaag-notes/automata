@@ -14,5 +14,8 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - finire i TODOs sparsi
     - PARLA DEGLI ALBERI
 
+- teorema di cook levin
+- insiemini carini
+
 - CONTROLLA GLI APPUNTI SULL'IPAD
 

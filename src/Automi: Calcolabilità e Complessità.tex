@@ -2164,10 +2164,6 @@
         Si definiscono \tbf{linguaggi di accettazione} i linguaggi definiti come segue $$A_\mathcal{C} := \{\abk{B, w} \mid B \in \mathcal{C} , w \in L(B)\}$$
     \end{frameddefn}
 
-    \begin{framedobs}{Decidibilità dei linguaggi $A_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio di accettazione è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se un certo oggetto in $\mathcal C$ accetta/descrive un certo input $w$} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $A_\mathcal C$, controllare che $B \in \mathcal{C}$ accetti/descriva $w$ equivale a controllare che $\abk{B,w}$ sia in $A_\mathcal{C}$.
-    \end{framedobs}
-
     \begin{framedthm}[label={a_dfa}]{Decidibilità di $A_\DFA$}
         $A_\DFA$ è decidibile; in simboli $$A_\DFA := \{\abk{B, w} \mid B \in \DFA, w \in L(B)\} \in \DEC$$
     \end{framedthm}
@@ -2272,27 +2268,27 @@
     \end{proof}
 
     \begin{frameddefn}{Co-Turing-riconoscibilità}
-        Un linguaggio è detto \tbf{co-Turing-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi co-Turing-riconoscibili è denotata con \COREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \COREC \iff \overline L \in \REC$$
+        Un linguaggio è detto \tbf{co-Turing-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi co-Turing-riconoscibili è denotata con \coREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \coREC \iff \overline L \in \REC$$
     \end{frameddefn}
 
     \begin{framedthm}[label={coturing thm}]{Co-Turing-riconoscibilità}
-        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e co-Turing-riconoscibile; in simboli $$\DEC = \REC \cap \COREC$$
+        Un linguaggio è decidibile se e solo se è Turing-riconoscibile e co-Turing-riconoscibile; in simboli $$\DEC = \REC \cap \coREC$$
     \end{framedthm}
 
     \proofiff{
-        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\overline L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \overline L$, si ha che $\overline L \in \DEC$ per definizione stessa, ed in particolare $$\overline L \in \DEC \implies \overline L \in \REC \iff L \in \COREC$$
+        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\overline L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \overline L$, si ha che $\overline L \in \DEC$ per definizione stessa, ed in particolare $$\overline L \in \DEC \implies \overline L \in \REC \iff L \in \coREC$$
     }{
-        Sia $L$ tale che $L \in \REC$ e $L \in \COREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\overline L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\overline L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \overline L = \Sigma^* \\ L \cap \overline L = \varnothing}$$ e dunque $w \in L \iff w \notin \overline L$. Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
+        Sia $L$ tale che $L \in \REC$ e $L \in \coREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\overline L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\overline L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \overline L = \Sigma^* \\ L \cap \overline L = \varnothing}$$ e dunque $w \in L \iff w \notin \overline L$. Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
 
         Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\overline L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
     }
 
     \begin{framedcor}[label={a_tm not in corec}]{Irriconoscibilità di $\overline{A_\TM}$}
-        $A_\TM$ non è co-Turing-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \notin \COREC$$
+        $A_\TM$ non è co-Turing-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \notin \coREC$$
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff A_\TM \notin \COREC$$
+        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff A_\TM \notin \coREC$$
     \end{proof}
 
     \subsection{Problema del vuoto}
@@ -2300,10 +2296,6 @@
     \begin{frameddefn}{Linguaggi del vuoto}
         Si definiscono \tbf{linguaggi del vuoto} i linguaggi definiti come segue $$E_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C}: L(A) = \varnothing\}$$
     \end{frameddefn}
-
-    \begin{framedobs}{Decidibilità dei linguaggi $E_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio del vuoto è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se il linguaggio di un certo oggetto in $\mathcal C$ è vuoto} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $E_\mathcal C$, controllare che il linguaggio di $A \in \mathcal{C}$ sia vuoto equivale a controllare che $\abk{A}$ sia in $E_\mathcal{C}$.
-    \end{framedobs}
 
     \begin{framedthm}[label={dec e_dfa}]{Decidibilità di $E_\DFA$}
         $E_\DFA$ è decidibile; in simboli $$E_\DFA := \{\abk{A} \mid A \in \DFA: L(A) = \varnothing \} \in \DEC$$
@@ -2334,10 +2326,6 @@
     \begin{frameddefn}{Linguaggi dell'uguaglianza}
         Si definiscono \tbf{linguaggi dell'uguaglianza} i linguaggi definiti come segue: $$EQ_\mathcal{C} := \{\abk{A, B} \mid A, B \in \mathcal{C} : L(A) = L(B)\}$$
     \end{frameddefn}
-
-    \begin{framedobs}{Decidibilità dei linguaggi $EQ_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio dell'uguaglianza è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se due oggetti in $\mathcal C$ siano equivalenti} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $EQ_\mathcal C$, controllare che $A \in \mathcal{C}$ sia equivalente a $B \in \mathcal C$ corrisponde a controllare che $\abk{A,B}$ sia in $EQ_\mathcal{C}$.
-    \end{framedobs}
 
     \begin{frameddefn}{Differenza simmetrica}
         Siano $A$ e $B$ due insiemi; allora, si definisce \tbf{differenza simmetrica} tra $A$ e $B$ la seguente: $$A \ \Delta \ B := (A \cap \overline B) \cup (\overline A \cap B)$$
@@ -2454,10 +2442,6 @@
         Si definiscono \tbf{linguaggi di terminazione} i linguaggi definiti come segue $$HALT_\mathcal{C} := \{\abk{A, w} \mid A \in \mathcal{C} , A \ \textrm{si ferma su input} \ w\}$$
     \end{frameddefn}
 
-    \begin{framedobs}{Decidibilità dei linguaggi $HALT_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio di terminazione è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se un certo oggetto in $\mathcal C$ si ferma su input $w$} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $HALT_\mathcal C$, controllare che $A \in \mathcal{C}$ si fermi su input $w$ equivale a controllare che $\abk{A,w}$ sia in $HALT_\mathcal{C}$.
-    \end{framedobs}
-
     \begin{framedthm}{Indecidibilità di $HALT_\TM$}
         $HALT_\TM$ è indecidibile; in simboli $$HALT_\TM := \{\abk{M, w} \mid M \in \TM , M \ \textrm{si ferma su input} \ w\} \notin \DEC$$
     \end{framedthm}
@@ -2523,10 +2507,6 @@
     \begin{frameddefn}{Linguaggi di regolarità}
         Si definiscono \tbf{linguaggi di regolarità} i linguaggi definiti come segue $$REG_\mathcal{C} := \{\abk{A} \mid A \in \mathcal{C} , L(A) \in \REG\}$$
     \end{frameddefn}
-
-    \begin{framedobs}{Decidibilità dei linguaggi $REG_\mathcal C$}
-        Si noti che, dimostrare che un linguaggio di regolarità è decidibile per una certa classe di oggetti $\mathcal{C}$, equivale a dimostrare che \curlyquotes{stabilire se il linguaggio di un certo oggetto in $\mathcal C$ sia regolare} è un problema \tit{computabile}, e dunque per l'\cref{alg tm} di fatto esiste una macchina di Turing che può stabilirlo \tit{senza andare in loop}; infatti, per definizione stessa di $REG_\mathcal C$, controllare che il linguaggio di $A \in \mathcal{C}$ sia regolare equivale a controllare che $\abk{A}$ sia in $REG_\mathcal{C}$.
-    \end{framedobs}
 
     \begin{framedthm}{Indecidibilità di $REG_\TM$}
         $REG_\TM$ è indecidibile; in simboli $$REG_\TM := \{\abk{M} \mid M \in \TM , L(M) \in \REG\} \notin \DEC$$
@@ -2599,19 +2579,19 @@
     \end{proof}
 
     \begin{framedcor}[label={corec w red}]{Co-riconoscibilità mediante riduzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $B$ è co-Turing-riconoscibile, allora $A$ è co-Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \COREC} \implies A \in \COREC$$
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $B$ è co-Turing-riconoscibile, allora $A$ è co-Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ B \in \coREC} \implies A \in \coREC$$
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{red compl} si ha che $$A \leq_\mathrm m B \iff \overline{A} \leq_\mathrm m \overline B$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m \overline B \\ B \in \COREC \iff \overline B \in \REC} \implies \overline A \in \REC \iff A \in \COREC$$ 
+        Per il \cref{red compl} si ha che $$A \leq_\mathrm m B \iff \overline{A} \leq_\mathrm m \overline B$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m \overline B \\ B \in \coREC \iff \overline B \in \REC} \implies \overline A \in \REC \iff A \in \coREC$$ 
     \end{proof}
 
     \begin{framedcor}[label={corec w red cor}]{Co-irriconoscibilità mediante riduzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $A$ non è co-Turing-riconoscibile, allora $B$ è non co-Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \COREC} \implies B \notin \COREC$$
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm m B$, ed $A$ non è co-Turing-riconoscibile, allora $B$ è non co-Turing-riconoscibile. In simboli $$\soe{l}{A \leq_\mathrm m B \\ A \notin \coREC} \implies B \notin \coREC$$
     \end{framedcor}
 
     \begin{proof}
-        Per assurdo, sia $B \in \COREC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{corec w red}, si ha che $A \in \COREC$ $\lightning$.
+        Per assurdo, sia $B \in \coREC$; allora, poiché $A \leq_\mathrm m B$, per il \cref{corec w red}, si ha che $A \in \coREC$ $\lightning$.
     \end{proof}
 
     \begin{framedcor}{Riducibilità al proprio complemento}
@@ -2619,7 +2599,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{red compl} si ha che $$A \leq_\mathrm m \overline A \iff \overline A \leq_\mathrm m \overline {\overline A} = A$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m A \\ A \in \REC} \implies \overline A \in \REC \iff A \in \COREC$$ e poiché $$\DEC = \REC \cap \COREC$$ per il \cref{coturing thm}, segue che $A \in \DEC$.
+        Per il \cref{red compl} si ha che $$A \leq_\mathrm m \overline A \iff \overline A \leq_\mathrm m \overline {\overline A} = A$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m A \\ A \in \REC} \implies \overline A \in \REC \iff A \in \coREC$$ e poiché $$\DEC = \REC \cap \coREC$$ per il \cref{coturing thm}, segue che $A \in \DEC$.
     \end{proof}
 
     \subsection{Problema dell'uguaglianza}
@@ -2643,15 +2623,15 @@
             \item $F$ restituisce $\abk{M_1, M_2}$ sul suo nastro.
         \end{itemize}
 
-        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M_1, M_2}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M, w}}{\abk{M_1, M_2}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma ^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1) = \varnothing \neq L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \notin EQ_\TM \iff \abk{M_1, M_2} \in \overline{EQ_\TM}$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in \overline{EQ_\TM}$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $A_\TM \notin \COREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $\overline{EQ_\TM} \notin \COREC \iff EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
+        Si noti dunque che, poiché $F$ si ferma avendo solo $\abk{M_1, M_2}$ sul nastro, per qualsiasi input $\abk{M, w}$, la funzione $\funcmap{f}{\Sigma^*}{\Sigma^*}{\abk{M, w}}{\abk{M_1, M_2}}$ che $F$ descrive è calcolabile per definizione. Allora, si noti che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma ^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1) = \varnothing \neq L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \notin EQ_\TM \iff \abk{M_1, M_2} \in \overline{EQ_\TM}$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in \overline{EQ_\TM}$$ Allora, per definizione, segue che $$A_\TM \leq_\mathrm m \overline{EQ_\TM}$$ e poiché $A_\TM \notin \coREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $\overline{EQ_\TM} \notin \coREC \iff EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
     \end{proof}
 
     \begin{framedthm}{Irriconoscibilità di $\overline{EQ_\TM}$}
-        $EQ_\TM$ non è co-Turing-riconoscibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \COREC$$
+        $EQ_\TM$ non è co-Turing-riconoscibile; in simboli $$EQ_\TM := \{\abk{M_1, M_2} \mid M_1, M_2 \in \TM, L(M_1) = L(M_2)\} \notin \coREC$$
     \end{framedthm}
 
     \begin{proof}
-        Si consideri la dimostrazione del \cref{eq_tm not in rec}; in essa, la \TM $F$ costruisce due macchine di Turing $M_1$ ed $M_2$, dove la prima riconosce $\varnothing$. Se $M_1$ fosse invece tale da accettare sempre, riconoscerebbe $\Sigma^*$, e dunque si avrebbe che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1)=L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \in EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in EQ_\TM$$ Allora, per definizione, segue $$A_\TM \leq_\mathrm m EQ_\TM$$ e poiché $A_\TM \notin \COREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
+        Si consideri la dimostrazione del \cref{eq_tm not in rec}; in essa, la \TM $F$ costruisce due macchine di Turing $M_1$ ed $M_2$, dove la prima riconosce $\varnothing$. Se $M_1$ fosse invece tale da accettare sempre, riconoscerebbe $\Sigma^*$, e dunque si avrebbe che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1)=L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \in EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in EQ_\TM$$ Allora, per definizione, segue $$A_\TM \leq_\mathrm m EQ_\TM$$ e poiché $A_\TM \notin \coREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
     \end{proof}
 
     \section{Esercizi}
@@ -2677,7 +2657,7 @@
     \end{framedprob}
 
     \addtocontents{toc}{\protect\newpage}
-    \chapter{Complessità temporale}
+    \chapter{Complessità di tempo}
 
     \section{Analisi asintotica}
     
@@ -2797,7 +2777,15 @@
         Allora, il costo temporale di $M$ risulta essere $$O(n) + O(n) + O(n^2) + O(n) = O(\max(n, n, n^2, n)) = O(n^2)$$ (si veda la \cref{alg asintotica}) e dunque, segue che $L \in \DTIME \rbk{n^2}$.
     \end{example}
 
-    \subsection{Funzioni polinomialmente calcolabili}
+    \subsection{Classe \Pclass}
+
+    \begin{frameddefn}{Classe \Pclass}
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass := \bigcup_{k \in \N}{\DTIME\rbk{n^k}}$$
+    \end{frameddefn}
+
+    \begin{framedobs}{Classe \Pclass}
+        La classe di problemi descritti dai linguaggi in \Pclass è particolarmente importante, poiché \Pclass corrisponde approssimativamente alla classe dei problemi che sono realisticamente risolvibili su un computer, in tempi ragionevoli.
+    \end{framedobs}
 
     \begin{frameddefn}{Funzione polinomialmente calcolabile}
         Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione polinomialmente calcolabile} se esiste una macchina di Turing in tempo polinomiale che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
@@ -2811,15 +2799,9 @@
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm P B \iff \overline A \leq_\mathrm P \overline B$$
     \end{framedlem}
 
-    \subsection{Classe \Pclass}
-
-    \begin{frameddefn}{Classe \Pclass}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass := \bigcup_{k \in \N}{\DTIME\rbk{n^k}}$$
-    \end{frameddefn}
-
-    \begin{framedobs}{Classe \Pclass}
-        La classe di problemi descritti dai linguaggi in \Pclass è particolarmente importante, poiché \Pclass corrisponde approssimativamente alla classe dei problemi che sono realisticamente risolvibili su un computer, in tempi ragionevoli.
-    \end{framedobs}
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione del \cref{red compl}, pertanto verrà omessa.
+    \end{proof}
 
     \begin{framedobs}{Rappresentazione di grafi}
         Nelle prossime dimostrazioni si assumerà che sia possibile definire una codifica coerente per rappresentare grafi $G = (V, E)$, al fine di fornire questi in input a macchine di Turing; un esempio potrebbe essere quello della matrice di adiacenza, in cui la generica cella è definita come segue: $$\forall i, j \in [1, \abs{V}] \quad m_{i, j} = \soe{ll}{1 & (v_i, v_j) \in E \\ 0 & (v_i, v_j) \notin E}$$ dove $v_i, v_j\in V$.
@@ -2866,6 +2848,20 @@
         Per assurdo, sia $B \in \Pclass$; allora, poiché $A \leq_\mathrm P B$, per il \cref{p w red}, si ha che $A \in \Pclass$ $\lightning$.
     \end{proof}
 
+    \subsection{Classe \coPclass}
+    
+    \begin{frameddefn}{Classe \coPclass}
+        La classe \coPclass è definita come segue: $$\coPclass := \{ L \in \DEC \mid \overline L \in \Pclass \}$$
+    \end{frameddefn}
+
+    \begin{framedthm}[label={p = cop}]{$\Pclass = \coPclass$}
+        Si verifica che $$\Pclass = \coPclass$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
     \subsection{Classe \EXP}
 
     \begin{frameddefn}{Classe \EXP}
@@ -2887,6 +2883,24 @@
     \begin{framedthm}{$HAMPATH$ in \EXP}
         TODO
     \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \subsection{Classe \coEXP}
+
+    \begin{frameddefn}{Classe \coEXP}
+        La classe \coEXP è definita come segue: $$\coEXP := \{L \in \DEC \mid \overline A \in \EXP\}$$
+    \end{frameddefn}
+
+    \begin{framedthm}[label={exp = coexp}]{$\EXP = \coEXP$}
+        Si verifica che $$\EXP = \coEXP$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
 
     \subsection{Classe \NTIME}
 
@@ -2995,7 +3009,7 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={clique in np}]{$CLIQUE$ in \NPclass}
-        Sia $CLIQUE$ il linguaggio definico come segue: $$CLIQUE := \{\abk{G, k} \mid G = (V_G, E_G) \ \textrm{grafo non diretto contenente una $k$-clique}\}$$ Allora, si ha che $CLIQUE \in \NPclass$.
+        Sia $CLIQUE$ il linguaggio definito come segue: $$CLIQUE := \{\abk{G, k} \mid G = (V_G, E_G) \ \textrm{grafo non diretto contenente una $k$-clique}\}$$ Allora, si ha che $CLIQUE \in \NPclass$.
     \end{framedthm}
 
     \begin{proof}
@@ -3003,11 +3017,93 @@
 
         \begin{enumerate}
             \item $V$ interpreta $c$ come sottoinsieme di $V_G$;
-            \item $V$ controlla se esiste un arco in $E_G$ tra ogni coppia di nodi dell'insieme descritto da $c$;
+            \item $V$ controlla se esiste un arco in $E_G$ tra ogni coppia di nodi dell'insieme descritto dal certificato $c$;
             \item se gli archi sono presenti tutti, $V$ accetta, altrimenti rifiuta.
         \end{enumerate}
 
         Allora, $V$ risulta essere un verificatore di $CLIQUE$, poiché per costruzione $V$ accetta se e solo se esiste un sottoinsieme di nodi $c \in \Sigma^*$ tale che $\abk{\abk{G, k} c} \in L(V)$; inoltre $V$ è un verificatore polinomiale, poiché l'istruzione 2 richiede tempo $O(n^2)$. Allora, per il \cref{np verif}, segue la tesi.
+    \end{proof}
+
+    \subsection{Classe \NPComplete}
+
+    \begin{frameddefn}{\NPclass-difficoltà}
+        Un linguaggio $L$ è detto essere \tbf{\NPclass-difficile} se e solo se ogni altro linguaggio in \NPclass è polinomialmente riducibile ad $L$. In simboli $$\NPHard := \{L \mid \forall L' \in \NPclass \quad L' \leq_\mathrm P L\}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}[label={np completeness def}]{\NPclass-completezza}
+        Un linguaggio è detto essere \tbf{\NPclass-completo} se e solo se è in \NPclass ed è \NPclass-difficile. In simboli $$\NPComplete := \NPclass \cap \NPHard$$
+    \end{frameddefn}
+
+    \begin{framedobs}{\curlyquotes{\Pclass versus \NPclass problem}}
+        Uno dei \href{https://en.wikipedia.org/wiki/Millennium_Prize_Problems#P_versus_NP}{problemi del millennio} consiste nello stabilire se \href{https://en.wikipedia.org/wiki/P_versus_NP_problem}{\Pclass coincide o meno con \NPclass}.
+        
+        Intuitivamente, è possibile interpretare tale problema aperto attraverso il seguente quesito: \tit{per tutti i problemi per cui un algoritmo può verificare efficientemente la correttezza di una data soluzione, esiste un algoritmo che è anche in grado di trovare tale soluzione efficientemente?} Infatti, si ritiene che $\Pclass \neq \NPclass$.
+    \end{framedobs}
+
+    \begin{framedprop}[label={p = np impl 3}]{Implicazioni di $\Pclass = \NPclass$}
+        Sia $L$ un linguaggio \NPclass-completo; allora si ha che $$L \in \Pclass \iff \Pclass = \NPclass$$
+    \end{framedprop}
+
+    \proofiff{
+        Per la \cref{np completeness def} si ha che $$\soe{l}{L \in \NPComplete \\ L \in \Pclass} \implies \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \Pclass}$$ dunque in particolare, dato un linguaggio $L' \in \NPclass$, se $L \in \NPComplete \cap \Pclass$ segue che $$\soe{l}{L' \leq_\mathrm P L \\ L \in \Pclass} \implies L' \in \Pclass$$ per il \cref{p w red}; dunque $\NPclass \subseteq \Pclass$. Inoltre, poiché $\Pclass \subseteq \NPclass$ per il \cref{time hier}, segue la tesi.
+    }{
+        Trivialmente, dalle ipotesi e dalla \cref{np completeness def} segue che $$L \in \NPComplete \implies L \in \NPclass = \Pclass$$
+    }
+
+    \begin{framedthm}{\NPComplete mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, $A$ è \NPclass-completo, e $B$ è in \NPclass, allora $B$ è \NPclass-completo. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \in \NPComplete \\ B \in \NPclass} \implies B \in \NPComplete$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \subsection{Classe \coNPclass}
+
+    \begin{frameddefn}{Classe \coNPclass}
+        La classe \coNPclass è definita come segue: $$\coNPclass := \{L \in \DEC \mid \overline L \in \NPclass\}$$
+    \end{frameddefn}
+
+    \begin{framedprop}[label={ho finito i nomi}]{$\Pclass \subseteq \coNPclass \subseteq \EXP$}
+        Si verifica che $$\Pclass \subseteq \coNPclass \subseteq \EXP$$
+    \end{framedprop}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedthm}[label={p = np impl 1}]{Implicazioni di $\Pclass = \NPclass$}
+        Si verifica che $$\Pclass = \NPclass \implies \Pclass = \coNPclass$$
+    \end{framedthm}
+
+    \begin{proof}
+        Per il \cref{ho finito i nomi}, si ha che $\Pclass \subseteq \coNPclass$; inoltre, preso un linguaggio $L \in \coNPclass$, si ha che $$L \in \coNPclass \iff \overline L \in \NPclass = \Pclass$$ e dunque segue la tesi per doppia inclusione.
+    \end{proof}
+
+    \begin{framedcor}[label={p = np impl 2}]{Implicazioni di $\Pclass = \NPclass$}
+        Si verifica che $$\Pclass = \NPclass \implies \NPclass = \coNPclass$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per il \cref{p = np impl 1}, si ha che $$\Pclass = \NPclass \implies \NPclass = \Pclass = \coNPclass$$
+    \end{proof}
+
+    \subsection{Classe \coNPComplete}
+
+    \begin{frameddefn}{\coNPclass-difficoltà}
+        Un linguaggio $L$ è detto essere \tbf{\coNPclass-difficile} se e solos e ogni altro linguaggio in \coNPclass è polinomialmente riducibile ad $L$. In simboli $$\coNPclass := \{L \mid \forall L' \in \coNPclass \quad L' \leq_\mathrm P L\}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}{\coNPclass-completezza}
+        Un linguaggio è detto essere \tbf{\coNPclass-completo} se e solo se è in \coNPclass ed è \coNPclass-difficile. In simboli $$\coNPComplete := \coNPclass \cap \coNPHard$$
+    \end{frameddefn}
+
+    \begin{framedthm}{\coNPclass-completezza dei complementi}
+        Dato un linguaggio $L$, si ha che $$L \in \NPComplete \iff \overline L \in \coNPComplete$$
+    \end{framedthm}
+
+    \begin{proof}
+        $$\centeredsoe{L \in \NPComplete \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L} \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad \overline{L'} \leq_\mathrm P L} \iff \\ \iff \soe{l}{\overline L \in \coNPclass \\ \forall \overline{L'} \in \coNPclass \quad \overline{L'} \leq_\mathrm P \overline L} \iff \overline L \in \coNPComplete}$$
     \end{proof}
 
     \subsection{Classe \NEXP}
@@ -3032,70 +3128,8 @@
         Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora, la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
     \end{proof}
 
-    \section{\NPclass-completezza}
+    \chapter{Complessità di spazio}
 
-    \subsection{Teorema di Cook-Levin}
-
-    \begin{framedobs}{\curlyquotes{\Pclass versus \NPclass problem}}
-        Uno dei \href{https://en.wikipedia.org/wiki/Millennium_Prize_Problems#P_versus_NP}{problemi del millennio} consiste nello stabilire se \href{https://en.wikipedia.org/wiki/P_versus_NP_problem}{\Pclass coincide o meno con \NPclass}. Intuitivamente, è possibile interpretare tale problema aperto attraverso il seguente quesito: \tit{per tutti i problemi per cui un algoritmo può verificare efficientemente la correttezza di una data soluzione, esiste un algoritmo che è anche in grado di trovare tale soluzione efficientemente?}
-        
-        Nonostante sia un problema aperto, è ritenuto che $\Pclass \neq \NPclass$.
-    \end{framedobs}
-
-    \begin{frameddefn}{\NPclass-difficoltà}
-        Un linguaggio $L$ è detto essere \tbf{\NPclass-difficile} se e solo se ogni altro linguaggio in \NPclass è polinomialmente riducibile ad $L$. In simboli $$\NPHard := \{L \mid \forall L' \in \NPclass \quad L' \leq_\mathrm P L\}$$
-    \end{frameddefn}
-
-    \begin{frameddefn}[label={np completeness def}]{\NPclass-completezza}
-        Un linguaggio è detto essere \tbf{\NPclass-completo} se e solo se è in \NPclass ed è \NPclass-difficile. In simboli $$\NPComplete := \NPclass \cap \NPHard$$
-    \end{frameddefn}
-
-    \begin{framedprop}{\Pclass = \NPclass}
-        Sia $L$ un linguaggio \NPclass-completo; allora si ha che $L \in \Pclass \iff \Pclass = \NPclass$.
-    \end{framedprop}
-
-    \proofiff{
-        Per la \cref{np completeness def} si ha che $$\soe{l}{L \in \NPComplete \\ L \in \Pclass} \implies \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \Pclass}$$ dunque in particolare, dato un linguaggio $L' \in \NPclass$, se $L \in \NPComplete \cap \Pclass$ segue che $$\soe{l}{L' \leq_\mathrm P L \\ L \in \Pclass} \implies L' \in \Pclass$$ per il \cref{p w red}; dunque $\NPclass \subseteq \Pclass$. Inoltre, poiché $\Pclass \subseteq \NPclass$ per il \cref{time hier}, segue la tesi.
-    }{
-        Trivialmente, dalle ipotesi e dalla \cref{np completeness def} segue che $$L \in \NPComplete \implies L \in \NPclass = \Pclass$$
-    }
-
-    \begin{framedthm}{\NPComplete mediante riduzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, $A$ è \NPclass-completo, e $B$ è in \NPclass, allora $B$ è \NPclass-completo. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \in \NPComplete \\ B \in \NPclass} \implies B \in \NPComplete$$
-    \end{framedthm}
-
-    \begin{proof}
-        TODO
-    \end{proof}
-
-    \begin{framedthm}{Teorema di Cook-Levin}
-        TODO
-    \end{framedthm}
-
-    \begin{proof}
-        TODO
-    \end{proof}
-
-    \begin{framedobs}{boh}
-        \begin{center}
-            \begin{tikzpicture}[fill=gray]
-                \scope
-                \clip (-2,-2) rectangle (2,2)
-                      (1,0) circle (1);
-                \fill (0,0) circle (1);
-                \endscope
-                \scope
-                \clip (-2,-2) rectangle (2,2)
-                      (0,0) circle (1);
-                \fill (1,0) circle (1);
-                \endscope
-                \draw (0,0) circle (1) (0,1)  node [text=black,above] {$A$}
-                      (1,0) circle (1) (1,1)  node [text=black,above] {$B$}
-                      (-2,-2) rectangle (3,2) node [text=black,above] {$U$};
-            \end{tikzpicture}
-        \end{center}
-    \end{framedobs}
-
-    \section{}
+    TODO
 
 \end{document}
