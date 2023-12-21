@@ -67,7 +67,7 @@
 \contentsline {subsection}{\numberline {3.3.5}Problema dell'uguaglianza}{75}{subsection.3.3.5}%
 \contentsline {chapter}{\numberline {4}Riducibilità}{78}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Riduzione}{78}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Definizioni}{78}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.1}Funzioni calcolabili}{78}{subsection.4.1.1}%
 \contentsline {section}{\numberline {4.2}Turing-decidibilità mediante riduzione}{79}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Teoremi}{79}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Problema della terminazione}{80}{subsection.4.2.2}%
@@ -87,10 +87,12 @@
 \contentsline {subsection}{\numberline {5.1.2}Varianti di macchine di Turing}{90}{subsection.5.1.2}%
 \contentsline {section}{\numberline {5.2}Classi di complessità di tempo}{91}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Classe \textsf {DTIME}\xspace }{91}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Classe \textsf {P}\xspace }{92}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Classe \textsf {EXP}\xspace }{94}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Classe \textsf {NTIME}\xspace }{94}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}Classe \textsf {NP}\xspace }{95}{subsection.5.2.5}%
-\contentsline {subsection}{\numberline {5.2.6}Classe \textsf {NEXP}\xspace }{97}{subsection.5.2.6}%
-\contentsline {section}{\numberline {5.3}NP-completezza}{98}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Problema aperto}{98}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.2.2}Funzioni polinomialmente calcolabili}{92}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Classe \textsf {P}\xspace }{92}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Classe \textsf {EXP}\xspace }{94}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Classe \textsf {NTIME}\xspace }{95}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}Classe \textsf {NP}\xspace }{95}{subsection.5.2.6}%
+\contentsline {subsection}{\numberline {5.2.7}Classe \textsf {NEXP}\xspace }{99}{subsection.5.2.7}%
+\contentsline {section}{\numberline {5.3}\textsf {NP}\xspace -completezza}{99}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Teorema di Cook-Levin}{99}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}}{101}{section.5.4}%

@@ -2398,7 +2398,7 @@
 
     \section{Riduzione}
 
-    \subsection{Definizioni}
+    \subsection{Funzioni calcolabili}
 
     \begin{frameddefn}{Riduzione}
         Una \tbf{riduzione} è un modo di convertire un problema in un altro, in modo tale che una soluzione al secondo possa essere utilizzata per risolvere il primo.
@@ -2797,10 +2797,24 @@
         Allora, il costo temporale di $M$ risulta essere $$O(n) + O(n) + O(n^2) + O(n) = O(\max(n, n, n^2, n)) = O(n^2)$$ (si veda la \cref{alg asintotica}) e dunque, segue che $L \in \DTIME \rbk{n^2}$.
     \end{example}
 
+    \subsection{Funzioni polinomialmente calcolabili}
+
+    \begin{frameddefn}{Funzione polinomialmente calcolabile}
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione polinomialmente calcolabile} se esiste una macchina di Turing in tempo polinomiale che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Riduzione polinomiale mediante funzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$}, se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $A \leq_\mathrm P B$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
+    \end{frameddefn}
+
+    \begin{framedlem}{Riducibilità polinomiale dei complementi}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm P B \iff \overline A \leq_\mathrm P \overline B$$
+    \end{framedlem}
+
     \subsection{Classe \Pclass}
 
     \begin{frameddefn}{Classe \Pclass}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass = \bigcup_{k \in \N}{\DTIME\rbk{n^k}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo polinomiale} da una \TM a singolo nastro il seguente insieme $$\Pclass := \bigcup_{k \in \N}{\DTIME\rbk{n^k}}$$
     \end{frameddefn}
 
     \begin{framedobs}{Classe \Pclass}
@@ -2830,17 +2844,13 @@
         \end{itemize}
 
         Dunque, poiché $\abs{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), sicuramente $\abs{E} = O(n)$, e dunque la complessità temporale di $M$ risulta essere (rispettivamente per ogni istruzione): $$O\rbk{n^k} + O(1) + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
-    \end{proof}
+    \end{proof} 
     
-    \begin{frameddefn}{Funzione polinomialmente calcolabile}
-        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione polinomialmente calcolabile} se esiste una macchina di Turing in tempo polinomiale che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
-    \end{frameddefn}
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione del \cref{red compl}, pertanto verrà omessa.
+    \end{proof}
 
-    \begin{frameddefn}{Riduzione polinomiale mediante funzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$}, se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $A \leq_\mathrm P B$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
-    \end{frameddefn}
-
-    \begin{framedthm}[label={p w red}]{In \Pclass mediante riduzione}
+    \begin{framedthm}[label={p w red}]{\Pclass mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \Pclass, allora $A$ è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \Pclass} \implies A \in \Pclass$$
     \end{framedthm}
 
@@ -2848,7 +2858,7 @@
         La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano in tempo polinomiale; verrà dunque omessa.
     \end{proof}
 
-    \begin{framedcor}[label={p with red cor}]{Non in \Pclass mediante riduzione}
+    \begin{framedcor}[label={p with red cor}]{\Pclass mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $A$ non è in \Pclass, allora $B$ non è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \notin \Pclass} \implies B \notin \Pclass$$
     \end{framedcor}
 
@@ -2859,7 +2869,7 @@
     \subsection{Classe \EXP}
 
     \begin{frameddefn}{Classe \EXP}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo esponenziale} da una \TM a singolo nastro il seguente insieme $$\EXP = \bigcup_{k \in N}{\DTIME \rbk{2^{n^k}}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo esponenziale} da una \TM a singolo nastro il seguente insieme $$\EXP := \bigcup_{k \in N}{\DTIME \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
     \begin{framedprop}[label={p exp}]{Relazione tra \Pclass e \EXP}
@@ -2887,7 +2897,7 @@
     \subsection{Classe \NPclass}
     
     \begin{frameddefn}[label={np def}]{Classe \NPclass}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo polinomiale} da una \NTM il seguente insieme $$\NPclass = \bigcup_{k \in \N}{\NTIME \rbk{n^k}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo polinomiale} da una \NTM il seguente insieme $$\NPclass := \bigcup_{k \in \N}{\NTIME \rbk{n^k}}$$
     \end{frameddefn}
 
     \begin{framedprop}[label={np exp}]{Tempo polinomiale in \NTIME}
@@ -2907,6 +2917,22 @@
     \begin{framedobs}{Lunghezza dei certificati di verificatori}
         Sia $V$ un verificatore che computa in $O(f(n))$ per qualche $f$, e sia $\abk{w, c} \in L(V)$; la lunghezza di $c$ deve necessariamente essere in $O(f(n))$ --- rispetto alla lunghezza di $w$ --- poiché $O(f(n))$ è proprio il tempo di cui $V$ dispone per computare.
     \end{framedobs}
+
+    \begin{framedthm}[label={np w red}]{\NPclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \NPclass, allora $A$ è in \NPclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \NPclass} \implies A \in \NPclass$$
+    \end{framedthm}
+
+    \begin{proof}
+        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano non deterministicamente in tempo polinomiale; verrà dunque omessa.
+    \end{proof}
+
+    \begin{framedcor}[label={np with red cor}]{\NPclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $A$ non è in \NPclass, allora $B$ non è in \NPclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \notin \NPclass} \implies B \notin \NPclass$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \NPclass$; allora, poiché $A \leq_\mathrm P B$, per il \cref{np w red}, si ha che $A \in \NPclass$ $\lightning$.
+    \end{proof}
 
     \begin{framedthm}[label={np verif}]{Linguaggi polinomialmente verificabili}
         \NPclass è la classe dei linguaggi polinomialmente verificabili.
@@ -2951,7 +2977,7 @@
             \item se esiste un arco $(v_i, v_j) \in E_G$, con $i, j \in [1, \abs{V_G}] \mid i \neq j$ tale che $c_i = c_j$, $V$ rifiuta; se tali archi non esistono, $V$ accetta.
         \end{enumerate}
 
-        Dunque, poiché $V$ accetta $\abk{w, c}$
+        Dunque, poiché $V$ accetta $\abk{w, c}$ TODO
 
         Allora, si ha che:
 
@@ -2964,14 +2990,30 @@
         In conclusione, $V$ ha costo pari a $$O(n) + TODO + O(n^2) = TODO$$ dunque $V$ è un verificatore polinomiale, e per il \cref{np verif} segue che $3COL \in \NPclass$.
     \end{proof}
 
-    \begin{framedthm}{$CLIQUE$ in \Pclass}
-        TODO
+    \begin{frameddefn}{$k$-clique}
+        Sia $G$ un grafo non diretto; una \tbf{$k$-clique} di $G$ è un sottografo di $G$ in cui ogni nodo è collegato con ogni altro nodo.
+    \end{frameddefn}
+
+    \begin{framedthm}[label={clique in np}]{$CLIQUE$ in \NPclass}
+        Sia $CLIQUE$ il linguaggio definico come segue: $$CLIQUE := \{\abk{G, k} \mid G = (V_G, E_G) \ \textrm{grafo non diretto contenente una $k$-clique}\}$$ Allora, si ha che $CLIQUE \in \NPclass$.
     \end{framedthm}
+
+    \begin{proof}
+        Sia $V$ una macchina di Turing che, data una codifica $\abk{\abk{G, k}, c}$ in input, computa come segue:
+
+        \begin{enumerate}
+            \item $V$ interpreta $c$ come sottoinsieme di $V_G$;
+            \item $V$ controlla se esiste un arco in $E_G$ tra ogni coppia di nodi dell'insieme descritto da $c$;
+            \item se gli archi sono presenti tutti, $V$ accetta, altrimenti rifiuta.
+        \end{enumerate}
+
+        Allora, $V$ risulta essere un verificatore di $CLIQUE$, poiché per costruzione $V$ accetta se e solo se esiste un sottoinsieme di nodi $c \in \Sigma^*$ tale che $\abk{\abk{G, k} c} \in L(V)$; inoltre $V$ è un verificatore polinomiale, poiché l'istruzione 2 richiede tempo $O(n^2)$. Allora, per il \cref{np verif}, segue la tesi.
+    \end{proof}
 
     \subsection{Classe \NEXP}
 
     \begin{frameddefn}{Classe \NEXP}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo esponenziale} da una \NTM il seguente insieme $$\NEXP = \bigcup_{k \in \N}{\NTIME \rbk{2^{n^k}}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo esponenziale} da una \NTM il seguente insieme $$\NEXP := \bigcup_{k \in \N}{\NTIME \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
     \begin{framedprop}[label={np nexp}]{Relazione tra \NPclass e \NEXP}
@@ -2982,7 +3024,7 @@
         Omessa.
     \end{proof}
 
-    \begin{framedcor}{Gerarchia temporale}
+    \begin{framedcor}[label={time hier}]{Gerarchia temporale}
         Si verifica che $$\Pclass \subseteq \NPclass \subseteq \EXP \subseteq \NEXP$$ dove $\Pclass \subsetneq \EXP$ e $\NPclass \subsetneq \NEXP$.
     \end{framedcor}
 
@@ -2990,13 +3032,70 @@
         Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora, la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
     \end{proof}
 
-    \section{NP-completezza}
+    \section{\NPclass-completezza}
 
-    \subsection{Problema aperto}
+    \subsection{Teorema di Cook-Levin}
 
     \begin{framedobs}{\curlyquotes{\Pclass versus \NPclass problem}}
         Uno dei \href{https://en.wikipedia.org/wiki/Millennium_Prize_Problems#P_versus_NP}{problemi del millennio} consiste nello stabilire se \href{https://en.wikipedia.org/wiki/P_versus_NP_problem}{\Pclass coincide o meno con \NPclass}. Intuitivamente, è possibile interpretare tale problema aperto attraverso il seguente quesito: \tit{per tutti i problemi per cui un algoritmo può verificare efficientemente la correttezza di una data soluzione, esiste un algoritmo che è anche in grado di trovare tale soluzione efficientemente?}
         
-        È ritenuto che $\Pclass \neq \NPclass$, ma tutt'ora non è ancora stato dimostrato.
+        Nonostante sia un problema aperto, è ritenuto che $\Pclass \neq \NPclass$.
     \end{framedobs}
+
+    \begin{frameddefn}{\NPclass-difficoltà}
+        Un linguaggio $L$ è detto essere \tbf{\NPclass-difficile} se e solo se ogni altro linguaggio in \NPclass è polinomialmente riducibile ad $L$. In simboli $$\NPHard := \{L \mid \forall L' \in \NPclass \quad L' \leq_\mathrm P L\}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}[label={np completeness def}]{\NPclass-completezza}
+        Un linguaggio è detto essere \tbf{\NPclass-completo} se e solo se è in \NPclass ed è \NPclass-difficile. In simboli $$\NPComplete := \NPclass \cap \NPHard$$
+    \end{frameddefn}
+
+    \begin{framedprop}{\Pclass = \NPclass}
+        Sia $L$ un linguaggio \NPclass-completo; allora si ha che $L \in \Pclass \iff \Pclass = \NPclass$.
+    \end{framedprop}
+
+    \proofiff{
+        Per la \cref{np completeness def} si ha che $$\soe{l}{L \in \NPComplete \\ L \in \Pclass} \implies \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \Pclass}$$ dunque in particolare, dato un linguaggio $L' \in \NPclass$, se $L \in \NPComplete \cap \Pclass$ segue che $$\soe{l}{L' \leq_\mathrm P L \\ L \in \Pclass} \implies L' \in \Pclass$$ per il \cref{p w red}; dunque $\NPclass \subseteq \Pclass$. Inoltre, poiché $\Pclass \subseteq \NPclass$ per il \cref{time hier}, segue la tesi.
+    }{
+        Trivialmente, dalle ipotesi e dalla \cref{np completeness def} segue che $$L \in \NPComplete \implies L \in \NPclass = \Pclass$$
+    }
+
+    \begin{framedthm}{\NPComplete mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, $A$ è \NPclass-completo, e $B$ è in \NPclass, allora $B$ è \NPclass-completo. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \in \NPComplete \\ B \in \NPclass} \implies B \in \NPComplete$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedthm}{Teorema di Cook-Levin}
+        TODO
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedobs}{boh}
+        \begin{center}
+            \begin{tikzpicture}[fill=gray]
+                \scope
+                \clip (-2,-2) rectangle (2,2)
+                      (1,0) circle (1);
+                \fill (0,0) circle (1);
+                \endscope
+                \scope
+                \clip (-2,-2) rectangle (2,2)
+                      (0,0) circle (1);
+                \fill (1,0) circle (1);
+                \endscope
+                \draw (0,0) circle (1) (0,1)  node [text=black,above] {$A$}
+                      (1,0) circle (1) (1,1)  node [text=black,above] {$B$}
+                      (-2,-2) rectangle (3,2) node [text=black,above] {$U$};
+            \end{tikzpicture}
+        \end{center}
+    \end{framedobs}
+
+    \section{}
+
 \end{document}
