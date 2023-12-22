@@ -14,8 +14,8 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - finire i TODOs sparsi
     - PARLA DEGLI ALBERI
 
-- teorema di cook levin
 - insiemini carini
+- quando fai gerarchia di tempo leva le prop "relazione tra ..." e corollario 5.3.11.1
 
 - CONTROLLA GLI APPUNTI SULL'IPAD
 

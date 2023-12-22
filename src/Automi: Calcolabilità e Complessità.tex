@@ -2283,6 +2283,33 @@
         Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\overline L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
     }
 
+    \begin{framedobs}{Gerarchia dei linguaggi di Chomsky}
+        \begin{center}
+            \begin{tikzpicture}[fill=gray]
+                % \scope
+                % \clip (-2,-2) rectangle (2,2)
+                %       (1,0) circle (1);
+                % \fill (0,0) circle (1);
+                % \endscope
+                % \scope
+                % \clip (-2,-2) rectangle (2,2)
+                %       (0,0) circle (1);
+                % \fill (1,0) circle (1);
+                % \endscope
+                % \draw (0,0) circle (1) (0,1) node [text=black,above] {$A$}
+                %       (1,0) circle (1) (1,1) node [text=black,above] {$B$}
+                %       (0,0) circle [radiu]
+                      % (2.5,0) ellipse (1.5 and 0.5) [text=black,above] {$C$}
+                \draw (0,-0.25) circle [x radius=0.5, y radius=0.5] (0,-0.21) node {\REG};
+                \draw (0,0) circle [x radius=1, y radius=1] (0,0.7) node {\CFL};
+                % \draw (-1,2) circle []
+                % \draw (1,0) circle [x radius=1, y radius=1];
+            \end{tikzpicture}
+        \end{center}
+
+        TRICERATOPO
+    \end{framedobs}
+
     \begin{framedcor}[label={a_tm not in corec}]{Irriconoscibilità di $\overline{A_\TM}$}
         $A_\TM$ non è co-Turing-riconoscibile; in simboli $$A_\TM := \{\abk{M, w} \mid M \in \TM, w \in L(M)\} \notin \coREC$$
     \end{framedcor}
@@ -3052,12 +3079,40 @@
         Trivialmente, dalle ipotesi e dalla \cref{np completeness def} segue che $$L \in \NPComplete \implies L \in \NPclass = \Pclass$$
     }
 
-    \begin{framedthm}{\NPComplete mediante riduzione}
+    \begin{framedthm}[label={np-complete w red}]{\NPComplete mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, $A$ è \NPclass-completo, e $B$ è in \NPclass, allora $B$ è \NPclass-completo. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \in \NPComplete \\ B \in \NPclass} \implies B \in \NPComplete$$
     \end{framedthm}
 
     \begin{proof}
         TODO
+    \end{proof}
+
+    \begin{frameddefn}{Formula in 3CNF}
+        TODO
+    \end{frameddefn}
+
+    \begin{framedthm}{$3SAT$ riducibile a $CLIQUE$}
+        TODO
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedthm}[label={3sat np-complete}]{$3SAT$ in \NPComplete}
+        Si verifica che $$3SAT \in \NPComplete$$
+    \end{framedthm}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \begin{framedcor}{$CLIQUE$ in \NPComplete}
+        Si verifica che $$CLIQUE \in \NPComplete$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per il \cref{3sat np-complete}, per il \cref{clique in np}, e per il \cref{np-complete w red}, segue la tesi.
     \end{proof}
 
     \subsection{Classe \coNPclass}
@@ -3167,6 +3222,67 @@
 
     \begin{proof}
         Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora, la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
+    \end{proof}
+
+    \section{Teorema di Cook-Levin}
+
+    \subsection{Teorema di Cook-Levin}
+
+    \begin{framedthm}{Teorema di Cook-Levin}
+        Sia $SAT$ il linguaggio definito come: $$SAT := \{\abk{\phi} \mid \phi \ \textrm{formula soddisfacibile}\}$$ Allora, si ha che $SAT$ è \NPclass-completo.
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $V$ una macchina di Turing che, data una codifica $\abk{\phi, c}$ in input, computa come segue:
+
+        \begin{itemize}
+            \item $V$ interpreta $c$ come assegnamento alle variabili di $\phi$;
+            \item $V$ controlla che $\phi(c)$ sia soddisfatta, ed in tal caso accetta; in caso contrario, $V$ rifiuta;
+        \end{itemize}
+
+        Allora, $V$ risulta essere un verificatore di $SAT$, poiché per costruzione $V$ accetta se e solo se $c \in \Sigma^*$ è un assegnamento per $\phi$ tale che $\abk{\phi, c} \in L(V)$; inoltre, $V$ è un verificatore polinomiale, e dunque per il \cref {np verif} si ha che $SAT \in \NPclass$.
+
+        Sia $A \in \NPclass$, e dunque esiste una \NTM $N = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $A$ in tempo polinomiale. Sia consideri ora una stringa $w$ in input ad $N$, ed un \tit{tableau} --- \tit{per ognuno dei rami di computazione di $N$} --- definito come mostrato in figura:
+
+        \centeredimage{0.3}{../assets/tableau.png}
+
+        Dunque, sull'$i$-esima riga del tableau è presente l'$i$-esima configurazione che la macchina assume durante la computazione di $w$. Si noti che, poiché $N$ computa in tempo polinomiale, il nastro non può avere più di $n^k$ celle occupate, e dunque la tabella ha dimensione $n^k \times n^k$ (si assume che il tableau considerato sia quadrato anche se il nastro fosse utilizzato per meno di $n^k$ celle, andando a considerare celle vuote nella porzione di nastro non utilizzata). Un tableau è detto \tit{accettante} se almeno una sua riga contiene una configurazione accettante.
+
+        Si considerino ora le seguenti:
+
+        \begin{itemize}
+            \item dato $C := Q \cup \Gamma \cup \{ \ttt \# \}$, si definiscano variabili $$\forall i,j \in \sbk{1, n^k}, s \in C \quad x_{i, j, s} := \soe{ll}{\ttt 1 & T_{i, j} = s \\ \ttt 0 & T_{i, j} \neq s}$$ dunque, è possibile immaginare una stringa $x_{i, j}$ come stringa booleana che attraverso codifica \tit{one-hot encoding} mostra il carattere presente sulla cella $T_{i, j}$ del tableau; si definisce allora la seguente formula booleana, che descrive tale struttura: $\phi_\mathrm{cell}$: $$\phi_\mathrm{cell} := \bigwedge_{i, j \in \sbk{1, n^k}}{\sbk{\rbk{\bigvee_{s \in C}{x_{i, j, s}}} \land \rbk{\bigwedge_{\substack{s, t \in C \\ s \neq t}}{\overline{x_{i, j, s} \land x_{i, j, t}}}}}}$$
+
+                \begin{itemize}
+                    \item la prima parte della formula garantisce che almeno uno dei caratteri delle stringhe $x_{i, j}$ sia un \ttt 1;
+                    \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (letteralmente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
+                \end{itemize}
+
+            \item si definisce una formula booleana che impone che la prima riga del tableau considerato sia la configurazione iniziale di $N$, come segue: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ si noti che questa formula booleana impone che la prima riga del tableau considerato sia la configurazione iniziale di $N$;
+            \item si definisce una formula booleana che imponga che esista almeno una riga, del tableau considerato, contenente una configurazione accettante, come segue: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$
+            \item una \tit{finestra} $2 \times 3$ di un tableau è una porzione di tableau, composta da 3 celle di 2 righe diverse, in cui la prima riga contiene una porzione di configurazione corrente, e la seconda riga contiene una porzione di configurazione nel passo successivo; una finestra è detta \tit{lecita} se non viola le azioni specificate dalla funzione di transizione $\delta$ di $N$; ad esempio, se la $\delta$ ammette le seguenti configurazioni $$\centeredsoe{\delta(q_1, \ttt a) = \{(q_1, \ttt b, \mathrm R)\} \\ \delta(q_1, \ttt b) = \{(q_2, \ttt c, \mathrm L), (q_2, \ttt a, \mathrm R)\}}$$ i seguenti sono esempi di finestre lecite: TODO METTI FOTO O FAI TABELLE
+
+                Si consideri ora la seguente proposizione: \curlyquotes{dato un tableau ed una sua riga, se la riga superiore è la configurazione iniziale, ed ogni finestra nel tableau è lecita, ogni riga del tableau è una configurazione che segue legittimamente dalla precedente}; essa è vera poiché:
+
+                \begin{itemize}
+                    \item si consideri una coppia di configurazioni;
+                    \item ogni cella che contiene un simbolo di nastro e non è adiacente ad un simbolo di stato, rappresenta la cella centrale superiore di una finestra in cui la riga superiore non contiene stati; di conseguenza, questo stesso simbolo deve comparire nella cella centrale della seconda riga della finestra;
+                    \item una finestra contenente il simbolo di stato nella cella centrale superiore garantisce che le tre posizioni corrispondenti vengano aggiornate consistentemente tramite $\delta$; dunque, se la configurazione inferiore e lecita, deve esserlo necessariamente anche quella inferiore.
+                \end{itemize}
+
+                Dunque, si definisce una formula booleana che impone che, all'interno del tableau, esista ogni finestra legale possibile, come segue: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$
+        \end{itemize}
+
+        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se il tableau che rappresenta descrive una ramificazione di computazione accettante. Dunque, si consideri ora una \TM $M_\phi$ tale che, data in input $w$, se $N$ accetta, $M_\phi$ restituisce sul suo nastro $f(w) = \abk{\phi}$, dove $\phi$ rappresenta un tableau accettante. Di conseguenza, per costruzione $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
+
+        \begin{itemize}
+            \item $\phi_\mathrm{cell}$ richiede tempo $O\rbk{n^k} \cdot O\rbk{n^k} \cdot \abs{C} = O\rbk{n^{2k}}$ (poiché $\abs{C} = O(1)$ perché non dipende da $n$);
+            \item $\phi_\mathrm{start}$ richiede tempo $O\rbk{n^k}$, poiché rappresenta una sola riga del tableau;
+            \item $\phi_\mathrm{accept}$ richiede tempo $O\rbk{n^{2k}}$, poiché richiede che sia presente $q_\mathrm{accept}$ all'interno del tableau;
+            \item $\phi_\mathrm{move}$ richiede tempo $O\rbk{n^{k}} \cdot O\rbk{n^k} \cdot O\rbk{\Xi} = O\rbk{n^{2k}}$, dove $\Xi := \displaystyle \binom{\abs{C}}{6}$ poiché viene considerata ogni possibile finestra lecita per ogni cella del tableau.
+        \end{itemize}
+
+        Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard \iff SAT \in \NPComplete$$
     \end{proof}
 
     \chapter{Complessità di spazio}
