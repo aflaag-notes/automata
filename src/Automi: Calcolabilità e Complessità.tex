@@ -2663,14 +2663,6 @@
     
     \subsection{$O$-grande ed $o$-piccolo}
 
-    \begin{frameddefn}{Complessità temporale di una \TM}
-        Sia $D$ un decisore; si definisce \tbf{complessità temporale} (o \tbf{tempo di esecuzione}) di $D$ la funzione $\func{f}{\N}{\N}$ tale che $f(n)$ sia il numero massimo di passi che $D$ utilizza per processare una stringa di lunghezza $n$.
-    \end{frameddefn}
-
-    \begin{example}[Complessità temporali di \TM]
-        Sia $D$ un decisore che, data in input una stringa $x$, sposta la testina verso destra finché non legge $\blankchar$, e quando legge quest'ultimo accetta. Allora, se input è presente una stringa avente lunghezza $n$, $D$ impiega esattamente $n$ passi a processarla, e dunque $f(n) = n \implies f \equiv \id$.
-    \end{example}
-
     \begin{frameddefn}{$O$-grande}
         Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-grande} di $g(n)$ se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) \leq c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = O(g(n))$$ Viceversa, $g(n)$ è detto essere \tbf{limite superiore asintotico} per $f(n)$.
     \end{frameddefn}
@@ -2704,10 +2696,22 @@
         Si noti che tali regole valgono anche per $O$-grande, per l'\cref{small o big o obs}.
     \end{framedprop}
 
-    \subsection{Varianti di macchine di Turing}
+    \section{Complessità di tempo di macchine di Turing}
+
+    \subsection{Macchine di Turing}
+
+    \begin{frameddefn}{Complessità di tempo di una \TM}
+        Sia $D$ un decisore; si definisce \tbf{complessità di tempo} (o \tbf{tempo di esecuzione}) di $D$ la funzione $\func{f}{\N}{\N}$ tale che $f(n)$ sia il numero massimo di passi che $D$ utilizza per processare una stringa di lunghezza $n$.
+    \end{frameddefn}
+
+    \begin{example}[Complessità di tempo di \TM]
+        Sia $D$ un decisore che, data in input una stringa $x$, sposta la testina verso destra finché non legge $\blankchar$, e quando legge quest'ultimo accetta. Allora, se input è presente una stringa avente lunghezza $n$, $D$ impiega esattamente $n$ passi a processarla, e dunque $f(n) = n \implies f \equiv \id$.
+    \end{example}
+
+    \subsection{Macchine di Turing multinastro}
 
     \begin{framedthm}{Relazione tra \TM e \TM multinastro}
-        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $M$ una macchina di Turing multinastro avente tempo $t(n)$; allora, esiste una \TM $M'$, equivalente a $M$, avente tempo $O(t^2(n))$.
+        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $M$ una macchina di Turing multinastro avente tempo $t(n)$; allora, esiste una \TM $M'$, equivalente ad $M$, avente tempo $O(t^2(n))$.
     \end{framedthm}
 
     \begin{proof}
@@ -2722,8 +2726,10 @@
         \end{itemize}
     \end{proof}
 
+    \subsection{Macchine di Turing non deterministiche}
+
     \begin{framedthm}[label={ntm time}]{Relazione tra \TM ed \NTM}
-        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $M$ una macchina di Turing non deterministica avente tempo $t(n)$; allora, esiste una \TM $M'$, equivalente a $M$, avente tempo $2^{O(t(n))}$.
+        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $M$ una macchina di Turing non deterministica avente tempo $t(n)$; allora, esiste una \TM $M'$, equivalente ad $M$, avente tempo $2^{O(t(n))}$.
     \end{framedthm}
 
     \begin{proof}
@@ -2795,7 +2801,7 @@
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$}, se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $A \leq_\mathrm P B$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
     \end{frameddefn}
 
-    \begin{framedlem}{Riducibilità polinomiale dei complementi}
+    \begin{framedlem}[label={p red compl}]{Riducibilità polinomiale dei complementi}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm P B \iff \overline A \leq_\mathrm P \overline B$$
     \end{framedlem}
 
@@ -2828,10 +2834,6 @@
         Dunque, poiché $\abs{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), sicuramente $\abs{E} = O(n)$, e dunque la complessità temporale di $M$ risulta essere (rispettivamente per ogni istruzione): $$O\rbk{n^k} + O(1) + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
     \end{proof} 
     
-    \begin{proof}
-        La dimostrazione è analoga alla dimostrazione del \cref{red compl}, pertanto verrà omessa.
-    \end{proof}
-
     \begin{framedthm}[label={p w red}]{\Pclass mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \Pclass, allora $A$ è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \Pclass} \implies A \in \Pclass$$
     \end{framedthm}
@@ -3045,7 +3047,7 @@
     \end{framedprop}
 
     \proofiff{
-        Per la \cref{np completeness def} si ha che $$\soe{l}{L \in \NPComplete \\ L \in \Pclass} \implies \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \Pclass}$$ dunque in particolare, dato un linguaggio $L' \in \NPclass$, se $L \in \NPComplete \cap \Pclass$ segue che $$\soe{l}{L' \leq_\mathrm P L \\ L \in \Pclass} \implies L' \in \Pclass$$ per il \cref{p w red}; dunque $\NPclass \subseteq \Pclass$. Inoltre, poiché $\Pclass \subseteq \NPclass$ per il \cref{time hier}, segue la tesi.
+        Per la \cref{np completeness def}, e per il \cref{p w red}, si ha che \centeredeq{0.9}{$\soe{l}{L \in \NPComplete \\ L \in \Pclass} \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \Pclass} \implies \forall L' \in \NPclass \quad L' \in \Pclass \iff \NPclass \subseteq \Pclass$} Inoltre, poiché $\Pclass \subseteq \NPclass$ per il \cref{time hier}, segue la tesi.
     }{
         Trivialmente, dalle ipotesi e dalla \cref{np completeness def} segue che $$L \in \NPComplete \implies L \in \NPclass = \Pclass$$
     }
@@ -3088,22 +3090,61 @@
         Per il \cref{p = np impl 1}, si ha che $$\Pclass = \NPclass \implies \NPclass = \Pclass = \coNPclass$$
     \end{proof}
 
+    \begin{framedobs}{\curlyquotes{\NPclass versus \coNPclass}}
+        Un altro noto problema aperto riguarda stabilire se \href{https://en.wikipedia.org/wiki/Co-NP}{\NPclass coincide o meno con \coNPclass}.
+    \end{framedobs}
+
+    \begin{framedthm}[label={conp w red}]{\coNPclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \coNPclass, allora $A$ è in \coNPclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \coNPclass} \implies A \in \coNPclass$$
+    \end{framedthm}
+
+    \begin{proof}
+        Per il \cref{p red compl}, e per il \cref{np w red}, si ha che $$\soe{l}{A \leq_\mathrm P B \\ B \in \coNPclass} \iff \soe{l}{\overline A \leq_\mathrm P \overline B \\ \overline B \in \NPclass} \implies \overline A \in \NPclass \iff A \in \coNPclass$$
+    \end{proof}
+
+    \begin{framedcor}{\coNPclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $A$ non è in \coNPclass, allora $B$ non è in \coNPclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \notin \coNPclass} \implies B \notin \coNPclass$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \coNPclass$; allora, poiché $A \leq_\mathrm P B$, per il \cref{conp w red} si ha che $A \in \coNPclass$ $\lightning$.
+    \end{proof}
+
+    \begin{framedcor}[label={np = conp impl 1}]{Implicazioni di $\NPclass = \coNPclass$}
+        Sia $L$ un linguaggio \NPclass-completo; allora si ha che $$L \in \coNPclass \iff \NPclass = \coNPclass$$
+    \end{framedcor}
+
+    \proofiff{
+        Per \NPclass-completezza di $L$, e per il \cref{conp w red}, si ha che $$\soe{l}{\forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \coNPclass} \implies \forall L' \in \NPclass \quad L' \in \coNPclass \iff \NPclass \subseteq \coNPclass$$ Viceversa, per il \cref{p red compl} e per il \cref{np w red}, si ha che \centeredeq{0.9}{$\soe{l}{\forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \coNPclass} \iff \soe{l}{\forall \overline{L'} \in \coNPclass \quad \overline{L'} \leq_\mathrm P \overline L \\ \overline L \in \NPclass} \implies \forall \overline {L'} \in \coNPclass  \quad \overline{L'} \in \NPclass \iff \coNPclass \subseteq \NPclass$} dunque segue la tesi per doppia inclusione.
+    }{
+        Trivialmente, si ha che $$L \in \NPComplete \subseteq \NPclass = \coNPclass$$
+    }
+
     \subsection{Classe \coNPComplete}
 
     \begin{frameddefn}{\coNPclass-difficoltà}
         Un linguaggio $L$ è detto essere \tbf{\coNPclass-difficile} se e solos e ogni altro linguaggio in \coNPclass è polinomialmente riducibile ad $L$. In simboli $$\coNPclass := \{L \mid \forall L' \in \coNPclass \quad L' \leq_\mathrm P L\}$$
     \end{frameddefn}
 
+    \begin{framedthm}[label={np-hard conp-hard}]{Definizione alternativa di \coNPHard}
+        Si verifica che $$\coNPHard = \{L \in \DEC \mid \overline L \in \NPHard\}$$
+    \end{framedthm}
+
+    \begin{proof}
+        Si noti che, per dimostare la tesi, è sufficiente dimostrare che $$L \in \coNPHard \iff \overline L \in \NPHard$$ e dunque, per il \cref{p red compl}, si ha che $$\centeredsoe{L \in \coNPHard \iff \forall L' \in \coNPclass \quad L' \leq_\mathrm P L \iff \\ \iff \forall \overline {L'} \in \NPclass \quad \overline{L'} \leq_\mathrm P \overline L \iff \overline L \in \NPHard}$$
+    \end{proof}
+
     \begin{frameddefn}{\coNPclass-completezza}
         Un linguaggio è detto essere \tbf{\coNPclass-completo} se e solo se è in \coNPclass ed è \coNPclass-difficile. In simboli $$\coNPComplete := \coNPclass \cap \coNPHard$$
     \end{frameddefn}
 
-    \begin{framedthm}{\coNPclass-completezza dei complementi}
-        Dato un linguaggio $L$, si ha che $$L \in \NPComplete \iff \overline L \in \coNPComplete$$
+    \begin{framedthm}{Definizione alternativa di \coNPclass}
+        Si verifica che $$\coNPComplete = \{L \in \DEC \mid \overline L \in \NPComplete\}$$
     \end{framedthm}
 
     \begin{proof}
-        $$\centeredsoe{L \in \NPComplete \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L} \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad \overline{L'} \leq_\mathrm P L} \iff \\ \iff \soe{l}{\overline L \in \coNPclass \\ \forall \overline{L'} \in \coNPclass \quad \overline{L'} \leq_\mathrm P \overline L} \iff \overline L \in \coNPComplete}$$
+        Si noti che, per dimostrare la tesi, è sufficiente dimostrare che $$L \in \coNPComplete \iff \overline L \in \NPComplete$$ e dunque, per il \cref{np-hard conp-hard} si ha che $$L \in \coNPComplete \iff L \in \coNPclass \cap \coNPHard \iff \overline L \in \NPclass \cap \NPHard \iff \overline L \in \NPclass$$
+        % Si noti che, per dimostrare la tesi, è sufficiente dimostrare che $$L \in \NPComplete \iff \overline L \in \coNPComplete$$ e dunque si ha che $$\centeredsoe{L \in \NPComplete \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L} \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad \overline{L'} \leq_\mathrm P L} \iff \\ \iff \soe{l}{\overline L \in \coNPclass \\ \forall \overline{L'} \in \coNPclass \quad \overline{L'} \leq_\mathrm P \overline L} \iff \overline L \in \coNPComplete}$$
     \end{proof}
 
     \subsection{Classe \NEXP}
@@ -3130,6 +3171,40 @@
 
     \chapter{Complessità di spazio}
 
-    TODO
+    \section{Complessità di spazio di macchine di Turing}
+
+    \subsection{Macchine di Turing}
+
+    \begin{framedobs}[label={space model}]{Modello di \TM per complessità di spazio}
+        TODO
+    \end{framedobs}
+
+    \begin{frameddefn}[label={space complexity}]{Complessità di spazio di una \TM}
+        Sia $D$ un decisore; si definisce \tbf{complessità di spazio} di $D$ la funzione $\func{f}{\N}{\N}$ TODO DA FINIRE
+    \end{frameddefn}
+
+    \subsection{Macchine di Turing multinastro}
+    
+    \begin{framedthm}{Relazione tra \TM e \TM multinastro}
+        Sia $s(n)$ una funzione tale che $s(n) \ge n$, e sia $M$ una macchina di Turing multinastro avente spazio $s(n)$; allora, esiste una \TM $M'$, equivalente ad $M$, avente spazio $O(s(n))$.
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \section{Classi di complessità di spazio}
+
+    \subsection{Classe \DSPACE}
+
+    \begin{frameddefn}{Classe \DSPACE}
+        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing come descritta nell'\cref{space model} in $O(s(n))$.
+    \end{frameddefn}
+
+    \subsection{Classe \LSPACE}
+
+    \begin{frameddefn}{Classe \LSPACE}
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM come descritta nell'\cref{space model} il seguente insieme $$\LSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE(\log(n))}$$
+    \end{frameddefn}
 
 \end{document}
