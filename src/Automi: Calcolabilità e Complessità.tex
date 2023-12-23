@@ -2723,6 +2723,10 @@
         Si noti che tali regole valgono anche per $O$-grande, per l'\cref{small o big o obs}.
     \end{framedprop}
 
+    \begin{framedobs}[label={fn log}]{Funzioni logaritmiche}
+        Per convenzione, le funzioni logaritmiche si esprimono in $O$-grande o $o$-piccolo di $\log_2$, ed è possibile farlo grazie al cambio di base, infatti: $$\forall k \in \R \quad f(n) = \log_k(n) \implies f(n) = O(\log_k(n)) = O \rbk{\dfrac{\log_2(n)}{\log_2(k)}} = O(\log_2(n))$$ (per l'ultimo passaggio, si veda la \cref{alg asintotica}).
+    \end{framedobs}
+
     \section{Complessità di tempo di macchine di Turing}
 
     \subsection{Macchine di Turing}
@@ -3292,16 +3296,21 @@
     \subsection{Macchine di Turing}
 
     \begin{framedobs}[label={space model}]{Modello di \TM per complessità di spazio}
-        TODO
+        Per il calcolo della complessità di spazio, verrà utilizzato un modello di \TM differente dalle \TM utilizzate fin'ora, al fine di non penalizzare le macchine considerate rispetto allo spazio utilizzato per salvare l'input sul proprio nastro; di conseguenza, verranno considerate \TM fornite di 2 nastri, dove
+
+        \begin{itemize}
+            \item il primo nastro conterrà esclusivamente l'input, verrà utilizzato in modalità \tit{read-only}, e prenderà il nome di \tit{input tape}
+            \item il secondo nastro verrà utilizzato per effettuare le computazioni (dunque di default conterrà solo \blankchar), e prenderà il nome di \tit{working tape}
+        \end{itemize}
     \end{framedobs}
 
     \begin{frameddefn}[label={space complexity}]{Complessità di spazio di una \TM}
-        Sia $D$ un decisore; si definisce \tbf{complessità di spazio} di $D$ la funzione $\func{f}{\N}{\N}$ TODO DA FINIRE
+        Sia $D$ un decisore definito come descritto nell'\cref{space model}; si definisce \tbf{complessità di spazio} di $D$ la funzione $\func{f}{\N}{\N}$ tale che $f(n)$ sia il numero massimo di celle che $D$ utilizza per processare una stringa di lunghezza $n$.
     \end{frameddefn}
 
     \subsection{Macchine di Turing multinastro}
     
-    \begin{framedthm}{Relazione tra \TM e \TM multinastro}
+    \begin{framedthm}[label={multitape tm space equiv}]{Relazione tra \TM e \TM multinastro}
         Sia $s(n)$ una funzione tale che $s(n) \ge n$, e sia $M$ una macchina di Turing multinastro avente spazio $s(n)$; allora, esiste una \TM $M'$, equivalente ad $M$, avente spazio $O(s(n))$.
     \end{framedthm}
 
@@ -3314,13 +3323,124 @@
     \subsection{Classe \DSPACE}
 
     \begin{frameddefn}{Classe \DSPACE}
-        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing come descritta nell'\cref{space model} in $O(s(n))$.
+        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing definita come descritto nell'\cref{space model} in $O(s(n))$.
     \end{frameddefn}
 
     \subsection{Classe \LSPACE}
 
     \begin{frameddefn}{Classe \LSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM come descritta nell'\cref{space model} il seguente insieme $$\LSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE(\log(n))}$$
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\LSPACE := \displaystyle \DSPACE(\log(n))$$
+    \end{frameddefn}
+
+    \begin{example}[Linguaggi in \LSPACE]
+        Si considerino il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ e una macchina di Turing $M$ --- definita come descritto nell'\cref{space model} --- che, data in input una stringa $w$, computa come segue:
+
+        \begin{itemize}
+            \item $M$ controlla che non siano presenti \ttt 1 seguiti da \ttt 0 all'interno dell'\tit{input tape};
+            \item $M$ definisce un contatore binario sul \tit{working tape};
+            \item $M$ scorre l'input, e se legge \ttt 0 incrementa il contatore, mentre se legge \ttt 1 lo decrementa;
+            \item $M$ accetta se e solo se, alla fine dell'input, il contatore è a 0.
+        \end{itemize}
+
+        Dunque, per costruzione $M$ decide $L$, e poiché un numero $a$ in base $k$ ha $O(\log_k(a)) = O(\log(a))$ cifre (si veda l'\cref{fn log} per chiarimenti), $M$ decide in $L$ con spazio $$O(\log(\abs{w})) = O(\log(n)) \implies L \in \LSPACE$$
+    \end{example}
+
+    \begin{framedprop}[label={log space ops}]{Operazioni in spazio logaritmico}
+        In spazio logaritmico, è possibile effettuare le seguenti operazioni:
+
+        \begin{itemize}
+            \item stabilire la lunghezza dell'input:
+                \begin{itemize}
+                    \item per calcolare la lunghezza dell'input sull'\tit{input tape} è sufficiente utilizzare un sul \tit{working tape} e contare di quanti simboli è composto l'input, dunque richiede spazio $O(\log(n))$
+                \end{itemize}
+            \item effettuare somme tra 2 numeri:
+                \begin{itemize}
+                    \item grazie al \cref{multitape tm space equiv}, si può assumere che la macchina sia dotata di più \tit{working tape} (ammesso che il numero di nastri sia in $O(1)$, e dunque non dipenda dalla dimensione dell'input);
+                    \item dunque, per effettuare una somma tra 2 numeri $a$ e $b$, è sufficiente avere salvato $a$ su un nastro, $b$ salvato su un altro, e successivamente incrementare il nastro contenente $a$ e decrementare il nastro contenente $b$, un passo alla volta, fino a che sul nastro di $b$ non vi è 0;
+                    \item il risultato della somma sarà contenuto sul nastro di $a$;
+                    \item lo spazio richiesto dalla somma è dunque lo spazio richiesto per rappresentare $a + b$, ovvero $O(\log(a + b))$;
+                \end{itemize}
+            \item effettuare differenze tra 2 numeri:
+                \begin{itemize}
+                    \item l'operazione è analoga alla somma (assumendo che $a > b$), ma richiede di decrementare il nastro del primo numero al posto di incrementare;
+                    \item come per la somma, il risultato della differenza sarà contenuta sul nastro di $b$;
+                    \item lo spazio richiesto dalla differenza è dunque lo spazio richiesto per rappresentare $a$, ovvero $O(\log(a))$;
+                \end{itemize}
+            \item effettuare prodotti tra 2 numeri:
+                \begin{itemize}
+                    \item TODO
+                \end{itemize}
+        \end{itemize}
+    \end{framedprop}
+
+    \begin{framedobs}{Classe \LSPACE}
+        La classe di problemi descritti dai linguaggi in \LSPACE è particolarmente interessante, poiché le funzioni logaritmiche sono tali per cui $f(n) < n$.
+    \end{framedobs}
+
+    \begin{frameddefn}{Trasduttore di spazio logaritmico}
+        Un \tbf{trasduttore di spazio logaritmico} è una macchina di Turing definita come descritto nell'\cref{space model}, che presenta un ulteriore nastro, detto \tit{output tape}, utilizzato esclusivamente in modalità \tit{read-once} per scrivere l'output.
+    \end{frameddefn}
+
+    \begin{frameddefn}[label={fn calc log}]{Funzione calcolabile in spazio logaritmico}
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile in spazio logaritmico} se esiste un trasduttore di spazio logaritmico che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Trasduttori di spazio logaritmico}
+        L'uso di trasduttori di spazio logaritmico all'interno della \cref{fn calc log} permette di non penalizzare le \TM considerate sulla rappresentazione dell'output.
+    \end{frameddefn}
+
+    \begin{framedthm}{$PALINDROMES$ in $\LSPACE$}
+        Sia $PALINDROMES$ il linguaggio definito come segue: $$PALINDROMES := \{w \mid \forall i \in [1, \abs{w}] \quad w_i = w_{n - i + 1}\}$$ Allora, si ha che $$PALINDROMES \in \LSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $M$ una \TM definita come descritto nell'\cref{space model} che, data in input una stringa $w$, computa come segue:
+
+        \begin{itemize}
+            \item $M$ determina $n := \abs{w}$ attraverso un contatore;
+            \item per ogni $i \in [1, n]$, se $w_ i \neq w_{n - i + 1}$, $M$ rifiuta;
+            \item se $M$ ha raggiunto la fine dell'input, accetta.
+        \end{itemize}
+
+        Dunque, per la \cref{log space ops}, $M$ richiede spazio logaritmico, e poiché per costruzione decide $PALINDROMES$, segue la tesi.
+    \end{proof}
+
+    \subsection{Classe \PSPACE}
+
+    \begin{frameddefn}{Classe \PSPACE}
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\PSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
+    \end{frameddefn}
+
+    \subsection{Classe \EXPSPACE}
+
+    \begin{frameddefn}{Classe \EXPSPACE}
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\EXPSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
+    \end{frameddefn}
+
+    \subsection{Classe \NLSPACE}
+
+    \begin{frameddefn}{Classe \NLSPACE}
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NLSPACE := \DSPACE(\log(n))$$
+    \end{frameddefn}
+
+    \subsection{Classe \NLHard}
+
+    \begin{frameddefn}{\NLSPACE-difficoltà}
+        Un lingauggio $L$ è detto essere \NLSPACE-difficile se e solos e ogni altro linguaggio in \NLSPACE è riducibile in spazio logaritmico ad $L$. In simboli $$\NLHard := \{L \mid \forall L' \in \NLSPACE \quad L' \leq_\mathrm L L\}$$
+    \end{frameddefn}
+
+    \subsection{Classe \NLComplete}
+
+    \subsection{Classe \NPSPACE}
+
+    \begin{frameddefn}{Classe \NPSPACE}
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NPSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
+    \end{frameddefn}
+
+    \subsection{Classe \NEXPSPACE}
+
+    \begin{frameddefn}{Classe \NEXPSPACE}
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
 \end{document}
