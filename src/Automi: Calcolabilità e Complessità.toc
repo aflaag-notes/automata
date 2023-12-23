@@ -96,10 +96,10 @@
 \contentsline {subsection}{\numberline {5.3.5}Classe \textsf {coEXP}\xspace }{95}{subsection.5.3.5}%
 \contentsline {subsection}{\numberline {5.3.6}Classe \textsf {NTIME}\xspace }{96}{subsection.5.3.6}%
 \contentsline {subsection}{\numberline {5.3.7}Classe \textsf {NP}\xspace }{96}{subsection.5.3.7}%
-\contentsline {subsection}{\numberline {5.3.8}Classe \textsf {NP-Complete}\xspace }{99}{subsection.5.3.8}%
-\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{101}{subsection.5.3.9}%
-\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{103}{subsection.5.3.10}%
-\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{104}{subsection.5.3.11}%
+\contentsline {subsection}{\numberline {5.3.8}Classe \textsf {NP-Complete}\xspace }{100}{subsection.5.3.8}%
+\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{102}{subsection.5.3.9}%
+\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{104}{subsection.5.3.10}%
+\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{105}{subsection.5.3.11}%
 \contentsline {section}{\numberline {5.4}Teorema di Cook-Levin}{105}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}Teorema di Cook-Levin}{105}{subsection.5.4.1}%
 \contentsline {chapter}{\numberline {6}Complessità di spazio}{109}{chapter.6}%
@@ -109,10 +109,10 @@
 \contentsline {section}{\numberline {6.2}Classi di complessità di spazio}{110}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{110}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{110}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{112}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{113}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NL}\xspace }{113}{subsection.6.2.5}%
-\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL-Hard}\xspace }{113}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{113}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NPSPACE}\xspace }{113}{subsection.6.2.8}%
-\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NEXPSPACE}\xspace }{114}{subsection.6.2.9}%
+\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{115}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{115}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NL}\xspace }{115}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL-Hard}\xspace }{116}{subsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{116}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NPSPACE}\xspace }{116}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NEXPSPACE}\xspace }{117}{subsection.6.2.9}%

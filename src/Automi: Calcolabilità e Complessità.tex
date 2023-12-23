@@ -2423,8 +2423,8 @@
         Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile} se esiste una macchina di Turing che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
     \end{frameddefn}
 
-    \begin{frameddefn}{Riducibilità mediante funzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile mediante funzione a $B$}, se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ e la funzione $f$ prende il nome di \tbf{riduzione di $A$ a $B$}.
+    \begin{frameddefn}{Riduzione mediante funzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile mediante funzione a $B$} se esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm m B$$ e la funzione $f$ prende il nome di \tbf{riduzione di $A$ a $B$}.
     \end{frameddefn}
 
     \begin{framedlem}[label={red compl}]{Riducibilità dei complementi}
@@ -2829,7 +2829,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Riduzione polinomiale mediante funzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$}, se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $A \leq_\mathrm P B$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$} se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm P B$$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
     \end{frameddefn}
 
     \begin{framedlem}[label={p red compl}]{Riducibilità polinomiale dei complementi}
@@ -3074,7 +3074,7 @@
     \end{framedobs}
 
     \begin{framedprop}[label={p = np impl 3}]{Implicazioni di $\Pclass = \NPclass$}
-        Sia $L$ un linguaggio \NPclass-completo; allora si ha che $$L \in \Pclass \iff \Pclass = \NPclass$$
+        Si verifica che $$\Pclass \cap \NPComplete \neq \varnothing \iff \Pclass = \NPclass$$
     \end{framedprop}
 
     \proofiff{
@@ -3326,6 +3326,14 @@
         Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing definita come descritto nell'\cref{space model} in $O(s(n))$.
     \end{frameddefn}
 
+    \begin{framedthm}[label={dtime in dspace}]{$\DTIME(f(n)) \subseteq \DSPACE(f(n))$}
+        Si verifica che $$\DTIME(f(n)) \subseteq \DSPACE(f(n))$$
+    \end{framedthm}
+
+    \begin{proof}
+        Si consideri un linguaggio in $\DTIME(f(n))$ per qualche funzione $\func{f}{\N}{\R^+}$; di conseguenza, il decisore di tale linguaggio effettua al massimo $f(n)$ passi, e poiché nel caso peggiore la macchina non fa altro che spostare la testina verso destra, tale macchina potrebbe effettuare solamente $f(n)$ spostamenti verso destra, e dunque potrebbe lavorare con al massimo $f(n)$ celle. Dunque, segue la tesi.
+    \end{proof}
+
     \subsection{Classe \LSPACE}
 
     \begin{frameddefn}{Classe \LSPACE}
@@ -3345,6 +3353,42 @@
         Dunque, per costruzione $M$ decide $L$, e poiché un numero $a$ in base $k$ ha $O(\log_k(a)) = O(\log(a))$ cifre (si veda l'\cref{fn log} per chiarimenti), $M$ decide in $L$ con spazio $$O(\log(\abs{w})) = O(\log(n)) \implies L \in \LSPACE$$
     \end{example}
 
+    \begin{framedobs}{Classe \LSPACE}
+        La classe di problemi descritti dai linguaggi in \LSPACE è particolarmente interessante, poiché le funzioni logaritmiche sono tali per cui $f(n) < n$.
+    \end{framedobs}
+
+    \begin{frameddefn}{Trasduttore di spazio logaritmico}
+        Un \tbf{trasduttore di spazio logaritmico} è una macchina di Turing definita come descritto nell'\cref{space model}, che presenta un ulteriore nastro, detto \tit{output tape}, utilizzato esclusivamente in modalità \tit{read-once} per scrivere l'output.
+    \end{frameddefn}
+
+    \begin{frameddefn}[label={fn calc log}]{Funzione calcolabile in spazio logaritmico}
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile in spazio logaritmico} se esiste un trasduttore di spazio logaritmico che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo \tit{output tape}.
+    \end{frameddefn}
+
+    \begin{framedobs}{Trasduttori di spazio logaritmico}
+        L'uso di trasduttori di spazio logaritmico all'interno della \cref{fn calc log} permette di non penalizzare le \TM considerate sullo spazio per rappresentare l'output.
+    \end{framedobs}
+
+    \begin{frameddefn}{Riduzione in spazio $O(\log(n))$ mediante $f$}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile in spazio logaritmico mediante funzione a $B$} se esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm L B$$ e la funzione $f$ prende il nome di \tbf{riduzione in spazio logaritmico di $A$ a $B$}.
+    \end{frameddefn}
+
+    \begin{framedthm}[label={l w red}]{\LSPACE mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, e $B$ è in \LSPACE, allora $A$ è in \LSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ B \in \LSPACE} \implies A \in \LSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedcor}{\LSPACE mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, e $A$ non è in \LSPACE, allora $B$ non è in \LSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ A \notin \LSPACE} \implies B \notin \LSPACE$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, si $B \in \LSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{l w red}, si ha che $A \in \LSPACE$ $\lightning$.
+    \end{proof}
+
     \begin{framedprop}[label={log space ops}]{Operazioni in spazio logaritmico}
         In spazio logaritmico, è possibile effettuare le seguenti operazioni:
 
@@ -3353,6 +3397,7 @@
                 \begin{itemize}
                     \item per calcolare la lunghezza dell'input sull'\tit{input tape} è sufficiente utilizzare un sul \tit{working tape} e contare di quanti simboli è composto l'input, dunque richiede spazio $O(\log(n))$
                 \end{itemize}
+            \item salvare il valore di variabili;
             \item effettuare somme tra 2 numeri:
                 \begin{itemize}
                     \item grazie al \cref{multitape tm space equiv}, si può assumere che la macchina sia dotata di più \tit{working tape} (ammesso che il numero di nastri sia in $O(1)$, e dunque non dipenda dalla dimensione dell'input);
@@ -3373,24 +3418,8 @@
         \end{itemize}
     \end{framedprop}
 
-    \begin{framedobs}{Classe \LSPACE}
-        La classe di problemi descritti dai linguaggi in \LSPACE è particolarmente interessante, poiché le funzioni logaritmiche sono tali per cui $f(n) < n$.
-    \end{framedobs}
-
-    \begin{frameddefn}{Trasduttore di spazio logaritmico}
-        Un \tbf{trasduttore di spazio logaritmico} è una macchina di Turing definita come descritto nell'\cref{space model}, che presenta un ulteriore nastro, detto \tit{output tape}, utilizzato esclusivamente in modalità \tit{read-once} per scrivere l'output.
-    \end{frameddefn}
-
-    \begin{frameddefn}[label={fn calc log}]{Funzione calcolabile in spazio logaritmico}
-        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione calcolabile in spazio logaritmico} se esiste un trasduttore di spazio logaritmico che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
-    \end{frameddefn}
-
-    \begin{frameddefn}{Trasduttori di spazio logaritmico}
-        L'uso di trasduttori di spazio logaritmico all'interno della \cref{fn calc log} permette di non penalizzare le \TM considerate sulla rappresentazione dell'output.
-    \end{frameddefn}
-
     \begin{framedthm}{$PALINDROMES$ in $\LSPACE$}
-        Sia $PALINDROMES$ il linguaggio definito come segue: $$PALINDROMES := \{w \mid \forall i \in [1, \abs{w}] \quad w_i = w_{n - i + 1}\}$$ Allora, si ha che $$PALINDROMES \in \LSPACE$$
+        Sia $PALINDROMES$ il linguaggio definito come segue: $$PALINDROMES := \{w \mid \forall i \in [1, \abs{w}] \quad w_i = w_{n - i + 1}\}$$ Allora, si ha che $PALINDROMES \in \LSPACE$.
     \end{framedthm}
 
     \begin{proof}
@@ -3403,6 +3432,46 @@
         \end{itemize}
 
         Dunque, per la \cref{log space ops}, $M$ richiede spazio logaritmico, e poiché per costruzione decide $PALINDROMES$, segue la tesi.
+    \end{proof}
+
+    \begin{framedthm}{$PATH$ in $\DSPACE(\log^2(n))$}
+        Si verifica che $$PATH \in \DSPACE(\log^2(n)$$
+    \end{framedthm}
+
+    \begin{proof}
+        Si consideri il seguente algoritmo:
+
+        \begin{algorithmic}[1]
+            \Function{findPath}{$G, x, y, k$}
+                \If{$k == 0$}
+                    \If{$(x, y) \in E \lor x == y$}
+                        \State \textbf{return} \ttt{True}
+                    \Else
+                        \State \textbf{return} \ttt{False}
+                    \EndIf
+                \ElsIf{$k > 0$}
+                    \For{$w \in V$}
+                        \If{$\soe{l}{\ttt{findPath}(G, x, w, k - 1) == \ttt{True} \\ \ttt{findPath}(G, w, y, k -1) == \ttt{True}}$}
+                            \State \tbf{return} \ttt{True}
+                        \EndIf
+                    \EndFor
+
+                    \State \tbf{return} \ttt{False}
+                \EndIf
+            \EndFunction
+        \end{algorithmic}
+
+        Si consideri una \TM $M$ in grado di eseguire l'algoritmo \ttt{findPath}, la quale esiste per l'\cref{alg tm}. Allora, sia $M'$ una \TM --- avente $M$ come sua sottoprocedura --- che, data in input una codifica $\abk{G, s, t}$, computa come segue:
+
+        \begin{itemize}
+            \item $M'$ interpreta $G = (V, E)$ come un grafo diretto, ed $s, t \in V$ come due suoi nodi;
+            \item $M'$ esegue $\ttt{findPath}\rbk{G, s, t, \ceil{\log(\abs{V})}}$ su $M$;
+            \item $M'$ accetta se e solo se $M$ restituisce \ttt{True} sul suo nastro.
+        \end{itemize}
+
+        L'algoritmo \ttt{findPath}, per sua definizione, dato un grafo diretto $G$, due suoi nodi $x, y \in G$, ed un intero $k \in \N$, restituisce \ttt{True} se e solo se in $G$ esiste un cammino $x \to y$ lungo al massimo $2^k$, in quanto \ttt{findPath} effettua 2 chiamate ricorsive per ogni livello di ricorsione, e dunque l'albero di chiamate ricorsive ha altezza al massimo $k$ e base al massimo $2^k$. Dunque $M'$ utilizza \ttt{findPath} per decidere $PATH$, ponendo $k = \ceil{\log(\abs{V})}$ poiché un cammino in un grafo ha lunghezza $O\rbk{\abs{V}}$ ed infatti $$k = \ceil{\log(\abs{V})} \implies O\rbk{2^k} = O\rbk{2^{\ceil{\log(\abs{V})}}} = O\rbk{\abs{V}}$$
+
+        Allora, poiché in ogni livello di ricorsione è necessario salvare le variabili $\abs{V}, s, t, x, y, k$ --- il cui costo è $O(\log(n))$ (si veda l'\cref{log space ops}) --- e il numero di livelli di ricosione è pari all'altezza dell'albero di chiamate ricorsive, ovvero $O(k) = O(\log \rbk{\abs{V}}) = O(\log(n))$ segue che lo spazio che la \TM $M'$ utilizza per computare è pari a $$O(\log(n)) \cdot O(\log(n)) = O(\log^2(n)) \implies PATH \in \DSPACE(\log^2(n))$$
     \end{proof}
 
     \subsection{Classe \PSPACE}
@@ -3423,6 +3492,14 @@
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NLSPACE := \DSPACE(\log(n))$$
     \end{frameddefn}
 
+    \begin{framedthm}[label={nl in p}]{$\NLSPACE \subseteq \Pclass$}
+        Si verifica che $$\NLSPACE \subseteq \Pclass$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
     \subsection{Classe \NLHard}
 
     \begin{frameddefn}{\NLSPACE-difficoltà}
@@ -3430,6 +3507,30 @@
     \end{frameddefn}
 
     \subsection{Classe \NLComplete}
+
+    \begin{frameddefn}{\NLSPACE-completezza}
+        Un linguaggio è detto essere \tbf{\NLSPACE-completo} se e solo se è in \NLSPACE ed è \NLSPACE-difficile. In simboli $$\NLComplete := \NLSPACE \cap \NLHard$$
+    \end{frameddefn}
+
+    \begin{framedobs}{\curlyquotes{\LSPACE versus \NLSPACE problem}}
+        Un altro noto problema aperto riguarda stabilire se \href{https://en.wikipedia.org/wiki/NL_(complexity)}{\LSPACE coincide o meno con \NLSPACE}.
+    \end{framedobs}
+
+    \begin{framedprop}{Implicazioni di $\LSPACE = \NLSPACE$}
+        Si verifica che $$\LSPACE \cap \NLComplete \neq \varnothing \iff \LSPACE = \NLSPACE$$
+    \end{framedprop}
+
+    \begin{proof}
+        La dimostrazione è analoga alla \cref{p = np impl 3}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedthm}{$PATH$ in \NLComplete}
+        Si verifica che $$PATH \in \NLComplete$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
 
     \subsection{Classe \NPSPACE}
 
