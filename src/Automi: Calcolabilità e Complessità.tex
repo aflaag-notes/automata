@@ -2435,6 +2435,18 @@
         Si assuma $A \leq_\mathrm m B$, senza perdita di generalità; allora, per definizione, esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B$. Allora, si ha che $$w \in \overline A \iff w \notin A \iff f(w) \notin B \iff f(w) \in \overline B$$ e dunque $f$, poiché calcolabile, è anche la riduzione da $\overline A$ a $\overline B$, dunque per definizione segue che $\overline A \leq_\mathrm m \overline B$.
     \end{proof}
 
+    \begin{framedlem}[label={red trans}]{Transitività della riducibilità}
+        Siano $A$, $B$ e $C$ tre linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$\soe{l}{A \leq_\mathrm m B \\ B \leq_\mathrm m C} \implies A \leq_\mathrm m C$$
+    \end{framedlem}
+
+    \begin{proof}
+        Per definizione stessa, poiché $A \leq_\mathrm m B$ e $B \leq_\mathrm m C$, esistono funzioni calcolabili $\func{f, g}{\Sigma^*}{\Sigma^*}$ tali che $$\centeredsoe{\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B \\ \forall w \in \Sigma^* \quad w \in B \iff g(w) \in C}$$ Inoltre, si noti che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B \iff g(f(w)) \in C$$ Dunque, si consideri allora la seguente macchina di Turing $M$ che, data in input una stringa $w$, computa come segue:
+
+        \begin{itemize}
+            \item TODO
+        \end{itemize}
+    \end{proof}
+
     \section{Turing-decidibilità mediante riduzione}
 
     \subsection{Teoremi}
@@ -2447,7 +2459,7 @@
         Poiché $B \in \DEC$ in ipotesi, esiste un decisore $M$ tale che $M$ decide $B$; inoltre, poichè $A \leq_\mathrm m B$, esiste una funzione calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale per cui $A$ sia riducibile a $B$. Sia dunque $N$ una macchina di Turing che, data in input una stringa $w \in \Sigma^*$, computa come segue:
 
         \begin{itemize}
-            \item $N$ computa $f(w)$;
+            \item $N$ computa $f(w)$ attraverso la \TM che rende $f$ calcolabile;
             \item $N$ simula $M$ avente $f(w)$ come input; 
             \item $N$ accetta se e solo se $M$ accetta.
         \end{itemize}
@@ -3248,22 +3260,24 @@
 
         Sia $A \in \NPclass$, e dunque esiste una \NTM $N = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $A$ in tempo polinomiale. Sia consideri ora una stringa $w$ in input ad $N$, ed un \tit{tableau} --- \tit{per ognuno dei rami di computazione di $N$} --- definito come mostrato in figura:
 
-        \centeredimage{0.3}{../assets/tableau.png}
+        \centeredimage{0.4}{../assets/tableau.png}
 
         Dunque, sull'$i$-esima riga del tableau è presente l'$i$-esima configurazione che la macchina assume durante la computazione di $w$. Si noti che, poiché $N$ computa in tempo polinomiale, il nastro non può avere più di $n^k$ celle occupate, e dunque la tabella ha dimensione $n^k \times n^k$ (si assume che il tableau considerato sia quadrato anche se il nastro fosse utilizzato per meno di $n^k$ celle, andando a considerare celle vuote nella porzione di nastro non utilizzata). Un tableau è detto \tit{accettante} se almeno una sua riga contiene una configurazione accettante.
 
-        Si considerino ora le seguenti:
+        Verrà ora descritto un tableau accettante attraverso formule booleane, come segue:
 
         \begin{itemize}
-            \item dato $C := Q \cup \Gamma \cup \{ \ttt \# \}$, si definiscano variabili $$\forall i,j \in \sbk{1, n^k}, s \in C \quad x_{i, j, s} := \soe{ll}{\ttt 1 & T_{i, j} = s \\ \ttt 0 & T_{i, j} \neq s}$$ dunque, è possibile immaginare una stringa $x_{i, j}$ come stringa booleana che attraverso codifica \tit{one-hot encoding} mostra il carattere presente sulla cella $T_{i, j}$ del tableau; si definisce allora la seguente formula booleana, che descrive tale struttura: $\phi_\mathrm{cell}$: $$\phi_\mathrm{cell} := \bigwedge_{i, j \in \sbk{1, n^k}}{\sbk{\rbk{\bigvee_{s \in C}{x_{i, j, s}}} \land \rbk{\bigwedge_{\substack{s, t \in C \\ s \neq t}}{\overline{x_{i, j, s} \land x_{i, j, t}}}}}}$$
+            \item dato $C := Q \cup \Gamma \cup \{ \ttt \# \}$, si definiscano variabili $$\forall i,j \in \sbk{1, n^k}, s \in C \quad x_{i, j, s} := \soe{ll}{\ttt 1 & T_{i, j} = s \\ \ttt 0 & T_{i, j} \neq s}$$ si noti che è possibile immaginare $x_{i, j}$ come stringa booleana che attraverso codifica \tit{one-hot encoding} mostra il carattere presente sulla cella $T_{i, j}$ del tableau considerato; si consideri allora la seguente formula booleana: $$\phi_\mathrm{cell} := \bigwedge_{i, j \in \sbk{1, n^k}}{\sbk{\rbk{\bigvee_{s \in C}{x_{i, j, s}}} \land \rbk{\bigwedge_{\substack{s, t \in C \\ s \neq t}}{\overline{x_{i, j, s} \land x_{i, j, t}}}}}}$$
+
+                per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata costruita rappresenta proprio un tableau definito come descritto in precedenza, poiché:
 
                 \begin{itemize}
                     \item la prima parte della formula garantisce che almeno uno dei caratteri delle stringhe $x_{i, j}$ sia un \ttt 1;
                     \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (letteralmente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
                 \end{itemize}
 
-            \item si definisce una formula booleana che impone che la prima riga del tableau considerato sia la configurazione iniziale di $N$, come segue: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ si noti che questa formula booleana impone che la prima riga del tableau considerato sia la configurazione iniziale di $N$;
-            \item si definisce una formula booleana che imponga che esista almeno una riga, del tableau considerato, contenente una configurazione accettante, come segue: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$
+            \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, la prima riga del tableau considerato è la configurazione iniziale di $N$;
+            \item si consideri la seguente formula booleana: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, all'interno del tableau considerato è contenuta almeno una configurazione accettante;
             \item una \tit{finestra} $2 \times 3$ di un tableau è una porzione di tableau, composta da 3 celle di 2 righe diverse, in cui la prima riga contiene una porzione di configurazione corrente, e la seconda riga contiene una porzione di configurazione nel passo successivo; una finestra è detta \tit{lecita} se non viola le azioni specificate dalla funzione di transizione $\delta$ di $N$; ad esempio, se la $\delta$ ammette le seguenti configurazioni $$\centeredsoe{\delta(q_1, \ttt a) = \{(q_1, \ttt b, \mathrm R)\} \\ \delta(q_1, \ttt b) = \{(q_2, \ttt c, \mathrm L), (q_2, \ttt a, \mathrm R)\}}$$ i seguenti sono esempi di finestre lecite: TODO METTI FOTO O FAI TABELLE
 
                 Si consideri ora la seguente proposizione: \curlyquotes{dato un tableau ed una sua riga, se la riga superiore è la configurazione iniziale, ed ogni finestra nel tableau è lecita, ogni riga del tableau è una configurazione che segue legittimamente dalla precedente}; essa è vera poiché:
@@ -3274,10 +3288,10 @@
                     \item una finestra contenente il simbolo di stato nella cella centrale superiore garantisce che le tre posizioni corrispondenti vengano aggiornate consistentemente tramite $\delta$; dunque, se la configurazione inferiore e lecita, deve esserlo necessariamente anche quella inferiore.
                 \end{itemize}
 
-                Dunque, si definisce una formula booleana che impone che, all'interno del tableau, esista ogni finestra legale possibile, come segue: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$
+                Si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, allora le celle del tableau considerato definiscono soltamente finestre lecite.
         \end{itemize}
 
-        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se il tableau che rappresenta descrive una ramificazione di computazione accettante. Dunque, si consideri ora una \TM $M_\phi$ tale che, data in input $w$, se $N$ accetta, $M_\phi$ restituisce sul suo nastro $f(w) = \abk{\phi}$, dove $\phi$ rappresenta un tableau accettante. Di conseguenza, per costruzione $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
+        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se la struttura considerata rappresenta un tableau accettante. Dunque, si consideri ora una \TM $M_\phi$ tale che, data in input $w$, se $N$ accetta, $M_\phi$ restituisce sul suo nastro $f(w) = \abk{\phi}$, dove $\phi$ rappresenta un tableau accettante. Di conseguenza, per costruzione $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
 
         \begin{itemize}
             \item $\phi_\mathrm{cell}$ richiede tempo $O\rbk{n^k} \cdot O\rbk{n^k} \cdot \abs{C} = O\rbk{n^{2k}}$ (poiché $\abs{C} = O(1)$ perché non dipende da $n$);
@@ -3378,7 +3392,25 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Poiché $B \in \LSPACE$ in ipotesi, esiste un decisore $M$ --- definito come descritto nell'\cref{space model} --- tale che $M$ decide $B$ in spazio logaritmico; inolrte, poiché $A \leq_\mathrm L B$, esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ tale per cui $A$ riducibile in spazio logaritmico a $B$. Sia dunque $N$ una macchina di Turing --- definita come descritto nell'\cref{space model} --- che, data in input una stringa $w \in \Sigma^*$, computa come segue:
+
+        \begin{itemize}
+            \item $N$ computa $f(w)$, attraverso il trasduttore di spazio logaritmico tale per cui $f$ è calcolabile, \tit{ma salvando un simbolo alla volta sul suo working tape};
+            \item $N$ simula $M$ avente i vari simboli di $f(w)$ uno ad uno come input, tenendo traccia di dove si trova la testina di $M$, ed ogni qual volta che $M$ necessita di conoscere il prossimo simbolo di $f(w)$, $N$ pulisce il proprio \tit{working tape} e calcola il $f(w)$ dall'inizio fino ad ottenere il prossimo simbolo necessario;
+            \item $N$ accetta se e solo se $M$ accetta.
+        \end{itemize}
+
+        Allora, per costruzione di $N$, e per riducibilità in spazio logaritmico di $A$ a $B$, si ha che $$w \in L(N) \iff f(w) \in L(M) = B \iff w \in A$$ e dunque $N$ decide $A$ in spazio logaritmico, poiché $f$ è calcolabile in spazio logaritmico, e $M$ è un decisore di $B$ in spazio logaritmico anch'esso.
+
+        Si noti che il motivo per cui è necessario utilizzare una macchina definita come descritto, e non è sufficiente sfruttrare l'approccio di dimostrazione utilizzato per il \cref{dec w rec}, è che la calcolabilità in spazio logaritmico di $f$ implica che esista un trasduttore di spazio logaritmico $T$ tale da calcolare $f$ in spazio logaritmico. Di conseguenza, lo spazio utilizzato per rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) stesso non è considerato nella sua definizione, ma $N$ deve invece essere una \TM definita come descritto nell'\cref{space model} per definizione di appartenenza ad \LSPACE. Dunque, calcolare preventivamente $f(w)$ potrebbe eccedere lo spazio logaritmico per rappresentare $f(w)$ sul nastro di $N$, ed è dunque necessario computare come descritto.
+    \end{proof}
+
+    \begin{framedlem}[label={l red trans}]{Transitività della riducibilità}
+        Siano $A, B$ e $C$ tre linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$\soe{l}{A \leq_\mathrm L B B \leq_\mathrm L C} \implies A \leq_\mathrm L C$$
+    \end{framedlem}
+
+    \begin{proof}
+        La dimostrazione è analoga al \cref{red trans}, ma TODO PORCODIO
     \end{proof}
 
     \begin{framedcor}{\LSPACE mediante riduzione}
@@ -3389,7 +3421,7 @@
         Per assurdo, si $B \in \LSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{l w red}, si ha che $A \in \LSPACE$ $\lightning$.
     \end{proof}
 
-    \begin{framedprop}[label={log space ops}]{Operazioni in spazio logaritmico}
+    \begin{framedprop}[label={log space ops}, breakable]{Operazioni in spazio logaritmico}
         In spazio logaritmico, è possibile effettuare le seguenti operazioni:
 
         \begin{itemize}

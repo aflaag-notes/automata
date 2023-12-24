@@ -71,12 +71,12 @@
 \contentsline {section}{\numberline {4.2}Turing-decidibilità mediante riduzione}{79}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Teoremi}{79}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Problema della terminazione}{80}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Problema del vuoto}{81}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.3}Problema del vuoto}{82}{subsection.4.2.3}%
 \contentsline {subsection}{\numberline {4.2.4}Problema della regolarità}{82}{subsection.4.2.4}%
 \contentsline {subsection}{\numberline {4.2.5}Problema dell'uguaglianza}{83}{subsection.4.2.5}%
 \contentsline {section}{\numberline {4.3}Turing-riconoscibilità mediante riduzione}{84}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Teoremi}{84}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Problema dell'uguaglianza}{85}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Problema dell'uguaglianza}{86}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}Esercizi}{87}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Indecidibilità}{87}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Irriconoscibilità}{87}{subsection.4.4.2}%
@@ -110,9 +110,9 @@
 \contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{110}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{110}{subsection.6.2.2}%
 \contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{115}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{115}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NL}\xspace }{115}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{116}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NL}\xspace }{116}{subsection.6.2.5}%
 \contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL-Hard}\xspace }{116}{subsection.6.2.6}%
 \contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{116}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NPSPACE}\xspace }{116}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NPSPACE}\xspace }{117}{subsection.6.2.8}%
 \contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NEXPSPACE}\xspace }{117}{subsection.6.2.9}%
