@@ -2265,7 +2265,7 @@
         Per assurdo, sia $A_\TM \in \DEC$, e dunque per definizione esiste un decisore $H$ tale che $L(H) = A_\TM$. Allora, poiché è un decisore, $H$ computa come segue: $$\forall M \in \TM, w \in L(M) \quad H(\abk{M,w}) = \soe{ll}{\textrm{accetta} & M \ \textrm{accetta} \ w \\ \textrm{rifiuta} & M \ \textrm{rifiuta} \ w}$$ dove la sintassi $H(\abk{M,w})$ indica che $H$ computa avendo la codifica $\abk{M,w}$ sul nastro. Sia ora $D$ una macchina di Turing avente $H$ come sua sottoprocedura, la quale viene chiamata quando l'input di $M$ è la descrizione di $M$ stessa (ovvero $\abk{M}$). Inoltre, $D$ computa come segue: $$\forall M \in \TM \quad D(\abk{M}) = \soe{ll}{\textrm{accetta} & H(\abk{M, \abk{M}}) \ \textrm{rifiuta} \iff M \ \textrm{rifiuta} \ \abk{M} \\ \textrm{rifiuta} & H(\abk{M, \abk{M}}) \ \textrm{accetta} \iff M \ \textrm{accetta} \ \abk{M}}$$ dunque $D$ inverte il risultato ottenuto computando $H(\abk{M, \abk{M}})$. Allora, si ha che se $M$ è pari a $D$ stesso, si ottiene che $$D(\abk{D}) = \soe{ll}{\textrm{accetta} & H(\abk{D, \abk{D}}) \ \textrm{rifiuta} \iff D \ \textrm{rifiuta} \ \abk{D} \\ \textrm{rifiuta} & H(\abk{D, \abk{D}}) \ \textrm{accetta} \iff D \ \textrm{accetta} \ \abk{D}}$$ che rappresenta chiaramente un assurdo $\lightning$.
     \end{proof}
     
-    \begin{framedcor}{Gerarchia dei linguaggi di Chomsky}
+    \begin{framedcor}[label={chomsky hier}]{Gerarchia dei linguaggi di Chomsky}
         Dato un alfabeto $\Sigma$, si ha che $$\REG \subsetneq \CFL \subsetneq \DEC \subsetneq \REC \subsetneq \powerset(\Sigma^*)$$
     \end{framedcor}
 
@@ -2290,30 +2290,18 @@
     }
 
     \begin{framedobs}{Gerarchia dei linguaggi di Chomsky}
-        \begin{center}
-            \begin{tikzpicture}[fill=gray]
-                % \scope
-                % \clip (-2,-2) rectangle (2,2)
-                %       (1,0) circle (1);
-                % \fill (0,0) circle (1);
-                % \endscope
-                % \scope
-                % \clip (-2,-2) rectangle (2,2)
-                %       (0,0) circle (1);
-                % \fill (1,0) circle (1);
-                % \endscope
-                % \draw (0,0) circle (1) (0,1) node [text=black,above] {$A$}
-                %       (1,0) circle (1) (1,1) node [text=black,above] {$B$}
-                %       (0,0) circle [radiu]
-                      % (2.5,0) ellipse (1.5 and 0.5) [text=black,above] {$C$}
-                \draw (0,-0.25) circle [x radius=0.5, y radius=0.5] (0,-0.21) node {\REG};
-                \draw (0,0) circle [x radius=1, y radius=1] (0,0.7) node {\CFL};
-                % \draw (-1,2) circle []
-                % \draw (1,0) circle [x radius=1, y radius=1];
-            \end{tikzpicture}
-        \end{center}
+        Dal \cref{chomsky hier}, e dal \cref{coturing thm}, segue il seguente diagramma:
 
-        TRICERATOPO
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,0.8) circle [x radius=3.6, y radius=2.4] (0,2.65) node {$\powerset(\Sigma^*)$};
+                \draw (0,-0.25) circle [x radius=0.5, y radius=0.5] (0,-0.22) node {\REG};
+                \draw (0,0) circle [x radius=1, y radius=1] (0,0.6) node {\CFL};
+                \draw (-0.9,0.55) circle [x radius=2.4, y radius=1.75, rotate=-20] (-2.1,1) node {\REC};
+                \draw (0.9,0.55) circle [x radius=2.4, y radius=1.75, rotate=20] (2.2,1) node {\coREC};
+                \draw (0,0) circle [x radius=0, y radius=0] (0, 1.45) node {\DEC};
+           \end{tikzpicture}
+        \end{center}
     \end{framedobs}
 
     \begin{framedcor}[label={a_tm not in corec}]{Irriconoscibilità di $\overline{A_\TM}$}
@@ -3327,6 +3315,28 @@
         Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard \iff SAT \in \NPComplete$$
     \end{proof}
 
+
+    \begin{framedobs}{Gerarchia delle classi di tempo}
+        TODO METTI QUESTA OBS NEL POSTO GIUSTO (controlla teoremi di gerarchia) E NOMINA I TEOREMI
+
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,-0.2) circle [x radius=0.5, y radius=0.5] (0,-0.2) node {\LSPACE};
+                \draw (0,0.4) circle [x radius=1.3, y radius=1.3] (0,0.8) node {$\NLSPACE = \coNLSPACE$};
+                \draw (0,0.9) circle [x radius=2, y radius=2] (0,2.2) node {$\Pclass = \coPclass$};
+                \draw (-0.7,1.15) circle [x radius=3, y radius=2.3, rotate=-20] (-2.55,2.1) node {\NPclass};
+                \draw (0.7,1.15) circle [x radius=3, y radius=2.3, rotate=20] (2.55,2.1) node {\coNPclass};
+                \draw (0.0,1.8) circle [x radius=4, y radius=3.25] (0,4.1) node {$\PSPACE = \NPSPACE$};
+                \draw (0.0,2.2) circle [x radius=4.5, y radius=3.8] (0,5.45) node {$\EXP = \coEXP$};
+                \draw (0.0,2.5) circle [x radius=5, y radius=4.3] (0,6.4) node {\NEXP};
+                \draw (0,0) circle [x radius=0, y radius=0] (0,7.45) node {\DEC};
+                \draw (0.7,3.1) circle [x radius=6, y radius=5, rotate=20] (5.15,5.5) node {\coREC};
+                \draw (-0.7,3.1) circle [x radius=6, y radius=5, rotate=-20] (-5.15,5.5) node {\REC};
+                \draw (0,3.8) circle [x radius=7, y radius=6] (0,9) node {$\powerset(\Sigma^*)$};
+           \end{tikzpicture}
+        \end{center}
+    \end{framedobs}
+
     \chapter{Complessità di spazio}
 
     \section{Complessità di spazio di macchine di Turing}
@@ -3693,7 +3703,7 @@
 
         Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$. TODO MANCA QUALCOSA CHE NON HO CAPITO
 
-        Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_{L, w}}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}} \in PATH$$ TODO DA FINIRE
+        Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione: $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_{L, w}}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}} \in PATH$$ TODO DA FINIRE DEVI DI CHE $r$ HA SPAZIO LOG E POI SALUTI FINALI
     \end{proof}
 
     \subsection{Classe \coNLSPACE}
