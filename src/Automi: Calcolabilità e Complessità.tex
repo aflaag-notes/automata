@@ -3397,7 +3397,9 @@
             \item il numero di stringhe possibili sul \tit{working tape} di $M$ è pari a $\abs{\Gamma}^{f(n)}$;
         \end{itemize}
         
-        e dunque il numero di configurazioni di $M$ possibili è pari a $$\centeredsoe{n \cdot \abs{Q} \cdot f(n) \cdot \abs{\Gamma}^{f(n)} = n \cdot O\rbk{f(n) \cdot \abs{\Gamma}^{f(n)}} = n \cdot O\rbk{f(n) \cdot 2^{O(f(n))}} = \\ = n \cdot O\rbk{2^{\log(f(n)) + O(n)}} = n \cdot O\rbk{2^{O(f(n))}} = n \cdot 2^{O(f(n))}}$$ (si veda l'\cref{fn exp} per chiarimenti). Si noti che il numero di configurazioni di $M$ possibili coincide con il numero massimo di passi possibili che $M$ può effettuare durante una sua esecuzione, poiché $M$ è un decisore e dunque non può ripetere le configurazioni, altrimenti andrebbe in loop; di conseguenza, segue la tesi.
+        e dunque il numero di configurazioni di $M$ possibili è pari a $$\centeredsoe{n \cdot \abs{Q} \cdot f(n) \cdot \abs{\Gamma}^{f(n)} = n \cdot O\rbk{f(n) \cdot \abs{\Gamma}^{f(n)}} = n \cdot O\rbk{f(n) \cdot 2^{O(f(n))}} = \\ = n \cdot O\rbk{2^{\log(f(n)) + O(f(n))}} = n \cdot O\rbk{2^{O(f(n))}} = n \cdot 2^{O(f(n))}}$$ (si veda l'\cref{fn exp} per chiarimenti). Si noti che il numero di configurazioni di $M$ possibili coincide con il numero massimo di passi possibili che $M$ può effettuare durante una sua esecuzione, poiché $M$ è un decisore e dunque non può ripetere le configurazioni, altrimenti andrebbe in loop; di conseguenza, segue la tesi.
+
+        Infine, si noti che non è possibile accorpare $n$ nell'$O$-grande, poiché  $$f(n) < \log (n) \iff 2^{f(n)} < 2^{\log(n)} = n$$ e dunque se $f(n)$ è asintoticamente inferiore a $\log(n)$, $n$ è ansintoticamente superiore a $2^{f(n)}$.
     \end{proof}
 
     \begin{framedcor}[label={dspace in dtime cor}]{Limite di tempo}
@@ -3405,7 +3407,7 @@
     \end{framedcor}
 
     \begin{proof}
-        La tesi segue direttamente dal \cref{dspace in dtime}, poiché quando $f(n) \ge \log(n)$, si ha che $n \cdot 2^{O(f(n))} = 2^{O(f(n))}$. TODO PERCHÉ???
+        La tesi segue direttamente dal \cref{dspace in dtime}, poiché $$f(n) \ge \log(n) \iff 2^{f(n)} \ge 2^{\log(n)} = n \implies n \cdot 2^{O(f(n))} = 2^{O(f(n))}$$
     \end{proof}
 
     \subsection{Classe \LSPACE}
@@ -3436,7 +3438,7 @@
     \end{framedprop}
 
     \begin{proof}
-        La tesi segue direttamente dal \cref{dspace in dtime cor}, poiché TODO TRICERATOPO
+        La tesi segue direttamente dal \cref{dspace in dtime cor}, poiché $$f(n) = \log(n) \implies \LSPACE := \DSPACE(\log(n)) \subseteq \DTIME \rbk{2^{O(\log(n))}} = \DTIME(O(n)) \subseteq \Pclass$$
     \end{proof}
 
     \begin{frameddefn}{Trasduttore di spazio logaritmico}
@@ -3478,7 +3480,7 @@
 
         Allora, per costruzione di $N$, e per riducibilità in spazio logaritmico di $A$ a $B$, si ha che $$w \in L(N) \iff f(w) \in L(M) = B \iff w \in A$$ e dunque $N$ decide $A$ in spazio logaritmico, poiché $f$ è calcolabile in spazio logaritmico, e $M$ è un decisore di $B$ in spazio logaritmico anch'esso.
 
-        Si noti che il motivo per cui è necessario utilizzare una macchina definita come descritto, e non è sufficiente sfruttrare l'approccio di dimostrazione utilizzato per il \cref{dec w rec}, è che la calcolabilità in spazio logaritmico di $f$ implica che esista un trasduttore di spazio logaritmico $T$ tale da calcolare $f$ in spazio logaritmico. Di conseguenza, lo spazio utilizzato per rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) stesso non è considerato nella sua definizione, ma $N$ deve invece essere una \TM definita come descritto nell'\cref{space model} per definizione di appartenenza ad \LSPACE. Dunque, calcolare preventivamente $f(w)$ potrebbe eccedere lo spazio logaritmico per rappresentare $f(w)$ sul nastro di $N$, ed è dunque necessario computare come descritto.
+        Si noti che il motivo per cui è necessario utilizzare una macchina definita come descritto, e non è sufficiente sfruttrare l'approccio di dimostrazione utilizzato per il \cref{dec w red}, è che la calcolabilità in spazio logaritmico di $f$ implica che esista un trasduttore di spazio logaritmico $T$ tale da calcolare $f$ in spazio logaritmico. Di conseguenza, lo spazio utilizzato per rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) stesso non è considerato nella sua definizione, ma $N$ deve invece essere una \TM definita come descritto nell'\cref{space model} per definizione di appartenenza ad \LSPACE. Dunque, calcolare preventivamente $f(w)$ potrebbe eccedere lo spazio logaritmico per rappresentare $f(w)$ sul nastro di $N$, ed è dunque necessario computare come descritto.
     \end{proof}
 
     \begin{framedcor}{\LSPACE mediante riduzione}
@@ -3579,9 +3581,9 @@
 
         L'algoritmo \ttt{findPath}, per sua definizione, dato un grafo diretto $G$, due suoi nodi $x, y \in G$, ed un intero $k \in \N$, restituisce \ttt{True} se e solo se in $G$ esiste un cammino $x \to y$ lungo al massimo $2^k$, in quanto \ttt{findPath} effettua 2 chiamate ricorsive per ogni livello di ricorsione, e dunque l'albero di chiamate ricorsive ha altezza al massimo $k$ e base al massimo $2^k$. Dunque $M'$ utilizza \ttt{findPath} per decidere $PATH$, ponendo $k = \ceil{\log(\abs{V})}$ poiché un cammino in un grafo ha lunghezza $O\rbk{\abs{V}}$ ed infatti $$k = \ceil{\log(\abs{V})} \implies O\rbk{2^k} = O\rbk{2^{\ceil{\log(\abs{V})}}} = O\rbk{\abs{V}}$$
 
-        Allora, poiché in ogni livello di ricorsione è necessario salvare le variabili $\abs{V}, s, t, x, y, k$ --- il cui costo è $O(\log(n))$ (si veda l'\cref{log space ops}) --- e il numero di livelli di ricosione è pari all'altezza dell'albero di chiamate ricorsive, ovvero $O(k) = O(\log \rbk{\abs{V}}) = O(\log(n))$ segue che lo spazio che la \TM $M'$ utilizza per computare è pari a $$O(\log(n)) \cdot O(\log(n)) = O(\log^2(n)) \implies PATH \in \DSPACE(\log^2(n))$$
+        Allora, poiché in ogni livello di ricorsione è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, k$, salvarle ha costo $O(\log(n))$ (si veda l'\cref{log space ops}); inoltre, il numero di livelli di ricosione è pari all'altezza dell'albero di chiamate ricorsive, ovvero $O(k) = O(\log \rbk{\abs{V}}) = O(\log(n))$. Dunque, segue che lo spazio che la \TM $M'$ utilizza per computare è pari a $$O(\log(n)) \cdot O(\log(n)) = O(\log^2(n)) \implies PATH \in \DSPACE(\log^2(n))$$
     \end{proof}
-
+    
     \subsection{Classe \PSPACE}
 
     \begin{frameddefn}{Classe \PSPACE}
@@ -3594,10 +3596,26 @@
         Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\EXPSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
+    \subsection{Classe \NSPACE}
+    
+    \begin{frameddefn}{Classe \NSPACE}
+        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio $\NSPACE(s(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing non deterministica definita come descritto nell'\cref{space model} in $O(s(n))$.
+    \end{frameddefn}
+
+    \begin{framedthm}[label={savitch}]{Teorema di Savitch}
+        Si verifica che $$\NSPACE(f(n)) \subseteq \DSPACE(f^2(n))$$
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C_1, C_2) \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C_1$ alla configurazione $C_2$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita TODO CHE VUOL DIRE, viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e si assume che, al termine della computazione, $N$ pulisca il working tape e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
+
+        TODO DA FINIRE
+    \end{proof}
+
     \subsection{Classe \NLSPACE}
 
     \begin{frameddefn}{Classe \NLSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NLSPACE := \DSPACE(\log(n))$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NLSPACE := \NSPACE(\log(n))$$
     \end{frameddefn}
     
     \begin{framedthm}[label={nl w red}]{\NLSPACE mediante riduzione}
@@ -3645,19 +3663,43 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Si consideri il seguente algoritmo:
+
+        \begin{algorithmic}[1]
+            \Function{findPathNL}{$G, x, y$}
+                \If{$x == y$}
+                    \State \textbf{accept}
+                \EndIf
+                \State $u := x$
+                \For{$v \in V$} \Comment{scelto \underline{non deterministicamente}}
+                    \If{$(u, v) \in E$}
+                        \State $u := v$
+                        \If{$u == y$}
+                            \State \textbf{accept}
+                        \EndIf
+                    \Else
+                        \State \textbf{reject} \Comment{si noti il non determinismo}
+                    \EndIf
+                \EndFor
+                \State \textbf{reject} \Comment{si noti il non determinismo}
+            \EndFunction
+        \end{algorithmic}
+
+        Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$. TODO MANCA QUALCOSA CHE NON HO CAPITO
+
+        Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_{L, w}}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}} \in PATH$$ TODO DA FINIRE
     \end{proof}
 
     \subsection{Classe \NPSPACE}
 
     \begin{frameddefn}{Classe \NPSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NPSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{n^k}}$$
     \end{frameddefn}
 
     \subsection{Classe \NEXPSPACE}
 
     \begin{frameddefn}{Classe \NEXPSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
 \end{document}

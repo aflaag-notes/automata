@@ -108,11 +108,12 @@
 \contentsline {subsection}{\numberline {6.1.2}Macchine di Turing multinastro}{112}{subsection.6.1.2}%
 \contentsline {section}{\numberline {6.2}Classi di complessità di spazio}{112}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{112}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{113}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{114}{subsection.6.2.2}%
 \contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{119}{subsection.6.2.3}%
 \contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{119}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NL}\xspace }{119}{subsection.6.2.5}%
-\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL-Hard}\xspace }{120}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{120}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NPSPACE}\xspace }{121}{subsection.6.2.8}%
-\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NEXPSPACE}\xspace }{121}{subsection.6.2.9}%
+\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NSPACE}\xspace }{120}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL}\xspace }{120}{subsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Hard}\xspace }{121}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NL-Complete}\xspace }{121}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NPSPACE}\xspace }{122}{subsection.6.2.9}%
+\contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NEXPSPACE}\xspace }{123}{subsection.6.2.10}%
