@@ -3218,7 +3218,7 @@
     \subsection{Classe \coNPComplete}
 
     \begin{frameddefn}{\coNPclass-difficoltà}
-        Un linguaggio $L$ è detto essere \tbf{\coNPclass-difficile} se e solos e ogni altro linguaggio in \coNPclass è polinomialmente riducibile ad $L$. In simboli $$\coNPclass := \{L \mid \forall L' \in \coNPclass \quad L' \leq_\mathrm P L\}$$
+        Un linguaggio $L$ è detto essere \tbf{\coNPclass-difficile} se e solos e ogni altro linguaggio in \coNPclass è polinomialmente riducibile ad $L$. In simboli $$\coNPHard := \{L \mid \forall L' \in \coNPclass \quad L' \leq_\mathrm P L\}$$
     \end{frameddefn}
 
     \begin{framedthm}[label={np-hard conp-hard}]{Definizione alternativa di \coNPHard}
@@ -3457,7 +3457,7 @@
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile in spazio logaritmico mediante funzione a $B$} se esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm L B$$ e la funzione $f$ prende il nome di \tbf{riduzione in spazio logaritmico di $A$ a $B$}.
     \end{frameddefn}
 
-    \begin{framedlem}{Riducibilità in spazio log. dei complementi}
+    \begin{framedlem}[label={l red compl}]{Riducibilità in spazio log. dei complementi}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm L B \iff \overline A \leq_\mathrm L \overline B$$
     \end{framedlem}
 
@@ -3626,6 +3626,14 @@
         La dimostrazione è analoga al \cref{l w red}, pertanto verrà omessa.
     \end{proof}
 
+    \begin{framedcor}[label={nl w red cor}]{\NLSPACE mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, e $A$ non è in \NLSPACE, allora $B$ non è in \NLSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ A \notin \NLSPACE} \implies B \notin \NLSPACE$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \NLSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{nl w red} si ha che $A \in \NLSPACE$ $\lightning$.
+    \end{proof}
+
     \begin{framedthm}[label={nl in p}]{Relazione tra \NLSPACE e \Pclass}
         Si verifica che $$\NLSPACE \subseteq \Pclass$$
     \end{framedthm}
@@ -3656,7 +3664,7 @@
         La dimostrazione è analoga alla \cref{p = np impl 3}, pertanto verrà omessa.
     \end{proof}
 
-    \begin{framedthm}{$PATH$ in \NLComplete}
+    \begin{framedthm}[label={path in nl-complete}]{$PATH$ in \NLComplete}
         Si verifica che $$PATH \in \NLComplete$$
     \end{framedthm}
 
@@ -3686,6 +3694,44 @@
         Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$. TODO MANCA QUALCOSA CHE NON HO CAPITO
 
         Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_{L, w}}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}} \in PATH$$ TODO DA FINIRE
+    \end{proof}
+
+    \subsection{Classe \coNLSPACE}
+    
+    \begin{frameddefn}
+        La classe \coNLSPACE è definita come segue: $$\coNLSPACE := \{L \in \DEC \mid \overline L \in \NLSPACE\}$$
+    \end{frameddefn}
+
+    \begin{framedthm}[label={conl w red}]{\coNLSPACE mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, e $B$ è in \coNLSPACE, allora $A$ è in \coNLSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ B \in \coNLSPACE} \implies A \in \coNLSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione del \cref{conp w red}, grazie al \cref{l red compl} ed al \cref{nl w red}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedcor}[label={conl w red cor}]{\coNLSPACE mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, ed $A$ non è in \coNLSPACE, allora $B$ non è in \coNLSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ A \notin \coNLSPACE} \implies B \notin \coNLSPACE$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \coNLSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{conl w red} si ha che $A \in \coNLSPACE$ $\lightning$.
+    \end{proof}
+
+    \begin{framedthm}[label={path in conl}]{$PATH$ in \coNLSPACE}
+        Si verifica che $$PATH \in \coNLSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedthm}{Teorema di Immerman-Szelepcsényi}
+        Si verifica che $$\NLSPACE = \coNLSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        Per il \cref{path in nl-complete}, il \cref{path in conl}, il \cref{l red compl}, il \cref{conl w red}, ed il \cref{nl w red} si ha che $$\soe{l}{\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \\ PATH \in \coNLSPACE} \implies \forall L \in \NLSPACE \quad L \in \coNLSPACE \iff \NLSPACE \subseteq \coNLSPACE$$ ed inoltre \centeredeq{0.9}{$\soe{l}{\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \iff \overline L \leq_\mathrm L \overline{PATH} \\ PATH \in \coNLSPACE \iff \overline{PATH} \in \NLSPACE} \implies \forall \overline L \in \coNLSPACE \quad \overline L \in \NLSPACE \iff \coNLSPACE \subseteq \NLSPACE$} dunque segue la tesi.
     \end{proof}
 
     \subsection{Classe \NPSPACE}
