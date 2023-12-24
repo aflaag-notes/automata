@@ -1867,7 +1867,13 @@
     \subsection{Configurazioni di \TM}
 
     \begin{frameddefn}{Configurazione (\TM)}
-        Sia $M= (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; con il simbolismo $$u \ q \ v$$ per certi $u, v \in \Gamma^*, q \in Q$ si denota una \tbf{configurazione} di $M$, dove $q$ rappresenta lo stato attuale della computazione di un certo input, $uv$ è la stringa che descrive il nastro (si assume che, dopo l'ultimo simbolo di $v$, il nastro contenga solo $\blankchar$), e la posizione della testina è sul primo simbolo di $v$.
+        Sia $M= (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; con il simbolismo $$u \ q \ v$$ per certi $u, v \in \Gamma^*, q \in Q$ si denota una \tbf{configurazione di $M$}, dove:
+
+        \begin{itemize}
+            \item $q$ rappresenta lo stato attuale della computazione di un certo input;
+            \item $uv$ è la stringa che descrive il nastro (si assume che, dopo l'ultimo simbolo di $v$, il nastro contenga solo $\blankchar$);
+            \item la testina punta al primo simbolo di $v$.
+        \end{itemize}
     \end{frameddefn}
 
     \begin{example}[Configurazioni di \TM]
@@ -2440,11 +2446,15 @@
     \end{framedlem}
 
     \begin{proof}
-        Per definizione stessa, poiché $A \leq_\mathrm m B$ e $B \leq_\mathrm m C$, esistono funzioni calcolabili $\func{f, g}{\Sigma^*}{\Sigma^*}$ tali che $$\centeredsoe{\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B \\ \forall w \in \Sigma^* \quad w \in B \iff g(w) \in C}$$ Inoltre, si noti che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B \iff g(f(w)) \in C$$ Dunque, si consideri allora la seguente macchina di Turing $M$ che, data in input una stringa $w$, computa come segue:
+        Per definizione stessa, poiché $A \leq_\mathrm m B$ e $B \leq_\mathrm m C$, esistono funzioni calcolabili $\func{f, g}{\Sigma^*}{\Sigma^*}$ tali che $$\centeredsoe{\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B \\ \forall w \in \Sigma^* \quad w \in B \iff g(w) \in C}$$ dunque, segue che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B \iff g(f(w)) \in C$$ ed è quindi possibile definire una funzione $F := (g \circ f)$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff F(w) \in C$$. Si consideri infine la seguente macchina di Turing $M$ che, data in input una stringa $w$, computa come segue:
 
         \begin{itemize}
-            \item TODO
+            \item $M$ calcola $f(w)$ attraverso la \TM che rende $f$ calcolabile;
+            \item $M$ calcola $g(f(w))$ attraverso la \TM che rende $g$ calcolabile;
+            \item $M$ restituisce $g(f(w))$ sul proprio nastro.
         \end{itemize}
+
+        Allora, per costruzione di $M$, se $M$ si ferma, termina avendo solo $F(w) = g(f(w))$ sul suo nastro; di conseguenza, per le proprietà di $F$ precedentemente discusse, segue la tesi.
     \end{proof}
 
     \section{Turing-decidibilità mediante riduzione}
@@ -2736,7 +2746,13 @@
     \end{framedprop}
 
     \begin{framedobs}[label={fn log}]{Funzioni logaritmiche}
-        Per convenzione, le funzioni logaritmiche si esprimono in $O$-grande o $o$-piccolo di $\log_2$, ed è possibile farlo grazie al cambio di base, infatti: $$\forall k \in \R \quad f(n) = \log_k(n) \implies f(n) = O(\log_k(n)) = O \rbk{\dfrac{\log_2(n)}{\log_2(k)}} = O(\log_2(n))$$ (per l'ultimo passaggio, si veda la \cref{alg asintotica}).
+        Per convenzione, le funzioni logaritmiche si esprimono in termini di $\log_2$, ed è possibile farlo grazie alle proprietà dei logaritmi, infatti $$\forall k \in \R \quad f(n) = \log_k(n) \implies f(n) = O(\log_k(n)) = O \rbk{\dfrac{\log_2(n)}{\log_2(k)}} = O(\log_2(n))$$
+    \end{framedobs}
+
+    \begin{framedobs}[label={fn exp}]{Funzioni esponenziali}
+        Per convenzione, le funzioni esponenziali si esprimono in termini di potenze di 2, ed è possibile farlo grazie alle proprietà delle potenze, infatti $$\forall k \in \R \quad f(n) = k^n = 2^{\log_2\rbk{k^n}} = 2^{n \cdot \log_2 (k)} = 2^{O(n)}$$
+
+        Inoltre, una funzione $f(n) = O\rbk{2^{O(n)}}$, per definizione, ha come limite superiore asintotico $2^{O(n)}$, ed è dunque superata asintoticamente da una funzione $c \cdot 2^{O(n)}$ per qualche $c \in \N - \{0\}$; allora, per proprietà delle potenze, si ha che $$c \cdot 2^{O(n)} = 2^{\log_2(c)} \cdot 2^{O(n)} = 2^{\log_2(c) + O(n)} = 2^{O(n)}$$ implicando che $f(n) = O\rbk{2^{O(n)}} = 2^{O(n)}$.
     \end{framedobs}
 
     \section{Complessità di tempo di macchine di Turing}
@@ -2852,6 +2868,30 @@
         La dimostrazione è analoga alla dimostrazione del \cref{red compl}, pertanto verrà omessa.
     \end{proof}
 
+    \begin{framedlem}{Transitività della riducibilità polinomiale}
+        Siano $A$, $B$ e $C$ tre linguaggi definiti su un alfabeto $\Sigma$; allora, si verifica che $$\soe{l}{A \leq_\mathrm P B \\ B \leq_\mathrm P C} \implies A \leq_\mathrm P C$$
+    \end{framedlem}
+
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione del \cref{red trans}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedthm}[label={p w red}]{\Pclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \Pclass, allora $A$ è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \Pclass} \implies A \in \Pclass$$
+    \end{framedthm}
+
+    \begin{proof}
+        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano in tempo polinomiale; verrà dunque omessa.
+    \end{proof}
+
+    \begin{framedcor}[label={p with red cor}]{\Pclass mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $A$ non è in \Pclass, allora $B$ non è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \notin \Pclass} \implies B \notin \Pclass$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per assurdo, sia $B \in \Pclass$; allora, poiché $A \leq_\mathrm P B$, per il \cref{p w red}, si ha che $A \in \Pclass$ $\lightning$.
+    \end{proof}
+
     \begin{framedobs}{Rappresentazione di grafi}
         Nelle prossime dimostrazioni si assumerà che sia possibile definire una codifica coerente per rappresentare grafi $G = (V, E)$, al fine di fornire questi in input a macchine di Turing; un esempio potrebbe essere quello della matrice di adiacenza, in cui la generica cella è definita come segue: $$\forall i, j \in [1, \abs{V}] \quad m_{i, j} = \soe{ll}{1 & (v_i, v_j) \in E \\ 0 & (v_i, v_j) \notin E}$$ dove $v_i, v_j\in V$.
     \end{framedobs}
@@ -2875,22 +2915,6 @@
         \end{itemize}
 
         Dunque, poiché $\abs{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), sicuramente $\abs{E} = O(n)$, e dunque la complessità temporale di $M$ risulta essere (rispettivamente per ogni istruzione): $$O\rbk{n^k} + O(1) + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
-    \end{proof} 
-    
-    \begin{framedthm}[label={p w red}]{\Pclass mediante riduzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \Pclass, allora $A$ è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \Pclass} \implies A \in \Pclass$$
-    \end{framedthm}
-
-    \begin{proof}
-        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano in tempo polinomiale; verrà dunque omessa.
-    \end{proof}
-
-    \begin{framedcor}[label={p with red cor}]{\Pclass mediante riduzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $A$ non è in \Pclass, allora $B$ non è in \Pclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \notin \Pclass} \implies B \notin \Pclass$$
-    \end{framedcor}
-
-    \begin{proof}
-        Per assurdo, sia $B \in \Pclass$; allora, poiché $A \leq_\mathrm P B$, per il \cref{p w red}, si ha che $A \in \Pclass$ $\lightning$.
     \end{proof}
 
     \subsection{Classe \coPclass}
@@ -2899,7 +2923,7 @@
         La classe \coPclass è definita come segue: $$\coPclass := \{ L \in \DEC \mid \overline L \in \Pclass \}$$
     \end{frameddefn}
 
-    \begin{framedthm}[label={p = cop}]{$\Pclass = \coPclass$}
+    \begin{framedthm}[label={p = cop}]{Relazione tra \Pclass e \coPclass}
         Si verifica che $$\Pclass = \coPclass$$
     \end{framedthm}
 
@@ -2939,7 +2963,7 @@
         La classe \coEXP è definita come segue: $$\coEXP := \{L \in \DEC \mid \overline A \in \EXP\}$$
     \end{frameddefn}
 
-    \begin{framedthm}[label={exp = coexp}]{$\EXP = \coEXP$}
+    \begin{framedthm}[label={exp = coexp}]{Relazione tra \EXP e \coEXP}
         Si verifica che $$\EXP = \coEXP$$
     \end{framedthm}
 
@@ -3137,7 +3161,7 @@
         La classe \coNPclass è definita come segue: $$\coNPclass := \{L \in \DEC \mid \overline L \in \NPclass\}$$
     \end{frameddefn}
 
-    \begin{framedprop}[label={ho finito i nomi}]{$\Pclass \subseteq \coNPclass \subseteq \EXP$}
+    \begin{framedprop}[label={ho finito i nomi}]{Relazione tra \Pclass, \coNPclass ed \EXP}
         Si verifica che $$\Pclass \subseteq \coNPclass \subseteq \EXP$$
     \end{framedprop}
 
@@ -3309,7 +3333,7 @@
 
     \subsection{Macchine di Turing}
 
-    \begin{framedobs}[label={space model}]{Modello di \TM per complessità di spazio}
+    \begin{framedobs}[label={space model}]{Modello di \TM per compl. di spazio}
         Per il calcolo della complessità di spazio, verrà utilizzato un modello di \TM differente dalle \TM utilizzate fin'ora, al fine di non penalizzare le macchine considerate rispetto allo spazio utilizzato per salvare l'input sul proprio nastro; di conseguenza, verranno considerate \TM fornite di 2 nastri, dove
 
         \begin{itemize}
@@ -3317,6 +3341,17 @@
             \item il secondo nastro verrà utilizzato per effettuare le computazioni (dunque di default conterrà solo \blankchar), e prenderà il nome di \tit{working tape}
         \end{itemize}
     \end{framedobs}
+
+    \begin{frameddefn}[breakable]{Configurazione (\TM per compl. di spazio)}
+        Sia $M = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una macchina di Turing definita come descritto nell'\cref{space model}; con il simbolismo $$u \ q \ v \ttt ; \ i$$ per certi $u, v, \in \Gamma^*, q \in Q, i \in [1, \abs{w}]$ --- dove $w$ è l'input della \TM, posto sull'\tit{input tape} --- si denota una \tbf{configurazione di $M$}, dove:
+
+        \begin{itemize}
+            \item $q$ rappresenta lo stato attuale della computazione dell'input $w$;
+            \item $uv$ è la stringa che descrive il \tit{working tape} (si assume che, dopo l'ultimo simbolo di $v$, il \tit{working tape} contenga solo \blankchar);
+            \item la testina del \tit{working tape} punta al primo simbolo di $v$;
+            \item la testina dell'\tit{input tape} punta all'$i$-esimo carattere di $w$, dunque si trova sulla cella dell'\tit{input tape} contenente $w_i$.
+        \end{itemize}
+    \end{frameddefn}
 
     \begin{frameddefn}[label={space complexity}]{Complessità di spazio di una \TM}
         Sia $D$ un decisore definito come descritto nell'\cref{space model}; si definisce \tbf{complessità di spazio} di $D$ la funzione $\func{f}{\N}{\N}$ tale che $f(n)$ sia il numero massimo di celle che $D$ utilizza per processare una stringa di lunghezza $n$.
@@ -3340,12 +3375,37 @@
         Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing definita come descritto nell'\cref{space model} in $O(s(n))$.
     \end{frameddefn}
 
-    \begin{framedthm}[label={dtime in dspace}]{$\DTIME(f(n)) \subseteq \DSPACE(f(n))$}
+    \begin{framedthm}[label={dtime in dspace}]{Limite di spazio}
         Si verifica che $$\DTIME(f(n)) \subseteq \DSPACE(f(n))$$
     \end{framedthm}
 
     \begin{proof}
-        Si consideri un linguaggio in $\DTIME(f(n))$ per qualche funzione $\func{f}{\N}{\R^+}$; di conseguenza, il decisore di tale linguaggio effettua al massimo $f(n)$ passi, e poiché nel caso peggiore la macchina non fa altro che spostare la testina verso destra, tale macchina potrebbe effettuare solamente $f(n)$ spostamenti verso destra, e dunque potrebbe lavorare con al massimo $f(n)$ celle. Dunque, segue la tesi.
+        Si consideri un linguaggio in $\DTIME(f(n))$ per qualche funzione $\func{f}{\N}{\R^+}$; di conseguenza, il decisore di tale linguaggio effettua al massimo $f(n)$ passi, e poiché nel caso peggiore la macchina non fa altro che spostare la testina verso destra, tale macchina potrebbe effettuare solamente $f(n)$ spostamenti verso destra, e dunque potrebbe lavorare con al massimo $f(n)$ celle; allora, segue la tesi.
+    \end{proof}
+
+    \begin{framedthm}[label={dspace in dtime}]{Limite di tempo}
+        Si verifica che $$\DSPACE(f(n)) \subseteq \DTIME \rbk{n \cdot 2^{O(f(n))}}$$
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $M$ un decisore definito come descritto nell'\cref{space model}, che computa in spazio $f(n)$; allora, si ha che:
+
+        \begin{itemize}
+            \item il numero di stati possibili di una configurazione di $M$ è $\abs{Q}$;
+            \item il numero di posizioni possibili che la testina dell'\tit{input tape} di $M$ può assumere è $n$;
+            \item il numero di posizioni possibili che la testina del \tit{working tape} di $M$ può assumere è $f(n)$;
+            \item il numero di stringhe possibili sul \tit{working tape} di $M$ è pari a $\abs{\Gamma}^{f(n)}$;
+        \end{itemize}
+        
+        e dunque il numero di configurazioni di $M$ possibili è pari a $$\centeredsoe{n \cdot \abs{Q} \cdot f(n) \cdot \abs{\Gamma}^{f(n)} = n \cdot O\rbk{f(n) \cdot \abs{\Gamma}^{f(n)}} = n \cdot O\rbk{f(n) \cdot 2^{O(f(n))}} = \\ = n \cdot O\rbk{2^{\log(f(n)) + O(n)}} = n \cdot O\rbk{2^{O(f(n))}} = n \cdot 2^{O(f(n))}}$$ (si veda l'\cref{fn exp} per chiarimenti). Si noti che il numero di configurazioni di $M$ possibili coincide con il numero massimo di passi possibili che $M$ può effettuare durante una sua esecuzione, poiché $M$ è un decisore e dunque non può ripetere le configurazioni, altrimenti andrebbe in loop; di conseguenza, segue la tesi.
+    \end{proof}
+
+    \begin{framedcor}[label={dspace in dtime cor}]{Limite di tempo}
+        Si verifica che $$f(n) \ge \log(n) \implies \DSPACE(f(n)) \subseteq \DTIME \rbk{2^{O(f(n))}}$$
+    \end{framedcor}
+
+    \begin{proof}
+        La tesi segue direttamente dal \cref{dspace in dtime}, poiché quando $f(n) \ge \log(n)$, si ha che $n \cdot 2^{O(f(n))} = 2^{O(f(n))}$. TODO PERCHÉ???
     \end{proof}
 
     \subsection{Classe \LSPACE}
@@ -3371,6 +3431,14 @@
         La classe di problemi descritti dai linguaggi in \LSPACE è particolarmente interessante, poiché le funzioni logaritmiche sono tali per cui $f(n) < n$.
     \end{framedobs}
 
+    \begin{framedprop}{Relazione tra \LSPACE e \Pclass}
+        Si verifica che $$\LSPACE \subseteq \Pclass$$
+    \end{framedprop}
+
+    \begin{proof}
+        La tesi segue direttamente dal \cref{dspace in dtime cor}, poiché TODO TRICERATOPO
+    \end{proof}
+
     \begin{frameddefn}{Trasduttore di spazio logaritmico}
         Un \tbf{trasduttore di spazio logaritmico} è una macchina di Turing definita come descritto nell'\cref{space model}, che presenta un ulteriore nastro, detto \tit{output tape}, utilizzato esclusivamente in modalità \tit{read-once} per scrivere l'output.
     \end{frameddefn}
@@ -3383,9 +3451,17 @@
         L'uso di trasduttori di spazio logaritmico all'interno della \cref{fn calc log} permette di non penalizzare le \TM considerate sullo spazio per rappresentare l'output.
     \end{framedobs}
 
-    \begin{frameddefn}{Riduzione in spazio $O(\log(n))$ mediante $f$}
+    \begin{frameddefn}{Riduzione in spazio log. mediante funzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile in spazio logaritmico mediante funzione a $B$} se esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm L B$$ e la funzione $f$ prende il nome di \tbf{riduzione in spazio logaritmico di $A$ a $B$}.
     \end{frameddefn}
+
+    \begin{framedlem}{Riducibilità in spazio log. dei complementi}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$A \leq_\mathrm L B \iff \overline A \leq_\mathrm L \overline B$$
+    \end{framedlem}
+
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione del \cref{red compl}, pertanto verrà omessa.
+    \end{proof}
 
     \begin{framedthm}[label={l w red}]{\LSPACE mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, e $B$ è in \LSPACE, allora $A$ è in \LSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ B \in \LSPACE} \implies A \in \LSPACE$$
@@ -3405,20 +3481,20 @@
         Si noti che il motivo per cui è necessario utilizzare una macchina definita come descritto, e non è sufficiente sfruttrare l'approccio di dimostrazione utilizzato per il \cref{dec w rec}, è che la calcolabilità in spazio logaritmico di $f$ implica che esista un trasduttore di spazio logaritmico $T$ tale da calcolare $f$ in spazio logaritmico. Di conseguenza, lo spazio utilizzato per rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) stesso non è considerato nella sua definizione, ma $N$ deve invece essere una \TM definita come descritto nell'\cref{space model} per definizione di appartenenza ad \LSPACE. Dunque, calcolare preventivamente $f(w)$ potrebbe eccedere lo spazio logaritmico per rappresentare $f(w)$ sul nastro di $N$, ed è dunque necessario computare come descritto.
     \end{proof}
 
-    \begin{framedlem}[label={l red trans}]{Transitività della riducibilità}
-        Siano $A, B$ e $C$ tre linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$\soe{l}{A \leq_\mathrm L B B \leq_\mathrm L C} \implies A \leq_\mathrm L C$$
-    \end{framedlem}
-
-    \begin{proof}
-        La dimostrazione è analoga al \cref{red trans}, ma TODO PORCODIO
-    \end{proof}
-
     \begin{framedcor}{\LSPACE mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, e $A$ non è in \LSPACE, allora $B$ non è in \LSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ A \notin \LSPACE} \implies B \notin \LSPACE$$
     \end{framedcor}
 
     \begin{proof}
         Per assurdo, si $B \in \LSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{l w red}, si ha che $A \in \LSPACE$ $\lightning$.
+    \end{proof}
+
+    \begin{framedlem}[label={l red trans}]{Transitività della riducibilità in spazio log.}
+        Siano $A, B$ e $C$ tre linguaggi definiti su un alfabeto $\Sigma$; allora, si ha che $$\soe{l}{A \leq_\mathrm L B \\ B \leq_\mathrm L C} \implies A \leq_\mathrm L C$$
+    \end{framedlem}
+
+    \begin{proof}
+        La dimostrazione è analoga al \cref{red trans}, con la differenza che la \TM $M$ considerata deve essere definita come descritto nell'\cref{space model}, e deve cmputare come descritto nella dimostrazione del \cref{l w red}, poiché anche in questo caso rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) potrebbe richiedere più spazio di $O(\log(n))$.
     \end{proof}
 
     \begin{framedprop}[label={log space ops}, breakable]{Operazioni in spazio logaritmico}
@@ -3523,8 +3599,16 @@
     \begin{frameddefn}{Classe \NLSPACE}
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NLSPACE := \DSPACE(\log(n))$$
     \end{frameddefn}
+    
+    \begin{framedthm}[label={nl w red}]{\NLSPACE mediante riduzione}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, e $B$ è in \NLSPACE, allora $A$ è in \NLSPACE. In simboli $$\soe{l}{A \leq_\mathrm L B \\ B \in \NLSPACE} \implies A \in \NLSPACE$$
+    \end{framedthm}
 
-    \begin{framedthm}[label={nl in p}]{$\NLSPACE \subseteq \Pclass$}
+    \begin{proof}
+        La dimostrazione è analoga al \cref{l w red}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedthm}[label={nl in p}]{Relazione tra \NLSPACE e \Pclass}
         Si verifica che $$\NLSPACE \subseteq \Pclass$$
     \end{framedthm}
 

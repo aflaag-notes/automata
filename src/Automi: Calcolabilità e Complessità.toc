@@ -68,8 +68,8 @@
 \contentsline {chapter}{\numberline {4}Riducibilità}{78}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Riduzione}{78}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Funzioni calcolabili}{78}{subsection.4.1.1}%
-\contentsline {section}{\numberline {4.2}Turing-decidibilità mediante riduzione}{79}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Teoremi}{79}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.2}Turing-decidibilità mediante riduzione}{80}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Teoremi}{80}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Problema della terminazione}{80}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}Problema del vuoto}{82}{subsection.4.2.3}%
 \contentsline {subsection}{\numberline {4.2.4}Problema della regolarità}{82}{subsection.4.2.4}%
@@ -77,42 +77,42 @@
 \contentsline {section}{\numberline {4.3}Turing-riconoscibilità mediante riduzione}{84}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Teoremi}{84}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Problema dell'uguaglianza}{86}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Esercizi}{87}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Indecidibilità}{87}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Irriconoscibilità}{87}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.4}Esercizi}{88}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Indecidibilità}{88}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Irriconoscibilità}{88}{subsection.4.4.2}%
 \newpage 
-\contentsline {chapter}{\numberline {5}Complessità di tempo}{88}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Analisi asintotica}{88}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}$O$-grande ed $o$-piccolo}{88}{subsection.5.1.1}%
-\contentsline {section}{\numberline {5.2}Complessità di tempo di macchine di Turing}{90}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Macchine di Turing}{90}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Macchine di Turing multinastro}{90}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Macchine di Turing non deterministiche}{91}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Classi di complessità di tempo}{91}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Classe \textsf {DTIME}\xspace }{91}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Classe \textsf {P}\xspace }{92}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Classe \textsf {coP}\xspace }{94}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Classe \textsf {EXP}\xspace }{95}{subsection.5.3.4}%
-\contentsline {subsection}{\numberline {5.3.5}Classe \textsf {coEXP}\xspace }{95}{subsection.5.3.5}%
-\contentsline {subsection}{\numberline {5.3.6}Classe \textsf {NTIME}\xspace }{96}{subsection.5.3.6}%
-\contentsline {subsection}{\numberline {5.3.7}Classe \textsf {NP}\xspace }{96}{subsection.5.3.7}%
-\contentsline {subsection}{\numberline {5.3.8}Classe \textsf {NP-Complete}\xspace }{100}{subsection.5.3.8}%
-\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{102}{subsection.5.3.9}%
-\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{104}{subsection.5.3.10}%
-\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{105}{subsection.5.3.11}%
-\contentsline {section}{\numberline {5.4}Teorema di Cook-Levin}{105}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Teorema di Cook-Levin}{105}{subsection.5.4.1}%
-\contentsline {chapter}{\numberline {6}Complessità di spazio}{109}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Complessità di spazio di macchine di Turing}{109}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Macchine di Turing}{109}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Macchine di Turing multinastro}{110}{subsection.6.1.2}%
-\contentsline {section}{\numberline {6.2}Classi di complessità di spazio}{110}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{110}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{110}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{115}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{116}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NL}\xspace }{116}{subsection.6.2.5}%
-\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL-Hard}\xspace }{116}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{116}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NPSPACE}\xspace }{117}{subsection.6.2.8}%
-\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NEXPSPACE}\xspace }{117}{subsection.6.2.9}%
+\contentsline {chapter}{\numberline {5}Complessità di tempo}{89}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Analisi asintotica}{89}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}$O$-grande ed $o$-piccolo}{89}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}Complessità di tempo di macchine di Turing}{91}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Macchine di Turing}{91}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Macchine di Turing multinastro}{91}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Macchine di Turing non deterministiche}{92}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Classi di complessità di tempo}{92}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Classe \textsf {DTIME}\xspace }{92}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Classe \textsf {P}\xspace }{93}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Classe \textsf {coP}\xspace }{96}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Classe \textsf {EXP}\xspace }{96}{subsection.5.3.4}%
+\contentsline {subsection}{\numberline {5.3.5}Classe \textsf {coEXP}\xspace }{97}{subsection.5.3.5}%
+\contentsline {subsection}{\numberline {5.3.6}Classe \textsf {NTIME}\xspace }{97}{subsection.5.3.6}%
+\contentsline {subsection}{\numberline {5.3.7}Classe \textsf {NP}\xspace }{97}{subsection.5.3.7}%
+\contentsline {subsection}{\numberline {5.3.8}Classe \textsf {NP-Complete}\xspace }{101}{subsection.5.3.8}%
+\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{103}{subsection.5.3.9}%
+\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{105}{subsection.5.3.10}%
+\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{106}{subsection.5.3.11}%
+\contentsline {section}{\numberline {5.4}Teorema di Cook-Levin}{107}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Teorema di Cook-Levin}{107}{subsection.5.4.1}%
+\contentsline {chapter}{\numberline {6}Complessità di spazio}{111}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Complessità di spazio di macchine di Turing}{111}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Macchine di Turing}{111}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Macchine di Turing multinastro}{112}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Classi di complessità di spazio}{112}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{112}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{113}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{119}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{119}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NL}\xspace }{119}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL-Hard}\xspace }{120}{subsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{120}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {NPSPACE}\xspace }{121}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NEXPSPACE}\xspace }{121}{subsection.6.2.9}%

@@ -19,7 +19,7 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 - fine appunti del 21/12
 - esercizi del 22/12
 
-- transitività riduzioni
+- decidi se i cosi "relazione tra" sono teoremi o prop
 
 - insiemini carini
 - quando fai gerarchia di tempo leva le prop "relazione tra ..." e corollario 5.3.11.1
