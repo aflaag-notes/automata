@@ -840,7 +840,6 @@
                 \ElsIf{$|Q| > 2$}
                     \State $q \in Q - \{q_{\mathrm{start}}, q_{\mathrm{accept}}\}$
                     \State $Q' := Q - \{q\}$
-                    % \State $\forall q_i \in Q' - \{q_{\mathrm{accept}}\}, q_j \in Q' - \{q_{\mathrm{start}}\} \quad \delta'(q_i, q_j) := \delta(q_i, q)\delta(q, q)^* \delta(q, q_j) \cup \delta(q_i, q_j)$
                     \For{$q_i \in Q' - \{q_\mathrm{accept}\}$}
                         \For{$q_j \in Q' - \{q_\mathrm{start}\}$}
                             \State $\delta'(q_i, q_j) := \delta(q_i, q)\delta(q, q)^* \delta(q, q_j) \cup \delta(q_i, q_j)$
@@ -2081,7 +2080,7 @@
     \subsection{Linguaggi non Turing-riconoscibili}
     
     \begin{framedobs}{Codifiche}
-        Sia $O$ un oggetto; poichè una \TM può prendere in input qualsiasi oggetto, ammesso che sia codificato attraverso una quaclhe codifica predeterminata, all'interno di questi appunti si utilizzerà il simbolismo $\abk{O}$ per sottointendere una qualche codifica del dato oggetto $O$, in modo che sia possibile rappresentare $O$ sul nastro di una \TM.
+        Sia $O$ un oggetto; poichè una \TM può prendere in input qualsiasi oggetto, ammesso che sia codificato attraverso una quaclhe codifica predeterminata, all'interno di questi appunti si utilizzerà il simbolismo $\abk{O}$ per sottointendere una qualche codifica del dato oggetto $O$, in modo che sia possibile rappresentare $O$ sul nastro di una \TM. Inoltre, a meno di specifica, si assume che le \TM considerate, data loro in input una qualche codifica, controllino la validità di quest'ultime come prima istruzione, e rifiutino nel caso in cui si presentino codifiche non valide.
     \end{framedobs}
 
     \begin{example}[Codifiche di $\delta$]
@@ -2604,7 +2603,7 @@
     \end{framedthm}
 
     \begin{proof}
-        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate sono riconoscitori e non decisori; verrà dunque omessa.
+        La dimostrazione è analoga alla dimostrazione del \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate sono riconoscitori e non decisori; verrà dunque omessa.
     \end{proof}
 
     \begin{framedcor}[label={rec w red cor}]{Turing-irriconoscibilità mediante riduzione}
@@ -2869,7 +2868,7 @@
     \end{framedthm}
 
     \begin{proof}
-        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano in tempo polinomiale; verrà dunque omessa.
+        La dimostrazione è analoga alla dimostrazione del \cref{dec w red}, con la sola differenza che le macchine di Turing considerate computano in tempo polinomiale; verrà dunque omessa.
     \end{proof}
 
     \begin{framedcor}[label={p with red cor}]{\Pclass mediante riduzione}
@@ -2984,7 +2983,7 @@
     \end{framedthm}
 
     \begin{proof}
-        La dimostrazione è analoga al \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano non deterministicamente in tempo polinomiale; verrà dunque omessa.
+        La dimostrazione è analoga alla dimostrazione del \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano non deterministicamente in tempo polinomiale; verrà dunque omessa.
     \end{proof}
 
     \begin{framedcor}[label={np with red cor}]{\NPclass mediante riduzione}
@@ -3170,6 +3169,10 @@
         Per il \cref{ho finito i nomi}, si ha che $\Pclass \subseteq \coNPclass$; inoltre, preso un linguaggio $L \in \coNPclass$, si ha che $$L \in \coNPclass \iff \overline L \in \NPclass = \Pclass$$ e dunque segue la tesi per doppia inclusione.
     \end{proof}
 
+    \begin{framedobs}{\curlyquotes{\NPclass versus \coNPclass}}
+        Un altro noto problema aperto riguarda stabilire se \href{https://en.wikipedia.org/wiki/Co-NP}{\NPclass coincide o meno con \coNPclass}.
+    \end{framedobs}
+
     \begin{framedcor}[label={p = np impl 2}]{Implicazioni di $\Pclass = \NPclass$}
         Si verifica che $$\Pclass = \NPclass \implies \NPclass = \coNPclass$$
     \end{framedcor}
@@ -3177,10 +3180,6 @@
     \begin{proof}
         Per il \cref{p = np impl 1}, si ha che $$\Pclass = \NPclass \implies \NPclass = \Pclass = \coNPclass$$
     \end{proof}
-
-    \begin{framedobs}{\curlyquotes{\NPclass versus \coNPclass}}
-        Un altro noto problema aperto riguarda stabilire se \href{https://en.wikipedia.org/wiki/Co-NP}{\NPclass coincide o meno con \coNPclass}.
-    \end{framedobs}
 
     \begin{framedthm}[label={conp w red}]{\coNPclass mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \coNPclass, allora $A$ è in \coNPclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \coNPclass} \implies A \in \coNPclass$$
@@ -3268,11 +3267,11 @@
         Sia $V$ una macchina di Turing che, data una codifica $\abk{\phi, c}$ in input, computa come segue:
 
         \begin{itemize}
-            \item $V$ interpreta $c$ come assegnamento alle variabili di $\phi$;
+            \item $V$ interpreta $w$ come $\abk{\phi}$, dove $\phi$ è una formula booleana, e $c$ come assegnamento alle variabili di $\phi$;
             \item $V$ controlla che $\phi(c)$ sia soddisfatta, ed in tal caso accetta; in caso contrario, $V$ rifiuta;
         \end{itemize}
 
-        Allora, $V$ risulta essere un verificatore di $SAT$, poiché per costruzione $V$ accetta se e solo se $c \in \Sigma^*$ è un assegnamento per $\phi$ tale che $\abk{\phi, c} \in L(V)$; inoltre, $V$ è un verificatore polinomiale, e dunque per il \cref {np verif} si ha che $SAT \in \NPclass$.
+        Allora, $V$ risulta essere un verificatore di $SAT$, poiché per costruzione $V$ accetta se e solo se $c \in \Sigma^*$ è un assegnamento per $\phi$ tale che $\abk{\abk{\phi}, c} \in L(V)$; inoltre, $V$ è un verificatore polinomiale, e dunque per il \cref {np verif} si ha che $SAT \in \NPclass$.
 
         Sia $A \in \NPclass$, e dunque esiste una \NTM $N = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $A$ in tempo polinomiale. Sia consideri ora una stringa $w$ in input ad $N$, ed un \tit{tableau} --- \tit{per ognuno dei rami di computazione di $N$} --- definito come mostrato in figura:
 
@@ -3496,7 +3495,7 @@
     \end{framedlem}
 
     \begin{proof}
-        La dimostrazione è analoga al \cref{red trans}, con la differenza che la \TM $M$ considerata deve essere definita come descritto nell'\cref{space model}, e deve cmputare come descritto nella dimostrazione del \cref{l w red}, poiché anche in questo caso rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) potrebbe richiedere più spazio di $O(\log(n))$.
+        La dimostrazione è analoga alla dimostrazione del \cref{red trans}, con la differenza che la \TM $M$ considerata deve essere definita come descritto nell'\cref{space model}, e deve cmputare come descritto nella dimostrazione del \cref{l w red}, poiché anche in questo caso rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) potrebbe richiedere più spazio di $O(\log(n))$.
     \end{proof}
 
     \begin{framedprop}[label={log space ops}, breakable]{Operazioni in spazio logaritmico}
@@ -3596,6 +3595,14 @@
         Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\EXPSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
+    \begin{framedprop}[label={nexp in expspace}]{Relazione tra \NEXP ed \EXPSPACE}
+        Si verifica che $$\NEXP \subseteq \EXPSPACE$$
+    \end{framedprop}
+
+    \begin{proof}
+        La tesi segue direttamente dal \cref{dspace in dtime cor}, e la dimostrazione è analoga alla dimostrazione della \cref{l in p}, pertanto verrà omessa.
+    \end{proof}
+
     \subsection{Classe \NSPACE}
     
     \begin{frameddefn}{Classe \NSPACE}
@@ -3623,7 +3630,7 @@
     \end{framedthm}
 
     \begin{proof}
-        La dimostrazione è analoga al \cref{l w red}, pertanto verrà omessa.
+        La dimostrazione è analoga alla dimostrazione del \cref{l w red}, pertanto verrà omessa.
     \end{proof}
 
     \begin{framedcor}[label={nl w red cor}]{\NLSPACE mediante riduzione}
@@ -3669,7 +3676,7 @@
     \end{framedprop}
 
     \begin{proof}
-        La dimostrazione è analoga alla \cref{p = np impl 3}, pertanto verrà omessa.
+        La dimostrazione è analoga alla dimostrazione della \cref{p = np impl 3}, pertanto verrà omessa.
     \end{proof}
 
     \begin{framedthm}[label={path in nl-complete}]{$PATH$ in \NLComplete}
@@ -3732,7 +3739,7 @@
 
     \subsection{Classe \coNLSPACE}
     
-    \begin{frameddefn}{Classe \coNLSPACE}
+    \begin{frameddefn}[label={conl def}]{Classe \coNLSPACE}
         La classe \coNLSPACE è definita come segue: $$\coNLSPACE := \{L \in \DEC \mid \overline L \in \NLSPACE\}$$
     \end{frameddefn}
 
@@ -3757,7 +3764,41 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Per la \cref{conl def}, la tesi può procedere dimostrando equivalentemente che $\overline{PATH} \in \NLSPACE$; inoltre, per il \cref{nl verif}, dimostrare che $\overline{PATH} \in \NLSPACE$ è equivalente a dimostrare che $\overline{PATH}$ e verificabile in spazio logaritmico per il \cref{nl verif}. Infine, si noti che all'interno di $\overline{PATH}$ sono presenti non solo codifiche $\abk{G, s, t}$ tali per cui non esistono cammini $s \to t$ in $G$, ma anche ogni altra stringa di simboli dell'alfabeto considerato che non corrisponde ad una valida codifica della forma $\abk{G, s, t}$. 
+
+        Si consideri dunque una \TM $V$ definita come descritto all'interno dell'\cref{space model} che, data una codifica $\abk{w, c}$ in input, computa come segue:
+
+        \begin{itemize}
+            \item $V$ interpreta $w$ come $\abk{G, s, t}$, dove $G = (V_G, E_G)$ è un grafo diretto, ed $s, t \in V$ come due suoi nodi; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, $V$ accetta;
+            \item sia $R_l$ l'insieme dei vertici raggiungibili da $s$ con al massimo $l$ archi, e sia $r_l := \abs{R_l}$;
+            \item $V$ interpreta dunque $c$ come $\abk{c_0, \ldots, c_{\abs{V_G} -1}}$, dove ogni $c_i$ viene interpretato da $V$ come certificato di non appartenenza ad $R_i$ da parte di $t$; in simboli $$\forall i \in [0, \abs{V_G}) \quad c_i = \abk{s \to v_1, \ldots, s \to v_k}$$ per qualche $k\in \N$, dove $v_1, \ldots, v_k \in V_G \mid \forall j \in [1, k] \quad v_j \neq t$ sono tutti i nodi raggiungibili da $s$ attraverso cammini lunghi al massimo $i$; inoltre, i cammini all'interno di ogni $c_i$ devono essere ordinati in ordine di lunghezza (e, per evitare ambiguità, lessicograficamente in base ai vertici $v_j$ a parità di lunghezza); se non è possibile effettuare tale interpretazione per via di una codifica incorretta, $V$ accetta;
+            \item dopo aver controllato che tali codifiche sono interpretabili come descritto, $V$ controlla che $c_{i + 1}$ sia un'estensione di $c_i$, per ogni $i \in [0, \abs{V_G})$; se cosi non fosse, $V$ accetta;
+            \item $V$ esegue la seguente procedura:
+                \begin{algorithmic}[1]
+                    \Function{checkPath}{$G, s, t, c$}
+                        \For{$i \in [0, \abs{V_G})$}
+                            \For{$s \to v_j \in c_i$}
+                                \If{$v_j = t$}
+                                    \State \textbf{reject}
+                                \EndIf
+                            \EndFor
+                        \EndFor
+                        \State \textbf{accept}
+                    \EndFunction
+                \end{algorithmic}
+        \end{itemize}
+
+        La dimostrazione della correttezza della procedura \ttt{checkPath} di $V$ procede per induzione sui vertici raggiungibili da $s$.
+
+            \begin{enumerate}[label=]
+                \item \tit{Caso base.} Per definizione, si ha $R_0 = \{ s\}$ e $c_0 = \abk{s \to s}$; allora, per stabilire se $t \notin R_0$, \ttt{checkPath} controlla se $t \neq s \in R_0$.
+                \item \tit{Ipotesi induttiva.} Dato un $l \in [0, \abs{V_G})$, \ttt{checkPath} è in grado di stabilire se $t \notin R_l$. Si noti che, per definizione stessa, si ha che $\forall h \in [0, \abs{V_G}) \quad R_h \subseteq R_{h + 1}$, dunque segue che $$t \notin R_l \implies \forall h \in [0, l] \quad t \notin R_h$$ implicando che i cammini lunghi al più $l$ contenuti in $c_l$ --- che saranno anche i primi $r_l$, poiché si è ipotizzato che la codifica di $c_l$ sia ordinata per lunghezza dei cammini --- non sono cammini $s \to t$.
+                \item \tit{Passo induttivo.} È necessario dimostare che per $l +1$, \ttt{checkPath} è in grado di stabilire se $t \notin R_{l + 1}$. Si noti che, per ipotesi induttiva, \ttt{checkPath} è in grado di stabilire se $t \notin R_l$, ed inoltre $R_l \subseteq R_{l + 1}$ per quanto detto in precedenza. Allora, poiché TODO
+            \end{enumerate}
+
+            Dunque, questo dimostra che \ttt{checkPath} è in grado di stabilire correttamente se $t \in R_{\abs{V_G}}$; allora, attraverso tale procedura, $V$ stabilisce correttamente se $t$ è raggiungibile da $s$. Di conseguenza, se non esistono cammini $s \to t \in G$, esiste una $c \in \Sigma ^*$ tale che $\abk{\abk{G, s, t}, c} \in L(V)$, e se esiste un cammino $s \to t$ allora \ttt{checkPath} è in grado di stabilire che $t \in R_{\abs{V_G}}$ correttamente, e dunque $V$ rifiuta. Questo dimostra che $V$ è un verificatore per $\overline{PATH}$.
+
+            Inoltre, si noti che TODO COSTO SPAZIALE
     \end{proof}
 
     \begin{framedthm}{Teorema di Immerman-Szelepcsényi}
@@ -3774,30 +3815,50 @@
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{n^k}}$$
     \end{frameddefn}
 
+    \begin{framedprop}[label={pspace = npspace}]{Relazione tra \PSPACE ed \NPSPACE}
+        Si verifica che $$\PSPACE = \NPSPACE$$
+    \end{framedprop}
+
+    \begin{proof}
+        Trivialmente si ha che $\PSPACE \subseteq \NPSPACE$, poiché una \TM è una particolare \NTM, inoltre, per il \cref{savitch}, si ha che $$\forall k, h \in \N \mid h = 2k \quad \NSPACE(n^k) \subseteq \DSPACE \rbk{\rbk{n^k}^2} = \DSPACE \rbk{n^{2k}} = \PSPACE(n^h)$$ dunque segue la tesi per doppia implicazione.
+    \end{proof}
+
     \subsection{Classe \NEXPSPACE}
 
     \begin{frameddefn}{Classe \NEXPSPACE}
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
-    \begin{framedobs}{Gerarchia delle classi}
-        TODO METTI QUESTA OBS NEL POSTO GIUSTO (controlla teoremi di gerarchia) E NOMINA I TEOREMI E FIXA IL DISEGNO AGGIUNGENDO EXPSPACE=NEXPSPACE
+    \begin{framedprop}{Relaz. tra \EXPSPACE e \NEXPSPACE}
+        Si verifica che $$\EXPSPACE = \NEXPSPACE$$
+    \end{framedprop}
+
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione della \cref{pspace = npspace}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedobs}[breakable]{Gerarchia delle classi}
+        TODO METTI QUESTA OBS NEL POSTO GIUSTO (controlla teoremi di gerarchia) E NOMINA I TEOREMI USATI
 
         \begin{center}
-            \begin{tikzpicture}
-                \draw (0,-0.2) circle [x radius=0.5, y radius=0.5] (0,-0.2) node {\LSPACE};
-                \draw (0,0.4) circle [x radius=1.3, y radius=1.3] (0,0.8) node {$\NLSPACE = \coNLSPACE$};
-                \draw (0,0.9) circle [x radius=2, y radius=2] (0,2.2) node {$\Pclass = \coPclass$};
-                \draw (-0.7,1.15) circle [x radius=3, y radius=2.3, rotate=-20] (-2.55,2.1) node {\NPclass};
-                \draw (0.7,1.15) circle [x radius=3, y radius=2.3, rotate=20] (2.55,2.1) node {\coNPclass};
-                \draw (0.0,1.8) circle [x radius=4, y radius=3.25] (0,4.1) node {$\PSPACE = \NPSPACE$};
-                \draw (0.0,2.2) circle [x radius=4.5, y radius=3.8] (0,5.45) node {$\EXP = \coEXP$};
-                \draw (0.0,2.5) circle [x radius=5, y radius=4.3] (0,6.4) node {\NEXP};
-                \draw (0,0) circle [x radius=0, y radius=0] (0,7.45) node {\DEC};
-                \draw (0.7,3.1) circle [x radius=6, y radius=5, rotate=20] (5.15,5.5) node {\coREC};
-                \draw (-0.7,3.1) circle [x radius=6, y radius=5, rotate=-20] (-5.15,5.5) node {\REC};
-                \draw (0,3.8) circle [x radius=7, y radius=6] (0,9) node {$\powerset(\Sigma^*)$};
-           \end{tikzpicture}
+            \resizebox{0.9\hsize}{!}{
+                \begin{tikzpicture}
+                    \draw (0,-0.2) circle [x radius=0.5, y radius=0.5] (0,-0.2) node {\LSPACE};
+                    \draw (0,0.4) circle [x radius=1.3, y radius=1.3] (0,0.8) node {$\NLSPACE = \coNLSPACE$};
+                    \draw (0,0.9) circle [x radius=1.95, y radius=1.95] (0,2.15) node {$\Pclass = \coPclass$};
+                    \draw (-0.7,1.15) circle [x radius=2.9, y radius=2.3, rotate=-20] (-2.6,2) node {\NPclass};
+                    \draw (0.7,1.15) circle [x radius=2.9, y radius=2.3, rotate=20] (2.6,2) node {\coNPclass};
+                    \draw (0.0,1.8) circle [x radius=4, y radius=3.25] (0,4.1) node {$\PSPACE = \NPSPACE$};
+                    \draw (0.0,2.2) circle [x radius=4.5, y radius=3.8] (0,5.45) node {$\EXP = \coEXP$};
+                    \draw (0.0,2.5) circle [x radius=5, y radius=4.3] (0,6.4) node {\NEXP};
+                    \draw (0.0,3) circle [x radius=5.5, y radius=5] (0,7.15) node {$\EXPSPACE = \NEXPSPACE$};
+
+                    \draw (0,0) circle [x radius=0, y radius=0] (0,8.7) node {\DEC};
+                    \draw (0.6,3.7) circle [x radius=6.75, y radius=5.8, rotate=18] (6.1,6) node {\coREC};
+                    \draw (-0.6,3.7) circle [x radius=6.75, y radius=5.8, rotate=-18] (-6.1,6) node {\REC};
+                    \draw (0,4.3) circle [x radius=7.5, y radius=6.7] (0,10.2) node {$\powerset(\Sigma^*)$};
+               \end{tikzpicture}
+           }
         \end{center}
     \end{framedobs}
 
