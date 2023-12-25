@@ -2979,16 +2979,6 @@
         Sia $L \in \NTIME\rbk{n^k}$ per qualche $k \in \N$, e dunque per definizione esiste una \NTM che decide $L$ in $O\rbk{n^k}$; allora, per il \cref{ntm time}, si ha che $L \in \DTIME \rbk{2^{O\rbk{n^k}}}$.
     \end{proof}
 
-    \begin{frameddefn}{Verificatore}
-        Sia $L$ un linguaggio decidibile definito su un certo alfabeto $\Sigma$, e $V$ un decisore; $V$ è detto \tbf{verificatore di $L$} se $$L = \{w \in \Sigma^* \mid \exists c \in \Sigma^* : \abk{w, c} \in L(V)\}$$
-
-        Data una codifica $\abk{w, c} \in L(V)$, il tempo di computazione di $V$ è misurato solamente in termini della lunghezza di $w$; inoltre, $c$ prende il nome di \tbf{certificato di $w$}. Un linguaggio è detto essere \tbf{polinomialmente verificabile} se ammette un verificatore in tempo polinomiale.
-    \end{frameddefn}
-
-    \begin{framedobs}{Lunghezza dei certificati di verificatori}
-        Sia $V$ un verificatore che computa in $O(f(n))$ per qualche $f$, e sia $\abk{w, c} \in L(V)$; la lunghezza di $c$ deve necessariamente essere in $O(f(n))$ --- rispetto alla lunghezza di $w$ --- poiché $O(f(n))$ è proprio il tempo di cui $V$ dispone per computare.
-    \end{framedobs}
-
     \begin{framedthm}[label={np w red}]{\NPclass mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $B$ è in \NPclass, allora $A$ è in \NPclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ B \in \NPclass} \implies A \in \NPclass$$
     \end{framedthm}
@@ -3005,6 +2995,16 @@
         Per assurdo, sia $B \in \NPclass$; allora, poiché $A \leq_\mathrm P B$, per il \cref{np w red}, si ha che $A \in \NPclass$ $\lightning$.
     \end{proof}
 
+    \begin{frameddefn}{Verificatore}
+        Sia $L$ un linguaggio decidibile definito su un certo alfabeto $\Sigma$, e $V$ un decisore; $V$ è detto \tbf{verificatore di $L$} se $$L = \{w \in \Sigma^* \mid \exists c \in \Sigma^* : \abk{w, c} \in L(V)\}$$
+
+        Data una codifica $\abk{w, c} \in L(V)$, il tempo di computazione di $V$ è misurato solamente in termini della lunghezza di $w$; inoltre, $c$ prende il nome di \tbf{certificato di $w$}. Un linguaggio è detto essere \tbf{polinomialmente verificabile} se ammette un verificatore in tempo polinomiale.
+    \end{frameddefn}
+
+    \begin{framedobs}[label={certif len}]{Certificati di verificatori}
+        Sia $V$ un verificatore che computa in $O(f(n))$ per qualche $f$, e sia $\abk{w, c} \in L(V)$; si noti che $c$, per definizione di $V$, può avere qualsiasi lunghezza, ma poiché $V$ deve computare in $O(f(n))$, la porzione di $c$ che verrà utilizzata da parte di $V$ deve comunque essere in $O(f(n))$, poiché $O(f(n))$ è proprio il tempo di cui $V$ dispone per computare.
+    \end{framedobs}
+
     \begin{framedthm}[label={np verif}]{Linguaggi polinomialmente verificabili}
         \NPclass è la classe dei linguaggi polinomialmente verificabili.
     \end{framedthm}
@@ -3018,7 +3018,7 @@
             \item $V$ accetta se la simulazione di $N$ accetta.
         \end{itemize}
 
-        Allora, per costruzione di $V$, si ha che $$w \in L = L(N) \iff \exists c \in \Sigma^* \mid \abk{w, c} \in L(V)$$ e, sempre per costruzione di $V$, ciò avviene se e solo se esiste un ramo di $N$ che accetta $w$. Inoltre, poiché $L \in \NPclass$, la lunghezza dei rami dell'albero di computazione di $N$ è necessariamente in $O(n^k)$, e dunque se un certificato $c$ descrive una serie di scelte tali che $N$ accetta $w$, la lunghezza di $c$ deve necessariamente essere in $O(n^k)$ anch'essa. Infine, poiché $c$ rappresenta indirizzi di computazione di $N$, ed $N \in \NTIME\rbk{n^k}$, se una stringa $w$ ha lunghezza $n$, la sua computazione è in $O(n^k)$, e dunque l'indirizzo TODO DA FINIRE
+        Allora, per costruzione di $V$, si ha che $$w \in L = L(N) \iff \exists c \in \Sigma^* \mid \abk{w, c} \in L(V)$$ e, sempre per costruzione di $V$, ciò avviene se e solo se esiste un ramo di $N$ che accetta $w$. Inoltre, poiché $L \in \NPclass$, la lunghezza dei rami dell'albero di computazione di $N$ è necessariamente polinomiale, e dunque se un certificato $c$ descrive una serie di scelte tali che $N$ accetti $w$, la lunghezza di $c$ deve necessariamente essere in polinomiale anch'essa. Di conseguenza, poiché la lunghezza di $c$ determina la computazione di $V$ stessa, $V$ risulta essere un verificatore in tempo polinomiale di $L$.
     }{
         Sia $L$ un linguaggio polinomialmente verificabile, e dunque esiste un verificatore $V$ che verifica $L$ polinomialmente. Sia allora $N$ una \NTM --- avente $V$ come sottoprocedura --- che, data una codifica $\abk{w}$, computa come segue:
 
@@ -3028,7 +3028,7 @@
             \item $N$ accetta se $V$ accetta.
         \end{itemize}
 
-        Poiché $N$ computa non deterministicamente, il primo passo genererà un albero di computazione in cui ogni ramo elaborerà un solo certificato $c$ avente lunghezza polinomiale; inoltre, poiché $V$ verifica $L$, deve esistere un certificato tale per cui il suo ramo di computazione sia accettante. Dunque, poiché per costruzione $N$ riconosce tutte e sole le stringhe $w$ tali per cui esiste un certificato $c$ tale che $\abk{w, c} \in L(V)$, segue che $L = L(N) \implies L \in \NPclass$.
+        Poiché $N$ computa non deterministicamente, il primo passo genererà un albero di computazione in cui ogni ramo elaborerà un solo certificato $c$ avente lunghezza polinomiale (si noti che i certificati aventi lunghezza polinomiale sono \tit{finiti}); inoltre, poiché $V$ verifica $L$ in tempo polinomiale, deve esistere un certificato di lunghezza polinomiale tale per cui il suo ramo di computazione sia accettante (si noti l'\cref{certif len}). Dunque, poiché per costruzione $N$ riconosce tutte e sole le stringhe $w$ tali per cui esiste un certificato $c$ tale che $\abk{w, c} \in L(V)$, segue che $L = L(N) \implies L \in \NPclass$.
     }
 
     \begin{frameddefn}{Grafo tricolorabile}
@@ -3053,12 +3053,11 @@
         Allora, si ha che:
 
         \begin{itemize}
-            \item l'istruzione 1 ha costo $O(\abs w) = O(n)$;
-            \item l'istruzione 2 ha costo $O()$ TODO DA FINIRE
-            \item l'istruzione 3 è costituita da un ciclo, il cui corpo ha costo $O(1)$, e viene eseguito $\abs{E_G}$ volte, e dunque ha costo $O(\abs{E_G}) \cdot O(1) = O(\abs{E_G})$; si noti però che, nel caso peggiore, ogni nodo del grafo è connesso con ogni altro nodo, e dunque $O(\abs E_G) = O(\abs{V_G}^2) = O(n^2)$.
+            \item le istruzioni 1 e 2 hanno costo $O(\abs w) = O(n)$;
+            \item l'istruzione 3 è costituita da un ciclo, il cui corpo ha costo $O(1)$, e viene eseguito $\abs{E_G}$ volte, e dunque ha costo $O(\abs{E_G}) \cdot O(1) = O(\abs{E_G})$; si noti però che, nel caso peggiore, ogni nodo del grafo è connesso con ogni altro nodo, e dunque $O(\abs{E_G}) = O(\abs{V_G}^2) = O(n^2)$.
         \end{itemize}
 
-        In conclusione, $V$ ha costo pari a $$O(n) + TODO + O(n^2) = TODO$$ dunque $V$ è un verificatore polinomiale, e per il \cref{np verif} segue che $3COL \in \NPclass$.
+        In conclusione, $V$ ha costo pari a $O(n) + O(n^2) = O(n^2)$ dunque $V$ è un verificatore polinomiale, e per il \cref{np verif} segue che $3COL \in \NPclass$.
     \end{proof}
 
     \begin{frameddefn}{$k$-clique}
@@ -3443,7 +3442,7 @@
         La classe di problemi descritti dai linguaggi in \LSPACE è particolarmente interessante, poiché le funzioni logaritmiche sono tali per cui $f(n) < n$.
     \end{framedobs}
 
-    \begin{framedprop}{Relazione tra \LSPACE e \Pclass}
+    \begin{framedprop}[label={l in p}]{Relazione tra \LSPACE e \Pclass}
         Si verifica che $$\LSPACE \subseteq \Pclass$$
     \end{framedprop}
 
@@ -3473,6 +3472,14 @@
 
     \begin{proof}
         La dimostrazione è analoga alla dimostrazione del \cref{red compl}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedlem}[label={l red into p red}]{Riducibilità di spazio log. e polinomiale}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, allora $A \leq_\mathrm P B$. In simboli $$A \leq_\mathrm L B \implies A \leq_\mathrm P B$$
+    \end{framedlem}
+
+    \begin{proof}
+        Siano $A$ e $B$ due linguaggi definiti su uno stesso alfabeto, tali che $A \leq_\mathrm L B$, e dunque per definizione esiste una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ calcolabile in spazio logaritmico; allora, per definizione di $f$, esiste un trasduttore di spazio logaritmico $T$ che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo \tit{output tape}. Si noti che $T$ computa in spazio logaritmico, e dunque poiché $\LSPACE \subseteq \Pclass$ per il \cref{l in p}, si ha che $T$ è anche una macchina di Turing di tempo polinomiale tale per cui $f$ risulta dunque essere una funzione polinomialmente calcolabile; di conseguenza, $f$ è tale che $A \leq_\mathrm P B$ per definizione di riduzione polinomiale mediante funzione.
     \end{proof}
 
     \begin{framedthm}[label={l w red}]{\LSPACE mediante riduzione}
@@ -3555,7 +3562,7 @@
     \end{proof}
 
     \begin{framedthm}{$PATH$ in $\DSPACE(\log^2(n))$}
-        Si verifica che $$PATH \in \DSPACE(\log^2(n)$$
+        Si verifica che $$PATH \in \DSPACE(\log^2(n))$$
     \end{framedthm}
 
     \begin{proof}
@@ -3617,7 +3624,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C_1, C_2) \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C_1$ alla configurazione $C_2$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita TODO CHE VUOL DIRE, viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e si assume che, al termine della computazione, $N$ pulisca il working tape e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
+        Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C, C') \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C$ alla configurazione $C'$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita TODO CHE VUOL DIRE, viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e si assume che, al termine della computazione, $N$ pulisca il working tape e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
 
         TODO DA FINIRE
     \end{proof}
@@ -3642,14 +3649,6 @@
 
     \begin{proof}
         Per assurdo, sia $B \in \NLSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{nl w red} si ha che $A \in \NLSPACE$ $\lightning$.
-    \end{proof}
-
-    \begin{framedthm}[label={nl in p}]{Relazione tra \NLSPACE e \Pclass}
-        Si verifica che $$\NLSPACE \subseteq \Pclass$$
-    \end{framedthm}
-
-    \begin{proof}
-        TODO
     \end{proof}
 
     \subsection{Classe \NLComplete}
@@ -3704,6 +3703,15 @@
         Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$. TODO MANCA QUALCOSA CHE NON HO CAPITO
 
         Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione: $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_{L, w}}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}} \in PATH$$ TODO DA FINIRE DEVI DI CHE $r$ HA SPAZIO LOG E POI SALUTI FINALI
+    \end{proof}
+
+    \begin{framedprop}[label={nl in p}]{Relazione tra \NLSPACE e \Pclass}
+        Si verifica che $$\NLSPACE \subseteq \Pclass$$
+    \end{framedprop}
+
+    \begin{proof}
+        % Per il \cref{path in np-complete}, il \cref{path in p}, ed il \cref{p w red}, segue che $$\soe{l}{\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \\ PATH \in \Pclass} \implies \forall L \in \NLSPACE \quad L \in \Pclass \iff \NLSPACE \subseteq \Pclass$$
+        % Per il \cref{path in nl-complete}, dato un linguaggio $L \in \NLSPACE$, si ha che $L \leq_\mathrm L PATH$, e dunque per definizione esiste un trasduttore di spazio logaritmico $T$ tale da realizzare la riduzione descritta; allora, poiché $\LSPACE \in \Pclass$ per il \cref{l in p}, si ha che $T$ è anche tale da essere una macchina di Turing che computa in tempo polinomiale, e poiché realizza la riduzione di $L$ a $PATH$, si verifica che $L \leq_\mathrm P PATH$
     \end{proof}
 
     \subsection{Classe \coNLSPACE}
