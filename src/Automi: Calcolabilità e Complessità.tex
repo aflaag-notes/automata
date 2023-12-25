@@ -2996,9 +2996,15 @@
     \end{proof}
 
     \begin{frameddefn}{Verificatore}
-        Sia $L$ un linguaggio decidibile definito su un certo alfabeto $\Sigma$, e $V$ un decisore; $V$ è detto \tbf{verificatore di $L$} se $$L = \{w \in \Sigma^* \mid \exists c \in \Sigma^* : \abk{w, c} \in L(V)\}$$
+        Sia $L$ un linguaggio decidibile definito su un certo alfabeto $\Sigma$, e $V$ un decisore; $V$ è detto \tbf{verificatore di $L$} se $$L = \{w \in \Sigma^* \mid \exists c \in \Sigma^* : \abk{w, c} \in L(V)\}$$ Data una codifica $\abk{w, c} \in L(V)$, $c$ prende il nome di \tbf{certificato di $w$}.
+    \end{frameddefn}
 
-        Data una codifica $\abk{w, c} \in L(V)$, il tempo di computazione di $V$ è misurato solamente in termini della lunghezza di $w$; inoltre, $c$ prende il nome di \tbf{certificato di $w$}. Un linguaggio è detto essere \tbf{polinomialmente verificabile} se ammette un verificatore in tempo polinomiale.
+    \begin{framedobs}{Complessità temporale di verificatori}
+        Dato un verificatore $V$, ed una codifica $\abk{w, c} \in L(V)$, il tempo di computazione di $V$ è misurato solamente in termini della lunghezza di $w$
+    \end{framedobs}
+
+    \begin{frameddefn}{Linguaggio polinomialmente verificabile}
+        Un linguaggio è detto essere \tbf{polinomialmente verificabile} se ammette un verificatore in tempo polinomiale.
     \end{frameddefn}
 
     \begin{framedobs}[label={certif len}]{Certificati di verificatori}
@@ -3139,7 +3145,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{3sat np-complete}, per il \cref{clique in np}, e per il \cref{np-complete w red}, segue la tesi.
+        Per il \cref{3sat np-complete}, il \cref{clique in np}, ed il \cref{np-complete w red}, segue la tesi.
     \end{proof}
 
     \subsection{Classe \coNPclass}
@@ -3220,13 +3226,12 @@
         Un linguaggio è detto essere \tbf{\coNPclass-completo} se e solo se è in \coNPclass ed è \coNPclass-difficile. In simboli $$\coNPComplete := \coNPclass \cap \coNPHard$$
     \end{frameddefn}
 
-    \begin{framedthm}{Definizione alternativa di \coNPclass}
+    \begin{framedthm}{Definizione alternativa di \coNPComplete}
         Si verifica che $$\coNPComplete = \{L \in \DEC \mid \overline L \in \NPComplete\}$$
     \end{framedthm}
 
     \begin{proof}
-        Si noti che, per dimostrare la tesi, è sufficiente dimostrare che $$L \in \coNPComplete \iff \overline L \in \NPComplete$$ e dunque, per il \cref{np-hard conp-hard} si ha che $$L \in \coNPComplete \iff L \in \coNPclass \cap \coNPHard \iff \overline L \in \NPclass \cap \NPHard \iff \overline L \in \NPclass$$
-        % Si noti che, per dimostrare la tesi, è sufficiente dimostrare che $$L \in \NPComplete \iff \overline L \in \coNPComplete$$ e dunque si ha che $$\centeredsoe{L \in \NPComplete \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L} \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad \overline{L'} \leq_\mathrm P L} \iff \\ \iff \soe{l}{\overline L \in \coNPclass \\ \forall \overline{L'} \in \coNPclass \quad \overline{L'} \leq_\mathrm P \overline L} \iff \overline L \in \coNPComplete}$$
+        Si noti che, per dimostrare la tesi, è sufficiente dimostrare che $$L \in \coNPComplete \iff \overline L \in \NPComplete$$ e dunque, per il \cref{np-hard conp-hard}, si ha che \centeredeq{0.9}{$L \in \coNPComplete \iff L \in \coNPclass \cap \coNPHard \iff \overline L \in \NPclass \cap \NPHard \iff \overline L \in \NPComplete$}
     \end{proof}
 
     \subsection{Classe \NEXP}
@@ -3299,7 +3304,7 @@
                     \item una finestra contenente il simbolo di stato nella cella centrale superiore garantisce che le tre posizioni corrispondenti vengano aggiornate consistentemente tramite $\delta$; dunque, se la configurazione inferiore e lecita, deve esserlo necessariamente anche quella inferiore.
                 \end{itemize}
 
-                Si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, allora le celle del tableau considerato definiscono soltamente finestre lecite.
+                Si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, allora le celle del tableau considerato definiscono solamente finestre lecite.
         \end{itemize}
 
         Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se la struttura considerata rappresenta un tableau accettante. Dunque, si consideri ora una \TM $M_\phi$ tale che, data in input $w$, se $N$ accetta, $M_\phi$ restituisce sul suo nastro $f(w) = \abk{\phi}$, dove $\phi$ rappresenta un tableau accettante. Di conseguenza, per costruzione $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
@@ -3313,28 +3318,6 @@
 
         Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard \iff SAT \in \NPComplete$$
     \end{proof}
-
-
-    \begin{framedobs}{Gerarchia delle classi di tempo}
-        TODO METTI QUESTA OBS NEL POSTO GIUSTO (controlla teoremi di gerarchia) E NOMINA I TEOREMI
-
-        \begin{center}
-            \begin{tikzpicture}
-                \draw (0,-0.2) circle [x radius=0.5, y radius=0.5] (0,-0.2) node {\LSPACE};
-                \draw (0,0.4) circle [x radius=1.3, y radius=1.3] (0,0.8) node {$\NLSPACE = \coNLSPACE$};
-                \draw (0,0.9) circle [x radius=2, y radius=2] (0,2.2) node {$\Pclass = \coPclass$};
-                \draw (-0.7,1.15) circle [x radius=3, y radius=2.3, rotate=-20] (-2.55,2.1) node {\NPclass};
-                \draw (0.7,1.15) circle [x radius=3, y radius=2.3, rotate=20] (2.55,2.1) node {\coNPclass};
-                \draw (0.0,1.8) circle [x radius=4, y radius=3.25] (0,4.1) node {$\PSPACE = \NPSPACE$};
-                \draw (0.0,2.2) circle [x radius=4.5, y radius=3.8] (0,5.45) node {$\EXP = \coEXP$};
-                \draw (0.0,2.5) circle [x radius=5, y radius=4.3] (0,6.4) node {\NEXP};
-                \draw (0,0) circle [x radius=0, y radius=0] (0,7.45) node {\DEC};
-                \draw (0.7,3.1) circle [x radius=6, y radius=5, rotate=20] (5.15,5.5) node {\coREC};
-                \draw (-0.7,3.1) circle [x radius=6, y radius=5, rotate=-20] (-5.15,5.5) node {\REC};
-                \draw (0,3.8) circle [x radius=7, y radius=6] (0,9) node {$\powerset(\Sigma^*)$};
-           \end{tikzpicture}
-        \end{center}
-    \end{framedobs}
 
     \chapter{Complessità di spazio}
 
@@ -3651,6 +3634,22 @@
         Per assurdo, sia $B \in \NLSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{nl w red} si ha che $A \in \NLSPACE$ $\lightning$.
     \end{proof}
 
+    \begin{frameddefn}{Complessità di spazio di verificatori}
+        Dato un verificatore $V$ definito come descritto nell'\cref{space model}, ed una codifica $\abk{w, c} \in L(V)$, lo spazio di computazione di $V$ è misuato solamente in termini della lunghezza di $w$.
+    \end{frameddefn}
+
+    \begin{frameddefn}{Verificatore di spazio logaritmico}
+        Un linguaggio è detto essere \tbf{verificabile in spazio logaritmico} se ammette un verificatore in spazio logaritmico.
+    \end{frameddefn}
+
+    \begin{framedthm}[label={nl verif}]{Linguaggi verificabili in spazio logaritmico}
+        \NLSPACE è la classe dei linguaggi verificabili in spazio logaritmico.
+    \end{framedthm}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
     \subsection{Classe \NLComplete}
 
     \begin{frameddefn}{\NLSPACE-difficoltà}
@@ -3702,7 +3701,17 @@
 
         Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$. TODO MANCA QUALCOSA CHE NON HO CAPITO
 
-        Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione: $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_{L, w}}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}} \in PATH$$ TODO DA FINIRE DEVI DI CHE $r$ HA SPAZIO LOG E POI SALUTI FINALI
+        Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione: $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_L, w}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_L, w}, C_0, C_\mathrm{accept}} \in PATH$$ Si consideri un trasduttore $T$ che, data in input una stringa $w \in \Sigma^*$, computa come segue:
+
+        \begin{itemize}
+            \item determina $C_0$ in base dalla funzione di transizione di $N$;
+            \item $T$ elenca \tit{una alla volta} tutte le possibili stringhe di lunghezza $O(\log(n))$;
+            \item per ognuna di queste, $T$ controlla che siano configurazioni possibili di $N_L$ (attraverso la funzione di transizione di quest'ultimo); sia $V_{N_L, w}$ l'insieme  di tali configurazioni filtrate;
+            \item data una coppia di configurazioni $C, C' \in V_{N_L, w}$, dove solo una delle due è scritta sul \tit{working tape} di $T$, è sufficiente che $T$ controlli che sia possibile produrre $C'$ a partire da $C$ (attraverso la funzione di transizione di $N$) per stabilire se $(C, C')$ debba essere un arco in $E_{N_L, w}$, dunque \tit{senza} dover scrivere $C'$ stessa sul suo \tit{working tape};
+        \item $T$ restituisce $\abk{G_{N_L} = (V_{N_L, w}, E_{N_L, w}), C_0, C_\mathrm{accept}}$ sul suo \tit{output tape}.
+        \end{itemize}
+
+        Dunque, per costruzione stessa, $T$ ha costo di spazio logaritmico, sia per come computa, sia perché ognuna delle configurazioni di $N_L$ deve occupare spazio logaritmico per definizione di $L$. Inoltre, se $T$ si ferma, termina avendo solo $r(w)$ sul suo \tit{output tape} per definizione di $r$; allora, $r$ risulta essere una funzione calcolabile in spazio logaritmico, che per sua stessa definizione costituisce dunque una riduzione in spazio logaritmico di $L$ a $PATH$. In simboli, si ha che $$\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \iff PATH \in \NLHard$$ allora segue la tesi.
     \end{proof}
 
     \begin{framedprop}[label={nl in p}]{Relazione tra \NLSPACE e \Pclass}
@@ -3710,13 +3719,20 @@
     \end{framedprop}
 
     \begin{proof}
-        % Per il \cref{path in np-complete}, il \cref{path in p}, ed il \cref{p w red}, segue che $$\soe{l}{\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \\ PATH \in \Pclass} \implies \forall L \in \NLSPACE \quad L \in \Pclass \iff \NLSPACE \subseteq \Pclass$$
-        % Per il \cref{path in nl-complete}, dato un linguaggio $L \in \NLSPACE$, si ha che $L \leq_\mathrm L PATH$, e dunque per definizione esiste un trasduttore di spazio logaritmico $T$ tale da realizzare la riduzione descritta; allora, poiché $\LSPACE \in \Pclass$ per il \cref{l in p}, si ha che $T$ è anche tale da essere una macchina di Turing che computa in tempo polinomiale, e poiché realizza la riduzione di $L$ a $PATH$, si verifica che $L \leq_\mathrm P PATH$
+        Per il \cref{path in nl-complete}, il \cref{path in p}, il \cref{l red into p red} ed il \cref{p w red}, segue che $$\soe{l}{\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \implies L \leq_\mathrm P PATH \\ PATH \in \Pclass} \implies \forall L \in \NLSPACE \quad L \in \Pclass \iff \NLSPACE \subseteq \Pclass$$
+    \end{proof}
+
+    \begin{framedprop}[label={nl in log sq}]{Relazione tra \NLSPACE e $\DSPACE(\log^2(n))$}
+        Si verifica che $$\NLSPACE \subseteq \DSPACE(\log^2(n))$$
+    \end{framedprop}
+
+    \begin{proof}
+        TODO
     \end{proof}
 
     \subsection{Classe \coNLSPACE}
     
-    \begin{frameddefn}
+    \begin{frameddefn}{Classe \coNLSPACE}
         La classe \coNLSPACE è definita come segue: $$\coNLSPACE := \{L \in \DEC \mid \overline L \in \NLSPACE\}$$
     \end{frameddefn}
 
@@ -3763,5 +3779,26 @@
     \begin{frameddefn}{Classe \NEXPSPACE}
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
+
+    \begin{framedobs}{Gerarchia delle classi}
+        TODO METTI QUESTA OBS NEL POSTO GIUSTO (controlla teoremi di gerarchia) E NOMINA I TEOREMI E FIXA IL DISEGNO AGGIUNGENDO EXPSPACE=NEXPSPACE
+
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,-0.2) circle [x radius=0.5, y radius=0.5] (0,-0.2) node {\LSPACE};
+                \draw (0,0.4) circle [x radius=1.3, y radius=1.3] (0,0.8) node {$\NLSPACE = \coNLSPACE$};
+                \draw (0,0.9) circle [x radius=2, y radius=2] (0,2.2) node {$\Pclass = \coPclass$};
+                \draw (-0.7,1.15) circle [x radius=3, y radius=2.3, rotate=-20] (-2.55,2.1) node {\NPclass};
+                \draw (0.7,1.15) circle [x radius=3, y radius=2.3, rotate=20] (2.55,2.1) node {\coNPclass};
+                \draw (0.0,1.8) circle [x radius=4, y radius=3.25] (0,4.1) node {$\PSPACE = \NPSPACE$};
+                \draw (0.0,2.2) circle [x radius=4.5, y radius=3.8] (0,5.45) node {$\EXP = \coEXP$};
+                \draw (0.0,2.5) circle [x radius=5, y radius=4.3] (0,6.4) node {\NEXP};
+                \draw (0,0) circle [x radius=0, y radius=0] (0,7.45) node {\DEC};
+                \draw (0.7,3.1) circle [x radius=6, y radius=5, rotate=20] (5.15,5.5) node {\coREC};
+                \draw (-0.7,3.1) circle [x radius=6, y radius=5, rotate=-20] (-5.15,5.5) node {\REC};
+                \draw (0,3.8) circle [x radius=7, y radius=6] (0,9) node {$\powerset(\Sigma^*)$};
+           \end{tikzpicture}
+        \end{center}
+    \end{framedobs}
 
 \end{document}
