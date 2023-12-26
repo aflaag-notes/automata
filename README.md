@@ -9,7 +9,6 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 
 - generali
     - GLI OVERLINE POTREBBERO ESSERE ROTTI, FIXERAI RILEGGENDO
-    - CAMBIA IL CENTRAMENTO ALLE GRAMMATICHE PER FAVORE DI DIO
     - finire i TODOs sparsi
     - PARLA DEGLI ALBERI
     - TUTTE LE VOLTE CHE HAI SCRITTO L = {0^n 1^n} CONTROLLA CHE IN n lo 0 è incluso o no

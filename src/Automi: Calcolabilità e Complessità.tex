@@ -1103,7 +1103,7 @@
         Si definisce \tbf{acontestualità} la condizione per cui il lato sinistro delle regole di una grammatica è composto sempre da un solo simbolo.
     \end{frameddefn}
 
-    \begin{frameddefn}{\CFG}
+    \begin{frameddefn}[breakable]{\CFG}
         Una \tbf{grammatica context-free} --- detta anche \tbf{acontestuale} ---, o \CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
 
         \begin{itemize}
@@ -1113,14 +1113,32 @@
             \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il simbolo alla sinistra della prima regola della grammatica
         \end{itemize}
 
-        Le \CFG si scrivono nella forma $$X \to Y$$ dove $X \in V$ e $X \to Y \in R$ è una regola della \CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \smid Z$.
+        Le \CFG si scrivono nella forma
+
+        \begin{center}
+            \begin{tabular}{rcl}
+                $X$ & $\to$ & $Y$ \\
+            \end{tabular}
+        \end{center}
+
+        dove $X \in V$ e $X \to Y \in R$ è una regola della \CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \smid Z$.
 
         Siano $u, v, w$ stringhe, e $A \to w \in R$; allora si dice che $uAv$ \tbf{produce} $uwv$, denotato con $$uAv \yields uwv$$ Date due stringhe $u, v$, se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che $u$ \tbf{deriva} $v$, ed è denotato con $u \derives v$.
     \end{frameddefn}
 
     \begin{example}[\CFG]
         \label{cfg ex}
-        Un esempio di \CFG è il seguente: $$\left . \begin{array}{c} A \to \ttt 0 A \ttt 1 \\ A \to B \\ B \to \ttt \# \end{array} \right .$$ In essa, si hanno: $$\left . \begin{array}{c} V := \{A, B\} \\ \Sigma := \{\ttt 0, \ttt 1, \ttt \# \} \\ S := A \in V \end{array} \right. $$
+        Un esempio di \CFG è il seguente:
+
+        \begin{center}
+            \begin{tabular}{rcl}
+                $A$ & $\to$ & $\ttt 0 A \ttt 1$ \\
+                $A$ & $\to$ & $B$ \\
+                $B$ & $\to$ & $\ttt \#$
+            \end{tabular}
+        \end{center}
+
+        In essa, si hanno: $$\left . \begin{array}{c} V := \{A, B\} \\ \Sigma := \{\ttt 0, \ttt 1, \ttt \# \} \\ S := A \in V \end{array} \right. $$
 
         Da essa, è possibile ottenere ad esempio la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $$A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$$
     \end{example}
@@ -1134,16 +1152,38 @@
     \end{frameddefn}
 
     \begin{example}[\CFL]
-        Si prenda in esame la \CFG dell'\cref{cfg ex}, e sia essa $G$. Allora, in tale grammatica il linguaggio risulta essere $$L(G) = \{\ttt 0 ^n \ttt \# \ttt 1 ^n \mid n \ge 0\}$$
+        Si prenda in esame la \CFG dell'\cref{cfg ex}, e sia essa $G$; allora, il linguaggio di tale grammatica risulta essere $$L(G) = \{\ttt 0 ^n \ttt \# \ttt 1 ^n \mid n \ge 0\}$$
     \end{example}
 
     \begin{example}[Grammatiche e linguaggi]
         I seguenti sono esempi di linguaggi, e corrispondenti grammatiche che li descrivono:
 
         \begin{itemize}
-            \item il linguaggio $L_1 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w \ \mathrm{contiene \ almeno \ tre \ \ttt 1}\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S_1 \to X \ttt 1 X \ttt 1 X \\ X \to \varepsilon \smid \ttt 0 X \smid \ttt 1 X}$$
-            \item il linguaggio $L_2 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w = w ^\mathcal{R} \land |w| \equiv 0 \ (\bmod \ 2)\}$ è descritto dalla seguente grammatica: $$S \to \ttt 0 S \ttt 0 \smid \ttt 1 S \ttt 1 \smid \varepsilon$$
-            \item il linguaggio $L_3 := \{\ttt a^i \ttt b^j \ttt c^{i + j} \mid i, j \ge 0\}$ è descritto dalla seguente grammatica: $$\centeredsoe{S \to \ttt a S \ttt c \smid X \\ X \to \ttt b S \ttt c \smid \varepsilon}$$
+            \item il linguaggio $L_1 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w \ \mathrm{contiene \ almeno \ tre \ \ttt 1}\}$ è descritto dalla seguente grammatica:
+
+                \begin{center}
+                    \begin{tabular}{rcl}
+                        $S_1$ & $\to$ & $X \ttt 1 X \ttt 1 X$ \\
+                        $X$ & $\to$ &  $\varepsilon \smid \ttt 0 X \smid \ttt 1 X$
+                    \end{tabular}
+                \end{center}
+
+            \item il linguaggio $L_2 := \{w \in \{\ttt 0, \ttt 1\}^* \mid w = w ^\mathcal{R} \land |w| \equiv 0 \ (\bmod \ 2)\}$ è descritto dalla seguente grammatica:
+
+                \begin{center}
+                    \begin{tabular}{rcl}
+                        $S$ & $\to$ & $\ttt 0 S \ttt 0 \smid \ttt 1 S \ttt 1 \smid \varepsilon$
+                    \end{tabular}
+                \end{center}
+
+            \item il linguaggio $L_3 := \{\ttt a^i \ttt b^j \ttt c^{i + j} \mid i, j \ge 0\}$ è descritto dalla seguente grammatica:
+
+                \begin{center}
+                    \begin{tabular}{rcl}
+                        $S$ & $\to$ & $\ttt a S \ttt c \smid X$ \\ 
+                        $X$ & $\to$ & $\ttt b S \ttt c \smid \varepsilon$
+                    \end{tabular}
+                \end{center}
         \end{itemize}
     \end{example}
 
@@ -1211,7 +1251,19 @@
             \item vengono aggiunte la variabile $S_0 \in V$, e la regola $S_0 \to S \in R$, in modo da non avere $S$ alla destra di nessuna regola in $R$;
             \item ogni regola $A \to \varepsilon \in R$ --- con $A \in V - \{S\}$ --- viene rimossa da $R$, e successivamente per ogni regola della forma $X \to uAv \in R$ --- per qualche $X \in V$ e $u, v \in (V \cup \Sigma)^*$ --- viene aggiunta $X \to uv \in R$; inoltre, se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa;
             \item ogni regola unitaria $A \to B \in R$ viene rimossa, e per ogni regola $B \to u \in R$ --- con $u \in (V \cup \Sigma)^*$ --- viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
-            \item ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ --- dove $u_1, \ldots, u_k \in (V \cup \Sigma)^*$ --- viene rimpiazzata con le regole $$\left . \begin{array}{c} A \to u_1 A_1  \\ A_1 \to u_2 A_2 \\ A_2 \to u_3 A_3 \\ \vdots \\ A_{k - 2} \to u_{k - 1}u_k \end{array} \right .$$ dove $A_1, \ldots, A_{k - 2} \in V$, creando dunque una \tit{catena di sostituzioni}, al fine di avere al più 2 variabili o terminali alla destra delle regole;
+            \item ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ --- dove $u_1, \ldots, u_k \in (V \cup \Sigma)^*$ --- viene rimpiazzata con le regole
+
+                \begin{center}
+                    \begin{tabular}{rcl}
+                        $A$ & $\to$ & $u_1 A_1$ \\
+                        $A_1$ & $\to$ & $u_2 A_2$ \\
+                        $A_2$ & $\to$ & $u_3 A_3$ \\
+                              & $\vdots$ & \\
+                        $A_{k - 2}$ & $\to$ & $u_{k - 1}u_k$
+                    \end{tabular}
+                \end{center}
+
+                dove $A_1, \ldots, A_{k - 2} \in V$, creando dunque una \tit{catena di sostituzioni}, al fine di avere al più 2 variabili o terminali alla destra delle regole;
             \item infine, ogni $u_i \in \Sigma$ (dunque terminale) --- per ogni $i \in [1, k]$ --- viene rimpiazzato con una nuova varibile $U_i \in V$, e viene aggiunta la regola $U_i \to u_i \in R$.
         \end{itemize}
     \end{framedmeth}
@@ -1320,7 +1372,7 @@
 
         \begin{itemize}
             \item viene posto $\ttt \$$ all'interno dello stack;
-            \item fintanto che viene letto \ttt 0, viene \tit{pushato} \ttt 0 nello stack;
+            \item fintanto che viene letto \ttt 0, viene inserito \ttt 0 nello stack;
             \item non appena viene letto \ttt 1, e fintanto che viene letto \ttt 1, viene rimosso \ttt 0 dallo stack;
             \item se all'interno dello stack è presente $\ttt \$$, allora l'automa accetta.
         \end{itemize}
@@ -1432,7 +1484,14 @@
     \end{framedmeth}
 
     \begin{example}[\PDA di \CFG]
-        Si consideri la seguente \CFG: $$G: \centeredsoe{S \to \ttt a T \ttt b \smid \ttt b \\ T \to T \ttt a \smid \varepsilon}$$
+        Si consideri la seguente \CFG:
+        
+        \begin{center}
+            \begin{tabular}{crcl}
+                $G:$ & $S$ & $\to$ & $\ttt a T \ttt b \smid \ttt b$ \\
+                     & $T$ & $\to$ & $T \ttt a \smid \varepsilon$
+            \end{tabular}
+        \end{center}
 
         Attraverso il \cref{cfg into pda}, si ottiene il seguente \PDA, in grado di riconoscere $L(G)$:
 
@@ -1661,7 +1720,7 @@
     \subsection{Unione}
 
     \begin{framedprop}{Chiusura sull'unione (\CFL)}
-        Siano $L_1, \ldots, L_n$ dei \CFL; allora $\displaystyle \bigcup_{i =1}^n{L_i}$ è un \CFL.
+        Siano $L_1, \ldots, L_n$ dei \CFL; allora la loro unione è un \CFL. In simboli $$\forall L_1, \ldots, L_n \in \CFL \quad \displaystyle \bigcup_{i =1}^n{L_i} \in \CFL$$
     \end{framedprop}
 
     \begin{proof}
@@ -1669,13 +1728,37 @@
     \end{proof}
 
     \begin{example}[Unione di \CFL]
-        Siano $L_1$ ed $L_2$ due \CFL generati rispettivamente dalle seguenti \CFG $G_1$ e $G_2$: $$\centeredsoe{G_1: S_1 \to \ttt 0 S_1 \ttt 1 \smid \varepsilon \\ G_2: S_2 \to \ttt 1 S_2 \ttt 0 \smid \varepsilon}$$ Allora, la seguente \CFG $G$: $$G: \centeredsoe{S \to S_1 \smid S_2 \\ S_1 \to \ttt 0 S_1 \ttt 1 \smid \varepsilon \\ S_2 \to \ttt 1 S_2 \ttt 0 \smid \varepsilon }$$ è in grado di generare $L_1 \cup L_2$.
+        Siano $L_1$ ed $L_2$ due \CFL generati rispettivamente dalle seguenti \CFG $G_1$ e $G_2$:
+
+        \begin{center}
+            \begin{tabular}{crcl}
+                $G_1:$ & $S_1$ & $\to$ & $\ttt 0 S_1 \ttt 1 \smid \varepsilon$
+            \end{tabular}
+        \end{center}
+
+        \begin{center}
+            \begin{tabular}{crcl}
+                $G_2:$ & $S_2$ & $\to$ & $\ttt 1 S_2 \ttt 0 \smid \varepsilon$
+            \end{tabular}
+        \end{center}
+
+        Allora, la seguente \CFG $G$
+
+        \begin{center}
+            \begin{tabular}{crcl}
+                $G:$ & $S$   & $\to$ & $S_1 \smid S_2$ \\
+                     & $S_1$ & $\to$ & $\ttt 0 S_1 \ttt 1 \smid \varepsilon$ \\
+                     & $S_2$ & $\to$ & $\ttt 1 S_2 \ttt 0 \smid \varepsilon$
+            \end{tabular}
+        \end{center}
+
+        è in grado di generare $L_1 \cup L_2$.
     \end{example}
 
     \subsection{Concatenazione}
 
     \begin{framedprop}{Chiusura sulla concatenazione (\CFL)}
-        TODO
+        Siano $L_1, \ldots, L_n$ dei \CFL; allora la loro concatenazione è un \CFL. In simboli $$\forall L_1, \ldots, L_n \in \CFL \quad \displaystyle \mathop{\bigcirc}_{i = 1}^n{L_i} \in \CFL$$
     \end{framedprop}
 
     \begin{proof}
@@ -1685,7 +1768,7 @@
     \subsection{Star}
 
     \begin{framedprop}{Chiusura sull'operazione star (\CFL)}
-        TODO.
+        Sia $L$ un \CFL; allora $L^*$ è un \CFL. In simboli $$\forall L \in \CFL \quad L^* \in \CFL$$
     \end{framedprop}
 
     \begin{proof}
@@ -1699,7 +1782,27 @@
     \end{framedprop}
 
     \begin{proof}
-        Siano $G_1$ e $G_2$ le due seguenti \CFG: $$\centeredsoe{G_1: \centeredsoe{S \to TU \\ T \to \ttt 0 T \ttt 1 \smid \varepsilon \\ U \to \ttt 2 U \smid \varepsilon} \quad G_2: \centeredsoe{S \to UT \\ T \to \ttt 1 T \ttt 2 \smid \varepsilon \\ U \to \ttt 0 U \smid \varepsilon}}$$ Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{\CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{\CFL}$ per loro stessa definizione, segue la tesi.
+        Siano $G_1$ e $G_2$ le due seguenti \CFG:
+
+        \begin{center}
+            \begin{tabular}{c}
+                \begin{tabular}{crcl}
+                    $G_1:$ & $S$ & $\to$ & $TU$ \\
+                           & $T$ & $\to$ & $\ttt 0 T \ttt 1 \smid \varepsilon$ \\
+                           & $U$ & $\to$ & $\ttt 2 U \smid \varepsilon$
+                \end{tabular}
+                
+                \quad
+
+                \begin{tabular}{crcl}
+                    $G_2:$ & $S$ & $\to$ & $UT$ \\
+                           & $T$ & $\to$ & $\ttt 1 T \ttt 2 \smid \varepsilon$ \\
+                           & $U$ & $\to$ & $\ttt 0 U \smid \varepsilon$
+                \end{tabular}
+            \end{tabular}
+        \end{center}
+
+        Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{\CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{\CFL}$ per loro stessa definizione, segue la tesi.
     \end{proof}
 
     \subsection{Complemento}
@@ -1709,7 +1812,17 @@
     \end{framedprop}
 
     \begin{proof}
-        Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \iff \overline L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$: $$G: \centeredsoe{S \to A \smid B \smid AB \smid BA \\ A \to \ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1 \\ B \to \ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1}$$ e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
+        Sia $L$ il linguaggio del \cref{pump cfl ex2}, e si consideri il suo complemento $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\} \iff \overline L = \{\ttt 0, \ttt 1\}^* - \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e si consideri la seguente grammatica $G$:
+
+        \begin{center}
+            \begin{tabular}{crcl}
+                $G:$ & $S$ & $\to$ & $A \smid B \smid AB \smid BA$ \\
+                     & $A$ & $\to$ & $\ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1$ \\
+                     & $B$ & $\to$ & $\ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1$
+            \end{tabular}
+        \end{center}
+        
+        e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
 
         Dunque, si ha che:
 
@@ -1924,10 +2037,6 @@
         Allora, poiché esiste una \TM $M$ tale per cui $L(M) = L$, si ha che $L \in \mathrm{\REC}$.
     \end{example}
 
-    \begin{example}[Linguaggi Turing-riconoscibili]
-        TODO
-    \end{example}
-
     \subsection{Turing-decidibilità}
 
     \begin{frameddefn}{Decisore}
@@ -2124,7 +2233,7 @@
             \end{tabular}
         \end{center}
 
-        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \overline f(i)_i$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
+        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \overline{f(i)_i}$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
     \end{proof}
 
     \begin{framedprop}[label={bij set}]{Biezioni tra insiemi}
@@ -2273,7 +2382,7 @@
     \end{proof}
 
     \begin{frameddefn}{Co-Turing-riconoscibilità}
-        Un linguaggio è detto \tbf{co-Turing-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. La classe dei lingauggi co-Turing-riconoscibili è denotata con \coREC. Allora, in simboli, dato un linguaggio $L$, si ha che $$L \in \coREC \iff \overline L \in \REC$$
+        Un linguaggio è detto \tbf{co-Turing-riconoscibile} se questo è il complemento di un linguaggio Turing-riconoscibile. In simboli $$\coREC := \{L \mid \overline L \in \REC\}$$
     \end{frameddefn}
 
     \begin{framedthm}[label={coturing thm}]{Co-Turing-riconoscibilità}
@@ -2670,29 +2779,6 @@
         Si consideri la dimostrazione del \cref{eq_tm not in rec}; in essa, la \TM $F$ costruisce due macchine di Turing $M_1$ ed $M_2$, dove la prima riconosce $\varnothing$. Se $M_1$ fosse invece tale da accettare sempre, riconoscerebbe $\Sigma^*$, e dunque si avrebbe che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1)=L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \in EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in EQ_\TM$$ Allora, per definizione, segue $$A_\TM \leq_\mathrm m EQ_\TM$$ e poiché $A_\TM \notin \coREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
     \end{proof}
 
-    \section{Esercizi}
-
-    \subsection{Indecidibilità}
-    
-    \begin{framedprob}{Indecidibilità di $ODD_\TM$}
-        TODO
-    \end{framedprob}
-
-    \begin{framedprob}{Indecidibilità di $START \textsf -0_\TM$}
-        TODO
-    \end{framedprob}
-
-    \begin{framedprob}{Indecidibilità di $UNION \textsf -ALL_\TM$}
-        TODO
-    \end{framedprob}
-
-    \subsection{Irriconoscibilità}
-
-    \begin{framedprob}{Irriconoscibilità di $ODD_\TM$}
-        TODO
-    \end{framedprob}
-
-    \addtocontents{toc}{\protect\newpage}
     \chapter{Complessità di tempo}
 
     \section{Analisi asintotica}
@@ -2884,7 +2970,7 @@
     \end{framedobs}
 
     \begin{framedthm}[label={path in p}]{$PATH$ in \Pclass}
-        Sia $PATH$ il linguaggio definito come segue: $$PATH := \{\abk{G, s, t} \mid G = (V, E) \ \textrm{grafo diretto con un cammino $s \to t$}\}$$ Allora, si ha che $PATH \in \Pclass$.
+        Sia $PATH$ il linguaggio definito come segue: $$PATH := \{\abk{G, s, t} \mid G = (V, E) \ \textrm{grafo diretto con un cammino $s \to t$}\}$$ Allora, si verifica che $$PATH \in \Pclass$$
     \end{framedthm}
 
     \begin{proof}
@@ -2937,11 +3023,18 @@
     \end{frameddefn}
 
     \begin{framedthm}{$HAMPATH$ in \EXP}
-        TODO
+        Sia $HAMPATH$ il linguaggio definito come segue: \centeredeq{0.9}{$HAMPATH := \{\abk{G, s, t} \mid G = (V, E) \ \textrm{grafo diretto con un cammino hamiltoniano $s \to t$}\}$} Allora, si verifica che $$HAMPATH \in \EXP$$
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Si consideri una macchina di Turing $M$ che, data in input una codifica $\abk{G, s, t}$ in input, computa come segue:
+
+        \begin{itemize}
+            \item per ogni possibile cammino $c$ della forma $s \to t$ in $G$, $M$ controlla se $c$ è hamiltoniano; se lo è, $M$ accetta;
+            \item se $M$ non ha mai accettato, $M$ rifiuta.
+        \end{itemize}
+
+        Allora $M$, per costruzione, è in grado di decidere $HAMPATH$. Si noti che i lnumero di cammini possibili in un grafo è $O(2^{n^k})$ per qualche $k \in \N$, e poiché controllare che un cammino sia hamiltoniano richiede tempo $O(n)$, la complessità temporale di $M$ risulta essere $$O(n) \cdot O\rbk{2^{n^k}} = O\rbk{n \cdot 2^{n^k}}$$ e poiché $n^k \ge \log(n)$ (per $k$ sufficientemente grande) si ha che $$O\rbk{n \cdot 2^{n^k}} = O\rbk{2^{n^k}} \implies HAMPATH \in \EXP$$ TODO ASSICURATI CHE SIA TUTTO GIUSTO
     \end{proof}
 
     \subsection{Classe \coEXP}
@@ -3041,7 +3134,7 @@
     \end{frameddefn}
 
     \begin{framedthm}{$3COL$ in \NPclass}
-        Sia $3COL$ il linguaggio definito come segue: $$3COL := \{\abk{G} \mid G = (V_G, E_G) \ \textrm{grafo tricolorabile}\}$$ Allora, si ha che $3COL \in \NPclass$.
+        Sia $3COL$ il linguaggio definito come segue: $$3COL := \{\abk{G} \mid G = (V_G, E_G) \ \textrm{grafo tricolorabile}\}$$ Allora, si verifica che $$3COL \in \NPclass$$
     \end{framedthm}
 
     \begin{proof}
@@ -3070,7 +3163,7 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={clique in np}]{$CLIQUE$ in \NPclass}
-        Sia $CLIQUE$ il linguaggio definito come segue: $$CLIQUE := \{\abk{G, k} \mid G = (V_G, E_G) \ \textrm{grafo non diretto contenente una $k$-clique}\}$$ Allora, si ha che $CLIQUE \in \NPclass$.
+        Sia $CLIQUE$ il linguaggio definito come segue: $$CLIQUE := \{\abk{G, k} \mid G = (V_G, E_G) \ \textrm{grafo non diretto contenente una $k$-clique}\}$$ Allora, si verifica che $CLIQUE \in \NPclass$.
     \end{framedthm}
 
     \begin{proof}
@@ -3119,12 +3212,85 @@
         TODO
     \end{proof}
 
-    \begin{frameddefn}{Formula in 3CNF}
-        TODO
+    \begin{frameddefn}{Formula soddisfacibile}
+        Una formula booleana è detta \tbf{soddisfacibile} se esiste un assegnamento dei suoi letterali tale per cui il valore della formula è pari a \ttt 1.
     \end{frameddefn}
 
-    \begin{framedthm}{$3SAT$ riducibile a $CLIQUE$}
+    \begin{example}
         TODO
+    \end{example}
+
+    \begin{framedthm}{Teorema di Cook-Levin}
+        Sia $SAT$ il linguaggio definito come: $$SAT := \{\abk{\phi} \mid \phi \ \textrm{formula soddisfacibile}\}$$ Allora, si verifica che $$SAT \in \NPComplete$$
+    \end{framedthm}
+
+    \begin{proof}
+        Sia $V$ una macchina di Turing che, data una codifica $\abk{\phi, c}$ in input, computa come segue:
+
+        \begin{itemize}
+            \item $V$ interpreta $w$ come $\abk{\phi}$, dove $\phi$ è una formula booleana, e $c$ come assegnamento alle variabili di $\phi$;
+            \item $V$ controlla che $\phi(c)$ sia soddisfatta, ed in tal caso accetta; in caso contrario, $V$ rifiuta;
+        \end{itemize}
+
+        Allora, $V$ risulta essere un verificatore di $SAT$, poiché per costruzione $V$ accetta se e solo se $c \in \Sigma^*$ è un assegnamento per $\phi$ tale che $\abk{\abk{\phi}, c} \in L(V)$; inoltre, $V$ è un verificatore polinomiale, e dunque per il \cref {np verif} si ha che $SAT \in \NPclass$.
+
+        Sia $A \in \NPclass$, e dunque esiste una \NTM $N = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $A$ in tempo polinomiale. Sia consideri ora una stringa $w$ in input ad $N$, ed un \tit{tableau} --- \tit{per ognuno dei rami di computazione di $N$} --- definito come mostrato in figura:
+
+        \centeredimage{0.4}{../assets/tableau.png}
+
+        Dunque, sull'$i$-esima riga del tableau è presente l'$i$-esima configurazione che la macchina assume durante la computazione di $w$. Si noti che, poiché $N$ computa in tempo polinomiale, il nastro non può avere più di $n^k$ celle occupate, e dunque la tabella ha dimensione $n^k \times n^k$ (si assume che il tableau considerato sia quadrato anche se il nastro fosse utilizzato per meno di $n^k$ celle, andando a considerare celle vuote nella porzione di nastro non utilizzata). Un tableau è detto \tit{accettante} se almeno una sua riga contiene una configurazione accettante.
+
+        Verrà ora descritto un tableau accettante attraverso formule booleane, come segue:
+
+        \begin{itemize}
+            \item dato $C := Q \cup \Gamma \cup \{ \ttt \# \}$, si definiscano variabili $$\forall i,j \in \sbk{1, n^k}, s \in C \quad x_{i, j, s} := \soe{ll}{\ttt 1 & T_{i, j} = s \\ \ttt 0 & T_{i, j} \neq s}$$ si noti che è possibile immaginare $x_{i, j}$ come stringa booleana che attraverso codifica \tit{one-hot encoding} mostra il carattere presente sulla cella $T_{i, j}$ del tableau considerato; si consideri allora la seguente formula booleana: $$\phi_\mathrm{cell} := \bigwedge_{i, j \in \sbk{1, n^k}}{\sbk{\rbk{\bigvee_{s \in C}{x_{i, j, s}}} \land \rbk{\bigwedge_{\substack{s, t \in C \\ s \neq t}}{\overline{x_{i, j, s} \land x_{i, j, t}}}}}}$$
+
+                per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata costruita rappresenta proprio un tableau definito come descritto in precedenza, poiché:
+
+                \begin{itemize}
+                    \item la prima parte della formula garantisce che almeno uno dei caratteri delle stringhe $x_{i, j}$ sia un \ttt 1;
+                    \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (letteralmente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
+                \end{itemize}
+
+            \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, la prima riga del tableau considerato è la configurazione iniziale di $N$;
+            \item si consideri la seguente formula booleana: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, all'interno del tableau considerato è contenuta almeno una configurazione accettante;
+            \item una \tit{finestra} $2 \times 3$ di un tableau è una porzione di tableau, composta da 3 celle di 2 righe diverse, in cui la prima riga contiene una porzione di configurazione corrente, e la seconda riga contiene una porzione di configurazione nel passo successivo; una finestra è detta \tit{lecita} se non viola le azioni specificate dalla funzione di transizione $\delta$ di $N$; ad esempio, se la $\delta$ ammette le seguenti configurazioni $$\centeredsoe{\delta(q_1, \ttt a) = \{(q_1, \ttt b, \mathrm R)\} \\ \delta(q_1, \ttt b) = \{(q_2, \ttt c, \mathrm L), (q_2, \ttt a, \mathrm R)\}}$$ i seguenti sono esempi di finestre lecite:
+
+                \centeredimage{0.3}{../assets/windows.png}
+
+                Si consideri ora la seguente proposizione: \curlyquotes{dato un tableau ed una sua riga, se la riga superiore è la configurazione iniziale, ed ogni finestra nel tableau è lecita, ogni riga del tableau è una configurazione che segue legittimamente dalla precedente}; essa è vera poiché:
+
+                \begin{itemize}
+                    \item si consideri una coppia di configurazioni;
+                    \item ogni cella che contiene un simbolo di nastro e non è adiacente ad un simbolo di stato, rappresenta la cella centrale superiore di una finestra in cui la riga superiore non contiene stati; di conseguenza, questo stesso simbolo deve comparire nella cella centrale della seconda riga della finestra;
+                    \item una finestra contenente il simbolo di stato nella cella centrale superiore garantisce che le tre posizioni corrispondenti vengano aggiornate consistentemente tramite $\delta$; dunque, se la configurazione inferiore e lecita, deve esserlo necessariamente anche quella inferiore.
+                \end{itemize}
+
+                Si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, allora le celle del tableau considerato definiscono solamente finestre lecite.
+        \end{itemize}
+
+        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se la struttura considerata rappresenta un tableau accettante. Dunque, si consideri ora una \TM $M_\phi$ tale che, data in input $w$, se $N$ accetta, $M_\phi$ restituisce sul suo nastro $f(w) = \abk{\phi}$, dove $\phi$ rappresenta un tableau accettante. Di conseguenza, per costruzione $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
+
+        \begin{itemize}
+            \item $\phi_\mathrm{cell}$ richiede tempo $O\rbk{n^k} \cdot O\rbk{n^k} \cdot \abs{C} = O\rbk{n^{2k}}$ (poiché $\abs{C} = O(1)$ perché non dipende da $n$);
+            \item $\phi_\mathrm{start}$ richiede tempo $O\rbk{n^k}$, poiché rappresenta una sola riga del tableau;
+            \item $\phi_\mathrm{accept}$ richiede tempo $O\rbk{n^{2k}}$, poiché richiede che sia presente $q_\mathrm{accept}$ all'interno del tableau;
+            \item $\phi_\mathrm{move}$ richiede tempo $O\rbk{n^{k}} \cdot O\rbk{n^k} \cdot O\rbk{\mathcal W} = O\rbk{n^{2k}}$, dove $\mathcal W := \displaystyle \binom{\abs{C}}{6}$ poiché viene considerata ogni possibile finestra lecita per ogni cella del tableau.
+        \end{itemize}
+
+        Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard \iff SAT \in \NPComplete$$
+    \end{proof}
+
+    \begin{frameddefn}{Formula in 3CNF}
+        Una formula booleana è detta essere in \tbf{3CNF}, se risulta essere l'\tit{and logico} tra clausole, le quali devono essere costituite dall'\tit{or logico} di 3 letterali.
+    \end{frameddefn}
+
+    \begin{example}[Formule in 3CNF]
+        La seguente formula booleana è in 3CNF: $$(x_1 \lor x_2 \lor \overline{x_3}) \land (x_2 \lor \overline{x_4} \lor x_6) \land (\overline{x_5} \lor \overline{x_2} \lor x_1) \land (x_3 \lor x_4 \lor x_1)$$
+    \end{example}
+
+    \begin{framedthm}[label={3sat red clique}]{$3SAT$ polinomialmente riducibile a $CLIQUE$}
+        Sia $3SAT$ il linguaggio definito come segue: $$3SAT := \{\abk{\phi} \mid \phi \ \textrm{formula in 3CNF soddisfacibile}\}$$ Allora, si verifica che $$3SAT \leq_\mathrm P CLIQUE$$
     \end{framedthm}
 
     \begin{proof}
@@ -3146,7 +3312,7 @@
     \begin{proof}
         Per il \cref{3sat np-complete}, il \cref{clique in np}, ed il \cref{np-complete w red}, segue la tesi.
     \end{proof}
-
+    
     \subsection{Classe \coNPclass}
 
     \begin{frameddefn}{Classe \coNPclass}
@@ -3253,69 +3419,6 @@
 
     \begin{proof}
         Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora, la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
-    \end{proof}
-
-    \section{Teorema di Cook-Levin}
-
-    \subsection{Teorema di Cook-Levin}
-
-    \begin{framedthm}{Teorema di Cook-Levin}
-        Sia $SAT$ il linguaggio definito come: $$SAT := \{\abk{\phi} \mid \phi \ \textrm{formula soddisfacibile}\}$$ Allora, si ha che $SAT$ è \NPclass-completo.
-    \end{framedthm}
-
-    \begin{proof}
-        Sia $V$ una macchina di Turing che, data una codifica $\abk{\phi, c}$ in input, computa come segue:
-
-        \begin{itemize}
-            \item $V$ interpreta $w$ come $\abk{\phi}$, dove $\phi$ è una formula booleana, e $c$ come assegnamento alle variabili di $\phi$;
-            \item $V$ controlla che $\phi(c)$ sia soddisfatta, ed in tal caso accetta; in caso contrario, $V$ rifiuta;
-        \end{itemize}
-
-        Allora, $V$ risulta essere un verificatore di $SAT$, poiché per costruzione $V$ accetta se e solo se $c \in \Sigma^*$ è un assegnamento per $\phi$ tale che $\abk{\abk{\phi}, c} \in L(V)$; inoltre, $V$ è un verificatore polinomiale, e dunque per il \cref {np verif} si ha che $SAT \in \NPclass$.
-
-        Sia $A \in \NPclass$, e dunque esiste una \NTM $N = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $A$ in tempo polinomiale. Sia consideri ora una stringa $w$ in input ad $N$, ed un \tit{tableau} --- \tit{per ognuno dei rami di computazione di $N$} --- definito come mostrato in figura:
-
-        \centeredimage{0.4}{../assets/tableau.png}
-
-        Dunque, sull'$i$-esima riga del tableau è presente l'$i$-esima configurazione che la macchina assume durante la computazione di $w$. Si noti che, poiché $N$ computa in tempo polinomiale, il nastro non può avere più di $n^k$ celle occupate, e dunque la tabella ha dimensione $n^k \times n^k$ (si assume che il tableau considerato sia quadrato anche se il nastro fosse utilizzato per meno di $n^k$ celle, andando a considerare celle vuote nella porzione di nastro non utilizzata). Un tableau è detto \tit{accettante} se almeno una sua riga contiene una configurazione accettante.
-
-        Verrà ora descritto un tableau accettante attraverso formule booleane, come segue:
-
-        \begin{itemize}
-            \item dato $C := Q \cup \Gamma \cup \{ \ttt \# \}$, si definiscano variabili $$\forall i,j \in \sbk{1, n^k}, s \in C \quad x_{i, j, s} := \soe{ll}{\ttt 1 & T_{i, j} = s \\ \ttt 0 & T_{i, j} \neq s}$$ si noti che è possibile immaginare $x_{i, j}$ come stringa booleana che attraverso codifica \tit{one-hot encoding} mostra il carattere presente sulla cella $T_{i, j}$ del tableau considerato; si consideri allora la seguente formula booleana: $$\phi_\mathrm{cell} := \bigwedge_{i, j \in \sbk{1, n^k}}{\sbk{\rbk{\bigvee_{s \in C}{x_{i, j, s}}} \land \rbk{\bigwedge_{\substack{s, t \in C \\ s \neq t}}{\overline{x_{i, j, s} \land x_{i, j, t}}}}}}$$
-
-                per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata costruita rappresenta proprio un tableau definito come descritto in precedenza, poiché:
-
-                \begin{itemize}
-                    \item la prima parte della formula garantisce che almeno uno dei caratteri delle stringhe $x_{i, j}$ sia un \ttt 1;
-                    \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (letteralmente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
-                \end{itemize}
-
-            \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, la prima riga del tableau considerato è la configurazione iniziale di $N$;
-            \item si consideri la seguente formula booleana: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, all'interno del tableau considerato è contenuta almeno una configurazione accettante;
-            \item una \tit{finestra} $2 \times 3$ di un tableau è una porzione di tableau, composta da 3 celle di 2 righe diverse, in cui la prima riga contiene una porzione di configurazione corrente, e la seconda riga contiene una porzione di configurazione nel passo successivo; una finestra è detta \tit{lecita} se non viola le azioni specificate dalla funzione di transizione $\delta$ di $N$; ad esempio, se la $\delta$ ammette le seguenti configurazioni $$\centeredsoe{\delta(q_1, \ttt a) = \{(q_1, \ttt b, \mathrm R)\} \\ \delta(q_1, \ttt b) = \{(q_2, \ttt c, \mathrm L), (q_2, \ttt a, \mathrm R)\}}$$ i seguenti sono esempi di finestre lecite: TODO METTI FOTO O FAI TABELLE
-
-                Si consideri ora la seguente proposizione: \curlyquotes{dato un tableau ed una sua riga, se la riga superiore è la configurazione iniziale, ed ogni finestra nel tableau è lecita, ogni riga del tableau è una configurazione che segue legittimamente dalla precedente}; essa è vera poiché:
-
-                \begin{itemize}
-                    \item si consideri una coppia di configurazioni;
-                    \item ogni cella che contiene un simbolo di nastro e non è adiacente ad un simbolo di stato, rappresenta la cella centrale superiore di una finestra in cui la riga superiore non contiene stati; di conseguenza, questo stesso simbolo deve comparire nella cella centrale della seconda riga della finestra;
-                    \item una finestra contenente il simbolo di stato nella cella centrale superiore garantisce che le tre posizioni corrispondenti vengano aggiornate consistentemente tramite $\delta$; dunque, se la configurazione inferiore e lecita, deve esserlo necessariamente anche quella inferiore.
-                \end{itemize}
-
-                Si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, allora le celle del tableau considerato definiscono solamente finestre lecite.
-        \end{itemize}
-
-        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se la struttura considerata rappresenta un tableau accettante. Dunque, si consideri ora una \TM $M_\phi$ tale che, data in input $w$, se $N$ accetta, $M_\phi$ restituisce sul suo nastro $f(w) = \abk{\phi}$, dove $\phi$ rappresenta un tableau accettante. Di conseguenza, per costruzione $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
-
-        \begin{itemize}
-            \item $\phi_\mathrm{cell}$ richiede tempo $O\rbk{n^k} \cdot O\rbk{n^k} \cdot \abs{C} = O\rbk{n^{2k}}$ (poiché $\abs{C} = O(1)$ perché non dipende da $n$);
-            \item $\phi_\mathrm{start}$ richiede tempo $O\rbk{n^k}$, poiché rappresenta una sola riga del tableau;
-            \item $\phi_\mathrm{accept}$ richiede tempo $O\rbk{n^{2k}}$, poiché richiede che sia presente $q_\mathrm{accept}$ all'interno del tableau;
-            \item $\phi_\mathrm{move}$ richiede tempo $O\rbk{n^{k}} \cdot O\rbk{n^k} \cdot O\rbk{\Xi} = O\rbk{n^{2k}}$, dove $\Xi := \displaystyle \binom{\abs{C}}{6}$ poiché viene considerata ogni possibile finestra lecita per ogni cella del tableau.
-        \end{itemize}
-
-        Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard \iff SAT \in \NPComplete$$
     \end{proof}
 
     \chapter{Complessità di spazio}
@@ -3495,7 +3598,7 @@
     \end{framedlem}
 
     \begin{proof}
-        La dimostrazione è analoga alla dimostrazione del \cref{red trans}, con la differenza che la \TM $M$ considerata deve essere definita come descritto nell'\cref{space model}, e deve cmputare come descritto nella dimostrazione del \cref{l w red}, poiché anche in questo caso rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) potrebbe richiedere più spazio di $O(\log(n))$.
+        La dimostrazione è analoga alla dimostrazione del \cref{red trans}, con la differenza che la \TM $M$ considerata deve essere definita come descritto all'interno dell'\cref{space model}, e deve cmputare come descritto nella dimostrazione del \cref{l w red}, poiché anche in questo caso rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) potrebbe richiedere più spazio di $O(\log(n))$.
     \end{proof}
 
     \begin{framedprop}[label={log space ops}, breakable]{Operazioni in spazio logaritmico}
@@ -3522,13 +3625,14 @@
                 \end{itemize}
             \item effettuare prodotti tra 2 numeri:
                 \begin{itemize}
-                    \item TODO
+                    \item la logica è analoga alla somma, pertanto verrà omessa;
+                    \item lo spazio richiesto al prodotto è dunque lo spazio richiesto per rappresentare $a \cdot b$, ovvero $O(\log(a \cdot b) = O(\log(a) + \log(b)) = O(\max(\log(a), \log(b)))$
                 \end{itemize}
         \end{itemize}
     \end{framedprop}
 
     \begin{framedthm}{$PALINDROMES$ in $\LSPACE$}
-        Sia $PALINDROMES$ il linguaggio definito come segue: $$PALINDROMES := \{w \mid \forall i \in [1, \abs{w}] \quad w_i = w_{n - i + 1}\}$$ Allora, si ha che $PALINDROMES \in \LSPACE$.
+        Sia $PALINDROMES$ il linguaggio definito come segue: $$PALINDROMES := \{w \mid \forall i \in [1, \abs{w}] \quad w_i = w_{n - i + 1}\}$$ Allora, si verifica che $$PALINDROMES \in \LSPACE$$
     \end{framedthm}
 
     \begin{proof}
@@ -3614,7 +3718,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C, C') \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C$ alla configurazione $C'$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita TODO CHE VUOL DIRE, viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e si assume che, al termine della computazione, $N$ pulisca il working tape e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
+        Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C, C') \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C$ alla configurazione $C'$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita --- in particolare, non è nota a priori come è definita la configurazione accettante, poiché generalmente dipende da come computa la macchina di Turing presa in considerazione --- viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e dunque si assume che, al termine della computazione, $N$ pulisca il \tit{working tape} e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
 
         TODO DA FINIRE
     \end{proof}
@@ -3784,6 +3888,7 @@
                             \EndFor
                         \EndFor
                         \State \textbf{accept}
+                        \State TODO METTI LA COSA DEGLI ARCHI
                     \EndFunction
                 \end{algorithmic}
         \end{itemize}
@@ -3793,7 +3898,7 @@
             \begin{enumerate}[label=]
                 \item \tit{Caso base.} Per definizione, si ha $R_0 = \{ s\}$ e $c_0 = \abk{s \to s}$; allora, per stabilire se $t \notin R_0$, \ttt{checkPath} controlla se $t \neq s \in R_0$.
                 \item \tit{Ipotesi induttiva.} Dato un $l \in [0, \abs{V_G})$, \ttt{checkPath} è in grado di stabilire se $t \notin R_l$. Si noti che, per definizione stessa, si ha che $\forall h \in [0, \abs{V_G}) \quad R_h \subseteq R_{h + 1}$, dunque segue che $$t \notin R_l \implies \forall h \in [0, l] \quad t \notin R_h$$ implicando che i cammini lunghi al più $l$ contenuti in $c_l$ --- che saranno anche i primi $r_l$, poiché si è ipotizzato che la codifica di $c_l$ sia ordinata per lunghezza dei cammini --- non sono cammini $s \to t$.
-                \item \tit{Passo induttivo.} È necessario dimostare che per $l +1$, \ttt{checkPath} è in grado di stabilire se $t \notin R_{l + 1}$. Si noti che, per ipotesi induttiva, \ttt{checkPath} è in grado di stabilire se $t \notin R_l$, ed inoltre $R_l \subseteq R_{l + 1}$ per quanto detto in precedenza. Allora, poiché TODO
+                \item \tit{Passo induttivo.} È necessario dimostare che per $l +1$, \ttt{checkPath} è in grado di stabilire se $t \notin R_{l + 1}$. Si noti che, per ipotesi induttiva, \ttt{checkPath} è in grado di stabilire se $t \notin R_l$, ed inoltre $R_l \subseteq R_{l + 1}$ per quanto detto in precedenza. Allora, poiché TODO METTI LA COSA DEGLI ARCHI
             \end{enumerate}
 
             Dunque, questo dimostra che \ttt{checkPath} è in grado di stabilire correttamente se $t \in R_{\abs{V_G}}$; allora, attraverso tale procedura, $V$ stabilisce correttamente se $t$ è raggiungibile da $s$. Di conseguenza, se non esistono cammini $s \to t \in G$, esiste una $c \in \Sigma ^*$ tale che $\abk{\abk{G, s, t}, c} \in L(V)$, e se esiste un cammino $s \to t$ allora \ttt{checkPath} è in grado di stabilire che $t \in R_{\abs{V_G}}$ correttamente, e dunque $V$ rifiuta. Questo dimostra che $V$ è un verificatore per $\overline{PATH}$.
