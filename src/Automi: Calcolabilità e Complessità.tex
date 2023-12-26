@@ -2542,7 +2542,7 @@
     \end{framedlem}
 
     \begin{proof}
-        Per definizione stessa, poiché $A \leq_\mathrm m B$ e $B \leq_\mathrm m C$, esistono funzioni calcolabili $\func{f, g}{\Sigma^*}{\Sigma^*}$ tali che $$\centeredsoe{\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B \\ \forall w \in \Sigma^* \quad w \in B \iff g(w) \in C}$$ dunque, segue che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B \iff g(f(w)) \in C$$ ed è quindi possibile definire una funzione $F := (g \circ f)$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff F(w) \in C$$. Si consideri infine la seguente macchina di Turing $M$ che, data in input una stringa $w$, computa come segue:
+        Per definizione stessa, poiché $A \leq_\mathrm m B$ e $B \leq_\mathrm m C$, esistono funzioni calcolabili $\func{f, g}{\Sigma^*}{\Sigma^*}$ tali che $$\centeredsoe{\forall w \in \Sigma ^* \quad w \in A \iff f(w) \in B \\ \forall w \in \Sigma^* \quad w \in B \iff g(w) \in C}$$ dunque, segue che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B \iff g(f(w)) \in C$$ ed è quindi possibile definire una funzione $F := (g \circ f)$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff F(w) \in C$$ Si consideri infine la seguente macchina di Turing $M$ che, data in input una stringa $w$, computa come segue:
 
         \begin{itemize}
             \item $M$ calcola $f(w)$ attraverso la \TM che rende $f$ calcolabile;
@@ -2550,7 +2550,7 @@
             \item $M$ restituisce $g(f(w))$ sul proprio nastro.
         \end{itemize}
 
-        Allora, per costruzione di $M$, se $M$ si ferma, termina avendo solo $F(w) = g(f(w))$ sul suo nastro; di conseguenza, per le proprietà di $F$ precedentemente discusse, segue la tesi.
+        Allora, per costruzione di $M$, se $M$ si ferma, termina avendo solo $F(w) = g(f(w))$ sul suo nastro; di conseguenza, $F$ risulta essere una funzione calcolabile, per le proprietà di $F$ precedentemente discusse, segue la tesi.
     \end{proof}
 
     \section{Turing-decidibilità mediante riduzione}
