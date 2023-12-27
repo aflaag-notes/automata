@@ -3493,7 +3493,7 @@
         
         e dunque il numero di configurazioni di $M$ possibili è pari a $$\centeredsoe{n \cdot \abs{Q} \cdot f(n) \cdot \abs{\Gamma}^{f(n)} = n \cdot O\rbk{f(n) \cdot \abs{\Gamma}^{f(n)}} = n \cdot O\rbk{f(n) \cdot 2^{O(f(n))}} = \\ = n \cdot O\rbk{2^{\log(f(n)) + O(f(n))}} = n \cdot O\rbk{2^{O(f(n))}} = n \cdot 2^{O(f(n))}}$$ (si veda l'\cref{fn exp} per chiarimenti). Si noti che il numero di configurazioni di $M$ possibili coincide con il numero massimo di passi possibili che $M$ può effettuare durante una sua esecuzione, poiché $M$ è un decisore e dunque non può ripetere le configurazioni, altrimenti andrebbe in loop; di conseguenza, segue la tesi.
 
-        Infine, si noti che non è possibile accorpare $n$ nell'$O$-grande, poiché  $$f(n) < \log (n) \iff 2^{f(n)} < 2^{\log(n)} = n$$ e dunque se $f(n)$ è asintoticamente inferiore a $\log(n)$, $n$ è ansintoticamente superiore a $2^{f(n)}$.
+        Infine, si noti che non è possibile accorpare $n$ nell'$O$-grande, poiché  $$f(n) < \log (n) \iff 2^{f(n)} < 2^{\log(n)} = n$$ e dunque se $f(n)$ è asintoticamente inferiore a $\log(n)$, $n$ è asintoticamente superiore a $2^{f(n)}$.
     \end{proof}
 
     \begin{framedcor}[label={dspace in dtime cor}]{Limite di tempo}
@@ -3572,7 +3572,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Poiché $B \in \LSPACE$ in ipotesi, esiste un decisore $M$ --- definito come descritto nell'\cref{space model} --- tale che $M$ decide $B$ in spazio logaritmico; inolrte, poiché $A \leq_\mathrm L B$, esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ tale per cui $A$ riducibile in spazio logaritmico a $B$. Sia dunque $N$ una macchina di Turing --- definita come descritto nell'\cref{space model} --- che, data in input una stringa $w \in \Sigma^*$, computa come segue:
+        Poiché $B \in \LSPACE$ in ipotesi, esiste un decisore $M$ --- definito come descritto nell'\cref{space model} --- tale che $M$ decide $B$ in spazio logaritmico; inoltre, poiché $A \leq_\mathrm L B$, esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ tale per cui $A$ riducibile in spazio logaritmico a $B$. Sia dunque $N$ una macchina di Turing --- definita come descritto nell'\cref{space model} --- che, data in input una stringa $w \in \Sigma^*$, computa come segue:
 
         \begin{itemize}
             \item $N$ computa $f(w)$, attraverso il trasduttore di spazio logaritmico tale per cui $f$ è calcolabile, \tit{ma salvando un simbolo alla volta sul suo working tape};
@@ -3640,7 +3640,11 @@
 
         \begin{itemize}
             \item $M$ determina $n := \abs{w}$ attraverso un contatore;
-            \item per ogni $i \in [1, n]$, se $w_ i \neq w_{n - i + 1}$, $M$ rifiuta;
+            \item per ogni $i \in [1, n]$, se $w_i \neq w_{n - i + 1}$, $M$ rifiuta; dato $i$, per calcolare $n - i + 1$ $M$ computa come segue:
+
+                \begin{itemize}
+                    \item TODO
+                \end{itemize}
             \item se $M$ ha raggiunto la fine dell'input, accetta.
         \end{itemize}
 
@@ -3869,13 +3873,13 @@
     \end{framedthm}
 
     \begin{proof}
-        Per la \cref{conl def}, la tesi può procedere dimostrando equivalentemente che $\overline{PATH} \in \NLSPACE$; inoltre, per il \cref{nl verif}, dimostrare che $\overline{PATH} \in \NLSPACE$ è equivalente a dimostrare che $\overline{PATH}$ e verificabile in spazio logaritmico per il \cref{nl verif}. Infine, si noti che all'interno di $\overline{PATH}$ sono presenti non solo codifiche $\abk{G, s, t}$ tali per cui non esistono cammini $s \to t$ in $G$, ma anche ogni altra stringa di simboli dell'alfabeto considerato che non corrisponde ad una valida codifica della forma $\abk{G, s, t}$. 
+        Per la \cref{conl def}, la tesi può procedere dimostrando equivalentemente che $\overline{PATH} \in \NLSPACE$; inoltre, per il \cref{nl verif}, dimostrare che $\overline{PATH} \in \NLSPACE$ è equivalente a dimostrare che $\overline{PATH}$ e verificabile in spazio logaritmico. Infine, si noti che all'interno di $\overline{PATH}$ sono presenti non solo codifiche $\abk{G, s, t}$ tali per cui non esistono cammini $s \to t$ in $G$, ma anche ogni altra stringa di simboli dell'alfabeto considerato che non corrisponde ad una valida codifica della forma $\abk{G, s, t}$. 
 
         Si consideri dunque una \TM $V$ definita come descritto all'interno dell'\cref{space model} che, data una codifica $\abk{w, c}$ in input, computa come segue:
 
         \begin{itemize}
             \item $V$ interpreta $w$ come $\abk{G, s, t}$, dove $G = (V_G, E_G)$ è un grafo diretto, ed $s, t \in V$ come due suoi nodi; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, $V$ accetta;
-            \item $V$ interpreta dunque $c$ come $\abk{c_0, \ldots, c_{\abs{V_G} -1}}$, dove ogni $c_i$ viene interpretato da $V$ come segue: $$\forall i \in [0, \abs{V_G}) \quad c_i = \abk{s \to v_1, \ldots, s \to v_k}$$ per qualche $k\in \N$, dove $v_1, \ldots, v_k \in V_G$ sono tutti i nodi raggiungibili da $s$ attraverso cammini lunghi al massimo $i$; inoltre, gli elementi all'interno di ogni $c_i$ devono essere ordinati lessicograficamente, al fine di poter controllare efficientemente --- in termini di spazio --- se rappresentano cammini tutti distinti; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, oppure i cammini rappresentati da qualche $c_i$ non sono distinti, $V$ accetta;
+            \item $V$ interpreta dunque $c$ come $\abk{c_0, \ldots, c_{\abs{V_G}}}$, dove ogni $c_i$ viene interpretato da $V$ come segue: $$\forall i \in [0, \abs{V_G}) \quad c_i = \abk{s \to v_1, \ldots, s \to v_k}$$ per qualche $k\in \N$, dove $v_1, \ldots, v_k \in V_G$ sono tutti i nodi raggiungibili da $s$ attraverso cammini lunghi al massimo $i$; inoltre, gli elementi all'interno di ogni $c_i$ devono essere ordinati lessicograficamente, al fine di poter controllare efficientemente --- in termini di spazio --- se rappresentano cammini tutti distinti; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, oppure i cammini rappresentati da qualche $c_i$ non sono distinti, $V$ accetta;
             \item $V$ esegue la seguente procedura:
                 \begin{algorithmic}[1]
                     \Function{checkPath}{$G, s, t, c$}
@@ -3884,7 +3888,7 @@
                                 \State \textbf{reject}
                             \EndIf
                         \EndFor
-                        \For{$i \in [1, \abs{V_G} - 1)$}
+                        \For{$i \in [1, \abs{V_G})$}
                             \For{$s \to v' \in c_{i + 1} - c_i$}
                                 \State $\textrm{isExt} = \ttt{False}$
                                 \For{$s \to v \in c_i$}
@@ -3910,7 +3914,7 @@
 
             \begin{enumerate}[label=]
                 \item \tit{Caso base.} Per definizione, si ha $R_0 = \{ s\}$ e $c_0 = \abk{s \to s}$; allora, per stabilire se $t \notin R_0$, \ttt{checkPath} controlla se $t \neq s \in R_0$ alla riga 3 (si noti che il ciclo della riga 2 scorrerà un solo elemento, ovvero $s \to s \in c_0$).
-                \item \tit{Ipotesi induttiva.} Dato un $l \in [0, \abs{V_G} - 1)$, \ttt{checkPath} è in grado di stabilire correttamente
+                \item \tit{Ipotesi induttiva.} Dato un $l \in [0, \abs{V_G})$, \ttt{checkPath} è in grado di stabilire correttamente
 
                     \begin{itemize}
                         \item gli elementi in $c_l$ rappresentano cammini della forma $s \to v$ per qualche $v \in V_G$;
@@ -3926,10 +3930,10 @@
 
                     Il ciclo della riga 8 controlla che ogni $s \to v' \in c_{l + 1} - c_l$ rappresenti realmente un camnino che parte da $s$ e raggiunge un certo $v' \in V$, e poiché i cammini $s \to v \in c_l$ rappresentano cammini della forma $s \to v$ per ipotesi induttiva, il ciclo 8 di fatto controlla che $c_{l + 1}$ sia un'estensione di $c_l$; si noti inoltre che è possibile considerare solo gli ultimi $\abs{c_{l +1} - c_l}$ elementi, poiché i primi $r_l := \abs{R_l} = \abs{c_l}$ combacieranno avendo assunto che gli elementi in ogni $c_i$ siano ordinati lessicograficamente (si assume che sia sempre possibile etichettare i vertici di $G$, in modo che ogni $c_{i +1 }$ sia un estensione di $c_i$, e che ogni $c_i$ sia ordinato lessicograficamente). Questo dimostra la prima parte della tesi.
 
-                    Infine, per definizione stessa, si ha che $$\forall h \in [0, \abs{V_G} - 1) \quad R_h \subseteq R_{h + 1}$$ dunque segue che $$t \notin R_l \implies \forall h \in [0, l] \quad t \notin R_h$$ di conseguenza, per controllare che $t \notin R_{l + 1}$ è sufficiente verificare che i soli elementi $s \to v' \in c_{l + 1} - c_l$ non abbiano $v' = t$, poiché $t \notin R_l$ per ipotesi induttiva. Questo dimostra la seconda parte della tesi
+                    Infine, per definizione stessa, si ha che $$\forall h \in [0, \abs{V_G}) \quad R_h \subseteq R_{h + 1}$$ dunque segue che $$t \notin R_l \implies \forall h \in [0, l] \quad t \notin R_h$$ di conseguenza, per controllare che $t \notin R_{l + 1}$ è sufficiente verificare che i soli elementi $s \to v' \in c_{l + 1} - c_l$ non abbiano $v' = t$, poiché $t \notin R_l$ per ipotesi induttiva. Questo dimostra la seconda parte della tesi
             \end{enumerate}
 
-            Dunque, questo dimostra in particolare che \ttt{checkPath} è in grado di stabilire correttamente se $t \in R_{\abs{V_G}}$; allora, attraverso tale procedura, $V$ stabilisce correttamente se $t$ sia raggiungibile o meno da $s$. Di conseguenza, se non esistono cammini $s \to t \in G$, esiste una $c \in \Sigma ^*$ tale che $\abk{\abk{G, s, t}, c} \in L(V)$, e se esiste un cammino $s \to t$ allora \ttt{checkPath} è in grado di stabilire che $t \in R_{\abs{V_G} - 1}$ correttamente, e dunque $V$ rifiuta. Questo dimostra che $V$ è un verificatore per $\overline{PATH}$.
+            Dunque, questo dimostra in particolare che \ttt{checkPath} è in grado di stabilire correttamente se $t \in R_{\abs{V_G}}$; allora, attraverso tale procedura, $V$ stabilisce correttamente se $t$ sia raggiungibile o meno da $s$. Di conseguenza, se non esistono cammini $s \to t \in G$, esiste una $c \in \Sigma ^*$ tale che $\abk{\abk{G, s, t}, c} \in L(V)$, e se esiste un cammino $s \to t$ allora \ttt{checkPath} è in grado di stabilire che $t \in R_{\abs{V_G}}$ correttamente, e dunque $V$ rifiuta. Questo dimostra che $V$ è un verificatore per $\overline{PATH}$.
 
             Inoltre, si noti che:
 
@@ -3984,10 +3988,12 @@
     
     \begin{frameddefn}{Funzione spazio-costruibile}
         Una funzione $\func{f}{\N}{\N}$ è detta essere \tbf{spazio-costruibile} se $f(n)$ è almeno $O(\log(n))$, e se la funzione che mappa $\ttt 1^n$ nella rappresentazione binaria di $f(n)$ è computabile in spazio $O(f(n))$.
+
+        Funzioni a valori non interi vengono arrotondate all'intero successivo più piccolo al fine di renderle spazio-costruibili.
     \end{frameddefn}
 
     \begin{example}[Funzioni spazio-costruibili]
-        Si consideri la funzione $n^2$, la quale è almeno $O(\log(n))$; inoltre, sia $T$ un trasduttore che, data in input la stringa $\ttt 1 ^n$, computa come segue:
+        Si consideri la funzione $f(n) = n^2$, la quale è almeno $O(\log(n))$; inoltre, sia $T$ un trasduttore che, data in input la stringa $\ttt 1 ^n$, computa come segue:
 
         \begin{itemize}
             \item $T$ conta il numero di \ttt 1 presenti sull'\tit{input tape};
@@ -3995,19 +4001,51 @@
             \item $T$ restituisce $n^2$ sul suo \tit{output tape}.
         \end{itemize}
 
-        % Allora, poiché ogni operazione richiede spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\func{f}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$, implicando che $f$ sia computabile in spazio $\log(n)$
-        TODO DA FINIRE
+        Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio $O(n)$ per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è spazio-costruibile.
     \end{example}
 
     \begin{framedthm}{Teorema di gerarchia di spazio}
-        TODO
+        Sia $\func{f}{\N}{\N}$ una funzione spazio-costruibile; allora, esiste un linguaggio $L$ decidibile in spazio $O(f(n))$ ma non in spazio $o(f(n))$.
     \end{framedthm}
+
+    \begin{proof}
+        Si consideri il seguente decisore $D$ definito come descritto all'interno dell'\cref{space model} che, data in input una stringa $w$, computa come segue:
+
+        \begin{itemize}
+            \item $D$ marca la $f(n)$-esima cella del suo \tit{working tape} (si noti che $f(n)$ è calcolabile per spazio-costruibilità di $f$); se in fasi successive avviene un tentativo di usare più di $f(n)$ celle, $D$ rifiuta;
+            \item se $w$ non è della forma $\abk{M} \ttt 1 \ttt 0^*$, dove $M \in \TM$, $D$ rifiuta;
+            \item $D$ simula $M(w)$, limitandole lo spazio ad $f(n)$ per quanto detto in precedenza, e contando contemporaneamente il numero di passi che $M$ impiega per computare; se il conto eccede $2^{f(n)}$, $D$ rifiuta;
+            \item $D$ accetta se e solo se $M$ rifiuta.
+        \end{itemize}
+
+        È facile convincersi che $D$ è un decisore, poiché anche se $M$ dovesse andare in loop infinito entro le $f(n)$ celle di spazio che $D$ le fornisce, dopo $2^{f(n)}$ passi $D$ ne interromperebbe la simulazione e rifiuterebbe
+
+        Per quanto riguarda lo spazio utilizzato da $D$, si ha che:
+
+        \begin{itemize}
+            \item per come $D$ computa, la sua esecuzione non può eccedere l'uso dell'$f(n)$-esima cella del suo \tit{working tape};
+            \item poiché $O \rbk{\log \rbk{2^{f(n)}}} = O(f(n))$, il contatore di passi di $M(w)$ ha costo di spazio $O(f(n))$.
+            \item siano $\Gamma_D$ e $\Gamma_M$ rispettivamente gli alfabeti di nastro di $D$ ed $M$; poiché $D$ ha un alfabeto di nastro fissato, TODO DA FINIRE
+        \end{itemize}
+
+        Questo dimostra che $D$ è un decisore di spazio $O(f(n))$, e sia $L := L(D)$.
+
+        Per assurdo, sia $M_L$ TODO DA FINIRE
+
+        Per giustificare la scelta della codifica di $w = \abk{M} \ttt 1 \ttt 0 ^n$ in input a $D$, si ipotizzi che $M$ computi in spazio $o(f(n))$ (dunque utilizzi meno di $f(n)$ celle); per definizione di $o(f(n))$, l'uso di spazio di $M$ potrebbe essere superiore ad $f(n)$ per valori piccoli di $n$, quando il comportamento asintotico non è ancora stato raggiunto. Di conseguenza, potrebbe verificarsi che $D$ non abbia abbastanza spazio per eseguire $M$ fino al completamento, dunque rifiutando prematuramente, rischiando inoltre di decidere lo stesso lingauggio che decide $M$, condizione per cui il teorema non risulterebbe più verificato. TODO DA FINIRE
+    \end{proof}
+
+    \begin{framedcor}{TODO INVENTA NOME}
+        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o(f_2(n))$ ed $f_2$ è spazio-costruibile; allora, si verifica che $$\DSPACE(f_1(n)) \subsetneq \DSPACE(f_2(n))$$
+    \end{framedcor}
 
     \begin{proof}
         TODO
     \end{proof}
 
-    \subsection{Teorema di gerarchia di tempo TODO FORSE SPOSTALI SOPRA}
+    TODO MANCANO DUCENTO TEOREMI
+
+    \subsection{Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}
 
     \begin{framedthm}{Teorema di gerarchia di tempo}
         TODO
