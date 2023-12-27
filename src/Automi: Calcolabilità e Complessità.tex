@@ -3034,7 +3034,7 @@
             \item se $M$ non ha mai accettato, $M$ rifiuta.
         \end{itemize}
 
-        Allora $M$, per costruzione, è in grado di decidere $HAMPATH$. Si noti che i lnumero di cammini possibili in un grafo è $O \rbk{2^{n^k}}$ per qualche $k \in \N$ (si tratta TODO DA FINIRE), e poiché controllare che un cammino sia hamiltoniano richiede tempo $O(n)$, la complessità temporale di $M$ risulta essere $$O(n) \cdot O\rbk{2^{n^k}} = O\rbk{n \cdot 2^{n^k}}$$ e poiché $n^k \ge \log(n)$ (per $k$ sufficientemente grande) si ha che $$O\rbk{n \cdot 2^{n^k}} = O\rbk{2^{n^k}} \implies HAMPATH \in \EXP$$
+        Allora $M$, per costruzione, è in grado di decidere $HAMPATH$. Si noti che i lnumero di cammini possibili in un grafo è $O \rbk{2^{n^k}}$ per qualche $k \in \N$ --- più precisamente, sarebbe $\displaystyle \rbk{\max_{v \in V}{\deg(v)}}^{O(n)}$ --- e poiché controllare che un cammino sia hamiltoniano richiede tempo $O(n)$, la complessità temporale di $M$ risulta essere $$O(n) \cdot O\rbk{2^{n^k}} = O\rbk{n \cdot 2^{n^k}}$$ e poiché $n^k \ge \log(n)$ (per $k$ sufficientemente grande) si ha che $$O\rbk{n \cdot 2^{n^k}} = O\rbk{2^{n^k}} \implies HAMPATH \in \EXP$$
     \end{proof}
 
     \subsection{Classe \coEXP}
@@ -3796,7 +3796,8 @@
                     \State \textbf{accept}
                 \EndIf
                 \State $u := x$
-                \For{$v \in V$} \Comment{scelto \underline{non deterministicamente}}
+                \For{$\_ \in [1, \abs{V}]$} 
+                    \State $v \in V$ \Comment{scelto \underline{non deterministicamente}}
                     \If{$(u, v) \in E$}
                         \State $u := v$
                         \If{$u == y$}
@@ -3977,8 +3978,47 @@
         La dimostrazione è analoga alla dimostrazione della \cref{pspace = npspace}, pertanto verrà omessa.
     \end{proof}
 
+    \section{Teoremi di gerarchia}
+    
+    \subsection{Teorema di gerarchia di spazio}
+    
+    \begin{frameddefn}{Funzione spazio-costruibile}
+        Una funzione $\func{f}{\N}{\N}$ è detta essere \tbf{spazio-costruibile} se $f(n)$ è almeno $O(\log(n))$, e se la funzione che mappa $\ttt 1^n$ nella rappresentazione binaria di $f(n)$ è computabile in spazio $O(f(n))$.
+    \end{frameddefn}
+
+    \begin{example}[Funzioni spazio-costruibili]
+        Si consideri la funzione $n^2$, la quale è almeno $O(\log(n))$; inoltre, sia $T$ un trasduttore che, data in input la stringa $\ttt 1 ^n$, computa come segue:
+
+        \begin{itemize}
+            \item $T$ conta il numero di \ttt 1 presenti sull'\tit{input tape};
+            \item $T$ calcola $n \cdot n = n^2$;
+            \item $T$ restituisce $n^2$ sul suo \tit{output tape}.
+        \end{itemize}
+
+        % Allora, poiché ogni operazione richiede spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\func{f}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$, implicando che $f$ sia computabile in spazio $\log(n)$
+        TODO DA FINIRE
+    \end{example}
+
+    \begin{framedthm}{Teorema di gerarchia di spazio}
+        TODO
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \subsection{Teorema di gerarchia di tempo TODO FORSE SPOSTALI SOPRA}
+
+    \begin{framedthm}{Teorema di gerarchia di tempo}
+        TODO
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
     \begin{framedobs}[breakable]{Gerarchia delle classi}
-        TODO METTI QUESTA OBS NEL POSTO GIUSTO (controlla teoremi di gerarchia) E NOMINA I TEOREMI USATI
+        TODO NOMINA I TEOREMI USATI
 
         \begin{center}
             \resizebox{0.9\hsize}{!}{

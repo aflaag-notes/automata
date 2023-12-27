@@ -111,3 +111,6 @@
 \contentsline {subsection}{\numberline {6.2.8}Classe \textsf {coNL}\xspace }{125}{subsection.6.2.8}%
 \contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NPSPACE}\xspace }{129}{subsection.6.2.9}%
 \contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NEXPSPACE}\xspace }{129}{subsection.6.2.10}%
+\contentsline {section}{\numberline {6.3}Teoremi di gerarchia}{130}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Teorema di gerarchia di spazio}{130}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Teorema di gerarchia di tempo}{130}{subsection.6.3.2}%
