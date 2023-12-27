@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.30)  27 DEC 2023 19:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.8.30)  27 DEC 2023 21:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2629,7 +2629,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `italian' language definitions on input line 2830.
 [90]
-Package cleveref Info: loaded `italian' language definitions on input line 2855.
+Package cleveref Info: loaded `italian' language definitions on input line 2849.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2638,9 +2638,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 2855.
+Package cleveref Info: loaded `italian' language definitions on input line 2849.
 [91]
-Package cleveref Info: loaded `italian' language definitions on input line 2890.
+Package cleveref Info: loaded `italian' language definitions on input line 2886.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2649,9 +2649,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 2890.
+Package cleveref Info: loaded `italian' language definitions on input line 2886.
 [92]
-Package cleveref Info: loaded `italian' language definitions on input line 2927.
+Package cleveref Info: loaded `italian' language definitions on input line 2921.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2660,9 +2660,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 2927.
+Package cleveref Info: loaded `italian' language definitions on input line 2921.
 [93]
-Package cleveref Info: loaded `italian' language definitions on input line 2955.
+Package cleveref Info: loaded `italian' language definitions on input line 2947.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2671,9 +2671,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 2955.
+Package cleveref Info: loaded `italian' language definitions on input line 2947.
 [94]
-Package cleveref Info: loaded `italian' language definitions on input line 2982.
+Package cleveref Info: loaded `italian' language definitions on input line 2979.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2682,9 +2682,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 2982.
+Package cleveref Info: loaded `italian' language definitions on input line 2979.
 [95]
-Package cleveref Info: loaded `italian' language definitions on input line 3024.
+Package cleveref Info: loaded `italian' language definitions on input line 3010.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2693,9 +2693,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3024.
+Package cleveref Info: loaded `italian' language definitions on input line 3010.
 [96]
-Package cleveref Info: loaded `italian' language definitions on input line 3052.
+Package cleveref Info: loaded `italian' language definitions on input line 3045.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2704,9 +2704,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3052.
+Package cleveref Info: loaded `italian' language definitions on input line 3045.
 [97]
-Package cleveref Info: loaded `italian' language definitions on input line 3085.
+Package cleveref Info: loaded `italian' language definitions on input line 3077.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2715,9 +2715,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3085.
+Package cleveref Info: loaded `italian' language definitions on input line 3077.
 [98]
-Package cleveref Info: loaded `italian' language definitions on input line 3130.
+Package cleveref Info: loaded `italian' language definitions on input line 3109.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2726,9 +2726,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3130.
+Package cleveref Info: loaded `italian' language definitions on input line 3109.
 [99]
-Package cleveref Info: loaded `italian' language definitions on input line 3139.
+Package cleveref Info: loaded `italian' language definitions on input line 3138.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2737,9 +2737,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3139.
+Package cleveref Info: loaded `italian' language definitions on input line 3138.
 [100]
-Package cleveref Info: loaded `italian' language definitions on input line 3175.
+Package cleveref Info: loaded `italian' language definitions on input line 3172.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2748,13 +2748,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3175.
+Package cleveref Info: loaded `italian' language definitions on input line 3172.
 [101]
-Overfull \hbox (2.35211pt too wide) in paragraph at lines 3191--3193
+Overfull \hbox (2.35211pt too wide) in paragraph at lines 3199--3201
 \T1/cmr/m/n/12 Uno dei [][]pro-ble-mi del mil-len-nio[][] con-si-ste nel-lo sta-bi-li-re se [][]\T1/cmss/m/n/12 P \T1/cmr/m/n/12 coin-ci-de o me-no con \T1/cmss/m/n/12 NP[][]\T1/cmr/m/n/12 . 
  []
 
-Package cleveref Info: loaded `italian' language definitions on input line 3205.
+Package cleveref Info: loaded `italian' language definitions on input line 3204.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2762,14 +2762,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3205.
+Package cleveref Info: loaded `italian' language definitions on input line 3204.
 [102]
-<../assets/tableau.png, id=1685, 873.2625pt x 649.42625pt>
+Package cleveref Info: loaded `italian' language definitions on input line 3234.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package cleveref Info: loaded `italian' language definitions on input line 3234.
+[103]
+<../assets/tableau.png, id=1694, 873.2625pt x 649.42625pt>
 File: ../assets/tableau.png Graphic file (type png)
 <use ../assets/tableau.png>
-Package pdftex.def Info: ../assets/tableau.png  used on input line 3239.
+Package pdftex.def Info: ../assets/tableau.png  used on input line 3247.
 (pdftex.def)             Requested size: 349.29881pt x 259.7659pt.
-Package cleveref Info: loaded `italian' language definitions on input line 3239.
+Package cleveref Info: loaded `italian' language definitions on input line 3250.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2778,25 +2789,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3239.
-[103]
-Package cleveref Info: loaded `italian' language definitions on input line 3251.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-Package cleveref Info: loaded `italian' language definitions on input line 3251.
+Package cleveref Info: loaded `italian' language definitions on input line 3250.
 [104 <../assets/tableau.png>]
-<../assets/windows.png, id=1700, 1217.2978pt x 390.70969pt>
+Package cleveref Info: loaded `italian' language definitions on input line 3265.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package cleveref Info: loaded `italian' language definitions on input line 3265.
+[105]
+<../assets/windows.png, id=1707, 1217.2978pt x 390.70969pt>
 File: ../assets/windows.png Graphic file (type png)
 <use ../assets/windows.png>
-Package pdftex.def Info: ../assets/windows.png  used on input line 3259.
+Package pdftex.def Info: ../assets/windows.png  used on input line 3267.
 (pdftex.def)             Requested size: 365.19215pt x 117.2138pt.
-Package cleveref Info: loaded `italian' language definitions on input line 3265.
+Package cleveref Info: loaded `italian' language definitions on input line 3280.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2805,9 +2816,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3265.
-[105 <../assets/windows.png>]
-Package cleveref Info: loaded `italian' language definitions on input line 3287.
+Package cleveref Info: loaded `italian' language definitions on input line 3280.
+[106 <../assets/windows.png>]
+Package cleveref Info: loaded `italian' language definitions on input line 3314.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2816,20 +2827,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3287.
-[106]
-Package cleveref Info: loaded `italian' language definitions on input line 3325.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-Package cleveref Info: loaded `italian' language definitions on input line 3325.
+Package cleveref Info: loaded `italian' language definitions on input line 3314.
 [107]
-Package cleveref Info: loaded `italian' language definitions on input line 3361.
+Package cleveref Info: loaded `italian' language definitions on input line 3355.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2838,9 +2838,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3361.
+Package cleveref Info: loaded `italian' language definitions on input line 3355.
 [108]
-Package cleveref Info: loaded `italian' language definitions on input line 3387.
+Package cleveref Info: loaded `italian' language definitions on input line 3382.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2849,9 +2849,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3387.
+Package cleveref Info: loaded `italian' language definitions on input line 3382.
 [109]
-Package cleveref Info: loaded `italian' language definitions on input line 3419.
+Package cleveref Info: loaded `italian' language definitions on input line 3415.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2860,9 +2860,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3419.
+Package cleveref Info: loaded `italian' language definitions on input line 3415.
 [110]
-Package cleveref Info: loaded `italian' language definitions on input line 3424.
+Package cleveref Info: loaded `italian' language definitions on input line 3432.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2871,14 +2871,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3424.
+Package cleveref Info: loaded `italian' language definitions on input line 3432.
 [111]
 Capitolo 6.
-Package cleveref Info: loaded `italian' language definitions on input line 3448.
+Package cleveref Info: loaded `italian' language definitions on input line 3456.
 [112
 
 ]
-Package cleveref Info: loaded `italian' language definitions on input line 3483.
+Package cleveref Info: loaded `italian' language definitions on input line 3491.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2887,9 +2887,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3483.
+Package cleveref Info: loaded `italian' language definitions on input line 3491.
 [113]
-Package cleveref Info: loaded `italian' language definitions on input line 3512.
+Package cleveref Info: loaded `italian' language definitions on input line 3520.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2898,9 +2898,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3512.
+Package cleveref Info: loaded `italian' language definitions on input line 3520.
 [114]
-Package cleveref Info: loaded `italian' language definitions on input line 3545.
+Package cleveref Info: loaded `italian' language definitions on input line 3553.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2909,9 +2909,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3545.
+Package cleveref Info: loaded `italian' language definitions on input line 3553.
 [115]
-Package cleveref Info: loaded `italian' language definitions on input line 3568.
+Package cleveref Info: loaded `italian' language definitions on input line 3576.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2920,9 +2920,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3568.
+Package cleveref Info: loaded `italian' language definitions on input line 3576.
 [116]
-Package cleveref Info: loaded `italian' language definitions on input line 3591.
+Package cleveref Info: loaded `italian' language definitions on input line 3599.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2931,9 +2931,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3591.
+Package cleveref Info: loaded `italian' language definitions on input line 3599.
 [117]
-Package cleveref Info: loaded `italian' language definitions on input line 3637.
+Package cleveref Info: loaded `italian' language definitions on input line 3645.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2942,9 +2942,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3637.
+Package cleveref Info: loaded `italian' language definitions on input line 3645.
 [118]
-Package cleveref Info: loaded `italian' language definitions on input line 3662.
+Package cleveref Info: loaded `italian' language definitions on input line 3670.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2953,84 +2953,84 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3662.
+Package cleveref Info: loaded `italian' language definitions on input line 3670.
 [119]
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3667             \Function
+l.3675             \Function
                             {findPath}{$G, x, y, k$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3668                 \If
+l.3676                 \If
                           {$k == 0$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3669                     \If
+l.3677                     \If
                               {$(x, y) \in E \lor x == y$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3670                         \State
+l.3678                         \State
                                       \textbf{return} \ttt{True}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3671                     \Else
+l.3679                     \Else
                                 
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3672                         \State
+l.3680                         \State
                                       \textbf{return} \ttt{False}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3673                     \EndIf
+l.3681                     \EndIf
                                  
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3674                 \ElsIf
+l.3682                 \ElsIf
                              {$k > 0$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3675                     \For
+l.3683                     \For
                                {$w \in V$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3676                         \If
+l.3684                         \If
                                   {$\soe{l}{\ttt{findPath}(G, x, w, k - 1) =...
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.11}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3677                             \State
+l.3685                             \State
                                           \tbf{return} \ttt{True}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.12}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3678                         \EndIf
+l.3686                         \EndIf
                                      
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3679                     \EndFor
+l.3687                     \EndFor
                                   
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3681                     \State
+l.3689                     \State
                                   \tbf{return} \ttt{False}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.15}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3682                 \EndIf
+l.3690                 \EndIf
                              
-Package cleveref Info: loaded `italian' language definitions on input line 3697.
+Package cleveref Info: loaded `italian' language definitions on input line 3705.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3039,9 +3039,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3697.
+Package cleveref Info: loaded `italian' language definitions on input line 3705.
 [120]
-Package cleveref Info: loaded `italian' language definitions on input line 3730.
+Package cleveref Info: loaded `italian' language definitions on input line 3738.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3050,9 +3050,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3730.
+Package cleveref Info: loaded `italian' language definitions on input line 3738.
 [121]
-Package cleveref Info: loaded `italian' language definitions on input line 3760.
+Package cleveref Info: loaded `italian' language definitions on input line 3768.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3061,9 +3061,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3760.
+Package cleveref Info: loaded `italian' language definitions on input line 3768.
 [122]
-Package cleveref Info: loaded `italian' language definitions on input line 3798.
+Package cleveref Info: loaded `italian' language definitions on input line 3806.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3072,89 +3072,89 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3798.
+Package cleveref Info: loaded `italian' language definitions on input line 3806.
 [123]
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3803             \Function
+l.3811             \Function
                             {findPathNL}{$G, x, y$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3804                 \If
+l.3812                 \If
                           {$x == y$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3805                     \State
+l.3813                     \State
                                   \textbf{accept}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3806                 \EndIf
+l.3814                 \EndIf
                              
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3807                 \State
+l.3815                 \State
                               $u := x$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3808                 \For
+l.3816                 \For
                            {$\_ \in [1, \abs{V}]$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3809                     \State
+l.3817                     \State
                                   $v \in V$ \Comment{scelto \underline{non d...
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3810                     \If
+l.3818                     \If
                               {$(u, v) \in E$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3811                         \State
+l.3819                         \State
                                       $u := v$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3812                         \If
+l.3820                         \If
                                   {$u == y$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.11}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3813                             \State
+l.3821                             \State
                                           \textbf{accept}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.12}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3814                         \EndIf
+l.3822                         \EndIf
                                      
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3815                     \Else
+l.3823                     \Else
                                 
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3816                         \State
+l.3824                         \State
                                       \textbf{reject} \Comment{si noti il no...
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.15}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3817                     \EndIf
+l.3825                     \EndIf
                                  
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.16}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3818                 \EndFor
+l.3826                 \EndFor
                               
-Package cleveref Info: loaded `italian' language definitions on input line 3831.
+Package cleveref Info: loaded `italian' language definitions on input line 3839.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3163,9 +3163,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3831.
+Package cleveref Info: loaded `italian' language definitions on input line 3839.
 [124]
-Package cleveref Info: loaded `italian' language definitions on input line 3863.
+Package cleveref Info: loaded `italian' language definitions on input line 3871.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3174,9 +3174,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3863.
+Package cleveref Info: loaded `italian' language definitions on input line 3871.
 [125]
-Package cleveref Info: loaded `italian' language definitions on input line 3888.
+Package cleveref Info: loaded `italian' language definitions on input line 3896.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3185,99 +3185,99 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3888.
+Package cleveref Info: loaded `italian' language definitions on input line 3896.
 [126]
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3890                     \Function
+l.3898                     \Function
                                     {checkPath}{$G, s, t, c$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3891                         \For
+l.3899                         \For
                                    {$s \to v \in c_0$} \Comment{$c_0$ contie...
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3892                             \If
+l.3900                             \If
                                       {$v == t$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3893                                 \State
+l.3901                                 \State
                                               \textbf{reject}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3894                             \EndIf
+l.3902                             \EndIf
                                          
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3895                         \EndFor
+l.3903                         \EndFor
                                       
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3896                         \For
+l.3904                         \For
                                    {$i \in [1, \abs{V_G})$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3897                             \For
+l.3905                             \For
                                        {$s \to v' \in c_{i + 1} - c_i$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3898                                 \State
+l.3906                                 \State
                                               $\textrm{isExt} = \ttt{False}$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3899                                 \For
+l.3907                                 \For
                                            {$s \to v \in c_i$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.11}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3900                                     \If
+l.3908                                     \If
                                               {$(v, v') \in E_G$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.12}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3901 ...                                  \State
+l.3909 ...                                  \State
                                                    $\textrm{isExt} = \ttt{Tr...
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3902 ...                                  \State
+l.3910 ...                                  \State
                                                    \textbf{break}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3903                                     \EndIf
+l.3911                                     \EndIf
                                                  
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.15}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3904                                 \EndFor
+l.3912                                 \EndFor
                                               
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.16}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3905                                 \If
+l.3913                                 \If
                                           {$\textrm{isExt} == \ttt{False}$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.17}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3906                                     \State
+l.3914                                     \State
                                                   \textbf{reject}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.18}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3907                                 \EndIf
+l.3915                                 \EndIf
                                              
-Package cleveref Info: loaded `italian' language definitions on input line 3934.
+Package cleveref Info: loaded `italian' language definitions on input line 3942.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3286,9 +3286,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3934.
+Package cleveref Info: loaded `italian' language definitions on input line 3942.
 [127]
-Package cleveref Info: loaded `italian' language definitions on input line 3959.
+Package cleveref Info: loaded `italian' language definitions on input line 3967.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3297,9 +3297,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3959.
+Package cleveref Info: loaded `italian' language definitions on input line 3967.
 [128]
-Package cleveref Info: loaded `italian' language definitions on input line 3988.
+Package cleveref Info: loaded `italian' language definitions on input line 3996.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3308,9 +3308,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 3988.
+Package cleveref Info: loaded `italian' language definitions on input line 3996.
 [129]
-Package cleveref Info: loaded `italian' language definitions on input line 4024.
+Package cleveref Info: loaded `italian' language definitions on input line 4032.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3319,9 +3319,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 4024.
+Package cleveref Info: loaded `italian' language definitions on input line 4032.
 [130]
-Package cleveref Info: loaded `italian' language definitions on input line 4048.
+Package cleveref Info: loaded `italian' language definitions on input line 4056.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3330,9 +3330,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 4048.
+Package cleveref Info: loaded `italian' language definitions on input line 4056.
 [131]
-Package cleveref Info: loaded `italian' language definitions on input line 4073.
+Package cleveref Info: loaded `italian' language definitions on input line 4090.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3341,9 +3341,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 4073.
+Package cleveref Info: loaded `italian' language definitions on input line 4090.
 [132]
-Package cleveref Info: loaded `italian' language definitions on input line 4114.
+Package cleveref Info: loaded `italian' language definitions on input line 4128.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3352,9 +3352,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 4114.
+Package cleveref Info: loaded `italian' language definitions on input line 4128.
 [133]
-Package cleveref Info: loaded `italian' language definitions on input line 4115.
+Package cleveref Info: loaded `italian' language definitions on input line 4129.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3363,7 +3363,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `italian' language definitions on input line 4115.
+Package cleveref Info: loaded `italian' language definitions on input line 4129.
 [134] (./Automi: Calcolabilità e Complessità.aux
 Package cleveref Info: loaded `italian' language definitions on input line 20.
 Package cleveref Info: loaded `italian' language definitions on input line 21.
@@ -3378,19 +3378,19 @@ Package logreq Info: Writing requests to '"Automi: Calcolabilità e Complessità
 
  ) 
 Here is how much of TeX's memory you used:
- 64834 strings out of 477974
- 1483741 string characters out of 5839630
- 2553137 words of memory out of 5000000
- 83476 multiletter control sequences out of 15000+600000
+ 64841 strings out of 477974
+ 1483869 string characters out of 5839630
+ 2553388 words of memory out of 5000000
+ 83482 multiletter control sequences out of 15000+600000
  561322 words of font info for 164 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  119i,16n,125p,1546b,2398s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx0800.pfb></usr/shar
 e/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb>
-Output written on "Automi: Calcolabilità e Complessità.pdf" (138 pages, 1641748 bytes).
+Output written on "Automi: Calcolabilità e Complessità.pdf" (138 pages, 1643663 bytes).
 PDF statistics:
- 2329 PDF objects out of 2487 (max. 8388607)
- 2066 compressed objects within 21 object streams
- 700 named destinations out of 1000 (max. 500000)
+ 2335 PDF objects out of 2487 (max. 8388607)
+ 2072 compressed objects within 21 object streams
+ 701 named destinations out of 1000 (max. 500000)
  954 words of extra memory for PDF output out of 10000 (max. 10000000)
 

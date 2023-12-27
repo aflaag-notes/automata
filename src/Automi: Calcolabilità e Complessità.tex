@@ -2786,7 +2786,7 @@
     \subsection{$O$-grande ed $o$-piccolo}
 
     \begin{frameddefn}{$O$-grande}
-        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-grande} di $g(n)$ se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) \leq c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = O(g(n))$$ Viceversa, $g(n)$ è detto essere \tbf{limite superiore asintotico} per $f(n)$.
+        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-grande di $g(n)$} se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) \leq c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = O(g(n))$$ Viceversa, $g(n)$ è detto essere \tbf{limite superiore asintotico} per $f(n)$.
     \end{frameddefn}
 
     \begin{example}[$O$-grande]
@@ -2795,14 +2795,14 @@
     \end{example}
 
     \begin{frameddefn}{$o$-piccolo}
-        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $o$-piccolo} di $g(n)$ se e solo se $$\lim_{n \to + \infty}{\dfrac{f(n)}{g(n)}} = 0$$ o equivalentemente, se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) < c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = o(g(n))$$
+        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $o$-piccolo di $g(n)$} se e solo se $$\lim_{n \to + \infty}{\dfrac{f(n)}{g(n)}} = 0$$ o equivalentemente, se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) < c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = o(g(n))$$
     \end{frameddefn}
 
     \begin{example}[$o$-piccolo]
         Si consideri l'\cref{big o ex}; poiché sono stati scelti $c = n_0 = 10$, per $n = n_0$ si ottiene che $$f(n_0) = f(10) = 100 \cdot 10^2 = 10000 = 10 \cdot 1000 = 10 \cdot 10^3 = 10 \cdot g(10) = c \cdot g(n_0)$$ Allora, scegliendo $n_0$ tale da essere maggiore di 10 --- dunque ad esempio 11 --- si ha che $$\forall n \ge n_0 = 11 \quad f(n) = 100 n^2 < 10 \cdot n^3 = c \cdot g(n)$$ e dunque $f(n) = o(g(n))$ per definizione.
     \end{example}
 
-    \begin{framedobs}[label={small o big o obs}]{$O$-piccolo ed $o$-grande}
+    \begin{framedobs}[label={small o big o obs}]{$O$-grande ed $o$-piccolo}
         Si noti che, date due funzioni $\func{f,g}{\N}{\R^+}$, per definizione stessa si ha che $$f(n) = o(g(n)) \implies f(n)= O(g(n))$$
     \end{framedobs}
 
@@ -2827,6 +2827,14 @@
 
         Inoltre, una funzione $f(n) = O\rbk{2^{O(n)}}$, per definizione, ha come limite superiore asintotico $2^{O(n)}$, ed è dunque superata asintoticamente da una funzione $c \cdot 2^{O(n)}$ per qualche $c \in \N - \{0\}$; allora, per proprietà delle potenze, si ha che $$c \cdot 2^{O(n)} = 2^{\log_2(c)} \cdot 2^{O(n)} = 2^{\log_2(c) + O(n)} = 2^{O(n)}$$ implicando che $f(n) = O\rbk{2^{O(n)}} = 2^{O(n)}$.
     \end{framedobs}
+
+    \begin{framedprop}[label={o trans}]{Transitività di $o$-piccolo}
+        Siano $\func{f, g, h}{\N}{\R^+}$; allora, si verifica che $$\soe{l}{f(n) = o(g(n)) \\ g(n) = o(h(n))} \implies f(n) = o(h(n))$$
+    \end{framedprop}
+
+    \begin{proof}
+        Per definizione, si ha che $$f(n) = o(g(n)) \iff \displaystyle \lim_{n \to + \infty}{\dfrac{f(n)}{g(n)} = 0}$$ e che $$g(n) = o(h(n)) \iff \displaystyle \lim_{n \to + \infty}{\dfrac{g(n)}{h(n)}} = 0$$ allora, segue che $$\lim_{n \to + \infty}{\dfrac{f(n)}{h(n)}} = \lim_{n \to + \infty}{\dfrac{f(n)}{g(n)} \cdot \dfrac{g(n)}{h(n)}} = 0 \iff f(n) = o(h(n))$$
+    \end{proof}
 
     \section{Complessità di tempo di macchine di Turing}
 
@@ -3437,7 +3445,7 @@
     \end{framedobs}
 
     \begin{frameddefn}[breakable]{Configurazione (\TM per compl. di spazio)}
-        Sia $M = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una macchina di Turing definita come descritto nell'\cref{space model}; con il simbolismo $$u \ q \ v \ttt ; \ i$$ per certi $u, v, \in \Gamma^*, q \in Q, i \in [1, \abs{w}]$ --- dove $w$ è l'input della \TM, posto sull'\tit{input tape} --- si denota una \tbf{configurazione di $M$}, dove:
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una macchina di Turing definita come descritto nell'\cref{space model}; con il simbolismo $$u \ q \ v \ttt ; \ i$$ per certi $u, v, \in \Gamma^*, q \in Q, i \in [1, \abs{w}]$ --- dove $w$ è l'input della \TM, posto sull'\tit{input tape} --- si denota una \tbf{configurazione di $M$}, dove:
 
         \begin{itemize}
             \item $q$ rappresenta lo stato attuale della computazione dell'input $w$;
@@ -3458,7 +3466,7 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Data una \TM multinastro $M$ che computa in $s(n) \ge n$, è possibile realizzare una \TM $M'$ ad essa equivalente utilizzando la costruzione definita all'interno della dimostrazione del \cref{multitape equiv}, e poiché il numero di nastri di $M$ è costante, segue la tesi.
     \end{proof}
 
     \section{Classi di complessità di spazio}
@@ -3482,7 +3490,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $M = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ un decisore definito come descritto nell'\cref{space model}, che computa in spazio $f(n)$; allora, si ha che:
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ un decisore definito come descritto nell'\cref{space model}, che computa in spazio $f(n)$; allora, si ha che:
 
         \begin{itemize}
             \item il numero di stati possibili di una configurazione di $M$ è $\abs{Q}$;
@@ -4006,7 +4014,7 @@
             \item $T$ restituisce $n^2$ sul suo \tit{output tape}.
         \end{itemize}
 
-        Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio $O(n)$ per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è spazio-costruibile.
+        Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è spazio-costruibile.
     \end{example}
 
     \begin{framedthm}[label={hier space thm}]{Teorema di gerarchia di spazio}
@@ -4040,12 +4048,12 @@
         Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c, n_0 \in \N - \{0 \}$ tali per cui $\forall n \ge n_0 \quad g(n) < c \cdot f(n)$. Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L(D) =: L$.
     \end{proof}
 
-    \begin{framedcor}{Teorema di gerarchia di spazio}
+    \begin{framedcor}[label={hier space thm cor}]{Teorema di gerarchia di spazio}
         Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o(f_2(n))$ ed $f_2$ è spazio-costruibile; allora, si verifica che $$\DSPACE(f_1(n)) \subsetneq \DSPACE(f_2(n))$$
     \end{framedcor}
 
     \begin{proof}
-        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o(f_2(n))$ ed $f_2$ è spazio-costruibile; per definizione di $f_1$ ed $f_2$, si ha che $$\DSPACE(f_1(n)) \subset \DSPACE(f_2(n))$$ ed inoltre, per il \cref{hier space thm}, poiché $f_2$ è spazio costruibile esiste un linguaggio $$L \in \DSPACE(f_2(n)) - \DSPACE(o(f_2(n))) = \DSPACE(f_2(n)) - \DSPACE(f_1(n))$$ Allora segue la tesi.
+        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o(f_2(n))$ ed $f_2$ è spazio-costruibile; per definizione di $f_1$ ed $f_2$, si ha che $$\DSPACE(f_1(n)) \subset \DSPACE(f_2(n))$$ ed inoltre, per il \cref{hier space thm}, poiché $f_2$ è spazio costruibile esiste un linguaggio $$L \in \DSPACE(f_2(n)) - \DSPACE(o(f_2(n))) = \DSPACE(f_2(n)) - \DSPACE(f_1(n))$$ dunque segue la tesi.
     \end{proof}
 
     \begin{framedprop}{Relazione tra \NLSPACE e \PSPACE}
@@ -4060,7 +4068,7 @@
             \item $T$ restituisce $n$ sul suo \tit{output tape}.
         \end{itemize}
 
-        Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n)$. Questo dimostra che $f(n) = n$ è spazio-costruibile.
+        Allora, poiché l'operazione che $T$ effettua richiede spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n)$. Questo dimostra che $f(n) = n$ è spazio-costruibile.
 
         Di conseguenza, per il \cref{hier space thm}, si ha che esiste un linguaggio decidibile in $O(n)$ ma non in $o(n)$; in particolare, poiché $\log^2(n) = o(n)$, si ha che \centeredeq{0.9}{$\soe{l}{\DSPACE(n) - \DSPACE(\log^2(n)) \neq \varnothing \\ \DSPACE(\log^2(n)) \subset \DSPACE(n)} \implies \DSPACE(\log^2(n)) \subsetneq \DSPACE(n) =: \PSPACE$} Allora, per il \cref{nl in log sq}, segue che $$\NLSPACE \subseteq \DSPACE(\log^2(n)) \subsetneq \PSPACE \implies \NLSPACE \subsetneq \PSPACE$$
     \end{proof}
@@ -4069,12 +4077,18 @@
         Si verifica che $$\PSPACE \subsetneq \EXPSPACE$$
     \end{framedprop}
 
-    \begin{proof}
-        Si noti che $$\centeredsoe{\displaystyle \lim_{n \to + \infty}{\dfrac{n^k}{n^{\log(n)}}} = \lim_{n \to + \infty}{n^{k - \log(n)}}= 0}$$ e questo dimostra che $$\forall k \in \N \quad n^k = o \rbk{n ^{\log(n)}} \implies \DSPACE(n^k) \subset \DSPACE \rbk{n^{\log(n)}}$$ Inoltre, si noti che $$\displaystyle \lim_{n \to + \infty}{\dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{2^{\log^2(n)}}{2^n}} = 0$$ e questo dimostra che $$\forall k \in \N \quad n^{\log(n)} = o \rbk{n^{\log(n)}} \implies \DSPACE \rbk{n^{\log(n)}} \subset \DSPACE \rbk{2^n} \subset \DSPACE\rbk{2^{n^k}}$$
+    \begin{proof} 
+        Si consideri la funzione $f(n) = 2^n$, la quale è almeno $O(\log(n))$; inoltre, sia $T$ un trasduttore che, data in input la stringa $\ttt 1^n$, computa come segue:
 
-        Inoltre, per transitività dell'$o$-piccolo, si ha che $$\forall k \in n^k \quad n^k = o \rbk{n^{\log(n)}} = o \rbk{2^n}$$ TODO DA FINIRE
+        \begin{itemize}
+            \item $T$ conta il numero di \ttt 1 presenti sull'\tit{input tape};
+            \item $T$ calcola $2^n$;
+            \item $T$ restituisce $2^n$ sul suo \tit{output tape}.
+        \end{itemize}
 
-        Allora, segue che $$\forall k \in \N \quad \DSPACE \rbk{n^k} \subset \DSPACE \rbk{2^{n^k}}$$ e dunque $$\PSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}} \subset \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}} =: \EXPSPACE$$
+        Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{2^n}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente in $O \rbk{2^n}$. Questo dimostra che $f(n) = 2^n$ è spazio-costruibile.
+
+        Si noti che $$\forall k \in \N \quad \displaystyle \lim_{n \to + \infty}{\dfrac{n^k}{n^{\log(n)}}} = \lim_{n \to + \infty}{n^{k - \log(n)}}= 0 \implies \forall k \in \N \quad n^k = o \rbk{n ^{\log(n)}}$$ ed inoltre, si noti che $$\displaystyle \lim_{n \to + \infty}{\dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{2^{\log^2(n)}}{2^n}} = 0 \implies n^{\log(n)} = o \rbk{2^n}$$ allora, per la \cref{o trans}, si ha che $$\forall k \in n^k \quad n^k =  o \rbk{2^n}$$ e poiché $2^n$ è spazio-costruibile per quanto detto in precedenza, per il \cref{hier space thm cor}, segue che $$\forall k \in \N \quad \DSPACE \rbk{n^k} \subsetneq \DSPACE \rbk{2^n} \subsetneq \DSPACE \rbk{2^{n^k}}$$ implicando che $$\PSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}} \subsetneq \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}} =: \EXPSPACE$$
     \end{proof}
 
     \subsection{Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}
