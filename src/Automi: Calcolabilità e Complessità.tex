@@ -2795,7 +2795,7 @@
     \end{example}
 
     \begin{frameddefn}{$o$-piccolo}
-        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-piccolo} di $g(n)$ se e solo se $$\lim_{n \to + \infty}{\dfrac{f(n)}{g(n)}} = 0$$ o equivalentemente, se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) < c \cdot g(n)$$
+        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $o$-piccolo} di $g(n)$ se e solo se $$\lim_{n \to + \infty}{\dfrac{f(n)}{g(n)}} = 0$$ o equivalentemente, se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) < c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = o(g(n))$$
     \end{frameddefn}
 
     \begin{example}[$o$-piccolo]
@@ -3482,7 +3482,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $M$ un decisore definito come descritto nell'\cref{space model}, che computa in spazio $f(n)$; allora, si ha che:
+        Sia $M = (Q, \Sigma, \Gamma, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ un decisore definito come descritto nell'\cref{space model}, che computa in spazio $f(n)$; allora, si ha che:
 
         \begin{itemize}
             \item il numero di stati possibili di una configurazione di $M$ è $\abs{Q}$;
@@ -3564,7 +3564,7 @@
     \end{framedlem}
 
     \begin{proof}
-        Siano $A$ e $B$ due linguaggi definiti su uno stesso alfabeto, tali che $A \leq_\mathrm L B$, e dunque per definizione esiste una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ calcolabile in spazio logaritmico; allora, per definizione di $f$, esiste un trasduttore di spazio logaritmico $T$ che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo \tit{output tape}. Si noti che $T$ computa in spazio logaritmico, e dunque poiché $\LSPACE \subseteq \Pclass$ per il \cref{l in p}, si ha che $T$ è anche una macchina di Turing di tempo polinomiale tale per cui $f$ risulta dunque essere una funzione polinomialmente calcolabile; di conseguenza, $f$ è tale che $A \leq_\mathrm P B$ per definizione di riduzione polinomiale mediante funzione.
+        Siano $A$ e $B$ due linguaggi definiti su uno stesso alfabeto, tali che $A \leq_\mathrm L B$, e dunque per definizione esiste una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ calcolabile in spazio logaritmico; allora, per definizione di $f$, esiste un trasduttore di spazio logaritmico $T$ che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo \tit{output tape}. Si noti che $T$ computa in spazio logaritmico, e dunque poiché $\LSPACE \subseteq \Pclass$ per il \cref{l in p}, esiste una macchina di Turing $T'$ di tempo polinomiale equivalente a $T$, che di conseguenza è tale per cui $f$ risulta dunque essere anche polinomialmente calcolabile; in conclusione, $f$ è tale che $A \leq_\mathrm P B$ per definizione di riduzione polinomiale mediante funzione.
     \end{proof}
 
     \begin{framedthm}[label={l w red}]{\LSPACE mediante riduzione}
@@ -3625,8 +3625,13 @@
                 \end{itemize}
             \item effettuare prodotti tra 2 numeri:
                 \begin{itemize}
-                    \item la logica è analoga alla somma, pertanto verrà omessa;
-                    \item lo spazio richiesto al prodotto è dunque lo spazio richiesto per rappresentare $a \cdot b$, ovvero $O(\log(a \cdot b) = O(\log(a) + \log(b)) = O(\max(\log(a), \log(b)))$
+                    \item la logica è analoga alla somma (sono necessari 4 nastri), pertanto verrà omessa;
+                    \item lo spazio richiesto dal prodotto è dunque lo spazio richiesto per rappresentare $a \cdot b$, ovvero $O(\log(a \cdot b)) = O(\log(a) + \log(b)) = O(\max(\log(a), \log(b)))$
+                \end{itemize}
+            \item effettuare potenze tra 2 numeri:
+                \begin{itemize}
+                    \item la logica è analoga al prodotto (sono necessari 5 nastri), pertanto verrà omessa;
+                    \item lo spazio richiesto dalla potenza è dunque lo spazio richiesto per rappresentare $a^b$, ovvero $O(\log(a^b)) = O(b \cdot \log(a)) = O(\log(a))$
                 \end{itemize}
         \end{itemize}
     \end{framedprop}
@@ -4004,7 +4009,7 @@
         Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio $O(n)$ per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è spazio-costruibile.
     \end{example}
 
-    \begin{framedthm}{Teorema di gerarchia di spazio}
+    \begin{framedthm}[label={hier space thm}]{Teorema di gerarchia di spazio}
         Sia $\func{f}{\N}{\N}$ una funzione spazio-costruibile; allora, esiste un linguaggio $L$ decidibile in spazio $O(f(n))$ ma non in spazio $o(f(n))$.
     \end{framedthm}
 
@@ -4025,26 +4030,52 @@
         \begin{itemize}
             \item per come $D$ computa, la sua esecuzione non può eccedere l'uso dell'$f(n)$-esima cella del suo \tit{working tape};
             \item poiché $O \rbk{\log \rbk{2^{f(n)}}} = O(f(n))$, il contatore di passi di $M(w)$ ha costo di spazio $O(f(n))$.
-            \item siano $\Gamma_D$ e $\Gamma_M$ rispettivamente gli alfabeti di nastro di $D$ ed $M$; poiché $D$ ha un alfabeto di nastro fissato, TODO DA FINIRE
+            \item siano $\Gamma_D$ e $\Gamma_M$ rispettivamente gli alfabeti di nastro di $D$ ed $M$; si noti che, nel caso in cui $\Gamma_M - \Gamma_D \neq \varnothing$, $D$ può rappresentare i simboli di $M$ introducendo un fattore costante nel suo costo di spazio, poiché $\Gamma_D$ è fissato.
         \end{itemize}
 
         Questo dimostra che $D$ è un decisore di spazio $O(f(n))$, e sia $L := L(D)$.
 
-        Per giustificare la scelta della codifica di $w = \abk{M} \ttt 1 \ttt 0 ^n$ in input a $D$, si ipotizzi che $M$ computi in spazio $o(f(n))$ (dunque utilizzi meno di $f(n)$ celle); per definizione di $o(f(n))$, l'uso di spazio di $M$ potrebbe essere superiore ad $f(n)$ per valori piccoli di $n$, quando il comportamento asintotico non è ancora stato raggiunto. Di conseguenza, potrebbe verificarsi che $D$ non abbia abbastanza spazio per eseguire $M$ fino al completamento, dunque rifiutando prematuramente, rischiando inoltre di decidere lo stesso lingauggio che decide $M$, condizione per cui il teorema non risulterebbe più verificato. Allora, per garantire che $D$ decida il complemento del linguaggio riconosciuto da $M$, viene inserita una stringa $\ttt 1 \ttt 0^*$ al termine della codifica $\abk{M}$ nell'input di $D$, di modo che quando $M$ computa realmente in $o(f(n))$, $D$ TODO DA FINIRE NON HO CAPITO CHE C'ENTRA STA COSA
+        Per giustificare la scelta della codifica di $w = \abk{M} \ttt 1 \ttt 0 ^*$ in input a $D$, si ipotizzi che $M$ computi in spazio $o(f(n))$ (dunque utilizzi meno di $f(n)$ celle); per definizione di $o(f(n))$, l'uso di spazio di $M$ potrebbe essere superiore ad $f(n)$ per valori piccoli di $n$, quando il comportamento asintotico non è ancora stato raggiunto. Di conseguenza, potrebbe verificarsi che $D$ non abbia abbastanza spazio per eseguire $M$ fino al completamento, dunque rifiutando prematuramente, rischiando inoltre di decidere lo stesso lingauggio che decide $M$, condizione per cui il teorema non risulterebbe più verificato. Allora, per garantire che $D$ decida il complemento del linguaggio riconosciuto da $M$, è necessario assicurarsi che $M$ computi sempre in $o(f(n))$, e dunque viene inserita una stringa $\ttt 1 \ttt 0^k$ al termine della codifica $\abk{M}$ nell'input di $D$, con un numero $k$ di \ttt 0 tale che $w = \abk{M} \ttt 1 \ttt 0 ^k$ permetta di raggiungere la soglia tale per cui $M$ computa realmente in $o(f(n))$ --- si noti che $D$ simula $M\rbk{\abk{M} \ttt 1 \ttt 0^k}$.
 
-        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c, n_0 \in \N - \{0 \}$ tali per cui $\forall n \ge n_0 \quad g(n) < c \cdot f(n)$. Si assuma inoltre che la codifica di $M_L$ è tale che 
-
+        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c, n_0 \in \N - \{0 \}$ tali per cui $\forall n \ge n_0 \quad g(n) < c \cdot f(n)$. Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L(D) =: L$.
     \end{proof}
 
-    \begin{framedcor}{TODO INVENTA NOME}
+    \begin{framedcor}{Teorema di gerarchia di spazio}
         Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o(f_2(n))$ ed $f_2$ è spazio-costruibile; allora, si verifica che $$\DSPACE(f_1(n)) \subsetneq \DSPACE(f_2(n))$$
     \end{framedcor}
 
     \begin{proof}
-        TODO
+        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o(f_2(n))$ ed $f_2$ è spazio-costruibile; per definizione di $f_1$ ed $f_2$, si ha che $$\DSPACE(f_1(n)) \subset \DSPACE(f_2(n))$$ ed inoltre, per il \cref{hier space thm}, poiché $f_2$ è spazio costruibile esiste un linguaggio $$L \in \DSPACE(f_2(n)) - \DSPACE(o(f_2(n))) = \DSPACE(f_2(n)) - \DSPACE(f_1(n))$$ Allora segue la tesi.
     \end{proof}
 
-    TODO MANCANO DUCENTO TEOREMI
+    \begin{framedprop}{Relazione tra \NLSPACE e \PSPACE}
+        Si verifica che $$\NLSPACE \subsetneq \PSPACE$$
+    \end{framedprop}
+
+    \begin{proof}
+        Si consideri la funzione $f(n) = n$, la quale è almeno $O(\log(n))$; inoltre, sia $T$ un trasduttore che, data in input la stringa $\ttt 1^n$, computa come segue:
+
+        \begin{itemize}
+            \item $T$ conta il numero di \ttt 1 presenti sull'\tit{input tape};
+            \item $T$ restituisce $n$ sul suo \tit{output tape}.
+        \end{itemize}
+
+        Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n)$. Questo dimostra che $f(n) = n$ è spazio-costruibile.
+
+        Di conseguenza, per il \cref{hier space thm}, si ha che esiste un linguaggio decidibile in $O(n)$ ma non in $o(n)$; in particolare, poiché $\log^2(n) = o(n)$, si ha che \centeredeq{0.9}{$\soe{l}{\DSPACE(n) - \DSPACE(\log^2(n)) \neq \varnothing \\ \DSPACE(\log^2(n)) \subset \DSPACE(n)} \implies \DSPACE(\log^2(n)) \subsetneq \DSPACE(n) =: \PSPACE$} Allora, per il \cref{nl in log sq}, segue che $$\NLSPACE \subseteq \DSPACE(\log^2(n)) \subsetneq \PSPACE \implies \NLSPACE \subsetneq \PSPACE$$
+    \end{proof}
+
+    \begin{framedprop}{Relazione tra \PSPACE e \EXPSPACE}
+        Si verifica che $$\PSPACE \subsetneq \EXPSPACE$$
+    \end{framedprop}
+
+    \begin{proof}
+        Si noti che $$\centeredsoe{\displaystyle \lim_{n \to + \infty}{\dfrac{n^k}{n^{\log(n)}}} = \lim_{n \to + \infty}{n^{k - \log(n)}}= 0}$$ e questo dimostra che $$\forall k \in \N \quad n^k = o \rbk{n ^{\log(n)}} \implies \DSPACE(n^k) \subset \DSPACE \rbk{n^{\log(n)}}$$ Inoltre, si noti che $$\displaystyle \lim_{n \to + \infty}{\dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{2^{\log^2(n)}}{2^n}} = 0$$ e questo dimostra che $$\forall k \in \N \quad n^{\log(n)} = o \rbk{n^{\log(n)}} \implies \DSPACE \rbk{n^{\log(n)}} \subset \DSPACE \rbk{2^n} \subset \DSPACE\rbk{2^{n^k}}$$
+
+        Inoltre, per transitività dell'$o$-piccolo, si ha che $$\forall k \in n^k \quad n^k = o \rbk{n^{\log(n)}} = o \rbk{2^n}$$ TODO DA FINIRE
+
+        Allora, segue che $$\forall k \in \N \quad \DSPACE \rbk{n^k} \subset \DSPACE \rbk{2^{n^k}}$$ e dunque $$\PSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}} \subset \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}} =: \EXPSPACE$$
+    \end{proof}
 
     \subsection{Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}
 
@@ -4056,7 +4087,7 @@
         TODO
     \end{proof}
 
-    \begin{framedobs}[breakable]{Gerarchia delle classi}
+    \begin{framedobs}{Gerarchia delle classi}
         TODO NOMINA I TEOREMI USATI
 
         \begin{center}

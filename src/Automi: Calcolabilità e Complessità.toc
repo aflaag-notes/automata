@@ -113,4 +113,4 @@
 \contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NEXPSPACE}\xspace }{129}{subsection.6.2.10}%
 \contentsline {section}{\numberline {6.3}Teoremi di gerarchia}{130}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}Teorema di gerarchia di spazio}{130}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}{132}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.2}Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}{133}{subsection.6.3.2}%
