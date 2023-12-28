@@ -3734,7 +3734,7 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={savitch}]{Teorema di Savitch}
-        Si verifica che $$\NSPACE(f(n)) \subseteq \DSPACE(f^2(n))$$
+        Si verifica che $$f(n) \geq \log(n) \implies \NSPACE(f(n)) \subseteq \DSPACE(f^2(n))$$
     \end{framedthm}
 
     \begin{proof}
@@ -3745,12 +3745,11 @@
         Sia allora $M$ una macchina di Turing definita come descritto nell'\cref{space model} che, data in input una stringa $w$, computa come segue:
 
         \begin{itemize}
-            \item $M$ esegue $\ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{2^{O(f(n))}}}$;
+            \item $M$ esegue $\ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}}$;
             \item $M$ accetta se e solo se l'istruzione precedente restituisce \ttt{True}.
         \end{itemize}
 
-        Si noti che, poiché $\ttt{findPathGraph}(G, x, y, k)$ restituisce \ttt{True} se e solo se in $G$ è presente un cammino $x \to y$ lungo al massimo $2^k$, e poiché ogni cammino in un grafo ha lunghezza $O(\abs{V})$, $M$ pone $k = \ceil{2^{O(f(n))}}$ poiché TODO DA FINIRE
-        Allora, per costruzione di $M$, si ha che $$w \in L(M) \iff \ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{2^{O(f(n))}}} = \ttt{True} \iff w \in L(N)$$ per costruzione di $G_{N, w}$, dunque $N$ ed $M$ sono equivalenti. Inoltre, per ragionamento analogo alla \cref{path in log sq}, si ha che il costo di spazio di $M$ è pari a TODO DA FINIRE
+        Allora, per costruzione di $M$, si ha che $$w \in L(M) \iff \ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}} = \ttt{True} \iff w \in L(N)$$ per costruzione di $G_{N, w}$, dunque $N$ ed $M$ sono equivalenti. Infine, si noti che, per ragionamento analogo a quello proposto nella dimostrazione del \cref{dspace in dtime}, poiché il numero massimo di configurazioni possibili di $N$ è $n \cdot 2^{O(f(n))} = 2^{O(f(n))}$ (poiché $f(n) \geq \log(n)$ in ipotesi), questo è anche il numero di nodi massimo che $G_{N, w}$ può avere, e dunque $\abs{V} = 2^{O(f(n))}$. Allora, segue che il costo di spazio di $M$ è pari a $$O \rbk{\ceil {\log^2 \rbk{2^{O(f(n))}}}} = O(f^2(n))$$ il che dimostra la tesi.
     \end{proof}
 
     \subsection{Classe \NLSPACE}
@@ -4058,7 +4057,7 @@
 
         Per giustificare la scelta della codifica di $w = \abk{M} \ttt 1 \ttt 0 ^*$ in input a $D$, si ipotizzi che $M$ computi in spazio $o(f(n))$ (dunque utilizzi meno di $f(n)$ celle); per definizione di $o(f(n))$, l'uso di spazio di $M$ potrebbe essere superiore ad $f(n)$ per valori piccoli di $n$, quando il comportamento asintotico non è ancora stato raggiunto. Di conseguenza, potrebbe verificarsi che $D$ non abbia abbastanza spazio per eseguire $M$ fino al completamento, dunque rifiutando prematuramente, rischiando inoltre di decidere lo stesso lingauggio che decide $M$, condizione per cui il teorema non risulterebbe più verificato. Allora, per garantire che $D$ decida il complemento del linguaggio riconosciuto da $M$, è necessario assicurarsi che $M$ computi sempre in $o(f(n))$, e dunque viene inserita una stringa $\ttt 1 \ttt 0^k$ al termine della codifica $\abk{M}$ nell'input di $D$, con un numero $k$ di \ttt 0 tale che $w = \abk{M} \ttt 1 \ttt 0 ^k$ permetta di raggiungere la soglia tale per cui $M$ computa realmente in $o(f(n))$ --- si noti che $D$ simula $M\rbk{\abk{M} \ttt 1 \ttt 0^k}$.
 
-        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c, n_0 \in \N - \{0 \}$ tali per cui $\forall n \ge n_0 \quad g(n) < c \cdot f(n)$. Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L(D) =: L$.
+        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c, n_0 \in \N - \{0 \}$ tali per cui $\forall n \ge n_0 \quad g(n) < c \cdot f(n)$. Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L := L(D)$ $\lightning$.
     \end{proof}
 
     \begin{framedcor}[label={hier space thm cor}]{Teorema di gerarchia di spazio}
