@@ -1585,7 +1585,7 @@
         \begin{enumerate}[label=]
             \item \tit{Prima implicazione.} La dimostrazione procede per induzione sul numero di passaggi nella derivazione di $w$, a partire da $A_{p,q}$, attraverso le regole in $R$.
                 \begin{enumerate}[label=]
-                    \item \tit{Caso base.} Se la derivazione è composta solamente da 1 passaggio, allora è stata utilizzata una regola della forma $A_{p,q} \to u_1 \ldots u_k$ dove $u_1, \ldots u_k \in \Sigma^*$, dunque esclusivamente terminali. Si noti però che le uniche regole della grammatica che vedono solamente terminali sulla loro destra sono le regole del primo insieme di definizione di $R$, ovvero forma $A_{p,p} \to \varepsilon$ dunque, se $P'$ si trova nello stato $p$, avendo lo stack vuoto, sicuramente $\varepsilon$ è in grado di portare $P'$ in $p$ stesso, mantentendo vuoto lo stack.
+                    \item \tit{Caso base.} Se la derivazione è composta solamente da 1 passaggio, allora è stata utilizzata una regola della forma $A_{p,q} \to u_1 \ldots u_k$ dove $u_1, \ldots u_k \in \Sigma^*$, dunque esclusivamente terminali. Si noti però che le uniche regole della grammatica che vedono solamente terminali sulla loro destra sono le regole del primo insieme di definizione di $R$, ovvero forma $A_{p,p} \to \varepsilon$ dunque, se $P'$ si trova nello stato $p$, avendo lo stack vuoto, sicuramente $\varepsilon$ è in grado di portare $P'$ in $p$ stesso, mantenendo vuoto lo stack.
                     \item \tit{Ipotesi induttiva forte.} Dati due stati $p, q \in Q'$, se $A_{p,q}$ è in grado di derivare una stringa $w$, applicando al più $k$ passaggi (con $k \ge 1$) allora $w$ porta $P'$ dallo stato $p$ --- avendo lo stack vuoto --- allo stato $q$ --- avendo ancora lo stack vuoto.
                     \item \tit{Passo induttivo.} È necessario dimostare che l'ipotesi induttiva sia ancora verificata per derivazioni costituite da $k + 1$ passaggi. Si consideri dunque una stringa $w$ tale che $A_{p,q} \derives w$ con $k + 1$ passaggi; per costruzione di $R$, il primo passaggio può essere $A_{p,q} \yields aA_{r,s}b \derives x$ per certi stati $r, s \in Q'$ e terminali $a, b \in \Sigma_\varepsilon$, oppure $A_{p,q} \yields A_{p,r} A_{r,q} \derives x$ per un qualche stato $r \in Q'$, e dunque:
 
@@ -3639,7 +3639,7 @@
             \item effettuare potenze tra 2 numeri:
                 \begin{itemize}
                     \item la logica è analoga al prodotto (sono necessari 5 nastri), pertanto verrà omessa;
-                    \item lo spazio richiesto dalla potenza è dunque lo spazio richiesto per rappresentare $a^b$, ovvero $O(\log(a^b)) = O(b \cdot \log(a)) = O(\log(a))$
+                    \item lo spazio richiesto dalla potenza è dunque lo spazio richiesto per rappresentare $a^b$, ovvero $O \rbk{\log \rbk{a^b}} = O \rbk{b \cdot \log(a)}$
                 \end{itemize}
         \end{itemize}
     \end{framedprop}
@@ -3653,10 +3653,13 @@
 
         \begin{itemize}
             \item $M$ determina $n := \abs{w}$ attraverso un contatore;
-            \item per ogni $i \in [1, n]$, se $w_i \neq w_{n - i + 1}$, $M$ rifiuta; dato $i$, per calcolare $n - i + 1$ $M$ computa come segue:
+            \item per ogni $i \in [1, n]$, se $w_i \neq w_{n - i + 1}$, $M$ rifiuta; si noti che, dato $i$, $M$ può computare $n - i + 1$ come segue:
 
                 \begin{itemize}
-                    \item TODO
+                    \item $M$ scrive $n$ su un primo nastro;
+                    \item $M$ scrive $i$ su un secondo nastro;
+                    \item $M$ calcola $n - i$ sul primo nastro, portando il secondo a 0 (come descritto nella \cref{log space ops});
+                    \item $M$ incrementa il primo nastro di 1;
                 \end{itemize}
             \item se $M$ ha raggiunto la fine dell'input, accetta.
         \end{itemize}
@@ -3664,7 +3667,7 @@
         Dunque, per la \cref{log space ops}, $M$ richiede spazio logaritmico, e poiché per costruzione decide $PALINDROMES$, segue la tesi.
     \end{proof}
 
-    \begin{framedthm}{$PATH$ in $\DSPACE(\log^2(n))$}
+    \begin{framedthm}[label={path in log sq}]{$PATH$ in $\DSPACE(\log^2(n))$}
         Si verifica che $$PATH \in \DSPACE(\log^2(n))$$
     \end{framedthm}
 
@@ -3735,9 +3738,19 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C, C') \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C$ alla configurazione $C'$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita --- in particolare, non è nota a priori come è definita la configurazione accettante, poiché generalmente dipende da come computa la macchina di Turing presa in considerazione --- viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e dunque si assume che, al termine della computazione, $N$ pulisca il \tit{working tape} e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
+        Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C, C') \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C$ alla configurazione $C'$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita --- in particolare, non è nota a priori come è definita la configurazione accettante, poiché generalmente dipende da come computa la macchina di Turing presa in considerazione --- viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e dunque si assume che, al termine della computazione, $N$ pulisca il \tit{working tape} e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione di $G_{N,w}$, $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
 
-        TODO DA FINIRE
+        Si consideri la procedura \ttt{findPath} definita all'interno della dimostrazione del \cref{path in log sq}; è possibile modificarla affinché il grafo $G_{N, w}$ descritto venga costruito durante la ricorsione stessa, preservando lo stesso costo di spazio, in quanto tale modifica richiede di salvare solamente qualche altra variabile d'appoggio, preservando dunque il costo di spazio $O(\log^2(n))$; sia \ttt{findPathGraph} tale versione modificata di \ttt{findPath}.
+
+        Sia allora $M$ una macchina di Turing definita come descritto nell'\cref{space model} che, data in input una stringa $w$, computa come segue:
+
+        \begin{itemize}
+            \item $M$ esegue $\ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{2^{O(f(n))}}}$;
+            \item $M$ accetta se e solo se l'istruzione precedente restituisce \ttt{True}.
+        \end{itemize}
+
+        Si noti che, poiché $\ttt{findPathGraph}(G, x, y, k)$ restituisce \ttt{True} se e solo se in $G$ è presente un cammino $x \to y$ lungo al massimo $2^k$, e poiché ogni cammino in un grafo ha lunghezza $O(\abs{V})$, $M$ pone $k = \ceil{2^{O(f(n))}}$ poiché TODO DA FINIRE
+        Allora, per costruzione di $M$, si ha che $$w \in L(M) \iff \ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{2^{O(f(n))}}} = \ttt{True} \iff w \in L(N)$$ per costruzione di $G_{N, w}$, dunque $N$ ed $M$ sono equivalenti. Inoltre, per ragionamento analogo alla \cref{path in log sq}, si ha che il costo di spazio di $M$ è pari a TODO DA FINIRE
     \end{proof}
 
     \subsection{Classe \NLSPACE}
@@ -3943,7 +3956,7 @@
 
                     Il ciclo della riga 8 controlla che ogni $s \to v' \in c_{l + 1} - c_l$ rappresenti realmente un camnino che parte da $s$ e raggiunge un certo $v' \in V$, e poiché i cammini $s \to v \in c_l$ rappresentano cammini della forma $s \to v$ per ipotesi induttiva, il ciclo 8 di fatto controlla che $c_{l + 1}$ sia un'estensione di $c_l$; si noti inoltre che è possibile considerare solo gli ultimi $\abs{c_{l +1} - c_l}$ elementi, poiché i primi $r_l := \abs{R_l} = \abs{c_l}$ combacieranno avendo assunto che gli elementi in ogni $c_i$ siano ordinati lessicograficamente (si assume che sia sempre possibile etichettare i vertici di $G$, in modo che ogni $c_{i +1 }$ sia un estensione di $c_i$, e che ogni $c_i$ sia ordinato lessicograficamente). Questo dimostra la prima parte della tesi.
 
-                    Infine, per definizione stessa, si ha che $$\forall h \in [0, \abs{V_G}) \quad R_h \subseteq R_{h + 1}$$ dunque segue che $$t \notin R_l \implies \forall h \in [0, l] \quad t \notin R_h$$ di conseguenza, per controllare che $t \notin R_{l + 1}$ è sufficiente verificare che i soli elementi $s \to v' \in c_{l + 1} - c_l$ non abbiano $v' = t$, poiché $t \notin R_l$ per ipotesi induttiva. Questo dimostra la seconda parte della tesi
+                    Infine, per definizione stessa, si ha che $$\forall h \in [0, \abs{V_G}) \quad R_h \subseteq R_{h + 1}$$ dunque segue che $$t \notin R_l \implies \forall h \in [0, l] \quad t \notin R_h$$ di conseguenza, per controllare che $t \notin R_{l + 1}$ è sufficiente verificare che i soli elementi $s \to v' \in c_{l + 1} - c_l$ non abbiano $v' = t$, poiché $t \notin R_l$ per ipotesi induttiva. Questo dimostra la seconda parte della tesi.
             \end{enumerate}
 
             Dunque, questo dimostra in particolare che \ttt{checkPath} è in grado di stabilire correttamente se $t \in R_{\abs{V_G}}$; allora, attraverso tale procedura, $V$ stabilisce correttamente se $t$ sia raggiungibile o meno da $s$. Di conseguenza, se non esistono cammini $s \to t \in G$, esiste una $c \in \Sigma ^*$ tale che $\abk{\abk{G, s, t}, c} \in L(V)$, e se esiste un cammino $s \to t$ allora \ttt{checkPath} è in grado di stabilire che $t \in R_{\abs{V_G}}$ correttamente, e dunque $V$ rifiuta. Questo dimostra che $V$ è un verificatore per $\overline{PATH}$.
@@ -4093,8 +4106,25 @@
 
     \subsection{Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}
 
+    \begin{frameddefn}{Funzione tempo-costruibile}
+        Una funzione $\func{f}{\N}{\N}$ è detta essere \tbf{tempo-costruibile} se $f(n)$ è almeno $O(n \log(n))$, e se la funzione che mappa $\ttt 1 ^n$ nella rappresentazione binaria di $f(n)$ è computabile in tempo $O(f(n))$.
+
+        Funzioni a valori non interi vengono arrotondate all'intero successivo più piccolo al fine di renderle tempo-costruibili.
+    \end{frameddefn}
+
+    \begin{example}[Funzioni tempo-costruibili]
+        Si consideri la funzione $f(n) = n^2$, la quale è almeno $O(n \log(n))$; inoltre, sia $M$ una \TM che, data in input la stringa $\ttt 1 ^n$, computa come segue:
+
+        \begin{itemize}
+            \item $M$ conta il numero di \ttt 1 presenti sul suo nastro;
+            \item $M$ restituisce $n \cdot n = n^2$ sul suo nastro.
+        \end{itemize}
+
+        Allora, poiché entrambe le operazioni che $M$ effettua richiedono tempo $O(n)$, e poiché $M$ termina avendo $n^2$ sul suo nastro, essa è una \TM tale che la funzione $\func{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$ sia computabile in tempo $O(n)$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è tempo-costruibile.
+    \end{example}
+
     \begin{framedthm}{Teorema di gerarchia di tempo}
-        TODO
+        Sia $\func{f}{\N}{\N}$ una funzione tempo-costruibile; allora, esiste un linguaggio $L$ decidibile in tempo $O(f(n))$ ma non in tempo $o\rbk{\dfrac{f(n)}{\log(f(n))}}$.
     \end{framedthm}
 
     \begin{proof}

@@ -106,11 +106,11 @@
 \contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{121}{subsection.6.2.3}%
 \contentsline {subsection}{\numberline {6.2.4}Classe \textsf {EXPSPACE}\xspace }{121}{subsection.6.2.4}%
 \contentsline {subsection}{\numberline {6.2.5}Classe \textsf {NSPACE}\xspace }{121}{subsection.6.2.5}%
-\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL}\xspace }{122}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{123}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {coNL}\xspace }{125}{subsection.6.2.8}%
-\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NPSPACE}\xspace }{129}{subsection.6.2.9}%
-\contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NEXPSPACE}\xspace }{129}{subsection.6.2.10}%
-\contentsline {section}{\numberline {6.3}Teoremi di gerarchia}{130}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Teorema di gerarchia di spazio}{130}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}{133}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {NL}\xspace }{123}{subsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {NL-Complete}\xspace }{124}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {coNL}\xspace }{126}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NPSPACE}\xspace }{130}{subsection.6.2.9}%
+\contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NEXPSPACE}\xspace }{130}{subsection.6.2.10}%
+\contentsline {section}{\numberline {6.3}Teoremi di gerarchia}{131}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Teorema di gerarchia di spazio}{131}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}{134}{subsection.6.3.2}%

@@ -13,9 +13,6 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - PARLA DEGLI ALBERI
     - TUTTE LE VOLTE CHE HAI SCRITTO L = {0^n 1^n} CONTROLLA CHE IN n lo 0 è incluso o no
 
-- sposta teorema cook levin
-
-- fine appunti del 21/12
 - esercizi del 22/12
 
 - insiemini carini
