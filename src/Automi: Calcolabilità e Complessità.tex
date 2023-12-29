@@ -237,8 +237,8 @@
         Sia $M$ un automa; allora il \tbf{linguaggio di $M$} è un insieme, indicato con $L(M)$, contenente tutte le stringhe accettate da $M$; simmetricamente, si dice che $M$ \textbf{riconosce} $L(M)$.
     \end{frameddefn}
 
-    \begin{example}[Linguaggio di un automa]
-        Si consideri il seguente automa $M_1$:
+    \begin{example}[Linguaggi di \DFA]
+        Si consideri il seguente \DFA $M_1$:
 
         \begin{figure}[H]
             \centering
@@ -253,7 +253,7 @@
                     (2) edge [loop above] node {\ttt 1} (2)
                  ;
              \end{tikzpicture}
-             \caption{Un automa $M_1$.}
+             \caption{Un \DFA $M_1$.}
         \end{figure}
 
         sapendo che $\Sigma = \{\ttt 0, \ttt 1\}$, che $q_1$ è lo stato iniziale, e che $F = \{q_2\}$, è facilmente verificabile che $$L(M_1) = \{w \mid w = w_1  \cdots w_{n - 1} \ttt{1}, n \in \mathbb{N}\}$$ ovvero, $M_1$ accetta tutte e sole le stringhe che terminano per \ttt 1.
@@ -401,6 +401,8 @@
         Allora $M$ è in grado di riconoscere $A$ per costruzione, poiché il \DFA costruito emula l'\NFA di partenza, tenendo anche in considerazione gli $\varepsilon$-archi. Dunque, sia $N$ che $M$ riconoscono $A$, e per definizione sono di conseguenza equivalenti.
     }
     
+    \section{Operazioni regolari}
+
     \subsection{Unione}
     
     \begin{frameddefn}{Unione}
@@ -614,20 +616,20 @@
         Data un'espressione regolare $R$, con $L(R)$ si intende il linguaggio che $R$ descrive, ovvero l'insieme di stringhe che $R$ rappresenta. Dunque, sono vere le seguenti:
 
         \begin{itemize}
-            \item $L(\emptyset) = \emptyset$
+            \item $L(\emptyset) = \varnothing$
             \item $L(\varepsilon) = \{ \varepsilon \}$
             \item $\forall a \in \Sigma \quad L(a) = \{ a\}$
         \end{itemize}
     \end{frameddefn}
 
     \begin{frameddefn}{Unione}
-        Siano $R_1$ ed $R_2$ due espressioni regolari su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione} di $R_1$ ed $R_2$ la seguente espressione regolare: $$(R_1 \cup R_2)$$ e rappresenta uno qualsiasi dei caratteri di $R_1$ o di $R_2$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1, R_2 \in \mathrm{re}(\Sigma) : R = R_1 \cup R_2 \quad L(R) = L(R_1) \cup L(R_2)$$
+        Siano $R_1$ ed $R_2$ due espressioni regolari su un alfabeto $\Sigma$; allora, si definisce l'\tbf{unione di $R_1$ ed $R_2$} la seguente espressione regolare: $$(R_1 \cup R_2)$$ e rappresenta uno qualsiasi dei caratteri di $R_1$ o di $R_2$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1, R_2 \in \mathrm{re}(\Sigma) : R = R_1 \cup R_2 \quad L(R) = L(R_1) \cup L(R_2)$$
 
         Si noti che, per ogni espressione regolare $R$, è vero che $\emptyset \cup R = R \cup \emptyset = \emptyset$.
     \end{frameddefn}
 
     \begin{example}[Unione]
-        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di unione su $\Sigma$ è il seguente: $$R = (\ttt a \cup \ttt c)$$ ed il valore di questa espressione equivale da $\ttt a$ oppure $\ttt c$, e dunque $L(R) = \{ \ttt a, \ttt c\}$.
+        Sia $\Sigma = \{\ttt a, \ttt b, \ttt c\}$ un alfabeto; un esempio di espressione regolare di unione su $\Sigma$ è il seguente: $$R = (\ttt a \cup \ttt c)$$ ed il valore di questa espressione equivale ad $\ttt a$ oppure $\ttt c$, e dunque $L(R) = \{ \ttt a, \ttt c\}$.
     \end{example}
 
     \begin{example}[Espressioni regolari particolari]
@@ -635,7 +637,7 @@
     \end{example}
 
     \begin{frameddefn}{Concatenazione}
-        Siano $R_1$ ed $R_2$ due espressioni regolari; allora, si definisce la \tbf{concatenazione} di $R_1$ ed $R_2$ la seguente espressione regolare: $$(R_1 \circ R_2)$$ e rappresenta le stringhe che iniziano per $R_1$ e terminano con $R_2$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1, R_2 \in \mathrm{re}(\Sigma) : R = R_1 \circ R_2 \quad L(R) = L(R_1) \circ L(R_2)$$
+        Siano $R_1$ ed $R_2$ due espressioni regolari; allora, si definisce la \tbf{concatenazione di $R_1$ ed $R_2$} la seguente espressione regolare: $$(R_1 \circ R_2)$$ e rappresenta le stringhe che iniziano per $R_1$ e terminano con $R_2$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1, R_2 \in \mathrm{re}(\Sigma) : R = R_1 \circ R_2 \quad L(R) = L(R_1) \circ L(R_2)$$
 
         Per indicare la concatenazione di $R$ con sé stessa, si usa la seguente notazione $$R^k := \underbrace{R \circ \cdots \circ R}_{k \ \textrm{volte}}$$
 
@@ -654,9 +656,9 @@
     \end{example}
 
     \begin{frameddefn}{Star}
-        Sia $R$ un'espressione regolare; allora, si definisce l'operazione unaria \tbf{star} su $R$ la seguente espressione regolare: $$(R^*)$$ e tutte rappresenta le stringhe che si possono ottenere concatenando un qualsiasi numero di caratteri di $R$, e descrive dunque il linguaggio che consiste di tutte le stringhe dell'alfabeto di $R$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1 \in \mathrm{re}(\Sigma) : R = R_1^* \quad L(R) = L(R_1)^*$$ Si noti che $R^*$ comprende $\varepsilon$ per qualsiasi espressione regolare $R$.
+        Sia $R$ un'espressione regolare; allora, si definisce l'operazione unaria \tbf{star} su $R$ la seguente espressione regolare: $$(R^*)$$ e rappresenta tutte le stringhe che si possono ottenere concatenando un qualsiasi numero di caratteri di $R$, e descrive dunque il linguaggio che consiste di tutte le stringhe dell'alfabeto di $R$. Dunque, si ha che $$\forall R \in \mathrm{re}(\Sigma) \mid \exists R_1 \in \mathrm{re}(\Sigma) : R = R_1^* \quad L(R) = L(R_1)^*$$ Si noti che $R^*$ comprende $\varepsilon$ per qualsiasi espressione regolare $R$.
 
-        Spesso si usa la notazione $R^+ := RR^*$, ovvero le stringhe che si ottengono attraverso la concatenazione di 1 o più stringhe di $R$. Di conseguenza, si ha che $R^+ \cup \varepsilon = R^*$.
+        Spesso si usa la notazione $R^+ := RR^*$, che rappresenta dunque tutte le stringhe che si ottengono attraverso la concatenazione di almeno una stringa di $R$; di conseguenza, si ha che $R^+ \cup \varepsilon = R^*$.
     \end{frameddefn}
 
     \begin{example}[Star]
@@ -684,7 +686,7 @@
     \subsection{Configurazioni di \DFA}
 
     \begin{frameddefn}[label={extended trans}]{Estensione di $\delta$ (\DFA)}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva: $$\delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta^*(q, \varepsilon) = \delta(q, \varepsilon) & \\ \delta^*(q, by) =  \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$$ Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il \DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA; è possibile estendere la definizione della funzione di transizione $\delta$, utilizzando la notazione dell'operazione star, mediante la seguente definizione ricorsiva: $$\delta^*: Q \times \Sigma ^* \to Q : (q, x) \mapsto \soe{ll}{\delta(q, x) & x = \varepsilon \\ \delta^*(\delta(q, b), y) & b \in \Sigma, y \in \Sigma^* \mid x = by}$$ Si noti che tale funzione prende in input uno stato ed una stringa, e restituisce lo stato in cui il \DFA si troverà al termine della lettura dell'intera stringa di input. La notazione $\delta^*$ è coerente con la definizione dell'operazione star, poiché viene calcolata la transizione di stati attraverso $\delta$ fintanto che l'input non è stato esaurito.
     \end{frameddefn}
 
     \begin{frameddefn}{Configurazione (\DFA)}
@@ -692,7 +694,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}[label={rel config}]{Relazione tra configurazioni (\DFA)}
-        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA, e siano $(p, x), (q, y) \in Q \times \Sigma^*$ due sue configurazioni durante la computazione di un certo input; allora, tali due configurazioni si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$(p, x) \vdash_M (q, y) \iff \soe{l}{p, q \in Q \\ x, y \in \Sigma^* \\ \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q}$$
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA; due configurazioni di $M$ si dicono essere \tbf{in relazione} se e solo se dall'una è possibile passare all'altra. In simboli: $$\forall (p, x), (q, y) \in Q \times \Sigma^* \quad (p, x) \vdash_M (q, y) \iff \exists a \in \Sigma \mid x = ay \land \delta(p, a) = q$$
     \end{frameddefn}
 
     \begin{framedobs}{Chiusura transitiva di $\vdash$}
@@ -720,7 +722,7 @@
     TODO
 
     \begin{framedobs}{Linguaggio di un automa}
-        Dato un automa $M$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)\}$$
+        Dato un automa appartenente ad una certa classe $M \in \mathcal C$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)\}$$
 
         Si noti che, nella definizione, verrà presa in considerazione la funzione $\delta^*$ corrispondente alla classe dell'automa $M$ in questione.
     \end{framedobs}
@@ -734,14 +736,14 @@
 
         Un \GNFA legge blocchi di simboli dall'input, e si muove lungo gli archi che sono etichettati da espressioni regolari che possono descrivere il blocco di simboli letto.
 
-        Inoltre, essendo una versione generalizzata di un \NFA, un \GNFA può avere diversi modi di elaborare la stessa stringa di input, e accetta quest'ultima se la sua elaborazione può far si che il \GNFA si trovi in uno stato accettante al suo termine.
+        Inoltre, essendo una versione generalizzata di un \NFA, un \GNFA può avere diversi modi di elaborare la stessa stringa di input, e accetta quest'ultima se la sua elaborazione può far si che il \GNFA si trovi in uno stato accettante al termine della computazione.
 
         \imp{Nota} All'interno di questi appunti, a meno di specifica, si assume che ogni \GNFA preso in considerazione abbia:
 
         \begin{itemize}
             \item un solo stato di inizio, privo di archi entranti, connesso con ogni altro stato, ma non con sé stesso;
-            \item un solo stato accettante, privo di archi uscenti, non connesso con altri archi;
-            \item ogni altro stato collegato con ogni altro stato, a meno di quello iniziale, anche con sé stessi.
+            \item un solo stato accettante, privo di archi uscenti, non connesso con altri stati;
+            \item ogni altro stato collegato con ogni altro stato (a meno di quello iniziale), anche con loro stessi.
         \end{itemize}
 
         Formalmente, dato un alfabeto $\Sigma$, un \GNFA del tipo appena descritto è una quintupla $(Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ definita come segue:
@@ -750,13 +752,13 @@
             \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
             \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito}
             \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathrm{re}(\Sigma)}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathrm{re}(\Sigma)$, poiché a differenza di un normale \DFA o \NFA, un \GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare; inoltre, il dominio di $\delta$ è $(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})$ per evitare di includere l'arco $(q_{\mathrm{accept}}, q_\mathrm{start})$
-            \item $q_{\mathrm{start}} \in Q$ è lo \textbf{stato iniziale}
-            \item $q_{\mathrm{accept} \in Q}$ è lo \textbf{stato accettante}
+            \item $q_\mathrm{start} \in Q$ è lo \textbf{stato iniziale}
+            \item $q_\mathrm{accept} \in Q$ è lo \textbf{stato accettante}
         \end{itemize}
     \end{frameddefn}
 
     \begin{example}[\GNFA]
-        Il seguente è il digramma di un \GNFA sull'alfabeto $\Sigma = \{ \ttt a, \ttt b \}.$
+        Il seguente è il digramma di un \GNFA sull'alfabeto $\Sigma = \{ \ttt a, \ttt b \}$:
 
         \centeredimage[Un \GNFA.]{0.25}{../assets/gnfa.png}
     \end{example}
@@ -773,14 +775,21 @@
 
     \subsection{Equivalenze}
 
-    \begin{framedmeth}[label={dfa into gnfa}]{\GNFA di \DFA}
-        Sia $M$ un \DFA; allora per costruire un \GNFA ad esso equivalente, è sufficiente:
+    \begin{framedmeth}[label={dfa into gnfa},breakable]{\GNFA di \DFA}
+        Sia $M = (Q, \Sigma, \delta, q_0, F)$ un \DFA; allora per costruire un \GNFA ad esso equivalente, è sufficiente:
 
         \begin{itemize}
-            \item aggiungere un nuovo stato iniziale, con un $\varepsilon$-arco entrante sul vecchio stato iniziale;
-            \item aggiungere un nuovo stato accettante, con $\varepsilon$-archi entranti provenienti dai vecchi stati accettanti;
+            \item aggiungere un nuovo stato iniziale $q_\mathrm{start}$, con un $\varepsilon$-arco entrante sul vecchio stato iniziale;
+            \item aggiungere un nuovo stato accettante $q_\mathrm{accept}$, con $\varepsilon$-archi entranti provenienti dai vecchi stati accettanti; rendere i vecchi stati accettanti come \tit{non} accettanti.
             \item sostiuire gli archi con etichette multiple, con archi aventi come etichetta l'unione delle etichette;
-            \item aggiungere archi etichettati con $\emptyset$ tra gli stati non collegati (si noti che questa operazione non varia l'automa di partenza, poiché un arco etichettato con $\emptyset$ non potrà mai essere utilizzato)
+            \item aggiungere archi etichettati con $\emptyset$ tra gli stati non collegati fra loro, \tit{omettendo} gli archi
+
+                \begin{itemize}
+                    \item $(q_\mathrm{accept}, q_\mathrm{accept})$
+                    \item $\forall q \in Q \cup \{q_\mathrm{start}, q_\mathrm{accept}\} \quad (q, q_\mathrm{start})$
+                \end{itemize}
+
+                si noti che questa operazione non varia l'automa di partenza, poiché un arco etichettato con $\emptyset$ non potrà mai essere utilizzato.
         \end{itemize}
     \end{framedmeth}
 
@@ -888,9 +897,7 @@
                      \end{tikzpicture}
                 \end{figure}
 
-                poiché l'arco che $q$ ha su sé stesso è stato descritto attraverso $(R_2)^*$, gli archi $(q_i, q)$ e $(q, q_j)$ sono stati inseriti per concatenazione, ed infine è stato unito l'altro possibile cammino verso $q_j$ tramite unione;
-
-            \item inoltre, si noti che tale espressione regolare --- contenuta nella riga 9 --- tiene in considerazione tutte le possibili configurazioni di archi tra stati di un \GNFA, per come è stato definito il \GNFA all'interno della \cref{def gnfa}; infatti, per $|Q| > 2$, tra due stati $q_i$ e $q_j$, oltre ad avere la garanzia che esista l'arco $(q_i, q_j)$, esiste sicuramente un terzo stato $q$ intermedio tale per cui esistano archi $(q_i, q)$ e $(q, q_j)$, ed esiste anche l'arco $(q,q)$;
+                poiché l'arco che $q$ ha su sé stesso è stato descritto attraverso $(R_2)^*$, gli archi $(q_i, q)$ e $(q, q_j)$ sono stati inseriti per concatenazione, ed infine è stato unito l'altro possibile cammino verso $q_j$ tramite unione. Inoltre, si noti che tale espressione regolare --- contenuta nella riga 9 --- tiene in considerazione tutte le possibili configurazioni di archi tra stati di un \GNFA, per come è stato definito il \GNFA all'interno della \cref{def gnfa}; infatti, per $|Q| > 2$, tra due stati $q_i$ e $q_j$, oltre ad avere la garanzia che esista l'arco $(q_i, q_j)$, esiste sicuramente un terzo stato $q$ intermedio tale per cui esistano archi $(q_i, q)$ e $(q, q_j)$, ed esiste anche l'arco $(q,q)$;
 
             \item infine, sia per la \cref{def gnfa}, sia per come la riga 5 dell'algoritmo opera, per ogni \GNFA si ha che $|Q| \ge 2$, dunque non è necessario gestire ulteriori casi.
         \end{itemize}
@@ -951,7 +958,7 @@
     \end{example}
 
     \begin{framedthm}[label={ling expr reg}]{Linguaggi ed espressioni regolari}
-        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli, per un certo alfabeto $\Sigma$ si ha che $$\mathrm{\REG} = \mathcal{L}(\REX)$$
+        Un linguaggio è regolare se e solo se esiste un'espressione regolare che lo descrive; dunque, tutti e soli i linguaggi regolari sono descritti da espressioni regolari. In simboli $$\mathrm{\REG} = \mathcal{L}(\REX)$$
     \end{framedthm}
 
     \proofiff{
@@ -2786,7 +2793,7 @@
     \subsection{$O$-grande ed $o$-piccolo}
 
     \begin{frameddefn}{$O$-grande}
-        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-grande di $g(n)$} se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) \leq c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = O(g(n))$$ Viceversa, $g(n)$ è detto essere \tbf{limite superiore asintotico} per $f(n)$.
+        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $O$-grande di $g(n)$} se e solo se $$\exists c \in \R_{>0}, n_0 \in \N_{>0} \mid \forall n \ge n_0 \quad f(n) \leq c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = O(g(n))$$ Viceversa, $g(n)$ è detto essere \tbf{limite superiore asintotico} per $f(n)$.
     \end{frameddefn}
 
     \begin{example}[$O$-grande]
@@ -2795,7 +2802,7 @@
     \end{example}
 
     \begin{frameddefn}{$o$-piccolo}
-        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $o$-piccolo di $g(n)$} se e solo se $$\lim_{n \to + \infty}{\dfrac{f(n)}{g(n)}} = 0$$ o equivalentemente, se e solo se $$\exists c, n_0 \in \N - \{0\} \mid \forall n \ge n_0 \quad f(n) < c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = o(g(n))$$
+        Siano $\func{f, g}{\N}{\R^+}$; $f(n)$ è detta essere \tbf{in $o$-piccolo di $g(n)$} se e solo se $$\lim_{n \to + \infty}{\dfrac{f(n)}{g(n)}} = 0$$ o equivalentemente, se e solo se $$\exists c \in \R_{> 0}, n_0 \in \N_{>0} \mid \forall n \ge n_0 \quad f(n) < c \cdot g(n)$$ ed è indicato con il simbolismo $$f(n) = o(g(n))$$
     \end{frameddefn}
 
     \begin{example}[$o$-piccolo]
@@ -3372,13 +3379,13 @@
     \end{proof}
 
     \begin{framedcor}[label={np = conp impl 1}]{Implicazioni di $\NPclass = \coNPclass$}
-        Sia $L$ un linguaggio \NPclass-completo; allora si ha che $$L \in \coNPclass \iff \NPclass = \coNPclass$$
+        Si verifica che $$\coNPclass \cap \NPComplete \neq \varnothing \iff \NPclass = \coNPclass$$
     \end{framedcor}
 
     \proofiff{
-        Per \NPclass-completezza di $L$, e per il \cref{conp w red}, si ha che $$\soe{l}{\forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \coNPclass} \implies \forall L' \in \NPclass \quad L' \in \coNPclass \iff \NPclass \subseteq \coNPclass$$ Viceversa, per il \cref{p red compl} e per il \cref{np w red}, si ha che \centeredeq{0.9}{$\soe{l}{\forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \coNPclass} \iff \soe{l}{\forall \overline{L'} \in \coNPclass \quad \overline{L'} \leq_\mathrm P \overline L \\ \overline L \in \NPclass} \implies \forall \overline {L'} \in \coNPclass  \quad \overline{L'} \in \NPclass \iff \coNPclass \subseteq \NPclass$} dunque segue la tesi per doppia inclusione.
+        Sia $L \in \coNPclass \cap \NPComplete$; allora, per il \cref{conp w red}, si ha che $$\soe{l}{\forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \coNPclass} \implies \forall L' \in \NPclass \quad L' \in \coNPclass \iff \NPclass \subseteq \coNPclass$$ viceversa, per il \cref{p red compl} e per il \cref{np w red}, si ha che \centeredeq{0.9}{$\soe{l}{\forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \coNPclass} \iff \soe{l}{\forall \overline{L'} \in \coNPclass \quad \overline{L'} \leq_\mathrm P \overline L \\ \overline L \in \NPclass} \implies \forall \overline {L'} \in \coNPclass  \quad \overline{L'} \in \NPclass \iff \coNPclass \subseteq \NPclass$} dunque segue la tesi per doppia inclusione.
     }{
-        Trivialmente, si ha che $$L \in \NPComplete \subseteq \NPclass = \coNPclass$$
+        La tesi segue dal fatto che $\NPComplete \subseteq \NPclass = \coNPclass$ per definizione di $\NPComplete$.
     }
 
     \subsection{Classe \coNPComplete}
@@ -3702,7 +3709,7 @@
             \item $M'$ accetta se e solo se $M$ restituisce \ttt{True} sul suo nastro.
         \end{itemize}
 
-        L'algoritmo \ttt{findPath}, per sua definizione, dato un grafo diretto $G$, due suoi nodi $x, y \in G$, ed un intero $k \in \N$, restituisce \ttt{True} se e solo se in $G$ esiste un cammino $x \to y$ lungo al massimo $2^k$, in quanto \ttt{findPath} effettua 2 chiamate ricorsive per ogni livello di ricorsione, e dunque l'albero di chiamate ricorsive ha altezza al massimo $k$ e base al massimo $2^k$. Dunque $M'$ utilizza \ttt{findPath} per decidere $PATH$, ponendo $k = \ceil{\log(\abs{V})}$ poiché un cammino in un grafo ha lunghezza $O\rbk{\abs{V}}$ ed infatti $$k = \ceil{\log(\abs{V})} \implies O\rbk{2^k} = O\rbk{2^{\ceil{\log(\abs{V})}}} = O\rbk{\abs{V}}$$
+        L'algoritmo \ttt{findPath}, per sua definizione, dato un grafo diretto $G$, due suoi nodi $x, y \in G$, ed un intero $k \in \N$, restituisce \ttt{True} se e solo se in $G$ esiste un cammino $x \to y$ lungo al massimo $2^k$, in quanto \ttt{findPath} effettua 2 chiamate ricorsive per ogni livello di ricorsione, e dunque l'albero di chiamate ricorsive ha altezza al massimo $k$ e base al massimo $2^k$ (si noti che non è \tit{esattamente} $2^k$ poiché $w$ potrebbe essere anche $x$ o $y$). Dunque $M'$ utilizza \ttt{findPath} per decidere $PATH$, ponendo $k = \ceil{\log(\abs{V})}$ poiché un cammino in un grafo ha lunghezza $O\rbk{\abs{V}}$ ed infatti $$k = \ceil{\log(\abs{V})} \implies O\rbk{2^k} = O\rbk{2^{\ceil{\log(\abs{V})}}} = O\rbk{\abs{V}}$$
 
         Allora, poiché in ogni livello di ricorsione è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, k$, salvarle ha costo $O(\log(n))$ (si veda l'\cref{log space ops}); inoltre, il numero di livelli di ricosione è pari all'altezza dell'albero di chiamate ricorsive, ovvero $O(k) = O(\log \rbk{\abs{V}}) = O(\log(n))$. Dunque, segue che lo spazio che la \TM $M'$ utilizza per computare è pari a $$O(\log(n)) \cdot O(\log(n)) = O(\log^2(n)) \implies PATH \in \DSPACE(\log^2(n))$$
     \end{proof}
@@ -3712,6 +3719,34 @@
     \begin{frameddefn}{Classe \PSPACE}
         Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\PSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
     \end{frameddefn}
+
+    \subsection{Classe \coLSPACE}
+
+    \begin{frameddefn}{Classe \coLSPACE}
+        La classe \coLSPACE è definita come segue: $$\coLSPACE := \{L \in \DEC \mid \overline l \in \LSPACE\}$$
+    \end{frameddefn}
+
+    \begin{framedthm}{Relazione tra \LSPACE e \coLSPACE}
+        Si verifica che $$\LSPACE = \coLSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \subsection{Classe \coPSPACE}
+
+    \begin{frameddefn}{Classe \coPSPACE}
+        La classe \coPSPACE è definita come segue: $$\coPSPACE := \{L \in \DEC \mid \overline l \in \PSPACE\}$$
+    \end{frameddefn}
+
+    \begin{framedthm}{Relazione tra \PSPACE e \coPSPACE}
+        Si verifica che $$\PSPACE = \coPSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
+    \end{proof}
 
     \subsection{Classe \EXPSPACE}
 
@@ -3725,6 +3760,20 @@
 
     \begin{proof}
         La tesi segue direttamente dal \cref{dspace in dtime cor}, e la dimostrazione è analoga alla dimostrazione della \cref{l in p}, pertanto verrà omessa.
+    \end{proof}
+
+    \subsection{Classe \coEXPSPACE}
+
+    \begin{frameddefn}{Classe \coEXPSPACE}
+        La clase \coEXPSPACE è definita come segue: $$\coEXPSPACE := \{L \in \DEC \mid \overline L \in \EXPSPACE\}$$
+    \end{frameddefn}
+
+    \begin{framedthm}{Relazione tra \EXPSPACE e \coEXPSPACE}
+        Si verifica che $$\EXPSPACE = \coEXPSPACE$$
+    \end{framedthm}
+
+    \begin{proof}
+        TODO
     \end{proof}
 
     \subsection{Classe \NSPACE}
@@ -4037,7 +4086,7 @@
         Si consideri il seguente decisore $D$ definito come descritto all'interno dell'\cref{space model} che, data in input una stringa $w$, computa come segue:
 
         \begin{itemize}
-            \item $D$ marca la $f(n)$-esima cella del suo \tit{working tape} (si noti che $f(n)$ è calcolabile per spazio-costruibilità di $f$); se in fasi successive avviene un tentativo di usare più di $f(n)$ celle, $D$ rifiuta;
+            \item $D$ marca la $f(n)$-esima cella del suo \tit{working tape} (si noti che $f(n)$ è calcolabile in $O(f(n))$ per spazio-costruibilità di $f$); se in fasi successive avviene un tentativo di usare più di $f(n)$ celle, $D$ rifiuta;
             \item se $w$ non è della forma $\abk{M} \ttt 1 \ttt 0^*$, dove $M \in \TM$, $D$ rifiuta;
             \item $D$ simula $M(w)$, limitandole lo spazio ad $f(n)$ per quanto detto in precedenza, e contando contemporaneamente il numero di passi che $M$ impiega per computare; se il conto eccede $2^{f(n)}$, $D$ rifiuta;
             \item $D$ accetta se e solo se $M$ rifiuta.
