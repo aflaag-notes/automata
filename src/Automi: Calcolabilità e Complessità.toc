@@ -104,8 +104,8 @@
 \contentsline {section}{\numberline {6.2}Classi di complessità di spazio}{113}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{113}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{115}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {PSPACE}\xspace }{121}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {coL}\xspace }{121}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {coL}\xspace }{121}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {PSPACE}\xspace }{121}{subsection.6.2.4}%
 \contentsline {subsection}{\numberline {6.2.5}Classe \textsf {coPSPACE}\xspace }{121}{subsection.6.2.5}%
 \contentsline {subsection}{\numberline {6.2.6}Classe \textsf {EXPSPACE}\xspace }{122}{subsection.6.2.6}%
 \contentsline {subsection}{\numberline {6.2.7}Classe \textsf {coEXPSPACE}\xspace }{122}{subsection.6.2.7}%

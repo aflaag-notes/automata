@@ -3698,12 +3698,6 @@
 
         Allora, poiché in ogni livello di ricorsione è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, k$, salvarle ha costo $O(\log(n))$ (si veda l'\cref{log space ops}); inoltre, il numero di livelli di ricosione è pari all'altezza dell'albero di chiamate ricorsive, ovvero $O(k) = O(\log \rbk{\abs{V}}) = O(\log(n))$. Dunque, segue che lo spazio che la \TM $M'$ utilizza per computare è pari a $$O(\log(n)) \cdot O(\log(n)) = O(\log^2(n)) \implies PATH \in \DSPACE(\log^2(n))$$
     \end{proof}
-    
-    \subsection{Classe \PSPACE}
-
-    \begin{frameddefn}{Classe \PSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\PSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
-    \end{frameddefn}
 
     \subsection{Classe \coLSPACE}
 
@@ -3712,12 +3706,18 @@
     \end{frameddefn}
 
     \begin{framedthm}{Relazione tra \LSPACE e \coLSPACE}
-        Si verifica che $$\LSPACE = \coLSPACE$$
+        Si verifica che $$\LSPACE = \coLSPACE$$ porcodio
     \end{framedthm}
 
     \begin{proof}
         La dimostrazione è analoga alla dimostrazione del \cref{p = cop}, pertanto verrà omessa.
     \end{proof}
+
+    \subsection{Classe \PSPACE}
+
+    \begin{frameddefn}{Classe \PSPACE}
+        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\PSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
+    \end{frameddefn}
 
     \subsection{Classe \coPSPACE}
 
