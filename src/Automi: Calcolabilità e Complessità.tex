@@ -4039,7 +4039,15 @@
     \end{framedprop}
 
     \begin{proof}
-        Trivialmente si ha che $\PSPACE \subseteq \NPSPACE$, poiché una \TM è una particolare \NTM, inoltre, per il \cref{savitch}, si ha che $$\forall k, h \in \N \mid h = 2k \quad \NSPACE(n^k) \subseteq \DSPACE \rbk{\rbk{n^k}^2} = \DSPACE \rbk{n^{2k}} = \PSPACE(n^h)$$ dunque segue la tesi per doppia implicazione.
+        Trivialmente si ha che $\PSPACE \subseteq \NPSPACE$, poiché una \TM è una particolare \NTM, inoltre, per il \cref{savitch}, si ha che $$\forall k, h \in \N \mid h = 2k \quad \NSPACE \rbk{n^k} \subseteq \DSPACE \rbk{\rbk{n^k}^2} = \DSPACE \rbk{n^{2k}} = \PSPACE$$ dunque segue la tesi per doppia implicazione.
+    \end{proof}
+
+    \begin{framedprop}{Relazione tra \NPSPACE ed \EXP}
+        Si verifica che $$\NPSPACE \subseteq \EXP$$
+    \end{framedprop}
+
+    \begin{proof}
+        Per il \cref{savitch}, e per il \cref{dspace in dtime cor}, segue che $$\forall k, h \in \N \mid h = 2k \quad \NSPACE \rbk{n^k} \subseteq \DSPACE \rbk{n^{2k}} = \DSPACE \rbk{n^{h}} \subseteq \DTIME \rbk{2^{O \rbk{n^h}}}$$ dunque segue immediatamente la tesi.
     \end{proof}
 
     \subsection{Classe \NEXPSPACE}
