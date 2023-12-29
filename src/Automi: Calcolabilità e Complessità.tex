@@ -3016,7 +3016,16 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Si consideri un linguaggio $L \in \Pclass$, e dunque per definizione esiste una macchina di Turing $M_L$ che decide $L$ in tempo polinomiale; allora, si consideri la seguente \TM $M_{\overline L}$ che, data in input una stringa $w$, computa come segue:
+
+        \begin{itemize}
+            \item $M_{\overline L}$ esegue $M_L(w)$;
+            \item $M_{\overline L}$ accetta se e solo se $M_L(w)$ rifiuta.
+        \end{itemize}
+
+        Allora, per costruzione, si ha che $$w \in L(M_{\overline L}) \iff w \notin L(M_L) = L$$ e di conseguenza $$L(M_{\overline L}) = \overline L \in \coPclass$$ Inoltre, poiché $M_L$ è un decisore di tempo polinomiale, anche $M_{\overline L}$ è un decisore polinomiale per sua stessa costruzione. Questo dimostra che $\Pclass \subseteq \coPclass$.
+
+        Infine, poiché è possibile ripetere il ragionamento analogo per $\coPclass \subseteq \Pclass$, segue la tesi per doppia implicazione.
     \end{proof}
 
     \subsection{Classe \EXP}
@@ -3024,14 +3033,6 @@
     \begin{frameddefn}{Classe \EXP}
         Si definisce \tbf{classe dei linguaggi decidibili in tempo esponenziale} da una \TM a singolo nastro il seguente insieme $$\EXP := \bigcup_{k \in N}{\DTIME \rbk{2^{n^k}}}$$
     \end{frameddefn}
-
-    \begin{framedprop}[label={p exp}]{Relazione tra \Pclass e \EXP}
-        Si verifica che $$\Pclass \subsetneq \EXP$$
-    \end{framedprop}
-
-    \begin{proof}
-        Omessa.
-    \end{proof}
 
     \begin{frameddefn}{Cammino hamiltoniano}
         Sia $G$ un grafo; un \tbf{cammino hamiltoniano} su $G$ è un cammino che passa una sola volta per ogni nodo di $G$.
@@ -3063,7 +3064,7 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        La dimostrazione è analoga alla dimostrazione del \cref{p = cop}, pertanto verrà omessa.
     \end{proof}
 
     \subsection{Classe \NTIME}
@@ -3420,22 +3421,6 @@
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo esponenziale} da una \NTM il seguente insieme $$\NEXP := \bigcup_{k \in \N}{\NTIME \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
-    \begin{framedprop}[label={np nexp}]{Relazione tra \NPclass e \NEXP}
-        Si verifica che $$\NPclass \subsetneq \NEXP$$
-    \end{framedprop}
-
-    \begin{proof}
-        Omessa.
-    \end{proof}
-
-    \begin{framedcor}[label={time hier}]{Gerarchia temporale}
-        Si verifica che $$\Pclass \subseteq \NPclass \subseteq \EXP \subseteq \NEXP$$ dove $\Pclass \subsetneq \EXP$ e $\NPclass \subsetneq \NEXP$.
-    \end{framedcor}
-
-    \begin{proof}
-        Poiché una \TM è anche una \NTM, si ha che $\Pclass \subseteq \NPclass$ e che $\EXP \subseteq \NEXP$; allora, la tesi segue dalla \cref{np exp}, dalla \cref{p exp} e dalla \cref{np nexp}.
-    \end{proof}
-
     \chapter{Complessità di spazio}
 
     \section{Complessità di spazio di macchine di Turing}
@@ -3485,11 +3470,11 @@
     \end{frameddefn}
 
     \begin{framedthm}[label={dtime in dspace}]{Limite di spazio}
-        Si verifica che $$\DTIME(f(n)) \subseteq \DSPACE(f(n))$$
+        Si verifica che $$\DTIME(f(n)) \subseteq \NTIME(f(n)) \subseteq \DSPACE(f(n))$$
     \end{framedthm}
 
     \begin{proof}
-        Si consideri un linguaggio in $\DTIME(f(n))$ per qualche funzione $\func{f}{\N}{\R^+}$; di conseguenza, il decisore di tale linguaggio effettua al massimo $f(n)$ passi, e poiché nel caso peggiore la macchina non fa altro che spostare la testina verso destra, tale macchina potrebbe effettuare solamente $f(n)$ spostamenti verso destra, e dunque potrebbe lavorare con al massimo $f(n)$ celle; allora, segue la tesi.
+        Per definizione, si ha che $\DTIME(f(n)) \subseteq \NTIME(f(n))$; si consideri dunque un linguaggio in $\NTIME(f(n))$ per qualche funzione $\func{f}{\N}{\R^+}$; di conseguenza, il decisore di tale linguaggio effettua al massimo $f(n)$ passi, e poiché nel caso peggiore la macchina non fa altro che spostare la testina verso destra, tale macchina potrebbe effettuare solamente $f(n)$ spostamenti verso destra, e dunque potrebbe lavorare con al massimo $f(n)$ celle; allora, segue la tesi.
     \end{proof}
 
     \begin{framedthm}[label={dspace in dtime}]{Limite di tempo}
@@ -3622,7 +3607,7 @@
         \begin{itemize}
             \item stabilire la lunghezza dell'input:
                 \begin{itemize}
-                    \item per calcolare la lunghezza dell'input sull'\tit{input tape} è sufficiente utilizzare un sul \tit{working tape} e contare di quanti simboli è composto l'input, dunque richiede spazio $O(\log(n))$
+                    \item per calcolare la lunghezza dell'input sull'\tit{input tape} è sufficiente utilizzare un contatore sul \tit{working tape} e contare di quanti simboli è composto l'input, dunque richiede spazio $O(\log(n))$
                 \end{itemize}
             \item salvare il valore di variabili;
             \item effettuare somme tra 2 numeri:
@@ -3731,7 +3716,7 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        La dimostrazione è analoga alla dimostrazione del \cref{p = cop}, pertanto verrà omessa.
     \end{proof}
 
     \subsection{Classe \coPSPACE}
@@ -3745,7 +3730,7 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        La dimostrazione è analoga alla dimostrazione del \cref{p = cop}, pertanto verrà omessa.
     \end{proof}
 
     \subsection{Classe \EXPSPACE}
@@ -3773,7 +3758,7 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        La dimostrazione è analoga alla dimostrazione del \cref{p = cop}, pertanto verrà omessa.
     \end{proof}
 
     \subsection{Classe \NSPACE}
@@ -4139,10 +4124,10 @@
 
         Allora, poiché l'operazione che $T$ effettua richiede spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente $O(n)$. Questo dimostra che $f(n) = n$ è spazio-costruibile.
 
-        Di conseguenza, per il \cref{hier space thm}, si ha che esiste un linguaggio decidibile in $O(n)$ ma non in $o(n)$; in particolare, poiché $\log^2(n) = o(n)$, si ha che \centeredeq{0.9}{$\soe{l}{\DSPACE(n) - \DSPACE(\log^2(n)) \neq \varnothing \\ \DSPACE(\log^2(n)) \subset \DSPACE(n)} \implies \DSPACE(\log^2(n)) \subsetneq \DSPACE(n) =: \PSPACE$} Allora, per il \cref{nl in log sq}, segue che $$\NLSPACE \subseteq \DSPACE(\log^2(n)) \subsetneq \PSPACE \implies \NLSPACE \subsetneq \PSPACE$$
+        Di conseguenza, per il \cref{hier space thm}, si ha che esiste un linguaggio decidibile in $O(n)$ ma non in $o(n)$; in particolare, poiché $\log^2(n) = o(n)$, si ha che \centeredeq{0.9}{$\soe{l}{\DSPACE(n) - \DSPACE(\log^2(n)) \neq \varnothing \\ \DSPACE(\log^2(n)) \subset \DSPACE(n)} \implies \DSPACE(\log^2(n)) \subsetneq \DSPACE(n) \subsetneq \PSPACE$} Allora, per il \cref{nl in log sq}, segue che $$\NLSPACE \subseteq \DSPACE(\log^2(n)) \subsetneq \PSPACE \implies \NLSPACE \subsetneq \PSPACE$$
     \end{proof}
 
-    \begin{framedprop}{Relazione tra \PSPACE e \EXPSPACE}
+    \begin{framedprop}[label={pspace in expspace}]{Relazione tra \PSPACE e \EXPSPACE}
         Si verifica che $$\PSPACE \subsetneq \EXPSPACE$$
     \end{framedprop}
 
@@ -4157,10 +4142,10 @@
 
         Allora, poiché entrambe le operazioni che $T$ effettua richiedono spazio logaritmico per la \cref{log space ops}, $T$ risulta essere un trasduttore di spazio logaritmico per la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{2^n}$, implicando che $g$ sia computabile in spazio $O(\log(n))$, che è certamente in $O \rbk{2^n}$. Questo dimostra che $f(n) = 2^n$ è spazio-costruibile.
 
-        Si noti che $$\forall k \in \N \quad \displaystyle \lim_{n \to + \infty}{\dfrac{n^k}{n^{\log(n)}}} = \lim_{n \to + \infty}{n^{k - \log(n)}}= 0 \implies \forall k \in \N \quad n^k = o \rbk{n ^{\log(n)}}$$ ed inoltre, si noti che $$\displaystyle \lim_{n \to + \infty}{\dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{2^{\log^2(n)}}{2^n}} = 0 \implies n^{\log(n)} = o \rbk{2^n}$$ allora, per la \cref{o trans}, si ha che $$\forall k \in n^k \quad n^k =  o \rbk{2^n}$$ e poiché $2^n$ è spazio-costruibile per quanto detto in precedenza, per il \cref{hier space thm cor}, segue che $$\forall k \in \N \quad \DSPACE \rbk{n^k} \subsetneq \DSPACE \rbk{2^n} \subsetneq \DSPACE \rbk{2^{n^k}}$$ implicando che $$\PSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}} \subsetneq \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}} =: \EXPSPACE$$
+        Si noti che $$\forall k \in \N \quad \displaystyle \lim_{n \to + \infty}{\dfrac{n^k}{n^{\log(n)}}} = \lim_{n \to + \infty}{n^{k - \log(n)}}= 0 \implies \forall k \in \N \quad n^k = o \rbk{n ^{\log(n)}}$$ ed inoltre, si noti che $$\displaystyle \lim_{n \to + \infty}{\dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{2^{\log^2(n)}}{2^n}} = 0 \implies n^{\log(n)} = o \rbk{2^n}$$ allora, per la \cref{o trans}, si ha che $$\forall k \in n^k \quad n^k =  o \rbk{2^n}$$ e poiché $2^n$ è spazio-costruibile per quanto detto in precedenza, per il \cref{hier space thm cor}, segue che $$\forall k \in \N \quad \DSPACE \rbk{n^k} \subsetneq \DSPACE \rbk{2^n} \subsetneq \EXPSPACE$$ implicando che $$\PSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}} \subsetneq \DSPACE \rbk{2^n} \subsetneq \bigcup_{h \in \N}{\DSPACE \rbk{2^{n^h}}} =: \EXPSPACE$$
     \end{proof}
 
-    \subsection{Teorema di gerarchia di tempo TODO SPOSTA SOPRA FORSE}
+    \subsection{Teorema di gerarchia di tempo}
 
     \begin{frameddefn}{Funzione tempo-costruibile}
         Una funzione $\func{f}{\N}{\N}$ è detta essere \tbf{tempo-costruibile} se $f(n)$ è almeno $O(n \log(n))$, e se la funzione che mappa $\ttt 1 ^n$ nella rappresentazione binaria di $f(n)$ è computabile in tempo $O(f(n))$.
@@ -4184,8 +4169,26 @@
     \end{framedthm}
 
     \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \begin{framedcor}[label={hier time thm cor}]{Teorema di gerarchia di tempo}
+        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o\rbk{\dfrac{f_2(n)}{\log(f_2(n))}}$ ed $f_2$ è tempo-costruibile; allora, si verifica che $$\DTIME(f_1(n)) \subsetneq \DTIME(f_2(n))$$
+    \end{framedcor}
+
+    \begin{proof}
         TODO
     \end{proof}
+
+    \begin{framedprop}{Relazione tra \Pclass e \EXP}
+        Si verifica che $$\Pclass \subsetneq \EXP$$
+    \end{framedprop}
+
+    \begin{proof}
+        La funzione $f(n) = 2^n$ è spazio-costruibile (ne è fornita una prova nella dimostrazione della \cref{pspace in expspace}); inoltre, si noti che $$\forall k \in \N \lim_{n \to + \infty}{\dfrac{n^k}{\frac{2^n}{\log(2^n)}}} = \lim_{n \to + \infty}{\dfrac{n^k}{\frac{2^n}{n}}} = \lim_{n \to + \infty}{\dfrac{n^{k + 1}}{2^n}} = \lim_{n \to + \infty}{\dfrac{n^{k + 1}}{n^{\log(n)}} \cdot \dfrac{n^{\log(n)}}{2^n}} = 0$$ (si veda la dimostrazione della \cref{pspace in expspace} per chiarimenti) e dunque si ha che $$\forall k \in n^k \quad n^k = o \rbk{\dfrac{2^n}{\log(2^n)}} = o \rbk{\dfrac{2^n}{n}}$$ e poiché $2^n$ è tempo-costruibile per quanto detto in precedenza, per il \cref{hier time thm cor} segue che $$\forall k \in \N \quad \DTIME \rbk{n^k} \subsetneq \DTIME \rbk{2^n} \subsetneq \EXP$$ implicando che $$\Pclass := \bigcup_{k \in \N} {\DTIME \rbk{n^k}} \subsetneq \DTIME \rbk{2^n} \subsetneq \bigcup_{h \in \N} {\DTIME \rbk{2^{n^h}}} =: \EXP$$
+    \end{proof}
+
+    \subsection{Gerarchia delle classi}
 
     \begin{framedobs}{Gerarchia delle classi}
         TODO NOMINA I TEOREMI USATI
