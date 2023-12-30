@@ -749,11 +749,11 @@
         Formalmente, dato un alfabeto $\Sigma$, un \GNFA del tipo appena descritto è una quintupla $(Q, \Sigma, \delta, q_{\mathrm{start}}, q_{\mathrm{accept}})$ definita come segue:
 
         \begin{itemize}
-            \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito}
-            \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito}
-            \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathrm{re}(\Sigma)}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathrm{re}(\Sigma)$, poiché a differenza di un normale \DFA o \NFA, un \GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare; inoltre, il dominio di $\delta$ è $(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})$ per evitare di includere l'arco $(q_{\mathrm{accept}}, q_\mathrm{start})$
-            \item $q_\mathrm{start} \in Q$ è lo \textbf{stato iniziale}
-            \item $q_\mathrm{accept} \in Q$ è lo \textbf{stato accettante}
+            \item $Q$ è l'\textbf{insieme degli stati} dell'automa, un insieme \textit{finito};
+            \item $\Sigma$ è l'\textbf{alfabeto dell'automa}, un insieme \textit{finito};
+            \item $\func{\delta}{(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})}{\mathrm{re}(\Sigma)}$ è la \textbf{funzione di transizione}, che definisce la relazione tra gli stati; si noti che $\delta$ ha come dominio il prodotto cartesiano tra gli stati, e come codominio $\mathrm{re}(\Sigma)$, poiché a differenza di un normale \DFA o \NFA, un \GNFA prende come input 2 stati (che non possono essere né quello iniziale né quello accettante) e restituisce un'espressione regolare; inoltre, il dominio di $\delta$ è $(Q - \{q_{\mathrm{accept}}\}) \times (Q - \{q_{\mathrm{start}}\})$ per evitare di includere l'arco $(q_{\mathrm{accept}}, q_\mathrm{start})$;
+            \item $q_\mathrm{start} \in Q$ è lo \textbf{stato iniziale};
+            \item $q_\mathrm{accept} \in Q$ è lo \textbf{stato accettante}.
         \end{itemize}
     \end{frameddefn}
 
@@ -1103,7 +1103,13 @@
     \subsection{Definizioni}
 
     \begin{frameddefn}{Grammatica}
-        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre quest'ultime a partire da una variabile iniziale, mediante una sequenza di scambi. Le regole sono scritte nella forma $$\alpha A \beta \to \alpha \gamma \beta$$
+        Una grammatica è un insieme di regole di sostituzione di stringhe, in grado di produrre quest'ultime a partire da una variabile iniziale, mediante una sequenza di scambi. Le regole sono scritte nella forma
+
+        \begin{center}
+            \begin{tabular}{rcl}
+                $\alpha A \beta$ & $\to$ & $\gamma \beta$ \\
+            \end{tabular}
+        \end{center}
     \end{frameddefn}
 
     \begin{frameddefn}{Acontestualità}
@@ -1111,13 +1117,13 @@
     \end{frameddefn}
 
     \begin{frameddefn}[breakable]{\CFG}
-        Una \tbf{grammatica context-free} --- detta anche \tbf{acontestuale} ---, o \CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove
+        Una \tbf{grammatica context-free} --- detta anche \tbf{acontestuale}, o \CFG (\tit{Context-Free Grammar}) è una quadrupla $(V, \Sigma, R, S)$, dove:
 
         \begin{itemize}
-            \item $V$ è l'insieme delle \tbf{variabili}, un insieme \tit{finito}
-            \item $\Sigma$ è l'insieme dei \tbf{terminali}, un insieme \tit{finito}, dove $\Sigma \cap V = \varnothing$
-            \item $R$ è l'insieme delle \tbf{regole} o \tbf{produzioni}, un insieme \tit{finito}
-            \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il simbolo alla sinistra della prima regola della grammatica
+            \item $V$ è l'insieme delle \tbf{variabili}, un insieme \tit{finito};
+            \item $\Sigma$ è l'insieme dei \tbf{terminali}, un insieme \tit{finito}, dove $\Sigma \cap V = \varnothing$;
+            \item $R$ è l'insieme delle \tbf{regole} o \tbf{produzioni}, un insieme \tit{finito};
+            \item $S \in V$ è la \tbf{variabile iniziale}, ed è generalmente il simbolo alla sinistra della prima regola della grammatica.
         \end{itemize}
 
         Le \CFG si scrivono nella forma
@@ -2399,7 +2405,7 @@
     \proofiff{
         Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\overline L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \overline L$, si ha che $\overline L \in \DEC$ per definizione stessa, ed in particolare $$\overline L \in \DEC \implies \overline L \in \REC \iff L \in \coREC$$
     }{
-        Sia $L$ tale che $L \in \REC$ e $L \in \coREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\overline L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\overline L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \overline L = \Sigma^* \\ L \cap \overline L = \varnothing}$$ e dunque $w \in L \iff w \notin \overline L$. Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
+        Sia $L$ tale che $L \in \REC$ e $L \in \coREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\overline L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\overline L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \overline L = \Sigma^* \\ L \cap \overline L = \varnothing}$$ e dunque $$w \in L \iff w \notin \overline L$$ Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
 
         Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\overline L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
     }
@@ -3149,7 +3155,7 @@
         Un grafo è detto \tbf{tricolorabile} se ad ogni suo nodo è possibile assegnare un colore diverso dai suoi nodi adiacenti, utilizzando al più 3 colori.
     \end{frameddefn}
 
-    \begin{framedthm}{$3COL$ in \NPclass}
+    \begin{framedthm}[label={3col in np}]{$3COL$ in \NPclass}
         Sia $3COL$ il linguaggio definito come segue: $$3COL := \{\abk{G} \mid G = (V_G, E_G) \ \textrm{grafo tricolorabile}\}$$ Allora, si verifica che $$3COL \in \NPclass$$
     \end{framedthm}
 
@@ -3254,7 +3260,7 @@
         TODO
     \end{example}
 
-    \begin{framedthm}{Teorema di Cook-Levin}
+    \begin{framedthm}[label={cook-levin}]{Teorema di Cook-Levin}
         Sia $SAT$ il linguaggio definito come: $$SAT := \{\abk{\phi} \mid \phi \ \textrm{formula soddisfacibile}\}$$ Allora, si verifica che $$SAT \in \NPComplete$$
     \end{framedthm}
 
@@ -3313,6 +3319,14 @@
         \end{itemize}
 
         Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard \iff SAT \in \NPComplete$$
+    \end{proof}
+
+    \begin{framedcor}{}
+        Si verifica che $$3COL \leq_\mathrm P SAT$$
+    \end{framedcor}
+
+    \begin{proof}
+        Per il \cref{cook-levin}, si ha che $SAT \in \NPComplete = \NPclass \cap \NPHard$, e poiché $3COL \in \NPclass$ per il \cref{3col in np} segue la tesi per definizione di \NPclass-difficoltà di $SAT$.
     \end{proof}
 
     \begin{frameddefn}{Formula in 3CNF}
@@ -4018,7 +4032,7 @@
                                 \State \textbf{reject}
                             \EndIf
                         \EndFor
-                        \For{$i \in [1, \abs{V_G})$}
+                        \For{$i \in [0, \abs{V_G})$}
                             \For{$s \to v' \in c_{i + 1} - c_i$}
                                 \State $\textrm{isExt} = \ttt{False}$
                                 \For{$s \to v \in c_i$}
@@ -4028,7 +4042,7 @@
                                     \EndIf
                                 \EndFor
                                 \If{$\textrm{isExt} == \ttt{False}$}
-                                    \State \textbf{reject}
+                                    \State \textbf{accept}
                                 \EndIf
                             \EndFor
                             \If{$v' == t$}

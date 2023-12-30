@@ -94,9 +94,9 @@
 \contentsline {subsection}{\numberline {5.3.6}Classe \textsf {NTIME}\xspace }{98}{subsection.5.3.6}%
 \contentsline {subsection}{\numberline {5.3.7}Classe \textsf {NP}\xspace }{99}{subsection.5.3.7}%
 \contentsline {subsection}{\numberline {5.3.8}Classe \textsf {NP-Complete}\xspace }{103}{subsection.5.3.8}%
-\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{109}{subsection.5.3.9}%
-\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{111}{subsection.5.3.10}%
-\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{112}{subsection.5.3.11}%
+\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{110}{subsection.5.3.9}%
+\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{112}{subsection.5.3.10}%
+\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{113}{subsection.5.3.11}%
 \contentsline {subsection}{\numberline {5.3.12}Teorema di gerarchia di tempo}{113}{subsection.5.3.12}%
 \contentsline {chapter}{\numberline {6}Complessità di spazio}{115}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Complessità di spazio di macchine di Turing}{115}{section.6.1}%
