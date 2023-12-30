@@ -1035,7 +1035,7 @@
     \begin{framedprinc}[label={pigeonhole}]{Principio della piccionaia}
         Siano $A$ e $B$ due insiemi finiti, tali che $|B| < |A|$; allora, non esiste alcuna funzione iniettiva $\func{f}{A}{B}$.
 
-        In altri termini, avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno: alcuni volatili dovranno necessariamente condividere la propria casella.
+        Questo problema è noto in letteratura \curlyquotes{principio della piccionatia} per via della seguente analogia: avendo una piccionaia con $m$ caselle, non è possibile inserire più di $m$ piccioni al suo interno; infatti, alcuni volatili dovranno necessariamente condividere la propria casella.
     \end{framedprinc}
     
     \begin{frameddefn}{Linguaggio non regolare}
@@ -1053,14 +1053,14 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un \DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, poiché $p := |Q|$, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
+        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un \DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $r_1 := q_1$ e siano $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, poiché $p := |Q|$, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
 
         Si pongano dunque $$\soe{l}{x:= s_1 \cdots s_{j - 1} \\ y := s_j \cdots s_{l - 1} \\ z := s_l \cdots s_n}$$ Allora, si ha che:
 
         \begin{itemize}
-            \item $x$ porta $M$ da $r_1$ ad $r_j$, $y$ porta $M$ da $r_j = r_l$ ad $r_j$ --- dunque $y$ porta $M$ da $r_j$ ad $r_j$ stesso --- ed infine $z$ porta $M$ da $r_j$ ad $r_{n + 1}$, e poiché $r_{n + 1} \in F$, $M$ accetta sicuramente $xy^iz$ per ogni $i \ge 0$;
+            \item $x$ porta $M$ da $r_1$ ad $r_j$, $y$ porta $M$ da $r_j$ ad $r_l = r_j$ --- dunque $y$ porta $M$ da $r_j$ ad $r_j$ stesso --- ed infine $z$ porta $M$ da $r_l$ ad $r_{n + 1}$, e poiché $r_{n + 1} \in F$, $M$ accetta sicuramente $xy^iz$ per ogni $i \ge 0$;
             \item $j \neq l \implies |y| > 0$;
-            \item $l \le p + 1 \implies |xy| \le p$, poiché $r_l$ è lo stato che viene dopo aver letto $s_{l - 1} \in y$, e dunque nel caso limite si ha che $l = p + 1 \implies |xy| = p$.
+            \item $l \le p + 1 \implies |xy| \le p$, poiché $r_l$ è lo stato che $M$ raggiunge dopo aver letto $s_{l - 1} \in y$, e dunque nel caso limite si ha che $l = p + 1 \implies |xy| = p$.
         \end{itemize}
 
         Allora, sono soddisfatte tutte le condizioni della tesi.
@@ -3215,10 +3215,28 @@
     \end{framedprop}
 
     \proofiff{
-        Per la \cref{np completeness def}, e per il \cref{p w red}, si ha che \centeredeq{0.9}{$\soe{l}{L \in \NPComplete \\ L \in \Pclass} \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \Pclass} \implies \forall L' \in \NPclass \quad L' \in \Pclass \iff \NPclass \subseteq \Pclass$} Inoltre, poiché $\Pclass \subseteq \NPclass$ per il \cref{time hier}, segue la tesi.
+        Per la \cref{np completeness def}, e per il \cref{p w red}, si ha che \centeredeq{0.9}{$\soe{l}{L \in \NPComplete \\ L \in \Pclass} \iff \soe{l}{L \in \NPclass \\ \forall L' \in \NPclass \quad L' \leq_\mathrm P L \\ L \in \Pclass} \implies \forall L' \in \NPclass \quad L' \in \Pclass \iff \NPclass \subseteq \Pclass$} Inoltre, poiché $\Pclass \subseteq \NPclass$ per definizione stessa, segue la tesi.
     }{
         Trivialmente, dalle ipotesi e dalla \cref{np completeness def} segue che $$L \in \NPComplete \implies L \in \NPclass = \Pclass$$
     }
+
+    \begin{framedthm}[label={p = np impl 5}]{Implicazioni di $\Pclass = \NPclass$}
+        Si verifica che $$\Pclass = \NPclass \implies \NPclass = \NPComplete$$
+    \end{framedthm}
+
+    \begin{proof}
+        Si noti che $$\NPclass = \NPComplete := \NPHard \cap \NPclass \iff \NPclass \subseteq \NPHard \iff \forall L, L' \in \NPclass \quad L \leq_\mathrm P L'$$ dunque la tesi equivale a dimostrare tra ogni coppia di problemi in \NPclass esiste una riduzione polinomiale; di conseguenza, assumendo che $\Pclass = \NPclass$, per dimostrare la tesi è sufficiente mostrare che tale proprietà è verificata in \Pclass.
+
+        Siano dunque $L, L' \in \Pclass$; per loro stessa definizione, esistono due \TM $M$ ed $M'$ tali da deciderli in tempo polinomiale rispettivamente. Allora, siano $x \in L'$ e $y \notin L'$ due stringhe, e si consideri una macchina di Turing $M_{x, y}$ che, data in input una stringa $w \in \Sigma^*$, computa come segue:
+        
+        \begin{itemize}
+            \item $M_{x, y}$ computa $M_1(w)$;
+            \item se $M$ accetta, $M_{x, y}$ scrive $x$ sul suo nastro e termina;
+            \item se $M'$ rifiuta, $M_{x, y}$ scrive $y$ sul suo nastro e termina.
+        \end{itemize}
+
+        Allora, chiamando $\func{f}{\Sigma^*}{\Sigma^*}$ la funzione computabile che $M_{x, y}$ descrive per sua stessa costruzione, si ha che $$\centeredsoe{w \in L \implies f(w) = x \in L' \\ w \notin L \implies f(w) = y \notin L'}$$ e dunque $$w \in L = L(M) \iff f(w) \in L' = L(M')$$ Infine, poiché il costo temporale di $M_{x, y}$ è interamente determinato da $M$, la quale computa in tempo polinomiale in ipotesi, segue che $f$ è una riduzione di tempo polinomiale di $L$ a $L'$, dimostrando che $L \leq_\mathrm P L'$.
+    \end{proof}
 
     \begin{framedthm}[label={np-complete w red}]{\NPComplete mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, $A$ è \NPclass-completo, e $B$ è in \NPclass, allora $B$ è \NPclass-completo. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \in \NPComplete \\ B \in \NPclass} \implies B \in \NPComplete$$
@@ -3265,7 +3283,7 @@
 
                 \begin{itemize}
                     \item la prima parte della formula garantisce che almeno uno dei caratteri delle stringhe $x_{i, j}$ sia un \ttt 1;
-                    \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (letteralmente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
+                    \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (più precisamente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
                 \end{itemize}
 
             \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, la prima riga del tableau considerato è la configurazione iniziale di $N$;
@@ -3421,6 +3439,59 @@
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo esponenziale} da una \NTM il seguente insieme $$\NEXP := \bigcup_{k \in \N}{\NTIME \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
+    \subsection{Teorema di gerarchia di tempo}
+
+    \begin{frameddefn}{Funzione tempo-costruibile}
+        Una funzione $\func{f}{\N}{\N}$ è detta essere \tbf{tempo-costruibile} se $f(n)$ è almeno $O(n \log(n))$, e se la funzione che mappa $\ttt 1 ^n$ nella rappresentazione binaria di $f(n)$ è computabile in tempo $O(f(n))$.
+
+        Funzioni a valori non interi vengono arrotondate all'intero successivo più piccolo al fine di renderle tempo-costruibili.
+    \end{frameddefn}
+
+    \begin{example}[Funzioni tempo-costruibili]
+        Si consideri la funzione $f(n) = n^2$, la quale è almeno $O(n \log(n))$; inoltre, sia $M$ una \TM che, data in input la stringa $\ttt 1 ^n$, computa come segue:
+
+        \begin{itemize}
+            \item $M$ conta il numero di \ttt 1 presenti sul suo nastro;
+            \item $M$ restituisce $n \cdot n = n^2$ sul suo nastro.
+        \end{itemize}
+
+        Allora, poiché entrambe le operazioni che $M$ effettua richiedono tempo $O(n)$, e poiché $M$ termina avendo $n^2$ sul suo nastro, essa è una \TM tale che la funzione $\func{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$ sia computabile in tempo $O(n)$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è tempo-costruibile.
+    \end{example}
+
+    \begin{framedthm}{Teorema di gerarchia di tempo}
+        Sia $\func{f}{\N}{\N}$ una funzione tempo-costruibile; allora, esiste un linguaggio $L$ decidibile in tempo $O(f(n))$ ma non in tempo $o\rbk{\dfrac{f(n)}{\log(f(n))}}$.
+    \end{framedthm}
+
+    \begin{proof}
+        Omessa.
+    \end{proof}
+
+    \begin{framedcor}[label={hier time thm cor}]{Teorema di gerarchia di tempo}
+        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o\rbk{\dfrac{f_2(n)}{\log(f_2(n))}}$ ed $f_2$ è tempo-costruibile; allora, si verifica che $$\DTIME(f_1(n)) \subsetneq \DTIME(f_2(n))$$
+    \end{framedcor}
+
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{framedprop}{Relazione tra \Pclass e \EXP}
+        Si verifica che $$\Pclass \subsetneq \EXP$$
+    \end{framedprop}
+
+    \begin{proof}
+        Si consideri la funzione $f(n) = 2^n$, la quale è almeno $O(n \log(n))$; inoltre, sia $M$ una \TM data in input la stringa $\ttt 1^n$, computa come segue:
+
+        \begin{itemize}
+            \item $M$ conta il numero di \ttt 1 presenti sul nastro;
+            \item $M$ calcola $2^n$
+            \item $M$ termina restituendo il risultato sul nastro.
+        \end{itemize}
+
+        Allora, poiché calcolare $2^n$ richiede tempo al massimo $O(2^n)$ (si noti che l'efficienza varia in base all'algoritmo utilizzato), segue che la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{2^n}$ che $M$ rappresenta è computabile in tempo $O(2^n)$. Questo dimostra che $f(n) = 2^n$ è tempo-costruibile.
+
+        Si noti che \centeredeq{0.9}{$\displaystyle \forall k \in \N \quad \lim_{n \to + \infty}{\dfrac{n^k}{\frac{2^n}{\log(2^n)}}} = \lim_{n \to + \infty}{\dfrac{n^k}{\frac{2^n}{n}}} = \lim_{n \to + \infty}{\dfrac{n^{k + 1}}{2^n}} = \lim_{n \to + \infty}{\dfrac{n^{k + 1}}{n^{\log(n)}} \cdot \dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{n^{k + 1}}{n^{\log(n)}} \cdot \dfrac{2^{\log^2(n)}}{2^n}} = 0$} e dunque si ha che $$\forall k \in n^k \quad n^k = o \rbk{\dfrac{2^n}{\log(2^n)}}$$ e poiché $2^n$ è tempo-costruibile per quanto detto in precedenza, per il \cref{hier time thm cor} segue che $$\forall k \in \N \quad \DTIME \rbk{n^k} \subsetneq \DTIME \rbk{2^n} \subsetneq \EXP$$ implicando che $$\Pclass := \bigcup_{k \in \N} {\DTIME \rbk{n^k}} \subsetneq \DTIME \rbk{2^n} \subsetneq \bigcup_{h \in \N} {\DTIME \rbk{2^{n^h}}} =: \EXP$$
+    \end{proof}
+
     \chapter{Complessità di spazio}
 
     \section{Complessità di spazio di macchine di Turing}
@@ -3507,7 +3578,7 @@
     \subsection{Classe \LSPACE}
 
     \begin{frameddefn}{Classe \LSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\LSPACE := \displaystyle \DSPACE(\log(n))$$
+        Si definisce \tbf{classe dei linguaggi decidibili in spazio logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\LSPACE := \displaystyle \DSPACE(\log(n))$$
     \end{frameddefn}
 
     \begin{example}[Linguaggi in \LSPACE]
@@ -3716,7 +3787,7 @@
     \subsection{Classe \PSPACE}
 
     \begin{frameddefn}{Classe \PSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\PSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili in spazio polinomiale} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\PSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{n^k}}$$
     \end{frameddefn}
 
     \subsection{Classe \coPSPACE}
@@ -3736,7 +3807,7 @@
     \subsection{Classe \EXPSPACE}
 
     \begin{frameddefn}{Classe \EXPSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili in tempo logaritmico} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\EXPSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili in spazio esponenziale} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\EXPSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
     \begin{framedprop}[label={nexp in expspace}]{Relazione tra \NEXP ed \EXPSPACE}
@@ -3789,7 +3860,7 @@
     \subsection{Classe \NLSPACE}
 
     \begin{frameddefn}{Classe \NLSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NLSPACE := \NSPACE(\log(n))$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in spazio logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NLSPACE := \NSPACE(\log(n))$$
     \end{frameddefn}
     
     \begin{framedthm}[label={nl w red}]{\NLSPACE mediante riduzione}
@@ -3809,7 +3880,7 @@
     \end{proof}
 
     \begin{frameddefn}{Complessità di spazio di verificatori}
-        Dato un verificatore $V$ definito come descritto nell'\cref{space model}, ed una codifica $\abk{w, c} \in L(V)$, lo spazio di computazione di $V$ è misuato solamente in termini della lunghezza di $w$.
+        Dato un verificatore $V$ definito come descritto nell'\cref{space model}, ed una codifica $\abk{w, c} \in L(V)$, lo spazio di computazione di $V$ è misurato solamente in termini della lunghezza di $w$.
     \end{frameddefn}
 
     \begin{frameddefn}{Verificatore di spazio logaritmico}
@@ -4016,7 +4087,7 @@
     \subsection{Classe \NPSPACE}
 
     \begin{frameddefn}{Classe \NPSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{n^k}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in spazio polinomiale} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{n^k}}$$
     \end{frameddefn}
 
     \begin{framedprop}[label={pspace = npspace}]{Relazione tra \PSPACE ed \NPSPACE}
@@ -4038,7 +4109,7 @@
     \subsection{Classe \NEXPSPACE}
 
     \begin{frameddefn}{Classe \NEXPSPACE}
-        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo logaritmico} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{2^{n^k}}}$$
+        Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in spazio esponenziale} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
     \begin{framedprop}{Relaz. tra \EXPSPACE e \NEXPSPACE}
@@ -4049,8 +4120,6 @@
         La dimostrazione è analoga alla dimostrazione della \cref{pspace = npspace}, pertanto verrà omessa.
     \end{proof}
 
-    \section{Teoremi di gerarchia}
-    
     \subsection{Teorema di gerarchia di spazio}
     
     \begin{frameddefn}{Funzione spazio-costruibile}
@@ -4144,51 +4213,6 @@
 
         Si noti che $$\forall k \in \N \quad \displaystyle \lim_{n \to + \infty}{\dfrac{n^k}{n^{\log(n)}}} = \lim_{n \to + \infty}{n^{k - \log(n)}}= 0 \implies \forall k \in \N \quad n^k = o \rbk{n ^{\log(n)}}$$ ed inoltre, si noti che $$\displaystyle \lim_{n \to + \infty}{\dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{2^{\log^2(n)}}{2^n}} = 0 \implies n^{\log(n)} = o \rbk{2^n}$$ allora, per la \cref{o trans}, si ha che $$\forall k \in n^k \quad n^k =  o \rbk{2^n}$$ e poiché $2^n$ è spazio-costruibile per quanto detto in precedenza, per il \cref{hier space thm cor}, segue che $$\forall k \in \N \quad \DSPACE \rbk{n^k} \subsetneq \DSPACE \rbk{2^n} \subsetneq \EXPSPACE$$ implicando che $$\PSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}} \subsetneq \DSPACE \rbk{2^n} \subsetneq \bigcup_{h \in \N}{\DSPACE \rbk{2^{n^h}}} =: \EXPSPACE$$
     \end{proof}
-
-    \subsection{Teorema di gerarchia di tempo}
-
-    \begin{frameddefn}{Funzione tempo-costruibile}
-        Una funzione $\func{f}{\N}{\N}$ è detta essere \tbf{tempo-costruibile} se $f(n)$ è almeno $O(n \log(n))$, e se la funzione che mappa $\ttt 1 ^n$ nella rappresentazione binaria di $f(n)$ è computabile in tempo $O(f(n))$.
-
-        Funzioni a valori non interi vengono arrotondate all'intero successivo più piccolo al fine di renderle tempo-costruibili.
-    \end{frameddefn}
-
-    \begin{example}[Funzioni tempo-costruibili]
-        Si consideri la funzione $f(n) = n^2$, la quale è almeno $O(n \log(n))$; inoltre, sia $M$ una \TM che, data in input la stringa $\ttt 1 ^n$, computa come segue:
-
-        \begin{itemize}
-            \item $M$ conta il numero di \ttt 1 presenti sul suo nastro;
-            \item $M$ restituisce $n \cdot n = n^2$ sul suo nastro.
-        \end{itemize}
-
-        Allora, poiché entrambe le operazioni che $M$ effettua richiedono tempo $O(n)$, e poiché $M$ termina avendo $n^2$ sul suo nastro, essa è una \TM tale che la funzione $\func{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$ sia computabile in tempo $O(n)$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è tempo-costruibile.
-    \end{example}
-
-    \begin{framedthm}{Teorema di gerarchia di tempo}
-        Sia $\func{f}{\N}{\N}$ una funzione tempo-costruibile; allora, esiste un linguaggio $L$ decidibile in tempo $O(f(n))$ ma non in tempo $o\rbk{\dfrac{f(n)}{\log(f(n))}}$.
-    \end{framedthm}
-
-    \begin{proof}
-        Omessa.
-    \end{proof}
-
-    \begin{framedcor}[label={hier time thm cor}]{Teorema di gerarchia di tempo}
-        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o\rbk{\dfrac{f_2(n)}{\log(f_2(n))}}$ ed $f_2$ è tempo-costruibile; allora, si verifica che $$\DTIME(f_1(n)) \subsetneq \DTIME(f_2(n))$$
-    \end{framedcor}
-
-    \begin{proof}
-        TODO
-    \end{proof}
-
-    \begin{framedprop}{Relazione tra \Pclass e \EXP}
-        Si verifica che $$\Pclass \subsetneq \EXP$$
-    \end{framedprop}
-
-    \begin{proof}
-        La funzione $f(n) = 2^n$ è spazio-costruibile (ne è fornita una prova nella dimostrazione della \cref{pspace in expspace}); inoltre, si noti che $$\forall k \in \N \lim_{n \to + \infty}{\dfrac{n^k}{\frac{2^n}{\log(2^n)}}} = \lim_{n \to + \infty}{\dfrac{n^k}{\frac{2^n}{n}}} = \lim_{n \to + \infty}{\dfrac{n^{k + 1}}{2^n}} = \lim_{n \to + \infty}{\dfrac{n^{k + 1}}{n^{\log(n)}} \cdot \dfrac{n^{\log(n)}}{2^n}} = 0$$ (si veda la dimostrazione della \cref{pspace in expspace} per chiarimenti) e dunque si ha che $$\forall k \in n^k \quad n^k = o \rbk{\dfrac{2^n}{\log(2^n)}} = o \rbk{\dfrac{2^n}{n}}$$ e poiché $2^n$ è tempo-costruibile per quanto detto in precedenza, per il \cref{hier time thm cor} segue che $$\forall k \in \N \quad \DTIME \rbk{n^k} \subsetneq \DTIME \rbk{2^n} \subsetneq \EXP$$ implicando che $$\Pclass := \bigcup_{k \in \N} {\DTIME \rbk{n^k}} \subsetneq \DTIME \rbk{2^n} \subsetneq \bigcup_{h \in \N} {\DTIME \rbk{2^{n^h}}} =: \EXP$$
-    \end{proof}
-
-    \subsection{Gerarchia delle classi}
 
     \begin{framedobs}{Gerarchia delle classi}
         TODO NOMINA I TEOREMI USATI

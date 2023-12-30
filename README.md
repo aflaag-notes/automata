@@ -8,8 +8,8 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
     - teorema 1.7.2.1
 
 - generali
-    - GLI OVERLINE POTREBBERO ESSERE ROTTI, FIXERAI RILEGGENDO
     - finire i TODOs sparsi
+    - GLI OVERLINE POTREBBERO ESSERE ROTTI, FIXERAI RILEGGENDO
     - PARLA DEGLI ALBERI
     - TUTTE LE VOLTE CHE HAI SCRITTO L = {0^n 1^n} CONTROLLA CHE IN n lo 0 è incluso o no
 
