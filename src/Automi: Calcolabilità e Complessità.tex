@@ -387,9 +387,7 @@
     \proofiff{
         Per l'\cref{non det obs} si ha che $$\mathrm{\DFA} \subseteq \mathrm{\NFA} \implies \mathcal{L}(\mathrm{\DFA}) \subseteq \mathcal{L}(\mathrm{\NFA})$$
     }{
-        Si noti che $$\mathcal{L}(\mathrm{\NFA}) \subseteq \mathcal{L}(\mathrm{\DFA}) \iff \forall A \in \mathcal{L}(\mathrm{\NFA}) \quad \exists M \in \mathrm{\DFA} \mid A = L(M)$$ Allora, sia $A \in \mathcal{L}(\mathrm{\NFA})$, e dunque esiste un \NFA $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ in grado di riconoscerlo. Inoltre, si definisca $$\forall k \ge 0 \quad \displaystyle E(R) := \bigcup_{r \in R}{\delta^k(r, \varepsilon)}$$ l'insieme degli stati raggiungibili da stati in $R$, applicando (anche ripetutamente) un numero arbitrario di $\varepsilon$-archi (si noti che per $k = 0$ si ha che $R \subseteq E(R)$).
-
-        Allora, sia $M = (Q', \Sigma, \delta', q_0', F)$ il \DFA definito come segue:
+        Si noti che $$\mathcal{L}(\mathrm{\NFA}) \subseteq \mathcal{L}(\mathrm{\DFA}) \iff \forall A \in \mathcal{L}(\mathrm{\NFA}) \quad \exists M \in \mathrm{\DFA} \mid A = L(M)$$ Allora, sia $A \in \mathcal{L}(\mathrm{\NFA})$, e dunque esiste un \NFA $N = (Q, \Sigma_{\varepsilon}, \delta, q_0, F)$ in grado di riconoscerlo. Inoltre, si definisca $E(R)$ l'insieme degli stati raggiungibili da stati in $R$, attraverso 0 o più $\varepsilon$-archi. Allora, sia $M = (Q', \Sigma, \delta', q_0', F)$ il \DFA definito come segue:
 
         \begin{itemize}
             \item $Q' := \powerset{(Q)}$, scelto tale da rappresentare ogni possibile stato di $N$;
@@ -570,7 +568,7 @@
     \subsection{Complemento}
 
     \begin{frameddefn}{Complemento}
-        Sia $A$ un linguaggio definito su un alfabeto $\Sigma$; allora si definisce il \tbf{complemento di $A$} il seguente linguaggio: $$\overline A := \{x \in \Sigma^* \mid x \notin A\}$$
+        Sia $A$ un linguaggio definito su un alfabeto $\Sigma$; allora si definisce il \tbf{complemento di $A$} il seguente linguaggio: $$\overline A := \{x \mid x \notin A\}$$
     \end{frameddefn}
 
     \begin{example}[Complemento]
@@ -3201,12 +3199,13 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $V$ una macchina di Turing che, data una codifica $\abk{\abk{G, k}, c}$ in input, computa come segue:
+        Sia $V$ una macchina di Turing che, data una codifica $\abk{w, c}$ in input, computa come segue:
 
         \begin{enumerate}
+            \item $V$ interpreta $w$ come $\abk{G, k}$, dove $G = (V_G, E_G)$ è un grafo, e $k$ è un intero;
             \item $V$ interpreta $c$ come sottoinsieme di $V_G$;
             \item $V$ controlla se esiste un arco in $E_G$ tra ogni coppia di nodi dell'insieme descritto dal certificato $c$;
-            \item se gli archi sono presenti tutti, $V$ accetta, altrimenti rifiuta.
+            \item se gli archi sono tutti presenti, $V$ accetta, altrimenti rifiuta.
         \end{enumerate}
 
         Allora, $V$ risulta essere un verificatore di $CLIQUE$, poiché per costruzione $V$ accetta se e solo se esiste un sottoinsieme di nodi $c \in \Sigma^*$ tale che $\abk{\abk{G, k} c} \in L(V)$; inoltre $V$ è un verificatore polinomiale, poiché l'istruzione 2 richiede tempo $O(n^2)$. Allora, per il \cref{np verif}, segue la tesi.

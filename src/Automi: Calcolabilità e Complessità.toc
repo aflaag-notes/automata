@@ -20,9 +20,9 @@
 \contentsline {subsection}{\numberline {1.4.1}Unione}{10}{subsection.1.4.1}%
 \contentsline {subsection}{\numberline {1.4.2}Intersezione}{12}{subsection.1.4.2}%
 \contentsline {subsection}{\numberline {1.4.3}Concatenazione}{13}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}Elevamento a potenza}{15}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.4}Elevamento a potenza}{14}{subsection.1.4.4}%
 \contentsline {subsection}{\numberline {1.4.5}Star}{15}{subsection.1.4.5}%
-\contentsline {subsection}{\numberline {1.4.6}Complemento}{17}{subsection.1.4.6}%
+\contentsline {subsection}{\numberline {1.4.6}Complemento}{16}{subsection.1.4.6}%
 \contentsline {section}{\numberline {1.5}Espressioni regolari}{18}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Definizioni}{18}{subsection.1.5.1}%
 \contentsline {section}{\numberline {1.6}Configurazioni}{21}{section.1.6}%
