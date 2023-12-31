@@ -1113,7 +1113,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Acontestualità}
-        Si definisce \tbf{acontestualità} la condizione per cui il lato sinistro delle regole di una grammatica è composto sempre da un solo simbolo.
+        Si definisce \tbf{acontestualità} la caratteristica per la quale il lato sinistro delle regole di una grammatica è composto sempre da un solo simbolo.
     \end{frameddefn}
 
     \begin{frameddefn}[breakable]{\CFG}
@@ -1134,9 +1134,15 @@
             \end{tabular}
         \end{center}
 
-        dove $X \in V$ e $X \to Y \in R$ è una regola della \CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo $X \to Y \smid Z$.
+        dove $X \in V$, $Y \in (V \cup \Sigma_\epsilon)^*$ e $X \to Y \in R$ è una regola della \CFG. Due regole $X \to Y, X \to Z \in R$ possono essere accorpate con il simbolismo
 
-        Siano $u, v, w$ stringhe, e $A \to w \in R$; allora si dice che $uAv$ \tbf{produce} $uwv$, denotato con $$uAv \yields uwv$$ Date due stringhe $u, v$, se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che $u$ \tbf{deriva} $v$, ed è denotato con $u \derives v$.
+        \begin{center}
+            \begin{tabular}{rcl}
+                $X$ & $\to$ & $Y \smid Z$ \\
+            \end{tabular}
+        \end{center}
+
+        Siano $u, v, w$ stringhe, e $A \to w \in R$; allora si dice che $uAv$ \tbf{produce} $uwv$, denotato con $$uAv \yields uwv$$ Date due stringhe $u, v$, se $u = v$, oppure esistono stringhe $u_1, \ldots, u_k$ con $k \ge 0$ tali che $$u \yields u_1 \yields \ldots \yields u_k \yields v$$ si dice che \tbf{$u$ deriva $v$}, ed è denotato come segue $$u \derives v$$
     \end{frameddefn}
 
     \begin{example}[\CFG]
@@ -1153,11 +1159,13 @@
 
         In essa, si hanno: $$\left . \begin{array}{c} V := \{A, B\} \\ \Sigma := \{\ttt 0, \ttt 1, \ttt \# \} \\ S := A \in V \end{array} \right. $$
 
-        Da essa, è possibile ottenere ad esempio la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $$A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$$
+        Da essa, è possibile ottenere ad esempio la stringa $\ttt{000\#111}$ attraverso le seguenti sostituzioni: $$A \implies \ttt 0 A \ttt 1 \implies \ttt{000}A\ttt{111} \implies \ttt{000}B\ttt{111} \implies \ttt{000\#111}$$ Tale catena di produzioni può essere espressa anche attraverso il seguente \tit{albero di derivazione}:
+
+        \centeredimage{0.3}{../assets/grammar_tree.png}
     \end{example}
 
     \begin{frameddefn}{Linguaggio di una grammatica}
-        Data una grammatica $G$, il suo \tbf{linguaggio} è l'insieme delle stringhe che la grammatica $G$ è in grado di generare, ed è denotato con $L(G)$. In simboli, data una grammatica $G$, si ha che $$L(G) = \{w \in \Sigma ^* \mid S \derives w\}$$
+        Data una grammatica $G$, il suo \tbf{linguaggio} è l'insieme delle stringhe che tale grammatica è in grado di generare, ed è denotato con $L(G)$. In simboli, data una grammatica $G$, si ha che $$L(G) = \{w \in \Sigma ^* \mid S \derives w\}$$
     \end{frameddefn}
 
     \begin{frameddefn}{\CFL}
@@ -1204,9 +1212,9 @@
         Dato un \DFA $D = (Q, \Sigma, \delta, q_0, F)$, per ottenere una grammatica $G = (V, \Sigma, R, S)$ tale che $L(D) = L(G)$, è necessario:
 
         \begin{itemize}
-            \item associare una variabile $V_i$, per ogni stato $q_i \in Q$, con $i \in [1, n]$ (assumendo $|Q| = n$);
-            \item porre $S = V_0$;
-            \item introdurre una regola $V_i \to a V_j$ se vale $\delta(q_i, a) = q_j$ per qualche coppia di stati $q_i, q_j \in Q$;
+            \item associare una variabile $V_i$, per ogni stato $q_i \in Q$, con $i \in [1, \abs{Q}]$;
+            \item porre $S := V_0$;
+            \item introdurre una regola $V_i \to a V_j$ se vale $\delta(q_i, a) = q_j$ per ogni coppia di stati $q_i, q_j \in Q$;
             \item aggiungere la regola $V_i \to \varepsilon$ se $q_i \in F$.
         \end{itemize}
     \end{framedmeth}
@@ -1225,18 +1233,16 @@
         Sia $G$ una grammatica; una stringa si dice essere \tbf{derivata a sinistra} se è stata ottenuta applicando regole di $G$ sulle variabili più a sinistra disponibili.
     \end{frameddefn}
 
-    \begin{example}[Derivazione a sinistra]
-        TODO
-    \end{example}
-
     \begin{frameddefn}{Ambiguità}
         Sia $G$ una grammatica; se esistono due stringhe $u, v$ con $u \neq v$, tali che esiste una terza stringa $z$ \tit{derivata a sinistra} sia da $u$ che da $v$ attraverso le regole di $G$, si dice che $G$ genera $z$ \tbf{ambiguamente}.
+
+        Equivalentemente, una stringa è detta essere generata \tbf{ambiguamente} se per essa esistono molteplici alberi di derivazione a sinistra.
 
         Simmetricamente, $G$ si dice essere \tbf{ambigua} se genera stringhe ambiguamente.
     \end{frameddefn}
 
     \begin{example}[Stringhe generate ambiguamente]
-        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \smid E \ttt * E \smid \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Si noti però che è possibile ottenere questa stringa applicando anche la seguente derivazione a sinistra: $$E \yields E \ttt + E \yields \ttt a \ttt + E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Dunque, la grammatica descritta risulta essere ambigua, poiché esistono due derivazioni a sinistra per la stringa $\ttt{a+a*a}$.
+        Si consideri la seguente grammatica: $$\centeredsoe{E \to E \ttt + E \smid E \ttt * E \smid \ttt a}$$ Attraverso essa, è possibile ottenere ad esempio la seguente stringa, applicando la seguente derivazione a sinistra: $$E \yields E \ttt * E \yields E \ttt + E \ttt * E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Si noti però che è possibile ottenere questa stessa stringa applicando anche la seguente derivazione a sinistra: $$E \yields E \ttt + E \yields \ttt a \ttt + E \yields \ttt a \ttt + E \ttt * E \yields \ttt a \ttt + \ttt a \ttt * E \yields \ttt{a+a*a}$$ Dunque, la grammatica descritta risulta essere ambigua, poiché esistono due derivazioni a sinistra per la stringa $\ttt{a+a*a}$.
     \end{example}
 
     \begin{frameddefn}{Linguaggi inerentemente ambigui}
@@ -1246,7 +1252,17 @@
     \subsection{Forma normale di Chomsky}
 
     \begin{frameddefn}{Forma normale di Chomsky}
-        Una \CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma $$\left . \begin{array}{c} A \to BC \\ A \to a \end{array} \right .$$ dove $A, B, C \in V$, $a \in \Sigma$, $S := A$, e la regola $S \to \varepsilon \in R$ è sempre ammessa, la quale prende il nome di \tbf{$\varepsilon$-regola}.
+        Una \CFG $(V, \Sigma, R, S)$ è in \tbf{forma normale di Chomsky}, o CNF (\tit{Chomsky Normal Form}), se ogni regola è della forma
+
+        \begin{center}
+            \begin{tabular}{rcl}
+                $A$ & $\to$ & $BC$ \\ 
+                $A$ & $\to$ & $a$ \\
+                $S$ & $\to$ & $\varepsilon$
+            \end{tabular}
+        \end{center}
+
+        dove $A, B, C \in V$, $a \in \Sigma$ ed $S$ deve essere la variabile alla sinistra della prima regola di $G$. Si noti che la regola $S \to \varepsilon \in R$ prende il nome di \tbf{$\varepsilon$-regola}.
 
         Dunque, la CNF non permette di
 
@@ -1257,7 +1273,7 @@
         \end{enumerate}
     \end{frameddefn}
 
-    \begin{framedmeth}[label={cfg into cnf}, breakable]{CNF di \CFG}
+    \begin{framedmeth}[label={cfg into cnf}, breakable]{\CFG in CNF}
         Sia $G = (V, \Sigma, R, S)$ una \CFG; allora, è possibile rendere $G$ in CNF attraverso i seguenti passaggi:
 
         \begin{itemize}
@@ -1289,10 +1305,6 @@
         Sia $L$ un \CFL generato da una \CFG $G$; allora, attraverso il \cref{cfg into cnf}, è possibile rendere $G$ in forma normale di Chomsky, e dunque segue la tesi.
     \end{proof}
 
-    \begin{example}[Convertire \CFG in CNF]
-        TODO
-    \end{example}
-
     \section{Automi a pila}
 
     \subsection{Definizioni}
@@ -1300,20 +1312,20 @@
     \begin{frameddefn}{\PDA}
         Un \tbf{\PDA} (\tit{Pushdown Automaton}) è un \NFA dotato di uno \tbf{stack} illimitato, che gli consente di riconoscere alcuni linguaggi non regolari, poiché in esso è in grado di porre i simboli che legge dalla stringa di input, di fatto implementando un sistema di \tit{memoria}.
 
-        Formalmente, un \PDA è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
+        Formalmente, un \PDA è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove:
 
         \begin{itemize}
-            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
-            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}
-            \item $\Gamma$ è l'\tbf{alfabeto dello stack} (o \tit{pila}), un insieme \tit{finito}
-            \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{\powerset{(Q \times \Gamma_\varepsilon)}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
-            \item $q_0 \in Q$ è lo \tbf{stato iniziale}
-            \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
+            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito};
+            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito};
+            \item $\Gamma$ è l'\tbf{alfabeto dello stack} (o \tit{pila}), un insieme \tit{finito};
+            \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{\powerset{(Q \times \Gamma_\varepsilon)}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati;
+            \item $q_0 \in Q$ è lo \tbf{stato iniziale};
+            \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}.
         \end{itemize}
 
         dove $\Gamma_\varepsilon := \Gamma \cup \{ \varepsilon \}$.
 
-        Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del \PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un \PDA è non deterministico) del codominio di $\delta$, al fine di decidere se salvare il simbolo letto all'interno dello stack  (tramite $\varepsilon \in \Gamma$ stesso). Dunque, un'operazione di un \PDA sul suo stack può essere un \tit{push}, un \tit{pop}, o entrambe --- ottenendo l'effetto di rimpiazzare l'elemento in cima allo stack.
+        Si noti che la macchina può usare differenti alfabeti per il suo input e la sua pila, infatti la definizione formale vede due alfabeti distinti, $\Sigma$ e $\Gamma$ rispettivamente. Inoltre, $\Gamma_\varepsilon$ compare nel prodotto cartesiano del dominio di $\delta$, poiché il simbolo in cima allo stack del \PDA è in grado di determinare anch'esso la mossa seguente dell'automa; a tal proposito, $\varepsilon \in \Gamma$ permette di ignorare il primo elemento della pila. In aggiunta, $\Gamma_\varepsilon$ compare anche all'interno dell'insieme potenza (si noti che un \PDA è non deterministico) del codominio di $\delta$, al fine di decidere se salvare o meno il simbolo letto all'interno dello stack  (tramite $\varepsilon \in \Gamma$ stesso). Dunque, un'operazione di un \PDA sul suo stack può essere un \tit{push}, un \tit{pop}, o entrambe \tit{in una sola operazione} --- ottenendo l'effetto di rimpiazzare l'elemento in cima allo stack.
     \end{frameddefn}
 
     \begin{example}[\PDA]
@@ -1355,9 +1367,9 @@
         La notazione $a; b \to c$ presente sugli archi di questo diagramma sta ad indicare che se viene letto il simbolo $a$ dall'input, $M$ può sostituire $b$, se in cima al suo stack (attraverso un'operazione di \tit{pop}) con $c$ (mediante un'operazione di \tit{push}). Si noti inoltre che ognuno dei simboli può essere $\varepsilon$, e dunque
 
         \begin{itemize}
-            \item $\varepsilon; b \to c$ indica che il ramo viene eseguito senza attendere alcun simbolo di input (si noti l'\cref{nfa exec} per il non determinismo)
-            \item $a; \varepsilon \to c$ indica che, alla lettura di $a$, viene effettuato solamente il \tit{push} di $c$ nello stack
-            \item $a; b \to \varepsilon$ indica che, alla lettura di $a$, viene effettuato solamente il \tit{pop} di $b$ dallo stack
+            \item $\varepsilon; b \to c$ indica che il ramo viene eseguito senza attendere alcun simbolo di input (si noti l'\cref{nfa exec} per il non determinismo);
+            \item $a; \varepsilon \to c$ indica che, alla lettura di $a$, viene effettuato solamente il \tit{push} di $c$ nello stack;
+            \item $a; b \to \varepsilon$ indica che, alla lettura di $a$, viene effettuato solamente il \tit{pop} di $b$ dallo stack.
         \end{itemize}
     \end{example}
 
@@ -1377,7 +1389,7 @@
     \end{framedobs}
 
     \begin{framedobs}{Fine dell'input}
-        Un \PDA non è in grado di controllare se è stata raggiunga la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il \PDA $M$ dell'\cref{pda ex}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}).
+        Un \PDA non è in grado di controllare se è stata raggiunta la fine della stringa di input, ma è possibile ottenere questo effetto come segue: si prenda in esame il \PDA $M$ dell'\cref{pda ex}; è importante notare che esso può sapere se è stata raggiunta la fine della stringa di input, poiché lo stato accettante $q_4$ può essere eventualmente raggiunto solamente alla lettura di $\varepsilon$ e nel momento in cui è possibile rimuovere $\ttt \$$ dallo stack (si noti l'\cref{pda empty stack}), implicando necessariamente che l'input è terminato e che lo stack è vuoto.
     \end{framedobs}
 
     \begin{framedobs}{Linguaggi non regolari e \PDA}
@@ -1390,7 +1402,7 @@
             \item se all'interno dello stack è presente $\ttt \$$, allora l'automa accetta.
         \end{itemize}
 
-        Dunque, di fatto, il \PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Infine, lo stato $q_1$ è accettante per poter riconoscere la stringa $\varepsilon$. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}. In simboli, si ha che $$\mathrm{\REG} \subsetneq \mathcal{L}(\mathrm{\PDA})$$
+        Dunque, di fatto, il \PDA sta \tit{contando} il numero di \ttt 0 e di \ttt 1 presenti all'interno della stringa, poiché la computazione avanza solamente se, per ognuno degli \ttt 1 letti, è possibile rimuovere uno \ttt 0 dallo stack. Infine, lo stato $q_1$ è accettante per poter riconoscere la stringa $\varepsilon$. Allora, l'automa riconosce il linguaggio $$L = \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\}$$ il quale non è regolare per l'\cref{non reg ex}.
     \end{framedobs}
 
     \begin{example}[\PDA]
@@ -1420,7 +1432,7 @@
         \begin{itemize}
             \item pone $\ttt \$$ all'interno dello stack, per sapere quando quest'ultimo diventa vuoto;
             \item pone all'interno dello stack qualsiasi simbolo diverso da $\ttt \&$;
-            \item una volta letto il simbolo $\ttt \&$, l'automa cambia stato lasciando lo stack intatto, ed inizia a rimuovere da questo ogni simbolo che viene letto, \tit{solo se coincide con il simbolo posto sulla sua cima}; di fatto, questa tecnica controlla che i simboli che vengono letti dopo $\ttt \&$ siano l'\tit{opposto} di come sono stati letti inizialmente;
+            \item una volta letto il simbolo $\ttt \&$, l'automa cambia stato lasciando lo stack intatto, ed inizia a rimuovere da questo ogni simbolo che viene letto, \tit{solo se coincide con il simbolo posto sulla sua cima}; di fatto, questa tecnica controlla che i simboli che vengono letti dopo $\ttt \&$ siano posti \tit{al contrario} di come sono stati letti inizialmente;
             \item se trova $\ttt \$$ nello stack --- e dunque quest'ultimo è vuoto --- accetta.
         \end{itemize}
     \end{example}
@@ -1428,7 +1440,7 @@
     \subsection{Equivalenze}
 
     \begin{frameddefn}[label={insert stack}]{Inserimento di stringhe nello stack}
-        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un \PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u_1 \cdots u_k \in \Gamma^*$ all'interno dello stack di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, u_1 \cdots u_k) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{n - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di una stringa all'interno dello stack di un \PDA verrà utilizzato il seguente simbolismo $$a;s \to xyz$$ per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$.
+        Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un \PDA; è possibile introdurre una notazione per effettuare l'\tbf{inserimento di una stringa nello stack} di $P$, come segue: dati due stati $p, q \in Q$, per inserire una stringa $u = u_1 \cdots u_k \in \Gamma^*$ all'interno dello stack di $P$, alla lettura di un certo carattere $a \in \Sigma_\varepsilon$ della stringa di input e di un certo carattere $b \in \Gamma$ sulla cima dello \tit{stack} di $P$, devono esistere stati $r_1, \ldots, r_{k - 1} \in Q$ tali per cui $$\centeredsoe{\delta(p, a, b) \ni (r_1, u_k) \\ \delta(q_1, \varepsilon, \varepsilon) = \{(r_2, u_{k - 1}) \}\\ \vdots \\ \delta(r_{k - 1}, \varepsilon, \varepsilon) = \{(q, u_1)\}}$$ In simboli, per indicare l'inserimento di tale stringa all'interno dello stack di $P$ verrà utilizzato il seguente simbolismo $$a;b \to u \equiv a ; b \to u_1 \cdots u_k$$
     \end{frameddefn}
 
     \begin{example}[Inserimenti di stringhe nello stack]
@@ -1441,13 +1453,13 @@
                 \node[state] (2) [right of=1] {$q$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge node {$a; s \to xyz$} (2)
+                    (1) edge node {$a; b \to xyz$} (2)
                  ;
              \end{tikzpicture}
              \caption{Un \PDA che inserisce una stringa nello stack.}
         \end{figure}
 
-        per certi $a \in \Sigma_\varepsilon, s \in \Gamma, xyz \in \Gamma^*$; dunque, con la notazione presente sull'arco $(p, q)$ verrà sottointesa la seguente successione di stati --- per certi stati $r_1, r_2 \in Q$:
+        per certi $a \in \Sigma_\varepsilon, b \in \Gamma, xyz \in \Gamma^*$; dunque, con la notazione presente sull'arco $(p, q)$ verrà sottointesa la seguente successione di stati --- per certi stati $r_1, r_2 \in Q$:
 
         \begin{figure}[H]
             \centering
@@ -1458,7 +1470,7 @@
                 \node[state] (4) [right of=3] {$q$};
      
                 \path[every node/.style={font=\sffamily\small}]
-                    (1) edge node {$a; s \to z$} (2)
+                    (1) edge node {$a; b \to z$} (2)
                     (2) edge node {$\varepsilon; \varepsilon \to y$} (3)
                     (3) edge node {$\varepsilon; \varepsilon \to x$} (4)
                  ;
@@ -1472,8 +1484,8 @@
 
         \begin{itemize}
             \item $\delta(q_0, \varepsilon, \varepsilon) := \{(q', S \ttt \$) \}$, ovvero, viene inserito $\ttt \$$ come marcatore nello stack di $P$ (si noti l'\cref{pda empty stack}), e successivamente la stringa iniziale $S$ di $G$;
-            \item $\forall A \in V \quad \delta(q', \varepsilon, A) := \{ (q', w) \mid A \to w \in R, w \in (V \cup \Sigma)^*\}$ poiché, se viene incontrata una variabile $A$ sulla cima dello stack di $P$, viene scelta una delle regole di $G$ in grado di sostituire $A$ (si noti che la sostituzione verrà effettuata non deterministicamente);
-            \item $\forall a \in \Sigma \quad \delta(q', a, a) := \{ (q', \varepsilon) \}$ per rimuovere i terminali dallo stack, evitando che possano essere ulteriormente rimpiazzati;
+            \item $\forall A \in V \quad \delta(q', \varepsilon, A) := \{ (q', w) \mid A \to w \in R, w \in (V \cup \Sigma)^*\}$ poiché, se viene incontrata una variabile $A$ sulla cima dello stack di $P$, viene scelta \tit{non deterministicamente} una delle regole di $G$ in grado di sostituire $A$;
+            \item $\forall a \in \Sigma \quad \delta(q', a, a) := \{ (q', \varepsilon) \}$ per rimuovere i terminali dallo stack, evitando che possano essere ulteriormente rimpiazzati (si noti che se un simbolo $a$ è nella stringa di input, allora è sicuramente un terminale di $G$);
             \item $\delta(q', \varepsilon, \ttt \$) := \{(q, \varepsilon) \}$ per sfruttare il marcatore \ttt \$.
         \end{itemize}
 
