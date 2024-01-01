@@ -509,7 +509,7 @@
     \subsection{Elevamento a potenza}
 
     \begin{frameddefn}{Elevamento a potenza}
-        Sia $A$ un linguaggio; allora, si definisce \tbf{elevamento a potenza di $A$} il seguente linguaggio: $$A^n := \underbrace{A \circ \cdots \circ A}_{n \ \textrm{volte}} = \soe{ll}{A^0 := \{\varepsilon \} & \\ A^n = A^{n -1} \circ A & n \ge 1}$$
+        Sia $A$ un linguaggio; allora, si definisce \tbf{elevamento a potenza di $A$} il seguente linguaggio: $$A^n := \underbrace{A \circ \cdots \circ A}_{n \ \textrm{volte}} = \soe{ll}{\{\varepsilon \} & n = 0 \\ A^{n -1} \circ A & n \ge 1}$$
     \end{frameddefn}
 
     \begin{example}[Elevamento a potenza]
@@ -740,7 +740,7 @@
 
         \begin{itemize}
             \item un solo stato di inizio, privo di archi entranti, connesso con ogni altro stato, ma non con sé stesso;
-            \item un solo stato accettante, privo di archi uscenti, non connesso con altri stati;
+            \item un solo stato accettante, privo di archi uscenti, non connesso né con altri stati, né con sé stesso;
             \item ogni altro stato collegato con ogni altro stato (a meno di quello iniziale), anche con loro stessi.
         \end{itemize}
 
@@ -910,7 +910,7 @@
     }{
         Se $G$ è un \GNFA con $k - 1$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$.
     }{
-        È necessario dimostrare che, se $G$ è un \GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. In primo luogo, è necessario dimostrare che $G$ e $G'$ sono equivalenti, e dunque sia $w$ una stringa accettata da $G$; allora, in un ramo accettante della computazione, $G$ entra in una sequenza di stati $$q_\mathrm{start}, q_1, q_2, \ldots, q_\mathrm{accept}$$ dunque, se il ramo non contiene lo stato rimosso $q$, allora sicuramente $G'$ accetta $w$; viceversa, se $q$ è contenuto all'interno di tale ramo, allora per quanto discusso all'interno dell'idea di dimostrazione, l'espressione regolare inserita al posto dello stato $q$ rimosso è in grado di tenere in considerazione ogni possibile configurazione di archi, e dunque $G'$ accetta sicuramente $w$; infine, è possibile applicare la stessa osservazione per mostrare che una stringa accettata da $G'$ deve essere necessariamente accettata anche da $G$. Allora, poiché $G$ e $G'$ sono equivalenti, e $G$ ha $k$ stati, allora necessariamente al termine del $k$-esimo passo dell'algoritmo, $G'$ avrà $k - 1$ stati, e su di esso è possibile applicare l'ipotesi induttiva.
+        È necessario dimostrare che, se $G$ è un \GNFA con $k$ stati, allora $\ttt{convertGNFAtoRegEx}(G)$ è un'espressione regolare equivalente a $G$. In primo luogo, è necessario dimostrare che $G$ e $G'$ sono equivalenti, e dunque sia $w$ una stringa accettata da $G$; allora, in un ramo accettante della computazione, $G$ entra in una sequenza di stati $q_\mathrm{start}, q_1, q_2, \ldots, q_\mathrm{accept}$, dunque se il ramo non contiene lo stato rimosso $q$, allora sicuramente $G'$ accetta $w$; viceversa, se $q$ è contenuto all'interno di tale ramo, allora per quanto discusso all'interno dell'idea di dimostrazione, l'espressione regolare inserita al posto dello stato $q$ rimosso è in grado di tenere in considerazione ogni possibile configurazione di archi, e dunque $G'$ accetta sicuramente $w$; infine, è possibile applicare la stessa osservazione per mostrare che una stringa accettata da $G'$ deve essere necessariamente accettata anche da $G$. Allora, poiché $G$ e $G'$ sono equivalenti, e $G$ ha $k$ stati, allora necessariamente al termine del $k$-esimo passo dell'algoritmo, $G'$ avrà $k - 1$ stati, e su di esso è possibile applicare l'ipotesi induttiva.
     }
 
     \begin{example}[Espressioni regolari di \GNFA]
@@ -1056,9 +1056,9 @@
         Si pongano dunque $$\soe{l}{x:= s_1 \cdots s_{j - 1} \\ y := s_j \cdots s_{l - 1} \\ z := s_l \cdots s_n}$$ Allora, si ha che:
 
         \begin{itemize}
-            \item $x$ porta $M$ da $r_1$ ad $r_j$, $y$ porta $M$ da $r_j$ ad $r_l = r_j$ --- dunque $y$ porta $M$ da $r_j$ ad $r_j$ stesso --- ed infine $z$ porta $M$ da $r_l$ ad $r_{n + 1}$, e poiché $r_{n + 1} \in F$, $M$ accetta sicuramente $xy^iz$ per ogni $i \ge 0$;
-            \item $j \neq l \implies |y| > 0$;
-            \item $l \le p + 1 \implies |xy| \le p$, poiché $r_l$ è lo stato che $M$ raggiunge dopo aver letto $s_{l - 1} \in y$, e dunque nel caso limite si ha che $l = p + 1 \implies |xy| = p$.
+            \item $x$ porta $M$ da $r_1$ ad $r_j$, $y$ porta $M$ da $r_j$ ad $r_l = r_j$ --- dunque $y$ porta $M$ da $r_j$ ad $r_j$ stesso --- ed infine $z$ porta $M$ da $r_l$ ad $r_{n + 1}$, e poiché $r_{n + 1} \in F$, $M$ accetta sicuramente $xy^iz$ per ogni $i \ge 0$; questo dimostra la prima condizione della tesi;
+            \item $j \neq l \implies |y| > 0$, segue la seconda condizione della tesi;
+            \item $l \le p + 1 \iff l - 1 \le p$, e poiché $\abs{xy} = l - 1$, segue la terza condizione della tesi.
         \end{itemize}
 
         Allora, sono soddisfatte tutte le condizioni della tesi.
@@ -1210,9 +1210,9 @@
         Dato un \DFA $D = (Q, \Sigma, \delta, q_0, F)$, per ottenere una grammatica $G = (V, \Sigma, R, S)$ tale che $L(D) = L(G)$, è necessario:
 
         \begin{itemize}
-            \item associare una variabile $V_i$, per ogni stato $q_i \in Q$, con $i \in [1, \abs{Q}]$;
+            \item associare una variabile $V_i$, dove $q_i \in Q$;
             \item porre $S := V_0$;
-            \item introdurre una regola $V_i \to a V_j$ se vale $\delta(q_i, a) = q_j$ per ogni coppia di stati $q_i, q_j \in Q$;
+            \item introdurre una regola $V_i \to a V_j$ se vale $\delta(q_i, a) = q_j$, dove $q_i, q_j \in Q$;
             \item aggiungere la regola $V_i \to \varepsilon$ se $q_i \in F$.
         \end{itemize}
     \end{framedmeth}
