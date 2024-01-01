@@ -1295,9 +1295,9 @@
         \end{itemize}
     \end{framedmeth}
 
-    \begin{framedlem}{\CFL generati da \CFG in CNF}
+    \begin{framedcor}{\CFL generati da \CFG in CNF}
         Ogni \CFL è generato da una \CFG in forma normale di Chomsky.
-    \end{framedlem}
+    \end{framedcor}
 
     \begin{proof}
         Sia $L$ un \CFL generato da una \CFG $G$; allora, attraverso il \cref{cfg into cnf}, è possibile rendere $G$ in forma normale di Chomsky, e dunque segue la tesi.
@@ -1598,7 +1598,7 @@
         \begin{itemize}
             \item $V := \{A_{p,q} \mid p, q \in Q'\}$
             \item $S := A_{q_0, q_\mathrm{accept}}$
-            \item l'insieme di regole $R$ è composto dall'unione dei seguenti: \centeredeq{0.9}{$\centeredsoe{R := \{A_{p,p} \to \varepsilon \mid p \in Q'\} \ \cup \\ \cup \ \{A_{p,q} \to a A_{r,s}b \mid p, q, r, s \in Q', a, b \in \Sigma_\varepsilon, \exists u \in \Gamma : (r, u) \in \delta'(p, a, \varepsilon), (q, \varepsilon) \in \delta(s, b, u)\} \ \cup \\ \cup \ \{A_{p,q} \to A_{p,r}A_{r,q} \in R \mid p, q, r \in Q'\}}$}
+            \item l'insieme di regole $R$ è composto dall'unione dei seguenti: \centeredeq{0.9}{$\centeredsoe{R := \{A_{p,p} \to \varepsilon \mid p \in Q'\} \ \cup \\ \cup \ \{A_{p,q} \to a A_{r,s}b \mid p, q, r, s \in Q', a, b \in \Sigma_\varepsilon, \exists u \in \Gamma : (r, u) \in \delta'(p, a, \varepsilon), (q, \varepsilon) \in \delta(s, b, u)\} \ \cup \\ \cup \ \{A_{p,q} \to A_{p,r}A_{r,q} \mid p, q, r \in Q'\}}$}
         \end{itemize}
 
         Dunque, il linguaggio di $G$ è il seguente: $$L(G) = \{w \in \Sigma^* \mid A_{q_0, q_{\mathrm{accept}}} \derives w\}$$
@@ -1608,12 +1608,12 @@
         \begin{enumerate}[label=]
             \item \tit{Prima implicazione.} La dimostrazione procede per induzione sul numero di passaggi nella derivazione di $w$, a partire da $A_{p,q}$, attraverso le regole in $R$.
                 \begin{enumerate}[label=]
-                    \item \tit{Caso base.} Se la derivazione è composta solamente da 1 passaggio, allora è stata utilizzata una regola della forma $A_{p,q} \to u_1 \ldots u_k$ dove $u_1, \ldots u_k \in \Sigma^*$, dunque esclusivamente terminali. Si noti però che le uniche regole della grammatica che vedono solamente terminali sulla loro destra sono le regole del primo insieme di definizione di $R$, ovvero forma $A_{p,p} \to \varepsilon$ dunque, se $P'$ si trova nello stato $p$, avendo lo stack vuoto, sicuramente $\varepsilon$ è in grado di portare $P'$ in $p$ stesso, mantenendo vuoto lo stack.
+                    \item \tit{Caso base.} Se la derivazione è composta solamente da 1 passaggio, allora è stata utilizzata una regola della forma $A_{p,q} \to u_1 \ldots u_h$ dove $u_1, \ldots u_h, \in \Sigma$, dunque esclusivamente terminali. Si noti però che le uniche regole della grammatica che vedono solamente terminali sulla loro destra sono le regole del primo insieme di definizione di $R$, ovvero forma $A_{p,p} \to \varepsilon$ dunque, se $P'$ si trova nello stato $p$, avendo lo stack vuoto, sicuramente $\varepsilon$ è in grado di portare $P'$ in $p$ stesso, mantenendo vuoto lo stack.
                     \item \tit{Ipotesi induttiva forte.} Dati due stati $p, q \in Q'$, se $A_{p,q}$ è in grado di derivare una stringa $w$, applicando al più $k$ passaggi (con $k \ge 1$) allora $w$ porta $P'$ dallo stato $p$ --- avendo lo stack vuoto --- allo stato $q$ --- avendo ancora lo stack vuoto.
-                    \item \tit{Passo induttivo.} È necessario dimostare che l'ipotesi induttiva sia ancora verificata per derivazioni costituite da $k + 1$ passaggi. Si consideri dunque una stringa $w$ tale che $A_{p,q} \derives w$ con $k + 1$ passaggi; per costruzione di $R$, il primo passaggio può essere $A_{p,q} \yields aA_{r,s}b \derives x$ per certi stati $r, s \in Q'$ e terminali $a, b \in \Sigma_\varepsilon$, oppure $A_{p,q} \yields A_{p,r} A_{r,q} \derives x$ per un qualche stato $r \in Q'$, e dunque:
+                    \item \tit{Passo induttivo.} È necessario dimostare che l'ipotesi induttiva sia ancora verificata per derivazioni costituite da $k + 1$ passaggi. Si consideri dunque una stringa $w$ tale che $A_{p,q} \derives w$ con $k + 1$ passaggi; per costruzione di $R$, il primo passaggio può essere $A_{p,q} \yields aA_{r,s}b \derives w$ per certi stati $r, s \in Q'$ e terminali $a, b \in \Sigma_\varepsilon$, oppure $A_{p,q} \yields A_{p,r} A_{r,q} \derives w$ per un qualche stato $r \in Q'$, e dunque:
 
                         \begin{itemize}
-                            \item nel primo caso, sia $y$ la sottostringa di $w$ generata da $A_{r,s}$, dunque $A_{r,s} \derives y \implies w = ayb$, e si noti che $y$ è stata derivata con $k$ passaggi; allora, per ipotesi induttiva forte, $y$ porta $P'$ dallo stato $r$ --- avendo lo stack vuoto --- allo stato $s$ --- avendo ancora lo stack vuoto; inoltre, per costruzione di $R$, si ha che $$A_{p,q} \to a A_{r,s}b \in R \iff \exists u \in \Gamma \mid \soe{l}{(r, u) \in \delta'(p, a , \varepsilon) \\ (q, \varepsilon) \in \delta'(s, b, u)}$$ e dunque, assumendo che $P'$ abbia lo stack vuoto:
+                            \item nel primo caso, sia $y$ la sottostringa di $w$ generata da $A_{r,s}$, dunque $A_{r,s} \derives y$, quindi $w = ayb$ e si noti che $y$ è stata derivata con $k$ passaggi; allora, per ipotesi induttiva forte, $y$ porta $P'$ dallo stato $r$ --- avendo lo stack vuoto --- allo stato $s$ --- avendo ancora lo stack vuoto; inoltre, per costruzione di $R$, si ha che $$A_{p,q} \to a A_{r,s}b \in R \iff \exists u \in \Gamma \mid \soe{l}{(r, u) \in \delta'(p, a , \varepsilon) \\ (q, \varepsilon) \in \delta'(s, b, u)}$$ e dunque, assumendo che $P'$ abbia lo stack vuoto:
                                 
                                 \begin{itemize}
                                     \item se si trova nello stato $p$, leggendo $a$, $P'$ può andare nello stato $r$, inserendo $u$ nello stack;
@@ -1622,14 +1622,14 @@
                                 \end{itemize}
 
                                 allora $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack.
-                            \item differentemente, nel secondo caso, siano $y$ e $z$ sottostringhe di $w$ generate rispettivamente da $A_{p, r}$ ed $A_{r, q}$ dunque $\soe{l}{A_{p,r} \derives y \\ A_{r,q} \derives z} \implies w = yz$, e si noti che $y$ e $z$ sono state derivate con $k + 1$ passaggi; allora, per ipotesi induttiva forte, $y$ e $z$ portano, rispettivamente, $P'$ dagli stati $p$ ed $r$ --- avendo lo stack vuoto --- agli stati $r$ e $q$ --- avendo ancora lo stack vuoto; allora, $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack;
+                            \item differentemente, nel secondo caso, siano $y$ e $z$ sottostringhe di $w$ generate rispettivamente da $A_{p, r}$ ed $A_{r, q}$ dunque $\soe{l}{A_{p,r} \derives y \\ A_{r,q} \derives z} \implies w = yz$, e si noti che $y$ e $z$ sono state derivate con $k$ passaggi; allora, per ipotesi induttiva forte, $y$ e $z$ portano, rispettivamente, $P'$ dagli stati $p$ ed $r$ --- avendo lo stack vuoto --- agli stati $r$ e $q$ --- avendo ancora lo stack vuoto; allora, $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack;
                         \end{itemize}
                 \end{enumerate}
             \item \tit{Seconda implicazione.} La dimostrazione procede per induzione sul numero di passaggi della computazione di $w$, da parte di $P'$, tra gli stati $p$ e $q$.
                 \begin{enumerate}[label=]
                     \item \tit{Caso base.} Se la computazione è composta da 0 passaggi, allora inizia e finisce nello stesso stato, dunque inizia e termina in $p$ stesso; inoltre, in 0 passaggi $P'$ non può leggere nessun carattere, dunque $w = \varepsilon$; allora, per costruzione di $R$, si ha che $A_{p,p} \to \varepsilon \in R \implies A_{p,p} \derives w$.
                     \item \tit{Ipoesi induttiva forte.} Dati due stati $p, q \in Q'$, se una stringa $w$ porta $P'$ dallo stato $p$ --- avendo lo stack vuoto --- allo stato $q$ --- avendo ancora lo stack vuoto --- attraverso al più $k$ passaggi (con $k \ge 0$), allora $A_{p,q}$ è in grado di derivare $w$.
-                    \item \tit{Passo induttivo.} È necessario dimostrare che l'ipotesi induttiva sia ancora verificata per computazioni costituite da $k + 1$ passaggi. Se lo stack deve essere vuoto sia all'inizio della computazione (dunque su $p$) sia al termine (dunuqe su $q$), allora o lo stack non si è mai svuotato durante l'intera computazione, oppure esistono alcuni passaggi in cui lo stack si svuota e riempie nuovamente, e dunque:
+                    \item \tit{Passo induttivo.} È necessario dimostrare che l'ipotesi induttiva sia ancora verificata per computazioni costituite da $k + 1$ passaggi. Se lo stack deve essere vuoto sia all'inizio della computazione (dunque su $p$) sia al termine (dunuqe su $q$), allora o lo stack non è mai stato vuoto durante l'intera computazione --- se non all'inizio ed alla fine --- oppure esistono alcuni passaggi --- diversi dal primo e dall'ultimo --- in cui lo stack si svuota e riempie nuovamente, e dunque:
 
                         \begin{itemize}
                             \item nel primo caso, il primo simbolo che viene inserito all'interno dello stack deve necessariamente coincidere con l'ultimo che viene rimosso, e sia questo $u \in \Gamma$; siano inoltre:
@@ -1640,13 +1640,21 @@
                                     \item $b \in \Sigma_\varepsilon$ l'ultimo input letto, terminando in $q$;
                                 \end{itemize}
 
-                                allora, segue che $(r, u) \in \delta'(p, a, \varepsilon)$ e $(q, \varepsilon) \in \delta'(s, b, u)$; si consideri ora la regola $A_{p,q} \to a A_{r,s} b \in R$ presente tra le regole di $G$, e sia $y$ la sottostringa di $w$ tale che $w = ayb$ (e dunque $A_{r,s} \derives y$); si noti che, se $w = ayb$, allora $y$ non ha necessità di rimuovere $u$ dallo stack, ed è dunque in grado di portare $P'$ dallo stato $r$ allo stato $s$ lasciando lo stack invariato; allora, poiché la porzione di computazione di $y$ è composta da $(k + 1) - 2 = k - 1$ passaggi, è possibile applicare su essa l'ipotesi induttiva forte, per la quale $A_{r,s} \derives y$; allora si ha che $$A_{p,q} \yields a A_{r,s}b \derives ayb = w \implies A{p,q} \derives w$$
-                            \item differentemente, nel secondo caso si assuma esistauno stato $r \in Q'$ tale per cui la computazione veda vuoto lo stack di $P'$ in $r$ ; allora, poiché la computazione da $p$ a $q$ è composta da $k + 1$ passaggi, le computazioni da $p$ ad $r$, e da $r$ a $q$ possono entrambe contenere al massimo $k$ passaggi; allora, chiamate rispettivamente $y, z \in \Sigma_\varepsilon^*$ gli input letti durante le due porzioni di computazione (si noti allora che $w = yz$), si ha che per ipotesi induttiva forte $A_{p,r} \derives y$ e $A_{r,q} \derives z$; dunque, poiché la regola $A_{p,q} \to A_{p,r}A_{r,q} \in R$ è presente tra le regole di $G$, si ha che $$A_{p,q} \yields A{p,r}A_{r,q} \derives yz = w$$
+                                allora, segue che $(r, u) \in \delta'(p, a, \varepsilon)$ e $(q, \varepsilon) \in \delta'(s, b, u)$, e sia $y$ la stringa che permette di portare $P'$ dallo stato $r$ allo stato $s$; inoltre, poiché
+
+                                \begin{itemize}
+                                    \item la computazione da $p$ a $q$ deve lasciare invariato lo stack
+                                    \item $u \in \Gamma$ viene posto all'interno dello stack all'inizio della computazione
+                                    \item $u \in \Gamma$ viene rimosso dallo stack alla fine della computazione
+                                \end{itemize}
+
+                                segue necessariamente che $y$ deve lasciare lo stack invariato anche'essa; questo dimostra che $y$ è dunque in grado di portare $P'$ dallo stato $r$ allo stato $s$ lasciando lo stack invariato; allora, poiché la porzione di computazione di $y$ è composta da $(k + 1) - 2 = k - 1$ passaggi, è possibile applicare su essa l'ipotesi induttiva forte, per la quale $A_{r,s} \derives y$; allora, poiché $A_{p,q} \to aA_{r,s}b \in R$ per costruzione di $G$, si ha che $$A_{p,q} \yields a A_{r,s}b \derives ayb = w \implies A_{p,q} \derives w$$
+                            \item differentemente, nel secondo caso si assuma esista uno stato $r \in Q'$ tale per cui la computazione veda vuoto lo stack di $P'$ in $r$ ; allora, poiché la computazione da $p$ a $q$ è composta da $k + 1$ passaggi, le computazioni da $p$ ad $r$, e da $r$ a $q$ possono entrambe contenere al massimo $k$ passaggi; allora, chiamate rispettivamente $y, z \in \Sigma^*$ gli input letti durante le due porzioni di computazione (si noti allora che $w = yz$), si ha che per ipotesi induttiva forte $A_{p,r} \derives y$ e $A_{r,q} \derives z$; dunque, poiché la regola $A_{p,q} \to A_{p,r}A_{r,q} \in R$ è presente tra le regole di $G$, si ha che $$A_{p,q} \yields A_{p,r}A_{r,q} \derives yz = w$$
                         \end{itemize}
                 \end{enumerate}
         \end{enumerate}
 
-        In particolare, $A_{q_0, q_\mathrm{accept}}$ è in grado di derivare una stringa $w$ se e solo se $w$ porta $P'$ dallo stato $q_0$ --- avendo lo stack vuoto --- allo stato $q_\mathrm{accept}$ --- avendo ancora lo stack vuoto --- o equivalentemente, $P'$ accetta $w$. Allora, segue che $$A_{q_0, q_\mathrm{accept}} \derives w \iff w \in L(G) \iff w \in L(P')$$ e dunque, poiché $L(G) = L(P') = L(P) = L$, segue la tesi.
+        In particolare, $A_{q_0, q_\mathrm{accept}}$ è in grado di derivare una stringa $w$ se e solo se $w$ porta $P'$ dallo stato $q_0$ --- avendo lo stack vuoto --- allo stato $q_\mathrm{accept}$ --- avendo ancora lo stack vuoto --- o equivalentemente, $P'$ accetta $w$. Allora, segue che $$w \in L(G) \iff A_{q_0, q_\mathrm{accept}} \derives w \iff w \in L(P') = L(P) = L$$ implicando che $L(G) = L$.
     }
 
     \section{Linguaggi non context-free}

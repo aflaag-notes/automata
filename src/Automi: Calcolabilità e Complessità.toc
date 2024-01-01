@@ -43,12 +43,12 @@
 \contentsline {subsection}{\numberline {2.2.2}Equivalenze}{42}{subsection.2.2.2}%
 \contentsline {section}{\numberline {2.3}Linguaggi non context-free}{48}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Pumping lemma}{48}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Operazioni context-free}{50}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Unione}{50}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Concatenazione}{51}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.4}Operazioni context-free}{51}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Unione}{51}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Concatenazione}{52}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}Star}{52}{subsection.2.4.3}%
 \contentsline {subsection}{\numberline {2.4.4}Intersezione}{52}{subsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.4.5}Complemento}{52}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.5}Complemento}{53}{subsection.2.4.5}%
 \contentsline {chapter}{\numberline {3}Decidibilità}{55}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Macchine di Turing}{55}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Definizioni}{55}{subsection.3.1.1}%
