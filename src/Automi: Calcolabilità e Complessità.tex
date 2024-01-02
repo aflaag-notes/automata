@@ -766,7 +766,7 @@
 
         \begin{itemize}
             \item $q_0 = q_{\mathrm{start}}$
-            \item $\forall i \in [0, n - 1] \quad w_i \in L(\delta(q_i, q_{i + 1}))$, ovvero, $w_i$ deve far parte del linguaggio rappresentato dall'espressione regolare sull'arco da $q_i$ a $q_{i + 1}$
+            \item $\forall i \in [0, n - 1] \quad w_{i + 1} \in L(\delta(q_i, q_{i + 1}))$, ovvero, $w_i$ deve far parte del linguaggio rappresentato dall'espressione regolare sull'arco da $q_i$ a $q_{i + 1}$
             \item $q_n = q_{\mathrm{accept}}$
         \end{itemize}
     \end{frameddefn}
@@ -1051,7 +1051,7 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un \DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $r_1 := q_1$ e siano $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, $n \ge p \iff n + 1 \ge p + 1$, e dunque per il \cref{pigeonhole}, poiché $p := |Q|$, due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato; siano $r_j$ il primo ed $r_l$ il secondo, con $j \neq l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
+        Poiché $A$ è un linguaggio regolare in ipotesi, per definizione esiste un \DFA $M = (Q, \Sigma, \delta, q_1, F)$ in grado di riconoscerlo. Allora, sia $p := |Q|$, e sia $s \in A \mid s = s_1 s_2 \cdots s_n$ tale che $\forall i \in [1, n] \quad s_i \in \Sigma$, e $n \ge p$. Inoltre, sia $r_1 := q_1$ e siano $$\forall i \in [1, n] \quad r_{i + 1} := \delta(r_i, s_i)$$ la sequenza di stati attraversati da $M$ mentre elabora $s$; dunque, si ha che $r_{n + 1} \in F$. Si noti che la sequenza di stati ha dunque cardinalità $$|\{r_1, \ldots, r_{n + 1}\}| = n + 1$$ in quanto devono essere attraversati $n$ archi, e dunque $n + 1$ stati. Inoltre, si noti che $$n \ge p \implies n + 1 \ge p + 1 \ge p$$ e dunque per il \cref{pigeonhole} due dei primi $p + 1$ stati della sequenza devono necessariamente essere lo stesso stato (poiché $p := \abs{Q}$); siano $r_j$ il primo ed $r_l$ il secondo, con $j < l$ ed $r_j = r_l$. Allora, sicuramente $l \le p + 1$, poiché $r_l$ è uno stato tra i primi $p + 1$.
 
         Si pongano dunque $$\soe{l}{x:= s_1 \cdots s_{j - 1} \\ y := s_j \cdots s_{l - 1} \\ z := s_l \cdots s_n}$$ Allora, si ha che:
 
@@ -1686,60 +1686,42 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un \CFL, per definizione esiste una \CFG $G = (V, \Sigma, R, S)$ che lo genera, e si assuma --- senza perdita di generalità, per il \cref{cfg into cnf} --- che $G$ sia in CNF; sia allora $p := 2^{|V|}$. Inoltre, sia $s \in A \mid |s| \ge p$, e dunque per la \cref{prop pre pump cfl}, poiché $G$ è in CNF, si ha che $$p := 2^{|V|} \le |s| \le 2^{h - 1} \implies 2^{|V|} \le 2^{h - 1} \iff |V| + 1 \le h$$ dove $h$ è l'altezza dell'albero di derivazione di $s$.
+        Poiché $A$ è un \CFL, per definizione esiste una \CFG $G = (V, \Sigma, R, S)$ che lo genera, e si assuma --- senza perdita di generalità, per il \cref{cfg into cnf} --- che $G$ sia in CNF; sia allora $p := 2^{|V|}$. Inoltre, sia $s \in A \mid |s| \ge p$, e dunque per la \cref{prop pre pump cfl}, poiché $G$ è in CNF, si ha che $$p := 2^{|V|} \le |s| \le 2^{h - 1} \implies 2^{|V|} \le 2^{h - 1} \iff |V| + 1 \le h$$ dove $h$ è l'altezza dell'albero di derivazione di $s$. Inoltre, in tale albero si consideri un cammino che parta da $S$ e abbia lunghezza $h$; allora, per quanto detto, il cammino attraversa $k$ nodi, dove $k \ge \abs{V} + 2$, dei quali solo l'ultimo è un terminale, dunque il cammino contiene $k - 1$ variabili, dove $$k \ge \abs{V} + 2 \implies k - 1 \ge \abs{V} + 1 \ge \abs{V}$$ dunque per il \cref{pigeonhole} due delle ultime TODO PERCHÉ LE ULTIME $\abs{V} + 1$ variabili del cammino devono necessariamente essere la stessa variabile; siano $A_j$ la prima ed $A_l$ la seconda, con $j < l$ e $A_j = A_l$, e dunque sicuramente $$j \ge k - 1 - \rbk{\abs{V} + 1} + 1 = k - \abs{V} - 1$$
+        
+        Si pongano dunque $$\soe{l}{u, z \mid S \derives u A_j z \\ v, y \mid A_j \derives v A_l y \\ x \mid A_l \derives x}$$ Allora, si ha che:
 
-        TODO DA FINIRE
+        \begin{itemize}
+            \item poiché $A_j = A_l$, in ogni derivazione $A_j \derives vA_ly$ è possibile sostituire $A_l$ con $A_j$, anche ricorsivamente, infatti $$A_j \derives vA_l y = vA_jy \derives vvA_lyy = v^2A_ly^2 = v^2 A_j y^2 \derives \ldots$$ di conseguenza $$\forall i > 0 \quad S \derives uA_j z \derives uv^i A_l y^iz \derives u v^i x y^i z$$ ed inoltre per $i = 0$ si ha che $uv^i xy^i z = uxy$ che è derivabile come segue $$S \derives u A_j z = u A_l z \derives uxz$$ questo dimostra la prima condizione della tesi;
+            \item poiché $G$ è in CNF in ipotesi, la derivazione $A_j \derives v A_l y$ deve aver necessariamente utilizzato una regola della forma $A_j \to BC$ dove $B \derives v A_l$ e $C \derives y$ oppure $B \derives v$ e $C \derives A_l y$; allora, poiché l'unica $\varepsilon$-regola ammessa in una grammatica in CNF è $S \to \varepsilon$, TODO, segue che $v \neq \varepsilon$ oppure $y \neq \varepsilon$; questo dimostra la seconda condizione della tesi;
+            \item poiché $A_j$ si trova tra le ultime $\abs{V} + 1$ variabili del cammino considerato, chiamando $h'$ il suo sottoalbero, esso deve avere altezza al massimo $\abs{V} + 1$; allora, poiché $$h' \le \abs{V} + 1 \iff h' - 1 \le \abs{V}$$ per la \cref{prop pre pump cfl} segue che $\abs{vxy} \le 2^{h' - 1} \le 2^{\abs{V}} =:$ dimostrando dunque la terza condizione della tesi.
+        \end{itemize}
     \end{proof}
-
-    % \begin{proof}
-    %     Poiché $A$ è un \CFL, per definizione esiste una \CFG $G= (V, \Sigma, R, S)$ che lo genera; sia $b$ il massimo numero di simboli nel lato destro di una regola in $R$, e dunque all'interno di ogni albero sintattico che è possibile costruire attraverso $G$ non sarà possibile avere un nodo con più di $b$ figli. Dunque, partendo da $S$, per la prima sostituzione effettuata, si avranno al più $b$ foglie all'interno dell'albero; per la seconda, se ne avranno al più $b^2$, ed in generale, un albero di altezza al più $h$ avrà al più $b^h$ foglie, dunque la stringa generata avrà lunghezza al più $b^h$. Di conseguenza, una stringa di lunghezza pari almeno a $b^h + 1$ deve essere stata generata da un albero avente altezza pari almeno ad $h + 1$.
-    %
-    %     Sia $p := b^{|V| + 1}$, e sia $s \in A$ tale che $|s| \ge p$; si noti che $b^{|V| + 1} \ge b^{|V|} + 1$, e poiché $s$ ha lunghezza pari almeno a $p$, allora --- per quanto detto precedentemente --- $s$ deve essere stata generata attraverso un albero sintattico avente altezza pari almeno a $|V| + 1$. Sia allora $\tau$ l'albero sintattico con minor numero di nodi tale da generare $s$; poiché $h_\tau \ge |V| + 1$, il cammino $\mathscr{C}$ più lungo dalla radice ad una foglia in $\tau$ ha lunghezza almeno $|V| + 1$, avente dunque almeno $|V| + 2$ nodi, dove il primo è la radice --- ovvero $S$, una variabile --- l'ultimo è la foglia --- necessariamente un terminale --- e tutti gli altri nodi nel mezzo sono variabili; dunque il cammino è composto da almeno $|V| + 1$ variabili. Si noti che $G = (V, \Sigma, R, S)$, dunque il numero di variabili di $G$ è $|V|$; allora, per il \cref{pigeonhole}, all'interno del cammino preso in considerazione, deve esistere TODO ALMENO? una variabile ripetuta più di 1 volta, e sia questa $\rho$. Si asssuma che $\rho \neq S$. TODO SE $\rho = S$???
-    %
-    %     Siano $u, v, x, y, z$ scelte come segue:
-    %
-    %     \centeredimage{0.15}{../assets/pump_cfl1.png}
-    %
-    %     Poiché $\rho$ è ripetuta, è possibile sostituire il suo sottoalbero nei punti in cui essa si ripete, ottenendo ad esempio i due seguenti alberi sintattici ancora validi:
-    %     
-    %     \centeredimage{0.3}{../assets/pump_cfl2.png}
-    %
-    %     Si noti che: 
-    %
-    %     \begin{itemize}
-    %         \item sostituzione di sinistra genera la stringa $uxz$, che dunque è in $A$, mentre la sostituzione di sinistra genera la stringa $uv^2xy^2z$, che dunque è in $A$ anch'essa, e si noti che sarebbe possibile continuare a sostituire il sottoalbero di $\rho$ ripetutamente nella rappresentazione di destra; dunque, questo dimostra la prima condizione del lemma, ovvero $\forall i \ge 0 \quad uv^ixy^iz \in A$;
-    %         \item se $v = y = \varepsilon$, allora TODO NON HO CAPITO
-    %         \item l'occorrenza più in alto di $\rho$ genera la stringa $vxy$, e $\rho$ è stata scelta diversa da $S$, dunque $\rho$ deve necessariamente trovarsi tra le $|V| + 1$ variabili più in basso di $\mathscr{C}$, il quale era stato scelto tale che fosse il più lungo cammino dalla radice ad una foglia; allora, il sottoalbero di $\rho$ è alto al più $|V| + 1$ TODO PERCHÉ NON $|V|$??, dunque per quanto detto precedentemente, tale albero può generare una stringa di lunghezza al più $b^{|V|} + 1 =: p$, e dunque $|vxy| \le p$.
-    %     \end{itemize}
-    %
-    %     Allora, sono soddisfatte tutte le condizioni della tesi.
-    % \end{proof}
 
     \begin{example}[Pumping lemma in \CFL]
         \label{pump cfl ex1}
-        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \ttt 2 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{\CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w:=\ttt 0^p \ttt 1^p \ttt 2 ^p \implies |w| = 3p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1 ^p \ttt 2^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
+        Si consideri il linguaggio $$L := \{\ttt 0 ^n \ttt 1 ^n \ttt 2 ^n \mid n \in \N\}$$ e per assurdo, sia $L \in \mathrm{\CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w:=\ttt 0^p \ttt 1^p \ttt 2 ^p \implies |w| = 3p > p$$ avente lunghezza sicuramente maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1 ^p \ttt 2^p = uvxyz$, può verificarsi solo uno dei seguenti:
 
         \begin{itemize}
-            \item $vxy$ contiene solamente $\ttt 0$, dunque $v^0xy^0$ contiene solamente $\ttt 0$
-            \item $vxy$ contiene solamente $\ttt 1$, dunque $v^0xy^0$ contiene solamente $\ttt 1$
-            \item $vxy$ contiene solamente $\ttt 2$, dunque $v^0xy^0$ contiene solamente $\ttt 2$
-            \item $vxy$ contiene soltanto $\ttt 0$ e $\ttt 1$, dunque $v^0xy^0$ può contenere solo $\ttt 0$, solo $\ttt 1$, o sia $\ttt 0$ che $\ttt 1$
-            \item $vxy$ contiene soltanto $\ttt 1$ e $\ttt 2$, dunque $v^0xy^0$ può contenere solo $\ttt 1$, solo $\ttt 2$, o sia $\ttt 1$ che $\ttt 2$
+            \item $vxy$ contiene solamente $\ttt 0$;
+            \item $vxy$ contiene solamente $\ttt 1$;
+            \item $vxy$ contiene solamente $\ttt 2$;
+            \item $vxy$ contiene soltanto $\ttt 0$ e $\ttt 1$;
+            \item $vxy$ contiene soltanto $\ttt 1$ e $\ttt 2$;
         \end{itemize}
         
-        e dunque, indipendentemente dalla scelta di $v, x, y$ TODO DA FINIRE IL FINALE NON HA SENSO
+        Allora, prendendo in esame ad esempio il primo caso --- poiché è possibile ripetere il ragionamento analogo per ogni altro --- si ha che $$vxy =  \ttt 0 ^{|vxy|} \implies w = uvxyz = \ttt 0^{|u|}\ttt 0 ^{|vxy|} \ttt 0^{p - |u| - |vxy|} \ttt 1 ^p \ttt 2 ^p$$ e poiché per il pumping lemma $\forall i \ge 0 \quad uv^ixy^iz \in L$, ad esempio per $i = 0$, si ha che $$uv^i xy^iz = u v^0 xy^0 z = uxz = \ttt 0 ^{|u|} \ttt 0 ^ {|x|} \ttt 0 ^{p - |u|- |vxy|} \ttt 1^p \ttt 2^p$$ e dunque $$uxz \in L \iff |u| + |x| + p - |u| - |vxy| = p \iff - |v| - |y| = 0 \iff |vy| = 0$$ ma per le condizioni del pumping lemma $|vy| > 0$ $\lightning$.
     \end{example}
 
     \begin{example}[Pumping lemma in \CFL]
         \label{pump cfl ex2}
-        Si consideri il linguaggio $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e per assurdo, sia $L \in \mathrm{\CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w := \ttt 0 ^p \ttt 1 ^p \ttt 0 ^p \ttt 1 ^p \implies |w| = 4p > p$$ avente sicuramente lunghezza maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1^p \ttt 0^p \ttt 1^p = uv^ixy^iz$ per ogni $i \in \N$, allora si può verificare solo uno dei seguenti:
+        Si consideri il linguaggio $$L := \{ww \mid w \in \{\ttt 0, \ttt 1\}^*\}$$ e per assurdo, sia $L \in \mathrm{\CFL}$, e dunque per esso vale il \cref{pump cfl}. Allora, sia $p \in \N$ la lunghezza del pumping di $L$, e si consideri la seguente stringa $$w := \ttt 0 ^p \ttt 1 ^p \ttt 0 ^p \ttt 1 ^p \implies |w| = 4p > p$$ avente sicuramente lunghezza maggiore di $p$. Siano inoltre $u, v, x, y, z$ tali da soddisfare il pumping lemma, ed in particolare $|vxy| \le p$, ma poiché $w := \ttt 0^p \ttt 1^p \ttt 0^p \ttt 1^p = uvxyz$, si può verificarsi uno dei seguenti:
 
         \begin{itemize}
-            \item $vxy$ contiene solamente $\ttt 0$ o solamente $\ttt 1$, e dunque assumendo che ad esempio si trovi nella prima porzione di $\ttt 0$ di $w$, per ogni $i > 1$ si ha che la stringa diventa della forma $$w := \ttt 0 ^{p + k} \ttt 1 \ttt 0 \ttt 1$$ per qualche $k$, e dunque non può essere della forma $w'w'$ con $w' \in \{\ttt 0, \ttt1\}^*$;
+            \item $vxy$ contiene solamente $\ttt 0$ o solamente $\ttt 1$, e dunque assumendo che ad esempio si trovi nella prima porzione di $\ttt 0$ di $w$, per ogni $i > 1$ si ha che la stringa diventa della forma $$w = \ttt 0 ^{p + k} \ttt 1 \ttt 0 \ttt 1$$ per qualche $k$, e dunque non può essere della forma $w'w'$ con $w' \in \{\ttt 0, \ttt1\}^*$;
             \item $vxy$ contiene sia $\ttt 0$ che $\ttt 1$, e dunque $vxy$ si trova a cavallo tra due sequenze di $\ttt 0$ ed $\ttt 1$; allora, assumendo che ad esempio si trovi nella prima regione di $w$ che comprende sia $\ttt 0$ che \ttt 1, per ogni $i > 1$, si ha che la stringa diventa della forma $$w := \ttt 0 ^{p + j} \ttt 1 ^{p + h} \ttt 0 ^p \ttt 1 ^ p$$ per qualche $j$ ed $h$, e dunque non può essere della forma $w'w'$ con $w' \in \{\ttt 0, \ttt 1\}^*$.
         \end{itemize}
         
-        Allora, in nessuno dei casi possibili $w := u v^i x y^i z \in L$ $\lightning$.
+        Allora, in nessuno dei casi possibili $u v^1 x y^1 z \in L$ $\lightning$.
     \end{example}
 
     \begin{framedobs}{Condizioni del pumping lemma (\CFL)}
@@ -1809,7 +1791,7 @@
     \subsection{Intersezione}
 
     \begin{framedprop}{$\mathrm{\CFL}$ non è chiuso sull'intersezione}
-        Siano $L_1$ ed $L_2$ due \CFL; allora $L_1 \cap L_2$ non è necessariamente un \CFL.
+        Siano $L_1$ ed $L_2$ due \CFL; allora $L_1 \cap L_2$ non è necessariamente un \CFL. In simboli $$\exists L_1, L_2 \in \CFL \mid L_1 \cap L_2 \notin \CFL$$
     \end{framedprop}
 
     \begin{proof}
@@ -1833,13 +1815,13 @@
             \end{tabular}
         \end{center}
 
-        Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n\} \notin \mathrm{\CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{\CFL}$ per loro stessa definizione, segue la tesi.
+        Si noti che la prima grammatica, partendo da $S$, compone stringhe costituite da $TU$, dove $T$ è solo in grado di diventare una combinazione di $\ttt 0 T \ttt 1$ o terminare --- e dunque produce stringhe della forma $\ttt 0^n \ttt 1^n$ --- mentre $U$ è solo in grado di diventare una combinazione di $\ttt 2 U$ o terminare --- e dunque produce stringhe della forma $\ttt 2 ^ k$; allora, il suo linguaggio è $$L(G_1) = \{\ttt 0^n \ttt 1^n \ttt 2^k \mid n, k \in \N\}$$ Per ragionamento analogo, è possibile verificare che le stringhe che genera $G_2$ appartengono al linguaggio $$L(G_2) = \{\ttt 0^k \ttt 1^n \ttt 2^n \mid n, k \in \N\}$$ Infine, si noti che $$L(G_1) \cap L(G_2) = \{\ttt 0^n \ttt 1^n \ttt 2^n \mid n \in \N\}$$ poiché il primo linguaggio contiene le stringhe aventi stesso numero di \ttt 0 e di \ttt 1, ma arbitrario numero di \ttt 2, mentre il secondo contiene le stringhe aventi stesso numero di \ttt 1 e \ttt 2, ma arbitrario numero di \ttt 0, dunque la loro intersezione deve necessariamente essere il linguaggio composto da stringhe aventi stesso numero di \ttt 0, \ttt 1 e \ttt 2. Si noti però che, come dimostrato nell'\cref{pump cfl ex1}, $\{\ttt 0^n \ttt 1^n \ttt 2^n \mid n \in \N\} \notin \mathrm{\CFL}$. Allora, poiché $L(G_1), L(G_2) \in \mathrm{\CFL}$ per loro stessa definizione, segue la tesi.
     \end{proof}
 
     \subsection{Complemento}
 
     \begin{framedprop}{$\mathrm{\CFL}$ non è chiuso sul complemento}
-        Sia $L$ un \CFL; allora $\overline L$ non è necessariamente un \CFL.
+        Sia $L$ un \CFL; allora $\overline L$ non è necessariamente un \CFL. In simboli $$\exists L \in \CFL \mid \overline L \notin \CFL$$
     \end{framedprop}
 
     \begin{proof}
@@ -1870,76 +1852,7 @@
 
         Dunque, poiché $S \derives x \iff x \in \overline L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \overline L \implies \overline L \in \mathrm{\CFL}$$ e dunque segue la tesi.
     \end{proof}
-
-    %    \begin{figure}[H]
-    %        \centering
-    %        \begin{tikzpicture}[-,>=stealth,shorten >=1pt,auto,node distance=3cm,thick,main node/.style={scale=0.9,circle,draw=none,font=\sffamily\normalsize}]
-    %            \node[main node] (1) {$q_1$};
-    %            \node[main node] (3) [below left of=1] {$s_2$};
-    %            \node[main node] (2) [left of=3] {$s_1$};
-    %            \node[main node] (4) [right of=3] {$\ldots$};
-    %            \node[main node] (5) [right of=4] {$s_b$};
-    %            \node[main node] (7) [below of=2] {$\ldots$};
-    %            \node[main node] (6) [left of=7] {$s^1_1$};
-    %            \node[main node] (8) [right of=7] {$s^1_b$};
-    %            \node[main node] (10) [below of=5] {$\ldots$};
-    %            \node[main node] (9) [left of=10] {$s^b_1$};
-    %            \node[main node] (11) [right of=10] {$s^b_b$};
-    % 
-    %            \path[every node/.style={font=\sffamily\small}]
-    %                (1) edge (2)
-    %                (1) edge (3)
-    %                (1) edge (5)
-    %                (2) edge (6)
-    %                (2) edge (8)
-    %                (5) edge (9)
-    %                (5) edge (11)
-    %            ;
-    %         \end{tikzpicture}
-    %         \caption{Rappresentazione dell'albero sintattico descritto.}
-    %    \end{figure}
-
-    % \section{Linguaggi context-free deterministici}
-    %
-    % \subsection{Automi a pila deterministici}
-    %
-    % \begin{frameddefn}{D\PDA}
-    %     Un \tbf{D\PDA} (\tit{Deterministic Pushdown Automaton}) è una sestupla $(Q, \Sigma, \Gamma, \delta, q_0, F)$, dove
-    %
-    %     \begin{itemize}
-    %         \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
-    %         \item $\Sigma$ è l'\tbf{alfabeto} dell'automa, un insieme \tit{finito}
-    %         \item $\Sigma$ è l'\tbf{alfabeto dello stack}, un insieme \tit{finito}
-    %         \item $\func{\delta}{Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon}{(Q \times \Gamma_\varepsilon) \cup \{\emptyset \}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
-    %         \item $q_0 \in Q$ è lo \tbf{stato iniziale}
-    %         \item $F \subseteq Q$ è l'\tbf{insieme degli stati accettanti}
-    %     \end{itemize}
-    %
-    %     Si noti che, nonostante l'automa sia deterministico, un D\PDA è in grado di lavorare con $\varepsilon$.
-    %
-    %     Poiché un D\PDA è la controparte deterministica di un \PDA, $\delta$ deve verificare la seguente condizione: per ogni $q \in Q, a \in \Sigma, x \in \Gamma$, solo uno tra $\delta(q, a, x)$, $\delta(q, a, \varepsilon)$, $\delta(q, \varepsilon, x)$ e $\delta(q, \varepsilon, \varepsilon)$ è diverso da $\emptyset$. In particolare, $\delta(q, \varepsilon, x)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-input}, mentre $\delta(q, a, \varepsilon)$ è detta \tbf{$\varepsilon$-mossa} di \tbf{$\varepsilon$-pila}.
-    %
-    %     Se la pila del D\PDA è vuota, questo può fare mosse solo se $\delta$ specifica una mossa che elimina $\varepsilon$, altrimenti non sono previste mosse lecite ed il D\PDA rifiuta l'input senza leggerne il resto; questa situazione viene detta \tit{hanging}. Inoltre, si verifica un rifiuto anche se il D\PDA effettua una sequenza infinita di mosse $\varepsilon$-input, senza leggere l'input oltre un certo punto; questa situazione viene detta \tit{looping}.
-    % \end{frameddefn}
-    %
-    % \begin{framedlem}{\DPDA equivalenti}
-    %     Ogni D\PDA ha un D\PDA equivalente che legge sempre l'intera stringa di input; dunque non si presenta mai né \tit{hanging} né \tit{looping}.
-    % \end{framedlem}
-    %
-    % \begin{proof}
-    %     Sia $P = (Q, \Sigma, \Gamma, \delta, q_0, F)$ un D\PDA; in primo luogo, $q_0$ viene rimpiazzato con un nuovo stato iniziale $q_{\mathrm{start}}$; successivamente, $q_{\mathrm{reject}}$ viene aggiunto ad $F$, ed inoltre, per ogni $r \in Q, a \in \Sigma_\varepsilon, x, y \in \Gamma_\varepsilon$ si effettuano le seguenti variazioni:
-    %
-    %     \begin{itemize}
-    %         \item per ogni $q \in Q$ si aggiunge uno stato $q_\mathrm{a}$, ed inoltre $$\forall q \in Q \quad \delta(q, \varepsilon, x) = (r, y) \implies \delta(q_\mathrm{a}, \varepsilon, x) := (r_\mathrm{a}, y)$$ inoltre $$q \in F \implies \delta(q, \varepsilon, x) := (r_\mathrm{a}, y)$$
-    %     \end{itemize}
-    %
-    %     TODO DA FINIRE NON HA NESSUN SENSO QUESTA DIMOSTRAZIONE
-    % \end{proof}
-    %
-    % \begin{frameddefn}{D\CFL}
-    %     Sia $M$ un D\PDA, e sia $A$ il linguaggio che riconosce; allora, $A$ è detto \tbf{D\CFL} (\tit{Deterministic Context-Free Language}).
-    % \end{frameddefn}
-
+ 
     \chapter{Decidibilità}
 
     \section{Macchine di Turing}
