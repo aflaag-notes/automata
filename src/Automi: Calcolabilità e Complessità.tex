@@ -2169,8 +2169,7 @@
     \begin{proof}
         Sia $\Sigma$ un alfabeto, e sia $\prec$ una relazione d'ordine su $\Sigma^*$ definita come segue: $$\forall x, y \in \Sigma^* \quad x \prec y \iff \soe{ll}{|x| < |y| & |x| \neq |y| \\ x \prec_l y & l := |x| = |y|}$$ dove $\prec_l$ è la relazione d'ordine dell'ordinamento lessicografico. Si noti che, per sua stessa definizione, la relazione d'ordine $\prec$ risulta essere totale; di conseguenza, è possibile ordinare \tit{totalmente} le stringhe presenti in $\Sigma^*$, ed è dunque possibile definire una biezione $\func{f}{\N}{\Sigma^*}$ (è sufficiente associare $i \in \N$ con l'$i$-esima stringa ottenutta dall'ordinamento descritto). Questo dimostra che $\Sigma^*$ è numerabile, per qualsiasi alfabeto $\Sigma$ (una volta stabilito un ordinamento lessicografico per caratteri esterni alle lettere dell'alfabeto canonico, se presenti).
 
-
-        Sia $$\mathcal M := \{\abk M \mid M \in \TM\}$$ che sarà necessariamente definito su qualche alfabeto $\Sigma$ in grado di rappresentare ogni sua possibile codifica; allora, poiché $\mathcal M \subseteq \Sigma^*$, e $\Sigma^*$ è numerabile per quanto detto in precedenza, segue che $\mathcal M$ è necessariamente nuerabile anch'esso
+        Sia dunque $$\mathcal M := \{\abk M \mid M \in \TM\}$$ che sarà necessariamente definito su qualche alfabeto $\Sigma$ in grado di rappresentare ogni sua possibile codifica; allora, poiché $\mathcal M \subseteq \Sigma^*$, e $\Sigma^*$ è numerabile per quanto detto in precedenza, segue che $\mathcal M$ è necessariamente nuerabile anch'esso
     \end{proof}
 
     \begin{framedprop}[label={not num B}]{Non-numerabilità di $\mathcal B$}
@@ -2192,7 +2191,7 @@
             \end{tabular}
         \end{center}
 
-        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \overline{f(i)_i}$$ estendendo la definizione di $i$-esimo carattere anche allo 0; allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora la $k$-esima cifra di $b$ (ovvero $b_k$) dovrebbe essere il negato di $f(k)_k$ stesso, ma $f(k)_k = b_k$ poiché $f(k) = b$ $\lightning$.
+        e si consideri la stringa binaria descritta dall'opposto delle cifre sulla \tit{diagonale} di tale matrice, ovvero $$b := \ttt{11000} \cdots$$ Essa dunque è definita come segue: $$b \in \{\ttt 0, \ttt 1\}^* \mid b_i = \overline{f(i)_i}$$ (si noti che si stanno considerando gli indici delle stringhe che partono da 0); allora per sua stessa definizione $b$ non può essere presente nella mappa di $f$, poiché se esistesse un $k \in \N$ tale che $f(k) = b$, allora $b_k = f(k)_k$, in quanto $b_k$ è la $k$-esima cifra di $b = f(k)$, ma per definizione di $b$ si avrebbe anche che $b_k = \overline{f(k)_k}$ e dunque $$f(k) = b_k = \overline{f(k)_k}$$ che è chiaramente impossibile $\lightning$.
     \end{proof}
 
     \begin{framedprop}[label={bij set}]{Biezioni tra insiemi}
@@ -2207,7 +2206,7 @@
             \item $f$ è biettiva, ed in particolare è suriettiva, e dunque $$\forall y \in B \quad \exists x \in A \mid f(x) = y$$ il che implica necessariamente che $|B| \subseteq |A|$.
         \end{itemize}
 
-        Allora $|A| = |B|$, come volevasi dimostrare.
+        Allora segue la tesi per doppia implicazione.
     }{
         Se $A$ e $B$ sono due insiemi tali che $|A| = |B|$, allora è sicuramente possibile definire una mappa \tit{uno-ad-uno} che associa gli elementi di $A$ con gli elementi di $B$, poiché non possono essere presenti elementi in eccesso o in difetto in nessuno dei due insiemi in quanto hanno la stessa cardinalità; dunque, segue la tesi.
     }
