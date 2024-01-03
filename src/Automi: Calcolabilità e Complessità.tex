@@ -1686,14 +1686,14 @@
     \end{framedlem}
 
     \begin{proof}
-        Poiché $A$ è un \CFL, per definizione esiste una \CFG $G = (V, \Sigma, R, S)$ che lo genera, e si assuma --- senza perdita di generalità, per il \cref{cfg into cnf} --- che $G$ sia in CNF; sia allora $p := 2^{|V|}$. Inoltre, sia $s \in A \mid |s| \ge p$, e dunque per la \cref{prop pre pump cfl}, poiché $G$ è in CNF, si ha che $$p := 2^{|V|} \le |s| \le 2^{h - 1} \implies 2^{|V|} \le 2^{h - 1} \iff |V| + 1 \le h$$ dove $h$ è l'altezza dell'albero di derivazione di $s$. Inoltre, in tale albero si consideri un cammino che parta da $S$ e abbia lunghezza $h$; allora, per quanto detto, il cammino attraversa $k$ nodi, dove $k \ge \abs{V} + 2$, dei quali solo l'ultimo è un terminale, dunque il cammino contiene $k - 1$ variabili, dove $$k \ge \abs{V} + 2 \implies k - 1 \ge \abs{V} + 1 \ge \abs{V}$$ dunque per il \cref{pigeonhole} due delle ultime TODO PERCHÉ LE ULTIME $\abs{V} + 1$ variabili del cammino devono necessariamente essere la stessa variabile; siano $A_j$ la prima ed $A_l$ la seconda, con $j < l$ e $A_j = A_l$, e dunque sicuramente $$j \ge k - 1 - \rbk{\abs{V} + 1} + 1 = k - \abs{V} - 1$$
+        Poiché $A$ è un \CFL, per definizione esiste una \CFG $G = (V, \Sigma, R, S)$ che lo genera, e si assuma --- senza perdita di generalità, per il \cref{cfg into cnf} --- che $G$ sia in CNF; sia allora $p := 2^{|V|}$. Inoltre, sia $s \in A \mid |s| \ge p$, e dunque per la \cref{prop pre pump cfl}, poiché $G$ è in CNF, si ha che $$p := 2^{|V|} \le |s| \le 2^{h - 1} \implies 2^{|V|} \le 2^{h - 1} \iff |V| + 1 \le h$$ dove $h$ è l'altezza dell'albero di derivazione di $s$. Inoltre, in tale albero si consideri un cammino che parta da $S$ e abbia lunghezza $h$; allora, per quanto detto, il cammino attraversa $k$ nodi, dove $k \ge \abs{V} + 2$, dei quali solo l'ultimo è un terminale, dunque il cammino contiene $k - 1$ variabili, dove $$k \ge \abs{V} + 2 \implies k - 1 \ge \abs{V} + 1 \ge \abs{V}$$ dunque per il \cref{pigeonhole} due delle ultime $\abs{V} + 1$ variabili del cammino devono necessariamente essere la stessa variabile; siano $A_j$ la prima ed $A_l$ la seconda, con $j < l$ e $A_j = A_l$, e dunque sicuramente $$j \ge k - 1 - \rbk{\abs{V} + 1} + 1 = k - \abs{V} - 1$$
         
         Si pongano dunque $$\soe{l}{u, z \mid S \derives u A_j z \\ v, y \mid A_j \derives v A_l y \\ x \mid A_l \derives x}$$ Allora, si ha che:
 
         \begin{itemize}
             \item poiché $A_j = A_l$, in ogni derivazione $A_j \derives vA_ly$ è possibile sostituire $A_l$ con $A_j$, anche ricorsivamente, infatti $$A_j \derives vA_l y = vA_jy \derives vvA_lyy = v^2A_ly^2 = v^2 A_j y^2 \derives \ldots$$ di conseguenza $$\forall i > 0 \quad S \derives uA_j z \derives uv^i A_l y^iz \derives u v^i x y^i z$$ ed inoltre per $i = 0$ si ha che $uv^i xy^i z = uxy$ che è derivabile come segue $$S \derives u A_j z = u A_l z \derives uxz$$ questo dimostra la prima condizione della tesi;
-            \item poiché $G$ è in CNF in ipotesi, la derivazione $A_j \derives v A_l y$ deve aver necessariamente utilizzato una regola della forma $A_j \to BC$ dove $B \derives v A_l$ e $C \derives y$ oppure $B \derives v$ e $C \derives A_l y$; allora, poiché l'unica $\varepsilon$-regola ammessa in una grammatica in CNF è $S \to \varepsilon$, TODO, segue che $v \neq \varepsilon$ oppure $y \neq \varepsilon$; questo dimostra la seconda condizione della tesi;
-            \item poiché $A_j$ si trova tra le ultime $\abs{V} + 1$ variabili del cammino considerato, chiamando $h'$ il suo sottoalbero, esso deve avere altezza al massimo $\abs{V} + 1$; allora, poiché $$h' \le \abs{V} + 1 \iff h' - 1 \le \abs{V}$$ per la \cref{prop pre pump cfl} segue che $\abs{vxy} \le 2^{h' - 1} \le 2^{\abs{V}} =:$ dimostrando dunque la terza condizione della tesi.
+            \item poiché $G$ è in CNF in ipotesi, la derivazione $A_j \derives v A_l y$ deve aver necessariamente utilizzato una regola della forma $A_j \to BC$ dove $B \derives v A_l$ e $C \derives y$ oppure $B \derives v$ e $C \derives A_l y$; allora, poiché la CNF non ammette $\varepsilon$-regole, segue che $v \neq \varepsilon$ oppure $y \neq \varepsilon$; questo dimostra la seconda condizione della tesi;
+            \item poiché $A_j$ si trova tra le ultime $\abs{V} + 1$ variabili del cammino considerato, chiamando $h'$ il suo sottoalbero, esso deve avere altezza al massimo $\abs{V} + 1$; allora, poiché $$h' \le \abs{V} + 1 \iff h' - 1 \le \abs{V}$$ per la \cref{prop pre pump cfl} segue che $$\abs{vxy} \le 2^{h' - 1} \le 2^{\abs{V}} =: p$$ dimostrando dunque la terza condizione della tesi.
         \end{itemize}
     \end{proof}
 
@@ -1830,12 +1830,12 @@
         \begin{center}
             \begin{tabular}{crcl}
                 $G:$ & $S$ & $\to$ & $A \smid B \smid AB \smid BA$ \\
-                     & $A$ & $\to$ & $\ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 \ttt A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1$ \\
+                     & $A$ & $\to$ & $\ttt 0 \smid \ttt 0 A \ttt 0 \smid \ttt 0 A \ttt 1 \smid \ttt 1 A \ttt 0 \smid \ttt 1 A \ttt 1$ \\
                      & $B$ & $\to$ & $\ttt 1 \smid \ttt 0 B \ttt 0 \smid \ttt 0 B \ttt 1 \smid \ttt 1 B \ttt 0 \smid \ttt 1 B \ttt 1$
             \end{tabular}
         \end{center}
         
-        e si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
+        si noti che le stringhe derivate da $A$ sono tutte le stringhe aventi lunghezza dispari ed uno \ttt 0 al centro, mentre le stringhe derivate da $B$ sono tutte le stringhe aventi lunghezza dispari ed un \ttt 1 al centro.
 
         Dunque, si ha che:
 
@@ -1846,11 +1846,11 @@
                     \item se ha un \ttt 1 al centro, allora $B \derives x$
                 \end{itemize}
                 
-                diversamente, se $n$ è pari, allora sia $i$ tale che $x_i \neq x_{\frac{n}{2} + i}$ --- si noti che $i$ deve necessariamente esistere, poiché se non esistesse allora vorrebbe dire che $\forall i \in [1, n] \quad x_i = x_{\frac{n}{2} + 1} \iff \exists w \in \{\ttt 0, \ttt 1\}^* \mid x = ww \iff x \in L$; siano inoltre $$\centeredsoe{u := x_1 \ldots x_{2i - 1} \implies |u| = 2i - 1 - 1 + 1 \\ v := x_{2i} \ldots x_n \implies |v| = n - 2i + 1}$$ due sottostringhe di $x = uv$ di lunghezza dispari --- si noti che $n - 2i + 1$ è dispari poiché $n$ è pari in ipotesi; allora, i due caratteri centrali di $u$ e $v$ saranno rispettivamente $$\centeredsoe{m(u) = x_{\frac{2i-1+1}{2}} = x_i \\ m(v) =x_{\frac{n + 2i}{2}} = x_{\frac{n}{2} + 1}}$$ allora, poiché $x_i \neq x_{\frac{n}{2} + 1}$, e questi sono proprio i centri di due sottostringhe di $x$, aventi lunghezza dispari, si ha che $x$ può essere generata attraverso le regole di $G$, poiché in essa sono presenti le regole $S \to AB \smid BA$; questo dimostra che $x \in \overline L \implies S \derives x$;
-            \item presa una stringa $x$ tale che $S \derives x$, e ponendo $n := |x|$, se $n$ è dispari allora sicuramente $x \notin L \iff x \in \overline L$; differentemente, se $n$ è pari, allora la stringa è stata generata attraverso una delle regole $S \to AB \smid BA$ necessariamente, e dunque --- senza perdita di generalità --- assumendo che $x$ sia stata ottenuta attraverso la regola $S \to AB$, devono esistere $u, v \in \{\ttt 0, \ttt 1\}^* \mid x = uv \land A \derives u \land B \derives v$, dove $u$ e $v$ sono due stringhe aventi lunghezza dispari; siano allora $l := |u| \implies |v| = n - l$, ottenendo che $$m (u) = x_{\frac{l + 1}{2}} = u_{\frac{l + 1}{2}} = \ttt 0 \neq \ttt 1 = v_{\frac{n - l + 1}{2}} = x_{\frac{n - l + 1}{2} + l} = x_{\frac{n + l + 1}{2}} = m(v)$$ allora, poiché $m(u)$ ed $m(v)$ devono necessariamente trovarsi l'uno nella prima metà di $x$, l'altro nella seconda metà (indipendentemente dalla scelta di $u$ e $v$) si ha che la stringa $x$ è necessariamente costituita da due stringhe $w, w' \in \{\ttt 0, \ttt 1\}^* \mid w \neq w'$, poiché differiscono per almeno un carattere, ovvero $m(u) \neq m(v)$, di conseguenza $x \notin \L \iff x \in \overline L$; questo dimostra che $S \derives x \implies x \in \overline L$.
+                diversamente, se $n$ è pari, allora sia $i$ tale che $x_i \neq x_{\frac{n}{2} + i}$ --- si noti che $i$ deve necessariamente esistere, poiché se non esistesse allora vorrebbe dire che $$\forall i \in [1, n] \quad x_i = x_{\frac{n}{2} + i} \iff \exists w \in \{\ttt 0, \ttt 1\}^* \mid x = ww \iff x \in L$$ siano inoltre $$\centeredsoe{u := x_1 \cdots x_{2i - 1} \implies |u| = 2i - 1 - 1 + 1 = 2i - 1 \\ v := x_{2i} \cdots x_n \implies |v| = n - 2i + 1}$$ due sottostringhe di $x = uv$ di lunghezza dispari (si noti che $n - 2i + 1$ è dispari poiché $n$ è pari in ipotesi); allora, i due caratteri centrali di $u$ e $v$ saranno rispettivamente $$\centeredsoe{m(u) = x_{\frac{2i-1+1}{2}} = x_i \\ m(v) =x_{\frac{n + 2i}{2}} = x_{\frac{n}{2} + i}}$$ allora, poiché $x_i \neq x_{\frac{n}{2} + i}$, e questi sono proprio i centri di due sottostringhe di $x$, aventi lunghezza dispari, si ha che $x$ può essere generata attraverso le regole di $G$, poiché $u$ e $v$ possono essere derivate da $A$ e $B$, ed in $G$ sono presenti le regole $S \to AB \smid BA$; questo dimostra che $\overline L \subseteq L(G)$;
+            \item presa una stringa $x$ tale che $S \derives x$, e ponendo $n := |x|$, se $n$ è dispari allora sicuramente $x \notin L \iff x \in \overline L$; differentemente, se $n$ è pari, allora la stringa è stata generata attraverso una delle regole $S \to AB \smid BA$ necessariamente, e dunque --- senza perdita di generalità --- assumendo che $x$ sia stata ottenuta attraverso la regola $S \to AB$, si ha che $$S \yields AB \derives x \iff \exists u, v \in \{\ttt 0 , \ttt 1\}^* \mid \soe{l}{x = uv \\ A \derives u \\ B \derives v \\ |u| \equiv |v| \equiv 1 \ (\bmod \ 2)}$$ dunque $u$ e $v$ devono avere lunghezza dispari per costruzione di $G$; allora, chiamando $l := |u| \implies |v| = n - l$, si ottiene che $$m (u) = x_{\frac{l + 1}{2}} = u_{\frac{l + 1}{2}} = \ttt 0 \neq \ttt 1 = v_{\frac{n - l + 1}{2}} = x_{\frac{n + l + 1}{2}} = m(v)$$ e poiché $m(u)$ ed $m(v)$ devono necessariamente trovarsi l'uno nella prima metà di $x$, l'altro nella seconda metà --- indipendentemente dalla scelta di $u$ e $v$ --- si ha che la stringa $x$ è necessariamente costituita da due stringhe $w, w' \in \{\ttt 0, \ttt 1\}^* \mid w \neq w'$, poiché differiscono per almeno un carattere, ovvero $m(u) \neq m(v)$, di conseguenza $x \notin L \iff x \in \overline L$; questo dimostra che $L(G) \subseteq \overline L$;
         \end{itemize}
 
-        Dunque, poiché $S \derives x \iff x \in \overline L$, si ha che $$L(G) := \{w \in \{\ttt 0, \ttt 1\}^* \mid S \derives x\} = \overline L \implies \overline L \in \mathrm{\CFL}$$ e dunque segue la tesi.
+        Dunque, poiché $\overline L = L(G) \in \CFL$, ed il complemento di $\overline L$ è $L \notin \CFL$, segue la tesi.
     \end{proof}
  
     \chapter{Decidibilità}
@@ -1860,25 +1860,27 @@
     \subsection{Definizioni}
 
     \begin{frameddefn}[label={tm},breakable]{\TM}
-        Una \tbf{\TM} (\tit{Turing Machine}) è un automa fornito di un nastro (o \tit{tape}) illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto; si noti che le macchine di Turing sono in grado di sovrascrivere ogni cella, anche quelle dell'input fornito, dunque questa caratteristica degli stati di accettazione e rifiuto ha significato).
+        Una \tbf{\TM} (\tit{Turing Machine}) è un automa fornito di un nastro (o \tit{tape}) illimitato costituito da celle sovrascrivibili --- sul quale viene posto anche l'input stesso, le cui celle sono sovrascrivibili anch'esse --- e di una testina che punta alla cella corrente della computazione, dove quest'ultima è in grado di muoversi liberamente sia verso destra che verso sinistra; inoltre, l'automa è caratterizzato da un solo stato di accettazione, ed un solo stato di rifiuto, che hanno \tit{effetto immediato} (dunque la computazione termina non appena viene raggiunto lo stato di accettazione o di rifiuto).
 
-        Formalmente, una \TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove
+        Formalmente, una \TM è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove:
 
         \begin{itemize}
-            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito}
-            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}, tale che $\blankchar \notin \Sigma$
-            \item $\Gamma$ è l'\tbf{alfabeto del nastro}, un insieme \tit{finito} tale che $\Sigma \subseteq \Gamma$ e $\blankchar \in \Gamma$
-            \item $\func{\delta}{(Q- \{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R\}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati
-            \item $q_0 \in Q$ è lo \tbf{stato iniziale}
-            \item $q_\mathrm{accept} \in Q$ è lo \tbf{stato di accettazione}
-            \item $q_\mathrm{reject} \in Q$ è lo \tbf{stato di rifiuto}, tale che $q_\mathrm{accept} \neq q_\mathrm{reject}$
+            \item $Q$ è l'\tbf{insieme degli stati}, un insieme \tit{finito};
+            \item $\Sigma$ è l'\tbf{alfabeto dell'automa}, un insieme \tit{finito}, tale che $\blankchar \notin \Sigma$;
+            \item $\Gamma$ è l'\tbf{alfabeto del nastro}, un insieme \tit{finito} tale che $\Sigma \subseteq \Gamma$ e $\blankchar \in \Gamma$;
+            \item $\func{\delta}{(Q- \{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R\}}$ è la \tbf{funzione di transizione}, che definisce la relazione tra gli stati;
+            \item $q_0 \in Q$ è lo \tbf{stato iniziale};
+            \item $q_\mathrm{accept} \in Q$ è lo \tbf{stato di accettazione};
+            \item $q_\mathrm{reject} \in Q$ è lo \tbf{stato di rifiuto}, tale che $q_\mathrm{accept} \neq q_\mathrm{reject}$.
         \end{itemize}
 
-        Si noti che il nastro di una \TM può essere limitato a destra, limitato a sinistra, o illimitato da entrambe le estremità, poiché è possibile dimostrare l'equivalenza delle 3 tipologie di nastri descritti; dunque, all'interno di questi appunti, a meno di specifica, si assume che la \TM in questione è costituita da un nastro limitato a sinistra.
+        Si noti che il nastro di una \TM può essere limitato a destra, limitato a sinistra, o illimitato da entrambe le estremità, poiché è possibile dimostrare l'equivalenza delle 3 tipologie di nastri descritti; dunque, all'interno di questi appunti, a meno di specifica, si assume che le \TM in questione siano costituite da un nastro limitato a sinistra.
 
-        Inizialmente, il nastro di una macchina di Turing contiene solamente la stringa di input, e tutto il resto è vuoto, dunque la \TM riceve una stringa di input $w = w_1 \ldots w_n \in \Sigma^*$ sulle $n$ celle più a sinistra del nastro, e le celle restanti contengono il simbolo $\sqcup$ (letto \curlyquotes{\tit{blank}}).
+        Inizialmente, il nastro di una macchina di Turing contiene solamente una stringa $w = w_1 \cdots w_n \in \Sigma^*$ in input, sulle $n$ celle più a sinistra del nastro, e le celle restanti contengono il simbolo $\blankchar \in \Gamma$ (letto \curlyquotes{\tit{blank}}).
 
-        Per la computazione delle \TM, si noti la segnatura della funzione di transizione $\delta$: essa considera lo stato corrente ed il carattere che si trova sulla cella puntata dalla testina, e restituisce il prossimo stato, il carattere con cui sovrascrivere la cella corrente, e una direzione da prendere, indicata con $\mathrm L$ (\tit{left}, e dunque la testina si sposterà a sinistra) o $\mathrm R$ (\tit{right}, e dunque la testina si sposterà a destra). Se la testina si trova sulla prima cella --- quella più a sinistra, nell'assunzione considerata --- e prova a spostarsi a sinistra, essa non effettuerà alcuno spostamento. Si noti che, se la \TM non raggiunge mai lo stato di accettazione o di rifiuto, la macchina non può terminare e la computazione proseguirà per sempre (\tit{looping}).
+        Per la computazione delle \TM, si noti la segnatura della funzione di transizione $\delta$: essa considera lo stato corrente ed il carattere che si trova sulla cella puntata dalla testina, e restituisce il prossimo stato, il carattere con cui sovrascrivere la cella corrente, e una direzione da prendere, indicata con $\mathrm L$ (\tit{left}, e dunque la testina si sposterà a sinistra) o $\mathrm R$ (\tit{right}, e dunque la testina si sposterà a destra). Se la testina si trova sulla prima cella --- quella più a sinistra, nell'assunzione considerata --- e prova a spostarsi a sinistra, essa non effettuerà alcuno spostamento.
+
+        Si noti che, se la \TM non raggiunge mai lo stato di accettazione o di rifiuto, la macchina non può terminare e la computazione proseguirà per sempre (\tit{looping}).
     \end{frameddefn}
 
     \begin{example}[\TM]
@@ -1915,7 +1917,7 @@
              \caption{La \TM $M$.}
          \end{figure}
          
-         La notazione $a \to b;c$ presente sugli archi di questo diagramma sta ad indicare che viene letto il simbolo $a \in \Gamma$ sulla cella puntata correntemente dalla testina, questo viene rimpiazzato col simbolo $b \in \Gamma$, e la testina si sposta verso $c \in \{\mathrm L, \mathrm R\}$. Dunque, per non sovrascrivere la cella corrente, è sufficiente porre $a \to a; c$ come etichetta dell'arco in questione.
+         La notazione $a \to b;c$ presente sugli archi di questo diagramma sta ad indicare che se viene letto il simbolo $a \in \Gamma$ sulla cella puntata correntemente dalla testina, questo viene rimpiazzato col simbolo $b \in \Gamma$, e la testina si sposta verso $c \in \{\mathrm L, \mathrm R\}$. Dunque, per non sovrascrivere la cella corrente, è sufficiente porre $a \to a; c$ come etichetta dell'arco in questione.
          
          Si noti che, all'interno dei diagrammi delle \TM, lo stato di rifiuto, e gli archi in esso entranti, sono generalmente omessi per brevità, implicitando che ogni stato $q$ che non presenta transizioni esplicitamente rappresentate descrive in realtà archi $(q, q_\mathrm{reject})$.
     \end{example}

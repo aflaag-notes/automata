@@ -4,9 +4,6 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 
 ## TODO list
 
-- check
-    - teorema 1.7.2.1
-
 - generali
     - finire i TODOs sparsi
     - GLI OVERLINE POTREBBERO ESSERE ROTTI, FIXERAI RILEGGENDO
