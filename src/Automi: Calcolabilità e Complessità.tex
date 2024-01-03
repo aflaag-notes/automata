@@ -1737,7 +1737,7 @@
     \end{framedprop}
 
     \begin{proof}
-        Poiché $L_1, \ldots, L_n$ sono \CFL, allora esistono delle \CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi; siano queste grammatiche definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una \CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{\CFL}$ per definizione; allora, si consideri la seguente \CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \smid \ldots \smid S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
+        Poiché $L_1, \ldots, L_n$ sono \CFL, allora esistono delle \CFG $G_1, \ldots, G_n$ tali da generare rispettivamente ogni linguaggio in ipotesi, e siano queste definite come $$\forall i \in [1, n] \quad G_i = (V_i, \Sigma_i, R_i, S_i)$$ Per dimostrare la tesi, è necessario dimostrare che esiste una \CFG $G$ tale che $$L(G) = \bigcup_{i = 1}^n{L_i} = \bigcup_{i = 1}^n{L(G_i)}$$ poiché $L(G)\in \mathrm{\CFL}$ per definizione; allora, si consideri la seguente \CFG: $$\displaystyle G = \left( \bigcup_{i = 1}^n{V_i} \cup \{S\}, \bigcup_{i = 1}^n{\Sigma_i}, \bigcup_{i = 1}^n{R_i} \cup \{S \rightarrow S_1 \smid \ldots \smid S_n\}, S \right)$$ e si noti che \centeredeq{0.9}{$\displaystyle w \in \bigcup_{i = 1}^n{L(G_i)} \iff \exists j \in [1, n] \mid \soe{l}{w \in L(G_j) \iff S_j \derives w \\ S \to S_j \in R} \iff S \derives w \iff  w \in L(G)$} Allora, segue la tesi.
     \end{proof}
 
     \begin{example}[Unione di \CFL]
@@ -1947,9 +1947,9 @@
     \end{frameddefn}
 
     \begin{framedobs}{Configurazioni particolari}
-        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; se la \TM si trova sull'estremità sinistra del nastro, dunque sul primo carattere, la configurazione corrente è $q_i \ bv$ per certi $q_i \in Q$ e $b \in \Gamma, v \in \Gamma^*$; dunque, se si verifica una transizione che comporta una mossa a sinistra ed un rimpiazzo sel simbolo $b$ con $c \in \Gamma$, per quando detto nella \cref{tm}, si ha che la prossima configurazione di $M$ sarà $q_j \ cv$ per qualche $q_j \in Q$. Se invece la \TM si trova sull'estremità destra --- dunque al termine dell'input fornito sul nastro --- la configurazione corrente è $ua \ q_i \ \blankchar$ per certi $q_i \in Q$ e $a \in \Gamma, u \in \Gamma^*$, ma per brevità il simbolo $\blankchar$ verrà omesso, assumendo che i simboli $\blankchar$ seguano la parte del nastro rappresentata dalla configurazione.
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; se la \TM si trova sull'estremità sinistra del nastro, dunque sul primo carattere, la configurazione corrente è $$q_i \ bv$$ per certi $q_i \in Q$ e $b \in \Gamma, v \in \Gamma^*$; dunque, se si verifica una transizione che comporta una mossa a sinistra ed un rimpiazzo del simbolo $b$ con $c \in \Gamma$, per quando detto nella \cref{tm}, si ha che la prossima configurazione di $M$ sarà $$q_j \ cv$$ per qualche $q_j \in Q$. Se invece la \TM si trova al termine dell'input fornito sul nastro, la configurazione corrente è $$ua \ q_i \ \blankchar$$ per certi $q_i \in Q$ e $a \in \Gamma, u \in \Gamma^*$, ma per brevità il simbolo $\blankchar$ verrà omesso, assumendo che i simboli $\blankchar$ seguano la parte del nastro rappresentata dalla configurazione.
 
-        Dunque, dato un input $w$, posto sul nastro, la \tit{configurazione iniziale} di $M$ è denotata con $q_0 \ w$, mentre le \tit{configurazioni di accettazione e rifiuto} --- dette anche \tit{configurazioni di arresto}, poiché non producono ulteriori configurazioni --- sono descritte rispettivamente con $q_\mathrm{accept}$ e $q_\mathrm{reject}$.
+        Dunque, dato un input $w$ posto sul nastro, la \tit{configurazione iniziale} di $M$ è denotata con $$q_0 \ w$$ mentre le \tit{configurazioni di accettazione e rifiuto} --- dette anche \tit{configurazioni di arresto}, poiché non producono ulteriori configurazioni --- sono descritte rispettivamente con $q_\mathrm{accept}$ e $q_\mathrm{reject}$.
     \end{framedobs}
 
     \begin{frameddefn}{Stringhe accettate (\TM)}
@@ -1965,7 +1965,7 @@
     \subsection{Turing-riconoscibilità}
 
     \begin{frameddefn}{Turing-riconoscibilità}
-        Un linguaggio è detto \tbf{Turing-riconoscibile} (o \tbf{ricorsivamente enumerabile}) se esiste una macchina di Turing che lo riconosce. La classe dei linguaggi Turing-riconoscibili è denotata con $\mathrm{\REC}$, dunque in simboli $$L \in \mathrm{\REC} \iff \exists M \in \mathrm{\TM} \mid L(M) = L$$
+        Un linguaggio è detto \tbf{Turing-riconoscibile} (o \tbf{ricorsivamente enumerabile}) se esiste una macchina di Turing che lo riconosce. In simboli $$\REC := \{L \mid \exists M \in \TM : L(M) = L\}$$
     \end{frameddefn}
 
     \begin{example}[Linguaggi Turing-riconoscibili]
@@ -1989,14 +1989,10 @@
         Una macchina di Turing è detta \tbf{decisore} se termina sempre, dunque se accetta o rifiuta per qualsiasi input, non andando mai in \tit{loop}.
     \end{frameddefn}
 
-    \begin{framedobs}{Decisori}
-        Data una \TM $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$, e ponendo $$\centeredsoe{L(M) := \{w \in \Sigma^* \mid M \ \mathrm{accetta} \ w\} \\ R(M) := \{w \in \Sigma^* \mid M \ \mathrm{rifiuta} \ w\}}$$ si ha che, in generale $$L(M) \cup R(M) \subseteq \Sigma^*$$ poiché $M$ potrebbe andare in loop, e dunque $$M \ \mathrm{decisore} \iff L(M) \cup R(M) = \Sigma^*$$
-    \end{framedobs}
-
     \begin{frameddefn}{Turing-decidibilità}
         Un linguaggio è detto \tbf{Turing-decidibile} (o \tbf{ricorsivo}, o semplicemente \tbf{decidibile}) se esiste un decisore che lo riconosce. La classe dei linguaggi Turing-decidibili è denotata con $\mathrm{\DEC}$.
 
-        Simmetricamente, se un linguaggio $L$ è Turing-decidibile per qualche decisore $M$, allora si dice che $M$ \tbf{decide} $L$.
+        Simmetricamente, se un linguaggio $L$ è Turing-decidibile per qualche decisore $M$, allora si dice che \tbf{$M$ decide $L$}.
     \end{frameddefn}
 
     \begin{framedobs}[label={dec in rec}]{Turing-decidibilità}
@@ -2016,7 +2012,7 @@
     \end{framedprop}
 
     \proofiff{
-        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una macchina di Turing con testina ferma; di conseguenza, nel prodotto cartesiano del codominio di $\delta$ è presente l'insieme $\{ \mathrm L, \mathrm R, \mathrm S\}$, e dunque per costruire una macchina di Turing $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ equivalente ad $M$, è sufficiente inserire nuovi stati in $Q'$ tali che $$\forall p, q \in Q, a, b \in \Gamma \quad \delta(p, a) = (q, b, \mathrm S) \implies \exists r \in Q' \mid \soe{l}{\delta'(p, a) = (r, b, \mathrm R) \\ \delta'(r, \gamma) = (p, \gamma, \mathrm L)}$$ per un certo $\gamma \in \Gamma$, dove $r \in Q'$ è il nuovo stato, dunque facendo spostare la testina in una direzione --- in questo caso, verso destra --- e poi facendola spostare nuovamente nella direzione opposta --- dunque in questo caso, verso sinistra.
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una macchina di Turing con testina ferma; di conseguenza, nel prodotto cartesiano del codominio di $\delta$ è presente l'insieme $\{ \mathrm L, \mathrm R, \mathrm S\}$, e dunque per costruire una macchina di Turing $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ equivalente ad $M$, è sufficiente inserire nuovi stati in $Q'$ tali che $$\forall p, q \in Q, a, b \in \Gamma \quad \delta(p, a) = (q, b, \mathrm S) \implies \exists r \in Q' \mid \soe{l}{\delta'(p, a) = (r, b, \mathrm R) \\ \delta'(r, \gamma) = (p, \gamma, \mathrm L)}$$ per un certo $\gamma \in \Gamma$, dove $r \in Q'$ è un nuovo stato, dunque facendo spostare la testina in una direzione --- in questo caso, verso destra --- e poi facendola spostare nuovamente nella direzione opposta --- dunque in questo caso, verso sinistra.
     }{
         Sia $M' = (Q', \Sigma, \Gamma, \delta', q_0', q_\mathrm{accept}', q_\mathrm{reject}')$ una \TM; allora, la segnatura della funzione di transizione di $M'$ segue dalla \cref{tm}, dunque nel prodotto cartesiano del suo codominio è presente l'insieme $\{\mathrm L, \mathrm R\}$, e poiché $$\{\mathrm L, \mathrm R\} \subseteq \{\mathrm L, \mathrm R, \mathrm S\}$$ allora è possibile considerare $M'$ stessa come macchina di Turing con testina ferma, che però non presenta mai il simbolo $\mathrm S$ all'interno delle transizioni.
     }
@@ -2028,7 +2024,7 @@
     \end{frameddefn}
 
     \begin{framedobs}[label={tape shift}]{Operazione di \tit{shift} sul nastro}
-        Le macchine di Turing sono in grado di effettuare operazioni di \tit{shift} di 1 cella a destra o a sinistra dell'intero nastro, semplicemente scansionando tutto quest'ultimo, e rimpiazzando ogni carattere con quello letto precedentemente.
+        Le macchine di Turing sono in grado di effettuare operazioni di \tit{shift} di 1 cella --- a destra o a sinistra --- dell'intero nastro, semplicemente scansionando tutto quest'ultimo, e rimpiazzando ogni carattere con quello letto precedentemente.
     \end{framedobs}
 
     \begin{framedobs}[label={tape start}]{Inizio del nastro}
@@ -2040,28 +2036,44 @@
     \end{framedprop}
 
     \proofiff{
-        Sia $M$ una macchina di Turing multinastro; si vuole dunque costruire una macchina di Turing $M'$ tale da simulare $M$. Poiché $M'$ è una \TM, essa è costituita da un solo nastro, e qunque per simulare $M$ è necessario suddividere il nastro di $M'"$ in regioni, che saranno delimitate da un nuovo carattere \ttt \#, e per simulare le testine di ogni nastro, verrà utilizzata una versione marcata dei caratteri in $\Gamma$, al fine di segnare \curlyquotes{virtualmente} la posizione di ogni testina in ogni nastro. Dunque, si ha che:
+        Sia $M$ una macchina di Turing multinastro; si vuole dunque costruire una macchina di Turing $M'$ tale da simulare $M$. Poiché $M'$ è una \TM, essa è costituita da un solo nastro, e qunque per simulare $M$ è necessario suddividere il nastro di $M'$ in regioni, che saranno delimitate da un nuovo carattere \ttt \#, e per simulare le testine di ogni nastro di $M$ verrà utilizzata una versione marcata dei caratteri in $\Gamma$. Dunque, si ha che:
 
         \begin{itemize}
             \item inizialmente $M'$ trasforma il nastro nel formato descritto, e dunque viene effetuato uno \tit{shift} a destra del nastro (si veda l'\cref{tape shift}), anteposto il carattere \ttt \# al suo inizio (si veda l'\cref{tape start}), e successivamente inseriti i seguenti caratteri marcati per segnare le testine virtuali: $$\ttt \# \stackrel{\bullet}{w_1} w_2 \cdots w_n \ \ttt \# \ \stackrel{\bullet}{x_1} x_2 \cdots x_m \ \ttt \# \ \ldots \ \ttt \# \ \stackrel{\bullet}{y_1} y_2 \cdots y_j \ \ttt \# \ \blankchar \ \ldots$$
-            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiornando oppurtunamente i simboli marcati con $\bullet$ per simulare lo spostamento di ogni testina su ogni nastro; successivamente, viene effettua una seconda scansione, per simulare i rimpiazzi dei simboli sulle celle, descritti dalla $\delta$;
-            \item se una qualsiasi testina virtuale effettua uno spostamento a destra, e si trova su un \ttt \# --- dunque a cavallo tra 2 nastri simulati --- allora $M'$ deve simulare il fatto che, nel nastro reale, la reale testina in $M$ starebbe leggendo una porzione di nastro vuota, non letta precedentemente; allora, viene effettuato uno \tit{shift} verso destra di tutto il nastro di $M'$, dalla cella corrente in poi, e sulla cella corrente viene posto il carattere $\blankchar$;
+            \item per simulare una singola mossa di $M$, la testina di $M'$ scansiona tutto il suo nastro, aggiornando oppurtunamente i simboli marcati con $\bullet$ per simulare lo spostamento di ogni testina su ogni nastro; successivamente, viene effettua una seconda scansione, per simulare i rimpiazzi dei simboli sulle celle, descritti dalla funzione di transizione $\delta$;
+            \item se una qualsiasi testina virtuale effettua uno spostamento a destra, e si trova su un \ttt \# --- dunque a cavallo tra 2 nastri simulati --- allora $M'$ deve simulare il fatto che, nel nastro reale, la testina in $M$ starebbe leggendo una porzione di nastro vuota, non letta precedentemente; allora, viene effettuato uno \tit{shift} verso destra di tutto il nastro di $M'$ \tit{a partire dalla cella corrente in poi}, e sulla cella corrente viene posto il carattere $\blankchar$;
         \end{itemize}
 
         Di conseguenza, $M'$ risulta essere in grado di simulare correttamente il comportamento di ogni nastro della macchina di Turing multinastro $M$, e dunque segue la tesi.
     }{
-        Per $k = 1$, si ha che la funzione di transizione $\delta$ descritta nella \cref{multitape} diventa $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R, \mathrm S\}}$$ che rappresenta la funzione di transizione delle macchine di Turing con testina ferma (si veda la \cref{stay tm}); allora, per la \cref{stay tm equiv}, si ha che ogni macchina di Turing $M'$, poiché è anche una macchina di Turing con testina ferma, è una macchina di Turing multinastro avente $k = 1$ nella funzione $\delta$.
+        Per $k = 1$, si ha che la funzione di transizione $\delta$ descritta nella \cref{multitape} diventa $$\func{\delta}{Q \times \Gamma}{Q \times \Gamma \times \{ \mathrm L, \mathrm R, \mathrm S\}}$$ che rappresenta la funzione di transizione delle macchine di Turing con testina ferma (si veda la \cref{stay tm}); allora, per la \cref{stay tm equiv}, si ha che ogni macchina di Turing $M'$, poiché è anche una macchina di Turing con testina ferma, è una macchina di Turing multinastro avente $k = 1$ nastri.
     }
 
     \subsection{Macchine di Turing non deterministiche}
 
     \begin{frameddefn}{\NTM}
-        Una \tbf{\NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q-\{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una \NTM computa non deterministicamente.
+        Una \tbf{\NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q-\{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una \NTM computa non deterministicamente.
     \end{frameddefn}
 
     \begin{framedprop}[label={ntm tm}]{Equivalenza delle \NTM}
         Sia $N$ una \NTM; allora esiste una \TM $M$ ad essa equivalente.
     \end{framedprop}
+
+    \begin{framedobs}{Computazioni di \NTM}
+        Si noti che, una \NTM \tit{riconoscitore}:
+        
+        \begin{itemize}
+            \item accetta una stringa se \tit{almeno un ramo di computazione non deterministica accetta}, dunque ogni altro ramo può \tit{sia accettare, sia rifiutare, sia andare in loop};
+            \item rifiuta una stringa se \tit{ogni ramo di computazione non deterministica o rifiuta o va in loop}.
+        \end{itemize}
+
+        Differentemente, una \NTM \tit{decisore}:
+
+        \begin{itemize}
+            \item accetta una stringa se \tit{almeno un ramo di computazione non deterministica accetta}, e ogni altro ramo può \tit{solo accettare o rifiutare};
+            \item rifiuta una stringa se \tit{ogni ramo di computazione non deterministica rifiuta}.
+        \end{itemize}
+    \end{framedobs}
 
     \proofiff{
         Sia $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \NTM, e si consideri l'albero di computazione che $N$ produce elaborando gli input, associando un \tit{indirizzo} ad ogni nodo dell'albero, come segue:
@@ -2079,7 +2091,7 @@
             \item il terzo nastro contiene l'indirizzo del nodo dell'albero di computazione non deterministica corrente.
         \end{itemize}
 
-        e dunque, data in input una stringa $w$, $M$ computa come segue:
+        Dunque, data in input una stringa $w$, $M$ computa come segue:
 
         \begin{itemize}
             \item inizialmente, il primo nastro di $M$ contiene $w$, il secondo è vuoto ed il terzo contiene $\varepsilon$;
@@ -2091,7 +2103,7 @@
                 \end{itemize}
         \end{itemize}
 
-        Dunque, la macchina $M$ simula la computazione di $N$ esplorando l'albero di computazione di $N$ in BFS (\tit{Breadth-First Search}), poiché se l'esplorazione avvenisse in DFS si rischierebbe di entrare in un ramo di computazione potenzialamente infinito, senza trovare un ramo che avrebbe potuto accettare l'input. Allora, per la \cref{multitape equiv}, segue la tesi.
+        Si noti che la macchina $M$ deve simulare $N$ esplorandone l'albero di computazione in BFS (\tit{Breadth-First Search}), poiché se la visita avvenisse in DFS si rischierebbe di entrare in un ramo di computazione potenzialamente infinito, senza trovare uno dei rami che avrebbe potuto eventualmente accettare l'input. Allora, per la \cref{multitape equiv}, segue la tesi.
     }{
         Sia $M$ una \TM; allora, poiché una macchina di Turing è una particolare macchina di Turing non deterministica, segue la tesi.
     }
@@ -2099,7 +2111,7 @@
     \subsection{Enumeratori}
 
     \begin{frameddefn}{Enumeratore}
-        Un \tbf{enumeratore} è una \TM descritta da una 7-tupla $(Q, \Sigma, \gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ --- dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm} --- connessa ad una stampante (ad esempio un nastro secondario), la quale stampa le stringhe di TODO DA FINIRE
+        Un \tbf{enumeratore} è una \TM descritta da una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ --- dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm} --- connessa ad una stampante (ad esempio un nastro secondario), che stampa stringhe in ordine casuale.
     \end{frameddefn}
 
     \begin{framedprop}{Equivalenza degli enumeratori}
@@ -2117,7 +2129,7 @@
     \subsection{Tesi di Church-Turing}
 
     \begin{frameddefn}{Algoritmo}
-        Un \tbf{algoritmo} è un insieme di istruzioni semplici per l'esecuzione di un certo compito.
+        Un \tbf{algoritmo} è un insieme di istruzioni semplici per l'esecuzione di un dato compito.
     \end{frameddefn}
 
     \begin{frameddefn}{Tesi di Church-Turing}
@@ -2151,13 +2163,14 @@
     \end{example}
 
     \begin{framedlem}[label={num tm}]{Numerabilità delle macchine di Turing}
-        L'insieme delle macchine di Turing è numerabile; dunque, esiste una biezione $\func{f}{\N}{\TM}$.
+        L'insieme delle macchine di Turing è numerabile.
     \end{framedlem}
 
     \begin{proof}
-        Sia $\Sigma$ un alfabeto contenente dei caratteri che rendano possibile codificare ogni macchina di Turing in una codifica $\abk{M}$ per ogni $M \in \TM$; sia dunque $\prec$ una relazione d'ordine su $\Sigma^*$ definita come segue: $$\forall x, y \in \Sigma^* \quad x \prec y \iff \soe{ll}{|x| < |y| & |x| \neq |y| \\ x \prec_l y & l := |x| = |y|}$$ dove $\prec_l$ è la relazione d'ordine dell'ordinamento lessicografico. Si noti che, per sua stessa definizione, la relazione d'ordine $\prec$ risulta essere totale; di conseguenza, è possibile ordinare \tit{totalmente} le stringhe presenti in $\Sigma^*$, ed è dunque possibile definire una biezione $\func{f}{\N}{\Sigma^*}$ (è sufficiente associare $i \in \N$ con l'$i$-esima stringa ottenutta dall'ordinamento descritto). Questo dimostra che $\Sigma^*$ è numerabile, per qualsiasi alfabeto $\Sigma$ (una volta stabilito un ordinamento lessicografico per caratteri esterni alle lettere dell'alfabeto canonico, se presenti).
+        Sia $\Sigma$ un alfabeto, e sia $\prec$ una relazione d'ordine su $\Sigma^*$ definita come segue: $$\forall x, y \in \Sigma^* \quad x \prec y \iff \soe{ll}{|x| < |y| & |x| \neq |y| \\ x \prec_l y & l := |x| = |y|}$$ dove $\prec_l$ è la relazione d'ordine dell'ordinamento lessicografico. Si noti che, per sua stessa definizione, la relazione d'ordine $\prec$ risulta essere totale; di conseguenza, è possibile ordinare \tit{totalmente} le stringhe presenti in $\Sigma^*$, ed è dunque possibile definire una biezione $\func{f}{\N}{\Sigma^*}$ (è sufficiente associare $i \in \N$ con l'$i$-esima stringa ottenutta dall'ordinamento descritto). Questo dimostra che $\Sigma^*$ è numerabile, per qualsiasi alfabeto $\Sigma$ (una volta stabilito un ordinamento lessicografico per caratteri esterni alle lettere dell'alfabeto canonico, se presenti).
 
-        Dunque, poiché con l'alfabeto $\Sigma$ scelto è possibile codificare ogni macchina di Turing \TM, questo dimostra che è possibile numerare anche le macchine di Turing. Allora \TM è numerabile.
+
+        Sia $$\mathcal M := \{\abk M \mid M \in \TM\}$$ che sarà necessariamente definito su qualche alfabeto $\Sigma$ in grado di rappresentare ogni sua possibile codifica; allora, poiché $\mathcal M \subseteq \Sigma^*$, e $\Sigma^*$ è numerabile per quanto detto in precedenza, segue che $\mathcal M$ è necessariamente nuerabile anch'esso
     \end{proof}
 
     \begin{framedprop}[label={not num B}]{Non-numerabilità di $\mathcal B$}
@@ -2215,7 +2228,7 @@
 
         Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque mappa ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è. Questo prova che l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile.
 
-        Poiché l'insieme \TM è numerabile per il \cref{num tm}, anche ogni sottoinsieme di \TM deve necessariamente esserlo; allora, fissato un alfabeto $\Sigma$, si consideri l'insieme delle macchine di Turing definite su $\Sigma$; si noti che, per quanto dimostrato precedentemente, l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile. Allora, deve necessariamente esistere qualche linguaggio, definito su $\Sigma$, che non può essere riconosciuto da nessuna macchina di Turing definita su $\Sigma$ stesso; di conseguenza, segue la tesi.
+        TODO RISCRIVI STA PARTE Poiché l'insieme $\mathcal M$ è numerabile per il \cref{num tm}, anche ogni suo sottoinsieme deve necessariamente esserlo; allora, fissato un alfabeto $\Sigma$, si consideri l'insieme delle macchine di Turing definite su $\Sigma$; si noti che, per quanto dimostrato precedentemente, l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile. Allora, deve necessariamente esistere qualche linguaggio, definito su $\Sigma$, che non può essere riconosciuto da nessuna macchina di Turing definita su $\Sigma$ stesso; di conseguenza, segue la tesi.
     \end{proof}
 
     \subsection{Problema dell'accettazione}

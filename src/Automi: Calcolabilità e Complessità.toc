@@ -64,8 +64,8 @@
 \contentsline {subsection}{\numberline {3.3.1}Tesi di Church-Turing}{65}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Linguaggi non Turing-riconoscibili}{66}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Problema dell'accettazione}{69}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Problema del vuoto}{75}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}Problema dell'uguaglianza}{76}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.4}Problema del vuoto}{76}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Problema dell'uguaglianza}{77}{subsection.3.3.5}%
 \contentsline {chapter}{\numberline {4}Riducibilità}{79}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Riduzione}{79}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Funzioni calcolabili}{79}{subsection.4.1.1}%
