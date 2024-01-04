@@ -2216,7 +2216,7 @@
     \end{framedlem}
 
     \begin{proof}
-        Dato un linguaggio $L$ definito su un qualche alfabeto $\Sigma$, ordinato secondo l'ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm}, si definisce \tit{sequenza caratteristica} di $L$ una stringa binaria $\chi_L$ in cui l'$i$-esimo carattere di $\chi_L$ è \ttt 1 se e solo se l'$i$-esima stringa di $L$ (rispetto a $\prec$) è presente in $\Sigma^*$. Ad esempio, dato $$L := \{\ttt 1, \ttt{01}, \ttt{010}\}$$ definito sull'alfabeto binario (il quale è ordinabile su $\prec$), si ha che $\chi_L$ è ottenuta come segue:
+        Dato un linguaggio $L$ definito su un qualche alfabeto $\Sigma$, si definisce \tit{sequenza caratteristica} di $L$ una stringa binaria $\chi_L$ in cui l'$i$-esimo carattere di $\chi_L$ è \ttt 1 se e solo se l'$i$-esima stringa di $\Sigma^*$ --- ordinato secondo l'ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm} --- è presente in $L$. Ad esempio, dato $$L := \{\ttt 1, \ttt{01}, \ttt{010}\}$$ definito sull'alfabeto binario (il quale è ordinabile su $\prec$), si ha che $\chi_L$ è ottenuta come segue:
         \begin{center}
             \begin{tabular}{cccccccccccccccc}
                 $\Sigma^*$ & $=$ & $\{$ & $\varepsilon$, & \ttt 0, & \ttt 1, & \ttt{00}, & \ttt{01}, & \ttt{10}, & \ttt{11}, & \ttt{000}, & \ttt{001}, & \ttt{010}, & \ttt{011}, & $\ldots$ & $\}$ \\
@@ -2227,7 +2227,7 @@
 
         Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque mappa ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è. Questo prova che l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile.
 
-        TODO RISCRIVI STA PARTE Poiché l'insieme $\mathcal M$ è numerabile per il \cref{num tm}, anche ogni suo sottoinsieme deve necessariamente esserlo; allora, fissato un alfabeto $\Sigma$, si consideri l'insieme delle macchine di Turing definite su $\Sigma$; si noti che, per quanto dimostrato precedentemente, l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile. Allora, deve necessariamente esistere qualche linguaggio, definito su $\Sigma$, che non può essere riconosciuto da nessuna macchina di Turing definita su $\Sigma$ stesso; di conseguenza, segue la tesi.
+        Allora, considerando $\mathcal M \subseteq \Sigma ^*$ l'insieme delle codifiche di \TM, poiché per il \cref{num tm} esso è numerabile, per quanto dimostrato in precedenza segue necessariamente che esiste un linguaggio, definito su $\Sigma$ stesso, che non può essere riconosciuto da nessuna macchina di Turing in $\mathcal M$.
     \end{proof}
 
     \subsection{Problema dell'accettazione}
@@ -2249,10 +2249,6 @@
     \end{framedthm}
 
     \begin{proof}[Dimostrazione I]
-        Una volta controllata la validità della codifica in input, è possibile utilizzare una \NTM $M$ per simulare l'\NFA posto sul suo nastro, e dunque $M$ accetterebbe se e solo se l'\NFA accetterebbe, e rifiuterebbe se e solo se l'\NFA rifiuterebbe; allora, poiché $M$ non può andare in loop, ed è dunque un decisore, per la \cref{ntm tm} segue la tesi.
-    \end{proof}
-
-    \begin{proof}[Dimostrazione II]
         Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può utilizzare l'algoritmo di conversione presentato all'interno della dimostrazione del \cref{nfa equiv} per convertire l'\NFA fornito in input in un \DFA(grazie all'\cref{alg tm}); allora, per il \cref{a_dfa}, segue la tesi.
     \end{proof}
 
@@ -2274,13 +2270,13 @@
         \begin{enumerate}[label=]
             \item \tit{Caso base}. Per $n = 1$, poiché $G$ è in CNF, si ha che l'unica regola che può aver prodotto la stringa $w$ è della forma $S \to a$ dove $a \in \Sigma$, ed infatti il numero di passaggi è pari a $$2n - 1 = 2 \cdot 1 -1 = 2 - 1 = 1$$
             \item \tit{Ipotesi induttiva forte}. Data una grammatica $G$ in CNF, ogni stringa non vuota $w$ lunga al più $n$ derivabile attraverso le sue regole, richiede esattamente $2n-1$ passaggi.
-            \item \tit{Passo induttivo}. È necessario dimostrare la tesi per una stringa $w$ tale che $|w| = n + 1$. Poiché $G$ è in CNF, le sue regole possono essere della forma $A \to BC$, oppure $D \to a$ con $a \in \Sigma$; allora, assumendo che $w$ abbia lunghezza $n + 1$ con $n > 1$, il numero di passaggi per derivare $w$ deve essere maggiore 1 (come dimostrato nel caso base), e dunque deve esistere una regola della forma $A \to BC$ che possa aver prodotto $w$; dunque, esisteranno due sottostringhe $y$ e $z$ di $w$, tali che $B \derives y$ e $C \derives z$, e sicuramente non vuote, poiché sono state generate da una regola della forma $A \to BC$. Dunque, poiché non sono vuote, e sono sottostringhe di $w$, hanno lunghezza al più $n$, e di conseguenza su di esse è possibile applicare l'ipotesi induttiva forte. Allora, ponendo $k := |y|$, e di conseguenza $|z| = |w| - |y| = n + 1 - k$, si ha che $y$ è stata derivata attraverso $$2k - 1$$ passaggi, mentre $w$ attraverso $$2(n+ 1 - k) - 1 = 2n+2-2k -1 = 2n-2k+1 = 2(n -k) + 1$$ passaggi. Allora, $w$ deve essere stata derivata attraverso i passaggi per derivare $y$, i passaggi per derivare $z$, ed il passaggio $A \to BC$ stesso, e dunque sono $$[2k - 1] + [2(n - k) + 1 ] + 1= 2k -1 +2n -2k +1 + 1 = 2n + 1$$ passaggi. Allora segue la tesi, poiché $$2(n + 1) - 1= 2n + 2 - 1 = 2n +1$$
+            \item \tit{Passo induttivo}. È necessario dimostrare la tesi per una stringa $w$ tale che $|w| = n + 1$. Poiché $G$ è in CNF, le sue regole possono essere della forma $A \to BC$, oppure $D \to a$ con $a \in \Sigma$; allora, assumendo che $w$ abbia lunghezza $n + 1$ con $n > 1$, il numero di passaggi per derivare $w$ deve essere almeno 2, e dunque deve esistere una regola della forma $A \to BC$ che possa aver prodotto $w$; dunque, esisteranno due sottostringhe $y$ e $z$ di $w$, tali che $B \derives y$ e $C \derives z$, e sicuramente non vuote poiché $G$ è in CNF e non presenta $\epsilon$-regole. Dunque, poiché non sono vuote, e sono sottostringhe di $w$, hanno lunghezza al più $n$, e di conseguenza su di esse è possibile applicare l'ipotesi induttiva forte. Allora, ponendo $k := |y|$, e di conseguenza $|z| = |w| - |y| = n + 1 - k$, si ha che $y$ è stata derivata attraverso $2k - 1$ passaggi, mentre $z$ attraverso $$2(n+ 1 - k) - 1 = 2n+2-2k -1 = 2n-2k+1 = 2(n -k) + 1$$ passaggi. Allora, $w$ deve essere stata derivata attraverso i passaggi per derivare $y$, i passaggi per derivare $z$, ed il passaggio $A \to BC$ stesso, e dunque sono $$[2k - 1] + [2(n - k) + 1 ] + 1= 2k -1 +2n -2k +1 + 1 = 2n + 1$$ passaggi. Allora segue la tesi, poiché $$2(n + 1) - 1= 2n + 2 - 1 = 2n +1$$
         \end{enumerate}
 
         Sia dunque $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può convertire la \CFG --- fornita in input --- in CNF, attraverso il \cref{cfg into cnf} (grazie all'\cref{alg tm}), e successivamente
 
         \begin{itemize}
-            \item se la stringa $w$ ha lunghezza 0, $M$ controlla che la regola $S \to \varepsilon$ sia presente in $G$, altrimenti rifiuta;
+            \item se la stringa $w$ ha lunghezza 0, $M$ controlla che la regola $S \to \varepsilon$ sia presente in $G$; in caso affermativo accetta, altrimenti rifiuta;
             \item se la stringa $w$ ha lunghezza $n \ge 1$, $M$ lista tutte le derivazioni di $G$, resa in CNF, aventi lunghezza $2n - 1$ (sufficiente per quanto dimostrato precedentemente), le quali sono in numero \tit{finito} --- dunque $M$ non va in loop --- e se $w$ è presente in una di queste, $M$ accetta, altrimenti rifiuta.
         \end{itemize}
 
@@ -2304,7 +2300,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $M$ una macchina di Turing multinastro; una volta controllata la validità della codifica in input (presente su uno dei due nastri), sia $M$ tale da computare come segue:
+        Sia $M$ una macchina di Turing multinastro a 2 nastri; una volta controllata la validità della codifica in input (presente su uno dei due nastri), sia $M$ tale da computare come segue:
 
         \begin{itemize}
             \item uno dei due nastri viene utilizzato da $M$ per mantenere le codifiche della macchina di Turing in input, che comprendono:
@@ -2317,7 +2313,7 @@
             \item l'altro nastro viene utilizzato da $M$ per mantenere lo stato della configurazione corrente della macchina di Turing che $M$ deve simulare, indicata attraverso la codifica $\abk{a, q, b}$ (dove $q \in Q, a, b \in \Gamma^*$)
             \item allora, $M$ inizialmente scansiona il primo nastro, cercando $\abk{\delta}$;
             \item successivamente, per ogni codifica di regole $\abk{\abk{q, x}, \abk{r, y, z}}$, se $x = b_1$, la codifica della configurazione corrente viene aggiornata in base alla transizione considerata, altrimenti $M$ passa alla regola successiva;
-            \item se la condifica della configurazione corrente, presente sul secondo nastro, contiene $q_\mathrm{accept}$ o $q_\mathrm{reject}$, $M$ accetta o rifiuta rispettivamente.
+            \item se la codifica della configurazione corrente, presente sul secondo nastro, contiene $q_\mathrm{accept}$ o $q_\mathrm{reject}$, $M$ accetta o rifiuta rispettivamente.
         \end{itemize}
 
         Allora $M$ è in grado di simulare la macchina di Turing che gli è stata fornita in input; si noti però che se la macchina che $M$ sta simulando va in loop, anche $M$ va in loop necessariamente. Allora $M$ riconosce $A_\TM$, ma non lo decide. Inoltre, per la \cref{multitape equiv} si ha che esiste una \TM $U$ equivalente alla $M$ descritta, che risulta dunque essere una macchina di Turing universale. Allora, poiché $U$ è equivalente ad $M$, $U$ riconosce (ma non decide) $A_\TM$, e dunque segue la tesi.
@@ -2348,9 +2344,9 @@
     \end{framedthm}
 
     \proofiff{
-        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subseteq \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\overline L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \overline L$, si ha che $\overline L \in \DEC$ per definizione stessa, ed in particolare $$\overline L \in \DEC \implies \overline L \in \REC \iff L \in \coREC$$
+        Sia $L \in \DEC$; per l'\cref{dec in rec} si ha che $\DEC \subset \REC$, dunque sicuramente $L \in \REC$. Inoltre, poiché $L \in \DEC$, per definizione esiste un decisore $M \in \TM$ tale che $L(M) = L$; allora, se si invertono gli stati di accettazione e di rifiuto di $M$, si ottiene una \TM $M'$ che riconosce $\overline L$, poiché accetta se e solo se $M$ rifiuta, e rifiuta se e solo se $M$ accetta; di conseguenza, $M'$ non può andare in loop, e dunque è un decisore. Allora, poiché esiste un decisore $M' \in \TM$ tale che $L(M') = \overline L$, si ha che $\overline L \in \DEC$ per definizione stessa, ed in particolare $$\overline L \in \DEC \implies \overline L \in \REC \iff L \in \coREC$$
     }{
-        Sia $L$ tale che $L \in \REC$ e $L \in \coREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\overline L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\overline L$, e si consideri una stringa $w \in \Sigma$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \overline L = \Sigma^* \\ L \cap \overline L = \varnothing}$$ e dunque $$w \in L \iff w \notin \overline L$$ Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
+        Sia $L$ tale che $L \in \REC$ e $L \in \coREC$, e dunque siano $M_1$ ed $M_2$ rispettivamente le \TM tali da riconoscere $L$ e $\overline L$; inoltre, sia $\Sigma$ l'alfabeto su cui sono definiti $L$ ed $\overline L$, e si consideri una stringa $w \in \Sigma^*$. Si noti che, per definizione stessa di complemento, si ha che $$\centeredsoe{L \cup \overline L = \Sigma^* \\ L \cap \overline L = \varnothing}$$ e dunque $$w \in L \iff w \notin \overline L$$ Allora, fornendo in input $w$ alle \TM $M_1$ ed $M_2$, si verifica che una delle due macchine deve necessariamente accettare $w$, indipendentemente se l'altra rifiuta o va in loop.
 
         Sia allora $M$ una \NTM costituita da 2 nastri, tale da simulare \tit{concorrentemente} --- dunque un passo alla volta --- $M_1$ ed $M_2$ sui suoi 2 nastri, e tale che $$M(w)=\soe{ll}{\textrm{accetta} & M_1 \ \textrm{accetta} \ w\\ \textrm{rifiuta} & M_2 \ \textrm{accetta} \ w}$$ Per quanto detto in precedenza, fornendo in input una qualsiasi stringa $w \in \Sigma^*$ ad $M$, si verifica che una delle due \TM simulate accetta $w$ necessariamente. Allora, segue che $M$ termina sempre, e dunque è un decisore; inoltre, poiché accetta se e solo se $M_1$ accetta --- la quale riconosce $L$ --- e rifiuta se e solo se $M_2$ accetta --- la quale riconosce $\overline L$ --- di fatto $M$ decide $L$, e dunque $L \in \DEC$.
     }
@@ -2375,7 +2371,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \iff A_\TM \notin \coREC$$
+        Per il \cref{a_tm in rec} ed il \cref{a_tm not in dec}, si ha che $$A_\TM \in \REC - \DEC$$ allora per il \cref{coturing thm}, segue che $$A_\TM \in \REC - \DEC \implies A_\TM \notin \coREC$$
     \end{proof}
 
     \subsection{Problema del vuoto}
@@ -2405,7 +2401,7 @@
             \item accetta se e solo se $S$ non è marcata, altrimenti rifiuta.
         \end{itemize}
 
-        Di conseguenza, l'algoritmo che sta eseguendo $M$ su $G$, partendo dai terminali di quest'ultima, controlla che sia possibile ripercorrere gli alberi di derivazione dai terminali fino ad $S$, attraverso le regole in $R$, sfruttate \curlyquotes{al contrario}. Allora, se al termine dell'algoritmo $S$ è marcata, esiste una sequenza di terminali derivabile da $S$, e dunque $L(G) \neq \varnothing$.
+        Di conseguenza, l'algoritmo che sta eseguendo $M$ su $G$, partendo dai terminali di quest'ultima, controlla che sia possibile ripercorrere gli alberi di derivazione dai terminali fino ad $S$, attraverso le regole in $R$, sfruttandole \curlyquotes{al contrario}. Allora, se al termine dell'algoritmo $S$ è marcata, esiste una sequenza di terminali derivabile da $S$, e dunque $L(G) \neq \varnothing$.
     \end{proof}
 
     \subsection{Problema dell'uguaglianza}
@@ -2458,7 +2454,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può convertire i due \DFA $A$ e $B$ forniti in input in un terzo \DFA $C$ --- utilizzando gli algoritmi presentati all'interno della \cref{closure unione}, della \cref{closure inters} e della \cref{closure compl} --- tale che $$L(C) = L(A) \ \Delta \ L(B)$$ e dunque per la \cref{prop diff simm}, si ha che $$L(A) = L(B) \iff L(C) = \varnothing$$ Sia $M'$ la \TM costruita all'interno del \cref{dec e_dfa}; allora, $M$ può utilizzare $M'$ sull'input $\abk{C}$, poiché se $M'$ accetta, allora $L(C) = \varnothing$, e dunque $A$ è equivalente a $B$; allora $M$ accetta se e solo se $M'$ accetta, e poiché $M'$ è decisore per la dimostrazione del \cref{dec e_dfa} stessa, segue la tesi.
+        Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può convertire i due \DFA $A$ e $B$ forniti in input in un terzo \DFA $C$ --- utilizzando gli algoritmi presentati all'interno della \cref{closure unione}, della \cref{closure inters} e della \cref{closure compl} --- tale che $$L(C) = L(A) \ \Delta \ L(B)$$ e dunque per la \cref{prop diff simm}, si ha che $$L(A) = L(B) \iff L(C) = \varnothing$$ Sia $M'$ la \TM costruita all'interno del \cref{dec e_dfa}; allora, $M$ può utilizzare $M'$ sul  input $\abk{C}$, poiché se $M'$ accetta, allora $L(C) = \varnothing$, e dunque $A$ è equivalente a $B$; allora $M$ accetta se e solo se $M'$ accetta, e poiché $M'$ è decisore per la dimostrazione del \cref{dec e_dfa} stessa, segue la tesi.
     \end{proof}
 
     \begin{framedthm}{Indecidibilità di $EQ_\CFG$}
@@ -2508,7 +2504,7 @@
             \item $M$ restituisce $g(f(w))$ sul proprio nastro.
         \end{itemize}
 
-        Allora, per costruzione di $M$, se $M$ si ferma, termina avendo solo $F(w) = g(f(w))$ sul suo nastro; di conseguenza, $F$ risulta essere una funzione calcolabile, per le proprietà di $F$ precedentemente discusse, segue la tesi.
+        Allora, per costruzione di $M$, se $M$ si ferma, termina avendo solo $F(w) = g(f(w))$ sul suo nastro; di conseguenza, $F$ risulta essere una funzione calcolabile, e per le proprietà di $F$ precedentemente discusse, segue la tesi.
     \end{proof}
 
     \section{Turing-decidibilità mediante riduzione}
@@ -2702,7 +2698,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{red compl} si ha che $$A \leq_\mathrm m \overline A \iff \overline A \leq_\mathrm m \overline {\overline A} = A$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m A \\ A \in \REC} \implies \overline A \in \REC \iff A \in \coREC$$ e poiché $$\DEC = \REC \cap \coREC$$ per il \cref{coturing thm}, segue che $A \in \DEC$.
+        Per il \cref{red compl} si ha che $$A \leq_\mathrm m \overline A \iff \overline A \leq_\mathrm m \overline {\overline A} = A$$ e dunque, per il \cref{rec w red}, si ha che $$\soe{l}{\overline A \leq_\mathrm m A \\ A \in \REC} \implies \overline A \in \REC \iff A \in \coREC$$ e poiché $\DEC = \REC \cap \coREC$ per il \cref{coturing thm}, segue che $A \in \DEC$.
     \end{proof}
 
     \subsection{Problema dell'uguaglianza}
@@ -2803,7 +2799,7 @@
     \end{frameddefn}
 
     \begin{example}[Complessità di tempo di \TM]
-        Sia $D$ un decisore che, data in input una stringa $x$, sposta la testina verso destra finché non legge $\blankchar$, e quando legge quest'ultimo accetta. Allora, se input è presente una stringa avente lunghezza $n$, $D$ impiega esattamente $n$ passi a processarla, e dunque $f(n) = n \implies f \equiv \id$.
+        Sia $D$ un decisore che, data in input una stringa $x$, sposta la testina verso destra finché non legge $\blankchar$, e quando legge quest'ultimo accetta. Allora, se in input è presente una stringa avente lunghezza $n$, $D$ impiega esattamente $n$ passi a processarla, e dunque $f(n) = n \implies f \equiv \id$.
     \end{example}
 
     \subsection{Macchine di Turing multinastro}
@@ -2853,7 +2849,7 @@
                     \setcounter{enumii}{3}
                     \setcounter{enumi}{6}
                     \item scorre il nastro: se trova uno \ttt 0, lo rimpiazza con \ttt x;
-                    \item scorre il nastro: se trova uno \ttt 1, lo rimipazza con \ttt x;
+                    \item continua a scorrere il nastro: se trova un \ttt 1, lo rimipazza con \ttt x;
                     \item torna all'inizio del nastro;
                 \end{enumerate}
             \item scorre il nastro: se sono presenti solo \ttt x sul nastro, accetta.
@@ -2874,11 +2870,11 @@
                     \item analogamente all'istruzione 2, l'istruzione 6 ha costo $O(n)$;
                 \end{itemize}
 
-                inoltre, si noti che l'istruzione 3 ripete le istruzioni 4, 5 e 6 al più $\dfrac{n}{2}$ volte, poiché ad ogni iterazione vengono rimossi uno \ttt 0 ed un \ttt 1 insieme; allora, per via dei costi delle istruzioni che ripete, l'istruzione 3 ha costo pari a $$\centeredsoe{\dfrac{n}{2} \cdot [O(n) + O(n) + O(n)] = \dfrac{n}{2} \cdot O(\max(n, n, n)) = \\ = \dfrac{n}{2} \cdot O(n) = \dfrac{1}{2} \cdot n \cdot O(n) = \dfrac{1}{2} \cdot O(n \cdot n) = \dfrac{1}{2} \cdot O(n^2) = O(n^2)}$$ (si veda la \cref{alg asintotica});
+                inoltre, si noti che l'istruzione 3 ripete le istruzioni 4, 5 e 6 al più $\dfrac{n}{2}$ volte, poiché ad ogni iterazione vengono rimossi uno \ttt 0 ed un \ttt 1 insieme; allora, per via dei costi delle istruzioni che ripete, l'istruzione 3 ha costo pari a $$\centeredsoe{\dfrac{n}{2} \cdot [O(n) + O(n) + O(n)] = \dfrac{n}{2} \cdot O(\max(n, n, n)) = \\ = \dfrac{n}{2} \cdot O(n) = \dfrac{1}{2} \cdot n \cdot O(n) = \dfrac{1}{2} \cdot O(n \cdot n) = \dfrac{1}{2} \cdot O(n^2) = O(n^2)}$$ (si veda la \cref{alg asintotica} per chiarimenti);
             \item analogamente all'istruzione 2, l'istruzione 7 ha costo $O(n)$.
         \end{itemize}
 
-        Allora, il costo temporale di $M$ risulta essere $$O(n) + O(n) + O(n^2) + O(n) = O(\max(n, n, n^2, n)) = O(n^2)$$ (si veda la \cref{alg asintotica}) e dunque, segue che $L \in \DTIME \rbk{n^2}$.
+        Allora, il costo temporale di $M$ risulta essere $$O(n) + O(n) + O(n^2) + O(n) = O(\max(n, n, n^2, n)) = O(n^2) \implies L \in \DTIME \rbk{n^k}$$
     \end{example}
 
     \subsection{Classe \Pclass}
@@ -2888,11 +2884,11 @@
     \end{frameddefn}
 
     \begin{framedobs}{Classe \Pclass}
-        La classe di problemi descritti dai linguaggi in \Pclass è particolarmente importante, poiché \Pclass corrisponde approssimativamente alla classe dei problemi che sono realisticamente risolvibili su un computer, in tempi ragionevoli.
+        La classe di problemi descritti dai linguaggi in \Pclass è particolarmente importante, poiché \Pclass corrisponde approssimativamente alla classe dei problemi che sono realisticamente risolvibili da un computer in tempi ragionevoli.
     \end{framedobs}
 
     \begin{frameddefn}{Funzione polinomialmente calcolabile}
-        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione polinomialmente calcolabile} se esiste una macchina di Turing in tempo polinomiale che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
+        Una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ è detta \tbf{funzione polinomialmente calcolabile} se esiste una macchina di Turing che computa in tempo polinomiale che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo nastro.
     \end{frameddefn}
 
     \begin{frameddefn}{Riduzione polinomiale mediante funzione}
@@ -2945,15 +2941,15 @@
         \begin{itemize}
             \item cerca il vertice $s$ tra i vertici di $G$;
             \item una volta trovato, marca $s$;
-            \item finche non vengono marcati tutti i vertici di $G$:
+            \item finche non è più possibile marcare vertici in $V$:
 
                 \begin{itemize}
-                    \item marca ogni vertice avente un arco entrante da un vertice già marcato;
+                    \item marca ogni vertice $v \in V$ tale per cui esiste un arco $(u, v) \in E$ con $u \in V$ già marcato;
                 \end{itemize}
             \item se tra i vertici marcati è presente $t$, allora $M$ accetta.
         \end{itemize}
 
-        Dunque, poiché $\abs{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), sicuramente $\abs{E} = O(n)$, e dunque la complessità temporale di $M$ risulta essere (rispettivamente per ogni istruzione): $$O\rbk{n^k} + O(1) + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
+        Dunque, poiché $\abs{E}$ è sicuramente minore di $n$ (in quanto il numero di archi è sicuramente inferiore del numero di simboli che servono per rappresentare tutto l'input), sicuramente $\abs{E} = O(n)$, e poiché nel caso peggiore $M$ marca tutti i vertici in $V$, si ha che la sua complessità temporale risulta essere (rispettivamente per ogni istruzione): $$O\rbk{n^k} + O(1) + \abs{E} \cdot O\rbk{n^k} + O\rbk{n^k} = O(n) \cdot O\rbk{n^k} = O(n^{k + 1}) \implies PATH \in \Pclass$$
     \end{proof}
 
     \subsection{Classe \coPclass}
@@ -2974,7 +2970,7 @@
             \item $M_{\overline L}$ accetta se e solo se $M_L(w)$ rifiuta.
         \end{itemize}
 
-        Allora, per costruzione, si ha che $$w \in L(M_{\overline L}) \iff w \notin L(M_L) = L$$ e di conseguenza $$L(M_{\overline L}) = \overline L \in \coPclass$$ Inoltre, poiché $M_L$ è un decisore di tempo polinomiale, anche $M_{\overline L}$ è un decisore polinomiale per sua stessa costruzione. Questo dimostra che $\Pclass \subseteq \coPclass$.
+        Allora, per costruzione, si ha che $$w \in L(M_{\overline L}) \iff w \notin L(M_L) = L$$ e di conseguenza $L(M_{\overline L}) = \overline L$. Inoltre, poiché $M_L$ è un decisore di tempo polinomiale, anche $M_{\overline L}$ è un decisore polinomiale per sua stessa costruzione, implicando che $\overline L \in \Pclass$. Questo dimostra che $\Pclass \subseteq \coPclass$.
 
         Infine, poiché è possibile ripetere il ragionamento analogo per $\coPclass \subseteq \Pclass$, segue la tesi per doppia implicazione.
     \end{proof}
@@ -3035,7 +3031,7 @@
     \end{framedprop}
 
     \begin{proof}
-        Sia $L \in \NTIME\rbk{n^k}$ per qualche $k \in \N$, e dunque per definizione esiste una \NTM che decide $L$ in $O\rbk{n^k}$; allora, per il \cref{ntm time}, si ha che $L \in \DTIME \rbk{2^{O\rbk{n^k}}}$.
+        Sia $L \in \NTIME\rbk{n^k}$ per qualche $k \in \N$, e dunque per definizione esiste una \NTM che decide $L$ in $O\rbk{n^k}$; allora, per il \cref{ntm time}, si ha che $L \in \DTIME \rbk{2^{n^k}}$.
     \end{proof}
 
     \begin{framedthm}[label={np w red}]{\NPclass mediante riduzione}
