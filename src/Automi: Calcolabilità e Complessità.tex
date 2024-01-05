@@ -2162,14 +2162,14 @@
         L'insieme $$P := \{2n \mid n \in \N\}$$ dei numeri pari è numerabile, poiché la funzione $$\funcmap{f}{\N}{P}{n}{2n}$$ è biettiva; infatti è iniettiva poiché $$\forall x, y \in \N \quad f(x) = f(y) \iff 2x = 2y \implies x = y$$ ed è suriettiva poiché $$\forall p \in P \quad \exists x \in \N \mid p = 2x$$ (altrimenti $p$ non sarebbe pari).
     \end{example}
 
-    \begin{framedlem}[label={num tm}]{Numerabilità delle macchine di Turing}
-        L'insieme delle macchine di Turing è numerabile.
+    \begin{framedlem}[label={num tm}]{Numerabilità di $\mathcal M$}
+        Sia consideri il seguente insieme: $$\mathcal M := \{\abk{M} \mid M \in \TM\}$$ Allora, si verifica che $\mathcal M$ è numerabile.
     \end{framedlem}
 
     \begin{proof}
         Sia $\Sigma$ un alfabeto, e sia $\prec$ una relazione d'ordine su $\Sigma^*$ definita come segue: $$\forall x, y \in \Sigma^* \quad x \prec y \iff \soe{ll}{|x| < |y| & |x| \neq |y| \\ x \prec_l y & l := |x| = |y|}$$ dove $\prec_l$ è la relazione d'ordine dell'ordinamento lessicografico. Si noti che, per sua stessa definizione, la relazione d'ordine $\prec$ risulta essere totale; di conseguenza, è possibile ordinare \tit{totalmente} le stringhe presenti in $\Sigma^*$, ed è dunque possibile definire una biezione $\func{f}{\N}{\Sigma^*}$ (è sufficiente associare $i \in \N$ con l'$i$-esima stringa ottenutta dall'ordinamento descritto). Questo dimostra che $\Sigma^*$ è numerabile, per qualsiasi alfabeto $\Sigma$ (una volta stabilito un ordinamento lessicografico per caratteri esterni alle lettere dell'alfabeto canonico, se presenti).
 
-        Sia dunque $$\mathcal M := \{\abk M \mid M \in \TM\}$$ che sarà necessariamente definito su qualche alfabeto $\Sigma$ in grado di rappresentare ogni sua possibile codifica; allora, poiché $\mathcal M \subseteq \Sigma^*$, e $\Sigma^*$ è numerabile per quanto detto in precedenza, segue che $\mathcal M$ è necessariamente nuerabile anch'esso
+        Si consideri un alfabeto $\Sigma$ in grado di rappresentare ogni sua possibile codifica; allora, poiché $\mathcal M \subseteq \Sigma^*$, e $\Sigma^*$ è numerabile per quanto detto in precedenza, segue che $\mathcal M$ è necessariamente nuerabile anch'esso.
     \end{proof}
 
     \begin{framedprop}[label={not num B}]{Non-numerabilità di $\mathcal B$}
@@ -2227,7 +2227,7 @@
 
         Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque mappa ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è. Questo prova che l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile.
 
-        Allora, considerando $\mathcal M \subseteq \Sigma ^*$ l'insieme delle codifiche di \TM, poiché per il \cref{num tm} esso è numerabile, per quanto dimostrato in precedenza segue necessariamente che esiste un linguaggio, definito su $\Sigma$ stesso, che non può essere riconosciuto da nessuna macchina di Turing in $\mathcal M$.
+        Allora, poiché $\mathcal M \subseteq \Sigma^*$ (dove $\Sigma$ un il linguaggio che permette di codificare ogni macchina di Turing) è numerabile per il \cref{num tm}, e $\powerset(\Sigma^*)$ non lo è, deve necessariamente esistere un linguaggio $L \in \powerset(\Sigma^*)$ --- dunque definito su $\Sigma$ stesso --- che non può essere riconosciuto da nessuna macchina di Turing descritta da una codifica in $\mathcal M$.
     \end{proof}
 
     \subsection{Problema dell'accettazione}
@@ -2288,7 +2288,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Sia $L \in \CFL$, e dunque per definizione esiste una $G \in \CFG$ tale che $L(G) = L$; affinché $L$ sia decidibile, deve esistere una \TM in grado di deciderlo, e dunque di riconoscere ogni sua stringa $w \in L$, senza andare mai in loop. Si consideri ora la \TM costruita all'interno della dimostrazione del \cref{a_cfg in dec}, la quale decide se una data stringa appartiene al linguaggio di una data \CFG, e sia questa $M_G$. Allora, per decidere $L$ è sufficiente costruire una \TM $M$ --- avente $M_G$ come sua sottoprocedura --- tale che, data una stringa $w \in L$ in input, esegua $M_G$ su $\abk{G, w}$ per stabilire se $w \in L(G)$. Allora $M$ è un decisore poiché $M_G$ è un decisore, e dunque segue la tesi.
+        Sia $L \in \CFL$, e dunque per definizione esiste una $G \in \CFG$ tale che $L(G) = L$; affinché $L$ sia decidibile, deve esistere una \TM in grado di deciderlo, e dunque di riconoscere ogni sua stringa $w \in L$, senza andare mai in loop. Si consideri ora la \TM costruita all'interno della dimostrazione del \cref{a_cfg in dec}, la quale decide se una data stringa appartiene al linguaggio di una data \CFG, e sia questa $M_G$. Allora, per decidere $L$ è sufficiente costruire una \TM $M$ --- avente $M_G$ come sua sottoprocedura --- tale che, data una stringa $w$ in input, esegua $M_G$ su $\abk{G, w}$ per stabilire se $w \in L(G)$. Allora $M$ è un decisore di $L = L(G)$ poiché $M_G$ è un decisore, e dunque segue la tesi.
     \end{proof}
 
     \begin{frameddefn}{Macchina di Turing universale}
