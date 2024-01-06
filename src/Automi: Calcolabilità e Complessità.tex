@@ -1083,17 +1083,6 @@
         e, ponendo ad esempio $i = 2$, si ottiene che $$xy^2z = \ttt 0^k \ttt 0^{2m} \ttt 0^{p-m-k} \ttt 1^p$$ ma il numero di $\ttt 1$ di questa stringa è pari a $p$, mentre il numero di $\ttt 0$ è pari a $$k + 2m + (p - m - k) = m + p$$ e poiché $m > 0$, si ha che $m + p > p$. Dunque $xy^2z \notin L$ poiché non è una stringa della forma $\ttt 0 ^n \ttt 1^n \ \lightning$.
     \end{example}
 
-    \begin{framedobs}{Condizioni del pumping lemma (\REG)}
-        Si noti che la seconda condizione del \cref{pumping reg} stabilisce che $y \neq \varepsilon$, poiché altrimenti il teorema sarebbe trivialmente verificato; infatti, ammettendo $y = \varepsilon$, dato un linguaggio $A \in \mathrm{\REG}$, e presa una sua stringa $s \in A$, ponendo $p := |x|$ esistono sicuramente stringhe $x, z \mid s = xz$ tali da verificare le restanti condizioni del lemma, infatti:
-
-        \begin{itemize}
-            \item $\forall i \ge 0 \quad xy^iz = x \varepsilon^iz  = xz =: s \in A$
-            \item $|xy| = |x \varepsilon| = |x| \le p := |x|$
-        \end{itemize}
-
-        e non sarebbe necessaria l'ipotesi per cui $A$ debba essere regolare; dunque, non sarebbe possibile utilizzare tale lemma per determinare la classe di un dato linguaggio.
-    \end{framedobs}
-
     \chapter{Linguaggi e grammatiche context-free}
 
     \section{Grammatiche context-free}
@@ -1724,10 +1713,6 @@
         Allora, in nessuno dei casi possibili $u v^1 x y^1 z \in L$ $\lightning$.
     \end{example}
 
-    \begin{framedobs}{Condizioni del pumping lemma (\CFL)}
-        TODO
-    \end{framedobs}
-
     \section{Operazioni context-free}
 
     \subsection{Unione}
@@ -2055,10 +2040,6 @@
         Una \tbf{\NTM} (\tit{Nondeterministic Turing Machine}) è una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm}, a meno della funzione di transizione $\delta$, definita come segue: $$\func{\delta}{(Q-\{q_\mathrm{accept}, q_\mathrm{reject}\}) \times \Gamma}{\powerset(Q \times \Gamma \times \{ \mathrm L, \mathrm R\})}$$ poiché una \NTM computa non deterministicamente.
     \end{frameddefn}
 
-    \begin{framedprop}[label={ntm tm}]{Equivalenza delle \NTM}
-        Sia $N$ una \NTM; allora esiste una \TM $M$ ad essa equivalente.
-    \end{framedprop}
-
     \begin{framedobs}{Computazioni di \NTM}
         Si noti che, una \NTM \tit{riconoscitore}:
         
@@ -2074,6 +2055,10 @@
             \item rifiuta una stringa se \tit{ogni ramo di computazione non deterministica rifiuta}.
         \end{itemize}
     \end{framedobs}
+
+    \begin{framedprop}[label={ntm tm}]{Equivalenza delle \NTM}
+        Sia $N$ una \NTM; allora esiste una \TM $M$ ad essa equivalente.
+    \end{framedprop}
 
     \proofiff{
         Sia $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \NTM, e si consideri l'albero di computazione che $N$ produce elaborando gli input, associando un \tit{indirizzo} ad ogni nodo dell'albero, come segue:
@@ -2111,7 +2096,7 @@
     \subsection{Enumeratori}
 
     \begin{frameddefn}{Enumeratore}
-        Un \tbf{enumeratore} è una \TM descritta da una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ --- dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm} --- connessa ad una stampante (ad esempio un nastro secondario), che stampa stringhe in ordine casuale.
+        Un \tbf{enumeratore} è una \TM descritta da una 7-tupla $(Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ --- dove ogni elemento della 7-tupla rimane invariato rispetto alla \cref{tm} --- che non prende nessun input, ed è connessa ad una stampante (ad esempio un nastro secondario) sulla quale stampa stringhe del proprio linguaggio in ordine casuale, anche ripetutamente.
     \end{frameddefn}
 
     \begin{framedprop}{Equivalenza degli enumeratori}
@@ -2119,9 +2104,24 @@
     \end{framedprop}
 
     \proofiff{
-        TODO
+        Sia $E = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ un enumeratore; allora, sia $M$ la seguente \TM -- avente $E$ come sua sottoprocedura --- che, su input $w$, computa come segue:
+
+        \begin{itemize}
+            \item $M$ simula $E$;
+            \item ogni volta che $E$ stampa una stringa $x$, $M$ compara $x$ con $w$
+            \item $M$ accetta se $w$ appare almeno una volta nell'output di $E$.
+        \end{itemize}
+
+        Allora, per costruzione $M$ accetta una stringa $w$ se e solo se $E$ la stampa, e poiché $E$ stampa le stringhe del proprio linguaggio per definizione, segue la tesi.
     }{
-        TODO
+        Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; allora, sia $E$ il seguente enumeratore --- avente $M$ come sua sottoprocedura --- che, dato nulla in input, computa come segue:
+
+        \begin{itemize}
+            \item per ogni $i \in \N$, e per ogni $j \in [1, i]$, $E$ simula $M(w_j)$, dove $w_j$ è la $j$-esima stringa di $\Sigma^*$, ordinato secondo il criterio di ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm};
+            \item $E$ stampa $w_j$ se $M(w_j)$ accetta.
+        \end{itemize}
+
+        Allora, per costruzione $E$ stampa $w_j$ se e solo se $M$ la accetta, e poiché $E$ controlla tutte le stringhe in $\Sigma^*$, $E$ è in grado di stampare tutte e sole le stringhe riconosciute da $M$; allora, segue la tesi.
     }
   
     \section{Linguaggi Turing-riconoscibili e Turing-decidibili}
@@ -2248,7 +2248,7 @@
         $A_\NFA$ è decidibile; in simboli $$A_\NFA := \{\abk{B, w} \mid B \in \NFA, w \in L(B)\} \in \DEC$$
     \end{framedthm}
 
-    \begin{proof}[Dimostrazione I]
+    \begin{proof}[Dimostrazione]
         Sia $M$ una macchina di Turing; una volta controllata la validità della codifica in input, $M$ può utilizzare l'algoritmo di conversione presentato all'interno della dimostrazione del \cref{nfa equiv} per convertire l'\NFA fornito in input in un \DFA(grazie all'\cref{alg tm}); allora, per il \cref{a_dfa}, segue la tesi.
     \end{proof}
 
@@ -2715,8 +2715,7 @@
             \item $F$ costruisce una macchina di Turing $M_2$ che, data in input una stringa $x$, computa come segue:
                 \begin{itemize}
                     \item $M_2$ esegue $M(w)$ (dunque ignorando $x$);
-                    \item se $M$ accetta, $M_2$ accetta;
-                    \item se $M$ rifiuta o cicla, $M_2$ rifiuta;
+                    \item se $M$ accetta, $M_2$ accetta, altrimenti $M_2$ rifiuta;
                 \end{itemize}
                 dunque, se $M$ accetta $w$, $M_2$ riconosce $\Sigma^*$, altrimenti $M_2$ riconosce $\varnothing$;
             \item $F$ restituisce $\abk{M_1, M_2}$ sul suo nastro.
@@ -2730,7 +2729,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Si consideri la dimostrazione del \cref{eq_tm not in rec}; in essa, la \TM $F$ costruisce due macchine di Turing $M_1$ ed $M_2$, dove la prima riconosce $\varnothing$. Se $M_1$ fosse invece tale da accettare sempre, riconoscerebbe $\Sigma^*$, e dunque si avrebbe che $$\abk{M, w} \in A_\TM \iff w \in L(M) \iff L(M_2) = \Sigma^*$$ per definizione di $A_\TM$ e per costruzione di $M_2$ rispettivamente; inoltre $$L(M_1)=L(M_2) \iff f(\abk{M, w}) = \abk{M_1, M_2} \in EQ_\TM$$ per definizione di $EQ_\TM$; dunque $$\abk{M, w} \in A_\TM \iff f(\abk{M, w}) \in EQ_\TM$$ Allora, per definizione, segue $$A_\TM \leq_\mathrm m EQ_\TM$$ e poiché $A_\TM \notin \coREC$ per il \cref{a_tm not in corec}, è verificata la tesi per cui $EQ_\TM \notin \REC$, per il \cref{corec w red cor}.
+        La dimostrazione è analoga al \cref{eq_tm not in rec}, pertanto verrà omessa.
     \end{proof}
 
     \chapter{Complessità di tempo}
@@ -2809,7 +2808,7 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $M$ una macchina di Turing a $k$-nastri avente tempo di esecuzione $t(n)$, e si consideri la \TM $M'$ costruita all'interno della prima implicazione della dimostrazione della \cref{multitape equiv}. Dunque, si ha che:
+        Sia $M$ una macchina di Turing a $k$-nastri avente tempo di esecuzione $t(n) \ge n$, e si consideri la \TM $M'$ costruita all'interno della prima implicazione della dimostrazione della \cref{multitape equiv}. Dunque, si ha che:
 
         \begin{itemize}
             \item il numero di nastri $k$ non dipende dall'input, ed è dunque costante;
@@ -2823,11 +2822,16 @@
     \subsection{Macchine di Turing non deterministiche}
 
     \begin{framedthm}[label={ntm time}]{Relazione tra \TM ed \NTM}
-        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $M$ una macchina di Turing non deterministica avente tempo $t(n)$; allora, esiste una \TM $M'$, equivalente ad $M$, avente tempo $2^{O(t(n))}$.
+        Sia $t(n)$ una funzione tale che $t(n) \ge n$, e sia $N$ una macchina di Turing non deterministica avente tempo $t(n)$; allora, esiste una \TM $M$, equivalente ad $N$, avente tempo $2^{O(t(n))}$.
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Sia $N$ una \NTM avente tempo di esecuzione $t(n) \ge n$, e si consideri la \TM $M$ costruita all'interno della prima implicazione della dimostrazione della \cref{ntm tm}. Dunque, si ha che:
+
+        \begin{itemize}
+            \item $b$ non dipende dalla dimensione dell'input;
+            \item TODO
+        \end{itemize}
     \end{proof}
 
     \section{Classi di complessità di tempo}
@@ -2892,7 +2896,7 @@
     \end{frameddefn}
 
     \begin{frameddefn}{Riduzione polinomiale mediante funzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$} se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm P B$$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile polinomialmente mediante funzione a $B$} se esiste una funzione polinomialmente calcolabile $\func{f}{\Sigma^*}{\Sigma^*}$ \tit{che termina su ogni input} tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm P B$$ e la funzione $f$ prende il nome di \tbf{riduzione di tempo polinomiale di $A$ a $B$}.
     \end{frameddefn}
 
     \begin{framedlem}[label={p red compl}]{Riducibilità polinomiale dei complementi}
@@ -2903,7 +2907,7 @@
         La dimostrazione è analoga alla dimostrazione del \cref{red compl}, pertanto verrà omessa.
     \end{proof}
 
-    \begin{framedlem}{Transitività della riducibilità polinomiale}
+    \begin{framedlem}[label={p red trans}]{Transitività della riducibilità polinomiale}
         Siano $A$, $B$ e $C$ tre linguaggi definiti su un alfabeto $\Sigma$; allora, si verifica che $$\soe{l}{A \leq_\mathrm P B \\ B \leq_\mathrm P C} \implies A \leq_\mathrm P C$$
     \end{framedlem}
 
@@ -3026,7 +3030,7 @@
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in tempo polinomiale} da una \NTM il seguente insieme $$\NPclass := \bigcup_{k \in \N}{\NTIME \rbk{n^k}}$$
     \end{frameddefn}
 
-    \begin{framedprop}[label={np exp}]{Tempo polinomiale in \NTIME}
+    \begin{framedprop}[label={np exp}]{Relazione tra \NPclass ed \EXP}
         Si verifica che $$\NPclass \subseteq \EXP$$
     \end{framedprop}
 
@@ -3079,9 +3083,9 @@
             \item $V$ accetta se la simulazione di $N$ accetta.
         \end{itemize}
 
-        Allora, per costruzione di $V$, si ha che $$w \in L = L(N) \iff \exists c \in \Sigma^* \mid \abk{w, c} \in L(V)$$ e, sempre per costruzione di $V$, ciò avviene se e solo se esiste un ramo di $N$ che accetta $w$. Inoltre, poiché $L \in \NPclass$, la lunghezza dei rami dell'albero di computazione di $N$ è necessariamente polinomiale, e dunque se un certificato $c$ descrive una serie di scelte tali che $N$ accetti $w$, la lunghezza di $c$ deve necessariamente essere in polinomiale anch'essa. Di conseguenza, poiché la lunghezza di $c$ determina la computazione di $V$ stessa, $V$ risulta essere un verificatore in tempo polinomiale di $L$.
+        Allora, per definizione $w \in L = L(N)$ se e solo se esiste un ramo di computazione di $N$ accettante, e per come $V$ interpreta il certificato in input, ciò avviene se e solo se $\exists c \in \Sigma^* \mid \abk{w, c} \in L(V)$. Inoltre, poiché $L \in \NPclass$, la lunghezza dei rami dell'albero di computazione di $N$ è necessariamente polinomiale, e dunque se un certificato $c$ descrive una serie di scelte tali che $N$ accetti $w$, la lunghezza di $c$ deve necessariamente essere in polinomiale anch'essa. Di conseguenza, poiché la lunghezza di $c$ determina la computazione di $V$ stessa, $V$ risulta essere un verificatore in tempo polinomiale di $L$.
     }{
-        Sia $L$ un linguaggio polinomialmente verificabile, e dunque esiste un verificatore $V$ che verifica $L$ polinomialmente. Sia allora $N$ una \NTM --- avente $V$ come sottoprocedura --- che, data una codifica $\abk{w}$, computa come segue:
+        Sia $L$ un linguaggio polinomialmente verificabile, e dunque esiste un verificatore $V$ che verifica $L$ polinomialmente. Sia allora $N$ una \NTM --- avente $V$ come sottoprocedura --- che, data una stringa $w$ in input, computa come segue:
 
         \begin{itemize}
             \item $N$ sceglie casualmente una stringa $c$ avente lunghezza polinomiale;
@@ -3104,21 +3108,21 @@
         Sia $V$ una macchina di Turing che, data una codifica $\abk{w, c}$ in input, computa come segue:
 
         \begin{enumerate}
-            \item interpreta $w$ come $\abk{G}$, dove $G = (V_G, E_G)$ è un grafo;
-            \item interpreta $c$ come $\abk{c_1, \ldots, c_{\abs{V_G}}}$, e $\forall k \in [1, \abs{V_G}] \quad c_k \in \{\mathrm R, \mathrm G, \mathrm B\}$, dunque $c$ viene come possibile tricolorazione di $G$;
+            \item $V$ interpreta $w$ come $\abk{G}$, dove $G = (V_G, E_G)$ è un grafo;
+            \item $V$ interpreta $c$ come $\abk{c_1, \ldots, c_{\abs{V_G}}}$, e $\forall k \in [1, \abs{V_G}] \quad c_k \in \{\mathrm R, \mathrm G, \mathrm B\}$, dunque $c$ viene interpretato come possibile colorazione di $G$;
             \item se esiste un arco $(v_i, v_j) \in E_G$, con $i, j \in [1, \abs{V_G}] \mid i \neq j$ tale che $c_i = c_j$, $V$ rifiuta; se tali archi non esistono, $V$ accetta.
         \end{enumerate}
 
-        Dunque, poiché $V$ accetta $\abk{w, c}$ TODO
+        Dunque, poiché $V$ accetta $\abk{w, c}$ se e solo se la colorazione descritta da $c$ è una tricolorazione del grafo in input, segue che $V$ verifica $3COL$.
 
-        Allora, si ha che:
+        Per quanto riguarda il costo temporale di $V$, si ha che
 
         \begin{itemize}
-            \item le istruzioni 1 e 2 hanno costo $O(\abs w) = O(n)$;
-            \item l'istruzione 3 è costituita da un ciclo, il cui corpo ha costo $O(1)$, e viene eseguito $\abs{E_G}$ volte, e dunque ha costo $O(\abs{E_G}) \cdot O(1) = O(\abs{E_G})$; si noti però che, nel caso peggiore, ogni nodo del grafo è connesso con ogni altro nodo, e dunque $O(\abs{E_G}) = O(\abs{V_G}^2) = O(n^2)$.
+            \item le istruzioni 1 e 2 hanno costo $O(\abs w) = O(n)$
+            \item l'istruzione 3 è costituita da un ciclo, il cui corpo ha costo $O(1)$, e viene eseguito $\abs{E_G}$ volte, e dunque ha costo $O(\abs{E_G}) \cdot O(1) = O(\abs{E_G})$; si noti però che, nel caso peggiore, ogni nodo del grafo è connesso con ogni altro nodo, e dunque $O(\abs{E_G}) = O(\abs{V_G}^2) = O(n^2)$
         \end{itemize}
 
-        In conclusione, $V$ ha costo pari a $O(n) + O(n^2) = O(n^2)$ dunque $V$ è un verificatore polinomiale, e per il \cref{np verif} segue che $3COL \in \NPclass$.
+        dunque $V$ ha costo pari a $$O(n) + O(n^2) = O(n^2)$$ di conseguenza $V$ è un verificatore polinomiale, e per il \cref{np verif} segue che $3COL \in \NPclass$.
     \end{proof}
 
     \begin{frameddefn}{$k$-clique}
@@ -3168,14 +3172,25 @@
         Trivialmente, dalle ipotesi e dalla \cref{np completeness def} segue che $$L \in \NPComplete \implies L \in \NPclass = \Pclass$$
     }
 
+    \begin{framedobs}[label={emptyset e sigma star}, breakable]{$\emptyset$ e $\Sigma^*$}
+        Si noti che, per un dato alfabeto $\Sigma$, si ha che $\emptyset, \Sigma^* \in \Pclass \subseteq \NPclass$, ma nessuno dei due può essere $\NPHard$, poiché:
+
+        \begin{itemize}
+            \item per assurdo, sia $L \leq_\mathrm P \emptyset$, e dunque esiste una funzione $f$ polinomialmente calcolabile tale che $$w \in L \iff f(w) \in \emptyset$$ allora, in particolre $$w \in L \implies f(w) \in \emptyset$$ ma questo è impossibile perche $\emptyset$ non contiene alcuna stringa $\lightning$;
+            \item per assurdo, sia $L \leq_\mathrm P \Sigma^*$, e dunque esiste una funzione $f$ polinomialmente calcolabile tale che $$w \in L \iff f(w) \in \Sigma^*$$ allora, in particolare $$w \notin L \implies f(w) \notin \Sigma^*$$ ma questo è impossibile perché $\Sigma^*$ contiene qualsiasi stringa definita su $\Sigma$ $\lightning$.
+        \end{itemize}
+
+        Di conseguenza $\emptyset, \Sigma^* \notin \NPComplete$, ed è dunque possibile ridefinire la classe dei linguaggi \NPclass-completi come segue: $$\NPComplete := (\NPclass - \{\emptyset, \Sigma^*\}) \cap \NPHard$$
+    \end{framedobs}
+
     \begin{framedthm}[label={p = np impl 5}]{Implicazioni di $\Pclass = \NPclass$}
-        Si verifica che $$\Pclass = \NPclass \implies \NPclass = \NPComplete$$
+        Per un dato alfabeto $\Sigma$, si verifica che $$\Pclass = \NPclass \implies \NPclass - \{\emptyset, \Sigma^*\} = \NPComplete$$
     \end{framedthm}
 
     \begin{proof}
-        Si noti che $$\NPclass = \NPComplete := \NPHard \cap \NPclass \iff \NPclass \subseteq \NPHard \iff \forall L, L' \in \NPclass \quad L \leq_\mathrm P L'$$ dunque la tesi equivale a dimostrare tra ogni coppia di problemi in \NPclass esiste una riduzione polinomiale; di conseguenza, assumendo che $\Pclass = \NPclass$, per dimostrare la tesi è sufficiente mostrare che tale proprietà è verificata in \Pclass.
+        Si noti che $$\NPclass - \{\emptyset, \Sigma^*\} = \NPComplete := (\NPclass - \{\emptyset, \Sigma^*\}) \cap \NPHard \iff \NPclass - \{\emptyset, \Sigma^*\} \subseteq \NPHard$$ (si veda l'\cref{emptyset e sigma star} per chiarimenti) e dunque si ha che $$\NPclass - \{\emptyset, \Sigma^*\} \subseteq \NPHard \iff \forall L, L' \in \NPclass - \{\emptyset, \Sigma^*\} \quad L \leq_\mathrm P L'$$ dunque la tesi equivale a dimostrare che tra ogni coppia di problemi in $\NPclass- \{ \emptyset, \Sigma^* \}$ esiste una riduzione polinomiale; di conseguenza, assumendo che $\Pclass = \NPclass$, per dimostrare la tesi è sufficiente mostrare che tale proprietà è verificata in $\Pclass - \{\emptyset, \Sigma^*\}$.
 
-        Siano dunque $L, L' \in \Pclass$; per loro stessa definizione, esistono due \TM $M$ ed $M'$ tali da deciderli in tempo polinomiale rispettivamente. Allora, siano $x \in L'$ e $y \notin L'$ due stringhe, e si consideri una macchina di Turing $M_{x, y}$ che, data in input una stringa $w \in \Sigma^*$, computa come segue:
+        Siano dunque $L, L' \in \Pclass - \{\emptyset, \Sigma^*\}$; per loro stessa definizione, esistono due \TM $M$ ed $M'$ tali da deciderli in tempo polinomiale rispettivamente. Allora, siano $x \in L'$ e $y \notin L'$ due stringhe, e si consideri una macchina di Turing $M_{x, y}$ che, data in input una stringa $w \in \Sigma^*$, computa come segue:
         
         \begin{itemize}
             \item $M_{x, y}$ computa $M_1(w)$;
@@ -3184,6 +3199,8 @@
         \end{itemize}
 
         Allora, chiamando $\func{f}{\Sigma^*}{\Sigma^*}$ la funzione computabile che $M_{x, y}$ descrive per sua stessa costruzione, si ha che $$\centeredsoe{w \in L \implies f(w) = x \in L' \\ w \notin L \implies f(w) = y \notin L'}$$ e dunque $$w \in L = L(M) \iff f(w) \in L' = L(M')$$ Infine, poiché il costo temporale di $M_{x, y}$ è interamente determinato da $M$, la quale computa in tempo polinomiale in ipotesi, segue che $f$ è una riduzione di tempo polinomiale di $L$ a $L'$, dimostrando che $L \leq_\mathrm P L'$.
+
+        Si noti che non sarebbe possibile dimostrare questa proprietà per $\Pclass$, poiché se $L$ e/o $L'$ fossero $\emptyset$ e/o $\Sigma^*$, non sarebbe possibile prendere le stringhe $x$ ed $y$ utilizzate all'interno della dimostrazione.
     \end{proof}
 
     \begin{framedthm}[label={np-complete w red}]{\NPComplete mediante riduzione}
@@ -3191,15 +3208,15 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Per il \cref{p red trans}, si ha che \centeredeq{0.9}{$\soe{l}{A \leq_\mathrm P B \\ A \in \NPComplete \subseteq \NPHard \\ B \in \NPclass} \implies \soe{l}{A \leq_\mathrm P B \\ \forall C \in \NPclass \quad C \leq_\mathrm P B \\ B \in \NPclass} \implies B \in \NPComplete$}
     \end{proof}
 
     \begin{frameddefn}{Formula soddisfacibile}
         Una formula booleana è detta \tbf{soddisfacibile} se esiste un assegnamento dei suoi letterali tale per cui il valore della formula è pari a \ttt 1.
     \end{frameddefn}
 
-    \begin{example}
-        TODO
+    \begin{example}[Formule soddisfacibili]
+        Sia $\phi$ la seguente formula booleana: $$(\overline x_1 \land x_2) \lor \overline x_4 \lor (x_3 \land \overline x_2 \land x_4) \lor x_5$$ è soddisfacibile attraverso ad esempio il seguente assegnamento $$x_1 = 0, \ x_2 = 1, \ x_3 = 0, \ x_4 = 0, \ x_5 = 1$$
     \end{example}
 
     \begin{framedthm}[label={cook-levin}]{Teorema di Cook-Levin}
@@ -3260,15 +3277,7 @@
             \item $\phi_\mathrm{move}$ richiede tempo $O\rbk{n^{k}} \cdot O\rbk{n^k} \cdot O\rbk{\mathcal W} = O\rbk{n^{2k}}$, dove $\mathcal W := \displaystyle \binom{\abs{C}}{6}$ poiché viene considerata ogni possibile finestra lecita per ogni cella del tableau.
         \end{itemize}
 
-        Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard \iff SAT \in \NPComplete$$
-    \end{proof}
-
-    \begin{framedcor}{}
-        Si verifica che $$3COL \leq_\mathrm P SAT$$
-    \end{framedcor}
-
-    \begin{proof}
-        Per il \cref{cook-levin}, si ha che $SAT \in \NPComplete = \NPclass \cap \NPHard$, e poiché $3COL \in \NPclass$ per il \cref{3col in np} segue la tesi per definizione di \NPclass-difficoltà di $SAT$.
+        Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard =: \NPComplete$$
     \end{proof}
 
     \begin{frameddefn}{Formula in 3CNF}
@@ -3314,7 +3323,7 @@
     \end{framedprop}
 
     \begin{proof}
-        TODO
+        Per il \cref{p = cop}, la \cref{np exp}, il \cref{exp = coexp} si ha che \centeredeq{0.9}{$A \in \Pclass \iff \overline A \in \Pclass \implies \overline A \in \NPclass \iff A \in \coNPclass \iff \overline A \in \NPclass \implies \overline A \in \EXP \iff A \in \EXP$}
     \end{proof}
 
     \begin{framedthm}[label={p = np impl 1}]{Implicazioni di $\Pclass = \NPclass$}
@@ -3411,10 +3420,10 @@
             \item $M$ restituisce $n \cdot n = n^2$ sul suo nastro.
         \end{itemize}
 
-        Allora, poiché entrambe le operazioni che $M$ effettua richiedono tempo $O(n)$, e poiché $M$ termina avendo $n^2$ sul suo nastro, essa è una \TM tale che la funzione $\func{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$ sia computabile in tempo $O(n)$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è tempo-costruibile.
+        Allora, poiché entrambe le operazioni che $M$ effettua richiedono tempo $O(n)$, e poiché $M$ termina avendo $n^2$ sul suo nastro, essa è una \TM tale che la funzione $\funcmap{g}{\Sigma^*}{\Sigma^*}{\ttt 1^n}{n^2}$ sia computabile in tempo $O(n)$, che è certamente $O(n^2)$. Questo dimostra che $f(n) = n^2$ è tempo-costruibile.
     \end{example}
 
-    \begin{framedthm}{Teorema di gerarchia di tempo}
+    \begin{framedthm}[label={hier time thm}]{Teorema di gerarchia di tempo}
         Sia $\func{f}{\N}{\N}$ una funzione tempo-costruibile; allora, esiste un linguaggio $L$ decidibile in tempo $O(f(n))$ ma non in tempo $o\rbk{\dfrac{f(n)}{\log(f(n))}}$.
     \end{framedthm}
 
@@ -3427,7 +3436,7 @@
     \end{framedcor}
 
     \begin{proof}
-        TODO
+        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, tali che $$f_1(n) = o\rbk{\dfrac{f_2(n)}{\log(f_2(n))}} \implies f_1(n) = O\rbk{\dfrac{f_2(n)}{\log(f_2(n))}}$$ (si veda la \cref{small o big o obs}) ed $f_2$ sia tempo-costruibile; allora, per definizione di $f_1$ ed $f_2$, e per il \cref{hier time thm}, si ha che $$\DTIME(f_1(n)) \subsetneq \DTIME\rbk{\dfrac{f_2(n)}{\log(f_2(n))}} \subset \DTIME (f_2(n))$$
     \end{proof}
 
     \begin{framedprop}{Relazione tra \Pclass e \EXP}
@@ -3575,7 +3584,7 @@
     \end{framedobs}
 
     \begin{frameddefn}{Riduzione in spazio log. mediante funzione}
-        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile in spazio logaritmico mediante funzione a $B$} se esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm L B$$ e la funzione $f$ prende il nome di \tbf{riduzione in spazio logaritmico di $A$ a $B$}.
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; $A$ è detto essere \tbf{riducibile in spazio logaritmico mediante funzione a $B$} se esiste una funzione calcolabile in spazio logaritmico $\func{f}{\Sigma^*}{\Sigma^*}$ \tit{che termina su ogni input} tale che $$\forall w \in \Sigma^* \quad w \in A \iff f(w) \in B$$ Tale relazione è indicata attraverso il simbolismo $$A \leq_\mathrm L B$$ e la funzione $f$ prende il nome di \tbf{riduzione in spazio logaritmico di $A$ a $B$}.
     \end{frameddefn}
 
     \begin{framedlem}[label={l red compl}]{Riducibilità in spazio log. dei complementi}
@@ -4132,7 +4141,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, dove $f_1(n) = o(f_2(n))$ ed $f_2$ è spazio-costruibile; per definizione di $f_1$ ed $f_2$, si ha che $$\DSPACE(f_1(n)) \subset \DSPACE(f_2(n))$$ ed inoltre, per il \cref{hier space thm}, poiché $f_2$ è spazio costruibile esiste un linguaggio $$L \in \DSPACE(f_2(n)) - \DSPACE(o(f_2(n))) = \DSPACE(f_2(n)) - \DSPACE(f_1(n))$$ dunque segue la tesi.
+        Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, tali che $$f_1(n) = o(f_2(n)) \implies f_1(n) = O(f_2(n))$$ (si veda la \cref{small o big o obs}) ed $f_2$ sia spazio-costruibile; allora, per definizione di $f_1$ ed $f_2$, e per il \cref{hier space thm}, si ha che $$\DSPACE(f_1(n)) \subsetneq \DSPACE(f_2(n))$$
     \end{proof}
 
     \begin{framedprop}{Relazione tra \NLSPACE e \PSPACE}
