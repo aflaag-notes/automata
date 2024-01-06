@@ -3046,7 +3046,7 @@
         La dimostrazione è analoga alla dimostrazione del \cref{dec w red}, tranne per il fatto che le macchine di Turing considerate computano non deterministicamente in tempo polinomiale; verrà dunque omessa.
     \end{proof}
 
-    \begin{framedcor}[label={np with red cor}]{\NPclass mediante riduzione}
+    \begin{framedcor}[label={np w red cor}]{\NPclass mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm P B$, e $A$ non è in \NPclass, allora $B$ non è in \NPclass. In simboli $$\soe{l}{A \leq_\mathrm P B \\ A \notin \NPclass} \implies B \notin \NPclass$$
     \end{framedcor}
 
@@ -3769,6 +3769,24 @@
         La dimostrazione è analoga alla dimostrazione del \cref{p = cop}, pertanto verrà omessa.
     \end{proof}
 
+    \subsection{Classe \PSPACEComplete}
+
+    \begin{frameddefn}{\PSPACE-difficoltà}
+        Un linguaggio $L$ è detto essere \tbf{\PSPACE-difficile} se e solo se ogni altro linguaggio in \PSPACE è riducibile in spazio logaritmico ad $L$. In simboli $$\PSPACEHard := \{L \mid \forall L' \in \PSPACE \quad L' \leq_\mathrm L L\}$$
+    \end{frameddefn}
+
+    \begin{frameddefn}{\PSPACE-completezza}
+        Un linguaggio è detto essere \tbf{\PSPACE-completo} se e solo se è in \PSPACE ed è \PSPACE-difficile. In simboli $$\PSPACEComplete := \PSPACE \cap \PSPACEHard$$
+    \end{frameddefn}
+
+    \begin{framedprop}{Proprietà di \PSPACEHard}
+        Si verifica che $$\NPHard \subseteq \PSPACEHard \implies \PSPACE = \NPclass$$
+    \end{framedprop}
+
+    \begin{proof}
+        Si noti che, per definizione, si ha che $\NPComplete \subseteq \NPHard$ dunque se $\NPHard \subseteq \PSPACEHard$, in particolare si ha che $$\NPComplete \subseteq \PSPACEHard$$ Sia dunque un linguaggio $L \in \NPComplete$, e quindi $L \in \PSPACEHard$ per ipotesi; allora, per il \cref{l red into p red} ed il \cref{np w red} segue che $$\soe{l}{\forall L' \in \PSPACE \quad L' \leq_\mathrm L L \implies L' \leq_\mathrm P L \\ L \in \NPComplete \subseteq \NPclass} \implies \forall L' \in \PSPACE \quad L' \in \NPclass$$ provando che $$\PSPACE \subseteq \NPclass$$ Viceversa, per il \cref{dtime in dspace}, si ha che $$\NPclass \subseteq \PSPACE$$ e dunque segue la tesi per doppia implicazione.
+    \end{proof}
+
     \subsection{Classe \EXPSPACE}
 
     \begin{frameddefn}{Classe \EXPSPACE}
@@ -3863,7 +3881,7 @@
     \subsection{Classe \NLComplete}
 
     \begin{frameddefn}{\NLSPACE-difficoltà}
-        Un lingauggio $L$ è detto essere \NLSPACE-difficile se e solos e ogni altro linguaggio in \NLSPACE è riducibile in spazio logaritmico ad $L$. In simboli $$\NLHard := \{L \mid \forall L' \in \NLSPACE \quad L' \leq_\mathrm L L\}$$
+        Un lingauggio $L$ è detto essere \tbf{\NLSPACE-difficile} se e solo se ogni altro linguaggio in \NLSPACE è riducibile in spazio logaritmico ad $L$. In simboli $$\NLHard := \{L \mid \forall L' \in \NLSPACE \quad L' \leq_\mathrm L L\}$$
     \end{frameddefn}
 
     \begin{frameddefn}{\NLSPACE-completezza}
@@ -3880,6 +3898,14 @@
 
     \begin{proof}
         La dimostrazione è analoga alla dimostrazione della \cref{p = np impl 3}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedthm}[label={nl-complete w red}]{}
+        Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, $A$ è \NLSPACE-completo è $B$ è in \NLSPACE, allora $B$ è \NLSPACE-completo. In simboli $$\soe{l}{A \leq_\mathrm L B \\ A \in \NLComplete \\ B \in \NLSPACE} \implies B \in \NLComplete$$
+    \end{framedthm}
+    
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione del \cref{np-complete w red}, pertanto verrà omessa
     \end{proof}
 
     \begin{framedthm}[label={path in nl-complete}]{$PATH$ in \NLComplete}
