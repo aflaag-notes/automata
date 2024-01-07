@@ -4161,27 +4161,27 @@
         Si consideri il seguente decisore $D$ definito come descritto all'interno dell'\cref{space model} che, data in input una stringa $w$, computa come segue:
 
         \begin{itemize}
-            \item $D$ marca la $f(n)$-esima cella del suo \tit{working tape} (si noti che $f(n)$ è calcolabile in $O(f(n))$ per spazio-costruibilità di $f$); se in fasi successive avviene un tentativo di usare più di $f(n)$ celle, $D$ rifiuta;
+            \item $D$ marca la $f(n)$-esima cella del suo \tit{working tape} (si noti che $f(n)$ è calcolabile in $O(f(n))$ spazio per spazio-costruibilità di $f$); se in fasi successive avviene un tentativo di usare più di $f(n)$ celle, $D$ rifiuta;
             \item se $w$ non è della forma $\abk{M} \ttt 1 \ttt 0^*$, dove $M \in \TM$, $D$ rifiuta;
-            \item $D$ simula $M(w)$, limitandole lo spazio ad $f(n)$ per quanto detto in precedenza, e contando contemporaneamente il numero di passi che $M$ impiega per computare; se il conto eccede $2^{f(n)}$, $D$ rifiuta;
+            \item $D$ simula $M(w)$, limitandole lo spazio ad $f(n)$ per quanto detto in precedenza, e contando contemporaneamente il numero di passi che $M$ impiega per computare; se il contatore eccede $2^{f(n)}$, $D$ rifiuta;
             \item $D$ accetta se e solo se $M$ rifiuta.
         \end{itemize}
 
-        È facile convincersi che $D$ è un decisore, poiché anche se $M$ dovesse andare in loop infinito entro le $f(n)$ celle di spazio che $D$ le fornisce, dopo $2^{f(n)}$ passi $D$ ne interromperebbe la simulazione e rifiuterebbe
+        È facile convincersi che $D$ è un decisore, poiché anche se $M$ dovesse andare in loop infinito entro le $f(n)$ celle di spazio che $D$ le fornisce, dopo $2^{f(n)}$ passi $D$ ne interromperebbe la simulazione e rifiuterebbe immediatamente.
 
         Per quanto riguarda lo spazio utilizzato da $D$, si ha che:
 
         \begin{itemize}
             \item per come $D$ computa, la sua esecuzione non può eccedere l'uso dell'$f(n)$-esima cella del suo \tit{working tape};
             \item poiché $O \rbk{\log \rbk{2^{f(n)}}} = O(f(n))$, il contatore di passi di $M(w)$ ha costo di spazio $O(f(n))$.
-            \item siano $\Gamma_D$ e $\Gamma_M$ rispettivamente gli alfabeti di nastro di $D$ ed $M$; si noti che, nel caso in cui $\Gamma_M - \Gamma_D \neq \varnothing$, $D$ può rappresentare i simboli di $M$ introducendo un fattore costante nel suo costo di spazio, poiché $\Gamma_D$ è fissato.
+            \item siano $\Gamma_D$ e $\Gamma_M$ rispettivamente gli alfabeti di nastro di $D$ ed $M$; si noti che, nel caso in cui $\Gamma_M - \Gamma_D \neq \varnothing$, $D$ può rappresentare i simboli di $M$ introducendo un fattore costante $d$ nel suo costo di spazio, poiché $\Gamma_D$ è fissato; di conseguenza, se $M$ computa in spazio $g(n)$, allora $D$ simula $M$ in spazio $d \cdot g(n)$.
         \end{itemize}
 
         Questo dimostra che $D$ è un decisore di spazio $O(f(n))$, e sia $L := L(D)$.
 
-        Per giustificare la scelta della codifica di $w = \abk{M} \ttt 1 \ttt 0 ^*$ in input a $D$, si ipotizzi che $M$ computi in spazio $o(f(n))$ (dunque utilizzi meno di $f(n)$ celle); per definizione di $o(f(n))$, l'uso di spazio di $M$ potrebbe essere superiore ad $f(n)$ per valori piccoli di $n$, quando il comportamento asintotico non è ancora stato raggiunto. Di conseguenza, potrebbe verificarsi che $D$ non abbia abbastanza spazio per eseguire $M$ fino al completamento, dunque rifiutando prematuramente, rischiando inoltre di decidere lo stesso lingauggio che decide $M$, condizione per cui il teorema non risulterebbe più verificato. Allora, per garantire che $D$ decida il complemento del linguaggio riconosciuto da $M$, è necessario assicurarsi che $M$ computi sempre in $o(f(n))$, e dunque viene inserita una stringa $\ttt 1 \ttt 0^k$ al termine della codifica $\abk{M}$ nell'input di $D$, con un numero $k$ di \ttt 0 tale che $w = \abk{M} \ttt 1 \ttt 0 ^k$ permetta di raggiungere la soglia tale per cui $M$ computa realmente in $o(f(n))$ --- si noti che $D$ simula $M\rbk{\abk{M} \ttt 1 \ttt 0^k}$.
+        Per giustificare la scelta della codifica di $w = \abk{M} \ttt 1 \ttt 0 ^*$ in input a $D$, si ipotizzi che $M$ computi in spazio $o(f(n))$ (dunque utilizzi meno di $f(n)$ celle); per definizione di $o(f(n))$, l'uso di spazio di $M$ potrebbe essere superiore ad $f(n)$ per valori piccoli di $n$, quando il comportamento asintotico non è ancora stato raggiunto. Di conseguenza, potrebbe verificarsi che $D$ non abbia abbastanza spazio per eseguire $M$ fino al completamento, dunque rifiutando prematuramente, rischiando inoltre di decidere lo stesso linuaaggio che decide $M$, condizione per la quale il teorema non risulterebbe più verificato. Allora, per garantire che $D$ decida il complemento del linguaggio riconosciuto da $M$, è necessario assicurarsi che $M$ computi sempre in $o(f(n))$, e dunque viene inserita una stringa $\ttt 1 \ttt 0^k$ al termine della codifica $\abk{M}$ nell'input di $D$, con un numero $k$ di \ttt 0 tale che $w = \abk{M} \ttt 1 \ttt 0 ^k$ permetta di raggiungere la soglia tale per cui $M$ computa realmente in $o(f(n))$ --- si noti che $D$ simula $M\rbk{\abk{M} \ttt 1 \ttt 0^k}$.
 
-        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c, n_0 \in \N - \{0 \}$ tali per cui $\forall n \ge n_0 \quad g(n) < c \cdot f(n)$. Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L := L(D)$ $\lightning$.
+        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c \in \R_{>0}, n_0 \in \N_{> 0}$ tali per cui $\forall n \ge n_0 \quad g(n) < c \cdot f(n)$ (si noti che, TODO). Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L := L(D)$ $\lightning$.
     \end{proof}
 
     \begin{framedcor}[label={hier space thm cor}]{Teorema di gerarchia di spazio}
