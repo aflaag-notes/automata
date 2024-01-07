@@ -4,10 +4,10 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 
 ## TODO list
 
-- generali
-    - finire i TODOs sparsi
+- metti gerarchia tempo
+- metti gerarchia spazio
 
-- insiemini carini
+- insiemi
     - solo tempo
     - solo spazio
 

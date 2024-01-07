@@ -2612,10 +2612,10 @@
                 \end{itemize}
             \item $D$ esegue $H(\abk{M'})$;
             \item se $H$ accetta, allora $L(M') \in \REG$, e dunque $D$ accetta;
-            \item se $H$ rifiuta, allora $L(M') \in \REG$, e dunque $D$ rifiuta.
+            \item se $H$ rifiuta, allora $L(M') \notin \REG$, e dunque $D$ rifiuta.
         \end{itemize}
 
-        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ accetta, ovvero se $L(M') \in \REG$, e per costruzione di $M'$ si ha che $L(M') \in \REG \iff \soe{l}{x \notin \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\} \\ M(w) \ \textrm{accetta}}$ TODO DA FINIRE
+        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ accetta, ovvero se $L(M') \in \REG$, e per costruzione di $M'$ il suo linguaggio è $\{\ttt 0^n \ttt 1^n \mid n \in \N\}$ --- il quale non è in $\REG$ come dimostrato nell'\cref{non reg ex} --- se $M(w)$ non accetta, altrimenti è $\Sigma^* \in \REG$ (si noti che $M'$ ignora l'input $x$). Allora, l'esistenza di $D$ dimostrerebbe che $A_\TM \in \DEC$, ma questo è impossibile per il \cref{a_tm not in dec} $\lightning$.
     \end{proof}
 
     \subsection{Problema dell'uguaglianza}
@@ -2819,8 +2819,9 @@
         Sia $N$ una \NTM avente tempo di esecuzione $t(n) \ge n$, e si consideri la \TM $M$ costruita all'interno della prima implicazione della dimostrazione della \cref{ntm tm}. Dunque, si ha che:
 
         \begin{itemize}
-            \item $b$ non dipende dalla dimensione dell'input;
-            \item TODO
+            \item $b$, ovvero il numero massimo di figli che ogni nodo dell'albero di computazione può avere, non dipende dalla dimensione dell'input;
+            \item il numero di nodi dell'albero di computazione non deterministica di $N$ è pari a $$\displaystyle O \rbk{\sum_{i=0}^{t(n)}{b^i}} = O \rbk{b^{t(n)}}$$ poiché si tratta di un albero in cui ogni nodo ha al massimo $b$ figli, ed ha altezza $t(n)$ (ovvero, il tempo di cui $N$ dispone per effettuare ogni ramo di computazione);
+            \item si noti che $M$ simula ogni nodo dell'albero di computazione di $N$ ripartendo ogni volta dalla radice, dunque il numero di passi che esegue è pari a $$\centeredsoe{O \rbk{t(n) \cdot b^{t(n)}} = O \rbk{2^{\log \rbk(t(n) \cdot b^{t(n)})}} = O \rbk{2^{\log(t(n)) + \log \rbk{b^t(n)}}} = \\ = O \rbk{2^{\log(t(n)) + t(n) \log(b)}} = O \rbk{ 2^{O(t(n))}} = 2^{O(t(n))}}$$
         \end{itemize}
     \end{proof}
 
@@ -2829,7 +2830,7 @@
     \subsection{Classe \DTIME}
 
     \begin{frameddefn}{Classe \DTIME}
-        Data una funzione $\func{t}{\N}{\R^+}$, si definisce \tbf{classe di complessità di tempo $\DTIME(t(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing --- \tit{varianti escluse} --- in $O(t(n))$.
+        Data una funzione $\func{t}{\N}{\R^+}$, si definisce \tbf{classe di complessità di tempo $\DTIME(t(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing --- \tit{varianti escluse} --- in $O(t(n))$ tempo.
     \end{frameddefn}
 
     \begin{example}[Classe di complessità di tempo]
@@ -3011,7 +3012,7 @@
     \subsection{Classe \NTIME}
 
     \begin{frameddefn}{Classe \NTIME}
-        Data una funzione $\func{t}{\N}{\R^+}$, si definisce \tbf{classe di complessità di tempo $\NTIME(t(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing non deterministica in $O(t(n))$.
+        Data una funzione $\func{t}{\N}{\R^+}$, si definisce \tbf{classe di complessità di tempo $\NTIME(t(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing non deterministica in $O(t(n))$ tempo.
     \end{frameddefn}
 
     \subsection{Classe \NPclass}
@@ -3487,7 +3488,7 @@
 
         \begin{itemize}
             \item il primo nastro conterrà esclusivamente l'input, verrà utilizzato in modalità \tit{read-only}, e prenderà il nome di \tit{input tape}
-            \item il secondo nastro verrà utilizzato per effettuare le computazioni (dunque di default conterrà solo \blankchar), e prenderà il nome di \tit{working tape}
+            \item il secondo nastro verrà utilizzato per effettuare le computazioni (dunque di default conterrà $\blankchar^*$), e prenderà il nome di \tit{working tape}
         \end{itemize}
     \end{framedobs}
 
@@ -3503,17 +3504,17 @@
     \end{frameddefn}
 
     \begin{frameddefn}[label={space complexity}]{Complessità di spazio di una \TM}
-        Sia $D$ un decisore definito come descritto nell'\cref{space model}; si definisce \tbf{complessità di spazio} di $D$ la funzione $\func{f}{\N}{\N}$ tale che $f(n)$ sia il numero massimo di celle che $D$ utilizza per processare una stringa di lunghezza $n$.
+        Sia $D$ un decisore definito come descritto nell'\cref{space model}; si definisce \tbf{complessità di spazio} di $D$ la funzione $\func{f}{\N}{\N}$ tale che $f(n)$ sia il numero massimo di celle del proprio \tit{working tape} che $D$ utilizza per processare una stringa di lunghezza $n$.
     \end{frameddefn}
 
     \subsection{Macchine di Turing multinastro}
     
     \begin{framedthm}[label={multitape tm space equiv}]{Relazione tra \TM e \TM multinastro}
-        Sia $s(n)$ una funzione tale che $s(n) \ge n$, e sia $M$ una macchina di Turing multinastro avente spazio $s(n)$; allora, esiste una \TM $M'$, equivalente ad $M$, avente spazio $O(s(n))$.
+        Sia $s(n)$ una funzione tale che $s(n) \ge n$, e sia $M$ una macchina di Turing multinastro --- definita come descritto nell'\cref{space model} --- avente spazio $s(n)$; allora, esiste una \TM $M'$, equivalente ad $M$, avente spazio $O(s(n))$.
     \end{framedthm}
 
     \begin{proof}
-        Data una \TM multinastro $M$ che computa in $s(n) \ge n$, è possibile realizzare una \TM $M'$ ad essa equivalente utilizzando la costruzione definita all'interno della dimostrazione del \cref{multitape equiv}, e poiché il numero di nastri di $M$ è costante, segue la tesi.
+        Data una \TM multinastro $M$ --- definita come mostrato --- che computa in $s(n) \ge n$ spazio (e dunque ogni suo nastro computa in $s(n)$ spazio), è possibile realizzare una \TM $M'$ ad essa equivalente utilizzando la costruzione definita all'interno della dimostrazione del \cref{multitape equiv}, e poiché il numero di nastri di $M$ è costante, segue la tesi.
     \end{proof}
 
     \section{Classi di complessità di spazio}
@@ -3521,7 +3522,7 @@
     \subsection{Classe \DSPACE}
 
     \begin{frameddefn}{Classe \DSPACE}
-        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing definita come descritto nell'\cref{space model} in $O(s(n))$.
+        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing definita come descritto nell'\cref{space model} in $O(s(n))$ spazio.
     \end{frameddefn}
 
     \begin{framedthm}[label={dtime in dspace}]{Limite di spazio}
@@ -3575,7 +3576,7 @@
             \item $M$ accetta se e solo se, alla fine dell'input, il contatore è a 0.
         \end{itemize}
 
-        Dunque, per costruzione $M$ decide $L$, e poiché un numero $a$ in base $k$ ha $O(\log_k(a)) = O(\log(a))$ cifre (si veda l'\cref{fn log} per chiarimenti), $M$ decide in $L$ con spazio $$O(\log(\abs{w})) = O(\log(n)) \implies L \in \LSPACE$$
+        Dunque, per costruzione $M$ decide $L$, e poiché un numero $a$ in base $k$ ha $O(\log_k(a)) = O(\log(a))$ cifre (si veda l'\cref{fn log} per chiarimenti), $M$ decide $L$ in spazio $$O(\log(\abs{w})) = O(\log(n)) \implies L \in \LSPACE$$
     \end{example}
 
     \begin{framedobs}{Classe \LSPACE}
@@ -3619,7 +3620,7 @@
     \end{framedlem}
 
     \begin{proof}
-        Siano $A$ e $B$ due linguaggi definiti su uno stesso alfabeto, tali che $A \leq_\mathrm L B$, e dunque per definizione esiste una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ calcolabile in spazio logaritmico; allora, per definizione di $f$, esiste un trasduttore di spazio logaritmico $T$ che, su qualsiasi input $w \in \Sigma^*$, se si ferma, termina avendo solo $f(w)$ sul suo \tit{output tape}. Si noti che $T$ computa in spazio logaritmico, e dunque poiché $\LSPACE \subseteq \Pclass$ per il \cref{l in p}, esiste una macchina di Turing $T'$ di tempo polinomiale equivalente a $T$, che di conseguenza è tale per cui $f$ risulta dunque essere anche polinomialmente calcolabile; in conclusione, $f$ è tale che $A \leq_\mathrm P B$ per definizione di riduzione polinomiale mediante funzione.
+        Siano $A$ e $B$ due linguaggi definiti su uno stesso alfabeto, tali che $A \leq_\mathrm L B$, e dunque per definizione esiste una funzione $\func{f}{\Sigma^*}{\Sigma^*}$ calcolabile in spazio logaritmico; allora, per definizione di $f$, esiste un trasduttore di spazio logaritmico $T$ che, su ogni input $w \in \Sigma^*$, termina avendo solo $f(w)$ sul suo \tit{output tape}. Si noti che $T$ computa in spazio logaritmico, e dunque poiché $\LSPACE \subseteq \Pclass$ per la \cref{l in p}, esiste una macchina di Turing $T'$ di tempo polinomiale equivalente a $T$, che di conseguenza è tale per cui $f$ risulta dunque essere anche polinomialmente calcolabile; in conclusione, $f$ è tale che $A \leq_\mathrm P B$ per definizione di riduzione polinomiale mediante funzione.
     \end{proof}
 
     \begin{framedthm}[label={l w red}]{\LSPACE mediante riduzione}
@@ -3631,11 +3632,11 @@
 
         \begin{itemize}
             \item $N$ computa $f(w)$, attraverso il trasduttore di spazio logaritmico tale per cui $f$ è calcolabile, \tit{ma salvando un simbolo alla volta sul suo working tape};
-            \item $N$ simula $M$ avente i vari simboli di $f(w)$ uno ad uno come input, tenendo traccia di dove si trova la testina di $M$, ed ogni qual volta che $M$ necessita di conoscere il prossimo simbolo di $f(w)$, $N$ pulisce il proprio \tit{working tape} e calcola il $f(w)$ dall'inizio fino ad ottenere il prossimo simbolo necessario;
+            \item $N$ simula $M$ avente i vari simboli di $f(w)$ uno ad uno come input, tenendo traccia di dove si trova la testina di $M$, ed ogni qual volta che $M$ necessita di conoscere il prossimo simbolo di $f(w)$, $N$ pulisce il proprio \tit{working tape} e ricalcola $f(w)$ dall'inizio fino ad ottenere il prossimo simbolo necessario;
             \item $N$ accetta se e solo se $M$ accetta.
         \end{itemize}
 
-        Allora, per costruzione di $N$, e per riducibilità in spazio logaritmico di $A$ a $B$, si ha che $$w \in L(N) \iff f(w) \in L(M) = B \iff w \in A$$ e dunque $N$ decide $A$ in spazio logaritmico, poiché $f$ è calcolabile in spazio logaritmico, e $M$ è un decisore di $B$ in spazio logaritmico anch'esso.
+        Allora, per costruzione di $N$, e per riducibilità in spazio logaritmico di $A$ a $B$, si ha che $$w \in L(N) \iff f(w) \in L(M) = B \iff w \in A$$ e dunque $N$ decide $A$ in spazio logaritmico, poiché $f$ è calcolabile in spazio logaritmico, ed $M$ è un decisore di $B$ in spazio logaritmico anch'esso.
 
         Si noti che il motivo per cui è necessario utilizzare una macchina definita come descritto, e non è sufficiente sfruttrare l'approccio di dimostrazione utilizzato per il \cref{dec w red}, è che la calcolabilità in spazio logaritmico di $f$ implica che esista un trasduttore di spazio logaritmico $T$ tale da calcolare $f$ in spazio logaritmico. Di conseguenza, lo spazio utilizzato per rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) stesso non è considerato nella sua definizione, ma $N$ deve invece essere una \TM definita come descritto nell'\cref{space model} per definizione di appartenenza ad \LSPACE. Dunque, calcolare preventivamente $f(w)$ potrebbe eccedere lo spazio logaritmico per rappresentare $f(w)$ sul nastro di $N$, ed è dunque necessario computare come descritto.
     \end{proof}
@@ -3653,7 +3654,7 @@
     \end{framedlem}
 
     \begin{proof}
-        La dimostrazione è analoga alla dimostrazione del \cref{red trans}, con la differenza che la \TM $M$ considerata deve essere definita come descritto all'interno dell'\cref{space model}, e deve cmputare come descritto nella dimostrazione del \cref{l w red}, poiché anche in questo caso rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) potrebbe richiedere più spazio di $O(\log(n))$.
+        La dimostrazione è analoga alla dimostrazione del \cref{red trans}, con la differenza che la \TM $M$ considerata deve essere definita come descritto all'interno dell'\cref{space model}, e deve computare come descritto nella dimostrazione del \cref{l w red}, poiché anche in questo caso rappresentare $f(w)$ (per qualche $w \in \Sigma^*$) potrebbe richiedere più spazio di $O(\log(n))$.
     \end{proof}
 
     \begin{framedprop}[label={log space ops}, breakable]{Operazioni in spazio logaritmico}
@@ -3668,14 +3669,14 @@
             \item effettuare somme tra 2 numeri:
                 \begin{itemize}
                     \item grazie al \cref{multitape tm space equiv}, si può assumere che la macchina sia dotata di più \tit{working tape} (ammesso che il numero di nastri sia in $O(1)$, e dunque non dipenda dalla dimensione dell'input);
-                    \item dunque, per effettuare una somma tra 2 numeri $a$ e $b$, è sufficiente avere salvato $a$ su un nastro, $b$ salvato su un altro, e successivamente incrementare il nastro contenente $a$ e decrementare il nastro contenente $b$, un passo alla volta, fino a che sul nastro di $b$ non vi è 0;
-                    \item il risultato della somma sarà contenuto sul nastro di $a$;
+                    \item dunque, per effettuare una somma tra 2 numeri $a$ e $b$, è sufficiente avere $a$ salvato su un nastro, $b$ salvato su un altro, e successivamente incrementare il nastro contenente $a$ e decrementare il nastro contenente $b$, un passo alla volta, fino a che sul nastro di $b$ non vi è 0;
+                    \item allora, al termine di tale procedura, il risultato della somma sarà contenuto sul nastro di $a$;
                     \item lo spazio richiesto dalla somma è dunque lo spazio richiesto per rappresentare $a + b$, ovvero $O(\log(a + b))$;
                 \end{itemize}
             \item effettuare differenze tra 2 numeri:
                 \begin{itemize}
-                    \item l'operazione è analoga alla somma (assumendo che $a > b$), ma richiede di decrementare il nastro del primo numero al posto di incrementare;
-                    \item come per la somma, il risultato della differenza sarà contenuta sul nastro di $b$;
+                    \item l'operazione è analoga alla somma, ma --- assumendo che $a > b$ --- richiede di decrementare il nastro del primo numero al posto di incrementarlo;
+                    \item allora, come per la somma, il risultato della differenza sarà contenuto sul nastro di $a$;
                     \item lo spazio richiesto dalla differenza è dunque lo spazio richiesto per rappresentare $a$, ovvero $O(\log(a))$;
                 \end{itemize}
             \item effettuare prodotti tra 2 numeri:
@@ -3744,7 +3745,7 @@
         Si consideri una \TM $M$ in grado di eseguire l'algoritmo \ttt{findPath}, la quale esiste per l'\cref{alg tm}. Allora, sia $M'$ una \TM --- avente $M$ come sua sottoprocedura --- che, data in input una codifica $\abk{G, s, t}$, computa come segue:
 
         \begin{itemize}
-            \item $M'$ interpreta $G = (V, E)$ come un grafo diretto, ed $s, t \in V$ come due suoi nodi;
+            \item $M'$ interpreta $G = (V, E)$ come grafo diretto, ed $s, t \in V$ come due suoi nodi;
             \item $M'$ esegue $\ttt{findPath}\rbk{G, s, t, \ceil{\log(\abs{V})}}$ su $M$;
             \item $M'$ accetta se e solo se $M$ restituisce \ttt{True} sul suo nastro.
         \end{itemize}
@@ -3817,7 +3818,7 @@
     \end{framedprop}
 
     \begin{proof}
-        La tesi segue direttamente dal \cref{dspace in dtime cor}, e la dimostrazione è analoga alla dimostrazione della \cref{l in p}, pertanto verrà omessa.
+        La tesi segue direttamente dal \cref{dtime in dspace}, pertanto verrà omessa.
     \end{proof}
 
     \subsection{Classe \coEXPSPACE}
@@ -3837,7 +3838,7 @@
     \subsection{Classe \NSPACE}
     
     \begin{frameddefn}{Classe \NSPACE}
-        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio $\NSPACE(s(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing non deterministica definita come descritto nell'\cref{space model} in $O(s(n))$.
+        Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio $\NSPACE(s(n))$} l'insieme dei linguaggi decidibili da una macchina di Turing non deterministica definita come descritto nell'\cref{space model} in $O(s(n))$ spazio.
     \end{frameddefn}
 
     \begin{framedthm}[label={savitch}]{Teorema di Savitch}
@@ -3847,16 +3848,18 @@
     \begin{proof}
         Sia $L \in \NSPACE(f(n))$, e dunque per definizione esiste una \NTM $N = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ che decide $L$ in spazio $f(n)$. Si consideri un grafo $G_{N,w} = (V_{N, w}, E_{N, w})$, costruito in base a $\delta$, che descrive l'albero di configurazioni che possono essere assunte da $N$ su input $w$; in particolare, esiste un arco $(C, C') \in E_{N, w}$ se e solo se è possibile passare dalla configurazione $C$ alla configurazione $C'$ attraverso $\delta$. Dunque, la radice dell'albero sarà sempre $$C_0 := q_0 \ \blankchar \ttt; \ 1$$ mentre per quanto riguarda la configurazione di accettazione, poiché questa potrebbe non essere ben definita --- in particolare, non è nota a priori come è definita la configurazione accettante, poiché generalmente dipende da come computa la macchina di Turing presa in considerazione --- viene introdotta una configurazione $$C_\mathrm{accept} := C_0$$ e dunque si assume che, al termine della computazione, $N$ pulisca il \tit{working tape} e sposti entrambe le testine sulle prime celle dei due suoi nastri rispettivamente. Dunque, per costruzione di $G_{N,w}$, $N(w)$ accetta se e solo se esiste un cammino $C_0 \to C_\mathrm{accept}$.
 
-        Si consideri la procedura \ttt{findPath} definita all'interno della dimostrazione del \cref{path in log sq}; è possibile modificarla affinché il grafo $G_{N, w}$ descritto venga costruito durante la ricorsione stessa, preservando lo stesso costo di spazio, in quanto tale modifica richiede di salvare solamente qualche altra variabile d'appoggio, preservando dunque il costo di spazio $O(\log^2(n))$; sia \ttt{findPathGraph} tale versione modificata di \ttt{findPath}.
+        Si consideri la procedura \ttt{findPath} definita all'interno della dimostrazione del \cref{path in log sq}; è possibile modificarla affinché il grafo $G_{N, w}$ descritto venga costruito durante la ricorsione stessa, preservando inoltre il costo di spazio, in quanto tale modifica richiede di salvare solamente qualche altra variabile d'appoggio; sia dunque \ttt{findPathGraph} tale versione modificata di \ttt{findPath}.
 
         Sia allora $M$ una macchina di Turing definita come descritto nell'\cref{space model} che, data in input una stringa $w$, computa come segue:
 
         \begin{itemize}
-            \item $M$ esegue $\ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}}$;
+            \item $M$ esegue $\ttt{findPathGraph} \rbk{C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}}$;
             \item $M$ accetta se e solo se l'istruzione precedente restituisce \ttt{True}.
         \end{itemize}
 
-        Allora, per costruzione di $M$, si ha che $$w \in L(M) \iff \ttt{findPathGraph} \rbk{G_{N, w}, C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}} = \ttt{True} \iff w \in L(N)$$ per costruzione di $G_{N, w}$, dunque $N$ ed $M$ sono equivalenti. Infine, si noti che, per ragionamento analogo a quello proposto nella dimostrazione del \cref{dspace in dtime}, poiché il numero massimo di configurazioni possibili di $N$ è $n \cdot 2^{O(f(n))} = 2^{O(f(n))}$ (poiché $f(n) \geq \log(n)$ in ipotesi), questo è anche il numero di nodi massimo che $G_{N, w}$ può avere, e dunque $\abs{V} = 2^{O(f(n))}$. Allora, segue che il costo di spazio di $M$ è pari a $$O \rbk{\ceil {\log^2 \rbk{2^{O(f(n))}}}} = O(f^2(n))$$ il che dimostra la tesi.
+        Allora, per costruzione di $M$, si ha che $$w \in L(M) \iff \ttt{findPathGraph} \rbk{C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}} = \ttt{True} \iff w \in L(N)$$ per costruzione di $G_{N, w}$, dunque $N$ ed $M$ sono equivalenti. Infine, si noti che, per ragionamento analogo a quello proposto nella dimostrazione del \cref{dspace in dtime}, poiché il numero massimo di configurazioni possibili di $N$ è $n \cdot 2^{O(f(n))} = 2^{O(f(n))}$ (poiché $f(n) \geq \log(n)$ in ipotesi), questo è anche il numero di nodi massimo che $G_{N, w}$ può avere, e dunque $\abs{V} = 2^{O(f(n))}$. Allora, il costo di spazio di $G_{N, w}$, che è determinato da $\abs{V}$ e da $\abs{E}$, è comunque pari $2^{O(f(n))}$ poiché $\abs{E} = O \rbk{\abs{V}^2} = 2^{2 \cdot O(f(n))} = 2^{O(f(n))}$.
+
+        In conclusione, poiché il costo di $M$ è determinato dal costo di spazio $G_{N, w}$, segue che $M$ ha costo di spazio pari a $$O \rbk{\ceil {\log^2 \rbk{2^{O(f(n))}}}} = O(f^2(n)) \implies L(M) = L(N) = L \in \DSPACE(f^2(n))$$
     \end{proof}
 
     \subsection{Classe \NLSPACE}
@@ -3963,9 +3966,9 @@
             \EndFunction
         \end{algorithmic}
 
-        Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$.
+        Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare solamente un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, e salvarle ha costo di spazio $O(\log(n))$ (si veda la \cref{log space ops}), l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$.
 
-        Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione: $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_L, w}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_L, w}, C_0, C_\mathrm{accept}} \in PATH$$ Si consideri un trasduttore $T$ che, data in input una stringa $w \in \Sigma^*$, computa come segue:
+        Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$ spazio; si consideri inoltre la seguente funzione: $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_L, w}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_L, w}, C_0, C_\mathrm{accept}} \in PATH$$ Si consideri un trasduttore $T$ che, data in input una stringa $w \in \Sigma^*$, computa come segue:
 
         \begin{itemize}
             \item determina $C_0$ in base dalla funzione di transizione di $N$;
@@ -3975,7 +3978,7 @@
         \item $T$ restituisce $\abk{G_{N_L} = (V_{N_L, w}, E_{N_L, w}), C_0, C_\mathrm{accept}}$ sul suo \tit{output tape}.
         \end{itemize}
 
-        Dunque, per costruzione stessa, $T$ ha costo di spazio logaritmico, sia per come computa, sia perché ognuna delle configurazioni di $N_L$ deve occupare spazio logaritmico per definizione di $L$. Inoltre, se $T$ si ferma, termina avendo solo $r(w)$ sul suo \tit{output tape} per definizione di $r$; allora, $r$ risulta essere una funzione calcolabile in spazio logaritmico, che per sua stessa definizione costituisce dunque una riduzione in spazio logaritmico di $L$ a $PATH$. In simboli, si ha che $$\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \iff PATH \in \NLHard$$ allora segue la tesi.
+        Dunque, per costruzione stessa, $T$ ha costo di spazio logaritmico, sia per come computa, sia perché ognuna delle configurazioni di $N_L$ deve occupare spazio logaritmico per definizione di $L$. Inoltre, $T$ termina sempre, ed avendo solo $r(w)$ sul suo \tit{output tape}; allora, $r$ risulta essere una funzione calcolabile in spazio logaritmico, che per sua stessa definizione costituisce dunque una riduzione in spazio logaritmico di $L$ a $PATH$. In simboli, si ha che $$\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \iff PATH \in \NLHard$$ allora segue la tesi.
     \end{proof}
 
     \begin{framedprop}[label={nl in p}]{Relazione tra \NLSPACE e \Pclass}
@@ -4013,16 +4016,16 @@
     \end{framedthm}
 
     \begin{proof}
-        Per la \cref{conl def}, la tesi può procedere dimostrando equivalentemente che $\overline{PATH} \in \NLSPACE$; inoltre, per il \cref{nl verif}, dimostrare che $\overline{PATH} \in \NLSPACE$ è equivalente a dimostrare che $\overline{PATH}$ e verificabile in spazio logaritmico. Infine, si noti che all'interno di $\overline{PATH}$ sono presenti non solo codifiche $\abk{G, s, t}$ tali per cui non esistono cammini $s \to t$ in $G$, ma anche ogni altra stringa di simboli dell'alfabeto considerato che non corrisponde ad una valida codifica della forma $\abk{G, s, t}$. 
+        Per la \cref{conl def}, la tesi può procedere dimostrando equivalentemente che $\overline{PATH} \in \NLSPACE$; inoltre, per il \cref{nl verif}, dimostrare che $\overline{PATH} \in \NLSPACE$ è equivalente a dimostrare che $\overline{PATH}$ è verificabile in spazio logaritmico. Infine, si noti che all'interno di $\overline{PATH}$ sono presenti non solo codifiche $\abk{G, s, t}$ tali per cui non esistono cammini $s \to t$ in $G$, ma anche ogni altra stringa di simboli dell'alfabeto considerato che non corrisponde ad una valida codifica della forma $\abk{G, s, t}$. 
 
         Si consideri dunque una \TM $V$ definita come descritto all'interno dell'\cref{space model} che, data una codifica $\abk{w, c}$ in input, computa come segue:
 
         \begin{itemize}
-            \item $V$ interpreta $w$ come $\abk{G, s, t}$, dove $G = (V_G, E_G)$ è un grafo diretto, ed $s, t \in V$ come due suoi nodi; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, $V$ accetta;
-            \item $V$ interpreta dunque $c$ come $\abk{c_0, \ldots, c_{\abs{V_G}}}$, dove ogni $c_i$ viene interpretato da $V$ come segue: $$\forall i \in [0, \abs{V_G}) \quad c_i = \abk{s \to v_1, \ldots, s \to v_k}$$ per qualche $k\in \N$, dove $v_1, \ldots, v_k \in V_G$ sono tutti i nodi raggiungibili da $s$ attraverso cammini lunghi al massimo $i$; inoltre, gli elementi all'interno di ogni $c_i$ devono essere ordinati lessicograficamente, al fine di poter controllare efficientemente --- in termini di spazio --- se rappresentano cammini tutti distinti; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, oppure i cammini rappresentati da qualche $c_i$ non sono distinti, $V$ accetta;
+            \item $V$ interpreta $w$ come $\abk{G, s, t}$, dove $G = (V_G, E_G)$ è un grafo diretto, ed $s, t \in V$ sono due suoi nodi; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, $V$ accetta;
+            \item $V$ interpreta $c$ come $\abk{c_0, \ldots, c_{\abs{V_G}}}$, dove ogni $c_i$ viene interpretato da $V$ come segue: $$\forall i \in [0, \abs{V_G}] \quad c_i = \abk{s \to v_1, \ldots, s \to v_k}$$ per qualche $k\in \N$, dove $v_1, \ldots, v_k \in V_G$ sono tutti i nodi raggiungibili da $s$ attraverso cammini lunghi al massimo $i$; inoltre, gli elementi all'interno di ogni $c_i$ devono essere ordinati lessicograficamente, al fine di poter controllare efficientemente --- in termini di spazio --- se rappresentano cammini tutti distinti; se non è possibile effettuare tale interpretazione per via di una codifica incorretta, oppure i cammini rappresentati da qualche $c_i$ non sono distinti, $V$ accetta;
             \item $V$ esegue la seguente procedura:
                 \begin{algorithmic}[1]
-                    \Function{checkPath}{$G, s, t, c$}
+                    \Function{checkPaths}{$G, s, t, c$}
                         \For{$s \to v \in c_0$} \Comment{$c_0$ contiene solo $s \to s$}
                             \If{$v == t$}
                                 \State \textbf{reject}
@@ -4030,7 +4033,7 @@
                         \EndFor
                         \For{$i \in [0, \abs{V_G})$}
                             \For{$s \to v' \in c_{i + 1} - c_i$}
-                                \State $\textrm{isExt} = \ttt{False}$
+                                \State $\textrm{isExt} := \ttt{False}$
                                 \For{$s \to v \in c_i$}
                                     \If{$(v, v') \in E_G$}
                                         \State $\textrm{isExt} = \ttt{True}$
@@ -4050,21 +4053,21 @@
                 \end{algorithmic}
         \end{itemize}
 
-        Sia $R_l$ l'insieme dei vertici raggiungibili da $s$ con al massimo $l$ archi, e sia $r_l := \abs{R_l}$; dunque, la dimostrazione della correttezza della procedura \ttt{checkPath} di $V$ procede per induzione sui vertici raggiungibili da $s$.
+        Sia $R_l$ l'insieme dei vertici raggiungibili da $s$ con al massimo $l$ archi, e sia $r_l := \abs{R_l}$; dunque, la dimostrazione della correttezza della procedura \ttt{checkPaths} di $V$ procede per induzione sui vertici raggiungibili da $s$.
 
             \begin{enumerate}[label=]
-                \item \tit{Caso base.} Per definizione, si ha $R_0 = \{ s\}$ e $c_0 = \abk{s \to s}$; allora, per stabilire se $t \notin R_0$, \ttt{checkPath} controlla se $t \neq s \in R_0$ alla riga 3 (si noti che il ciclo della riga 2 scorrerà un solo elemento, ovvero $s \to s \in c_0$).
-                \item \tit{Ipotesi induttiva.} Dato un $l \in [0, \abs{V_G})$, \ttt{checkPath} è in grado di stabilire correttamente
+                \item \tit{Caso base.} Per definizione, si ha $R_0 = \{ s\}$ e $c_0 = \abk{s \to s}$; allora, per stabilire se $t \notin R_0$, \ttt{checkPaths} controlla se $t \neq s \in R_0$ alla riga 3 (si noti che il ciclo della riga 2 scorrerà un solo elemento, ovvero $s \to s \in c_0$).
+                \item \tit{Ipotesi induttiva.} Dato un $l \in [0, \abs{V_G})$, \ttt{checkPaths} è in grado di stabilire correttamente
 
                     \begin{itemize}
-                        \item gli elementi in $c_l$ rappresentano cammini della forma $s \to v$ per qualche $v \in V_G$;
+                        \item se gli elementi in $c_l$ rappresentano cammini della forma $s \to v$ per qualche $v \in V_G$;
                         \item se $t \notin R_l$.
                     \end{itemize} 
 
-                \item \tit{Passo induttivo.} È necessario dimostare che per $l+1$, \ttt{checkPath} è in grado di stabilire correttamente
+                \item \tit{Passo induttivo.} È necessario dimostare che per $l+1$, \ttt{checkPaths} è in grado di stabilire correttamente
 
                     \begin{itemize}
-                        \item gli elementi in $c_{l + 1}$ rappresentano cammini della forma $s \to v$ per qualche $v \in V_G$;
+                        \item se gli elementi in $c_{l + 1}$ rappresentano cammini della forma $s \to v$ per qualche $v \in V_G$;
                         \item se $t \notin R_{l + 1}$.
                     \end{itemize}
 
@@ -4073,7 +4076,7 @@
                     Infine, per definizione stessa, si ha che $$\forall h \in [0, \abs{V_G}) \quad R_h \subseteq R_{h + 1}$$ dunque segue che $$t \notin R_l \implies \forall h \in [0, l] \quad t \notin R_h$$ di conseguenza, per controllare che $t \notin R_{l + 1}$ è sufficiente verificare che i soli elementi $s \to v' \in c_{l + 1} - c_l$ non abbiano $v' = t$, poiché $t \notin R_l$ per ipotesi induttiva. Questo dimostra la seconda parte della tesi.
             \end{enumerate}
 
-            Dunque, questo dimostra in particolare che \ttt{checkPath} è in grado di stabilire correttamente se $t \in R_{\abs{V_G}}$; allora, attraverso tale procedura, $V$ stabilisce correttamente se $t$ sia raggiungibile o meno da $s$. Di conseguenza, se non esistono cammini $s \to t \in G$, esiste una $c \in \Sigma ^*$ tale che $\abk{\abk{G, s, t}, c} \in L(V)$, e se esiste un cammino $s \to t$ allora \ttt{checkPath} è in grado di stabilire che $t \in R_{\abs{V_G}}$ correttamente, e dunque $V$ rifiuta. Questo dimostra che $V$ è un verificatore per $\overline{PATH}$.
+            Dunque, questo dimostra in particolare che \ttt{checkPaths} è in grado di stabilire correttamente se $t \in R_{\abs{V_G}}$; allora, attraverso tale procedura, $V$ stabilisce correttamente se $t$ sia raggiungibile o meno da $s$. Di conseguenza, se non esistono cammini $s \to t \in G$, esiste almeno una $c \in \Sigma ^*$ tale che $\abk{\abk{G, s, t}, c} \in L(V)$, e se esiste un cammino $s \to t$ allora \ttt{checkPaths} è in grado di stabilire che $t \in R_{\abs{V_G}}$ correttamente, e dunque $V$ rifiuta. Questo dimostra che $V$ è un verificatore per $\overline{PATH}$.
 
             Inoltre, si noti che:
 
