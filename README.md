@@ -6,7 +6,6 @@ Questi sono i miei [appunti](<https://raw.githubusercontent.com/ph-notes/automat
 
 - generali
     - finire i TODOs sparsi
-    - controlla gli appunti sull'ipad
 
 - insiemini carini
     - solo tempo

@@ -27,7 +27,6 @@
 \contentsline {subsection}{\numberline {1.5.1}Definizioni}{18}{subsection.1.5.1}%
 \contentsline {section}{\numberline {1.6}Configurazioni}{21}{section.1.6}%
 \contentsline {subsection}{\numberline {1.6.1}Configurazioni di \textsf {DFA}\xspace }{21}{subsection.1.6.1}%
-\contentsline {subsection}{\numberline {1.6.2}Configurazioni di \textsf {NFA}\xspace }{22}{subsection.1.6.2}%
 \contentsline {section}{\numberline {1.7}Non determinismo generalizzato}{23}{section.1.7}%
 \contentsline {subsection}{\numberline {1.7.1}Definizioni}{23}{subsection.1.7.1}%
 \contentsline {subsection}{\numberline {1.7.2}Equivalenze}{24}{subsection.1.7.2}%
@@ -94,27 +93,27 @@
 \contentsline {subsection}{\numberline {5.3.6}Classe \textsf {NTIME}\xspace }{99}{subsection.5.3.6}%
 \contentsline {subsection}{\numberline {5.3.7}Classe \textsf {NP}\xspace }{99}{subsection.5.3.7}%
 \contentsline {subsection}{\numberline {5.3.8}Classe \textsf {NP-Complete}\xspace }{103}{subsection.5.3.8}%
-\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{110}{subsection.5.3.9}%
-\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{112}{subsection.5.3.10}%
-\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{113}{subsection.5.3.11}%
-\contentsline {subsection}{\numberline {5.3.12}Teorema di gerarchia di tempo}{114}{subsection.5.3.12}%
-\contentsline {chapter}{\numberline {6}Complessità di spazio}{116}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Complessità di spazio di macchine di Turing}{116}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Macchine di Turing}{116}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Macchine di Turing multinastro}{117}{subsection.6.1.2}%
-\contentsline {section}{\numberline {6.2}Classi di complessità di spazio}{117}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{117}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{119}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {coL}\xspace }{125}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {PSPACE}\xspace }{125}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {coPSPACE}\xspace }{125}{subsection.6.2.5}%
-\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {PSPACE-Complete}\xspace }{126}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {EXPSPACE}\xspace }{127}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {coEXPSPACE}\xspace }{127}{subsection.6.2.8}%
-\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NSPACE}\xspace }{127}{subsection.6.2.9}%
-\contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NL}\xspace }{129}{subsection.6.2.10}%
-\contentsline {subsection}{\numberline {6.2.11}Classe \textsf {NL-Complete}\xspace }{130}{subsection.6.2.11}%
-\contentsline {subsection}{\numberline {6.2.12}Classe \textsf {coNL}\xspace }{132}{subsection.6.2.12}%
-\contentsline {subsection}{\numberline {6.2.13}Classe \textsf {NPSPACE}\xspace }{136}{subsection.6.2.13}%
-\contentsline {subsection}{\numberline {6.2.14}Classe \textsf {NEXPSPACE}\xspace }{137}{subsection.6.2.14}%
-\contentsline {subsection}{\numberline {6.2.15}Teorema di gerarchia di spazio}{137}{subsection.6.2.15}%
+\contentsline {subsection}{\numberline {5.3.9}Classe \textsf {coNP}\xspace }{111}{subsection.5.3.9}%
+\contentsline {subsection}{\numberline {5.3.10}Classe \textsf {coNP-Complete}\xspace }{113}{subsection.5.3.10}%
+\contentsline {subsection}{\numberline {5.3.11}Classe \textsf {NEXP}\xspace }{114}{subsection.5.3.11}%
+\contentsline {subsection}{\numberline {5.3.12}Teorema di gerarchia di tempo}{115}{subsection.5.3.12}%
+\contentsline {chapter}{\numberline {6}Complessità di spazio}{117}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Complessità di spazio di macchine di Turing}{117}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Macchine di Turing}{117}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Macchine di Turing multinastro}{118}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Classi di complessità di spazio}{118}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Classe \textsf {DSPACE}\xspace }{118}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Classe \textsf {L}\xspace }{120}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Classe \textsf {coL}\xspace }{126}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Classe \textsf {PSPACE}\xspace }{126}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Classe \textsf {coPSPACE}\xspace }{126}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.6}Classe \textsf {PSPACE-Complete}\xspace }{127}{subsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {EXPSPACE}\xspace }{128}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {coEXPSPACE}\xspace }{128}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NSPACE}\xspace }{128}{subsection.6.2.9}%
+\contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NL}\xspace }{130}{subsection.6.2.10}%
+\contentsline {subsection}{\numberline {6.2.11}Classe \textsf {NL-Complete}\xspace }{131}{subsection.6.2.11}%
+\contentsline {subsection}{\numberline {6.2.12}Classe \textsf {coNL}\xspace }{134}{subsection.6.2.12}%
+\contentsline {subsection}{\numberline {6.2.13}Classe \textsf {NPSPACE}\xspace }{137}{subsection.6.2.13}%
+\contentsline {subsection}{\numberline {6.2.14}Classe \textsf {NEXPSPACE}\xspace }{138}{subsection.6.2.14}%
+\contentsline {subsection}{\numberline {6.2.15}Teorema di gerarchia di spazio}{138}{subsection.6.2.15}%

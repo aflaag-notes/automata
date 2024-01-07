@@ -715,16 +715,6 @@
         Dato un \DFA $M = (Q, \Sigma, \delta, q_0, F)$, è possibile fornire una definizione di \tit{determinismo} alternativa, attraverso la relazione tra configurazioni definita nella \cref{rel config}, come segue: $$\forall q \in Q, a \in \Sigma, x \in \Sigma ^* \quad \exists ! p \in Q \mid (q, ax) \vdash_M (p, x)$$
     \end{framedobs}
 
-    \subsection{Configurazioni di \NFA}
-
-    TODO
-
-    \begin{framedobs}{Linguaggio di un automa}
-        Dato un automa appartenente ad una certa classe $M \in \mathcal C$, la \cref{def L(M)} si può riscrivere in simboli come segue: $$L(M) := \{x \in \Sigma ^* \mid \delta^*(q_0, x) \in F \iff \exists q \in F \mid (q_0, x) \vdash_M^* (q, \varepsilon)\}$$
-
-        Si noti che, nella definizione, verrà presa in considerazione la funzione $\delta^*$ corrispondente alla classe dell'automa $M$ in questione.
-    \end{framedobs}
-
     \section{Non determinismo generalizzato}
 
     \subsection{Definizioni}
@@ -2625,7 +2615,7 @@
             \item se $H$ rifiuta, allora $L(M') \in \REG$, e dunque $D$ rifiuta.
         \end{itemize}
 
-        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ accetta, ovvero se $L(M') \in \REG$, e per costruzione di $M'$ si ha che $L(M') \in \REG \iff \soe{l}{x \notin \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\} \\ M(w) \ \textrm{accetta}}$ TODO DA FINIRE NON HO CAPITO
+        Di conseguenza, $D$ è in grado di stabilire, data una macchina di Turing $M$ ed un input $w$, se $w \in L(M)$, poiché accetta se e solo se $H$ accetta, ovvero se $L(M') \in \REG$, e per costruzione di $M'$ si ha che $L(M') \in \REG \iff \soe{l}{x \notin \{\ttt 0 ^n \ttt 1 ^n \mid n \in \N\} \\ M(w) \ \textrm{accetta}}$ TODO DA FINIRE
     \end{proof}
 
     \subsection{Problema dell'uguaglianza}
@@ -3224,11 +3214,11 @@
     \end{framedthm}
 
     \begin{proof}
-        Sia $V$ una macchina di Turing che, data una codifica $\abk{\phi, c}$ in input, computa come segue:
+        Sia $V$ una macchina di Turing che, data una codifica $\abk{w, c}$ in input, computa come segue:
 
         \begin{itemize}
             \item $V$ interpreta $w$ come $\abk{\phi}$, dove $\phi$ è una formula booleana, e $c$ come assegnamento alle variabili di $\phi$;
-            \item $V$ controlla che $\phi(c)$ sia soddisfatta, ed in tal caso accetta; in caso contrario, $V$ rifiuta;
+            \item $V$ accetta se e solo se $\phi(c)$ è soddisfatta.
         \end{itemize}
 
         Allora, $V$ risulta essere un verificatore di $SAT$, poiché per costruzione $V$ accetta se e solo se $c \in \Sigma^*$ è un assegnamento per $\phi$ tale che $\abk{\abk{\phi}, c} \in L(V)$; inoltre, $V$ è un verificatore polinomiale, e dunque per il \cref {np verif} si ha che $SAT \in \NPclass$.
@@ -3237,38 +3227,41 @@
 
         \centeredimage{0.4}{../assets/tableau.png}
 
-        Dunque, sull'$i$-esima riga del tableau è presente l'$i$-esima configurazione che la macchina assume durante la computazione di $w$. Si noti che, poiché $N$ computa in tempo polinomiale, il nastro non può avere più di $n^k$ celle occupate, e dunque la tabella ha dimensione $n^k \times n^k$ (si assume che il tableau considerato sia quadrato anche se il nastro fosse utilizzato per meno di $n^k$ celle, andando a considerare celle vuote nella porzione di nastro non utilizzata). Un tableau è detto \tit{accettante} se almeno una sua riga contiene una configurazione accettante.
+        Dunque, sull'$i$-esima riga del tableau è presente l'$i$-esima configurazione che la macchina assume durante la computazione di $w$, all'interno del ramo di computazione non deterministica scelto. Si noti che, poiché $N$ computa in tempo polinomiale, il nastro non può avere più di $n^k$ celle occupate, e non può rappresentare più di $n^k$ configurazioni, dunque la tabella ha dimensione $n^k \times n^k$ (si assume che il tableau considerato sia quadrato anche se il nastro fosse utilizzato per meno di $n^k$ celle, andando a considerare celle vuote nella porzione di nastro non utilizzata). Un tableau è detto \tit{accettante} se almeno una sua riga contiene una configurazione accettante.
 
         Verrà ora descritto un tableau accettante attraverso formule booleane, come segue:
 
         \begin{itemize}
             \item dato $C := Q \cup \Gamma \cup \{ \ttt \# \}$, si definiscano variabili $$\forall i,j \in \sbk{1, n^k}, s \in C \quad x_{i, j, s} := \soe{ll}{\ttt 1 & T_{i, j} = s \\ \ttt 0 & T_{i, j} \neq s}$$ si noti che è possibile immaginare $x_{i, j}$ come stringa booleana che attraverso codifica \tit{one-hot encoding} mostra il carattere presente sulla cella $T_{i, j}$ del tableau considerato; si consideri allora la seguente formula booleana: $$\phi_\mathrm{cell} := \bigwedge_{i, j \in \sbk{1, n^k}}{\sbk{\rbk{\bigvee_{s \in C}{x_{i, j, s}}} \land \rbk{\bigwedge_{\substack{s, t \in C \\ s \neq t}}{\overline{x_{i, j, s} \land x_{i, j, t}}}}}}$$
 
-                per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata costruita rappresenta proprio un tableau definito come descritto in precedenza, poiché:
+                per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata generata rappresenta proprio un tableau definito come descritto in precedenza, poiché:
 
                 \begin{itemize}
                     \item la prima parte della formula garantisce che almeno uno dei caratteri delle stringhe $x_{i, j}$ sia un \ttt 1;
                     \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (più precisamente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
                 \end{itemize}
 
-            \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, la prima riga del tableau considerato è la configurazione iniziale di $N$;
-            \item si consideri la seguente formula booleana: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, all'interno del tableau considerato è contenuta almeno una configurazione accettante;
-            \item una \tit{finestra} $2 \times 3$ di un tableau è una porzione di tableau, composta da 3 celle di 2 righe diverse, in cui la prima riga contiene una porzione di configurazione corrente, e la seconda riga contiene una porzione di configurazione nel passo successivo; una finestra è detta \tit{lecita} se non viola le azioni specificate dalla funzione di transizione $\delta$ di $N$; ad esempio, se la $\delta$ ammette le seguenti configurazioni $$\centeredsoe{\delta(q_1, \ttt a) = \{(q_1, \ttt b, \mathrm R)\} \\ \delta(q_1, \ttt b) = \{(q_2, \ttt c, \mathrm L), (q_2, \ttt a, \mathrm R)\}}$$ i seguenti sono esempi di finestre lecite:
+            \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots \land x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata generata contiene la configurazione iniziale di $N$ sulla sua prima riga;
+            \item si consideri la seguente formula booleana: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, la struttura dalla quale tale formula è stata generata contiene almeno una cella con $q_\mathrm{accept}$, dunque almeno una configurazione accettante;
+            \item una \tit{finestra} $2 \times 3$ di un tableau è una porzione di tableau, composta da 6 celle di 2 righe diverse, in cui la prima riga contiene una porzione di configurazione corrente, e la seconda riga contiene una porzione della prossima configurazione; una finestra è detta \tit{lecita} se non viola le azioni specificate dalla funzione di transizione $\delta$ di $N$; ad esempio, se la $\delta$ ammette le seguenti configurazioni $$\centeredsoe{\delta(q_1, \ttt a) = \{(q_1, \ttt b, \mathrm R)\} \\ \delta(q_1, \ttt b) = \{(q_2, \ttt c, \mathrm L), (q_2, \ttt a, \mathrm R)\}}$$ i seguenti sono esempi di finestre lecite:
 
                 \centeredimage{0.3}{../assets/windows.png}
 
-                Si consideri ora la seguente proposizione: \curlyquotes{dato un tableau ed una sua riga, se la riga superiore è la configurazione iniziale, ed ogni finestra nel tableau è lecita, ogni riga del tableau è una configurazione che segue legittimamente dalla precedente}; essa è vera poiché:
-
-                \begin{itemize}
-                    \item si consideri una coppia di configurazioni;
-                    \item ogni cella che contiene un simbolo di nastro e non è adiacente ad un simbolo di stato, rappresenta la cella centrale superiore di una finestra in cui la riga superiore non contiene stati; di conseguenza, questo stesso simbolo deve comparire nella cella centrale della seconda riga della finestra;
-                    \item una finestra contenente il simbolo di stato nella cella centrale superiore garantisce che le tre posizioni corrispondenti vengano aggiornate consistentemente tramite $\delta$; dunque, se la configurazione inferiore e lecita, deve esserlo necessariamente anche quella inferiore.
-                \end{itemize}
-
-                Si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{a_1, \ldots, a_6 \in C \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 12, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, allora le celle del tableau considerato definiscono solamente finestre lecite.
+                Si noti che, se un tableau $T$ contiene la configurazione iniziale di $N$ nella sua prima riga, ed ogni finestra di $T$ è lecita, ogni riga di $T$ è una configurazione che segue legittimamente dalla precedente (\tit{è trivialmente verificabile per induzione, pertanto non ne verrà presentata una prova}). Allora, si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{(a_1, \ldots, a_6) \in C^6 \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 1, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, la struttura dalla quale tale formula è stata generata contiene esclusivamente finestre lecite (rispetto alla $\delta$).
         \end{itemize}
 
-        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se la struttura considerata rappresenta un tableau accettante. Dunque, si consideri ora una \TM $M_\phi$ tale che, data in input $w$, se $N$ accetta, $M_\phi$ restituisce sul suo nastro $f(w) = \abk{\phi}$, dove $\phi$ rappresenta un tableau accettante. Di conseguenza, per costruzione $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
+        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se la struttura considerata rappresenta un tableau accettante.
+
+        Dunque, si consideri una versione modificata di $N$, che su input $w$, ogni suo ramo di computazione non deterministica costruisce il tableau che rappresenta la propria computazione; inoltre, sia $F$ una \TM tale che, data in input $w$, computa come segue:
+
+        \begin{itemize}
+            \item se $N$ ha accettato $w$, $F$ restituisce in output uno dei tableau accettanti delle computazioni accettanti di $N$;
+            \item se $N$ ha rifiutato $w$ --- si noti che $N$ è un decisore --- $F$ restituisce un tableau di una qualsiasi computazione.
+        \end{itemize}
+
+        Di conseguenza, per costruzione si ha che $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ dimostrando che $F$ descrive una riduzione $\func{f}{\Sigma^*}{\Sigma^*}$ di $A$ a $SAT$.
+
+        Si consideri ora il tempo impiegato da $M$ per calcolare $f(w)$:
 
         \begin{itemize}
             \item $\phi_\mathrm{cell}$ richiede tempo $O\rbk{n^k} \cdot O\rbk{n^k} \cdot \abs{C} = O\rbk{n^{2k}}$ (poiché $\abs{C} = O(1)$ perché non dipende da $n$);
@@ -3277,7 +3270,7 @@
             \item $\phi_\mathrm{move}$ richiede tempo $O\rbk{n^{k}} \cdot O\rbk{n^k} \cdot O\rbk{\mathcal W} = O\rbk{n^{2k}}$, dove $\mathcal W := \displaystyle \binom{\abs{C}}{6}$ poiché viene considerata ogni possibile finestra lecita per ogni cella del tableau.
         \end{itemize}
 
-        Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, ovvero $A \leq_\mathrm P SAT$, e questo dimostra che $SAT \in \NPHard$. Dunque, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard =: \NPComplete$$
+        Allora, $f$ risulta essere una riduzione polinomiale di $A$ a $SAT$, dunque $A \leq_\mathrm P SAT$, provando che $SAT \in \NPHard$ poichè la riduzione non dipende dalla scelta di $A$. Di conseguenza, per quanto dimostrato in precedenza, segue la tesi, poiché $$SAT \in \NPclass \cap \NPHard =: \NPComplete$$
     \end{proof}
 
     \begin{frameddefn}{Formula in 3CNF}
@@ -3293,7 +3286,33 @@
     \end{framedthm}
 
     \begin{proof}
-        TODO
+        Si consideri la seguente \TM $F$, che su input $w$, computa come segue:
+
+        \begin{itemize}
+            \item $F$ interpreta $w$ come $\abk \phi$, dove $\phi$ è una formula booleana in 3CNF;
+            \item $F$ costruisce un grafo $G = (V, E)$ come segue:
+
+                \begin{itemize}
+                    \item $F$ crea nodi $x_i, \overline{x_i} \in V$ per ogni variabile $x_i$ in $\phi$ (creando duplicati nel caso in cui la variabile compare più volte in $\phi$);
+                    \item $F$ organizza i nodi in $V$ in $k$-triple --- dove $k$ è il numero di clausole di $\phi$ --- tali che ogni tripla rappresenti una clasuola di $\phi$;
+                    \item per ogni coppia di nodi $x_i$ ed $x_j$, $F$ crea l'arco $(x_i, x_j) \in E$ se e solo se $x_j \neq \overline {x_i}$, e $x_i$ ed $x_j$ appartengono a triple di $V$ --- e dunque clausole di $\phi$ --- diverse;
+                \end{itemize}
+
+            \item $F$ restituisce $\abk{G, k}$ sul suo nastro e termina.
+        \end{itemize}
+
+        Sia $\abk{\phi} \in 3SAT$; allora $\phi$ è in 3CNF, e dunque essa è soddisfacibile se e solo se almeno un letterale di ogni clasuola è vero. Sia dunque $C = \{x_1, \ldots, x_k\} \subseteq V$ tale che ogni $x_i$ sia il nodo corrispondente ad un letterale vero dell'$i$-esima clausola; allora, si noti che:
+
+        \begin{itemize}
+            \item i nodi in $C$ nodi rappresentano letterali appartenenti a clausole diverse, dunque si troveranno necessariamente in triple di $V$ differenti;
+            \item in $C$ non possono esistere due nodi $x_i, x_j$ tali che $x_j = \overline{x_i}$ (ovvero che uno rappresenti il letterale opposto dell'altro), poiché $C$ contiene solamente letterali veri, dunque $\overline{x_i}$ sarebbe falso.
+        \end{itemize}
+
+        Di conseguenza, per ogni coppia di nodi $x_i, x_j \in C$ esiste un arco $(x_i, x_j) \in E$ per costruzione di $G$. Questo dimostra che $C$ è una $k$-clique, e dunque $$\abk{\phi} \in 3SAT \implies f(\abk{\phi}) = \abk{G, k} \in CLIQUE$$
+
+        Sia $f(\abk{\phi}) = \abk{G, k} \in CLIQUE$, e dunque in $G$ esiste una $k$-clique; allora, per costruzione di $G$, una sua $k$-clique non può contenere due vertici all'interno della stessa tripla, e se contiene $x_i$ non può contenere $\overline {x_i}$. Di conseguenza, è possibile definire un assegnamento dei letterali rappresentati dai vertici della $k$-clique, affinché la formula $\phi$ che $G$ rappresenta sia soddisfacibile, poiché i vertici della clique si trovano in triple differenti e non possono interferire tra loro. Questo dimostra che $$f(\abk{\phi}) = \abk{G, k} \in CLIQUE \implies \abk{phi} \in 3SAT$$
+
+        In conclusione, si ha che $$\abk{\phi} \in 3SAT \iff f(\abk{\phi}) = \abk{G, k} \in CLIQUE$$ provando che $f$ rappresenta una riduzione da $3SAT$ a $CLIQUE$, e poiché $F$ esegue esclusivamente operazioni in tempo polinomiale, segue che $$3SAT \leq_\mathrm P CLIQUE$$
     \end{proof}
 
     \begin{framedthm}[label={3sat np-complete}]{$3SAT$ in \NPComplete}
@@ -3862,6 +3881,14 @@
         Per assurdo, sia $B \in \NLSPACE$; allora, poiché $A \leq_\mathrm L B$, per il \cref{nl w red} si ha che $A \in \NLSPACE$ $\lightning$.
     \end{proof}
 
+    \begin{framedprop}[label={nl in log sq}]{Relazione tra \NLSPACE e $\DSPACE(\log^2(n))$}
+        Si verifica che $$\NLSPACE \subseteq \DSPACE(\log^2(n))$$
+    \end{framedprop}
+
+    \begin{proof}
+        La tesi segue immediatamente dal \cref{savitch}, pertanto ne verrà omessa la dimostrazione.
+    \end{proof}
+
     \begin{frameddefn}{Complessità di spazio di verificatori}
         Dato un verificatore $V$ definito come descritto nell'\cref{space model}, ed una codifica $\abk{w, c} \in L(V)$, lo spazio di computazione di $V$ è misurato solamente in termini della lunghezza di $w$.
     \end{frameddefn}
@@ -3900,7 +3927,7 @@
         La dimostrazione è analoga alla dimostrazione della \cref{p = np impl 3}, pertanto verrà omessa.
     \end{proof}
 
-    \begin{framedthm}[label={nl-complete w red}]{}
+    \begin{framedthm}[label={nl-complete w red}]{\NLComplete mediante riduzione}
         Siano $A$ e $B$ due linguaggi definiti su un alfabeto $\Sigma$; se $A \leq_\mathrm L B$, $A$ è \NLSPACE-completo è $B$ è in \NLSPACE, allora $B$ è \NLSPACE-completo. In simboli $$\soe{l}{A \leq_\mathrm L B \\ A \in \NLComplete \\ B \in \NLSPACE} \implies B \in \NLComplete$$
     \end{framedthm}
     
@@ -3936,7 +3963,7 @@
             \EndFunction
         \end{algorithmic}
 
-        Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$. TODO MANCA QUALCOSA CHE NON HO CAPITO
+        Si consideri una \NTM $N$ che, su input $\abk{G, s, t}$, esegua l'algoritmo $\ttt{findPathNL}(G, s, t)$ --- la quale esiste per l'\cref{alg tm}. Dunque, per costruzione stessa dell'algoritmo, poiché $N$ computa non deterministicamente, $N$ accetta se e solo se esiste un cammino $s \to t$, quindi $N$ decide $PATH$. Inoltre, poiché è necessario salvare un numero costante di variabili, ovvero $\abs{V}, s, t, x, y, u, v$, salvarle ha costo $O(\log(n))$ (si veda la \cref{log space ops}), e dunque l'algoritmo risulta avere costo di spazio $O(\log(n))$, implicando che $PATH \in \NLSPACE$.
 
         Sia $L \in \NLSPACE$, e dunque per esso esiste un decisore $N_L$ non deterministico che computa in $O(\log(n))$; si consideri inoltre la seguente funzione: $$\funcmap{r}{\Sigma^*}{\Sigma^*}{w}{\abk{G_{N_{L, w}}, C_0, C_\mathrm{accept}}}$$ dove $G_{N_L, w}$, $C_0$ e $C_\mathrm{accept}$ sono definiti nella dimostrazione del \cref{savitch}. Dunque, per costruzione di $r$, si ha che $$w \in L = L(N_L) \iff r(w) = \abk{G_{N_L, w}, C_0, C_\mathrm{accept}} \in PATH$$ Si consideri un trasduttore $T$ che, data in input una stringa $w \in \Sigma^*$, computa come segue:
 
@@ -3957,14 +3984,6 @@
 
     \begin{proof}
         Per il \cref{path in nl-complete}, il \cref{path in p}, il \cref{l red into p red} ed il \cref{p w red}, segue che $$\soe{l}{\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \implies L \leq_\mathrm P PATH \\ PATH \in \Pclass} \implies \forall L \in \NLSPACE \quad L \in \Pclass \iff \NLSPACE \subseteq \Pclass$$
-    \end{proof}
-
-    \begin{framedprop}[label={nl in log sq}]{Relazione tra \NLSPACE e $\DSPACE(\log^2(n))$}
-        Si verifica che $$\NLSPACE \subseteq \DSPACE(\log^2(n))$$
-    \end{framedprop}
-
-    \begin{proof}
-        TODO
     \end{proof}
 
     \subsection{Classe \coNLSPACE}
