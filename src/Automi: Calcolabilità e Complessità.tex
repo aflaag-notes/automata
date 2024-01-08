@@ -3525,12 +3525,20 @@
         Data una funzione $\func{s}{\N}{\R^+}$, si definisce \tbf{classe di complessità di spazio} $\DSPACE(s(n))$ l'insieme dei linguaggi decidibili da una macchina di Turing definita come descritto nell'\cref{space model} in $O(s(n))$ spazio.
     \end{frameddefn}
 
-    \begin{framedthm}[label={dtime in dspace}]{Limite di spazio}
-        Si verifica che $$\DTIME(f(n)) \subseteq \NTIME(f(n)) \subseteq \DSPACE(f(n))$$
+    \begin{framedthm}[label={dtime in dspace}]{Limite di spazio deterministico}
+        Si verifica che $$f(n) \ge n \implies \DTIME(f(n)) \subseteq \DSPACE(f(n))$$
     \end{framedthm}
 
     \begin{proof}
-        Per definizione, si ha che $\DTIME(f(n)) \subseteq \NTIME(f(n))$; si consideri dunque un linguaggio in $\NTIME(f(n))$ per qualche funzione $\func{f}{\N}{\R^+}$; di conseguenza, il decisore di tale linguaggio effettua al massimo $f(n)$ passi, e poiché nel caso peggiore la macchina non fa altro che spostare la testina verso destra, tale macchina potrebbe effettuare solamente $f(n)$ spostamenti verso destra, e dunque potrebbe lavorare con al massimo $f(n)$ celle; allora, segue la tesi.
+        Si consideri un linguaggio in $\DTIME(f(n))$ per qualche funzione $\func{f}{\N}{\R^+}$ tale che $f(n) \ge n$; di conseguenza, il decisore di tale linguaggio effettua al massimo $f(n)$ passi, e poiché nel caso peggiore la macchina non fa altro che spostare la testina verso destra, tale macchina potrebbe effettuare solamente $f(n)$ spostamenti verso destra, e dunque potrebbe lavorare con al massimo $f(n)$ celle di nastro; allora, segue la tesi.
+    \end{proof}
+
+    \begin{framedthm}[label={ntime in nspace}]{Limite di spazio non deterministico}
+        Si verifica che $$f(n) \ge n \implies \NTIME(f(n)) \subseteq \NSPACE(f(n))$$
+    \end{framedthm}
+
+    \begin{proof}
+        La dimostrazione è analoga alla dimostrazione del \cref{dtime in dspace}, pertanto verrà omessa.
     \end{proof}
 
     \begin{framedthm}[label={dspace in dtime}]{Limite di tempo}
@@ -3799,27 +3807,11 @@
         Un linguaggio è detto essere \tbf{\PSPACE-completo} se e solo se è in \PSPACE ed è \PSPACE-difficile. In simboli $$\PSPACEComplete := \PSPACE \cap \PSPACEHard$$
     \end{frameddefn}
 
-    \begin{framedprop}{Proprietà di \PSPACEHard}
-        Si verifica che $$\NPHard \subseteq \PSPACEHard \implies \PSPACE = \NPclass$$
-    \end{framedprop}
-
-    \begin{proof}
-        Si noti che, per definizione, si ha che $\NPComplete \subseteq \NPHard$ dunque se $\NPHard \subseteq \PSPACEHard$, in particolare si ha che $$\NPComplete \subseteq \PSPACEHard$$ Sia dunque un linguaggio $L \in \NPComplete$, e quindi $L \in \PSPACEHard$ per ipotesi; allora, per il \cref{l red into p red} ed il \cref{np w red} segue che $$\soe{l}{\forall L' \in \PSPACE \quad L' \leq_\mathrm L L \implies L' \leq_\mathrm P L \\ L \in \NPComplete \subseteq \NPclass} \implies \forall L' \in \PSPACE \quad L' \in \NPclass$$ provando che $$\PSPACE \subseteq \NPclass$$ Viceversa, per il \cref{dtime in dspace}, si ha che $$\NPclass \subseteq \PSPACE$$ e dunque segue la tesi per doppia implicazione.
-    \end{proof}
-
     \subsection{Classe \EXPSPACE}
 
     \begin{frameddefn}{Classe \EXPSPACE}
         Si definisce \tbf{classe dei linguaggi decidibili in spazio esponenziale} da una \TM definita come descritto nell'\cref{space model} il seguente insieme $$\EXPSPACE := \displaystyle \bigcup_{k \in \N}{\DSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
-
-    \begin{framedprop}[label={nexp in expspace}]{Relazione tra \NEXP ed \EXPSPACE}
-        Si verifica che $$\NEXP \subseteq \EXPSPACE$$
-    \end{framedprop}
-
-    \begin{proof}
-        La tesi segue direttamente dal \cref{dtime in dspace}, pertanto verrà omessa.
-    \end{proof}
 
     \subsection{Classe \coEXPSPACE}
 
@@ -4119,18 +4111,34 @@
         Per il \cref{savitch}, e per il \cref{dspace in dtime cor}, segue che $$\forall k, h \in \N \mid h = 2k \quad \NSPACE \rbk{n^k} \subseteq \DSPACE \rbk{n^{2k}} = \DSPACE \rbk{n^{h}} \subseteq \DTIME \rbk{2^{O \rbk{n^h}}}$$ dunque segue immediatamente la tesi.
     \end{proof}
 
+    \begin{framedprop}{Proprietà di \PSPACEHard}
+        Si verifica che $$\NPHard \subseteq \PSPACEHard \implies \PSPACE = \NPclass$$
+    \end{framedprop}
+
+    \begin{proof}
+        Si noti che, per definizione, si ha che $\NPComplete \subseteq \NPHard$ dunque se $\NPHard \subseteq \PSPACEHard$, in particolare si ha che $$\NPComplete \subseteq \PSPACEHard$$ Sia dunque un linguaggio $L \in \NPComplete$, e quindi $L \in \PSPACEHard$ per ipotesi; allora, per il \cref{l red into p red} ed il \cref{np w red} segue che $$\soe{l}{\forall L' \in \PSPACE \quad L' \leq_\mathrm L L \implies L' \leq_\mathrm P L \\ L \in \NPComplete \subseteq \NPclass} \implies \forall L' \in \PSPACE \quad L' \in \NPclass$$ provando che $$\PSPACE \subseteq \NPclass$$ Viceversa, per il \cref{ntime in nspace} e per il \cref{pspace = npspace}, si ha che $$\NPclass \subseteq \NPSPACE = \PSPACE$$ e dunque segue la tesi per doppia implicazione.
+    \end{proof}
+
     \subsection{Classe \NEXPSPACE}
 
     \begin{frameddefn}{Classe \NEXPSPACE}
         Si definisce \tbf{classe dei linguaggi decidibili non deterministicamente in spazio esponenziale} da una \NTM definita come descritto nell'\cref{space model} il seguente insieme $$\NEXPSPACE := \bigcup_{k \in \N}{\NSPACE \rbk{2^{n^k}}}$$
     \end{frameddefn}
 
-    \begin{framedprop}{Relaz. tra \EXPSPACE e \NEXPSPACE}
+    \begin{framedprop}[label={expspace = nexpspace}]{Relaz. tra \EXPSPACE e \NEXPSPACE}
         Si verifica che $$\EXPSPACE = \NEXPSPACE$$
     \end{framedprop}
 
     \begin{proof}
         La dimostrazione è analoga alla dimostrazione della \cref{pspace = npspace}, pertanto verrà omessa.
+    \end{proof}
+
+    \begin{framedprop}[label={nexp in expspace}]{Relazione tra \NEXP ed \EXPSPACE}
+        Si verifica che $$\NEXP \subseteq \EXPSPACE$$
+    \end{framedprop}
+
+    \begin{proof}
+        Per il \cref{ntime in nspace} e la \cref{expspace = nexpspace}, segue che $$\NEXP \subseteq \NEXPSPACE = \EXPSPACE$$
     \end{proof}
 
     \subsection{Teorema di gerarchia di spazio}

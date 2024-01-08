@@ -108,12 +108,12 @@
 \contentsline {subsection}{\numberline {6.2.4}Classe \textsf {PSPACE}\xspace }{126}{subsection.6.2.4}%
 \contentsline {subsection}{\numberline {6.2.5}Classe \textsf {coPSPACE}\xspace }{126}{subsection.6.2.5}%
 \contentsline {subsection}{\numberline {6.2.6}Classe \textsf {PSPACE-Complete}\xspace }{127}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {EXPSPACE}\xspace }{128}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {coEXPSPACE}\xspace }{128}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.7}Classe \textsf {EXPSPACE}\xspace }{127}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Classe \textsf {coEXPSPACE}\xspace }{127}{subsection.6.2.8}%
 \contentsline {subsection}{\numberline {6.2.9}Classe \textsf {NSPACE}\xspace }{128}{subsection.6.2.9}%
-\contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NL}\xspace }{130}{subsection.6.2.10}%
-\contentsline {subsection}{\numberline {6.2.11}Classe \textsf {NL-Complete}\xspace }{131}{subsection.6.2.11}%
-\contentsline {subsection}{\numberline {6.2.12}Classe \textsf {coNL}\xspace }{134}{subsection.6.2.12}%
-\contentsline {subsection}{\numberline {6.2.13}Classe \textsf {NPSPACE}\xspace }{137}{subsection.6.2.13}%
+\contentsline {subsection}{\numberline {6.2.10}Classe \textsf {NL}\xspace }{129}{subsection.6.2.10}%
+\contentsline {subsection}{\numberline {6.2.11}Classe \textsf {NL-Complete}\xspace }{130}{subsection.6.2.11}%
+\contentsline {subsection}{\numberline {6.2.12}Classe \textsf {coNL}\xspace }{133}{subsection.6.2.12}%
+\contentsline {subsection}{\numberline {6.2.13}Classe \textsf {NPSPACE}\xspace }{136}{subsection.6.2.13}%
 \contentsline {subsection}{\numberline {6.2.14}Classe \textsf {NEXPSPACE}\xspace }{138}{subsection.6.2.14}%
 \contentsline {subsection}{\numberline {6.2.15}Teorema di gerarchia di spazio}{138}{subsection.6.2.15}%
