@@ -1255,7 +1255,7 @@
 
         \begin{itemize}
             \item vengono aggiunte la variabile $S_0 \in V$, e la regola $S_0 \to S \in R$, in modo da non avere $S$ alla destra di nessuna regola in $R$;
-            \item ogni regola $A \to \varepsilon \in R$ --- con $A \in V - \{S\}$ --- viene rimossa da $R$, e successivamente per ogni regola della forma $X \to uAv \in R$ --- per qualche $X \in V$ e $u, v \in (V \cup \Sigma)^*$ --- viene aggiunta $X \to uv \in R$; inoltre, se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa;
+            \item ogni regola $A \to \varepsilon \in R$ --- con $A \in V - \{S_0\}$ --- viene rimossa da $R$, e successivamente per ogni regola della forma $X \to uAv \in R$ --- per qualche $X \in V$ e $u, v \in (V \cup \Sigma)^*$ --- viene aggiunta $X \to uv \in R$; inoltre, se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa;
             \item ogni regola unitaria $A \to B \in R$ viene rimossa, e per ogni regola $B \to u \in R$ --- con $u \in (V \cup \Sigma)^*$ --- viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
             \item ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ --- dove $u_1, \ldots, u_k \in (V \cup \Sigma)^*$ --- viene rimpiazzata con le regole
 
@@ -1269,8 +1269,7 @@
                     \end{tabular}
                 \end{center}
 
-                dove $A_1, \ldots, A_{k - 2} \in V$, creando dunque una \tit{catena di sostituzioni}, al fine di avere al più 2 variabili o terminali alla destra delle regole;
-            \item infine, ogni $u_i \in \Sigma$ (dunque terminale) --- per ogni $i \in [1, k]$ --- viene rimpiazzato con una nuova varibile $U_i \in V$, e viene aggiunta la regola $U_i \to u_i \in R$.
+                dove $A_1, \ldots, A_{k - 2} \in V$, creando dunque una \tit{catena di sostituzioni}, al fine di avere al più 2 variabili o terminali alla destra delle regole; inoltre, ogni $u_i \in \Sigma$ (dunque terminale) --- per ogni $i \in [1, k]$ --- viene rimpiazzato con una nuova varibile $U_i \in V$, e viene aggiunta la regola $U_i \to u_i \in R$.
         \end{itemize}
     \end{framedmeth}
 
