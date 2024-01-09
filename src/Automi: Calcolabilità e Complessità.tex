@@ -1240,14 +1240,6 @@
         \end{center}
 
         dove $A, B, C \in V$, $a \in \Sigma$ ed $S$ deve essere la variabile alla sinistra della prima regola di $G$. Si noti che la regola $S \to \varepsilon \in R$ prende il nome di \tbf{$\varepsilon$-regola}.
-
-        Dunque, la CNF non permette di
-
-        \begin{enumerate}[label=\roman*), font=\itshape]
-            \item avere \tbf{regole unitarie}, ovvero regole della forma $X \to B \in R$, con $X,B \in V$;
-            \item avere regole della forma $X \to u \in R$, con $u \in (V \cup \Sigma)^* - \Sigma$;
-            \item avere regole della forma $X \to S \in R$, con $X \in V$.
-        \end{enumerate}
     \end{frameddefn}
 
     \begin{framedmeth}[label={cfg into cnf}, breakable]{\CFG in CNF}
@@ -1257,7 +1249,7 @@
             \item vengono aggiunte la variabile $S_0 \in V$, e la regola $S_0 \to S \in R$, in modo da non avere $S$ alla destra di nessuna regola in $R$;
             \item ogni regola $A \to \varepsilon \in R$ --- con $A \in V - \{S_0\}$ --- viene rimossa da $R$, e successivamente per ogni regola della forma $X \to uAv \in R$ --- per qualche $X \in V$ e $u, v \in (V \cup \Sigma)^*$ --- viene aggiunta $X \to uv \in R$; inoltre, se $X \to A \in R$, allora viene aggiunta $X \to \varepsilon \in R$, solo se quest'ultima non era stata precedentemente rimossa;
             \item ogni regola unitaria $A \to B \in R$ viene rimossa, e per ogni regola $B \to u \in R$ --- con $u \in (V \cup \Sigma)^*$ --- viene aggiunta $A \to u \in R$, solo se questa non era una regola unitaria precedentemente rimossa;
-            \item ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ --- dove $u_1, \ldots, u_k \in (V \cup \Sigma)^*$ --- viene rimpiazzata con le regole
+            \item ogni regola restante $A \to u_1 \ldots u_k$ con $k \ge 3$ --- dove $u_1, \ldots, u_k \in (V \cup \Sigma)$ (dunque singole variabili o singoli terminali) --- viene rimpiazzata con le regole
 
                 \begin{center}
                     \begin{tabular}{rcl}
@@ -1269,7 +1261,7 @@
                     \end{tabular}
                 \end{center}
 
-                dove $A_1, \ldots, A_{k - 2} \in V$, creando dunque una \tit{catena di sostituzioni}, al fine di avere al più 2 variabili o terminali alla destra delle regole; inoltre, ogni $u_i \in \Sigma$ (dunque terminale) --- per ogni $i \in [1, k]$ --- viene rimpiazzato con una nuova varibile $U_i \in V$, e viene aggiunta la regola $U_i \to u_i \in R$.
+                dove $A_1, \ldots, A_{k - 2} \in V$, creando dunque una \tit{catena di sostituzioni}, al fine di avere al più 2 variabili o terminali alla destra delle regole; inoltre, ogni $u_i \in \Sigma$ (dunque solo i \tit{terminali}) --- per ogni $i \in [1, k]$ --- viene rimpiazzato con una nuova varibile $U_i \in V$, e viene aggiunta la regola $U_i \to u_i \in R$.
         \end{itemize}
     \end{framedmeth}
 
@@ -1600,7 +1592,7 @@
                                 \end{itemize}
 
                                 allora $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack.
-                            \item differentemente, nel secondo caso, siano $y$ e $z$ sottostringhe di $w$ generate rispettivamente da $A_{p, r}$ ed $A_{r, q}$ dunque $\soe{l}{A_{p,r} \derives y \\ A_{r,q} \derives z} \implies w = yz$, e si noti che $y$ e $z$ sono state derivate con $k$ passaggi; allora, per ipotesi induttiva forte, $y$ e $z$ portano, rispettivamente, $P'$ dagli stati $p$ ed $r$ --- avendo lo stack vuoto --- agli stati $r$ e $q$ --- avendo ancora lo stack vuoto; allora, $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack;
+                            \item differentemente, nel secondo caso, siano $y$ e $z$ sottostringhe di $w$ generate rispettivamente da $A_{p, r}$ ed $A_{r, q}$ dunque $\soe{l}{A_{p,r} \derives y \\ A_{r,q} \derives z} \implies w = yz$, e si noti che $y$ e $z$ sono state derivate con $k$ passaggi; allora, per ipotesi induttiva forte, $y$ e $z$ portano, rispettivamente, $P'$ dagli stati $p$ ed $r$ --- avendo lo stack vuoto --- agli stati $r$ e $q$ --- avendo ancora lo stack vuoto; allora, $w$ è in grado di portare $P'$ dallo stato $p$ allo stato $q$, lasciando invariato lo stack.
                         \end{itemize}
                 \end{enumerate}
             \item \tit{Seconda implicazione.} La dimostrazione procede per induzione sul numero di passaggi della computazione di $w$, da parte di $P'$, tra gli stati $p$ e $q$.
@@ -2107,7 +2099,7 @@
 
         \begin{itemize}
             \item per ogni $i \in \N$, e per ogni $j \in [1, i]$, $E$ simula $M(w_j)$, dove $w_j$ è la $j$-esima stringa di $\Sigma^*$, ordinato secondo il criterio di ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm};
-            \item $E$ stampa $w_j$ se $M(w_j)$ accetta.
+            \item se esiste un $i \in \N$ tale per cui $M$ accetta ogni $w_j$ con $j \in [1, i]$, $E$ stampa ogni $w_j$ per tale $i$ e termina.
         \end{itemize}
 
         Allora, per costruzione $E$ stampa $w_j$ se e solo se $M$ la accetta, e poiché $E$ controlla tutte le stringhe in $\Sigma^*$, $E$ è in grado di stampare tutte e sole le stringhe riconosciute da $M$; allora, segue la tesi.
@@ -2820,7 +2812,7 @@
         \begin{itemize}
             \item $b$, ovvero il numero massimo di figli che ogni nodo dell'albero di computazione può avere, non dipende dalla dimensione dell'input;
             \item il numero di nodi dell'albero di computazione non deterministica di $N$ è pari a $$\displaystyle O \rbk{\sum_{i=0}^{t(n)}{b^i}} = O \rbk{b^{t(n)}}$$ poiché si tratta di un albero in cui ogni nodo ha al massimo $b$ figli, ed ha altezza $t(n)$ (ovvero, il tempo di cui $N$ dispone per effettuare ogni ramo di computazione);
-            \item si noti che $M$ simula ogni nodo dell'albero di computazione di $N$ ripartendo ogni volta dalla radice, dunque il numero di passi che esegue è pari a $$\centeredsoe{O \rbk{t(n) \cdot b^{t(n)}} = O \rbk{2^{\log \rbk(t(n) \cdot b^{t(n)})}} = O \rbk{2^{\log(t(n)) + \log \rbk{b^t(n)}}} = \\ = O \rbk{2^{\log(t(n)) + t(n) \log(b)}} = O \rbk{ 2^{O(t(n))}} = 2^{O(t(n))}}$$
+            \item si noti che $M$ simula ogni nodo dell'albero di computazione di $N$ ripartendo ogni volta dalla radice, dunque il numero di passi che esegue è pari a $$\centeredsoe{O \rbk{t(n) \cdot b^{t(n)}} = O \rbk{2^{\log \rbk{t(n) \cdot b^{t(n)}}}} = O \rbk{2^{\log(t(n)) + \log \rbk{b^{t(n)}}}} = \\ = O \rbk{2^{\log(t(n)) + t(n) \log(b)}} = O \rbk{ 2^{O(t(n))}} = 2^{O(t(n))}}$$
         \end{itemize}
     \end{proof}
 
@@ -3234,29 +3226,29 @@
         \begin{itemize}
             \item dato $C := Q \cup \Gamma \cup \{ \ttt \# \}$, si definiscano variabili $$\forall i,j \in \sbk{1, n^k}, s \in C \quad x_{i, j, s} := \soe{ll}{\ttt 1 & T_{i, j} = s \\ \ttt 0 & T_{i, j} \neq s}$$ si noti che è possibile immaginare $x_{i, j}$ come stringa booleana che attraverso codifica \tit{one-hot encoding} mostra il carattere presente sulla cella $T_{i, j}$ del tableau considerato; si consideri allora la seguente formula booleana: $$\phi_\mathrm{cell} := \bigwedge_{i, j \in \sbk{1, n^k}}{\sbk{\rbk{\bigvee_{s \in C}{x_{i, j, s}}} \land \rbk{\bigwedge_{\substack{s, t \in C \\ s \neq t}}{\overline{x_{i, j, s} \land x_{i, j, t}}}}}}$$
 
-                per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata generata rappresenta proprio un tableau definito come descritto in precedenza, poiché:
+                per sua costruzione, se questa formula è pari a \ttt 1, il tableau dalla quale tale formula è stata generata rappresenta proprio un tableau definito come descritto in precedenza, poiché:
 
                 \begin{itemize}
                     \item la prima parte della formula garantisce che almeno uno dei caratteri delle stringhe $x_{i, j}$ sia un \ttt 1;
                     \item la seconda parte della formula garantisce che sia presente solamente un \ttt 1 tra i caratteri delle stringhe $x_{i, j}$ (più precisamente, controlla che per ogni coppia di simboli $x_{i, j, s}$ ed $x_{i, j, t}$ con $s \neq t$, non si verifichi che $x_{i, j, s} = x_{i, j, t} = \ttt 1$);
                 \end{itemize}
 
-            \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots \land x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, la struttura dalla quale tale formula è stata generata contiene la configurazione iniziale di $N$ sulla sua prima riga;
-            \item si consideri la seguente formula booleana: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, la struttura dalla quale tale formula è stata generata contiene almeno una cella con $q_\mathrm{accept}$, dunque almeno una configurazione accettante;
+            \item si consideri la seguente formula booleana: $$\centeredsoe{\phi_\mathrm{start} := x_{1, 1, \ttt \#} \land x_{1, 2, q_0} \land \\ \land x_{1, 3, w_1}  \land x_{1, 4, w_2} \land \ldots \land x_{1, n + 2, w_n} \land \\ \land x_{1, n + 3, \blankchar} \land \ldots \land x_{1, n^k - 1, \blankchar} \land x_{1, n^k, \ttt \#}}$$ per sua costruzione, se questa formula è pari a \ttt 1, il tableau dalla quale tale formula è stata generata contiene la configurazione iniziale di $N$ sulla sua prima riga;
+            \item si consideri la seguente formula booleana: $$\phi_\mathrm{accept} := \bigvee_{i, j \in \sbk{1, n^k}}{x_{i, j, q_\mathrm{accept}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, il tableau dalla quale tale formula è stata generata contiene almeno una cella con $q_\mathrm{accept}$, dunque almeno una configurazione accettante;
             \item una \tit{finestra} $2 \times 3$ di un tableau è una porzione di tableau, composta da 6 celle di 2 righe diverse, in cui la prima riga contiene una porzione di configurazione corrente, e la seconda riga contiene una porzione della prossima configurazione; una finestra è detta \tit{lecita} se non viola le azioni specificate dalla funzione di transizione $\delta$ di $N$; ad esempio, se la $\delta$ ammette le seguenti configurazioni $$\centeredsoe{\delta(q_1, \ttt a) = \{(q_1, \ttt b, \mathrm R)\} \\ \delta(q_1, \ttt b) = \{(q_2, \ttt c, \mathrm L), (q_2, \ttt a, \mathrm R)\}}$$ i seguenti sono esempi di finestre lecite:
 
                 \centeredimage{0.3}{../assets/windows.png}
 
-                Si noti che, se un tableau $T$ contiene la configurazione iniziale di $N$ nella sua prima riga, ed ogni finestra di $T$ è lecita, ogni riga di $T$ è una configurazione che segue legittimamente dalla precedente (\tit{è trivialmente verificabile per induzione, pertanto non ne verrà presentata una prova}). Allora, si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{(a_1, \ldots, a_6) \in C^6 \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 1, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, la struttura dalla quale tale formula è stata generata contiene esclusivamente finestre lecite (rispetto alla $\delta$).
+                Si noti che, se un tableau $T$ contiene la configurazione iniziale di $N$ nella sua prima riga, ed ogni finestra di $T$ è lecita, ogni riga di $T$ è una configurazione che segue legittimamente dalla precedente (\tit{è trivialmente verificabile per induzione, pertanto non ne verrà presentata una prova}). Allora, si consideri la seguente formula booleana: $$\phi_\mathrm{move} := \bigwedge_{\substack{i \in \left[1, n^k \right) \\ j \in \left( 1, n^k \right)}}{\rbk{\bigvee_{\substack{(a_1, \ldots, a_6) \in C^6 \\ \textrm{finestra lecita}}}{\centeredsoe{x_{i, j-1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land \\ \land x_{i + 1, j- 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j +1, a_6}}}}}$$ per sua costruzione, se questa formula booleana è pari a \ttt 1, il tableau dalla quale tale formula è stata generata contiene esclusivamente finestre lecite (rispetto alla $\delta$).
         \end{itemize}
 
-        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ per costruzione $\phi$ è vera se e solo se la struttura considerata rappresenta un tableau accettante.
+        Si consideri ora la seguente formula booleana: $$\phi := \phi_\mathrm{cell} \land \phi_\mathrm{start} \land \phi_\mathrm{accept} \land \phi_\mathrm{move}$$ si noti che questa formula \tit{non rappresenta un singolo tableau}, ma \tit{rappresenta un generico ramo di computazione non deterministica di $N$}, e per sua costruzione $\phi$ sarà vera se e solo se gli assegnamenti alle variabili verranno realizzati a partire da un tableau accettante.
 
-        Dunque, si consideri una versione modificata di $N$, che su input $w$, ogni suo ramo di computazione non deterministica costruisce il tableau che rappresenta la propria computazione; inoltre, sia $F$ una \TM tale che, data in input $w$, computa come segue:
+        Sia allora $F$ una \TM tale che, data in input $w$, computa come segue:
 
         \begin{itemize}
-            \item se $N$ ha accettato $w$, $F$ restituisce in output uno dei tableau accettanti delle computazioni accettanti di $N$;
-            \item se $N$ ha rifiutato $w$ --- si noti che $N$ è un decisore --- $F$ restituisce un tableau di una qualsiasi computazione.
+            \item costruisce la formula $\phi$ che descrive la computazione di $N(w)$;
+            \item restituisce $\abk{\phi}$ sul proprio nastro e termina.
         \end{itemize}
 
         Di conseguenza, per costruzione si ha che $$w \in L(N) = A \iff \exists T \ \textrm{tableau accettante} \ \iff f(w) = \abk{\phi} \in SAT$$ dimostrando che $F$ descrive una riduzione $\func{f}{\Sigma^*}{\Sigma^*}$ di $A$ a $SAT$.
@@ -3848,9 +3840,9 @@
             \item $M$ accetta se e solo se l'istruzione precedente restituisce \ttt{True}.
         \end{itemize}
 
-        Allora, per costruzione di $M$, si ha che $$w \in L(M) \iff \ttt{findPathGraph} \rbk{C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}} = \ttt{True} \iff w \in L(N)$$ per costruzione di $G_{N, w}$, dunque $N$ ed $M$ sono equivalenti. Infine, si noti che, per ragionamento analogo a quello proposto nella dimostrazione del \cref{dspace in dtime}, poiché il numero massimo di configurazioni possibili di $N$ è $n \cdot 2^{O(f(n))} = 2^{O(f(n))}$ (poiché $f(n) \geq \log(n)$ in ipotesi), questo è anche il numero di nodi massimo che $G_{N, w}$ può avere, e dunque $\abs{V} = 2^{O(f(n))}$. Allora, il costo di spazio di $G_{N, w}$, che è determinato da $\abs{V}$ e da $\abs{E}$, è comunque pari $2^{O(f(n))}$ poiché $\abs{E} = O \rbk{\abs{V}^2} = 2^{2 \cdot O(f(n))} = 2^{O(f(n))}$.
+        Allora, per costruzione di $M$, si ha che $$w \in L(M) \iff \ttt{findPathGraph} \rbk{C_0, C_\mathrm{accept}, \ceil{\log(\abs{V})}} = \ttt{True} \iff w \in L(N)$$ per costruzione di $G_{N, w}$, dunque $N$ ed $M$ sono equivalenti. Infine, si noti che, per ragionamento analogo a quello proposto nella dimostrazione del \cref{dspace in dtime cor}, poiché il numero massimo di configurazioni possibili di $N$ è $n \cdot 2^{O(f(n))} = 2^{O(f(n))}$ (poiché $f(n) \geq \log(n)$ in ipotesi), questo è anche il numero di nodi massimo che $G_{N, w}$ può avere, e dunque $\abs{V} = 2^{O(f(n))}$. Allora, il costo di spazio di $G_{N, w}$, che è determinato da $\abs{V}$ e da $\abs{E}$, è comunque pari $2^{O(f(n))}$, poiché $\abs{E} = O \rbk{\abs{V}^2} = 2^{2 \cdot O(f(n))} = 2^{O(f(n))}$.
 
-        In conclusione, poiché il costo di $M$ è determinato dal costo di spazio $G_{N, w}$, segue che $M$ ha costo di spazio pari a $$O \rbk{\ceil {\log^2 \rbk{2^{O(f(n))}}}} = O(f^2(n)) \implies L(M) = L(N) = L \in \DSPACE(f^2(n))$$
+        In conclusione, poiché il costo di $M$ è determinato dal costo di spazio $G_{N, w}$, segue che $M$ ha costo di spazio pari a $$O \rbk{\log^2 \rbk{2^{O(f(n))}}} = O(f^2(n)) \implies L(M) = L(N) = L \in \DSPACE(f^2(n))$$
     \end{proof}
 
     \subsection{Classe \NLSPACE}
@@ -3966,7 +3958,7 @@
             \item $T$ elenca \tit{una alla volta} tutte le possibili stringhe di lunghezza $O(\log(n))$;
             \item per ognuna di queste, $T$ controlla che siano configurazioni possibili di $N_L$ (attraverso la funzione di transizione di quest'ultimo); sia $V_{N_L, w}$ l'insieme  di tali configurazioni filtrate;
             \item data una coppia di configurazioni $C, C' \in V_{N_L, w}$, dove solo una delle due è scritta sul \tit{working tape} di $T$, è sufficiente che $T$ controlli che sia possibile produrre $C'$ a partire da $C$ (attraverso la funzione di transizione di $N$) per stabilire se $(C, C')$ debba essere un arco in $E_{N_L, w}$, dunque \tit{senza} dover scrivere $C'$ stessa sul suo \tit{working tape};
-        \item $T$ restituisce $\abk{G_{N_L} = (V_{N_L, w}, E_{N_L, w}), C_0, C_\mathrm{accept}}$ sul suo \tit{output tape}.
+        \item $T$ restituisce $\abk{G_{N_L, w} = (V_{N_L, w}, E_{N_L, w}), C_0, C_\mathrm{accept}}$ sul suo \tit{output tape}.
         \end{itemize}
 
         Dunque, per costruzione stessa, $T$ ha costo di spazio logaritmico, sia per come computa, sia perché ognuna delle configurazioni di $N_L$ deve occupare spazio logaritmico per definizione di $L$. Inoltre, $T$ termina sempre, ed avendo solo $r(w)$ sul suo \tit{output tape}; allora, $r$ risulta essere una funzione calcolabile in spazio logaritmico, che per sua stessa definizione costituisce dunque una riduzione in spazio logaritmico di $L$ a $PATH$. In simboli, si ha che $$\forall L \in \NLSPACE \quad L \leq_\mathrm L PATH \iff PATH \in \NLHard$$ allora segue la tesi.
@@ -4188,7 +4180,7 @@
 
         Per giustificare la scelta della codifica di $w = \abk{M} \ttt 1 \ttt 0 ^*$ in input a $D$, si ipotizzi che $M$ computi in spazio $o(f(n))$ (dunque utilizzi meno di $f(n)$ celle); per definizione di $o(f(n))$, l'uso di spazio di $M$ potrebbe essere superiore ad $f(n)$ per valori piccoli di $n$, quando il comportamento asintotico non è ancora stato raggiunto. Di conseguenza, potrebbe verificarsi che $D$ non abbia abbastanza spazio per eseguire $M$ fino al completamento, dunque rifiutando prematuramente, rischiando inoltre di decidere lo stesso linuaaggio che decide $M$, condizione per la quale il teorema non risulterebbe più verificato. Allora, per garantire che $D$ decida il complemento del linguaggio riconosciuto da $M$, è necessario assicurarsi che $M$ computi sempre in $o(f(n))$, e dunque viene inserita una stringa $\ttt 1 \ttt 0^k$ al termine della codifica $\abk{M}$ nell'input di $D$, con un numero $k$ di \ttt 0 tale che $w = \abk{M} \ttt 1 \ttt 0 ^k$ permetta di raggiungere la soglia tale per cui $M$ computa realmente in $o(f(n))$ --- si noti che $D$ simula $M\rbk{\abk{M} \ttt 1 \ttt 0^k}$.
 
-        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c \in \R_{>0}, n_0 \in \N_{> 0}$ tali per cui $$\forall n \ge n_0 \quad g(n) < c \cdot f(n)$$ e, per quanto discusso in precedenza, per $c = \dfrac{1}{d}$ si ha $$g(n) < \dfrac{1}{d} \cdot f(n) \iff d \cdot g(n) < f(n)$$ Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L := L(D)$ $\lightning$.
+        Per assurdo, sia $M_L$ una macchina tale da decidere $L$ in spazio $g(n)$, con $g(n) = o(f(n))$, e dunque per definizione esistono $c \in \R_{>0}, n_0 \in \N_{> 0}$ tali per cui $$\forall n \ge n_0 \quad g(n) < c \cdot f(n)$$ allora, $D$ può simulare $M$ in spazio $O(f(n))$ poiché ponendo $c = \dfrac{1}{d}$ si ha $$g(n) < \dfrac{1}{d} \cdot f(n) \iff d \cdot g(n) < f(n)$$ Allora, se $k = n_0$, e dunque $w = \abk{M_L}\ttt 1 \ttt 0^{n_0}$ si ha che $\abs{w} > n_0$ (poiché ci sono almeno $n_0$ simboli \ttt 0); di conseguenza si è superata la soglia per cui $M_L$ computa in $o(f(n))$ (per quanto detto in precedenza) e dunque $D$ avrà spazio a sufficienza per simulare interamente $M_L$. Allora, per sua costruzione, $D$ invertirà il risultato di $M_L$ al termine della simulazione, e dunque $M_L$ non può decidere $L := L(D)$ $\lightning$.
     \end{proof}
 
     \begin{framedcor}[label={hier space thm cor}]{Teorema di gerarchia di spazio}
