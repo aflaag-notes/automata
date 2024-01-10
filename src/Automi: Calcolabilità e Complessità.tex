@@ -2333,7 +2333,7 @@
     }
 
     \begin{framedobs}{Gerarchia dei linguaggi di Chomsky}
-        Dal \cref{chomsky hier}, e dal \cref{coturing thm}, segue il seguente diagramma:
+        Dal \cref{exists lang not in rec}, dal \cref{chomsky hier}, e dal \cref{coturing thm}, segue il seguente diagramma:
 
         \begin{center}
             \begin{tikzpicture}
@@ -3165,9 +3165,9 @@
         Di conseguenza $\emptyset, \Sigma^* \notin \NPComplete$, ed è dunque possibile ridefinire la classe dei linguaggi \NPclass-completi come segue: $$\NPComplete := (\NPclass - \{\emptyset, \Sigma^*\}) \cap \NPHard$$
     \end{framedobs}
 
-    \begin{framedthm}[label={p = np impl 5}]{Implicazioni di $\Pclass = \NPclass$}
+    \begin{framedprop}[label={p = np impl 5}]{Implicazioni di $\Pclass = \NPclass$}
         Per un dato alfabeto $\Sigma$, si verifica che $$\Pclass = \NPclass \implies \NPclass - \{\emptyset, \Sigma^*\} = \NPComplete$$
-    \end{framedthm}
+    \end{framedprop}
 
     \begin{proof}
         Si noti che $$\NPclass - \{\emptyset, \Sigma^*\} = \NPComplete := (\NPclass - \{\emptyset, \Sigma^*\}) \cap \NPHard \iff \NPclass - \{\emptyset, \Sigma^*\} \subseteq \NPHard$$ (si veda l'\cref{emptyset e sigma star} per chiarimenti) e dunque si ha che $$\NPclass - \{\emptyset, \Sigma^*\} \subseteq \NPHard \iff \forall L, L' \in \NPclass - \{\emptyset, \Sigma^*\} \quad L \leq_\mathrm P L'$$ dunque la tesi equivale a dimostrare che tra ogni coppia di problemi in $\NPclass- \{ \emptyset, \Sigma^* \}$ esiste una riduzione polinomiale; di conseguenza, assumendo che $\Pclass = \NPclass$, per dimostrare la tesi è sufficiente mostrare che tale proprietà è verificata in $\Pclass - \{\emptyset, \Sigma^*\}$.
@@ -3337,12 +3337,12 @@
         Per il \cref{p = cop}, la \cref{np exp}, il \cref{exp = coexp} si ha che \centeredeq{0.9}{$A \in \Pclass \iff \overline A \in \Pclass \implies \overline A \in \NPclass \iff A \in \coNPclass \iff \overline A \in \NPclass \implies \overline A \in \EXP \iff A \in \EXP$}
     \end{proof}
 
-    \begin{framedthm}[label={p = np impl 1}]{Implicazioni di $\Pclass = \NPclass$}
+    \begin{framedprop}[label={p = np impl 1}]{Implicazioni di $\Pclass = \NPclass$}
         Si verifica che $$\Pclass = \NPclass \implies \Pclass = \coNPclass$$
-    \end{framedthm}
+    \end{framedprop}
 
     \begin{proof}
-        Per il \cref{ho finito i nomi}, si ha che $\Pclass \subseteq \coNPclass$; inoltre, preso un linguaggio $L \in \coNPclass$, si ha che $$L \in \coNPclass \iff \overline L \in \NPclass = \Pclass$$ e dunque segue la tesi per doppia inclusione.
+        Per la \cref{ho finito i nomi}, si ha che $\Pclass \subseteq \coNPclass$; inoltre, preso un linguaggio $L \in \coNPclass$, si ha che $$L \in \coNPclass \iff \overline L \in \NPclass = \Pclass$$ e dunque segue la tesi per doppia inclusione.
     \end{proof}
 
     \begin{framedobs}{\curlyquotes{\NPclass versus \coNPclass}}
@@ -3354,7 +3354,7 @@
     \end{framedcor}
 
     \begin{proof}
-        Per il \cref{p = np impl 1}, si ha che $$\Pclass = \NPclass \implies \NPclass = \Pclass = \coNPclass$$
+        Per la \cref{p = np impl 1}, si ha che $$\Pclass = \NPclass \implies \NPclass = \Pclass = \coNPclass$$
     \end{proof}
 
     \begin{framedthm}[label={conp w red}]{\coNPclass mediante riduzione}
@@ -3450,7 +3450,7 @@
         Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, tali che $$f_1(n) = o\rbk{\dfrac{f_2(n)}{\log(f_2(n))}} \implies f_1(n) = O\rbk{\dfrac{f_2(n)}{\log(f_2(n))}}$$ (si veda la \cref{small o big o obs}) ed $f_2$ sia tempo-costruibile; allora, per definizione di $f_1$ ed $f_2$, e per il \cref{hier time thm}, si ha che $$\DTIME(f_1(n)) \subsetneq \DTIME\rbk{\dfrac{f_2(n)}{\log(f_2(n))}} \subset \DTIME (f_2(n))$$
     \end{proof}
 
-    \begin{framedprop}{Relazione tra \Pclass e \EXP}
+    \begin{framedprop}[label={p not in exp}]{Relazione tra \Pclass e \EXP}
         Si verifica che $$\Pclass \subsetneq \EXP$$
     \end{framedprop}
 
@@ -3760,7 +3760,7 @@
         La classe \coLSPACE è definita come segue: $$\coLSPACE := \{L \in \DEC \mid \overline L \in \LSPACE\}$$
     \end{frameddefn}
 
-    \begin{framedthm}{Relazione tra \LSPACE e \coLSPACE}
+    \begin{framedthm}[label={l = col}]{Relazione tra \LSPACE e \coLSPACE}
         Si verifica che $$\LSPACE = \coLSPACE$$
     \end{framedthm}
 
@@ -3780,7 +3780,7 @@
         La classe \coPSPACE è definita come segue: $$\coPSPACE := \{L \in \DEC \mid \overline L \in \PSPACE\}$$
     \end{frameddefn}
 
-    \begin{framedthm}{Relazione tra \PSPACE e \coPSPACE}
+    \begin{framedthm}[label={pspace = copspace}]{Relazione tra \PSPACE e \coPSPACE}
         Si verifica che $$\PSPACE = \coPSPACE$$
     \end{framedthm}
 
@@ -3810,7 +3810,7 @@
         La clase \coEXPSPACE è definita come segue: $$\coEXPSPACE := \{L \in \DEC \mid \overline L \in \EXPSPACE\}$$
     \end{frameddefn}
 
-    \begin{framedthm}{Relazione tra \EXPSPACE e \coEXPSPACE}
+    \begin{framedthm}[label={expspace = coexpspace}]{Relazione tra \EXPSPACE e \coEXPSPACE}
         Si verifica che $$\EXPSPACE = \coEXPSPACE$$
     \end{framedthm}
 
@@ -4072,7 +4072,7 @@
             Allora, $V$ computa in spazio logaritmico, e dunque segue la tesi per il \cref{nl verif}.
     \end{proof}
 
-    \begin{framedthm}{Teorema di Immerman-Szelepcsényi}
+    \begin{framedthm}[label={immerman}]{Teorema di Immerman-Szelepcsényi}
         Si verifica che $$\NLSPACE = \coNLSPACE$$
     \end{framedthm}
 
@@ -4094,7 +4094,7 @@
         Trivialmente si ha che $\PSPACE \subseteq \NPSPACE$, poiché una \TM è una particolare \NTM, inoltre, per il \cref{savitch}, si ha che $$\forall k, h \in \N \mid h = 2k \quad \NSPACE \rbk{n^k} \subseteq \DSPACE \rbk{\rbk{n^k}^2} = \DSPACE \rbk{n^{2k}} = \PSPACE$$ dunque segue la tesi per doppia implicazione.
     \end{proof}
 
-    \begin{framedprop}{Relazione tra \NPSPACE ed \EXP}
+    \begin{framedprop}[label={npspace in exp}]{Relazione tra \NPSPACE ed \EXP}
         Si verifica che $$\NPSPACE \subseteq \EXP$$
     \end{framedprop}
 
@@ -4191,7 +4191,7 @@
         Siano $\func{f_1, f_2}{\N}{\N}$ due funzioni, tali che $$f_1(n) = o(f_2(n)) \implies f_1(n) = O(f_2(n))$$ (si veda la \cref{small o big o obs}) ed $f_2$ sia spazio-costruibile; allora, per definizione di $f_1$ ed $f_2$, e per il \cref{hier space thm}, si ha che $$\DSPACE(f_1(n)) \subsetneq \DSPACE(f_2(n))$$
     \end{proof}
 
-    \begin{framedprop}{Relazione tra \NLSPACE e \PSPACE}
+    \begin{framedprop}[label={nl not in pspace}]{Relazione tra \NLSPACE e \PSPACE}
         Si verifica che $$\NLSPACE \subsetneq \PSPACE$$
     \end{framedprop}
 
@@ -4208,7 +4208,7 @@
         Di conseguenza, per il \cref{hier space thm}, si ha che esiste un linguaggio decidibile in $O(n)$ ma non in $o(n)$; in particolare, poiché $\log^2(n) = o(n)$, si ha che \centeredeq{0.9}{$\soe{l}{\DSPACE(n) - \DSPACE(\log^2(n)) \neq \varnothing \\ \DSPACE(\log^2(n)) \subset \DSPACE(n)} \implies \DSPACE(\log^2(n)) \subsetneq \DSPACE(n) \subsetneq \PSPACE$} Allora, per il \cref{nl in log sq}, segue che $$\NLSPACE \subseteq \DSPACE(\log^2(n)) \subsetneq \PSPACE \implies \NLSPACE \subsetneq \PSPACE$$
     \end{proof}
 
-    \begin{framedprop}[label={pspace in expspace}]{Relazione tra \PSPACE e \EXPSPACE}
+    \begin{framedprop}[label={pspace not in expspace}]{Relazione tra \PSPACE e \EXPSPACE}
         Si verifica che $$\PSPACE \subsetneq \EXPSPACE$$
     \end{framedprop}
 
@@ -4226,8 +4226,35 @@
         Si noti che $$\forall k \in \N \quad \displaystyle \lim_{n \to + \infty}{\dfrac{n^k}{n^{\log(n)}}} = \lim_{n \to + \infty}{n^{k - \log(n)}}= 0 \implies \forall k \in \N \quad n^k = o \rbk{n ^{\log(n)}}$$ ed inoltre, si noti che $$\displaystyle \lim_{n \to + \infty}{\dfrac{n^{\log(n)}}{2^n}} = \lim_{n \to + \infty}{\dfrac{2^{\log^2(n)}}{2^n}} = 0 \implies n^{\log(n)} = o \rbk{2^n}$$ allora, per la \cref{o trans}, si ha che $$\forall k \in n^k \quad n^k =  o \rbk{2^n}$$ e poiché $2^n$ è spazio-costruibile per quanto detto in precedenza, per il \cref{hier space thm cor}, segue che $$\forall k \in \N \quad \DSPACE \rbk{n^k} \subsetneq \DSPACE \rbk{2^n} \subsetneq \EXPSPACE$$ implicando che $$\PSPACE := \bigcup_{k \in \N}{\DSPACE \rbk{n^k}} \subsetneq \DSPACE \rbk{2^n} \subsetneq \bigcup_{h \in \N}{\DSPACE \rbk{2^{n^h}}} =: \EXPSPACE$$
     \end{proof}
 
-    \begin{framedobs}{Gerarchia delle classi}
-        TODO NOMINA I TEOREMI USATI
+    \begin{framedobs}[breakable]{Gerarchia delle classi}
+        Attraverso i seguenti:
+
+        \begin{itemize}
+            \item \cref{exists lang not in rec}
+            \item \cref{cfl subset dec}
+            \item \cref{chomsky hier}
+            \item \cref{coturing thm}
+            \item \cref{p = cop}
+            \item \cref{exp = coexp}
+            \item \cref{np exp}
+            \item \cref{ho finito i nomi}
+            \item \cref{p not in exp}
+            \item \cref{l in p}
+            \item \cref{l = col}
+            \item \cref{pspace = copspace}
+            \item \cref{expspace = coexpspace}
+            \item \cref{nl in log sq}
+            \item \cref{nl in p}
+            \item \cref{immerman}
+            \item \cref{pspace = npspace}
+            \item \cref{npspace in exp}
+            \item \cref{expspace = nexpspace}
+            \item \cref{nexp in expspace}
+            \item \cref{nl not in pspace}
+            \item \cref{pspace not in expspace}
+        \end{itemize}
+
+        si congettura la seguente relazione tra classi:
 
         \begin{center}
             \resizebox{0.9\hsize}{!}{
