@@ -2098,11 +2098,11 @@
         Sia $M = (Q, \Sigma, \Gamma, \delta, q_0, q_\mathrm{accept}, q_\mathrm{reject})$ una \TM; allora, sia $E$ il seguente enumeratore --- avente $M$ come sua sottoprocedura --- che, dato nulla in input, computa come segue:
 
         \begin{itemize}
-            \item per ogni $i \in \N$, e per ogni $j \in [1, i]$, $E$ simula $M(w_j)$, dove $w_j$ è la $j$-esima stringa di $\Sigma^*$, ordinato secondo il criterio di ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm};
-            \item se esiste un $i \in \N$ tale per cui $M$ accetta ogni $w_j$ con $j \in [1, i]$, $E$ stampa ogni $w_j$ per tale $i$ e termina.
+            \item per ogni $i \in \N$, e per ogni $j \in [1, i]$, $E$ simula $M(w_j)$ per $i$ passi, dove $w_j$ è la $j$-esima stringa di $\Sigma^*$, ordinato secondo il criterio di ordinamento $\prec$ definito all'interno della dimostrazione del \cref{num tm};
+            \item se $M(w_j)$ accetta, $E$ stampa $w_j$.
         \end{itemize}
 
-        Allora, per costruzione $E$ stampa $w_j$ se e solo se $M$ la accetta, e poiché $E$ controlla tutte le stringhe in $\Sigma^*$, $E$ è in grado di stampare tutte e sole le stringhe riconosciute da $M$; allora, segue la tesi.
+        Allora, per costruzione $E$ stampa $w_j$ solo se $M$ la accetta, e poiché $E$ controlla tutte le stringhe in $\Sigma^*$, $E$ è in grado di stampare tutte e sole le stringhe riconosciute da $M$; allora, segue la tesi.
     }
   
     \section{Linguaggi Turing-riconoscibili e Turing-decidibili}
@@ -2201,14 +2201,14 @@
         \begin{center}
             \begin{tabular}{cccccccccccccccc}
                 $\Sigma^*$ & $=$ & $\{$ & $\varepsilon$, & \ttt 0, & \ttt 1, & \ttt{00}, & \ttt{01}, & \ttt{10}, & \ttt{11}, & \ttt{000}, & \ttt{001}, & \ttt{010}, & \ttt{011}, & $\ldots$ & $\}$ \\
-                $L$ & $:=$ & $\{$ & & & \ttt 1, & & \ttt{01}, & & & & \ttt{010} & & &  & $\}$ \\
+                $L$ & $:=$ & $\{$ & & & \ttt 1, & & \ttt{01}, & & & & & \ttt{010} & &  & $\}$ \\
                 $\chi_L$ & $:=$ & & \ttt 0 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 1 & \ttt 0 & \ttt 0 & \ttt 0  & \ttt 0 & \ttt 1 & \ttt 0 & $\cdots$ &
             \end{tabular}
         \end{center}
 
         Si consideri dunque la funzione $$\funcmap{f}{\powerset(\Sigma^*)}{\mathcal B}{L}{\chi_L}$$ dove $\mathcal B$ è l'insieme delle stringhe binarie infinite; $f$ dunque mappa ogni linguaggio nella sua stringa caratteristica. Si noti dunque che $$\forall \chi_A, \chi_B \in \mathcal B \quad \chi_A = \chi_B \implies A = B$$ poiché le due stringhe descrivono lo stesso linguaggio; allora $f$ è iniettiva. Inoltre, si verifica che $$\forall \chi_L \in \mathcal B \quad \exists L \in \powerset(\Sigma^*) \mid f(L) = \chi_L$$ poiché ogni stringa binaria deve necessariamente descrivere un linguaggio, per definizione di $\chi_L$; allora $f$ è suriettiva. Di conseguenza, $f$ è biettiva, e quindi per la \cref{bij set} si ha che $$\abs{\powerset(\Sigma^*)} = \abs{\mathcal B}$$ Si noti però che, per la \cref{not num B}, $\mathcal B$ non è numerabile, e di conseguenza neanche $\powerset(\Sigma^*)$ lo è. Questo prova che l'insieme dei linguaggi definiti su $\Sigma$ non è numerabile.
 
-        Allora, poiché $\mathcal M \subseteq \Sigma^*$ (dove $\Sigma$ un il linguaggio che permette di codificare ogni macchina di Turing) è numerabile per il \cref{num tm}, e $\powerset(\Sigma^*)$ non lo è, deve necessariamente esistere un linguaggio $L \in \powerset(\Sigma^*)$ --- dunque definito su $\Sigma$ stesso --- che non può essere riconosciuto da nessuna macchina di Turing descritta da una codifica in $\mathcal M$.
+        Allora, poiché $\mathcal M \subseteq \Sigma^*$ (dove $\Sigma$ è un alfabeto che permette di codificare ogni macchina di Turing) è numerabile per il \cref{num tm}, e $\powerset(\Sigma^*)$ non lo è, deve necessariamente esistere un linguaggio $L \in \powerset(\Sigma^*)$ --- dunque definito su $\Sigma$ stesso --- che non può essere riconosciuto da nessuna macchina di Turing descritta da una codifica in $\mathcal M$.
     \end{proof}
 
     \subsection{Problema dell'accettazione}
